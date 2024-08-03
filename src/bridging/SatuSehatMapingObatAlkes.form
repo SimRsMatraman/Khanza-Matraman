@@ -1,0 +1,1944 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JDialog" name="DlgKFARestApi">
+      <Properties>
+        <Property name="defaultCloseOperation" type="int" value="2"/>
+        <Property name="name" type="java.lang.String" value="DlgKFARestApi" noResource="true"/>
+        <Property name="undecorated" type="boolean" value="true"/>
+        <Property name="resizable" type="boolean" value="false"/>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+      <SubComponents>
+        <Container class="widget.InternalFrame" name="internalFrame19">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="::[ List Data KFA Browser ]::">
+                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="e1" green="eb" red="e6" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                  <Color PropertyName="color" blue="32" green="46" red="32" type="rgb"/>
+                </TitledBorder>
+              </Border>
+            </Property>
+            <Property name="name" type="java.lang.String" value="internalFrame19" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[800, 468]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+            <Property name="horizontalGap" type="int" value="1"/>
+            <Property name="verticalGap" type="int" value="1"/>
+          </Layout>
+          <SubComponents>
+            <Container class="widget.InternalFrame" name="internalFrame20">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="internalFrame20" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="0"/>
+                <Property name="rows" type="int" value="1"/>
+              </Layout>
+              <SubComponents>
+                <Container class="widget.ScrollPane" name="Scroll1">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder>
+                          <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="Scroll1" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="widget.Table" name="tbListKfa">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="tbListKfa" noResource="true"/>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbListKfaMouseClicked"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="widget.PanelBiasa" name="panelBiasa12">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="panelBiasa12" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[0, 40]"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Last"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="0"/>
+              </Layout>
+              <SubComponents>
+                <Component class="widget.Label" name="jLabel132">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cari Data :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel132" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="widget.TextBox" name="TCariObatLive">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value="TCariObatLive" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[250, 24]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TCariObatLiveKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnCariKFA">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="0" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="75"/>
+                    <Property name="text" type="java.lang.String" value="Cari"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+K"/>
+                    <Property name="name" type="java.lang.String" value="BtnCariKFA" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCariKFAActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnKeluarKFA">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="75"/>
+                    <Property name="text" type="java.lang.String" value="Keluar"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+K"/>
+                    <Property name="name" type="java.lang.String" value="BtnKeluarKFA" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnKeluarKFAActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Label" name="jLabel24">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Record :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel24" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[75, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.Label" name="LCountTotal">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="text" type="java.lang.String" value="0"/>
+                    <Property name="name" type="java.lang.String" value="LCountTotal" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[80, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.Label" name="jLabel133">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Jumlah Data per Halaman"/>
+                    <Property name="name" type="java.lang.String" value="jLabel133" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[156, 14]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.ComboBox" name="page">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="4">
+                        <StringItem index="0" value="10"/>
+                        <StringItem index="1" value="50"/>
+                        <StringItem index="2" value="100"/>
+                        <StringItem index="3" value="200"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="page" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="pageItemStateChanged"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pageKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Label" name="jLabel134">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Halaman :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel134" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="widget.ComboBox" name="hal">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="1">
+                        <StringItem index="0" value="1"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="hal" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="halItemStateChanged"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="halKeyPressed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="DlgMasterObat">
+      <Properties>
+        <Property name="defaultCloseOperation" type="int" value="2"/>
+        <Property name="name" type="java.lang.String" value="DlgMasterObat" noResource="true"/>
+        <Property name="undecorated" type="boolean" value="true"/>
+        <Property name="resizable" type="boolean" value="false"/>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+      <SubComponents>
+        <Container class="widget.InternalFrame" name="internalFrame23">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="::[ List Master Obat ]::">
+                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="e1" green="eb" red="e6" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                  <Color PropertyName="color" blue="32" green="46" red="32" type="rgb"/>
+                </TitledBorder>
+              </Border>
+            </Property>
+            <Property name="name" type="java.lang.String" value="internalFrame23" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[800, 468]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+            <Property name="horizontalGap" type="int" value="1"/>
+            <Property name="verticalGap" type="int" value="1"/>
+          </Layout>
+          <SubComponents>
+            <Container class="widget.InternalFrame" name="internalFrame24">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="internalFrame24" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                <Property name="columns" type="int" value="0"/>
+                <Property name="rows" type="int" value="1"/>
+              </Layout>
+              <SubComponents>
+                <Container class="widget.ScrollPane" name="Scroll2">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder>
+                          <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="Scroll2" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                  <SubComponents>
+                    <Component class="widget.Table" name="tbMasterObat">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="tbMasterObat" noResource="true"/>
+                        <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                          <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbMasterObatMouseClicked"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="widget.PanelBiasa" name="panelBiasa14">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="panelBiasa14" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[0, 40]"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Last"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="0"/>
+              </Layout>
+              <SubComponents>
+                <Component class="widget.Label" name="jLabel135">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Cari Data :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel135" noResource="true"/>
+                  </Properties>
+                </Component>
+                <Component class="widget.TextBox" name="TCariMasterObat">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value="TCariMasterObat" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[250, 24]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TCariMasterObatKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnCariObat">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="75"/>
+                    <Property name="text" type="java.lang.String" value="Cari"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+K"/>
+                    <Property name="name" type="java.lang.String" value="BtnCariObat" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCariObatActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnKeluarMasterObat">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="33" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="75"/>
+                    <Property name="text" type="java.lang.String" value="Keluar"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+K"/>
+                    <Property name="name" type="java.lang.String" value="BtnKeluarMasterObat" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnKeluarMasterObatActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Label" name="jLabel22">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Record :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel22" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[75, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.Label" name="LCountTotalMaster">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="text" type="java.lang.String" value="0"/>
+                    <Property name="name" type="java.lang.String" value="LCountTotalMaster" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[80, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.Label" name="label14">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Jenis :"/>
+                    <Property name="name" type="java.lang.String" value="label14" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[50, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.ComboBox" name="CmbJenis">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="Obat"/>
+                        <StringItem index="1" value="Alat kesehatan BMHP"/>
+                        <StringItem index="2" value="Semua"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="CmbJenis" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[160, 23]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="CmbJenisItemStateChanged"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CmbJenisKeyPressed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JDialog" name="DlgKFADetailObat">
+      <Properties>
+        <Property name="defaultCloseOperation" type="int" value="2"/>
+        <Property name="name" type="java.lang.String" value="DlgKFADetailObat" noResource="true"/>
+        <Property name="undecorated" type="boolean" value="true"/>
+        <Property name="resizable" type="boolean" value="false"/>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+      <SubComponents>
+        <Container class="widget.InternalFrame" name="internalFrame21">
+          <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="::[ Detail Data KFA REST-API ]::">
+                  <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="e1" green="eb" red="e6" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                  <Color PropertyName="color" blue="32" green="46" red="32" type="rgb"/>
+                </TitledBorder>
+              </Border>
+            </Property>
+            <Property name="name" type="java.lang.String" value="internalFrame21" noResource="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+            <Property name="horizontalGap" type="int" value="1"/>
+            <Property name="verticalGap" type="int" value="1"/>
+          </Layout>
+          <SubComponents>
+            <Container class="widget.InternalFrame" name="internalFrame22">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="internalFrame22" noResource="true"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+              <SubComponents>
+                <Container class="widget.PanelBiasa" name="FormInput1">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value="FormInput1" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 104]"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                      <BorderConstraints direction="Center"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+                    <Property name="useNullLayout" type="boolean" value="true"/>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="widget.TextBox" name="KFACode1">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="KFACode1" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KFACode1KeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="109" y="10" width="170" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel34">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="KFA Code :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel34" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="0" y="10" width="105" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel35">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="KFA Display :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel35" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="0" y="40" width="105" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="KFADisplay1">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="KFADisplay1" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KFADisplay1KeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="109" y="40" width="610" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="RouteCode1">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="RouteCode1" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RouteCode1KeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="110" y="280" width="70" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel36">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Route System :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel36" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="430" y="280" width="90" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="RouteSystem1">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="RouteSystem1" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RouteSystem1KeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="520" y="280" width="187" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel37">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Route Display :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel37" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="180" y="280" width="91" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="RouteDisplay1">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="RouteDisplay1" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RouteDisplay1KeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="270" y="280" width="160" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel38">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Route Code :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel38" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="0" y="280" width="105" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel39">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="KFA Description :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel39" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="0" y="70" width="105" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jScrollPane1" noResource="true"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="110" y="70" width="610" height="70"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="widget.TextArea" name="desc">
+                          <Properties>
+                            <Property name="columns" type="int" value="20"/>
+                            <Property name="rows" type="int" value="5"/>
+                            <Property name="name" type="java.lang.String" value="desc" noResource="true"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Component class="widget.Label" name="jLabel40">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="KFA Warning :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel40" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="0" y="140" width="105" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jScrollPane2" noResource="true"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="110" y="140" width="610" height="70"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="widget.TextArea" name="warning">
+                          <Properties>
+                            <Property name="columns" type="int" value="20"/>
+                            <Property name="rows" type="int" value="5"/>
+                            <Property name="name" type="java.lang.String" value="warning" noResource="true"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Component class="widget.Label" name="jLabel41">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="KFA Side Effect :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel41" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="0" y="210" width="105" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jScrollPane3" noResource="true"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="110" y="210" width="610" height="70"/>
+                        </Constraint>
+                      </Constraints>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="widget.TextArea" name="sideeffect">
+                          <Properties>
+                            <Property name="columns" type="int" value="20"/>
+                            <Property name="rows" type="int" value="5"/>
+                            <Property name="name" type="java.lang.String" value="sideeffect" noResource="true"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Component class="widget.Label" name="jLabel42">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="UCUM Code :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel42" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="0" y="310" width="105" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="ucum_code">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="ucum_code" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ucum_codeKeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="110" y="310" width="70" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel43">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="UCUM Display :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel43" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="180" y="310" width="91" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="ucum_name">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="ucum_name" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ucum_nameKeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="270" y="310" width="160" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel44">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="UOM :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel44" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="430" y="310" width="40" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="uom">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="uom" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="uomKeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="470" y="310" width="100" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel45">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Form Code :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel45" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="0" y="340" width="105" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="formcode">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="formcode" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="formcodeKeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="110" y="340" width="70" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel46">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Form Display:"/>
+                        <Property name="name" type="java.lang.String" value="jLabel46" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="180" y="340" width="91" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="formname">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="formname" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="formnameKeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="270" y="340" width="160" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel47">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Control Code :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel47" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="0" y="370" width="105" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="controlcode">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="controlcode" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="controlcodeKeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="110" y="370" width="70" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel48">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Control Display:"/>
+                        <Property name="name" type="java.lang.String" value="jLabel48" noResource="true"/>
+                      </Properties>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="180" y="370" width="91" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                    <Component class="widget.TextBox" name="controlname">
+                      <Properties>
+                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="null"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="controlname" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="controlnameKeyPressed"/>
+                      </Events>
+                      <Constraints>
+                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                          <AbsoluteConstraints x="270" y="370" width="160" height="23"/>
+                        </Constraint>
+                      </Constraints>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
+            <Container class="widget.PanelBiasa" name="panelBiasa13">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="panelBiasa13" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[0, 40]"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Last"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="0"/>
+              </Layout>
+              <SubComponents>
+                <Component class="widget.Button" name="BtnKeluarDetailObat">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="33" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="75"/>
+                    <Property name="text" type="java.lang.String" value="Keluar"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+K"/>
+                    <Property name="name" type="java.lang.String" value="BtnKeluarDetailObat" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnKeluarDetailObatActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="undecorated" type="boolean" value="true"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[900, 800]"/>
+    </Property>
+    <Property name="resizable" type="boolean" value="false"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-79,0,0,4,112"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <SubComponents>
+    <Container class="widget.InternalFrame" name="internalFrame1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="::[ Data Mapping Obat/Alkes/BHP Satu Sehat ]::">
+              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder>
+                  <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
+                </LineBorder>
+              </Border>
+              <Font PropertyName="font" name="Tahoma" size="11" style="0"/>
+              <Color PropertyName="color" blue="32" green="32" red="32" type="rgb"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="internalFrame1" noResource="true"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+        <Property name="horizontalGap" type="int" value="1"/>
+        <Property name="verticalGap" type="int" value="1"/>
+      </Layout>
+      <SubComponents>
+        <Container class="widget.ScrollPane" name="Scroll">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="Scroll" noResource="true"/>
+            <Property name="opaque" type="boolean" value="true"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="widget.Table" name="tbJnsPerawatan">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Silahkan klik untuk memilih data yang mau diedit ataupun dihapus"/>
+                <Property name="name" type="java.lang.String" value="tbJnsPerawatan" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbJnsPerawatanMouseClicked"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbJnsPerawatanKeyReleased"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel3">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="jPanel3" noResource="true"/>
+            <Property name="opaque" type="boolean" value="false"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[44, 100]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Last"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+            <Property name="horizontalGap" type="int" value="1"/>
+            <Property name="verticalGap" type="int" value="1"/>
+          </Layout>
+          <SubComponents>
+            <Container class="widget.panelisi" name="panelGlass8">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="panelGlass8" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[44, 44]"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="0"/>
+                <Property name="verticalGap" type="int" value="9"/>
+              </Layout>
+              <SubComponents>
+                <Component class="widget.Button" name="BtnSimpan">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/save-16x16.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="83"/>
+                    <Property name="text" type="java.lang.String" value="Simpan"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+S"/>
+                    <Property name="name" type="java.lang.String" value="BtnSimpan" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSimpanActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnSimpanKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnBatal">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/Cancel-2-16x16.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="66"/>
+                    <Property name="text" type="java.lang.String" value="Baru"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+B"/>
+                    <Property name="name" type="java.lang.String" value="BtnBatal" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBatalActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnBatalKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnHapus">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/stop_f2.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="72"/>
+                    <Property name="text" type="java.lang.String" value="Hapus"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+H"/>
+                    <Property name="name" type="java.lang.String" value="BtnHapus" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnHapusActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnHapusKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnEdit">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/inventaris.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="71"/>
+                    <Property name="text" type="java.lang.String" value="Ganti"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+G"/>
+                    <Property name="name" type="java.lang.String" value="BtnEdit" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEditActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnEditKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnPrint">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/b_print.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="84"/>
+                    <Property name="text" type="java.lang.String" value="Cetak"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+T"/>
+                    <Property name="name" type="java.lang.String" value="BtnPrint" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPrintActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnPrintKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnAll">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/Search-16x16.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="77"/>
+                    <Property name="text" type="java.lang.String" value="Semua"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+M"/>
+                    <Property name="name" type="java.lang.String" value="BtnAll" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAllActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnAllKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnKeluar">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/exit.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="75"/>
+                    <Property name="text" type="java.lang.String" value="Keluar"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+K"/>
+                    <Property name="name" type="java.lang.String" value="BtnKeluar" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnKeluarActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnKeluarKeyPressed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="widget.panelisi" name="panelGlass9">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="panelGlass9" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[44, 44]"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="First"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                <Property name="alignment" type="int" value="0"/>
+                <Property name="verticalGap" type="int" value="9"/>
+              </Layout>
+              <SubComponents>
+                <Component class="widget.Label" name="jLabel6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Key Word :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel6" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[70, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.TextBox" name="TCari">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value="TCari" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[200, 23]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TCariKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Button" name="BtnCari">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/accept.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="50"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
+                    <Property name="name" type="java.lang.String" value="BtnCari" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[28, 23]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCariActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnCariKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="widget.Label" name="jLabel7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Record :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel7" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[75, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.Label" name="LCount">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="text" type="java.lang.String" value="0"/>
+                    <Property name="name" type="java.lang.String" value="LCount" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[80, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.Label" name="jLabel19">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Progress Mapping :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel19" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[120, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.Label" name="CapaianObat">
+                  <Properties>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
+                    <Property name="text" type="java.lang.String" value="0"/>
+                    <Property name="name" type="java.lang.String" value="CapaianObat" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[120, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="PanelInput">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="PanelInput" noResource="true"/>
+            <Property name="opaque" type="boolean" value="false"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[660, 280]"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="First"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout">
+            <Property name="horizontalGap" type="int" value="1"/>
+            <Property name="verticalGap" type="int" value="1"/>
+          </Layout>
+          <SubComponents>
+            <Component class="widget.CekBox" name="ChkInput">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/picture/143.png"/>
+                </Property>
+                <Property name="mnemonic" type="int" value="73"/>
+                <Property name="text" type="java.lang.String" value=".: Input Data"/>
+                <Property name="toolTipText" type="java.lang.String" value="Alt+I"/>
+                <Property name="borderPainted" type="boolean" value="true"/>
+                <Property name="borderPaintedFlat" type="boolean" value="true"/>
+                <Property name="focusable" type="boolean" value="false"/>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="horizontalTextPosition" type="int" value="4"/>
+                <Property name="name" type="java.lang.String" value="ChkInput" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[192, 20]"/>
+                </Property>
+                <Property name="rolloverIcon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/picture/143.png"/>
+                </Property>
+                <Property name="rolloverSelectedIcon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/picture/145.png"/>
+                </Property>
+                <Property name="selectedIcon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/picture/145.png"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChkInputActionPerformed"/>
+              </Events>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Last"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Container class="widget.PanelBiasa" name="FormInput">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="FormInput" noResource="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[100, 104]"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+                <Property name="useNullLayout" type="boolean" value="true"/>
+              </Layout>
+              <SubComponents>
+                <Component class="widget.Label" name="jLabel4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="KFA System :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel4" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="220" y="40" width="80" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="KodeBarang">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="KodeBarang" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="110" y="10" width="100" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Button" name="btnBarang">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/picture/190.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="49"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+1"/>
+                    <Property name="name" type="java.lang.String" value="btnBarang" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBarangActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnBarangKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="590" y="10" width="28" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel5">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Form Code :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel5" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="0" y="100" width="105" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="FormCode">
+                  <Properties>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="FormCode" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FormCodeKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="110" y="100" width="80" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Numerator Code :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel8" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="0" y="160" width="105" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="NumoratorCode">
+                  <Properties>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="NumoratorCode" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NumoratorCodeKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="110" y="160" width="70" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="KFACode">
+                  <Properties>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="KFACode" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KFACodeKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="110" y="40" width="100" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel9">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="KFA Code :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel9" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="0" y="40" width="105" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel10">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="KFA Display :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel10" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="0" y="70" width="105" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="KFADisplay">
+                  <Properties>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="KFADisplay" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KFADisplayKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="110" y="70" width="620" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel11">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Form System :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel11" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="200" y="100" width="90" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="FormDisplay">
+                  <Properties>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="FormDisplay" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FormDisplayKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="110" y="130" width="620" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel12">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Form Display :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel12" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="0" y="130" width="105" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel13">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Denomina Code :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel13" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="0" y="190" width="105" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel14">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Numerator System :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel14" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="180" y="160" width="130" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="DenominatorCode">
+                  <Properties>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="DenominatorCode" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DenominatorCodeKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="110" y="190" width="70" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel15">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Denominator System :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel15" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="180" y="190" width="130" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel16">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Route Code :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel16" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="0" y="220" width="105" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="RouteCode">
+                  <Properties>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="RouteCode" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RouteCodeKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="110" y="220" width="70" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel17">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Route System :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel17" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="190" y="220" width="90" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel18">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Route Display :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel18" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="540" y="220" width="91" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="RouteDisplay">
+                  <Properties>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="RouteDisplay" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RouteDisplayKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="640" y="220" width="160" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Button" name="BtnSearchViaAPI">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="0" red="cc" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="75"/>
+                    <Property name="text" type="java.lang.String" value="Cari via Rest API"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+K"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="10" style="1"/>
+                    </Property>
+                    <Property name="iconTextGap" type="int" value="0"/>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[0, 0, 0, 0]"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="BtnSearchViaAPI" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSearchViaAPIActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="630" y="10" width="130" height="20"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Button" name="BtnSearchViaBrowser">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="75"/>
+                    <Property name="text" type="java.lang.String" value="Cari via Browser"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+K"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="10" style="1"/>
+                    </Property>
+                    <Property name="iconTextGap" type="int" value="0"/>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[0, 0, 0, 0]"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="BtnSearchViaBrowser" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSearchViaBrowserActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="770" y="10" width="130" height="20"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Label" name="jLabel21">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Data Obat RS :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel21" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="0" y="10" width="110" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Button" name="BtnDetailObat">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="66" green="66" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="75"/>
+                    <Property name="text" type="java.lang.String" value="Vew Detail"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Alt+K"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Tahoma" size="10" style="1"/>
+                    </Property>
+                    <Property name="iconTextGap" type="int" value="0"/>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[0, 0, 0, 0]"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="BtnDetailObat" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[100, 30]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnDetailObatActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="600" y="40" width="100" height="20"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.ComboBox" name="KFASystem">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="1">
+                        <StringItem index="0" value="http://sys-ids.kemkes.go.id/kfa"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="KFASystem" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KFASystemKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="310" y="40" width="280" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.ComboBox" name="NemeratorSystem">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="http://unitsofmeasure.org"/>
+                        <StringItem index="1" value="http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm"/>
+                        <StringItem index="2" value="http://terminology.kemkes.go.id/CodeSystem/medication-form"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="NemeratorSystem" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="NemeratorSystemKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="310" y="160" width="230" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.ComboBox" name="DenominatorSystem">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="http://unitsofmeasure.org"/>
+                        <StringItem index="1" value="http://terminology.hl7.org/CodeSystem/v3-orderableDrugForm"/>
+                        <StringItem index="2" value="http://terminology.kemkes.go.id/CodeSystem/medication-form"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="DenominatorSystem" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DenominatorSystemKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="310" y="190" width="230" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.TextBox" name="NamaBarang">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="null"/>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="NamaBarang" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="210" y="10" width="380" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.ComboBox" name="FormSystem">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="1">
+                        <StringItem index="0" value="http://terminology.kemkes.go.id/CodeSystem/medication-form"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="FormSystem" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FormSystemKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="310" y="100" width="420" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.ComboBox" name="RouteSystem">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="1">
+                        <StringItem index="0" value="http://www.whocc.no/atc"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="RouteSystem" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RouteSystemKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="280" y="220" width="260" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

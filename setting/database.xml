@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>KhanzaHMS</comment> 
+    <!--UPDATE-->
+    <entry key="URLSERVERUPDATE">localhost/webapps13/serverupdate</entry> <!--link webapps Update -->
+    <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
+    <!--BSSN TTE-->
+    <entry key="URLTTE">https://api-rsudkramatjati.jakarta.go.id/dev/tte/</entry>
+    <entry key="URLAPIINTEGRATION">http://10.50.149.23/api-khanza</entry>
+    <entry key="IDINTEGRATION">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
+    <entry key="PASSINTEGRATION">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
+     <!--INTEGRASI FASKES-->
+    <entry key="URLAPIINTEGRATIONFASKES">http://localhost/api-faskes/</entry>
+    <entry key="IDINTEGRATIONFASKES">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
+    <entry key="PASSINTEGRATIONFASKES">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
+    <entry key="PROXY">NO</entry>
+    <!-- ORTHANC -->
+    <!-- <entry key="URLORTHANC">http://localhost</entry>
+    <entry key="PORTORTHANC">tQAOT8APOLqHeGs54a6lNg==</entry>
+    <entry key="USERORTHANC">AqOU3p5RZEIAk8HazTrV+Q==</entry>
+    <entry key="PASSORTHANC">AqOU3p5RZEIAk8HazTrV+Q==</entry> -->
+    <!--Server--> 
+    <entry key="HOST">4RXos1g9GbDiO6Mq5mEeSg==</entry>
+    <entry key="DATABASE">AZHNccBwSmSho84f+X8GyQ==</entry>
+    <entry key="PORT">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="USER">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="PAS">cOJJODigL7CqJBp5yvTdWg==</entry>
+    <entry key="CARICEPAT">nonaktif</entry>
+    <entry key="HOSTHYBRIDWEB">ZzFu+LE1edNsZCF32HD1VA==</entry>
+    <entry key="USERHYBRIDWEB">nmXqCKzrz9i8GTZlq7JruQ==</entry>
+    <entry key="PASHYBRIDWEB">AsJ/0/gCnYnD+gK4fw9uKA==</entry>
+    <entry key="HYBRIDWEB">webapps</entry>
+    <entry key="PORTWEB">80</entry>
+    <!--Aplikasi--> 
+    <entry key="AKTIFKANWARNARALAN">yes</entry> <!--Warna status di rawat jalan-->
+    <entry key="ANTRIAN">player</entry>
+    <entry key="LOKETANTRIAN">1</entry>
+    <entry key="ALARMRSISRUTE">yes</entry>
+    <entry key="ALARMBOOKINGPERIKSA">yes</entry> <!--Alarm pasien baru di booking periksa-->
+    <entry key="ALARMPENGADUANPASIEN">yes</entry> <!--Alarm pengaduan baru di pengaduan pasien-->
+    <entry key="ALARMPERMINTAANRANAP">yes</entry> <!--Alarm Permintaan ranap-->
+    <entry key="MENUTRANSPARAN">no</entry> <!--Menu Transparant di Simrs-->
+    <entry key="KAMARAKTIFRANAP"></entry>
+    <entry key="DOKTERAKTIFKASIRRALAN"></entry>
+    <entry key="POLIAKTIFKASIRRALAN"></entry>
+    <entry key="RUANGANAKTIFINVENTARIS"></entry>
+    <entry key="BASENOREG">booking</entry> <!--Awal No registrasi-->
+    <entry key="URUTNOREG">dokter</entry> <!--Urut No registrasi-->
+    <entry key="JADWALDOKTERDIREGISTRASI">aktif</entry>  <!--Jadwal terintegrasi-->  
+    <entry key="IPPRINTERTRACER">10.50.150.57/label2</entry>
+    <entry key="AKTIFKANBILLINGPARSIAL">yes</entry> <!--Aktifasi Billing Parsial-->
+    <entry key="AKTIFKANTRACKSQL">88tE0ZUstuza/UrtfBYkFA==</entry> <!--Aktifasi Mapping sql-->
+    <!--Apotik--> 
+    <entry key="ALARMAPOTEK">yes</entry> <!--Suara resep baru apotik-->
+    <entry key="RESEPRAJALKEPLAN">yes</entry>
+    <entry key="FORMALARMAPOTEK">ralan + ranap</entry> <!--Format Alarm resep baru-->
+    <entry key="STOKKOSONGRESEP">no</entry> <!--Stok obat kosong mau di tampilkan/tidak-->
+    <entry key="HPPFARMASI">dasar</entry>
+    <entry key="HPPTOKO">dasar</entry>
+    <entry key="PEMBULATANHARGAOBAT">no</entry>
+    <entry key="AKTIFKANBATCHOBAT">no</entry> <!--Catat Mengenai Batch Obat Fifo Fefo
+                                                    Pengelolaan obat dalam konteks penyimpanan obat di apotek harus menjadi perhatian khusus mengingat aspek ini berperan penting dalam kelancaran delivery obat dari apotek ke pasien. Penyusunan obat yang sesuai dan tertata rapi akan mempermudah farmasis dalam proses dispensing obat. Ada berbagai metode yang bisa digunakan untuk penyimpanan obat diantaranya adalah FIFO, FEFO 
+                                                    First In First Out (FIFO) adalah penyimpanan obat berdasarkan obat yang datang lebih dulu dan dikeluarkan lebih dulu.
+                                                    First Expired First Out (FEFO) adalah penyimpanan obat berdasarkan obat yang memiliki tanggal kadaluarsa lebih cepat maka dikeluarkan lebih dulu.
+                                                    Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
+
+                                                    1. Setting database.xml pada opsi AKTIFKANBATCHOBAT dibuat yes
+                                                    2. Pada saat peneriman obat batch obat harus diisi beserta tanggal kadaluarsa obatnya
+                                                    3. Saat pemberian obat kita bisa memilih obat mana yang akan di kasihkan ke pasiennya berdasarkan nomor batch nya, sebelumnya pastikan data batch nya valid dulu
+                                                    4. Pengaruhnya apabila batch diaktifkan harga akan menyesuikan sesuai batchnya-->
+    <entry key="CETAKRINCIANOBAT">no</entry> <!--Setelah Pemberian obat melalui pemberian obat otomatis muncul rincian resep-->
+    <entry key="DEPOAKTIFOBAT">B0015</entry> <!--Set lokasi pemberian obat menggunakan lokasi mana-->
+    <entry key="VALIDASIULANGBERIOBAT">no</entry>
+    <!--Laboratorium--> 
+    <entry key="ALARMLAB">yes</entry>
+    <entry key="FORMALARMLAB">ralan + ranap</entry>
+    <!--Radiologi--> 
+    <entry key="ALARMRADIOLOGI">yes</entry>
+    <entry key="FORMALARMRADIOLOGI">ralan + ranap</entry>
+
+    <!--Bridging--> 
+    <entry key="URLAPIBPJS">https://apijkn.bpjs-kesehatan.go.id/vclaim-rest/</entry>
+    <entry key="SECRETKEYAPIBPJS">Nc9g9ojrGX2wmKT6sPM6LA==</entry>
+    <entry key="CONSIDAPIBPJS">zRdntHf6Zt5Ist7sHgnpdw==</entry>
+    <entry key="USERKEYAPIBPJS">5934td74k4ih5K95nOYUOG/9LtNZqIIf+a6oFu58HhAZgC5Lt28jpbiNdZf2q3dI</entry>
+    <entry key="DIAGNOSARUJUKANMASUKAPIBPJS">yes</entry> <!--Diagnosa Awal dari Rujukan BPJS-->
+    <entry key="JADIKANBOOKINGSURATKONTROLAPIBPJS">yes</entry> <!--bagi RS yang pengen langsung menjadikan data booking periksa dari surat kontrol BPJS-->
+
+    <entry key="URLAPIAPLICARE">https://new-api.bpjs-kesehatan.go.id/aplicaresws</entry>
+    <entry key="SECRETKEYAPIAPLICARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="CONSIDAPIAPLICARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="USERKEYAPIAPLICARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+
+    <entry key="URLAPIMOBILEJKN">https://apijkn.bpjs-kesehatan.go.id/antreanrs/</entry>
+    <entry key="SECRETKEYAPIMOBILEJKN">Nc9g9ojrGX2wmKT6sPM6LA==</entry>
+    <entry key="CONSIDAPIMOBILEJKN">zRdntHf6Zt5Ist7sHgnpdw==</entry>
+    <entry key="USERKEYAPIMOBILEJKN">iMijVhfyd+r4s7lcjitHTJoeJaiH8z0ge3xWS/lfZI31BjoxQQhkdYhTcdm+0xAE</entry>
+    <entry key="ADDANTRIANAPIMOBILEJKN">yes</entry>
+
+    <entry key="URLAPIAPOTEKBPJS">https://dev-soa.bpjs-kesehatan.go.id/apotek-rest</entry>
+    <entry key="SECRETKEYAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="CONSIDAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="USERKEYAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+
+    <entry key="URLAPIPCARE">https://apijkn-dev.bpjs-kesehatan.go.id/pcare-rest-dev</entry>
+    <entry key="SECRETKEYAPIPCARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="CONSIDAPIPCARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="USERKEYAPIPCARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PASSPCARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="USERPCARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="DIVREGPCARE">REGIONAL V-JAWA TENGAH</entry>
+    <entry key="KACABPCARE">SURAKARTA</entry>
+
+    <entry key="URLAPISISRUTE">https://api.sisrute.kemkes.go.id</entry>
+    <entry key="IDSISRUTE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PASSSISRUTE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+
+    <entry key="URLAPISIRS">https://sirs.kemkes.go.id/fo/index.php/Fasyankes</entry>
+    <entry key="IDSIRS">jhPSu1xlQkh+stLFrcin5w==</entry>
+    <entry key="PASSSIRS">BYptJvsq544HinWKjX8VTA==</entry>
+
+    <entry key="URLAPISITT">http://sirs.yankes.kemkes.go.id/sirsservice/sitbtraining/sitb/senddata</entry>
+    <entry key="IDSITT">Fm2U09DVwzqY2V8sl5jUCA==</entry>
+    <entry key="PASSSITT">ri7lfclUM11skv5F+NuUUg==</entry>
+    <entry key="KABUPATENSITT">12345</entry>
+
+    <entry key="URLAPICORONA">http://sirs.kemkes.go.id/fo/index.php</entry>
+    <entry key="IDCORONA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PASSCORONA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+
+    <entry key="CLIENTIDSATUSEHAT">P7r+UhotZ+TD5Gxvo9z+Cu4XctfONdHedFnPb884a1CrfF5lGde278HU+KTDASyaq6I5ld16yNBlpNOVH/2iyQ==</entry>
+    <entry key="SECRETKEYSATUSEHAT">p2//pZik2fKNprNhYWGsj0v7PvaJrwNawRYseD1hOCCEwZiCIsqVgxFXXpXXAVg0HWBfjK7ZOh1uNT/vVtXbsjgxLVO4Pk02U5xt8isHLmE=</entry>
+    <entry key="URLAUTHSATUSEHAT">https://api-satusehat.kemkes.go.id/oauth2/v1</entry> 
+    <entry key="URLFHIRSATUSEHAT">https://api-satusehat.kemkes.go.id/fhir-r4/v1</entry>
+    <entry key="IDSATUSEHAT">gaBNwBHeS3L0v0VbJMiSXw==</entry>
+    <entry key="KELURAHANSATUSEHAT">3175101006</entry>
+    <entry key="KECAMATANSATUSEHAT">317510</entry>
+    <entry key="KABUPATENSATUSEHAT">3175</entry>
+    <entry key="PROPINSISATUSEHAT">31</entry>
+    <entry key="KODEPOSSATUSEHAT">13840</entry>
+
+    <entry key="URLAPIINHEALTH">http://development.inhealth.co.id/pelkesws2</entry>
+    <entry key="TOKENINHEALTH">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+       
+    <entry key="URLDUKCAPILJAKARTA">http://kependudukan.jakarta.go.id/wsrs/xml.jsp</entry>
+    <entry key="USERDUKCAPILJAKARTA">eYTbZ3SMrmsvkl4t8u0zrA==</entry>
+    <entry key="PASSDUKCAPILJAKARTA">iDrX7PhhkIwMup7YcS2RFg==</entry>
+    <entry key="VAR1DUKCAPILJAKARTA">RSIABK</entry>
+    <entry key="VAR2DUKCAPILJAKARTA">12</entry>
+
+    <entry key="URLDUKCAPIL">http://172.16.160.128:8000/dukcapil/get_json/rsia_aceh/CALL_NIK</entry>
+    <entry key="USERDUKCAPIL">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PASSDUKCAPIL">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="IPUSERDUKCAPIL">10.160.57.2</entry>
+
+    <entry key="HOSTWSLICA">http://localhost/bridging-lica/public</entry>
+    <entry key="KEYWSLICA">yLT3/8b0KAb5QK1ueFkW7g==</entry>
+
+    <entry key="HOSTFUJI">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="DATABASEFUJI">278SCM7uDvhfdwppyMpg5OAy0jN9F3pCdgukirLsgKA=</entry>
+    <entry key="PORTFUJI">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="USERFUJI">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="PASFUJI">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+
+    <entry key="URLCARESTREAM">http://192.168.55.187:10110/pacs</entry>
+
+    <entry key="HOSTSYSMEX">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="DATABASESYSMEX">o4cUZDSdQxLPdcZer/pr1PnCrQNrd08+Hrx8Y/fi7Os=</entry>
+    <entry key="PORTSYSMEX">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="USERSYSMEX">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="PASSYSMEX">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="HOSTELIMS">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+
+    <entry key="DATABASEELIMS">o4cUZDSdQxLPdcZer/pr1PnCrQNrd08+Hrx8Y/fi7Os=</entry>
+    <entry key="PORTELIMS">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="USERELIMS">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="PASELIMS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+
+    <entry key="URLAPIMEDQLAB">https://dev-prembun.applimetis.id</entry>
+    <entry key="SECRETKEYAPIMEDQLAB">8ZipZmIxePiEF1zVagxxcQ==</entry>
+    <entry key="CONSIDAPIMEDQLAB">6IhC1JqxJ8ffoUfJz36IiA==</entry>
+    <entry key="HOSTSMARTLAB">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="DATABASESMARTLAB">o4cUZDSdQxLPdcZer/pr1PnCrQNrd08+Hrx8Y/fi7Os=</entry>
+    <entry key="PORTSMARTLAB">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="USERSMARTLAB">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="PASSMARTLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+
+    <entry key="URLAPISOFTMEDIX">http://192.168.1.100/wslis/bridging</entry>
+    <entry key="PRODUCTSOFTMEDIX">hxTq2l42LcFegDOGyf8NsQ==</entry>
+    <entry key="VERSIONSOFTMEDIX">NtswCF8BeY91Qs+C0p9G4g==</entry>
+    <entry key="USERIDSOFTMEDIX">ZrktPIaFtldPd5VRZVti1g==</entry>
+    <entry key="KEYSOFTMEDIX">KAkCm0yrGiE2y7VnPrI2RcLCEN+iP1sFTpvFpySD1f8=</entry>
+
+    <entry key="HOSTVANSLAB">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="DATABASEVANSLAB">o4cUZDSdQxLPdcZer/pr1PnCrQNrd08+Hrx8Y/fi7Os=</entry>
+    <entry key="PORTVANSLAB">nioxtijcpDaKSUiUiP5FAg==</entry>
+    <entry key="USERVANSLAB">kMR3WfAwUK6MbhCyydxa0g==</entry>
+    <entry key="PASVANSLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+
+    <entry key="URLORTHANC">http://192.168.20.112</entry>
+    <entry key="PORTORTHANC">gie5pRePkRsFe+dOh84P4A==</entry>
+    <entry key="USERORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>
+    <entry key="PASSORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>
+</properties>
