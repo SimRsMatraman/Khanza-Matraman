@@ -70,12 +70,14 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                    ttlLaborat=0,ttlRadiologi=0,ttlObat=0,ttlRalan_Dokter=0,ttlRalan_Paramedis=0,
                    ttlTambahan=0,ttlPotongan=0,ttlRegistrasi=0,ttlRalan_Dokter_Param=0,ppnobat=0,ttlOperasi=0,
                    kekurangan=0,obatlangsung;
-    private int i,r,cek,row2,countbayar=0,z=0,jml=0;
+    private int i,r,cek,row2,countbayar=0,z=0,jml=0,p,pl;
     private String nota_jalan="",dokterrujukan="",polirujukan="",status="",biaya="",tambahan="",totals="",kdptg="",nmptg="",kd_pj="",notaralan="",centangdokterralan="",
             rinciandokterralan="",Tindakan_Ralan="",Laborat_Ralan="",Radiologi_Ralan="",no_rkm_medis, nm_pasien, alamat, jk, umurdaftar, tgl_registrasi, no_nota,
             Obat_Ralan="",Registrasi_Ralan="",Tambahan_Ralan="",Potongan_Ralan="",Obat_Langsung_Ralan="",tgl_lahir,
             Operasi_Ralan="",tampilkan_ppnobat_ralan="",rincianoperasi="",centangobatralan="No",
             sqlpscekbilling="select count(billing.no_rawat) from billing where billing.no_rawat=?",
+            sqlpscekperiksalab="select count(periksa_lab.no_rawat) from periksa_lab where periksa_lab.no_rawat=?",
+            sqlpscekpermintaanlab="select count(permintaan_lab.no_rawat) from permintaan_lab where permintaan_lab.no_rawat=?",
             sqlpsreg="select reg_periksa.tgl_registrasi,reg_periksa.no_rkm_medis,reg_periksa.kd_poli,reg_periksa.no_rawat,"+
                      "reg_periksa.biaya_reg,current_time() as jam,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
                      "from reg_periksa where reg_periksa.no_rawat=?",
@@ -194,11 +196,11 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private PreparedStatement pscaripoli2,pscekbilling,pscarirm,pscaripasien,psreg,pscaripoli,pscarialamat,psrekening,
             psdokterralan,psdokterralan2,pscariralandokter,pscariralanperawat,pscariralandrpr,pscarilab,pscariplab,pscariobat,psdetaillab,
             psobatlangsung,pstambahan,psbiling,pstemporary,pspotongan,psbilling,pscariradiologi,
-            pstamkur,psnota,psoperasi,psobatoperasi,psakunbayar,psakunpiutang;
+            pstamkur,psnota,psoperasi,psobatoperasi,psakunbayar,psakunpiutang,pscekperiksalab,pscekpermintaanlab;
     private ResultSet rscekbilling,rscarirm,rscaripasien,rsreg,rscaripoli,rscarialamat,rsrekening,rsobatoperasi,
             rsdokterralan,rsdokterralan2,rscariralandokter,rscariralanperawat,rscariralandrpr,rscarilab,rscariplab,rscariobat,rsdetaillab,
             rsobatlangsung,rstambahan,rspotongan,rsbilling,rscariradiologi,rstamkur,rsoperasi,
-            rsakunbayar,rsakunpiutang,rscaripoli2;
+            rsakunbayar,rsakunpiutang,rscaripoli2,rscekperiksalab,rscekpermintaanlab;
     private WarnaTable2 warna=new WarnaTable2();
     private WarnaTable2 warna2=new WarnaTable2();
     private File file;
@@ -4099,7 +4101,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
     public void isRawat() {
         try {    
-            pscekbilling=koneksi.prepareStatement(sqlpscekbilling);
+            pscekbilling=koneksi.prepareStatement(sqlpscekbilling);            
 	    try{
                 pscekbilling.setString(1,TNoRw.getText());
                 rscekbilling=pscekbilling.executeQuery();
@@ -4115,6 +4117,44 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 }
                 if(pscekbilling != null){
                     pscekbilling.close();
+                }
+            }
+            
+            pscekperiksalab=koneksi.prepareStatement(sqlpscekperiksalab);            
+	    try{
+                pscekperiksalab.setString(1,TNoRw.getText());
+                rscekperiksalab=pscekperiksalab.executeQuery();
+                if(rscekperiksalab.next()){
+                    p=rscekperiksalab.getInt(1);
+                }
+            }catch (Exception e) {
+                p=0;
+                System.out.println("Notifikasi : "+e);
+            } finally{
+                if(rscekperiksalab != null){
+                    rscekperiksalab.close();
+                }
+                if(pscekperiksalab != null){
+                    pscekperiksalab.close();
+                }
+            }
+            
+            pscekpermintaanlab=koneksi.prepareStatement(sqlpscekpermintaanlab);            
+	    try{
+                pscekpermintaanlab.setString(1,TNoRw.getText());
+                rscekpermintaanlab=pscekpermintaanlab.executeQuery();
+                if(rscekpermintaanlab.next()){
+                    pl=rscekpermintaanlab.getInt(1);
+                }
+            }catch (Exception e) {
+                pl=0;
+                System.out.println("Notifikasi : "+e);
+            } finally{
+                if(rscekpermintaanlab != null){
+                    rscekpermintaanlab.close();
+                }
+                if(pscekpermintaanlab != null){
+                    pscekpermintaanlab.close();
                 }
             }
                             
@@ -4170,8 +4210,12 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
              }             
              if(chkTarifDokter.isSelected()==true){prosesCariRwJlDr();prosesCariRwJlDrPr();}
              if(chkTarifPrm.isSelected()==true){prosesCariRwJlPr();}
-             if(chkLaborat.isSelected()==true){prosesCariPeriksaLab();}
+             if(p>0){
+                if(chkLaborat.isSelected()==true){prosesCariPeriksaLab();}
+             }
+             if(p<=0&&pl>0){
              if(chkPLaborat.isSelected()==true){prosesCariPermintaanLab();}
+             }
              if(chkRadiologi.isSelected()==true){prosesCariRadiologi();}    
              prosesCariOperasi();
              if(chkSarpras.isSelected()==true){
@@ -4721,6 +4765,74 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 rscarilab=pscarilab.executeQuery();
                 subttl=0;
                 while(rscarilab.next()){
+                    psdetaillab=koneksi.prepareStatement(sqlpsdetaillab);
+                    try {
+                        psdetaillab.setString(1,TNoRw.getText());
+                        psdetaillab.setString(2,rscarilab.getString("kd_jenis_prw"));
+                        rsdetaillab=psdetaillab.executeQuery();
+                        ralanparamedis=0;
+                        while(rsdetaillab.next()){  
+                            ralanparamedis=rsdetaillab.getDouble("total");               
+                        }
+                    } catch (Exception e) {
+                        ralanparamedis=0;
+                        System.out.println("Notifikasi : "+e); 
+                    } finally{
+                        if(rsdetaillab!=null){
+                            rsdetaillab.close();
+                        }
+                        if(psdetaillab!=null){
+                            psdetaillab.close();
+                        }
+                    }
+                    tabModeRwJlDr.addRow(new Object[]{true,"",rscarilab.getString("nm_perawatan"),":",
+                                   rscarilab.getDouble("biaya"),rscarilab.getDouble("jml"),ralanparamedis,(rscarilab.getDouble("total")+ralanparamedis),"Laborat"});
+                    subttl=subttl+rscarilab.getDouble("total")+ralanparamedis;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e); 
+            } finally{
+                if(rscarilab!=null){
+                    rscarilab.close();
+                }
+                if(pscarilab!=null){
+                    pscarilab.close();
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
+    }
+    
+    private void prosesCariPermintaanLab() {
+        try{
+            pscariplab=koneksi.prepareStatement(sqlpscariplab);
+            pscariplab.setString(1,TNoRw.getText());
+            rscariplab=pscariplab.executeQuery();                
+            subttl=0;
+            
+            if(rscariplab!=null){
+            try {
+                    while(rscariplab.next()){ 
+                           tabModeRwJlDr.addRow(new Object[]{true,"Permintaan Lab"+" ("+rscariplab.getString("tgl_permintaan")+")",rscariplab.getString("nm_perawatan"),":",
+                           rscariplab.getDouble("total_item"),itempermintaan,rscariplab.getDouble("total_detail"),(rscariplab.getDouble("total")),"PLaborat"});
+                           subttl=subttl+rscariplab.getDouble("total");
+                    } 
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e); 
+            } finally{
+                if(rscariplab!=null){
+                    rscariplab.close();
+                }
+                if(pscariplab!=null){
+                    pscariplab.close();
+                }
+            }
+            }
+            
+//            if(rscarilab!=null) {
+//                try {
+//                    while(rscarilab.next()){
 //                    psdetaillab=koneksi.prepareStatement(sqlpsdetaillab);
 //                    try {
 //                        psdetaillab.setString(1,TNoRw.getText());
@@ -4744,64 +4856,19 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 //                    tabModeRwJlDr.addRow(new Object[]{true,"",rscarilab.getString("nm_perawatan"),":",
 //                                   rscarilab.getDouble("biaya"),rscarilab.getDouble("jml"),ralanparamedis,(rscarilab.getDouble("total")+ralanparamedis),"Laborat"});
 //                    subttl=subttl+rscarilab.getDouble("total")+ralanparamedis;
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e); 
-            } finally{
-                if(rscarilab!=null){
-                    rscarilab.close();
-                }
-                if(pscarilab!=null){
-                    pscarilab.close();
-                }
-            }
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-        }
-    }
-    
-    private void prosesCariPermintaanLab() {
-        try{
-            pscarilab=koneksi.prepareStatement(sqlpscariplab);
-            try {
-                pscarilab.setString(1,TNoRw.getText());
-                rscarilab=pscarilab.executeQuery();
-                subttl=0;
-                while(rscarilab.next()){
-//                    psdetaillab=koneksi.prepareStatement(sqlpsdetaillab);
-//                    try {
-//                        psdetaillab.setString(1,TNoRw.getText());
-//                        psdetaillab.setString(2,rscarilab.getString("kd_jenis_prw"));
-//                        rsdetaillab=psdetaillab.executeQuery();
-//                        ralanparamedis=0;
-//                        while(rsdetaillab.next()){  
-//                            ralanparamedis=rsdetaillab.getDouble("total");               
-//                        }
-//                    } catch (Exception e) {
-//                        ralanparamedis=0;
-//                        System.out.println("Notifikasi : "+e); 
-//                    } finally{
-//                        if(rsdetaillab!=null){
-//                            rsdetaillab.close();
-//                        }
-//                        if(psdetaillab!=null){
-//                            psdetaillab.close();
-//                        }
+//                    }                                   
+//                }
+//                catch (Exception e) {
+//                System.out.println("Notifikasi : "+e); 
+//                } finally{
+//                    if(rscariplab!=null){
+//                        rscariplab.close();
 //                    }
-                    tabModeRwJlDr.addRow(new Object[]{true,"Permintaan Lab"+" ("+rscarilab.getString("tgl_permintaan")+")",rscarilab.getString("nm_perawatan"),":",
-                                   rscarilab.getDouble("total"),itempermintaan,ralanparamedis,(rscarilab.getDouble("total")+ralanparamedis),"Laborat"});
-                    subttl=subttl+rscarilab.getDouble("total")+ralanparamedis;
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e); 
-            } finally{
-                if(rscarilab!=null){
-                    rscarilab.close();
-                }
-                if(pscarilab!=null){
-                    pscarilab.close();
-                }
-            }
+//                    if(pscariplab!=null){
+//                        pscariplab.close();
+//                    }
+//                }
+//            }           
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
