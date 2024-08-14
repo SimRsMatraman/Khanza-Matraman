@@ -6,7 +6,7 @@
     <entry key="URLSERVERUPDATE">localhost/webapps13/serverupdate</entry> <!--link webapps Update -->
     <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
     <!--BSSN TTE-->
-    <entry key="URLTTE">http://100.10.3.92/webapps/berkastte/</entry>
+    <entry key="URLTTE">http://192.168.20.254/api-tte/berkastte/</entry>
     <entry key="URLAPIINTEGRATION">http://10.50.149.23/api-khanza</entry>
     <entry key="IDINTEGRATION">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
     <entry key="PASSINTEGRATION">Fygcm+8VZnyqQF/FL8r9wQ==</entry>

@@ -283,14 +283,15 @@ public class DlgPassPhrase extends javax.swing.JDialog {
         username=akses.getkode();
         }
         else{
-        username=Sequel.cariIsi("select nama from pegawai where nik=?",akses.getkode());
+        username=Sequel.cariIsi("select no_ktp from pegawai where nik=?",akses.getkode());
         }
         uploadPdf(txtNamaFile.getText());
         
         
         
         try {
-            link="http://localhost/api-tte/berkastte/";
+//            link="http://localhost/api-tte/berkastte/";
+            link = koneksiDB.URLTTE();
             URL = link+"signtte.php";
            // System.out.println(URL);
             headers= new HttpHeaders();
@@ -305,12 +306,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
 	    requestEntity = new HttpEntity(requestJson,headers);
 	    root = mapper.readTree(apiTte.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
             metadata = root.path("metadata");
-//            JOptionPane.showMessageDialog(null,metadata.path("message").asText());
             
-//             int jawab=JOptionPane.showConfirmDialog(null, metadata.path("message").asText(),"Konfirmasi",JOptionPane.YES_NO_OPTION);
-//                    if(jawab==JOptionPane.YES_OPTION){
-//                       dispose(); 
-//                    }
              JOptionPane.showMessageDialog(null,metadata.path("message").asText());
                     if(metadata.path("code").asText().equals("200")){
                         Sequel.menyimpantf("berkas_tte_matraman","?,?,?,?","No.Rawat",4,new String[]{
@@ -318,10 +314,12 @@ public class DlgPassPhrase extends javax.swing.JDialog {
                     });
                     dispose(); 
                     }
-                    
-//            response =root.path("metadata");
-//              System.out.println(root);
-//              
+                    if(!metadata.path("code").asText().equals("200")){
+                        Sequel.menyimpantf("log_berkas_tte","?,?,?,?,?,?","No.Rawat",6,new String[]{
+                    txtNik.getText(),metadata.path("datetime").asText(),txtNoRawat.getText(),metadata.path("code").asText(),txtNamaFile.getText(),metadata.path("error_code").asText(),
+                    });
+                    dispose(); 
+                    }
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -429,11 +427,13 @@ public class DlgPassPhrase extends javax.swing.JDialog {
     }
 void uploadPdf(String FileName){
     try{
+        link = koneksiDB.URLTTE();
+        URL = link+"upload.php?doc=resume";
         File file =new File("tempfile/"+FileName);
         byte[] data = new byte[(int) file.length()];
         data = FileUtils.readFileToByteArray(file);
         HttpClient httpClient = new DefaultHttpClient();
-        HttpPost postRequest = new HttpPost("http://localhost/api-tte/berkastte/upload.php?doc=resume");
+        HttpPost postRequest = new HttpPost(URL);
         ByteArrayBody fileData = new ByteArrayBody(data, FileName);
         MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         reqEntity.addPart("file", fileData); 

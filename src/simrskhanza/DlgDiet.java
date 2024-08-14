@@ -76,7 +76,7 @@ public class DlgDiet extends javax.swing.JDialog {
 
         tbSpesialis.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TKd.setDocument(new batasInput((byte)3).getKata(TKd));
+        TKd.setDocument(new batasInput((byte)4).getKata(TKd));
         TNm.setDocument(new batasInput((byte)50).getKata(TNm));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -610,7 +610,7 @@ public class DlgDiet extends javax.swing.JDialog {
         TNm.setText("");
         TCari.setText("");
         TKd.requestFocus();
-        Valid.autoNomer("diet","D",2,TKd);
+        Valid.autoNomer("diet","D",3,TKd);
         TKd.requestFocus();
     }
 

@@ -37,6 +37,7 @@ import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 import laporan.DlgBerkasRawat;
 import laporan.DlgDiagnosaPenyakit;
+import digitalsignature.DlgViewPdf;
 
 
 /**
@@ -53,6 +54,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private int i=0;    
     private String namaPenyakit="",namaPenyakitt="",Listpenyakit="",Listpenyakitt="",NamaObat="",NamaObatt=""
             ,ListObat="",ListObatt="",NamaObattt="",NamaObatttt="",ListObattt="",ListObatttt=""; 
+    private String FileName;
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     private RMCariRPSAssMedisRanap carirps=new RMCariRPSAssMedisRanap(null,false);
     private RMCariKetFisikAssMedisRanap carifisik=new RMCariKetFisikAssMedisRanap(null,false);
@@ -1362,6 +1364,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         MnLaporanResume = new javax.swing.JMenuItem();
         MnInputDiagnosa = new javax.swing.JMenuItem();
         ppBerkasDigital = new javax.swing.JMenuItem();
+        MnDigitalTTE = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -1646,6 +1649,21 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(ppBerkasDigital);
+
+        MnDigitalTTE.setBackground(new java.awt.Color(255, 255, 254));
+        MnDigitalTTE.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnDigitalTTE.setForeground(new java.awt.Color(50, 50, 50));
+        MnDigitalTTE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnDigitalTTE.setText("Sign Digital Signature");
+        MnDigitalTTE.setToolTipText("");
+        MnDigitalTTE.setName("MnDigitalTTE"); // NOI18N
+        MnDigitalTTE.setPreferredSize(new java.awt.Dimension(220, 26));
+        MnDigitalTTE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnDigitalTTEActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnDigitalTTE);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -4779,6 +4797,27 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_DiagnosaUtamaActionPerformed
 
+    private void MnDigitalTTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDigitalTTEActionPerformed
+        if(tbObat.getSelectedRow()>-1){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            FileName=tbObat.getValueAt(tbObat.getSelectedRow(),2).toString().replaceAll("/","_")+".pdf";
+            DlgViewPdf berkas=new DlgViewPdf(null,true);
+            if(Sequel.cariInteger("select count(no_rawat) from berkas_tte_matraman where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()+"'")>0){
+                berkas.tampilPdf(FileName,"berkastte/resume");
+                berkas.setButton(false);
+            }else{
+                createPdf(FileName);
+                berkas.tampilPdfLocal(FileName,"local","berkastte/resume",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
+            };
+
+            berkas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            berkas.setLocationRelativeTo(internalFrame1);
+            berkas.setVisible(true);
+
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_MnDigitalTTEActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -4901,6 +4940,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.TextArea LabBelum;
     private widget.TextBox Masuk;
+    private javax.swing.JMenuItem MnDigitalTTE;
     private javax.swing.JMenuItem MnInputDiagnosa;
     private javax.swing.JMenuItem MnLaporanResume;
     private widget.TextBox Nama1;
@@ -6402,6 +6442,30 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
 //            System.out.println("Notif : "+e);
 //        } 
     }
+    
+    void createPdf(String FileName){
+    Map<String, Object> param = new HashMap<>();    
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());   
+            param.put("logo",Sequel.cariGambar("select logo from setting")); 
+            param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
+            param.put("finger",Sequel.cariIsi("select sha1(sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString())); 
+            if(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString().equals("Ralan")){
+                param.put("ruang",Sequel.cariIsi("select poliklinik.nm_poli from poliklinik inner join reg_periksa on reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+                param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_registrasi, '%d-%m-%Y') from reg_periksa where no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+                param.put("harirawat","1 Hari");
+            }else{
+                param.put("ruang",Sequel.cariIsi("select concat(no_bed,' ',nm_kamar)  from  kamar inner join kamar_inap on  kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+                param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_keluar, '%d-%m-%Y') from kamar_inap where no_rawat=? order by tgl_keluar desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+                param.put("harirawat",Sequel.cariIsi("select sum(lama) from kamar_inap where no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString())+" Hari");
+            }
+           
+            Valid.MyReportPDFWithName("rptLaporanResumeRanap.jasper","report","tempfile",FileName,"::[ Laporan Resume Pasien ]::",param);
+}
     
     private void isForm(){
         if(ChkInput.isSelected()==true){
