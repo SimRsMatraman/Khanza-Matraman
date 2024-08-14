@@ -290,17 +290,12 @@ public class DlgPassPhrase extends javax.swing.JDialog {
         
         
         try {
-            link="http://localhost/webapps/berkastte/";
+            link="http://localhost/api-tte/berkastte/";
             URL = link+"signtte.php";
            // System.out.println(URL);
             headers= new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-//	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
-//	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));  
-//            headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-//	    utc=String.valueOf(api.GetUTCdatetimeAsString());
-//                headers.add("X-Signature",api.getHmac(utc));
-        requestJson =" {" +
+            requestJson =" {" +
                     "\"nik\":\""+txtNik.getText()+"\","+
                     "\"passphrase\":\""+txtPassPhrase.getText()+"\","+
                     "\"document\":\""+txtNamaFile.getText()+"\","+
@@ -316,15 +311,15 @@ public class DlgPassPhrase extends javax.swing.JDialog {
 //                    if(jawab==JOptionPane.YES_OPTION){
 //                       dispose(); 
 //                    }
-             JOptionPane.showMessageDialog(null,metadata.path("message").asText());        
+             JOptionPane.showMessageDialog(null,metadata.path("message").asText());
                     if(metadata.path("code").asText().equals("200")){
-                        Sequel.menyimpantf("berkas_tte","?,?,?,?,?,?,?","No.Rawat",7,new String[]{
-                    txtNamaFile.getText(),txtNoRawat.getText(),metadata.path("datetime").asText(),"",txtLokasiFile.getText(),txtNamaFile.getText(),"MEDIS"
+                        Sequel.menyimpantf("berkas_tte_matraman","?,?,?,?","No.Rawat",4,new String[]{
+                    txtNoRawat.getText(),txtNamaFile.getText(),metadata.path("datetime").asText(),metadata.path("file").asText()
                     });
                     dispose(); 
                     }
                     
-//            response =root.path("response");
+//            response =root.path("metadata");
 //              System.out.println(root);
 //              
         } catch (Exception e) {
@@ -438,7 +433,7 @@ void uploadPdf(String FileName){
         byte[] data = new byte[(int) file.length()];
         data = FileUtils.readFileToByteArray(file);
         HttpClient httpClient = new DefaultHttpClient();
-        HttpPost postRequest = new HttpPost("http://localhost/webapps/berkastte/upload.php?doc=resume");
+        HttpPost postRequest = new HttpPost("http://localhost/api-tte/berkastte/upload.php?doc=resume");
         ByteArrayBody fileData = new ByteArrayBody(data, FileName);
         MultipartEntity reqEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         reqEntity.addPart("file", fileData); 

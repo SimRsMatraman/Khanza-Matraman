@@ -1247,6 +1247,16 @@ public class koneksiDB {
         return var;
     }
     
+    public static String URLTTE(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("URLTTE");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
     public static String KELURAHANSATUSEHAT(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));

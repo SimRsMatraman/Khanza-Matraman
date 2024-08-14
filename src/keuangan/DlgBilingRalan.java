@@ -4350,8 +4350,12 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         if(chkTarifDokter.isSelected()==true){prosesCariRwJlDr();prosesCariRwJlDrPr();}
         if(chkTarifPrm.isSelected()==true){prosesCariRwJlPr();}
         prosesCariOperasi();
-        if(chkLaborat.isSelected()==true){prosesCariPeriksaLab();}
-        if(chkPLaborat.isSelected()==true){prosesCariPermintaanLab();}
+        if(p>0){
+            if(chkLaborat.isSelected()==true){prosesCariPeriksaLab();}
+        }
+        if(p<=0&&pl>0){
+            if(chkPLaborat.isSelected()==true){prosesCariPermintaanLab();}
+        }
         if(chkRadiologi.isSelected()==true){prosesCariRadiologi();}             
         if(chkSarpras.isSelected()==true){
             if(detailjs>0){
@@ -4815,7 +4819,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             try {
                     while(rscariplab.next()){ 
                            tabModeRwJlDr.addRow(new Object[]{true,"Permintaan Lab"+" ("+rscariplab.getString("tgl_permintaan")+")",rscariplab.getString("nm_perawatan"),":",
-                           rscariplab.getDouble("total_item"),itempermintaan,rscariplab.getDouble("total_detail"),(rscariplab.getDouble("total")),"PLaborat"});
+                           rscariplab.getDouble("total_item"),itempermintaan,rscariplab.getDouble("total_detail"),(rscariplab.getDouble("total")),"Laborat"});
                            subttl=subttl+rscariplab.getDouble("total");
                     } 
             } catch (Exception e) {

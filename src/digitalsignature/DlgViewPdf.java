@@ -41,6 +41,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.io.FileOutputStream;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -247,7 +249,7 @@ passphrase.addWindowListener(new WindowListener() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnViewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnViewFileActionPerformed
-    if(Sequel.cariInteger("select count(nama_file) from berkas_tte where nama_file='"+txtNameFile.getText()+"'")>0){
+    if(Sequel.cariInteger("select count(nama_file) from berkas_tte_matraman where nama_file='"+txtNameFile.getText()+"'")>0){
        LocationFile="server"; 
        setButton(false);
        deleteFile();
@@ -270,7 +272,7 @@ void viewpdf(String fileName,String fileLocation){
                 if(fileLocation.equals("local")){  
                   ctrl.openDocument("tempfile/"+txtNameFile.getText());
                 }else{
-                 URL url =new URL("http://localhost/webapps/"+txtLokasiFile.getText()+"/"+txtNameFile.getText());
+                 URL url =new URL("http://localhost/api-tte/berkastte/resume/"+txtNameFile.getText());
                    ctrl.openDocument(url);
                 }
               jScrollPane1.setViewportView(s); 
@@ -281,7 +283,7 @@ void viewpdf(String fileName,String fileLocation){
 }
     void openpdf(String file){
           try {
-            URL url =new URL("http://localhost/webapps/"+txtLokasiFile.getText()+"/"+file);
+            URL url =new URL("http://localhost/api-tte/berkastte/resume/"+file);
             SwingController ctrl = new SwingController();
             SwingViewBuilder vb = new SwingViewBuilder(ctrl);
             JPanel s = vb.buildViewerPanel();
