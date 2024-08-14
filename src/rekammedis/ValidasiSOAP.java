@@ -1240,11 +1240,9 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             if(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString().equals("Ralan")){
                 param.put("ruang",Sequel.cariIsi("select poliklinik.nm_poli from poliklinik inner join reg_periksa on reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
                 param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_registrasi, '%d-%m-%Y') from reg_periksa where no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
-                param.put("harirawat","1 Hari");
             }else{
-                param.put("ruang",Sequel.cariIsi("select concat(no_bed,' ',nm_kamar)  from  kamar inner join kamar_inap on  kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+                param.put("ruang",Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar inner join kamar_inap on bangsal.kd_bangsal=kamar.kd_bangsal and kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
                 param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_keluar, '%d-%m-%Y') from kamar_inap where no_rawat=? order by tgl_keluar desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
-                param.put("harirawat",Sequel.cariIsi("select sum(lama) from kamar_inap where no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString())+" Hari");
             }
            
             Valid.MyReportPDFWithName("rptLaporanResume.jasper","report","tempfile",FileName,"::[ Laporan Resume Pasien ]::",param);

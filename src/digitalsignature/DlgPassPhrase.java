@@ -59,7 +59,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private String link="",URL="",requestJson="";
-     private HttpHeaders headers;
+    private HttpHeaders headers;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
@@ -76,6 +76,14 @@ public class DlgPassPhrase extends javax.swing.JDialog {
 
         this.setLocation(8,1);
         setSize(885,674);
+        if (akses.getkode()=="Admin Utama")
+        {
+        username="0803202100007062";
+        }
+        else{
+        username=Sequel.cariIsi("select no_ktp from pegawai where nik=?",akses.getkode());
+        }
+        txtNik.setText(username);
     }
 
     //private DlgCariObatPenyakit dlgobtpny=new DlgCariObatPenyakit(null,false);
@@ -102,6 +110,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
         jLabel6 = new widget.Label();
         txtNoRawat = new widget.TextBox();
         txtPassPhrase = new widget.PasswordBox();
+        jLabel7 = new widget.Label();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
         BtnKeluar = new widget.Button();
@@ -115,7 +124,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Passphrase ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Passphrase ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(70, 70, 70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -127,7 +136,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
         FormInput.add(jLabel3);
-        jLabel3.setBounds(0, 50, 110, 23);
+        jLabel3.setBounds(0, 50, 110, 30);
 
         BtnKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/85.png"))); // NOI18N
         BtnKeluar1.setMnemonic('T');
@@ -151,7 +160,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
-        jLabel4.setBounds(0, 10, 110, 23);
+        jLabel4.setBounds(0, 100, 110, 23);
 
         txtNamaFile.setEditable(false);
         txtNamaFile.setEnabled(false);
@@ -163,11 +172,11 @@ public class DlgPassPhrase extends javax.swing.JDialog {
             }
         });
         FormInput.add(txtNamaFile);
-        txtNamaFile.setBounds(120, 10, 450, 30);
+        txtNamaFile.setBounds(120, 100, 450, 30);
 
-        txtNik.setEditable(false);
-        txtNik.setText("0803202100007062");
-        txtNik.setEnabled(false);
+        txtNik.setEditable(true);
+        txtNik.setActionCommand(null);
+        txtNik.setEnabled(true);
         txtNik.setHighlighter(null);
         txtNik.setName("txtNik"); // NOI18N
         txtNik.addActionListener(new java.awt.event.ActionListener() {
@@ -176,7 +185,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
             }
         });
         FormInput.add(txtNik);
-        txtNik.setBounds(120, 100, 450, 30);
+        txtNik.setBounds(120, 10, 450, 30);
 
         jLabel5.setText("Lokasi Dokumen");
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -225,6 +234,12 @@ public class DlgPassPhrase extends javax.swing.JDialog {
         });
         FormInput.add(txtPassPhrase);
         txtPassPhrase.setBounds(120, 50, 450, 30);
+
+        jLabel7.setText("NIK");
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setName("jLabel7"); // NOI18N
+        FormInput.add(jLabel7);
+        jLabel7.setBounds(0, 10, 110, 30);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.CENTER);
         FormInput.getAccessibleContext().setAccessibleName("");
@@ -286,8 +301,6 @@ public class DlgPassPhrase extends javax.swing.JDialog {
         username=Sequel.cariIsi("select no_ktp from pegawai where nik=?",akses.getkode());
         }
         uploadPdf(txtNamaFile.getText());
-        
-        
         
         try {
 //            link="http://localhost/api-tte/berkastte/";
@@ -401,6 +414,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
     private widget.Label jLabel4;
     private widget.Label jLabel5;
     private widget.Label jLabel6;
+    private widget.Label jLabel7;
     private widget.panelisi panelGlass8;
     private widget.TextBox txtLokasiFile;
     private widget.TextBox txtNamaFile;
@@ -411,19 +425,14 @@ public class DlgPassPhrase extends javax.swing.JDialog {
     
 
     public void setNamaFile(String namaFile,String pathFile,String NoRawat) {
-        txtNamaFile.setText(namaFile);
+         txtNamaFile.setText(namaFile);
          txtLokasiFile.setText(pathFile);
          txtNoRawat.setText(NoRawat);
-         
     }
-
-    
+   
     
     public void isCek(){
         BtnSimpan.setEnabled(true);
-
-       
-        
     }
 void uploadPdf(String FileName){
     try{
@@ -455,6 +464,4 @@ void deleteFile(){
             }
         }
    }
-
-
 }
