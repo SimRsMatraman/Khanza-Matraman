@@ -3,13 +3,13 @@
 <properties>
     <comment>KhanzaHMS</comment> 
     <!--UPDATE-->
-    <entry key="URLSERVERUPDATE">localhost/webapps13/serverupdate</entry> <!--link webapps Update -->
+    <entry key="URLSERVERUPDATE">100.10.2.18/webapps13/serverupdate</entry> <!--link webapps Update -->
     <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
     <!--BSSN TTE-->
     <entry key="URLTTE">http://192.168.20.254/api-tte/berkastte/</entry>
-    <entry key="URLAPIINTEGRATION">http://10.50.149.23/api-khanza</entry>
-    <entry key="IDINTEGRATION">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
-    <entry key="PASSINTEGRATION">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
+    <entry key="URLAPIINTEGRATION">http://10.15.37.39/</entry>
+    <entry key="IDINTEGRATION">j3CI0CJDdhdR09OcWOCWRQ==</entry>
+    <entry key="PASSINTEGRATION">ykaGr/DmyKI/yKKln4QIvg==</entry>
      <!--INTEGRASI FASKES-->
     <entry key="URLAPIINTEGRATIONFASKES">http://localhost/api-faskes/</entry>
     <entry key="IDINTEGRATIONFASKES">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
