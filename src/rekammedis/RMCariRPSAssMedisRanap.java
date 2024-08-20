@@ -357,6 +357,12 @@ public final class RMCariRPSAssMedisRanap extends javax.swing.JDialog {
                     "no_rawat=? and tanggal like ? or "+
                     "no_rawat=? and rps like ? order by tanggal, jam");
             }
+            else if(Sequel.cariInteger("select count(no_rawat) from asesmen_medis_igd where no_rawat='"+norawat+"' ")>0){
+            ps=koneksi.prepareStatement(
+                    "select tanggal, jam, rps, nama from asesmen_medis_igd inner join pegawai on asesmen_medis_igd.kd_dokter=pegawai.nik where "+
+                    "no_rawat=? and tanggal like ? or "+
+                    "no_rawat=? and rps like ? order by tanggal, jam");
+            }
             try{
                 ps.setString(1,norawat);
                 ps.setString(2,"%"+TCari.getText().trim()+"%");

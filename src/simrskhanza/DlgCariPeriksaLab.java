@@ -6945,7 +6945,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         Kd2.setText("");
         if(tbDokter.getSelectedRow()!= -1){
             Kd2.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-        if(akses.getkode().equals("eka.marlina")||akses.getkode().equals("Admin Utama")){
+        if(akses.getkode().equals("Admin Utama")){
              MnUbah1.setEnabled(true);
         }else if(tbDokter.getSelectedRow()!= -1){
             Date v;

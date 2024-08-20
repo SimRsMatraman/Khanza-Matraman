@@ -323,7 +323,7 @@ public class DlgPassPhrase extends javax.swing.JDialog {
              JOptionPane.showMessageDialog(null,metadata.path("message").asText());
                     if(metadata.path("code").asText().equals("200")){
                         Sequel.menyimpantf("berkas_tte_matraman","?,?,?,?","No.Rawat",4,new String[]{
-                    txtNoRawat.getText(),txtNamaFile.getText(),metadata.path("datetime").asText(),metadata.path("file").asText()
+                    txtNoRawat.getText(),"signed_"+txtNamaFile.getText(),metadata.path("datetime").asText(),metadata.path("file").asText()
                     });
                     dispose(); 
                     }

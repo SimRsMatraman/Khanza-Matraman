@@ -335,6 +335,35 @@ public final class RMCariPemeriksaan extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
+                    "select tanggal, jam, ket_fisik, nama from asesmen_medis_igd inner join pegawai on asesmen_medis_igd.kd_dokter=pegawai.nik where "+
+                    "no_rawat=? and tanggal like ? or "+
+                    "no_rawat=? and ket_fisik like ? order by tanggal, jam");
+            try{
+                ps.setString(1,norawat);
+                ps.setString(2,"%"+TCari.getText().trim()+"%");
+                ps.setString(3,norawat);
+                ps.setString(4,"%"+TCari.getText().trim()+"%");
+                rs=ps.executeQuery();
+                while(rs.next()){
+                    tabMode.addRow(new String[] {
+                        rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)
+                    });
+                }
+            }catch(Exception ex){
+                System.out.println(ex);
+            }finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
+        try{
+            ps=koneksi.prepareStatement(
                     "select tgl_perawatan, jam_rawat, pemeriksaan, nama from pemeriksaan_ralan inner join pegawai on pemeriksaan_ralan.nik=pegawai.nik where "+
                     "no_rawat=? and tgl_perawatan like ? or "+
                     "no_rawat=? and pemeriksaan like ? order by tgl_perawatan, jam_rawat");

@@ -264,7 +264,7 @@ public class DlgViewPdf extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnViewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnViewFileActionPerformed
-        if (Sequel.cariInteger("select count(nama_file) from berkas_tte_matraman where nama_file='" + txtNameFile.getText() + "'") > 0) {
+        if (Sequel.cariInteger("select count(nama_file) from berkas_tte_matraman where nama_file='signed_" + txtNameFile.getText() + "'") > 0) {
             LocationFile = "server";
             setButton(false);
             deleteFile();
@@ -288,7 +288,7 @@ public class DlgViewPdf extends javax.swing.JDialog {
             if (fileLocation.equals("local")) {
                 ctrl.openDocument("tempfile/" + txtNameFile.getText());
             } else {
-                URL url = new URL(link + "resume/" + txtNameFile.getText());
+                URL url = new URL(link + "resume/signed_" + txtNameFile.getText());
                 ctrl.openDocument(url);
             }
             jScrollPane1.setViewportView(s);

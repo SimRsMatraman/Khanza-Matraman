@@ -2678,10 +2678,10 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
     private void MnDigitalTTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDigitalTTEActionPerformed
         if(tbObat.getSelectedRow()>-1){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        FileName=tbObat.getValueAt(tbObat.getSelectedRow(),2).toString().replaceAll("/","_")+".pdf";
+        FileName="resume_pasien_igd-"+tbObat.getValueAt(tbObat.getSelectedRow(),2).toString().replaceAll("/","")+".pdf";
         DlgViewPdf berkas=new DlgViewPdf(null,true);
                 if(Sequel.cariInteger("select count(no_rawat) from berkas_tte_matraman where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()+"'")>0){
-                     berkas.tampilPdf(FileName,"berkastte/resume");
+                     berkas.tampilPdf("signed_"+FileName,"berkastte/resume");
                      berkas.setButton(false);
                 }else{
             createPdf(FileName);

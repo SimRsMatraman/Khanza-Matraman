@@ -37235,7 +37235,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnGrafikInventarisJenis.addActionListener(this::btnGrafikInventarisJenisActionPerformed);
         
         btnResumePasien = new widget.ButtonBig();
-        btnResumePasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_icon-56-document-text_314896.png"))); 
+        btnResumePasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bsre.png"))); 
         btnResumePasien.setText("Resume Pasien IGD");
         btnResumePasien.setIconTextGap(0);
         btnResumePasien.setName("btnResumePasien"); 
@@ -37243,7 +37243,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnResumePasien.addActionListener(this::btnResumePasienActionPerformed);
         
         btnResumePasienRanap = new widget.ButtonBig();
-        btnResumePasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_icon-56-document-text_314896.png"))); 
+        btnResumePasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bsre.png"))); 
         btnResumePasienRanap.setText("Resume Pasien Ranap");
         btnResumePasienRanap.setIconTextGap(0);
         btnResumePasienRanap.setName("btnResumePasienRanap"); 

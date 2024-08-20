@@ -19,9 +19,11 @@ public class WarnaTableIGD extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (row % 2 == 1){
-            component.setBackground(new Color(255,244,244));
+            component.setBackground(new Color(240,248,254));
+            component.setForeground(new Color(50,50,50));
         }else{
-            component.setBackground(new Color(255,255,255));
+            component.setBackground(new Color(240,248,254));
+            component.setForeground(new Color(50,50,50));
         } 
         if(table.getValueAt(row,18).toString().equals("Sudah")){
             component.setBackground(new Color(213, 242, 214));
