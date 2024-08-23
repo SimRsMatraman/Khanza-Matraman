@@ -83,7 +83,7 @@ public class DlgListFileTte extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,350);
         
-        Object[] row={"No File","Nama File","Tgl. Sign","Jenis File",""};
+        Object[] row={"Tgl. Sign","NIK","Nama File","No Rawat","Kode","Status"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -92,7 +92,7 @@ public class DlgListFileTte extends javax.swing.JDialog {
         tbListFileTte.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbListFileTte.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
             TableColumn column = tbListFileTte.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(150);
@@ -101,10 +101,11 @@ public class DlgListFileTte extends javax.swing.JDialog {
             }else if(i==2){
                 column.setPreferredWidth(300);
             }else if(i==3){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(150);
             }else if(i==4){
-               column.setMinWidth(0);
-                column.setMaxWidth(0);
+                column.setPreferredWidth(80);
+            }else if(i==5){
+                column.setPreferredWidth(400);
             }
         }
         tbListFileTte.setDefaultRenderer(Object.class, new WarnaTable()); 
@@ -374,7 +375,7 @@ public class DlgListFileTte extends javax.swing.JDialog {
     private void MnViewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnViewFileActionPerformed
         if(tbListFileTte.getSelectedRow()>-1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            FileName=tbListFileTte.getValueAt(tbListFileTte.getSelectedRow(),4).toString();
+            FileName=tbListFileTte.getValueAt(tbListFileTte.getSelectedRow(),2).toString();
             DlgViewPdf berkas=new DlgViewPdf(null,true);
             berkas.tampilPdf2(FileName);
             berkas.setButton(false);
@@ -430,12 +431,12 @@ public class DlgListFileTte extends javax.swing.JDialog {
         try {
             if(TCari.getText().equals("")){
                 ps=koneksi.prepareStatement(
-                    "select * from berkas_tte JOIN master_berkas_tte ON berkas_tte.kode = master_berkas_tte.kode "+
-                    " where  date(tgl_tte) BETWEEN ? and ? ");
+                    "select * from log_berkas_tte"+
+                    " where  date(tanggal) BETWEEN ? and ? ");
             }else{
                   ps=koneksi.prepareStatement(
-                    "select * from berkas_tte JOIN master_berkas_tte ON berkas_tte.kode = master_berkas_tte.kode "+
-                    " where  date(tgl_tte) BETWEEN ? and ?  and no_dokumen like ?");
+                    "select * from log_berkas_tte"+
+                    " where  date(tanggal) BETWEEN ? and ? and nama_file like ? or kode like ? or status like ?");
             }
             try {
                 if(TCari.getText().equals("")){
@@ -445,11 +446,13 @@ public class DlgListFileTte extends javax.swing.JDialog {
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                     ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                     ps.setString(3,"%"+TCari.getText()+"%");
+                    ps.setString(4,"%"+TCari.getText()+"%");
+                    ps.setString(5,"%"+TCari.getText()+"%");
                 }   
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new String[]{
-                        rs.getString("no_dokumen"),rs.getString("nama_file"),rs.getString("tgl_tte"),rs.getString("nama"),rs.getString("lokasi_file")
+                        rs.getString("tanggal"),rs.getString("no_ktp"),rs.getString("nama_file"),rs.getString("no_rawat"),rs.getString("kode"),rs.getString("status")
                     });
                 }
             } catch (Exception e) {

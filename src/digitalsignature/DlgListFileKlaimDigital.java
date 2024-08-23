@@ -83,7 +83,7 @@ public class DlgListFileKlaimDigital extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,350);
         
-        Object[] row={"No Rawat","Nama Pasien"};
+        Object[] row={"No Rawat","Nama Pasien","No RM","Nama Poli"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -92,12 +92,16 @@ public class DlgListFileKlaimDigital extends javax.swing.JDialog {
         tbListFileTte.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbListFileTte.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 4; i++) {
             TableColumn column = tbListFileTte.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(150);
             }else if(i==1){
                 column.setPreferredWidth(150);
+            }else if(i==2){
+                column.setPreferredWidth(100);
+            }else if(i==3){
+                column.setPreferredWidth(200);
             }
         }
         tbListFileTte.setDefaultRenderer(Object.class, new WarnaTable()); 
@@ -371,7 +375,7 @@ public class DlgListFileKlaimDigital extends javax.swing.JDialog {
             DlgViewFileKlaimDigital berkas=new DlgViewFileKlaimDigital(null,true);
             berkas.setNoRawat(FileName,FileName.replaceAll("/","_"));
             berkas.tampil();
-//            berkas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            berkas.setSize(internalFrame1.getWidth()-200,internalFrame1.getHeight()-100);
             berkas.setLocationRelativeTo(internalFrame1);
             berkas.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -422,14 +426,14 @@ public class DlgListFileKlaimDigital extends javax.swing.JDialog {
         try {
             if(TCari.getText().equals("")){
                 ps=koneksi.prepareStatement(
-                    "select * from berkas_tte JOIN master_berkas_tte ON berkas_tte.kode = master_berkas_tte.kode"
-                  + " Join reg_periksa ON  berkas_tte.no_rawat = reg_periksa.no_rawat Join pasien ON  reg_periksa.no_rkm_medis = pasien.no_rkm_medis  "+
-                    " where  date(tgl_tte) BETWEEN ? and ? and status='MEDIS' group by berkas_tte.no_rawat");
+                    "select * from berkas_tte_matraman"
+                  + " Join reg_periksa ON  berkas_tte_matraman.no_rawat = reg_periksa.no_rawat Join pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis Join poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli "+
+                    " where date(tgl_tte) BETWEEN ? and ? group by berkas_tte_matraman.no_rawat");
             }else{
                   ps=koneksi.prepareStatement(
-                    "select * from berkas_tte JOIN master_berkas_tte ON berkas_tte.kode = master_berkas_tte.kode "+
-                    " Join reg_periksa ON  berkas_tte.no_rawat = reg_periksa.no_rawat Join pasien ON  reg_periksa.no_rkm_medis = pasien.no_rkm_medis  "+
-                    " where  date(tgl_tte) BETWEEN ? and ?  and no_dokumen like ? and status='MEDIS' group by berkas_tte.no_rawat");
+                    "select * from berkas_tte_matraman"+
+                    " Join reg_periksa ON  berkas_tte_matraman.no_rawat = reg_periksa.no_rawat Join pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis Join poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli "+
+                    " where date(tgl_tte) BETWEEN ? and ? and nm_pasien like ? and no_rkm_medis like ? group by berkas_tte_matraman.no_rawat");
             }
             try {
                 if(TCari.getText().equals("")){
@@ -439,11 +443,12 @@ public class DlgListFileKlaimDigital extends javax.swing.JDialog {
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                     ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                     ps.setString(3,"%"+TCari.getText()+"%");
+                    ps.setString(4,"%"+TCari.getText()+"%");
                 }   
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new String[]{
-                        rs.getString("no_rawat"), rs.getString("nm_pasien")
+                        rs.getString("no_rawat"), rs.getString("nm_pasien"),rs.getString("no_rkm_medis"), rs.getString("nm_poli")
                     });
                 }
             } catch (Exception e) {

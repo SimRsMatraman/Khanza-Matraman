@@ -96,7 +96,7 @@ public class DlgViewFileKlaimDigital extends javax.swing.JDialog {
         setSize(1285,350);
         nmFile.setVisible(false);
         
-        Object[] row={"","No File","Nama File","Tgl. Sign","Jenis File",""};
+        Object[] row={"","Tgl. Sign","Nama File","Jenis File"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                   boolean a = false;
@@ -119,21 +119,16 @@ public class DlgViewFileKlaimDigital extends javax.swing.JDialog {
         tbListFileTte.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbListFileTte.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 4; i++) {
             TableColumn column = tbListFileTte.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
             }else if(i==1){
                 column.setPreferredWidth(150);
             }else if(i==2){
-                column.setPreferredWidth(150);
-            }else if(i==3){
                 column.setPreferredWidth(300);
-            }else if(i==4){
+            }else if(i==3){
                 column.setPreferredWidth(100);
-            }else if(i==5){
-               column.setMinWidth(0);
-                column.setMaxWidth(0);
             }
         }
         tbListFileTte.setDefaultRenderer(Object.class, new WarnaTable()); 
@@ -402,7 +397,7 @@ public class DlgViewFileKlaimDigital extends javax.swing.JDialog {
     private void MnViewFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnViewFileActionPerformed
         if(tbListFileTte.getSelectedRow()>-1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            FileName=tbListFileTte.getValueAt(tbListFileTte.getSelectedRow(),5).toString();
+            FileName=tbListFileTte.getValueAt(tbListFileTte.getSelectedRow(),2).toString();
             DlgViewPdf berkas=new DlgViewPdf(null,true);
             berkas.tampilPdf2(FileName);
             berkas.setButton(false);
@@ -468,12 +463,12 @@ public class DlgViewFileKlaimDigital extends javax.swing.JDialog {
         try {
             if(TCari.getText().equals("")){
                 ps=koneksi.prepareStatement(
-                    "select * from berkas_tte JOIN master_berkas_tte ON berkas_tte.kode = master_berkas_tte.kode "+
-                    " where   no_rawat='"+norawat+"'");
+                    "select * from berkas_tte_matraman"+
+                    " where no_rawat='"+norawat+"'");
             }else{
                   ps=koneksi.prepareStatement(
-                    "select * from berkas_tte JOIN master_berkas_tte ON berkas_tte.kode = master_berkas_tte.kode "+
-                    " where   no_dokumen like ? and status='MEDIS' and no_rawat='"+norawat+"'");
+                    "select * from berkas_tte_matraman"+
+                    " where nama_file like ? and no_rawat='"+norawat+"'");
             }
             try {
                 if(TCari.getText().equals("")){
@@ -483,7 +478,7 @@ public class DlgViewFileKlaimDigital extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
-                        false,rs.getString("no_dokumen"),rs.getString("nama_file"),rs.getString("tgl_tte"),rs.getString("nama"),rs.getString("lokasi_file")
+                        false,rs.getString("tgl_tte"),rs.getString("nama_file"),"Medis"
                     });
                 }
             } catch (Exception e) {
@@ -539,7 +534,7 @@ void createZip(){
 //                File srcFile = new File(url);
 //                File srcFile = Paths.get(url.toURI().getPath()).toFile();
                 
-                URL website = new URL("http://localhost/webapps/berkastte/"+tbListFileTte.getValueAt(i,5).toString());
+                URL website = new URL("http://192.168.20.254/api-tte/berkastte/resume/"+tbListFileTte.getValueAt(i,2).toString());
                 ReadableByteChannel rbc;
                 rbc = Channels.newChannel(website.openStream());
                 FileOutputStream fos1 = new FileOutputStream("tempfile/"+tbListFileTte.getValueAt(i,2).toString());

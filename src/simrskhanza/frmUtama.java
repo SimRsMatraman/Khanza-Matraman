@@ -741,7 +741,6 @@ import laporan.DlgDaftarPasienRanapTNI;
 import laporan.DlgDataKlasifikasiPasienRanap;
 import laporan.DlgDemografiUmurKunjungan;
 import laporan.DlgDosisRadiologi;
-import rekammedis.RMDataResumePasien;
 import laporan.DlgHarianHAIs2;
 import laporan.DlgHarianKlasifikasiPasienRanap;
 import laporan.DlgJumlahPengunjungRalanPolri;
@@ -833,6 +832,8 @@ import rekammedis.RMDataCatatanObservasiRanapKebidanan;
 import rekammedis.RMDataCatatanObservasiRanapPostPartum;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
+import rekammedis.RMDataResumePasien;
+import rekammedis.RMDataResumePasienRajal;
 import rekammedis.RMDataResumePasienRanap;
 import rekammedis.RMDataSkriningGiziLanjut;
 import rekammedis.RMDeteksiDiniCorona;
@@ -14617,6 +14618,19 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnResumePasienRalanActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMDataResumePasienRajal form=new RMDataResumePasienRajal(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.tampil();
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     private void btnResumePasienRanapActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20259,7 +20273,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnGrafikPerbaikanInventarisPerBulan,btnGrafikPerbaikanInventarisPerTahun,btnGrafikPerbaikanInventarisPerPelaksanaStatus,
             btnPenilaianMCU,btnCaraBayar,btnPeminjamPiutang,btnPiutangLainLain,btnBPJSTaskIDMobileJKN,btnBayarPiutangLainLain,btnPembayaranAkunBayar4,
             btnStokAkhirFarmasiPerTanggal,btnRiwayatKamarPasien,btnAuditKepatuhanAPD,btnUjiFungsiKFR,btnKategoriPengeluaranHarian,btnKategoriPemasukanLian,
-            btnPembayaranAkunBayar5,btnRuangOperasi,btnJasaTindakanPasien,btnTelaahResep,btnPermintaanResepPulang,btnResumePasienRanap,
+            btnPembayaranAkunBayar5,btnRuangOperasi,btnJasaTindakanPasien,btnTelaahResep,btnPermintaanResepPulang,btnResumePasienRanap,btnResumePasienRalan,
             btnRekapJasaDokter,btnStatusDataRM,btnRingkasanBiayaObatPasienPerTanggal,btnMasterMasalahKeperawatanIGD,btnPenilaianAwalKeperawatanIGD,
             btnBPJSReferensiDPHOApotek,btnBPJSReferensiPoliApotek,btnBayarJMDokter,btnBPJSReferensiFaskesApotek,btnBPJSReferensiSpesialistikApotek,
             btnPembayaranBRIVA,btnPenilaianAwalKeperawatanRanap,btnAkunBayarHutang,btnNilaiPenerimaanVendorFarmasiPerBulan,btnMasterRencanaKeperawatan,
@@ -23508,6 +23522,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnResumePasien);
                 jmlmenu++;
                 Panelmenu.add(btnResumePasienRanap);
+                jmlmenu++;
+                Panelmenu.add(btnResumePasienRalan);
                 jmlmenu++;
             }
             
@@ -28238,6 +28254,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnResumePasien);
             jmlmenu++;
             Panelmenu.add(btnResumePasienRanap);
+            jmlmenu++;
+            Panelmenu.add(btnResumePasienRalan);
             jmlmenu++;
         }
         
@@ -34223,6 +34241,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
                 Panelmenu.add(btnResumePasienRanap);
                 jmlmenu++;
+                Panelmenu.add(btnResumePasienRalan);
+                jmlmenu++;
             }                
         }
         
@@ -37242,6 +37262,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnResumePasien.setPreferredSize(new java.awt.Dimension(200, 90));
         btnResumePasien.addActionListener(this::btnResumePasienActionPerformed);
         
+        btnResumePasienRalan = new widget.ButtonBig();
+        btnResumePasienRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bsre.png"))); 
+        btnResumePasienRalan.setText("Resume Pasien Ralan");
+        btnResumePasienRalan.setIconTextGap(0);
+        btnResumePasienRalan.setName("btnResumePasienRalan"); 
+        btnResumePasienRalan.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnResumePasienRalan.addActionListener(this::btnResumePasienRalanActionPerformed);
+        
         btnResumePasienRanap = new widget.ButtonBig();
         btnResumePasienRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bsre.png"))); 
         btnResumePasienRanap.setText("Resume Pasien Ranap");
@@ -38445,7 +38473,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         btnManageSignatureUser = new widget.ButtonBig();
         btnManageSignatureUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/users.png")));
-        btnManageSignatureUser.setText("Management Signature Petugas");
+        btnManageSignatureUser.setText("Petugas TTE");
         btnManageSignatureUser.setIconTextGap(0);
         btnManageSignatureUser.setName("btnManageSignatureUser"); 
         btnManageSignatureUser.setPreferredSize(new java.awt.Dimension(200, 90));
@@ -38453,7 +38481,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         btnManageSignatureLog = new widget.ButtonBig();
         btnManageSignatureLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_reports_49615.png")));
-        btnManageSignatureLog.setText("Management Signature Log");
+        btnManageSignatureLog.setText("TTE Log");
         btnManageSignatureLog.setIconTextGap(0);
         btnManageSignatureLog.setName("btnManageSignatureLog"); 
         btnManageSignatureLog.setPreferredSize(new java.awt.Dimension(200, 90));
@@ -38461,7 +38489,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         btnManageSignatureFile = new widget.ButtonBig();
         btnManageSignatureFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_group_data_45163.png")));
-        btnManageSignatureFile.setText("Management Signature File");
+        btnManageSignatureFile.setText("Management Signature Log");
         btnManageSignatureFile.setIconTextGap(0);
         btnManageSignatureFile.setName("btnManageSignatureLog"); 
         btnManageSignatureFile.setPreferredSize(new java.awt.Dimension(200, 90));
