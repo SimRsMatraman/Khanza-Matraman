@@ -59,19 +59,22 @@
     <entry key="HPPFARMASI">dasar</entry>
     <entry key="HPPTOKO">dasar</entry>
     <entry key="PEMBULATANHARGAOBAT">no</entry>
-    <entry key="AKTIFKANBATCHOBAT">no</entry> <!--Catat Mengenai Batch Obat Fifo Fefo
-                                                    Pengelolaan obat dalam konteks penyimpanan obat di apotek harus menjadi perhatian khusus mengingat aspek ini berperan penting dalam kelancaran delivery obat dari apotek ke pasien. Penyusunan obat yang sesuai dan tertata rapi akan mempermudah farmasis dalam proses dispensing obat. Ada berbagai metode yang bisa digunakan untuk penyimpanan obat diantaranya adalah FIFO, FEFO 
-                                                    First In First Out (FIFO) adalah penyimpanan obat berdasarkan obat yang datang lebih dulu dan dikeluarkan lebih dulu.
-                                                    First Expired First Out (FEFO) adalah penyimpanan obat berdasarkan obat yang memiliki tanggal kadaluarsa lebih cepat maka dikeluarkan lebih dulu.
-                                                    Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
+    <entry key="AKTIFKANBATCHOBAT">no</entry> 
+<!--Catat Mengenai Batch Obat Fifo Fefo
+Pengelolaan obat dalam konteks penyimpanan obat di apotek harus menjadi perhatian khusus mengingat aspek ini berperan penting dalam kelancaran delivery obat dari apotek ke pasien. Penyusunan obat yang sesuai dan tertata rapi akan mempermudah farmasis dalam proses 
+-First In First Out (FIFO) adalah penyimpanan obat berdasarkan obat yang datang lebih dulu dan dikeluarkan lebih dulu.
+-First Expired First Out (FEFO) adalah penyimpanan obat berdasarkan obat yang memiliki tanggal kadaluarsa lebih cepat maka dikeluarkan lebih dulu.
+Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
 
-                                                    1. Setting database.xml pada opsi AKTIFKANBATCHOBAT dibuat yes
-                                                    2. Pada saat peneriman obat batch obat harus diisi beserta tanggal kadaluarsa obatnya
-                                                    3. Saat pemberian obat kita bisa memilih obat mana yang akan di kasihkan ke pasiennya berdasarkan nomor batch nya, sebelumnya pastikan data batch nya valid dulu
-                                                    4. Pengaruhnya apabila batch diaktifkan harga akan menyesuikan sesuai batchnya-->
+1. Setting database.xml pada opsi AKTIFKANBATCHOBAT dibuat yes
+2. Pada saat peneriman obat batch obat harus diisi beserta tanggal kadaluarsa obatnya
+3. Saat pemberian obat kita bisa memilih obat mana yang akan di kasihkan ke pasiennya berdasarkan nomor batch nya, sebelumnya pastikan data batch nya valid dulu
+4. Pengaruhnya apabila batch diaktifkan harga akan menyesuikan sesuai batchnya-->
+
     <entry key="CETAKRINCIANOBAT">no</entry> <!--Setelah Pemberian obat melalui pemberian obat otomatis muncul rincian resep-->
     <entry key="DEPOAKTIFOBAT">B0015</entry> <!--Set lokasi pemberian obat menggunakan lokasi mana-->
     <entry key="VALIDASIULANGBERIOBAT">no</entry>
+
     <!--Laboratorium--> 
     <entry key="ALARMLAB">yes</entry>
     <entry key="FORMALARMLAB">ralan + ranap</entry>
@@ -198,7 +201,7 @@
     <entry key="USERVANSLAB">kMR3WfAwUK6MbhCyydxa0g==</entry>
     <entry key="PASVANSLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
 
-    <entry key="URLORTHANC">http://192.168.20.112</entry>
+    <entry key="URLORTHANC">http://192.168.20.24</entry>
     <entry key="PORTORTHANC">gie5pRePkRsFe+dOh84P4A==</entry>
     <entry key="USERORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>
     <entry key="PASSORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>
