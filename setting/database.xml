@@ -168,13 +168,13 @@ Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
 
     <entry key="URLCARESTREAM">http://192.168.55.187:10110/pacs</entry>
 
-    <entry key="HOSTSYSMEX">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="HOSTSYSMEX">4RXos1g9GbDiO6Mq5mEeSg==</entry>
     <entry key="DATABASESYSMEX">o4cUZDSdQxLPdcZer/pr1PnCrQNrd08+Hrx8Y/fi7Os=</entry>
     <entry key="PORTSYSMEX">nioxtijcpDaKSUiUiP5FAg==</entry>
     <entry key="USERSYSMEX">kMR3WfAwUK6MbhCyydxa0g==</entry>
-    <entry key="PASSYSMEX">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="HOSTELIMS">5k7+C7EnUw9nUv2Nix+DBA==</entry>
+    <entry key="PASSYSMEX">cOJJODigL7CqJBp5yvTdWg==</entry>
 
+    <entry key="HOSTELIMS">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="DATABASEELIMS">o4cUZDSdQxLPdcZer/pr1PnCrQNrd08+Hrx8Y/fi7Os=</entry>
     <entry key="PORTELIMS">nioxtijcpDaKSUiUiP5FAg==</entry>
     <entry key="USERELIMS">kMR3WfAwUK6MbhCyydxa0g==</entry>

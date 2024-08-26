@@ -1775,7 +1775,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         ppResume.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppResume.setForeground(new java.awt.Color(50, 50, 50));
         ppResume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppResume.setText("Data Resume Pasien");
+        ppResume.setText("Resume Pasien IGD");
         ppResume.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ppResume.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         ppResume.setName("ppResume"); // NOI18N

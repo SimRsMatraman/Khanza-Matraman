@@ -18,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -113,7 +114,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
         
         tabModeDicom=new DefaultTableModel(null,new Object[]{
-            "UUID Pasien","ID Studies","ID Series"}){
+            "Stone-viewer","Osimis-viewer","Khanza-viewer"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbListDicom.setModel(tabModeDicom);
@@ -123,11 +124,11 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         for (i = 0; i < 3; i++) {
             TableColumn column = tbListDicom.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(400);
             }else if(i==1){
-                column.setPreferredWidth(310);
+                column.setPreferredWidth(400);
             }else if(i==2){
-                column.setPreferredWidth(310);
+                column.setPreferredWidth(400);
             }
         }
         tbListDicom.setDefaultRenderer(Object.class, new WarnaTable());
@@ -499,6 +500,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         Scroll5 = new widget.ScrollPane();
         tbListDicom = new widget.Table();
         panelGlass7 = new widget.panelisi();
+        btnDicom1 = new widget.Button();
         btnDicom = new widget.Button();
 
         Kd2.setName("Kd2"); // NOI18N
@@ -1358,10 +1360,22 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         panelGlass7.setName("panelGlass7"); // NOI18N
         panelGlass7.setPreferredSize(new java.awt.Dimension(115, 40));
 
+        btnDicom1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        btnDicom1.setMnemonic('T');
+        btnDicom1.setText("Stone-Webviewer");
+        btnDicom1.setToolTipText("Alt+T");
+        btnDicom1.setName("btnDicom1"); // NOI18N
+        btnDicom1.setPreferredSize(new java.awt.Dimension(150, 30));
+        btnDicom1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDicom1ActionPerformed(evt);
+            }
+        });
+        panelGlass7.add(btnDicom1);
+
         btnDicom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        btnDicom.setMnemonic('T');
-        btnDicom.setText("Tampilkan DICOM");
-        btnDicom.setToolTipText("Alt+T");
+        btnDicom.setText("Khanza-Viewer");
+        btnDicom.setToolTipText("");
         btnDicom.setName("btnDicom"); // NOI18N
         btnDicom.setPreferredSize(new java.awt.Dimension(150, 30));
         btnDicom.addActionListener(new java.awt.event.ActionListener() {
@@ -2113,7 +2127,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private void MnViewDicomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnViewDicomActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        //dicomViewer.setJudul("::[ DICOM SERIES "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),5).toString()+" ]::","gbrpemeriksaan/pages");
+//        dicomViewer.setJudul("::[ DICOM SERIES "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),5).toString()+" ]::","gbrpemeriksaan/pages");
         try {
 
             //dicomViewer.loadURL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),5).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString(),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),5).toString());
@@ -2366,7 +2380,23 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private void tbListDicomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbListDicomMouseClicked
         if(tabModeDicom.getRowCount()!=0){
             if(evt.getClickCount()==2){
-                btnDicomActionPerformed(null);
+                i = tbListDicom.getSelectedColumn();
+                if (i == 0) {
+                    try {
+                        Desktop.getDesktop().browse(new URL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/stone-webviewer/index.html?study="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),0).toString()).toURI());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if (i == 1) {
+                    try {
+                        Desktop.getDesktop().browse(new URL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/osimis-viewer/app/index.html?study="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()).toURI());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    
+                } else if (i == 2) {
+                    btnDicomActionPerformed(null);             
+                } 
             }
         }
     }//GEN-LAST:event_tbListDicomMouseClicked
@@ -2381,7 +2411,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
     private void btnDicomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDicomActionPerformed
         if(tabModeDicom.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, tidak ada file dicom");
             TCari.requestFocus();
         }else {
             if(tbListDicom.getSelectedRow()!= -1){
@@ -2403,6 +2433,23 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             }
         }
     }//GEN-LAST:event_btnDicomActionPerformed
+
+    private void btnDicom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDicom1ActionPerformed
+       if(tabModeDicom.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, tidak ada file dicom");
+            TCari.requestFocus();
+        }else {
+            if(tbListDicom.getSelectedRow()!= -1){
+                    try {
+                        Desktop.getDesktop().browse(new URL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/stone-webviewer/index.html?study="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),0).toString()).toURI());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+            }else{
+                JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
+            }
+        }
+    }//GEN-LAST:event_btnDicom1ActionPerformed
 
     /**
     * @param args the command line arguments
@@ -2477,6 +2524,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Button btnAmbilPhoto;
     private widget.Button btnAmbilPhoto1;
     private widget.Button btnDicom;
+    private widget.Button btnDicom1;
     private widget.Button btnDokter;
     private widget.Button btnDokterPj;
     private widget.Button btnPasien;
@@ -2836,17 +2884,31 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                          try {
                              Valid.tabelKosong(tabModeDicom);
                              ApiOrthanc orthanc=new ApiOrthanc();
-                             root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
+                             root=orthanc.AmbilSeries(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
                              for(JsonNode list:root){
                                  for(JsonNode sublist:list.path("Series")){
                                       tabModeDicom.addRow(new Object[]{
-                                           list.path("PatientMainDicomTags").path("PatientID").asText(),list.path("ID").asText(),sublist.asText()
+                                           list.path("MainDicomTags").path("StudyInstanceUID").asText(),list.path("ID").asText(),sublist.asText()
                                       });   
                                  }        
                              }
                          } catch (Exception e) {
                              System.out.println("Notif : "+e);
                          }
+//                         try {
+//                             Valid.tabelKosong(tabModeDicom);
+//                             ApiOrthanc orthanc=new ApiOrthanc();
+//                             root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
+//                             for(JsonNode list:root){
+//                                 for(JsonNode sublist:list.path("Series")){
+//                                      tabModeDicom.addRow(new Object[]{
+//                                           list.path("PatientMainDicomTags").path("PatientID").asText(),list.path("ID").asText(),sublist.asText()
+//                                      });   
+//                                 }        
+//                             }
+//                         } catch (Exception e) {
+//                             System.out.println("Notif : "+e);
+//                         }                         
                      }
                 }
             }

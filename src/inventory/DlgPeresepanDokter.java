@@ -105,7 +105,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         for (i = 0; i < 12; i++) {
             TableColumn column = tbResep.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(20);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }else if(i==1){
                 column.setPreferredWidth(45);
             }else if(i==2){
@@ -123,7 +124,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             }else if(i==8){
                 column.setPreferredWidth(100);
             }else if(i==9){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(50);
             }else if(i==10){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -620,9 +621,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpan.setMnemonic('S');
+        BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
-        BtnSimpan.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnSimpan.setPreferredSize(new java.awt.Dimension(88, 23));
         BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSimpanActionPerformed(evt);
@@ -632,9 +634,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
         BtnTambah1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         BtnTambah1.setMnemonic('3');
+        BtnTambah1.setText("Tambah Racik");
         BtnTambah1.setToolTipText("Alt+3");
         BtnTambah1.setName("BtnTambah1"); // NOI18N
-        BtnTambah1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTambah1.setPreferredSize(new java.awt.Dimension(128, 23));
         BtnTambah1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnTambah1ActionPerformed(evt);
@@ -752,7 +755,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2024" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-08-2024" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);

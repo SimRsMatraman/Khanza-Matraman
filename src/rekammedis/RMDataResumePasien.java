@@ -3062,7 +3062,7 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
 //      Menampilkan Subjek dan Object dari CPPT
         try {
             ps=koneksi.prepareStatement(
-                    "SELECT a.no_rawat,a.no_rkm_medis,rps,keluhan,pemeriksaan,ket_fisik FROM reg_periksa a "
+                    "SELECT a.no_rawat,a.no_rkm_medis,IFNULL(rps,'')as rps,IFNULL(keluhan,'')as keluhan,IFNULL(pemeriksaan,'')as pemeriksaan,IFNULL(ket_fisik,'')as ket_fisik,IFNULL(tata,'')as tata FROM reg_periksa a "
                             + "LEFT JOIN pemeriksaan_ralan ON pemeriksaan_ralan.no_rawat = a.no_rawat "
                             + "LEFT JOIN asesmen_medis_igd ON asesmen_medis_igd.no_rawat = a.no_rawat "
                             + "WHERE a.no_rawat=?");
@@ -3071,11 +3071,15 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 while(rs.next()){
                     if(Keluhan.getText().isEmpty()){
-                        Keluhan.setText(rs.getString("keluhan")+", "+rs.getString("rps")+", ");
+                        Keluhan.setText(rs.getString("rps")+", ");
+                    }
+                       
+                    if(JalannyaPenyakit.getText().isEmpty()){
+                        JalannyaPenyakit.setText(rs.getString("ket_fisik")+", ");
                     }
                     
-                    if(JalannyaPenyakit.getText().isEmpty()){
-                        JalannyaPenyakit.setText(rs.getString("pemeriksaan")+", "+rs.getString("ket_fisik")+", ");
+                    if(Tindakan.getText().isEmpty()){
+                        Tindakan.setText(rs.getString("tata")+", ");
                     }
                 }
             } catch (Exception e) {
@@ -3093,64 +3097,64 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
         }
         
 //      Menampilkan Tindakan Dokter
-        try {
-            ps=koneksi.prepareStatement(
-                    " SELECT a.no_rawat,a.no_rkm_medis,nm_perawatan as tindakan FROM reg_periksa a "
-                            + "LEFT JOIN rawat_jl_dr ON rawat_jl_dr.no_rawat = a.no_rawat "
-                            + "LEFT JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = rawat_jl_dr.kd_jenis_prw "
-                            + "WHERE a.no_rawat=?");
-            try {
-                ps.setString(1,norwt);
-                rs=ps.executeQuery();
-                namaPenyakit="";
-                while(rs.next()){
-                    Listpenyakit=rs.getString("tindakan");
-                    namaPenyakit=namaPenyakit+""+Listpenyakit+",  "+"\n";
-                }
-                 Tindakan.append(namaPenyakit.length()>0 ? namaPenyakit.substring(0,namaPenyakit.length()-1):"");
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-           } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : "+e);
-        }
+//        try {
+//            ps=koneksi.prepareStatement(
+//                    " SELECT a.no_rawat,a.no_rkm_medis,nm_perawatan as tindakan FROM reg_periksa a "
+//                            + "LEFT JOIN rawat_jl_dr ON rawat_jl_dr.no_rawat = a.no_rawat "
+//                            + "LEFT JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = rawat_jl_dr.kd_jenis_prw "
+//                            + "WHERE a.no_rawat=?");
+//            try {
+//                ps.setString(1,norwt);
+//                rs=ps.executeQuery();
+//                namaPenyakit="";
+//                while(rs.next()){
+//                    Listpenyakit=rs.getString("tindakan");
+//                    namaPenyakit=namaPenyakit+""+Listpenyakit+",  "+"\n";
+//                }
+//                 Tindakan.append(namaPenyakit.length()>0 ? namaPenyakit.substring(0,namaPenyakit.length()-1):"");
+//            } catch (Exception e) {
+//                System.out.println("Notif : "+e);
+//           } finally{
+//                if(rs!=null){
+//                    rs.close();
+//                }
+//                if(ps!=null){
+//                    ps.close();
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Notif : "+e);
+//        }
         
 //      Menampilkan Tindakan Petugas
-        try {
-            ps=koneksi.prepareStatement(
-                    " SELECT a.no_rawat,a.no_rkm_medis,nm_perawatan as tindakan FROM reg_periksa a "
-                            + "LEFT JOIN rawat_jl_pr ON rawat_jl_pr.no_rawat = a.no_rawat "
-                            + "LEFT JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = rawat_jl_pr.kd_jenis_prw "
-                            + "WHERE a.no_rawat=?");
-            try {
-                ps.setString(1,norwt);
-                rs=ps.executeQuery();
-                namaPenyakit="";
-                while(rs.next()){
-                    Listpenyakit=rs.getString("tindakan");
-                    namaPenyakit=namaPenyakit+""+Listpenyakit+",  "+"\n";
-                }
-                 Tindakan.append(namaPenyakit.length()>0 ? namaPenyakit.substring(0,namaPenyakit.length()-1):"");
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-           } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : "+e);
-        }
+//        try {
+//            ps=koneksi.prepareStatement(
+//                    " SELECT a.no_rawat,a.no_rkm_medis,nm_perawatan as tindakan FROM reg_periksa a "
+//                            + "LEFT JOIN rawat_jl_pr ON rawat_jl_pr.no_rawat = a.no_rawat "
+//                            + "LEFT JOIN jns_perawatan ON jns_perawatan.kd_jenis_prw = rawat_jl_pr.kd_jenis_prw "
+//                            + "WHERE a.no_rawat=?");
+//            try {
+//                ps.setString(1,norwt);
+//                rs=ps.executeQuery();
+//                namaPenyakit="";
+//                while(rs.next()){
+//                    Listpenyakit=rs.getString("tindakan");
+//                    namaPenyakit=namaPenyakit+""+Listpenyakit+",  "+"\n";
+//                }
+//                 Tindakan.append(namaPenyakit.length()>0 ? namaPenyakit.substring(0,namaPenyakit.length()-1):"");
+//            } catch (Exception e) {
+//                System.out.println("Notif : "+e);
+//           } finally{
+//                if(rs!=null){
+//                    rs.close();
+//                }
+//                if(ps!=null){
+//                    ps.close();
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Notif : "+e);
+//        }
         
 //      Menampilkan Resep Obat
         try {
