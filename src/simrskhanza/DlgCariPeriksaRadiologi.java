@@ -1374,7 +1374,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         panelGlass7.add(btnDicom1);
 
         btnDicom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        btnDicom.setText("Khanza-Viewer");
+        btnDicom.setText("Osimis-Webviewer");
         btnDicom.setToolTipText("");
         btnDicom.setName("btnDicom"); // NOI18N
         btnDicom.setPreferredSize(new java.awt.Dimension(150, 30));
@@ -2395,7 +2395,20 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     }
                     
                 } else if (i == 2) {
-                    btnDicomActionPerformed(null);             
+//                    btnDicomActionPerformed(null);
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    OrthancDICOM orthan=new OrthancDICOM(null,false);
+                    orthan.setJudul("::[ DICOM Orthanc Pasien "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+", Series "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString()+" ]::",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().replaceAll("/",""),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+                    try {
+                        System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString());
+                        orthan.loadURL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString());
+                    } catch (Exception ex) {
+                        System.out.println("Notifikasi : "+ex);
+                    }
+                    orthan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                    orthan.setLocationRelativeTo(internalFrame1);
+                    orthan.setVisible(true);
+                    this.setCursor(Cursor.getDefaultCursor());
                 } 
             }
         }
@@ -2415,19 +2428,24 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             TCari.requestFocus();
         }else {
             if(tbListDicom.getSelectedRow()!= -1){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                OrthancDICOM orthan=new OrthancDICOM(null,false);
-                orthan.setJudul("::[ DICOM Orthanc Pasien "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+", Series "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()+" ]::",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().replaceAll("/",""),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+//                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//                OrthancDICOM orthan=new OrthancDICOM(null,false);
+//                orthan.setJudul("::[ DICOM Orthanc Pasien "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+", Series "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString()+" ]::",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().replaceAll("/",""),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+//                try {
+//                    System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString());
+//                    orthan.loadURL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString());
+//                } catch (Exception ex) {
+//                    System.out.println("Notifikasi : "+ex);
+//                }
+//                orthan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//                orthan.setLocationRelativeTo(internalFrame1);
+//                orthan.setVisible(true);
+//                this.setCursor(Cursor.getDefaultCursor());
                 try {
-                    System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
-                    orthan.loadURL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
-                } catch (Exception ex) {
-                    System.out.println("Notifikasi : "+ex);
-                }
-                orthan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                orthan.setLocationRelativeTo(internalFrame1);
-                orthan.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
+                        Desktop.getDesktop().browse(new URL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/osimis-viewer/app/index.html?study="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()).toURI());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
             }
@@ -2888,7 +2906,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                              for(JsonNode list:root){
                                  for(JsonNode sublist:list.path("Series")){
                                       tabModeDicom.addRow(new Object[]{
-                                           list.path("MainDicomTags").path("StudyInstanceUID").asText(),list.path("ID").asText(),sublist.asText()
+                                           list.path("MainDicomTags").path("StudyInstanceUID").asText(),sublist.asText(),list.path("ID").asText()
                                       });   
                                  }        
                              }
