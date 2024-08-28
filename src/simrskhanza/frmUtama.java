@@ -150,14 +150,14 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
-import informasi.InformasiJadwal;
-import informasi.InformasiKamar;
-import informasi.InformasiKamarInap;
-import informasi.InformasiTarifLab;
-import informasi.InformasiTarifOperasi;
-import informasi.InformasiTarifRadiologi;
-import informasi.InformasiTarifRalan;
-import informasi.InformasiTarifRanap;
+//import informasi.InformasiJadwal;
+//import informasi.InformasiKamar;
+//import informasi.InformasiKamarInap;
+//import informasi.InformasiTarifLab;
+//import informasi.InformasiTarifOperasi;
+//import informasi.InformasiTarifRadiologi;
+//import informasi.InformasiTarifRalan;
+//import informasi.InformasiTarifRanap;
 import inventaris.InventarisBarang;
 import inventaris.InventarisKoleksi;
 import inventaris.InventarisJenis;
@@ -310,7 +310,7 @@ import grafikanalisa.GrafikStatusRegPerTahun;
 import grafikanalisa.GrafikStatusRegPerTahun2;
 import grafikanalisa.GrafikStatusRegPerTanggal;
 import grafikanalisa.GrafikStatusRegPerTanggal2;
-import informasi.InformasiTelusurKunjunganPasien;
+//import informasi.InformasiTelusurKunjunganPasien;
 import inventaris.InventarisBarangCSSD;
 import inventory.DlgCariPPNObat;
 import inventory.DlgDaftarPermintaanResep;
@@ -393,19 +393,19 @@ import laporan.DlgValidasiSoap;
 import parkir.DlgParkirBarcode;
 import parkir.DlgParkirJenis;
 import parkir.DlgParkirMasuk;
-import kepegawaian.DlgBelum;
+//import kepegawaian.DlgBelum;
 import kepegawaian.DlgBerkasKepegawaian;
 import kepegawaian.DlgBulanan;
-import kepegawaian.DlgBulanan2;
+//import kepegawaian.DlgBulanan2;
 import kepegawaian.DlgHarian;
 import kepegawaian.DlgJadwalPegawai;
 import kepegawaian.DlgJadwalTambahan;
 import kepegawaian.DlgJamMasuk;
 import kepegawaian.DlgKegiatanIlmiah;
-import kepegawaian.DlgKehadiran;
+//import kepegawaian.DlgKehadiran;
 import kepegawaian.DlgKehadiran2;
 import kepegawaian.DlgMasterBerkasPegawai;
-import kepegawaian.DlgPulang;
+//import kepegawaian.DlgPulang;
 import kepegawaian.DlgRiwayatJabatan;
 import kepegawaian.DlgRiwayatNaikGaji;
 import kepegawaian.DlgRiwayatPendidikan;
@@ -984,6 +984,10 @@ import digitalsignature.DlgListLogTte;
 import digitalsignature.DlgManagementSignatureUser;
 import integration.DataInstansiTerintegrasi;
 import antrian.MapingAntrianDokter;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -1008,6 +1012,8 @@ public class frmUtama extends javax.swing.JFrame {
     private static final Properties propVer = new Properties();  
     private static final Properties propDatabase = new Properties();
     public static String version;
+    static String URLSERVER;
+    private static String historyURL ;
     private final Properties prop = new Properties();  
     private int jmlmenu=0,grid=0,tinggi=0,i=0,menuawal=0;
     private String coder_nik="",pilihpage="",judulform="",tampilkantni=Sequel.cariIsi("select set_tni_polri.tampilkan_tni_polri from set_tni_polri"),
@@ -1920,7 +1926,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31/07/2024" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27/08/2024" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7708,6 +7714,22 @@ private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
 //     About.setSize(PanelWall.getWidth(), PanelWall.getHeight());
 //     About.setLocationRelativeTo(PanelWall);  
 //     About.setVisible(true);
+        try  {
+            propVer.loadFromXML(new FileInputStream("setting/database.xml"));
+            URLSERVER=propVer.getProperty("URLSERVERUPDATE");
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : "+ex);
+        }
+        historyURL  = "http://"+URLSERVER+"/changelog.html";
+        
+        String data;
+        try {
+            data = getData(historyURL);
+            version = data.substring(data.indexOf("[history]")+9,data.indexOf("[/history]"));
+        } catch (Exception ex) {
+            Logger.getLogger(frmUtama.class.getName()).log(Level.SEVERE, null, ex);
+        }//        
+       JOptionPane.showMessageDialog(null,version);
 }//GEN-LAST:event_jMenu4MouseClicked
 
 private void jMenu4MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu4MenuSelected
@@ -40478,6 +40500,25 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnKonsultasiMedik.setName("btnKonsultasiMedik"); 
         btnKonsultasiMedik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKonsultasiMedik.addActionListener(this::btnKonsultasiMedikActionPerformed);
+    }
+    
+    private static String getData(String address)throws Exception
+    {
+        URL url = new URL(address);
+        
+        InputStream html = null;
+
+        html = url.openStream();
+        
+        int c = 0;
+        StringBuffer buffer = new StringBuffer("");
+
+        while(c != -1) {
+            c = html.read();
+            
+        buffer.append((char)c);
+        }
+        return buffer.toString();
     }
 }
 //
