@@ -83,7 +83,7 @@ public class UpdateInfo extends JFrame{
     }
     private void update()
     {
-        String[] run = {"java","-jar","updater/updateNew.jar"};
+        String[] run = {"java","-jar","Updater.jar"};
         try {
             Runtime.getRuntime().exec(run);
         } catch (Exception ex) {
