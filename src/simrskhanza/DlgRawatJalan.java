@@ -1560,7 +1560,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel25 = new widget.Label();
         TTinggi = new widget.TextBox();
         jLabel17 = new widget.Label();
-        jLabel15 = new widget.Label();
         TAlergi = new widget.TextBox();
         jLabel20 = new widget.Label();
         TRespirasi = new widget.TextBox();
@@ -1599,11 +1598,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         Asesmen = new widget.Button();
         Obat = new widget.Button();
         jLabel26 = new widget.Label();
-        jLabel29 = new widget.Label();
         BtnEWS1 = new widget.Button();
         scrollPane7 = new widget.ScrollPane();
         Instruksi = new widget.TextArea();
-        jLabel54 = new widget.Label();
         BtnTemplatePemeriksaan = new widget.Button();
         internalFrame6 = new widget.InternalFrame();
         Scroll4 = new widget.ScrollPane();
@@ -2610,11 +2607,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass12.add(jLabel17);
         jLabel17.setBounds(830, 50, 97, 23);
 
-        jLabel15.setText("Template Plan");
-        jLabel15.setName("jLabel15"); // NOI18N
-        panelGlass12.add(jLabel15);
-        jLabel15.setBounds(400, 290, 80, 23);
-
         TAlergi.setHighlighter(null);
         TAlergi.setName("TAlergi"); // NOI18N
         TAlergi.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2845,6 +2837,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         BtnDokter3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter3.setMnemonic('2');
+        BtnDokter3.setText("   Template Plan");
         BtnDokter3.setToolTipText("Alt+2");
         BtnDokter3.setName("BtnDokter3"); // NOI18N
         BtnDokter3.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -2854,7 +2847,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnDokter3);
-        BtnDokter3.setBounds(370, 290, 28, 23);
+        BtnDokter3.setBounds(370, 290, 130, 23);
 
         label14.setText("Nama :");
         label14.setName("label14"); // NOI18N
@@ -2991,6 +2984,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         Obat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         Obat.setMnemonic('2');
+        Obat.setText("   Input Resep");
         Obat.setToolTipText("Alt+2");
         Obat.setName("Obat"); // NOI18N
         Obat.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -3000,17 +2994,12 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(Obat);
-        Obat.setBounds(370, 320, 28, 23);
+        Obat.setBounds(370, 320, 120, 23);
 
         jLabel26.setText("Alergi :");
         jLabel26.setName("jLabel26"); // NOI18N
         panelGlass12.add(jLabel26);
         jLabel26.setBounds(400, 100, 40, 23);
-
-        jLabel29.setText("Input Resep");
-        jLabel29.setName("jLabel29"); // NOI18N
-        panelGlass12.add(jLabel29);
-        jLabel29.setBounds(400, 320, 70, 23);
 
         BtnEWS1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         BtnEWS1.setMnemonic('K');
@@ -3048,13 +3037,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass12.add(scrollPane7);
         scrollPane7.setBounds(450, 130, 360, 60);
 
-        jLabel54.setText("Template Pemeriksaan Dokter");
-        jLabel54.setName("jLabel54"); // NOI18N
-        panelGlass12.add(jLabel54);
-        jLabel54.setBounds(570, 293, 150, 20);
-
         BtnTemplatePemeriksaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnTemplatePemeriksaan.setMnemonic('4');
+        BtnTemplatePemeriksaan.setText("   Template Pemeriksaan Dokter");
         BtnTemplatePemeriksaan.setToolTipText("ALt+4");
         BtnTemplatePemeriksaan.setName("BtnTemplatePemeriksaan"); // NOI18N
         BtnTemplatePemeriksaan.addActionListener(new java.awt.event.ActionListener() {
@@ -3063,7 +3048,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnTemplatePemeriksaan);
-        BtnTemplatePemeriksaan.setBounds(545, 290, 30, 22);
+        BtnTemplatePemeriksaan.setBounds(545, 290, 220, 22);
 
         PanelInput.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -10635,7 +10620,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Label jLabel12;
     private widget.Label jLabel13;
     private widget.Label jLabel14;
-    private widget.Label jLabel15;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
     private widget.Label jLabel18;
@@ -10649,7 +10633,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Label jLabel26;
     private widget.Label jLabel27;
     private widget.Label jLabel28;
-    private widget.Label jLabel29;
     private widget.Label jLabel3;
     private widget.Label jLabel30;
     private widget.Label jLabel31;
@@ -10677,7 +10660,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Label jLabel51;
     private widget.Label jLabel52;
     private widget.Label jLabel53;
-    private widget.Label jLabel54;
     private widget.Label jLabel55;
     private widget.Label jLabel56;
     private widget.Label jLabel57;

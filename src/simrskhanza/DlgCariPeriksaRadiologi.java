@@ -2818,12 +2818,12 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(internalFrame1.getWidth()-520,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(internalFrame1.getWidth()-450,HEIGHT));
             TabData.setVisible(true);  
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){    
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(25,HEIGHT));
             TabData.setVisible(false);
             ChkAccor.setVisible(true);
         }
@@ -2845,11 +2845,11 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             root=orthanc.AmbilPhoto(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
                             
                             if(rs.next()){
-                                htmlContent.append("<tr><td border='0' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs.getString("lokasi_gambar")+"'><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs.getString("lokasi_gambar")+"' alt='gambar' width='"+(internalFrame1.getWidth()-370)+"' height='"+(internalFrame1.getWidth()-370)+"'/></a></td></tr>");
+                                htmlContent.append("<tr><td border='0' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs.getString("lokasi_gambar")+"'><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs.getString("lokasi_gambar")+"' alt='gambar' width='"+(internalFrame1.getWidth()-580)+"' height='"+(internalFrame1.getWidth()-580f)+"'/></a></td></tr>");
                             }
                             else if(!rs.next()){
                                 for(JsonNode list:root.path("Instances")){
-                                htmlContent.append("<tr><td border='0' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview'><img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview' alt='gambar' width='"+(internalFrame1.getWidth()-370)+"' height='"+(internalFrame1.getWidth()-370)+"'/></a></td></tr>");    
+                                htmlContent.append("<tr><td border='0' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview'><img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview' alt='gambar' width='"+(internalFrame1.getWidth()-580)+"' height='"+(internalFrame1.getWidth()-580)+"'/></a></td></tr>");    
                                 }  
                             }
 

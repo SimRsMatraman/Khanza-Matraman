@@ -11,6 +11,8 @@
 //
 package rekammedis;
 
+import bridging.ApiOrthanc;
+import com.fasterxml.jackson.databind.JsonNode;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -62,6 +64,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private HttpClient http = new HttpClient();
     private GetMethod get;
     private DlgCariPasien pasien=new DlgCariPasien(null,true);
+    private JsonNode root;
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -3706,13 +3709,18 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                 rs2.beforeFirst();
                                 w=1;
                                 while(rs2.next()){
+                                    ApiOrthanc orthanc=new ApiOrthanc();
+                                    root=orthanc.AmbilPhoto(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",rs.getString("no_rawat")),rs2.getString("tgl_periksa").replaceAll("-",""),rs2.getString("tgl_periksa").replaceAll("-",""));
+                                    for(JsonNode list:root.path("Instances")){
                                     htmlContent.append(
                                          "<tr>"+
                                             "<td valign='top' align='center'>"+w+"</td>"+
                                             "<td valign='top'>"+rs2.getString("tgl_periksa")+" "+rs2.getString("jam")+"</td>"+
-                                            "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"'><img alt='Gambar Radiologi' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"' width='450' height='450'/></a></td>"+
+                                            "<td valign='top' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview'> <img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview' width='450' height='450'/></a></td>"+
+//                                            "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"'><img alt='Gambar Radiologi' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs2.getString("lokasi_gambar")+"' width='450' height='450'/></a></td>"+
                                          "</tr>"); 
                                     w++;
+                                    }
                                 }
                                 htmlContent.append(
                                   "</table>");
