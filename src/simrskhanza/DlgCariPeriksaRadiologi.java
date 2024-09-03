@@ -395,7 +395,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         });
      
-        ChkAccor.setSelected(false);
+        ChkAccor.setSelected(true);
         isPhoto();
     }
 
@@ -2398,7 +2398,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 //                    btnDicomActionPerformed(null);
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     OrthancDICOM orthan=new OrthancDICOM(null,false);
-                    orthan.setJudul("::[ DICOM Orthanc Pasien "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+", Series "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString()+" ]::",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().replaceAll("/",""),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+                    orthan.setJudul("::[ DICOM Orthanc Pasien "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+", Series "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString()+" ]::",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().replaceAll("/",""),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString());
                     try {
                         System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString());
                         orthan.loadURL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString());
@@ -2818,7 +2818,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(internalFrame1.getWidth()-300,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(internalFrame1.getWidth()-520,HEIGHT));
             TabData.setVisible(true);  
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){    
@@ -2833,24 +2833,33 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         if(TabData.isVisible()==true){
             if(tbDokter.getSelectedRow()!= -1){
                 if((!Kd2.getText().equals(""))&&(!Petugas.getText().equals(""))){
-                     try {
+                     try { 
                         ps=koneksi.prepareStatement("select * from gambar_radiologi where gambar_radiologi.no_rawat=? and gambar_radiologi.tgl_periksa=?  and gambar_radiologi.jam=?");
                         try {
                             ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                             ps.setString(2,tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
                             ps.setString(3,tbDokter.getValueAt(tbDokter.getSelectedRow(),5).toString());
                             rs=ps.executeQuery();
-                            htmlContent = new StringBuilder();
-                            while(rs.next()){
+                            htmlContent = new StringBuilder(); 
+                            ApiOrthanc orthanc=new ApiOrthanc();
+                            root=orthanc.AmbilPhoto(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
+                            
+                            if(rs.next()){
                                 htmlContent.append("<tr><td border='0' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs.getString("lokasi_gambar")+"'><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs.getString("lokasi_gambar")+"' alt='gambar' width='"+(internalFrame1.getWidth()-370)+"' height='"+(internalFrame1.getWidth()-370)+"'/></a></td></tr>");
                             }
+                            else if(!rs.next()){
+                                for(JsonNode list:root.path("Instances")){
+                                htmlContent.append("<tr><td border='0' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview'><img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview' alt='gambar' width='"+(internalFrame1.getWidth()-370)+"' height='"+(internalFrame1.getWidth()-370)+"'/></a></td></tr>");    
+                                }  
+                            }
+
                             LoadHTML.setText(
                                 "<html>"+
                                   "<table width='100%' border='0' align='center' cellpadding='1px' cellspacing='1px' class='tbl_form'>"+
                                     htmlContent.toString()+
                                   "</table>"+
                                 "</html>"
-                            );
+                            );                            
                         } catch (Exception e) {
                             System.out.println("Notif : "+e);
                         } finally{
@@ -2861,7 +2870,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                 ps.close();
                             }
                         }
-                        
+ 
                         ps5=koneksi.prepareStatement("select hasil_radiologi.hasil from hasil_radiologi where hasil_radiologi.no_rawat=? and hasil_radiologi.tgl_periksa=? and hasil_radiologi.jam=?");  
                         try {
                             ps5.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
@@ -2899,10 +2908,24 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             if(tbDokter.getSelectedRow()!= -1){
                 if((!Kd2.getText().equals(""))&&(!Petugas.getText().equals(""))){
                      if(TabData.getSelectedIndex()==2){
+//                         try {
+//                             Valid.tabelKosong(tabModeDicom);
+//                             ApiOrthanc orthanc=new ApiOrthanc();
+//                             root=orthanc.AmbilSeries(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
+//                             for(JsonNode list:root){
+//                                 for(JsonNode sublist:list.path("Series")){
+//                                      tabModeDicom.addRow(new Object[]{
+//                                           list.path("MainDicomTags").path("StudyInstanceUID").asText(),sublist.asText(),list.path("ID").asText()
+//                                      });   
+//                                 }        
+//                             }
+//                         } catch (Exception e) {
+//                             System.out.println("Notif : "+e);
+//                         }
                          try {
                              Valid.tabelKosong(tabModeDicom);
                              ApiOrthanc orthanc=new ApiOrthanc();
-                             root=orthanc.AmbilSeries(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
+                             root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
                              for(JsonNode list:root){
                                  for(JsonNode sublist:list.path("Series")){
                                       tabModeDicom.addRow(new Object[]{
@@ -2912,21 +2935,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                              }
                          } catch (Exception e) {
                              System.out.println("Notif : "+e);
-                         }
-//                         try {
-//                             Valid.tabelKosong(tabModeDicom);
-//                             ApiOrthanc orthanc=new ApiOrthanc();
-//                             root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
-//                             for(JsonNode list:root){
-//                                 for(JsonNode sublist:list.path("Series")){
-//                                      tabModeDicom.addRow(new Object[]{
-//                                           list.path("PatientMainDicomTags").path("PatientID").asText(),list.path("ID").asText(),sublist.asText()
-//                                      });   
-//                                 }        
-//                             }
-//                         } catch (Exception e) {
-//                             System.out.println("Notif : "+e);
-//                         }                         
+                         }                         
                      }
                 }
             }

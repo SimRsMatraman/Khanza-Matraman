@@ -32,14 +32,14 @@ import org.springframework.web.client.RestTemplate;
  */
 public class ApiOrthanc {
     private HttpHeaders headers ;
-    private JsonNode root;
+    private JsonNode root,rootx;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
     private SSLContext sslContext;
     private SSLSocketFactory sslFactory;
     private Scheme scheme;
     private HttpComponentsClientHttpRequestFactory factory;
-    private String auth,authEncrypt,requestJson;
+    private String auth,authEncrypt,requestJson,requestJson1;
     private byte[] encodedBytes;
     private int i=1;
     
@@ -68,15 +68,54 @@ public class ApiOrthanc {
                               "\"Expand\": true,"+
                               "\"Query\": {"+
                                    "\"StudyDate\": \""+Tanggal1+"-"+Tanggal2+"\","+
-                                   "\"PatientID\": \""+Norm+"\""+
+                                   "\"PatientID\": \"*"+Norm+"\""+
                               "}"+
                           "}";
             System.out.println("Request JSON : "+requestJson);
             requestEntity = new HttpEntity(requestJson,headers);
             System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/tools/find");
-            requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/tools/find", HttpMethod.POST, requestEntity, String.class).getBody();
+            requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/tools/find", HttpMethod.POST, requestEntity, String.class).getBody();            
             System.out.println("Result JSON : "+requestJson);
             root = mapper.readTree(requestJson);
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+            JOptionPane.showMessageDialog(null,"Gagal mengambil data dari Orthanc, silahkan hubungi administrator ..!!");
+        }
+        return root;
+    }
+    
+    public JsonNode AmbilPhoto(String Norm,String Tanggal1,String Tanggal2){
+        System.out.println("Percobaan Mengambil Photo Pasien : "+Norm);
+        try{
+            headers = new HttpHeaders();
+            System.out.println("Auth : "+authEncrypt);
+            headers.add("Authorization", "Basic "+authEncrypt);
+            requestJson = "{"+
+                              "\"Level\": \"Study\","+
+                              "\"Expand\": true,"+
+                              "\"Query\": {"+
+                                   "\"StudyDate\": \""+Tanggal1+"-"+Tanggal2+"\","+
+                                   "\"PatientID\": \"*"+Norm+"\""+
+                              "}"+
+                          "}";
+            System.out.println("Request JSON : "+requestJson);
+            requestEntity = new HttpEntity(requestJson,headers);
+            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/tools/find");
+            requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/tools/find", HttpMethod.POST, requestEntity, String.class).getBody();            
+            System.out.println("Result JSON : "+requestJson);
+            root = mapper.readTree(requestJson);
+            for(JsonNode list:root){
+                for(JsonNode sublist:list.path("Series")){
+            headers = new HttpHeaders();
+            System.out.println("Auth : "+authEncrypt);
+            headers.add("Authorization", "Basic "+authEncrypt);
+            requestEntity = new HttpEntity(headers);
+            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+sublist.asText());
+            requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+sublist.asText(), HttpMethod.GET, requestEntity, String.class).getBody();
+            System.out.println("Result JSON : "+requestJson);
+            root = mapper.readTree(requestJson);
+                }
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
             JOptionPane.showMessageDialog(null,"Gagal mengambil data dari Orthanc, silahkan hubungi administrator ..!!");

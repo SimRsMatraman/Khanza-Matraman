@@ -12,13 +12,8 @@ import java.util.Properties;
 public class Updater {
      private final static  Properties propServ = new Properties();
      static String URLSERVER;
-      
-        
-    
-     
-   
-    private static String versionURL ;
-    private static String historyURL ;
+     private static String versionURL ;
+     private static String historyURL ;
     
     public static String getLatestVersion() throws Exception
     {

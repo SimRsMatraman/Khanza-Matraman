@@ -83,13 +83,16 @@ public class UpdateInfo extends JFrame{
     }
     private void update()
     {
-        String[] run = {"java","-jar","Updater.jar"};
-        try {
-            Runtime.getRuntime().exec(run);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        System.exit(0);
+//        String[] run = {"java","-jar","Updater.jar"};
+//        try {
+//            Runtime.getRuntime().exec(run);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        System.exit(0);
+        Main_Gui utama=new Main_Gui();
+                            utama.setVisible(true);
+         dispose();
     }
 
 }
