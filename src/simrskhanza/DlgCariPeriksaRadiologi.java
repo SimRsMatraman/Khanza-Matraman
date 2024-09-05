@@ -69,7 +69,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             Beban_Jasa_Medik_Petugas_Radiologi_Ralan="",Utang_Jasa_Medik_Petugas_Radiologi_Ralan="",Beban_Kso_Radiologi_Ralan="",Utang_Kso_Radiologi_Ralan="",
             HPP_Persediaan_Radiologi_Rawat_Jalan="",Persediaan_BHP_Radiologi_Rawat_Jalan="",Beban_Jasa_Sarana_Radiologi_Ralan="",Utang_Jasa_Sarana_Radiologi_Ralan="",
             Beban_Jasa_Perujuk_Radiologi_Ralan="",Utang_Jasa_Perujuk_Radiologi_Ralan="",Beban_Jasa_Menejemen_Radiologi_Ralan="",Utang_Jasa_Menejemen_Radiologi_Ralan="",
-            tgl_hasil="",jam_hasil="",tgl_periksa="";
+            tgl_hasil="",jam_hasil="",tgl_periksa="",kosong="",Series="";
     private SimpleDateFormat tanggalNow = new SimpleDateFormat("yyyy-MM-dd");
 //    private SimpleDateFormat tanggalNow = new SimpleDateFormat("dd-MM-yyyy");
     private SimpleDateFormat jamNow = new SimpleDateFormat("HH:mm:ss");
@@ -2843,13 +2843,15 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             htmlContent = new StringBuilder(); 
                             ApiOrthanc orthanc=new ApiOrthanc();
                             root=orthanc.AmbilPhoto(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
-                            
-                            if(rs.next()){
+                            kosong = "1";
+                            while(rs.next()){
                                 htmlContent.append("<tr><td border='0' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs.getString("lokasi_gambar")+"'><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/"+rs.getString("lokasi_gambar")+"' alt='gambar' width='"+(internalFrame1.getWidth()-580)+"' height='"+(internalFrame1.getWidth()-580f)+"'/></a></td></tr>");
+                                kosong = "0";
                             }
-                            else if(!rs.next()){
+                            if(kosong.equals("1")){
+                                Series= root.path("MainDicomTags").path("SeriesInstanceUID").asText();
                                 for(JsonNode list:root.path("Instances")){
-                                htmlContent.append("<tr><td border='0' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview'><img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview' alt='gambar' width='"+(internalFrame1.getWidth()-580)+"' height='"+(internalFrame1.getWidth()-580)+"'/></a></td></tr>");    
+                                htmlContent.append("<tr><td border='0' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/stone-webviewer/index.html?study="+Series+"'><img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview' alt='gambar' width='"+(internalFrame1.getWidth()-580)+"' height='"+(internalFrame1.getWidth()-580)+"'/></a></td></tr>");    
                                 }  
                             }
 
