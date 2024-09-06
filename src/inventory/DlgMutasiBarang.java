@@ -1286,13 +1286,13 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getmutasi_barang());
-        if(!akses.getkode().equals("Admin Utama")){
+//        if(!akses.getkode().equals("Admin Utama")){
             if(!DEPOAKTIFOBAT.equals("")){
                 kddari.setText(DEPOAKTIFOBAT);
                 nmdari.setText(bangsal.tampil3(DEPOAKTIFOBAT));
-                btnDari.setEnabled(false);
+//                btnDari.setEnabled(false);
             }
-        }
+//        }
     }
 
     private void getData() {
