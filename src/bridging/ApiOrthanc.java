@@ -58,7 +58,7 @@ public class ApiOrthanc {
     }
     
     public JsonNode AmbilSeries(String Norm,String Tanggal1,String Tanggal2){
-        System.out.println("Percobaan Mengambil Photo Pasien : "+Norm);
+        System.out.println("Percobaan Mengambil Series Pasien : "+Norm);
         try{
             headers = new HttpHeaders();
             System.out.println("Auth : "+authEncrypt);

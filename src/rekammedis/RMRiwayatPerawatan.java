@@ -59,12 +59,12 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private int i=0,urut=0,w=0,s=0,urutdpjp=0;
     private double biayaperawatan=0;
-    private String kddpjp="",dpjp="",dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="",kosong="",Series="",StudyInstanceUID="";
+    private String kddpjp="",dpjp="",dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="",kosong="",Series="",StudyInstanceUID="",norm="";
     private StringBuilder htmlContent;
     private HttpClient http = new HttpClient();
     private GetMethod get;
     private DlgCariPasien pasien=new DlgCariPasien(null,true);
-    private JsonNode root;
+    private JsonNode root,rootx;
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -3733,30 +3733,28 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                       "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>"+
                                       "<td valign='top' width='15%' bgcolor='#FFFAF8'>Tanggal</td>"+
                                       "<td valign='top' width='81%' bgcolor='#FFFAF8'>Gambar Radiologi</td>"+
-                                    "</tr>");                            
-                                ApiOrthanc orthanc=new ApiOrthanc();
-                                root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",rs.getString("no_rawat")),rs3.getString("tgl_periksa").replaceAll("-",""),rs3.getString("tgl_periksa").replaceAll("-",""));
-//                                root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
-                                for(JsonNode list:root){
-                                    StudyInstanceUID = list.path("MainDicomTags").path("StudyInstanceUID").asText();
-                                    for (JsonNode sublist:list.path("Series")){
-                                    Series= sublist.asText();
+                                    "</tr>");
+                                    w=1;
+                                    ApiOrthanc orthanc=new ApiOrthanc();
+                                    root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",rs.getString("no_rawat")),rs3.getString("tgl_periksa").replaceAll("-",""),rs3.getString("tgl_periksa").replaceAll("-",""));
+                                    norm=Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",rs.getString("no_rawat"));
+                                    for(JsonNode list:root){
+                                        StudyInstanceUID = list.path("MainDicomTags").path("StudyInstanceUID").asText();
+                                        for (JsonNode sublist:list.path("Series")){
+                                        Series= sublist.asText();
+                                        rootx=orthanc.AmbilInstances(Series);
+                                        for(JsonNode liste:rootx.path("Instances")){
+                                            htmlContent.append(
+                                                "<tr>"+
+                                                    "<td valign='top' align='center'>"+w+"</td>"+
+                                                    "<td valign='top'>"+rs3.getString("tgl_periksa")+"</td>"+
+                                                    "<td valign='top' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/stone-webviewer/index.html?patient="+"*"+norm+"'> <img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+liste.asText()+"/preview' width='450' height='450'/></a></td>"+
+                                                "</tr>"); 
+                                                w++;
+                                            }                                            
+                                        }                                        
                                     }
-                                }   
-                                w=1;
-//                                Series= root.path("MainDicomTags").path("SeriesInstanceUID").asText();
-                                root=orthanc.AmbilInstances(Series);
-                                for(JsonNode list:root.path("Instances")){
-                                    htmlContent.append(
-                                         "<tr>"+
-                                            "<td valign='top' align='center'>"+w+"</td>"+
-                                            "<td valign='top'>"+rs3.getString("tgl_periksa")+" "+rs3.getString("jam")+"</td>"+
-                                            "<td valign='top' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/stone-webviewer/index.html?study="+StudyInstanceUID+"'> <img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview' width='450' height='450'/></a></td>"+
-                                            "</tr>"); 
-                                    w++;
-                                    }
-                                htmlContent.append(
-                                  "</table>");
+                                    htmlContent.append("</table>");
                                 }
                             }
                         } catch (Exception e) {

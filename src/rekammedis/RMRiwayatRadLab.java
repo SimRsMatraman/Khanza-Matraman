@@ -59,12 +59,12 @@ public final class RMRiwayatRadLab extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private int i=0,urut=0,w=0,s=0,urutdpjp=0;
     private double biayaperawatan=0;
-    private String kddpjp="",dpjp="",dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="",Series="",StudyInstanceUID="",kosong="";
+    private String kddpjp="",dpjp="",dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="",Series="",StudyInstanceUID="",kosong="",norm="";
     private StringBuilder htmlContent;
     private HttpClient http = new HttpClient();
     private GetMethod get;
     private DlgCariPasien pasien=new DlgCariPasien(null,true);
-    private JsonNode root;
+    private JsonNode root,rootx;
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -1081,27 +1081,54 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
                     "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
                     "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? order by reg_periksa.tgl_registrasi desc limit 5");
+                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
+                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_lab) "+
+                    "union all "+ 
+                    "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
+                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
+                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
+                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
+                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_radiologi) limit 5");
             }else if(R2.isSelected()==true){
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
                     "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
                     "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
                     "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
-                    "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? order by reg_periksa.tgl_registrasi");
+                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
+                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_lab) "+
+                    "union all "+ 
+                    "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
+                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
+                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
+                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
+                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_radiologi)");
             }else if(R3.isSelected()==true){
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
                     "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
                     "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
                     "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
-                    "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and "+
-                    "reg_periksa.tgl_registrasi between ? and ? order by reg_periksa.tgl_registrasi");
+                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
+                    "where reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_lab) "+
+                    "union all "+ 
+                    "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
+                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
+                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
+                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
+                    "where reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_radiologi)");
+                
+//                    "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+//                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
+//                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
+//                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
+//                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
+//                    "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
+//                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and "+
+//                    "reg_periksa.tgl_registrasi between ? and ? order by reg_periksa.tgl_registrasi");
             }else if(R4.isSelected()==true){
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
@@ -1117,12 +1144,17 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 i=0;
                 if(R1.isSelected()==true){
                     ps.setString(1,NoRM.getText().trim());
+                    ps.setString(2,NoRM.getText().trim());
                 }else if(R2.isSelected()==true){
                     ps.setString(1,NoRM.getText().trim());
-                }else if(R3.isSelected()==true){
-                    ps.setString(1,NoRM.getText().trim());
-                    ps.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                    ps.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                    ps.setString(2,NoRM.getText().trim());
+                }else if(R3.isSelected()==true){                    
+                    ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                    ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                    ps.setString(3,NoRM.getText().trim());
+                    ps.setString(4,Valid.SetTgl(Tgl1.getSelectedItem()+""));
+                    ps.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
+                    ps.setString(6,NoRM.getText().trim());
                 }else if(R4.isSelected()==true){
                     ps.setString(1,NoRM.getText().trim());
                     ps.setString(2,NoRawat.getText().trim());
@@ -1386,31 +1418,29 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                       "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>"+
                                       "<td valign='top' width='15%' bgcolor='#FFFAF8'>Tanggal</td>"+
                                       "<td valign='top' width='81%' bgcolor='#FFFAF8'>Gambar Radiologi</td>"+
-                                    "</tr>");                            
-                                ApiOrthanc orthanc=new ApiOrthanc();
-                                root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",rs.getString("no_rawat")),rs3.getString("tgl_periksa").replaceAll("-",""),rs3.getString("tgl_periksa").replaceAll("-",""));
-//                                root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
-                                for(JsonNode list:root){
-                                    StudyInstanceUID = list.path("MainDicomTags").path("StudyInstanceUID").asText();
-                                    for (JsonNode sublist:list.path("Series")){
-                                    Series= sublist.asText();
+                                    "</tr>");
+                                    w=1;
+                                    ApiOrthanc orthanc=new ApiOrthanc();
+                                    root=orthanc.AmbilSeries(Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",rs.getString("no_rawat")),rs3.getString("tgl_periksa").replaceAll("-",""),rs3.getString("tgl_periksa").replaceAll("-",""));
+                                    norm=Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",rs.getString("no_rawat"));
+                                    for(JsonNode list:root){
+                                        StudyInstanceUID = list.path("MainDicomTags").path("StudyInstanceUID").asText();
+                                        for (JsonNode sublist:list.path("Series")){
+                                        Series= sublist.asText();
+                                        rootx=orthanc.AmbilInstances(Series);
+                                        for(JsonNode liste:rootx.path("Instances")){
+                                            htmlContent.append(
+                                                "<tr>"+
+                                                    "<td valign='top' align='center'>"+w+"</td>"+
+                                                    "<td valign='top'>"+rs3.getString("tgl_periksa")+"</td>"+
+                                                    "<td valign='top' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/stone-webviewer/index.html?patient="+"*"+norm+"'> <img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+liste.asText()+"/preview' width='450' height='450'/></a></td>"+
+                                                "</tr>"); 
+                                                w++;
+                                            }                                            
+                                        }                                        
                                     }
+                                    htmlContent.append("</table>");
                                 }   
-                                w=1;
-//                                Series= root.path("MainDicomTags").path("SeriesInstanceUID").asText();
-                                root=orthanc.AmbilInstances(Series);
-                                for(JsonNode list:root.path("Instances")){
-                                    htmlContent.append(
-                                         "<tr>"+
-                                            "<td valign='top' align='center'>"+w+"</td>"+
-                                            "<td valign='top'>"+rs3.getString("tgl_periksa")+" "+rs3.getString("jam")+"</td>"+
-                                            "<td valign='top' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/stone-webviewer/index.html?study="+StudyInstanceUID+"'> <img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview' width='450' height='450'/></a></td>"+
-                                            "</tr>"); 
-                                    w++;
-                                    }
-                                htmlContent.append(
-                                  "</table>");
-                                }
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
