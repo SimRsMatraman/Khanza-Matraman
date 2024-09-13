@@ -1854,7 +1854,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -2243,6 +2243,11 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         kdptg.setHighlighter(null);
         kdptg.setName("kdptg"); // NOI18N
+        kdptg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kdptgActionPerformed(evt);
+            }
+        });
         kdptg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 kdptgKeyPressed(evt);
@@ -2267,6 +2272,11 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         TPerawat.setBackground(new java.awt.Color(202, 202, 202));
         TPerawat.setHighlighter(null);
         TPerawat.setName("TPerawat"); // NOI18N
+        TPerawat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TPerawatActionPerformed(evt);
+            }
+        });
         panelGlass10.add(TPerawat);
         TPerawat.setBounds(214, 10, 532, 23);
 
@@ -3049,7 +3059,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnTemplatePemeriksaan);
-        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 22);
+        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 25);
 
         PanelInput.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -10330,6 +10340,14 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     this.setCursor(Cursor.getDefaultCursor());
                 }        
     }//GEN-LAST:event_BtnPermintaanKonsultasiMedikActionPerformed
+
+    private void kdptgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kdptgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kdptgActionPerformed
+
+    private void TPerawatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TPerawatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TPerawatActionPerformed
 
     /**
     * @param args the command line arguments
