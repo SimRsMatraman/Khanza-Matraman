@@ -40,6 +40,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
     private PreparedStatement ps,ps2;
     private ResultSet rs;
     private int i=0,pilih=0;
+    private String namapetugas = "";
 
     /** Creates new form DlgPemberianInfus
      * @param parent
@@ -391,7 +392,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         WindowValidasi.setUndecorated(true);
         WindowValidasi.setResizable(false);
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Validasi Petugas ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Validasi Petugas ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setLayout(null);
 
@@ -499,7 +500,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Permintaan Makan Pasien Baru ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Permintaan Makan Pasien Baru ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -734,7 +735,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-09-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -748,7 +749,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-09-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -840,7 +841,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         TPasien.setBounds(205, 12, 400, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-09-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1097,11 +1098,11 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
                     "select detail_beri_diet.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.umur,concat(detail_beri_diet.kd_kamar,', ',bangsal.nm_bangsal) as namakamar,"+
                     "detail_beri_diet.tanggal,detail_beri_diet.waktu,jam_diet_pasien.jam,diet.nama_diet,detail_beri_diet.kd_kamar,detail_beri_diet.kd_diet,dpjp_ranap.kd_dokter,dokter.nm_dokter,detail_beri_diet.makan,pegawai.nama,kamar_inap.diagnosa_awal "+
                     "from detail_beri_diet inner join reg_periksa on detail_beri_diet.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join diet on detail_beri_diet.kd_diet=diet.kd_diet "+
-                    "inner join kamar on detail_beri_diet.kd_kamar=kamar.kd_kamar "+
-                    "inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                    "inner join jam_diet_pasien on detail_beri_diet.waktu=jam_diet_pasien.waktu "+ 
+                    "left join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                    "left join diet on detail_beri_diet.kd_diet=diet.kd_diet "+
+                    "left join kamar on detail_beri_diet.kd_kamar=kamar.kd_kamar "+
+                    "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                    "left join jam_diet_pasien on detail_beri_diet.waktu=jam_diet_pasien.waktu "+ 
                     "left join dpjp_ranap on detail_beri_diet.no_rawat=dpjp_ranap.no_rawat "+
                     "left join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter "+
                     "left join pegawai on detail_beri_diet.user=pegawai.nik "+ 
@@ -1525,7 +1526,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 "select detail_beri_diet.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.umur,concat(detail_beri_diet.kd_kamar,', ',bangsal.nm_bangsal),"+
                 "detail_beri_diet.tanggal,detail_beri_diet.waktu,jam_diet_pasien.jam,diet.nama_diet,detail_beri_diet.kd_kamar,detail_beri_diet.kd_diet,dpjp_ranap.kd_dokter,dokter.nm_dokter,detail_beri_diet.makan,pegawai.nama,detail_beri_diet.user " +
                 "from detail_beri_diet inner join reg_periksa on detail_beri_diet.no_rawat=reg_periksa.no_rawat "+
-                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                "left join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "left join diet on detail_beri_diet.kd_diet=diet.kd_diet "+
                 "left join kamar on detail_beri_diet.kd_kamar=kamar.kd_kamar "+
                 "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
@@ -1681,5 +1682,33 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 //        BtnHapus.setEnabled(akses.getdiet_pasien());
         BtnPrint.setEnabled(akses.getdiet_pasien());
         MnSisaDietPasien.setEnabled(akses.getsisa_diet_pasien());
+        try {
+            namapetugas = koneksiDB.DOKTERAKTIFKASIRRALAN();
+        } catch (Exception e) {
+            namapetugas = "";
+        }
+
+        if (!namapetugas.equals("")) {
+            if (akses.getkode().equals("Admin Utama")) {
+                KdPetugas.setText("");
+                BtnSeekPetugas.setEnabled(true);
+                KdPetugas.setEditable(true);
+            } else {
+                KdPetugas.setText(namapetugas);
+                BtnSeekPetugas.setEnabled(true);
+                KdPetugas.setEditable(false);
+            }
+//        } else {
+//            namapetugas = billing.dokter.tampil3(akses.getkode());
+//            if (!namapetugas.equals("")) {
+//                CrPtg.setText(namapetugas);
+//                BtnSeekPetugas.setEnabled(true);
+//                CrPtg.setEditable(false);
+//            } else {
+//                CrPtg.setText("");
+//                BtnSeekPetugas.setEnabled(true);
+//                CrPtg.setEditable(true);
+//            }
+        }
     }
 }
