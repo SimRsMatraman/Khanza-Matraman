@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import kepegawaian.DlgCariPegawai;
 import kepegawaian.DlgCariPetugas;
 import laporan.LaporanSisaDietPasien;
 import setting.DlgCariJamDiet;;
@@ -36,6 +37,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
+    public  DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
     public  DlgCariPetugas petugas=new DlgCariPetugas(null,false); 
     private PreparedStatement ps,ps2;
     private ResultSet rs;
@@ -1682,33 +1684,17 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 //        BtnHapus.setEnabled(akses.getdiet_pasien());
         BtnPrint.setEnabled(akses.getdiet_pasien());
         MnSisaDietPasien.setEnabled(akses.getsisa_diet_pasien());
-        try {
-            namapetugas = koneksiDB.DOKTERAKTIFKASIRRALAN();
-        } catch (Exception e) {
-            namapetugas = "";
-        }
-
-        if (!namapetugas.equals("")) {
-            if (akses.getkode().equals("Admin Utama")) {
-                KdPetugas.setText("");
-                BtnSeekPetugas.setEnabled(true);
-                KdPetugas.setEditable(true);
-            } else {
-                KdPetugas.setText(namapetugas);
-                BtnSeekPetugas.setEnabled(true);
-                KdPetugas.setEditable(false);
-            }
-//        } else {
-//            namapetugas = billing.dokter.tampil3(akses.getkode());
-//            if (!namapetugas.equals("")) {
-//                CrPtg.setText(namapetugas);
-//                BtnSeekPetugas.setEnabled(true);
-//                CrPtg.setEditable(false);
-//            } else {
-//                CrPtg.setText("");
-//                BtnSeekPetugas.setEnabled(true);
-//                CrPtg.setEditable(true);
+        
+        if(akses.getjml2()>=1){
+            KdPetugas.setEditable(false);
+            BtnSeekPetugas.setEnabled(false);
+            KdPetugas.setText(akses.getkode());
+//            Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", NmPetugas,KdPetugas.getText());
+            Sequel.cariIsi("select nama from pegawai where nik=?", NmPetugas,KdPetugas.getText());
+//            if(NamaDokter.getText().equals("")){
+//                KodeDokter.setText("");
+//                JOptionPane.showMessageDialog(null,"User login bukan dokter...!!");
 //            }
         }
-    }
+        }
 }
