@@ -1015,7 +1015,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
                         Makan.getText()+"','"+
                         KdPetugas.getText()+"'","data")==true){
                     tabMode.addRow(new String[]{
-                        TNoRw.getText(),TPasien.getText(),"-","-",Ruang.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),NmDiet.getText(),"-",Kamar.getText(),KdDiet.getText(),Makan.getText()
+                        TNoRw.getText(),TPasien.getText(),"","","","","","","","","",Makan.getText()
                     });
                     LCount.setText(""+tabMode.getRowCount());
                     emptTeks();
@@ -1149,7 +1149,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
                 Valid.MyReportqry("rptBrDiet1.jasper","report","::[ Data Permintaan Makan Pasien Baru ]::",
                     "select detail_beri_diet.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.umur,concat(detail_beri_diet.kd_kamar,', ',bangsal.nm_bangsal) as namakamar,"+
-                    "detail_beri_diet.tanggal,detail_beri_diet.waktu,jam_diet_pasien.jam,diet.nama_diet,detail_beri_diet.kd_kamar,detail_beri_diet.kd_diet,dpjp_ranap.kd_dokter,dokter.nm_dokter,detail_beri_diet.makan,pegawai.nama,kamar_inap.diagnosa_awal "+
+                    "detail_beri_diet.tanggal,detail_beri_diet.waktu,jam_diet_pasien.jam,diet.nama_diet,detail_beri_diet.kd_kamar,detail_beri_diet.kd_diet,dpjp_ranap.kd_dokter,dokter.nm_dokter,pegawai.nama,kamar_inap.diagnosa_awal "+
                     "from detail_beri_diet inner join reg_periksa on detail_beri_diet.no_rawat=reg_periksa.no_rawat "+
                     "left join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "left join diet on detail_beri_diet.kd_diet=diet.kd_diet "+
@@ -1158,7 +1158,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
                     "left join jam_diet_pasien on detail_beri_diet.waktu=jam_diet_pasien.waktu "+ 
                     "left join dpjp_ranap on detail_beri_diet.no_rawat=dpjp_ranap.no_rawat "+
                     "left join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter "+
-                    "left join pegawai on detail_beri_diet.user=pegawai.nik "+ 
+                    "left join pegawai on detail_beri_diet.nip=pegawai.nik "+ 
                     "left join kamar_inap on detail_beri_diet.no_rawat=kamar_inap.no_rawat "+
                     "where detail_beri_diet.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and detail_beri_diet.waktu like '%"+WaktuDiet2.getText().trim()+"%' and bangsal.nm_bangsal like '%"+NmBangsalCari.getText().trim()+"%' and "+
                     "(detail_beri_diet.no_rawat like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%') order by bangsal.nm_bangsal,diet.nama_diet",param);
