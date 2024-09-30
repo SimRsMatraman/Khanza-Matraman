@@ -54,6 +54,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     private ResultSet rstindakan,rstampil,rsset_tarif;
     private boolean[] pilih,pilih2; 
     private String[] kode,nama,pemeriksaan2,satuan2,nilai_rujukan2,idtemplate2;
+    private double[] total;
     private int jml=0,i=0,index=0,jml2=0,jml3=0,i2=0,index2=0,jmlparsial=0;
     private String aktifkanparsial="no",norawatibu="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",status="",la="",ld="",pa="",pd="",finger="";
     private boolean sukses=true;
@@ -70,7 +71,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         setSize(885,674);
 
         Object[] row={
-            "P","Pemeriksaan","Satuan","Nilai Rujukan","id_template"};
+            "P","Sub Pemeriksaan","Satuan","Nilai Rujukan","id_template","Tarif"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                     boolean a = false;
@@ -80,7 +81,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                     return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
+                java.lang.Boolean.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Double.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -94,25 +95,30 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         tbDetailPK.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbDetailPK.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 6; i++) {
             TableColumn column = tbDetailPK.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
             }else if(i==1){
-                column.setPreferredWidth(356);
+                column.setPreferredWidth(220);
             }else if(i==2){
-                column.setPreferredWidth(50);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }else if(i==3){
-                column.setPreferredWidth(345);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }else if(i==4){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);                
+            }
+            else if(i==5){
+                column.setPreferredWidth(120);
             }
         }
         
         tbDetailPK.setDefaultRenderer(Object.class, new WarnaTable());
         
-        Object[] row2={"P","Kode Periksa","Nama Pemeriksaan"};
+        Object[] row2={"P","Kode Periksa","Nama Pemeriksaan","Tarif"};
         tabMode2=new DefaultTableModel(null,row2){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -122,7 +128,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -134,14 +140,18 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         tbTarifPK.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbTarifPK.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for(i = 0; i < 3; i++) {
+        for(i = 0; i < 4; i++) {
             TableColumn column = tbTarifPK.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
             }else if(i==1){
-                column.setPreferredWidth(100);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }else if(i==2){
-                column.setPreferredWidth(520);
+                column.setPreferredWidth(420);
+            }
+            else if(i==3){
+                column.setPreferredWidth(120);
             }
         }
         tbTarifPK.setDefaultRenderer(Object.class, new WarnaTable());
@@ -393,6 +403,9 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         PopupMB = new javax.swing.JPopupMenu();
         ppBersihkan1 = new javax.swing.JMenuItem();
         ppSemua1 = new javax.swing.JMenuItem();
+        jLabel6 = new widget.Label();
+        TCari = new widget.TextBox();
+        BtnCari2 = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         internalFrame2 = new widget.InternalFrame();
         FormInput = new javax.swing.JPanel();
@@ -420,19 +433,18 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         jLabel25 = new widget.Label();
         TabRawat = new javax.swing.JTabbedPane();
         PanelCariUtama = new javax.swing.JPanel();
-        Scroll = new widget.ScrollPane();
-        tbDetailPK = new widget.Table();
         panelGlass11 = new widget.panelisi();
-        jLabel6 = new widget.Label();
-        TCari = new widget.TextBox();
-        BtnCari2 = new widget.Button();
         jLabel11 = new widget.Label();
         Pemeriksaan = new widget.TextBox();
-        Scroll1 = new widget.ScrollPane();
-        tbTarifPK = new widget.Table();
         BtnCari1 = new widget.Button();
         jLabel4 = new widget.Label();
         TNoPermintaanPK = new widget.TextBox();
+        jPanel1 = new javax.swing.JPanel();
+        Scroll1 = new widget.ScrollPane();
+        tbTarifPK = new widget.Table();
+        jPanel3 = new javax.swing.JPanel();
+        Scroll = new widget.ScrollPane();
+        tbDetailPK = new widget.Table();
         PanelCariUtama1 = new javax.swing.JPanel();
         panelGlass12 = new widget.panelisi();
         jLabel8 = new widget.Label();
@@ -570,11 +582,39 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         });
         PopupMB.add(ppSemua1);
 
+        jLabel6.setText("Detail Pemeriksaan :");
+        jLabel6.setName("jLabel6"); // NOI18N
+        jLabel6.setPreferredSize(new java.awt.Dimension(110, 23));
+
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(625, 23));
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCariKeyPressed(evt);
+            }
+        });
+
+        BtnCari2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari2.setMnemonic('4');
+        BtnCari2.setToolTipText("Alt+4");
+        BtnCari2.setName("BtnCari2"); // NOI18N
+        BtnCari2.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCari2ActionPerformed(evt);
+            }
+        });
+        BtnCari2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCari2KeyPressed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Input Data Permintaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Input Data Permintaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -642,7 +682,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         jLabel9.setBounds(0, 40, 92, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-01-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -784,60 +824,12 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         PanelCariUtama.setPreferredSize(new java.awt.Dimension(100, 143));
         PanelCariUtama.setLayout(new java.awt.BorderLayout());
 
-        Scroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        Scroll.setComponentPopupMenu(Popup);
-        Scroll.setName("Scroll"); // NOI18N
-        Scroll.setOpaque(true);
-
-        tbDetailPK.setComponentPopupMenu(Popup);
-        tbDetailPK.setName("tbDetailPK"); // NOI18N
-        Scroll.setViewportView(tbDetailPK);
-
-        PanelCariUtama.add(Scroll, java.awt.BorderLayout.CENTER);
-
         panelGlass11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         panelGlass11.setName("panelGlass11"); // NOI18N
-        panelGlass11.setPreferredSize(new java.awt.Dimension(44, 157));
-        panelGlass11.setLayout(null);
-
-        jLabel6.setText("Detail Pemeriksaan :");
-        jLabel6.setName("jLabel6"); // NOI18N
-        jLabel6.setPreferredSize(new java.awt.Dimension(110, 23));
-        panelGlass11.add(jLabel6);
-        jLabel6.setBounds(4, 130, 110, 23);
-
-        TCari.setName("TCari"); // NOI18N
-        TCari.setPreferredSize(new java.awt.Dimension(625, 23));
-        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TCariKeyPressed(evt);
-            }
-        });
-        panelGlass11.add(TCari);
-        TCari.setBounds(117, 130, 623, 23);
-
-        BtnCari2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari2.setMnemonic('4');
-        BtnCari2.setToolTipText("Alt+4");
-        BtnCari2.setName("BtnCari2"); // NOI18N
-        BtnCari2.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnCari2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCari2ActionPerformed(evt);
-            }
-        });
-        BtnCari2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnCari2KeyPressed(evt);
-            }
-        });
-        panelGlass11.add(BtnCari2);
-        BtnCari2.setBounds(744, 130, 28, 23);
+        panelGlass11.setPreferredSize(new java.awt.Dimension(44, 657));
 
         jLabel11.setText("Pemeriksaan :");
         jLabel11.setName("jLabel11"); // NOI18N
-        panelGlass11.add(jLabel11);
-        jLabel11.setBounds(0, 10, 82, 23);
 
         Pemeriksaan.setHighlighter(null);
         Pemeriksaan.setName("Pemeriksaan"); // NOI18N
@@ -846,22 +838,6 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 PemeriksaanKeyPressed(evt);
             }
         });
-        panelGlass11.add(Pemeriksaan);
-        Pemeriksaan.setBounds(85, 10, 420, 23);
-
-        Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
-        Scroll1.setName("Scroll1"); // NOI18N
-
-        tbTarifPK.setName("tbTarifPK"); // NOI18N
-        tbTarifPK.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbTarifPKMouseClicked(evt);
-            }
-        });
-        Scroll1.setViewportView(tbTarifPK);
-
-        panelGlass11.add(Scroll1);
-        Scroll1.setBounds(85, 35, 687, 90);
 
         BtnCari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari1.setMnemonic('1');
@@ -873,13 +849,9 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 BtnCari1ActionPerformed(evt);
             }
         });
-        panelGlass11.add(BtnCari1);
-        BtnCari1.setBounds(507, 10, 28, 23);
 
         jLabel4.setText("No.Permintaan :");
         jLabel4.setName("jLabel4"); // NOI18N
-        panelGlass11.add(jLabel4);
-        jLabel4.setBounds(541, 10, 98, 23);
 
         TNoPermintaanPK.setHighlighter(null);
         TNoPermintaanPK.setName("TNoPermintaanPK"); // NOI18N
@@ -888,8 +860,78 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 TNoPermintaanPKKeyPressed(evt);
             }
         });
-        panelGlass11.add(TNoPermintaanPK);
-        TNoPermintaanPK.setBounds(642, 10, 130, 23);
+
+        jPanel1.setName("jPanel1"); // NOI18N
+
+        Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
+        Scroll1.setColumnHeaderView(null);
+        Scroll1.setName("Scroll1"); // NOI18N
+        Scroll1.setPreferredSize(new java.awt.Dimension(687, 557));
+        Scroll1.setViewportView(null);
+
+        tbTarifPK.setName("tbTarifPK"); // NOI18N
+        tbTarifPK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbTarifPKMouseClicked(evt);
+            }
+        });
+        Scroll1.setViewportView(tbTarifPK);
+
+        jPanel1.add(Scroll1);
+
+        jPanel3.setName("jPanel3"); // NOI18N
+
+        Scroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Scroll.setComponentPopupMenu(Popup);
+        Scroll.setName("Scroll"); // NOI18N
+        Scroll.setOpaque(true);
+        Scroll.setPreferredSize(new java.awt.Dimension(600, 557));
+
+        tbDetailPK.setComponentPopupMenu(Popup);
+        tbDetailPK.setName("tbDetailPK"); // NOI18N
+        Scroll.setViewportView(tbDetailPK);
+
+        jPanel3.add(Scroll);
+
+        javax.swing.GroupLayout panelGlass11Layout = new javax.swing.GroupLayout(panelGlass11);
+        panelGlass11.setLayout(panelGlass11Layout);
+        panelGlass11Layout.setHorizontalGroup(
+            panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGlass11Layout.createSequentialGroup()
+                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelGlass11Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(Pemeriksaan, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(BtnCari1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGlass11Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(12, 12, 12)
+                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGlass11Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(TNoPermintaanPK, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelGlass11Layout.setVerticalGroup(
+            panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGlass11Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Pemeriksaan, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnCari1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TNoPermintaanPK, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         PanelCariUtama.add(panelGlass11, java.awt.BorderLayout.PAGE_START);
 
@@ -1005,7 +1047,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         jLabel17.setBounds(235, 10, 120, 23);
 
         TanggalPA.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-01-2024" }));
+        TanggalPA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2024" }));
         TanggalPA.setDisplayFormat("dd-MM-yyyy");
         TanggalPA.setName("TanggalPA"); // NOI18N
         TanggalPA.setOpaque(false);
@@ -1048,7 +1090,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         DiagnosaPA.setBounds(432, 100, 340, 23);
 
         TanggalBahan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalBahan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-01-2024" }));
+        TanggalBahan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2024" }));
         TanggalBahan.setDisplayFormat("dd-MM-yyyy");
         TanggalBahan.setName("TanggalBahan"); // NOI18N
         TanggalBahan.setOpaque(false);
@@ -1710,26 +1752,6 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_ppSemuaActionPerformed
 
-    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            BtnCari2ActionPerformed(null);
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            BtnKeluar.requestFocus();
-        }
-    }//GEN-LAST:event_TCariKeyPressed
-
-    private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
-        tampil();
-    }//GEN-LAST:event_BtnCari2ActionPerformed
-
-    private void BtnCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari2KeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            BtnCari2ActionPerformed(null);
-        }else{
-            Valid.pindah(evt, TCari,Pemeriksaan);
-        }
-    }//GEN-LAST:event_BtnCari2KeyPressed
-
     private void TNoPermintaanPKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoPermintaanPKKeyPressed
         Valid.pindah(evt,Pemeriksaan,TCari);
     }//GEN-LAST:event_TNoPermintaanPKKeyPressed
@@ -1923,6 +1945,26 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         
     }//GEN-LAST:event_CmbstatusKeyPressed
 
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnCari2ActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
+    }//GEN-LAST:event_TCariKeyPressed
+
+    private void BtnCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari2KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnCari2ActionPerformed(null);
+        }else{
+            Valid.pindah(evt, TCari,Pemeriksaan);
+        }
+    }//GEN-LAST:event_BtnCari2KeyPressed
+
+    private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
+        tampil();
+    }//GEN-LAST:event_BtnCari2ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2025,6 +2067,8 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel7;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass12;
     private widget.panelisi panelGlass13;
@@ -2059,6 +2103,8 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             nilai_rujukan2=new String[jml2];
             idtemplate2=null;
             idtemplate2=new String[jml2];
+            total=null;
+            total=new double[jml2];
             
             index2=0; 
             for(i2=0;i2<tbDetailPK.getRowCount();i2++){
@@ -2068,6 +2114,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     satuan2[index2]=tbDetailPK.getValueAt(i2,2).toString();
                     nilai_rujukan2[index2]=tbDetailPK.getValueAt(i2,3).toString();
                     idtemplate2[index2]=tbDetailPK.getValueAt(i2,4).toString();
+                    total[index2]=Double.parseDouble(tbDetailPK.getValueAt(i2,5).toString());
                     index2++;
                 }
             }
@@ -2076,14 +2123,14 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             
             for(i2=0;i2<jml2;i2++){ 
                 tabMode.addRow(new Object[] {
-                    pilih2[i2],pemeriksaan2[i2],satuan2[i2],nilai_rujukan2[i2],idtemplate2[i2]
+                    pilih2[i2],pemeriksaan2[i2],satuan2[i2],nilai_rujukan2[i2],idtemplate2[i2],total[i2]
                 });
             }  
             
             for(i2=0;i2<tbTarifPK.getRowCount();i2++){ 
                 if(tbTarifPK.getValueAt(i2,0).toString().equals("true")){
-                    tabMode.addRow(new Object[]{false,tbTarifPK.getValueAt(i2,2).toString(),"","",""});
-                    pstampil=koneksi.prepareStatement("select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa from template_laboratorium where template_laboratorium.kd_jenis_prw=? and template_laboratorium.Pemeriksaan like ? order by template_laboratorium.urut");
+                    tabMode.addRow(new Object[]{false,tbTarifPK.getValueAt(i2,2).toString(),"","","",0}); //0
+                    pstampil=koneksi.prepareStatement("select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa,template_laboratorium.biaya_item from template_laboratorium where template_laboratorium.kd_jenis_prw=? and template_laboratorium.Pemeriksaan like ? order by template_laboratorium.urut");
                     try {
                         pstampil.setString(1,tbTarifPK.getValueAt(i2,1).toString());
                         pstampil.setString(2,"%"+TCari.getText().trim()+"%");
@@ -2103,10 +2150,12 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                 pa=" PA : "+rstampil.getString("nilai_rujukan_pa");
                             }
                             tabMode.addRow(new Object[]{
-                                false,"   "+rstampil.getString("Pemeriksaan"),
+                                true,
+                                "   "+rstampil.getString("Pemeriksaan"),
                                  rstampil.getString("satuan"),
                                  ld+la+pd+pa,
-                                 rstampil.getString("id_template")
+                                 rstampil.getString("id_template"),
+                                 rstampil.getDouble("biaya_item")
                             });
                         }
                     } catch (Exception e) {
@@ -2433,12 +2482,15 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             kode=new String[jml];
             nama=null;
             nama=new String[jml];
+            total=null;
+            total=new double[jml];
             index=0; 
             for(i=0;i<tbTarifPK.getRowCount();i++){
                 if(tbTarifPK.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
                     kode[index]=tbTarifPK.getValueAt(i,1).toString();
                     nama[index]=tbTarifPK.getValueAt(i,2).toString();
+                    total[index]=Double.parseDouble(tbTarifPK.getValueAt(i,3).toString());
                     index++;
                 }
             }
@@ -2446,33 +2498,33 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.tabelKosong(tabMode2);
             
             for(i=0;i<jml;i++){
-                tabMode2.addRow(new Object[] {pilih[i],kode[i],nama[i]});
+                tabMode2.addRow(new Object[] {pilih[i],kode[i],nama[i],total[i]});
             }       
         
             if(cara_bayar_lab.equals("Yes")&&kelas_lab.equals("No")){
                 pstindakan=koneksi.prepareStatement(
-                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab "+
+                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr "+
                     "from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and jns_perawatan_lab.kd_jenis_prw like ? or "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and jns_perawatan_lab.nm_perawatan like ? "+
                     "order by jns_perawatan_lab.kd_jenis_prw");
             }else if(cara_bayar_lab.equals("No")&&kelas_lab.equals("No")){
                 pstindakan2=koneksi.prepareStatement(
-                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab "+
+                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr "+
                     "from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and jns_perawatan_lab.kd_jenis_prw like ? or "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and jns_perawatan_lab.nm_perawatan like ?  "+
                     "order by jns_perawatan_lab.kd_jenis_prw"); 
             }else if(cara_bayar_lab.equals("Yes")&&kelas_lab.equals("Yes")){
                 pstindakan3=koneksi.prepareStatement(
-                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab "+
+                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr "+
                     "from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.kd_jenis_prw like ? or "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.nm_perawatan like ? "+
                     "order by jns_perawatan_lab.kd_jenis_prw");
             }else if(cara_bayar_lab.equals("No")&&kelas_lab.equals("Yes")){
                 pstindakan4=koneksi.prepareStatement(
-                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab "+
+                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr "+
                     "from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.kd_jenis_prw like ? or "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.nm_perawatan like ?  "+
@@ -2507,7 +2559,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 } 
                             
                 while(rstindakan.next()){                
-                    tabMode2.addRow(new Object[]{false,rstindakan.getString(1),rstindakan.getString(2)});
+                    tabMode2.addRow(new Object[]{false,rstindakan.getString(1),"   "+rstindakan.getString(2),rstindakan.getString(4)});
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
