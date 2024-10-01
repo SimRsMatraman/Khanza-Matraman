@@ -100,7 +100,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             if(i==0){
                 column.setPreferredWidth(20);
             }else if(i==1){
-                column.setPreferredWidth(220);
+                column.setPreferredWidth(420);
             }else if(i==2){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -442,7 +442,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         Scroll1 = new widget.ScrollPane();
         tbTarifPK = new widget.Table();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         Scroll = new widget.ScrollPane();
         tbDetailPK = new widget.Table();
         PanelCariUtama1 = new javax.swing.JPanel();
@@ -828,7 +828,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         panelGlass11.setName("panelGlass11"); // NOI18N
         panelGlass11.setPreferredSize(new java.awt.Dimension(44, 657));
 
-        jLabel11.setText("Pemeriksaan :");
+        jLabel11.setText("Cari Pemeriksaan :");
         jLabel11.setName("jLabel11"); // NOI18N
 
         Pemeriksaan.setHighlighter(null);
@@ -862,11 +862,12 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         });
 
         jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setPreferredSize(new java.awt.Dimension(592, 480));
 
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setColumnHeaderView(null);
         Scroll1.setName("Scroll1"); // NOI18N
-        Scroll1.setPreferredSize(new java.awt.Dimension(687, 557));
+        Scroll1.setPreferredSize(new java.awt.Dimension(587, 557));
         Scroll1.setViewportView(null);
 
         tbTarifPK.setName("tbTarifPK"); // NOI18N
@@ -877,44 +878,72 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         });
         Scroll1.setViewportView(tbTarifPK);
 
-        jPanel1.add(Scroll1);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(Scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(Scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        jPanel3.setName("jPanel3"); // NOI18N
+        jPanel2.setName("jPanel2"); // NOI18N
+        jPanel2.setPreferredSize(new java.awt.Dimension(592, 480));
 
         Scroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll.setComponentPopupMenu(Popup);
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
-        Scroll.setPreferredSize(new java.awt.Dimension(600, 557));
+        Scroll.setPreferredSize(new java.awt.Dimension(587, 557));
 
         tbDetailPK.setComponentPopupMenu(Popup);
         tbDetailPK.setName("tbDetailPK"); // NOI18N
         Scroll.setViewportView(tbDetailPK);
 
-        jPanel3.add(Scroll);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout panelGlass11Layout = new javax.swing.GroupLayout(panelGlass11);
         panelGlass11.setLayout(panelGlass11Layout);
         panelGlass11Layout.setHorizontalGroup(
             panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGlass11Layout.createSequentialGroup()
-                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelGlass11Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(Pemeriksaan, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(BtnCari1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelGlass11Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(12, 12, 12)
+                .addGap(11, 11, 11)
                 .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelGlass11Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Pemeriksaan, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(BtnCari1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(TNoPermintaanPK, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelGlass11Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelGlass11Layout.setVerticalGroup(
@@ -928,14 +957,16 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TNoPermintaanPK, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         PanelCariUtama.add(panelGlass11, java.awt.BorderLayout.PAGE_START);
 
         TabRawat.addTab("Patologi Klinis", PanelCariUtama);
+        PanelCariUtama.getAccessibleContext().setAccessibleParent(TabRawat);
 
         PanelCariUtama1.setName("PanelCariUtama1"); // NOI18N
         PanelCariUtama1.setOpaque(false);
@@ -2068,7 +2099,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel2;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass12;
     private widget.panelisi panelGlass13;
