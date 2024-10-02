@@ -433,17 +433,18 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         jLabel25 = new widget.Label();
         TabRawat = new javax.swing.JTabbedPane();
         PanelCariUtama = new javax.swing.JPanel();
-        panelGlass11 = new widget.panelisi();
+        jPanel3 = new javax.swing.JPanel();
+        panelisi5 = new widget.panelisi();
         jLabel11 = new widget.Label();
         Pemeriksaan = new widget.TextBox();
         BtnCari1 = new widget.Button();
+        Scroll5 = new widget.ScrollPane();
+        tbTarifPK = new widget.Table();
+        jPanel4 = new javax.swing.JPanel();
+        panelisi4 = new widget.panelisi();
         jLabel4 = new widget.Label();
         TNoPermintaanPK = new widget.TextBox();
-        jPanel1 = new javax.swing.JPanel();
-        Scroll1 = new widget.ScrollPane();
-        tbTarifPK = new widget.Table();
-        jPanel2 = new javax.swing.JPanel();
-        Scroll = new widget.ScrollPane();
+        Scroll6 = new widget.ScrollPane();
         tbDetailPK = new widget.Table();
         PanelCariUtama1 = new javax.swing.JPanel();
         panelGlass12 = new widget.panelisi();
@@ -822,22 +823,32 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         PanelCariUtama.setName("PanelCariUtama"); // NOI18N
         PanelCariUtama.setOpaque(false);
         PanelCariUtama.setPreferredSize(new java.awt.Dimension(100, 143));
-        PanelCariUtama.setLayout(new java.awt.BorderLayout());
+        PanelCariUtama.setLayout(new java.awt.GridLayout(1, 2));
 
-        panelGlass11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelGlass11.setName("panelGlass11"); // NOI18N
-        panelGlass11.setPreferredSize(new java.awt.Dimension(44, 657));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, " Pemeriksaan Lab PK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        jPanel3.setName("jPanel3"); // NOI18N
+        jPanel3.setOpaque(false);
+        jPanel3.setPreferredSize(new java.awt.Dimension(310, 102));
+        jPanel3.setLayout(new java.awt.BorderLayout(1, 1));
+
+        panelisi5.setBorder(null);
+        panelisi5.setName("panelisi5"); // NOI18N
+        panelisi5.setPreferredSize(new java.awt.Dimension(100, 43));
+        panelisi5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 4, 9));
 
         jLabel11.setText("Cari Pemeriksaan :");
         jLabel11.setName("jLabel11"); // NOI18N
+        panelisi5.add(jLabel11);
 
         Pemeriksaan.setHighlighter(null);
         Pemeriksaan.setName("Pemeriksaan"); // NOI18N
+        Pemeriksaan.setPreferredSize(new java.awt.Dimension(324, 24));
         Pemeriksaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 PemeriksaanKeyPressed(evt);
             }
         });
+        panelisi5.add(Pemeriksaan);
 
         BtnCari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari1.setMnemonic('1');
@@ -849,26 +860,13 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 BtnCari1ActionPerformed(evt);
             }
         });
+        panelisi5.add(BtnCari1);
 
-        jLabel4.setText("No.Permintaan :");
-        jLabel4.setName("jLabel4"); // NOI18N
+        jPanel3.add(panelisi5, java.awt.BorderLayout.PAGE_START);
 
-        TNoPermintaanPK.setHighlighter(null);
-        TNoPermintaanPK.setName("TNoPermintaanPK"); // NOI18N
-        TNoPermintaanPK.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoPermintaanPKKeyPressed(evt);
-            }
-        });
-
-        jPanel1.setName("jPanel1"); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(592, 480));
-
-        Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
-        Scroll1.setColumnHeaderView(null);
-        Scroll1.setName("Scroll1"); // NOI18N
-        Scroll1.setPreferredSize(new java.awt.Dimension(587, 557));
-        Scroll1.setViewportView(null);
+        Scroll5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Scroll5.setName("Scroll5"); // NOI18N
+        Scroll5.setOpaque(true);
 
         tbTarifPK.setName("tbTarifPK"); // NOI18N
         tbTarifPK.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -876,94 +874,50 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 tbTarifPKMouseClicked(evt);
             }
         });
-        Scroll1.setViewportView(tbTarifPK);
+        Scroll5.setViewportView(tbTarifPK);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(Scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(Scroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel3.add(Scroll5, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setName("jPanel2"); // NOI18N
-        jPanel2.setPreferredSize(new java.awt.Dimension(592, 480));
+        PanelCariUtama.add(jPanel3);
 
-        Scroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        Scroll.setComponentPopupMenu(Popup);
-        Scroll.setName("Scroll"); // NOI18N
-        Scroll.setOpaque(true);
-        Scroll.setPreferredSize(new java.awt.Dimension(587, 557));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Detail Pemeriksaan Lab PK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        jPanel4.setName("jPanel4"); // NOI18N
+        jPanel4.setOpaque(false);
+        jPanel4.setPreferredSize(new java.awt.Dimension(350, 102));
+        jPanel4.setLayout(new java.awt.BorderLayout(1, 1));
+
+        panelisi4.setBorder(null);
+        panelisi4.setName("panelisi4"); // NOI18N
+        panelisi4.setPreferredSize(new java.awt.Dimension(100, 43));
+        panelisi4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 4, 9));
+
+        jLabel4.setText("No.Permintaan :");
+        jLabel4.setName("jLabel4"); // NOI18N
+        panelisi4.add(jLabel4);
+
+        TNoPermintaanPK.setHighlighter(null);
+        TNoPermintaanPK.setName("TNoPermintaanPK"); // NOI18N
+        TNoPermintaanPK.setPreferredSize(new java.awt.Dimension(164, 24));
+        TNoPermintaanPK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNoPermintaanPKKeyPressed(evt);
+            }
+        });
+        panelisi4.add(TNoPermintaanPK);
+
+        jPanel4.add(panelisi4, java.awt.BorderLayout.PAGE_START);
+
+        Scroll6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Scroll6.setName("Scroll6"); // NOI18N
+        Scroll6.setOpaque(true);
 
         tbDetailPK.setComponentPopupMenu(Popup);
         tbDetailPK.setName("tbDetailPK"); // NOI18N
-        Scroll.setViewportView(tbDetailPK);
+        Scroll6.setViewportView(tbDetailPK);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(Scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel4.add(Scroll6, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout panelGlass11Layout = new javax.swing.GroupLayout(panelGlass11);
-        panelGlass11.setLayout(panelGlass11Layout);
-        panelGlass11Layout.setHorizontalGroup(
-            panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGlass11Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelGlass11Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Pemeriksaan, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(BtnCari1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(TNoPermintaanPK, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelGlass11Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelGlass11Layout.setVerticalGroup(
-            panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGlass11Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Pemeriksaan, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnCari1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TNoPermintaanPK, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelGlass11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))
-                .addGap(18, 18, 18))
-        );
-
-        PanelCariUtama.add(panelGlass11, java.awt.BorderLayout.PAGE_START);
+        PanelCariUtama.add(jPanel4);
 
         TabRawat.addTab("Patologi Klinis", PanelCariUtama);
         PanelCariUtama.getAccessibleContext().setAccessibleParent(TabRawat);
@@ -2053,11 +2007,11 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.TextBox Penjab;
     private javax.swing.JPopupMenu Popup;
     private javax.swing.JPopupMenu PopupMB;
-    private widget.ScrollPane Scroll;
-    private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
     private widget.ScrollPane Scroll3;
     private widget.ScrollPane Scroll4;
+    private widget.ScrollPane Scroll5;
+    private widget.ScrollPane Scroll6;
     private widget.TextBox TCari;
     private widget.TextBox TCariMB;
     private widget.TextBox TNoPermintaanMB;
@@ -2098,12 +2052,13 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel7;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private widget.panelisi panelGlass11;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private widget.panelisi panelGlass12;
     private widget.panelisi panelGlass13;
     private widget.panelisi panelGlass8;
+    private widget.panelisi panelisi4;
+    private widget.panelisi panelisi5;
     private javax.swing.JMenuItem ppBersihkan;
     private javax.swing.JMenuItem ppBersihkan1;
     private javax.swing.JMenuItem ppSemua;
