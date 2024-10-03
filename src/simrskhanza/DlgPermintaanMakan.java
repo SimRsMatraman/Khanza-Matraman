@@ -323,6 +323,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         JamDiet = new widget.TextBox();
         WaktuDiet = new widget.TextBox();
         BtnEdit = new widget.Button();
+        DTPTgl1 = new widget.Tanggal();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -520,12 +521,12 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(BtnSeek1);
-        BtnSeek1.setBounds(400, 70, 28, 23);
+        BtnSeek1.setBounds(370, 70, 28, 23);
 
         jLabel9.setText("Waktu :");
         jLabel9.setName("jLabel9"); // NOI18N
         internalFrame5.add(jLabel9);
-        jLabel9.setBounds(30, 100, 50, 23);
+        jLabel9.setBounds(10, 100, 50, 23);
 
         KdDiet.setHighlighter(null);
         KdDiet.setName("KdDiet"); // NOI18N
@@ -535,18 +536,18 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(KdDiet);
-        KdDiet.setBounds(90, 70, 85, 23);
+        KdDiet.setBounds(60, 70, 85, 23);
 
         NmDiet.setEditable(false);
         NmDiet.setHighlighter(null);
         NmDiet.setName("NmDiet"); // NOI18N
         internalFrame5.add(NmDiet);
-        NmDiet.setBounds(180, 70, 210, 23);
+        NmDiet.setBounds(150, 70, 210, 23);
 
         jLabel13.setText("Diet :");
         jLabel13.setName("jLabel13"); // NOI18N
         internalFrame5.add(jLabel13);
-        jLabel13.setBounds(30, 70, 50, 23);
+        jLabel13.setBounds(10, 70, 40, 23);
 
         BtnJam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnJam.setMnemonic('X');
@@ -563,13 +564,13 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(BtnJam);
-        BtnJam.setBounds(310, 100, 50, 23);
+        BtnJam.setBounds(290, 100, 50, 23);
 
         JamDiet.setEditable(false);
         JamDiet.setHighlighter(null);
         JamDiet.setName("JamDiet"); // NOI18N
         internalFrame5.add(JamDiet);
-        JamDiet.setBounds(240, 100, 80, 23);
+        JamDiet.setBounds(220, 100, 80, 23);
 
         WaktuDiet.setEditable(false);
         WaktuDiet.setHighlighter(null);
@@ -580,7 +581,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(WaktuDiet);
-        WaktuDiet.setBounds(90, 100, 140, 23);
+        WaktuDiet.setBounds(70, 100, 140, 23);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/file-edit-16x16.png"))); // NOI18N
         BtnEdit.setMnemonic('P');
@@ -600,6 +601,19 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         });
         internalFrame5.add(BtnEdit);
         BtnEdit.setBounds(460, 80, 100, 30);
+
+        DTPTgl1.setForeground(new java.awt.Color(50, 70, 50));
+        DTPTgl1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2024" }));
+        DTPTgl1.setDisplayFormat("dd-MM-yyyy");
+        DTPTgl1.setName("DTPTgl1"); // NOI18N
+        DTPTgl1.setOpaque(false);
+        DTPTgl1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DTPTgl1KeyPressed(evt);
+            }
+        });
+        internalFrame5.add(DTPTgl1);
+        DTPTgl1.setBounds(330, 100, 90, 23);
 
         WindowValidasi.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
@@ -842,7 +856,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-09-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -856,7 +870,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-09-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -948,7 +962,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
         TPasien.setBounds(205, 12, 400, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-09-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1117,7 +1131,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
                 }  
             }
         }else{
-            JOptionPane.showMessageDialog(null,"Silahkan buka data diet pasien");
+            JOptionPane.showMessageDialog(null,"Silahkan buka data permintaan makan pasien");
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1178,7 +1192,7 @@ public class DlgPermintaanMakan extends javax.swing.JDialog {
                 if(tbRekapDiet.getSelectedRow()!= -1){
                     if(Sequel.queryutf("delete from detail_beri_diet " +
                             "where no_rawat='"+TNoRw.getText()+"' " +
-                            "and tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"' " +
+                            "and tanggal='"+Valid.SetTgl(DTPTgl1.getSelectedItem()+"")+"' " +
                             "and waktu='"+WaktuDiet.getText()+"' " +
                             "and kd_diet='"+KdDiet.getText()+"'")==true){
                         tabMode2.removeRow(tbRekapDiet.getSelectedRow());
@@ -1645,7 +1659,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 Valid.textKosong(WaktuDiet,"Waktu Diet");
             }else{
                 if(Sequel.menyimpantf("detail_beri_diet","'"+TNoRw.getText()+"','"+Kamar.getText()+"','"+
-                        Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"','"+
+                        Valid.SetTgl(DTPTgl1.getSelectedItem()+"")+"','"+
                         WaktuDiet.getText()+"','"+
                         KdDiet.getText()+"','"+
                         KdPetugas.getText()+"'","data")==true){
@@ -1698,9 +1712,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(tbDataDiet.getSelectedRow()!= -1){
                     if(Sequel.mengedittf("detail_beri_diet","no_rawat='"+TNoRw.getText()+
                                 "' and kd_kamar='"+Kamar.getText()+
-                                "' and tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+
+                                "' and tanggal='"+Valid.SetTgl(DTPTgl1.getSelectedItem()+"")+
                                 "' and waktu='"+WaktuDiet.getText()+"'",
-                                "no_rawat='"+TNoRw.getText()+"',tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+
+                                "no_rawat='"+TNoRw.getText()+"',tanggal='"+Valid.SetTgl(DTPTgl1.getSelectedItem()+"")+
                                 "',kd_diet='"+KdDiet.getText()+"',waktu='"+WaktuDiet.getText()+"',"+
                                 "nip='"+KdPetugas.getText()+"'")==true){
 //                        tabMode.removeRow(tbDataDiet.getSelectedRow());
@@ -1720,9 +1734,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(tbRekapDiet.getSelectedRow()!= -1){
                     if(Sequel.mengedittf("detail_beri_diet","no_rawat='"+TNoRw.getText()+
                                 "' and kd_kamar='"+Kamar.getText()+
-                                "' and tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+
+                                "' and tanggal='"+Valid.SetTgl(DTPTgl1.getSelectedItem()+"")+
                                 "' and waktu='"+WaktuDiet.getText()+"'",
-                                "no_rawat='"+TNoRw.getText()+"',tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+
+                                "no_rawat='"+TNoRw.getText()+"',tanggal='"+Valid.SetTgl(DTPTgl1.getSelectedItem()+"")+
                                 "',kd_diet='"+KdDiet.getText()+"',waktu='"+WaktuDiet.getText()+"',"+
                                 "nip='"+KdPetugas.getText()+"'")==true){
 //                        tabMode.removeRow(tbDataDiet.getSelectedRow());
@@ -1736,11 +1750,18 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             break;
             }
         }
+//        
+//
+//
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnEditKeyPressed
+
+    private void DTPTgl1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTgl1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DTPTgl1KeyPressed
 
     /**
     * @param args the command line arguments
@@ -1779,6 +1800,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.Tanggal DTPTgl;
+    private widget.Tanggal DTPTgl1;
     private widget.TextBox Diagnosa;
     private widget.PanelBiasa FormInput;
     private widget.TextBox JamDiet;
@@ -1989,6 +2011,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 //        NmPetugas.setText("");
         DTPTgl.setDate(new Date());
         DTPTgl.requestFocus();
+        DTPTgl1.setDate(new Date());
+        DTPTgl1.requestFocus();
     }
 
     private void getData() {
@@ -2022,7 +2046,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             NmDiet.setText(tbRekapDiet.getValueAt(tbRekapDiet.getSelectedRow(),6).toString());
             Kamar.setText(tbRekapDiet.getValueAt(tbRekapDiet.getSelectedRow(),8).toString());
             KdDiet.setText(tbRekapDiet.getValueAt(tbRekapDiet.getSelectedRow(),9).toString());
-            Valid.SetTgl(DTPTgl,tbRekapDiet.getValueAt(tbRekapDiet.getSelectedRow(),3).toString());
+            Valid.SetTgl(DTPTgl1,tbRekapDiet.getValueAt(tbRekapDiet.getSelectedRow(),3).toString());
         }   
     }
     

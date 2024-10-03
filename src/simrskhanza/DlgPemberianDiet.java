@@ -841,7 +841,6 @@ public class DlgPemberianDiet extends javax.swing.JDialog {
                         Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"','"+
                         WaktuDiet.getText()+"','"+
                         KdDiet.getText()+"','"+
-                        "','"+
                         "'","data")==true){
                     tabMode.addRow(new String[]{
                         TNoRw.getText(),TPasien.getText(),Ruang.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),WaktuDiet.getText(),JamDiet.getText(),NmDiet.getText(),"-",Kamar.getText(),KdDiet.getText()
