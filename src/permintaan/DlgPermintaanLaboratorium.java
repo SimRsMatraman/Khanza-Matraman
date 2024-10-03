@@ -49,9 +49,9 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
-    private PreparedStatement pstindakan,pstindakan2,pstindakan3,pstindakan4,pstampil,
+    private PreparedStatement pstindakan,pstindakan2,pstindakan3,pstindakan4,pstampil,pstampil1,
             psset_tarif;
-    private ResultSet rstindakan,rstampil,rsset_tarif;
+    private ResultSet rstindakan,rstampil,rstampil1,rsset_tarif;
     private boolean[] pilih,pilih2; 
     private String[] kode,nama,pemeriksaan2,satuan2,nilai_rujukan2,idtemplate2;
     private double[] total;
@@ -2115,7 +2115,19 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             
             for(i2=0;i2<tbTarifPK.getRowCount();i2++){ 
                 if(tbTarifPK.getValueAt(i2,0).toString().equals("true")){
-                    tabMode.addRow(new Object[]{false,tbTarifPK.getValueAt(i2,2).toString(),"","","",0}); //0
+//                    pstampil1=koneksi.prepareStatement("select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa,template_laboratorium.biaya_item from template_laboratorium where urut ='0' and template_laboratorium.kd_jenis_prw=? and template_laboratorium.Pemeriksaan like ? order by template_laboratorium.urut");
+//                    try {
+//                        pstampil1.setString(1,tbTarifPK.getValueAt(i2,1).toString());
+//                        pstampil1.setString(2,"%"+TCari.getText().trim()+"%");
+//                        rstampil1=pstampil1.executeQuery();
+//                        while(rstampil1.next()){
+                            tabMode.addRow(new Object[]{false,tbTarifPK.getValueAt(i2,2).toString(),"","","",0}); 
+//                        }
+//                    }
+//                    catch (Exception e) {
+//                        System.out.println("Notifikasi : "+e);
+//                    } 
+                    
                     pstampil=koneksi.prepareStatement("select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa,template_laboratorium.biaya_item from template_laboratorium where template_laboratorium.kd_jenis_prw=? and template_laboratorium.Pemeriksaan like ? order by template_laboratorium.urut");
                     try {
                         pstampil.setString(1,tbTarifPK.getValueAt(i2,1).toString());

@@ -91,9 +91,9 @@ Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
     <entry key="JADIKANBOOKINGSURATKONTROLAPIBPJS">yes</entry> <!--bagi RS yang pengen langsung menjadikan data booking periksa dari surat kontrol BPJS-->
 
     <entry key="URLAPIAPLICARE">https://new-api.bpjs-kesehatan.go.id/aplicaresws</entry>
-    <entry key="SECRETKEYAPIAPLICARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="CONSIDAPIAPLICARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="USERKEYAPIAPLICARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="SECRETKEYAPIAPLICARE">Nc9g9ojrGX2wmKT6sPM6LA==</entry>
+    <entry key="CONSIDAPIAPLICARE">zRdntHf6Zt5Ist7sHgnpdw==</entry>
+    <entry key="USERKEYAPIAPLICARE">5934td74k4ih5K95nOYUOG/9LtNZqIIf+a6oFu58HhAZgC5Lt28jpbiNdZf2q3dI</entry>
 
     <entry key="URLAPIMOBILEJKN">https://apijkn.bpjs-kesehatan.go.id/antreanrs/</entry>
     <entry key="SECRETKEYAPIMOBILEJKN">Nc9g9ojrGX2wmKT6sPM6LA==</entry>
