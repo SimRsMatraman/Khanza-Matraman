@@ -31,7 +31,8 @@ public class frmUtama extends javax.swing.JFrame {
     private  Connection koneksi=koneksiDB.condb();
     private final sekuel Sequel=new sekuel();
     private String requestJson;
-    private final String URL = koneksiDB.URLAPIAPLICARE();
+    private String URL = "";
+    private String CONSIDAPIAPLICARE = "";
     private final String kodeppk = Sequel.cariIsi("select setting.kode_ppk from setting");
     private final BPJSApiAplicare api=new BPJSApiAplicare();
     private  HttpHeaders headers;
@@ -169,6 +170,8 @@ public class frmUtama extends javax.swing.JFrame {
                 
                 if(detik.equals("01")){
                     try {
+                        URL = koneksiDB.URLAPIAPLICARE();	
+                        CONSIDAPIAPLICARE=koneksiDB.CONSIDAPIAPLICARE();
                         koneksi=koneksiDB.condb();
                         TeksArea.append("Memulai update aplicare\n");
                         ps=koneksi.prepareStatement(
@@ -197,7 +200,7 @@ public class frmUtama extends javax.swing.JFrame {
                                 try {     
                                     headers = new HttpHeaders();
                                     headers.setContentType(MediaType.APPLICATION_JSON);
-                                    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIAPLICARE());
+                                    headers.add("X-Cons-ID",CONSIDAPIAPLICARE);
                                     headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));            
                                     headers.add("X-Signature",api.getHmac());
                                     requestJson ="{\"kodekelas\":\""+rs.getString("kode_kelas_aplicare")+"\", "+
