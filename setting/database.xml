@@ -101,10 +101,10 @@ Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
     <entry key="USERKEYAPIMOBILEJKN">iMijVhfyd+r4s7lcjitHTJoeJaiH8z0ge3xWS/lfZI31BjoxQQhkdYhTcdm+0xAE</entry>
     <entry key="ADDANTRIANAPIMOBILEJKN">yes</entry>
 
-    <entry key="URLAPIAPOTEKBPJS">https://dev-soa.bpjs-kesehatan.go.id/apotek-rest</entry>
-    <entry key="SECRETKEYAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="CONSIDAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="USERKEYAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="URLAPIAPOTEKBPJS">https://apijkn.bpjs-kesehatan.go.i/apotek-rest</entry>
+    <entry key="SECRETKEYAPIAPOTEKBPJS">Nc9g9ojrGX2wmKT6sPM6LA==</entry>
+    <entry key="CONSIDAPIAPOTEKBPJS">zRdntHf6Zt5Ist7sHgnpdw==</entry>
+    <entry key="USERKEYAPIAPOTEKBPJS">5934td74k4ih5K95nOYUOG/9LtNZqIIf+a6oFu58HhAZgC5Lt28jpbiNdZf2q3dI</entry>
 
     <entry key="URLAPIPCARE">https://apijkn-dev.bpjs-kesehatan.go.id/pcare-rest-dev</entry>
     <entry key="SECRETKEYAPIPCARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>

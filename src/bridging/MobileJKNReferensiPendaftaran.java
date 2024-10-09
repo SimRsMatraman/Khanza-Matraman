@@ -10,6 +10,8 @@
  */
 
 package bridging;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -29,6 +31,10 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 
 /**
  *
@@ -42,6 +48,18 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;    
     private int i=0;
+    private ApiMobileJKN api=new ApiMobileJKN();
+    private String URL="",link="",utc="";
+    private HttpHeaders headers;
+    private HttpEntity requestEntity;
+    private ObjectMapper mapper = new ObjectMapper();
+    private JsonNode root;
+    private JsonNode nameNode;
+    private JsonNode response;
+    private String requestJson;
+    private String json="";
+    private String CONSIDAPIMOBILEJKN = "";
+    private String USERKEYAPIMOBILEJKN = "";
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -471,9 +489,34 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         if(tbJnsPerawatan.getSelectedRow()!= -1){
+            URL = koneksiDB.URLAPIMOBILEJKN();	
+                CONSIDAPIMOBILEJKN=koneksiDB.CONSIDAPIMOBILEJKN();
+                USERKEYAPIMOBILEJKN = koneksiDB.USERKEYAPIMOBILEJKN();
+                utc=String.valueOf(api.GetUTCdatetimeAsString());
+                try {     
+                                    headers = new HttpHeaders();
+                                    headers.setContentType(MediaType.APPLICATION_JSON);
+                                    headers.add("X-Cons-ID",CONSIDAPIMOBILEJKN);
+                                    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));            
+                                    headers.add("X-Signature",api.getHmac(utc));
+                                    headers.add("user-key",USERKEYAPIMOBILEJKN);
+                                    requestJson ="{\"kodebooking\":\""+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()+"\", "+
+                                                  "\"keterangan\":\"Terjadi perubahan jadwal dokter, silahkan daftar kembali\""+
+                                                  "}";
+                                    requestEntity = new HttpEntity(requestJson,headers);
+//                                    System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
+                                    System.out.println("URL : "+URL+"antrean/batal");
+                                    System.out.println("Request JSON : "+requestJson);
+                                    json=api.getRest().exchange(URL+"antrean/batal", HttpMethod.POST, requestEntity, String.class).getBody();
+                                    root=mapper.readTree(json);
+                                    System.out.println("Result JSON : "+json);
+//                                    response = root.path("metadata");
+                                }catch (Exception ex) {
+                                    System.out.println("Notifikasi Bridging : "+ex);
+                                }
             if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Batal',validasi=now()",1,new String[]{
                 tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()
-            })==true){
+            })==true){                
                 Sequel.menyimpan2("referensi_mobilejkn_bpjs_batal","?,?,?,now(),?,?,?",6,new String[]{
                     tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(), 
                     tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString(),"Dibatalkan Oleh Admin","Belum",tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString()
