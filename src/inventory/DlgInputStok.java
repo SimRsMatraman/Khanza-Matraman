@@ -1951,7 +1951,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             if(!DEPOAKTIFOBAT.equals("")){
                 kdgudang.setText(DEPOAKTIFOBAT);
                 nmgudang.setText(bangsal.tampil3(DEPOAKTIFOBAT));
-                BtnGudang.setEnabled(false);
+//                BtnGudang.setEnabled(false);
             }
         }
     }
