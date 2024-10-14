@@ -1306,6 +1306,18 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         autoSKBN();
     }
     
+    public void setNoRm(String norwt,Date tgl1, Date tgl2) {
+        TNoRw.setText(norwt);
+        TCari.setText(norwt);
+        DTPCari1.setDate(tgl1);
+        DTPCari2.setDate(tgl2);
+        ChkInput.setSelected(true);
+        isRawat();
+        isPsien(); 
+        isForm();
+        autoSKBN();
+    }
+    
     private void isRawat() {
          Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",TNoRM);
     }

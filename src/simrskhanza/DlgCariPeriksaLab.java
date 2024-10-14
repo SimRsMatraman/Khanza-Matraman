@@ -2638,7 +2638,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 resume.emptTeks();
                 resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                 resume.setLocationRelativeTo(internalFrame1);
-//                resume.setNoRm(NoRawat.getText(), kdmem.getText(), nmmem.getText(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), Tgl1.getDate(), Tgl2.getDate());
+                resume.setNoRm(tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString(), Tgl1.getDate(), Tgl2.getDate());
                 resume.tampil();
                 resume.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
