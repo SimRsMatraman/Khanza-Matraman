@@ -93,6 +93,7 @@ import permintaan.DlgPermintaanRadiologi;
 import permintaan.DlgPermintaanRanap;
 import simrskhanza.DlgCariPeriksaLab;
 import simrskhanza.DlgCariPeriksaRadiologi;
+import rekammedis.RMRiwayatRadLab;
 import rekammedis.AsesmenAwalMedisIGD;
 import rekammedis.EWSRajal;
 import rekammedis.GdsIgd;
@@ -654,6 +655,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnRiwayat = new javax.swing.JMenu();
         ppRiwayat = new javax.swing.JMenuItem();
+        ppRiwayatLabRad = new javax.swing.JMenuItem();
         ppHasilLab = new javax.swing.JMenuItem();
         ppHasilRad = new javax.swing.JMenuItem();
         MnDataRM = new javax.swing.JMenu();
@@ -969,6 +971,23 @@ public final class DlgIGD extends javax.swing.JDialog {
             }
         });
         MnRiwayat.add(ppRiwayat);
+
+        ppRiwayatLabRad.setBackground(new java.awt.Color(255, 255, 254));
+        ppRiwayatLabRad.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppRiwayatLabRad.setForeground(new java.awt.Color(50, 50, 50));
+        ppRiwayatLabRad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppRiwayatLabRad.setText("Riwayat Rad & Lab");
+        ppRiwayatLabRad.setToolTipText("");
+        ppRiwayatLabRad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppRiwayatLabRad.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppRiwayatLabRad.setName("ppRiwayatLabRad"); // NOI18N
+        ppRiwayatLabRad.setPreferredSize(new java.awt.Dimension(250, 26));
+        ppRiwayatLabRad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppRiwayatLabRadBtnPrintActionPerformed(evt);
+            }
+        });
+        MnRiwayat.add(ppRiwayatLabRad);
 
         ppHasilLab.setBackground(new java.awt.Color(255, 255, 254));
         ppHasilLab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1786,7 +1805,6 @@ public final class DlgIGD extends javax.swing.JDialog {
             }
         });
         MnDataRM.add(ppResume);
-        ppResume.getAccessibleContext().setAccessibleName("Resume Pasien IGD");
         ppResume.getAccessibleContext().setAccessibleDescription("");
 
         jPopupMenu1.add(MnDataRM);
@@ -4392,7 +4410,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         panelGlass7.add(jLabel15);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -4406,7 +4424,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         panelGlass7.add(jLabel17);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4498,7 +4516,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         jLabel9.setBounds(165, 72, 36, 23);
 
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-08-2024" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2024" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -9449,6 +9467,21 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }//GEN-LAST:event_MnPermintaanKonsultasiMedikActionPerformed
 
+    private void ppRiwayatLabRadBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatLabRadBtnPrintActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMRiwayatRadLab resume=new RMRiwayatRadLab(null,true);
+            resume.setNoRm(TNoRM.getText(),TPasien.getText());
+            resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            resume.setLocationRelativeTo(internalFrame1);
+            resume.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_ppRiwayatLabRadBtnPrintActionPerformed
+
     /**
     * @data args the command line arguments
     */
@@ -9748,6 +9781,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem ppProgramPRB;
     private javax.swing.JMenuItem ppResume;
     private javax.swing.JMenuItem ppRiwayat;
+    private javax.swing.JMenuItem ppRiwayatLabRad;
     private javax.swing.JMenuItem ppSkriningGizi;
     private javax.swing.JMenuItem ppSkriningNutrisiAnak;
     private javax.swing.JMenuItem ppSkriningNutrisiDewasa;

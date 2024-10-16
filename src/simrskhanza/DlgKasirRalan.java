@@ -69,6 +69,7 @@ import permintaan.DlgPermintaanPelayananInformasiObat;
 import permintaan.DlgPermintaanRadiologi;
 import permintaan.DlgPermintaanRanap;
 import permintaan.DlgPermintaanKonsultasiMedik;
+import rekammedis.RMRiwayatRadLab;
 import rekammedis.RMDataResumePasien;
 import rekammedis.RMChecklistPreOperasi;
 import rekammedis.RMDataAsuhanGizi;
@@ -652,6 +653,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnRiwayat = new javax.swing.JMenu();
         ppRiwayat = new javax.swing.JMenuItem();
+        ppRiwayatLabRad = new javax.swing.JMenuItem();
         ppHasilLab = new javax.swing.JMenuItem();
         ppHasilRad = new javax.swing.JMenuItem();
         MnDataRM = new javax.swing.JMenu();
@@ -1041,6 +1043,23 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         });
         MnRiwayat.add(ppRiwayat);
+
+        ppRiwayatLabRad.setBackground(new java.awt.Color(255, 255, 254));
+        ppRiwayatLabRad.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppRiwayatLabRad.setForeground(new java.awt.Color(50, 50, 50));
+        ppRiwayatLabRad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppRiwayatLabRad.setText("Riwayat Rad & Lab");
+        ppRiwayatLabRad.setToolTipText("");
+        ppRiwayatLabRad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppRiwayatLabRad.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppRiwayatLabRad.setName("ppRiwayatLabRad"); // NOI18N
+        ppRiwayatLabRad.setPreferredSize(new java.awt.Dimension(250, 26));
+        ppRiwayatLabRad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppRiwayatLabRadBtnPrintActionPerformed(evt);
+            }
+        });
+        MnRiwayat.add(ppRiwayatLabRad);
 
         ppHasilLab.setBackground(new java.awt.Color(255, 255, 254));
         ppHasilLab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -11954,6 +11973,21 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         BtnEdit2.setVisible(false);
     }//GEN-LAST:event_BtnEdit2ComponentHidden
 
+    private void ppRiwayatLabRadBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatLabRadBtnPrintActionPerformed
+        if(TNoRwCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMRiwayatRadLab resume=new RMRiwayatRadLab(null,true);
+            resume.setNoRm(TNoRMCari.getText(),TPasienCari.getText());
+            resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            resume.setLocationRelativeTo(internalFrame1);
+            resume.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_ppRiwayatLabRadBtnPrintActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -12323,6 +12357,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem ppResume;
     private javax.swing.JMenuItem ppRiwayat;
     private javax.swing.JMenuItem ppRiwayat1;
+    private javax.swing.JMenuItem ppRiwayatLabRad;
     private javax.swing.JMenuItem ppSkriningGizi;
     private javax.swing.JMenuItem ppSkriningNutrisiAnak;
     private javax.swing.JMenuItem ppSkriningNutrisiDewasa;
