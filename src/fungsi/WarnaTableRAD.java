@@ -23,7 +23,7 @@ public class WarnaTableRAD extends DefaultTableCellRenderer {
         }else{
             component.setBackground(new Color(255,255,255));
         } 
-        if(table.getValueAt(row,5).toString().contains("-")){
+        if(table.getValueAt(row,5).toString().contains("-")&&table.getValueAt(row,7).toString().contains("-")){
             component.setBackground(new Color(213, 242, 214));
             component.setForeground(new Color(0,0,0));
         }
