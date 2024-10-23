@@ -703,7 +703,7 @@ public final class SuratMCUPegawai extends javax.swing.JDialog {
         FormInput.add(CmbButaWarna);
         CmbButaWarna.setBounds(1500, 10, 100, 23);
 
-        CmbKesimpulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sehat", "Tidak Sehat" }));
+        CmbKesimpulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sehat", "Sehat dengan Catatan", "Tidak Sehat" }));
         CmbKesimpulan.setName("CmbKesimpulan"); // NOI18N
         CmbKesimpulan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
