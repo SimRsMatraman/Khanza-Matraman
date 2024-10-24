@@ -1,7 +1,6 @@
 package permintaan;
 import bridging.ApiCareStream;
 import fungsi.BackgroundMusic;
-import fungsi.WarnaTable;
 import fungsi.WarnaTableRAD;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -170,7 +169,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                 column.setPreferredWidth(110);
             }
         }
-        tbRadiologiRalan2.setDefaultRenderer(Object.class, new WarnaTable());
+        tbRadiologiRalan2.setDefaultRenderer(Object.class, new WarnaTableRAD());
         
         tabMode3=new DefaultTableModel(null,new Object[]{
             "No.Permintaan","No.Rawat","Pasien","Permintaan","Jam","Sampel","Jam","Hasil","Jam","Kode Dokter","Dokter Perujuk","Kamar Terakhir","Informasi Tambahan","Diagnosis Klinis","Kode Bayar","Jenis Bayar"
@@ -220,7 +219,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                 column.setPreferredWidth(110);
             }
         }
-        tbRadiologiRanap.setDefaultRenderer(Object.class, new WarnaTable());
+        tbRadiologiRanap.setDefaultRenderer(Object.class, new WarnaTableRAD());
         
         tabMode4=new DefaultTableModel(null,new Object[]{
                 "No.Permintaan","No.Rawat","Pasien","Pemeriksaan","Permintaan","Jam","Sampel","Jam","Hasil","Jam","Kode Dokter","Dokter Perujuk","Kamar Terakhir","Informasi Tambahan","Diagnosis Klinis","Kode Bayar","Jenis Bayar"
@@ -272,7 +271,7 @@ public class DlgCariPermintaanRadiologi extends javax.swing.JDialog {
                 column.setPreferredWidth(110);
             }
         }
-        tbRadiologiRanap2.setDefaultRenderer(Object.class, new WarnaTable());
+        tbRadiologiRanap2.setDefaultRenderer(Object.class, new WarnaTableRAD());
         
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
