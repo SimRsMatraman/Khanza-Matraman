@@ -797,7 +797,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         MnDigitalTTE = new javax.swing.JMenuItem();
         MnLaporanResume = new javax.swing.JMenuItem();
         MnInputDiagnosa = new javax.swing.JMenuItem();
-        ppBerkasDigital = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -959,7 +958,7 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         MnLaporanResume.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnLaporanResume.setForeground(new java.awt.Color(50, 50, 50));
         MnLaporanResume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnLaporanResume.setText("Cetak Rujuk IGD");
+        MnLaporanResume.setText("Cetak Surat Rujukan");
         MnLaporanResume.setName("MnLaporanResume"); // NOI18N
         MnLaporanResume.setPreferredSize(new java.awt.Dimension(220, 26));
         MnLaporanResume.addActionListener(new java.awt.event.ActionListener() {
@@ -982,22 +981,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnInputDiagnosa);
-
-        ppBerkasDigital.setBackground(new java.awt.Color(255, 255, 254));
-        ppBerkasDigital.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppBerkasDigital.setForeground(new java.awt.Color(50, 50, 50));
-        ppBerkasDigital.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppBerkasDigital.setText("Berkas Digital Perawatan");
-        ppBerkasDigital.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppBerkasDigital.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppBerkasDigital.setName("ppBerkasDigital"); // NOI18N
-        ppBerkasDigital.setPreferredSize(new java.awt.Dimension(220, 26));
-        ppBerkasDigital.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppBerkasDigitalBtnPrintActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(ppBerkasDigital);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -1170,7 +1153,7 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1184,7 +1167,7 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2157,7 +2140,7 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         jLabel36.setBounds(550, 40, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -2773,7 +2756,7 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
 //                param.put("ruang",Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar inner join kamar_inap on bangsal.kd_bangsal=kamar.kd_bangsal and kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
 //                param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_keluar, '%d-%m-%Y') from kamar_inap where no_rawat=? order by tgl_keluar desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
 //            }
-            Valid.MyReport("rptLaporanRujukIGD.jasper","report","::[ Cetak Rujuk IGD ]::",param);
+            Valid.MyReport("rptLaporanRujukRawatInap.jasper","report","::[ Cetak Rujuk Rawat Inap ]::",param);
         }
     }//GEN-LAST:event_MnLaporanResumeActionPerformed
 
@@ -2842,33 +2825,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
         isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
-
-    private void ppBerkasDigitalBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalBtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabMode.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-            TCari.requestFocus();
-        }else{
-            if(tbObat.getSelectedRow()>-1){
-                if(!tbObat.getValueAt(tbObat.getSelectedRow(),1).toString().equals("")){
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                    DlgBerkasRawat berkas=new DlgBerkasRawat(null,true);
-                    berkas.setJudul("::[ Berkas Digital Perawatan ]::","berkasrawat/pages");
-                    try {
-                        berkas.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"berkasrawat/login2.php?act=login&usere=admin&passwordte=akusayangsamakamu&no_rawat="+tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
-                    } catch (Exception ex) {
-                        System.out.println("Notifikasi : "+ex);
-                    }
-
-                    berkas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                    berkas.setLocationRelativeTo(internalFrame1);
-                    berkas.setVisible(true);
-                    this.setCursor(Cursor.getDefaultCursor());
-                }
-            }
-        }
-        this.setCursor(Cursor.getDefaultCursor());
-    }//GEN-LAST:event_ppBerkasDigitalBtnPrintActionPerformed
 
     private void CaraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaraActionPerformed
         // TODO add your handling code here:
@@ -3301,7 +3257,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
     private widget.Label label16;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppBerkasDigital;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane3;
@@ -3737,8 +3692,7 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getdata_resume_pasien());
         BtnEdit.setEnabled(akses.getdata_resume_pasien());
         BtnPrint.setEnabled(akses.getdata_resume_pasien()); 
-        MnInputDiagnosa.setEnabled(akses.getdiagnosa_pasien());   
-        ppBerkasDigital.setEnabled(akses.getberkas_digital_perawatan());    
+        MnInputDiagnosa.setEnabled(akses.getdiagnosa_pasien());      
         if(akses.getjml2()>=1){
             KodeDokter.setEditable(false);
             BtnDokter.setEnabled(false);
