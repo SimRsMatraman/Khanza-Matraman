@@ -1409,9 +1409,9 @@ public final class PEWSRanap extends javax.swing.JDialog {
     
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
-        BtnHapus.setEnabled(akses.getadmin());
-        BtnEdit.setEnabled(akses.getadmin());
-        BtnPrint.setEnabled(akses.getadmin()); 
+        BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
+        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
+        BtnPrint.setEnabled(akses.getpenilaian_awal_keperawatan_ralan()); 
         if(akses.getjml2()>=1){
             nik.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nip=?",namapetugas,nik.getText());
