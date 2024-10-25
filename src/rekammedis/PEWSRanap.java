@@ -154,28 +154,28 @@ public final class PEWSRanap extends javax.swing.JDialog {
             });
         }
         
-//        petugas.addWindowListener(new WindowListener() {
-//            @Override
-//            public void windowOpened(WindowEvent e) {}
-//            @Override
-//            public void windowClosing(WindowEvent e) {}
-//            @Override
-//            public void windowClosed(WindowEvent e) {
-//                if(petugas.getTable().getSelectedRow()!= -1){                   
-//                    nik.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
-//                    namapetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-//                }  
-//                nik.requestFocus();
-//            }
-//            @Override
-//            public void windowIconified(WindowEvent e) {}
-//            @Override
-//            public void windowDeiconified(WindowEvent e) {}
-//            @Override
-//            public void windowActivated(WindowEvent e) {}
-//            @Override
-//            public void windowDeactivated(WindowEvent e) {}
-//        }); 
+        petugas.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(petugas.getTable().getSelectedRow()!= -1){                   
+                    nik.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
+                    namapetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
+                }  
+                nik.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        }); 
         
         pegawai.addWindowListener(new WindowListener() {
             @Override
@@ -267,12 +267,12 @@ public final class PEWSRanap extends javax.swing.JDialog {
         Skor3 = new widget.TextBox();
         jLabel27 = new widget.Label();
         TotalSkor = new widget.TextBox();
-        Penilaian = new widget.TextBox();
         jLabel28 = new widget.Label();
         jLabel31 = new widget.Label();
         jLabel33 = new widget.Label();
         jLabel34 = new widget.Label();
         jLabel35 = new widget.Label();
+        Penilaian = new widget.TextBox();
         Tatalaksana = new widget.TextBox();
         ChkInput = new widget.CekBox();
 
@@ -462,7 +462,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -476,7 +476,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -627,8 +627,13 @@ public final class PEWSRanap extends javax.swing.JDialog {
 
         TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
+        TglLahir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TglLahirActionPerformed(evt);
+            }
+        });
         FormInput.add(TglLahir);
-        TglLahir.setBounds(689, 10, 100, 23);
+        TglLahir.setBounds(690, 10, 100, 23);
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("1.  Perilaku");
@@ -729,12 +734,6 @@ public final class PEWSRanap extends javax.swing.JDialog {
         FormInput.add(TotalSkor);
         TotalSkor.setBounds(730, 170, 50, 23);
 
-        Penilaian.setEditable(false);
-        Penilaian.setFocusTraversalPolicyProvider(true);
-        Penilaian.setName("Penilaian"); // NOI18N
-        FormInput.add(Penilaian);
-        Penilaian.setBounds(190, 210, 590, 23);
-
         jLabel28.setText("Parameter :");
         jLabel28.setName("jLabel28"); // NOI18N
         FormInput.add(jLabel28);
@@ -764,8 +763,12 @@ public final class PEWSRanap extends javax.swing.JDialog {
         FormInput.add(jLabel35);
         jLabel35.setBounds(80, 240, 110, 23);
 
-        Tatalaksana.setEditable(false);
-        Tatalaksana.setFocusTraversalPolicyProvider(true);
+        Penilaian.setHighlighter(null);
+        Penilaian.setName("Penilaian"); // NOI18N
+        FormInput.add(Penilaian);
+        Penilaian.setBounds(190, 210, 590, 23);
+
+        Tatalaksana.setHighlighter(null);
         Tatalaksana.setName("Tatalaksana"); // NOI18N
         FormInput.add(Tatalaksana);
         Tatalaksana.setBounds(190, 240, 590, 23);
@@ -796,7 +799,6 @@ public final class PEWSRanap extends javax.swing.JDialog {
         internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
-        internalFrame1.getAccessibleContext().setAccessibleName("::[ PEWS Rawat Inap ]::");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -834,7 +836,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
             if(Sequel.menyimpantf("pews_ranap","?,?,?,?,?,?,?,?,?,?,?,?,?","Data",13,new String[]{
                 TNoRw.getText(),tanggalNow.format(new Date()),jamNow.format(new Date()),nik.getText(),
                 cmbSkor1.getSelectedItem().toString(),Skor1.getText(),cmbSkor2.getSelectedItem().toString(),Skor2.getText(),
-                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),Penilaian.getText(),Tatalaksana.getText()
+                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),TglLahir.getText(),Tatalaksana.getText()
             })==true){
                 tampil();
                 emptTeks();
@@ -905,7 +907,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
                 "parameter_2=?,skor_2=?,parameter_3=?,skor_3=?,skor_total=?,penilaian=?,tatalaksana=?",14,new String[]{
                 TNoRw.getText(),tanggalNow.format(new Date()),jamNow.format(new Date()),nik.getText(),
                 cmbSkor1.getSelectedItem().toString(),Skor1.getText(),cmbSkor2.getSelectedItem().toString(),Skor2.getText(),
-                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),Penilaian.getText(),Tatalaksana.getText(),
+                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),TglLahir.getText(),Tatalaksana.getText(),
                 tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
             });
             if(tabMode.getRowCount()!=0){tampil();}
@@ -1122,6 +1124,10 @@ public final class PEWSRanap extends javax.swing.JDialog {
         isHitung();
     }//GEN-LAST:event_cmbSkor3ItemStateChanged
 
+    private void TglLahirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TglLahirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TglLahirActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1314,22 +1320,22 @@ public final class PEWSRanap extends javax.swing.JDialog {
     
     private void isHitung(){
         if(TotalSkor.getText().equals("0")){
-            Penilaian.setText("Tiap 4 jam");
+            Penilaian.setText("Tiap 7 jam");
             Tatalaksana.setText("Terapi sebelumnya dilanjutkan");
         }else if(TotalSkor.getText().equals("1")){
-            Penilaian.setText("Tiap 4 jam");
+            Penilaian.setText("Tiap 7 jam");
             Tatalaksana.setText("Terapi sebelumnya dilanjutkan");
         }else if(TotalSkor.getText().equals("2")){
-            Penilaian.setText("Tiap 4 jam");
+            Penilaian.setText("Tiap 7 jam");
             Tatalaksana.setText("Terapi sebelumnya dilanjutkan");
         }else if(TotalSkor.getText().equals("3")){
-            Penilaian.setText("Tiap 1 jam");
+            Penilaian.setText("Tiap 7 jam");
             Tatalaksana.setText("Respon dan anjuran dokter spesialis anak dalam 1 jam untuk tatalaksana selanjutnya");
         }else if(TotalSkor.getText().equals("4")){
-            Penilaian.setText("Tiap 30 menit");
+            Penilaian.setText("Tiap 7 jam");
             Tatalaksana.setText("Respon dan anjuran dokter spesialis anak dalam 10 menit untuk tatalaksana selanjutnya");
         }else{
-            Penilaian.setText("Tiap 15 menit");
+            Penilaian.setText("Tiap 7 jam");
             Tatalaksana.setText("Respon dan anjuran dokter spesialis anak untuk tatalaksana selanjutnya");
         }
     }
@@ -1344,7 +1350,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
         cmbSkor3.setSelectedIndex(0);
         Skor3.setText("0");
         TotalSkor.setText("0");
-        Penilaian.setText("Tiap 4 jam");
+        Penilaian.setText("Tiap 7 jam");
         Tatalaksana.setText("Terapi sebelumnya dilanjutkan");
         TNoRw.requestFocus();
     } 
@@ -1403,9 +1409,9 @@ public final class PEWSRanap extends javax.swing.JDialog {
     
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
-        BtnHapus.setEnabled(akses.getadmin());
-        BtnEdit.setEnabled(akses.getadmin());
-        BtnPrint.setEnabled(akses.getadmin()); 
+        BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
+        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
+        BtnPrint.setEnabled(akses.getpenilaian_awal_keperawatan_ralan()); 
         if(akses.getjml2()>=1){
             nik.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nip=?",namapetugas,nik.getText());

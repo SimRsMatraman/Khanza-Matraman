@@ -267,12 +267,12 @@ public final class PEWSRajal extends javax.swing.JDialog {
         Skor3 = new widget.TextBox();
         jLabel27 = new widget.Label();
         TotalSkor = new widget.TextBox();
-        Penilaian = new widget.TextBox();
         jLabel28 = new widget.Label();
         jLabel31 = new widget.Label();
         jLabel33 = new widget.Label();
         jLabel34 = new widget.Label();
         jLabel35 = new widget.Label();
+        Penilaian = new widget.TextBox();
         Tatalaksana = new widget.TextBox();
         ChkInput = new widget.CekBox();
 
@@ -729,12 +729,6 @@ public final class PEWSRajal extends javax.swing.JDialog {
         FormInput.add(TotalSkor);
         TotalSkor.setBounds(730, 170, 50, 23);
 
-        Penilaian.setEditable(false);
-        Penilaian.setFocusTraversalPolicyProvider(true);
-        Penilaian.setName("Penilaian"); // NOI18N
-        FormInput.add(Penilaian);
-        Penilaian.setBounds(190, 210, 590, 23);
-
         jLabel28.setText("Parameter :");
         jLabel28.setName("jLabel28"); // NOI18N
         FormInput.add(jLabel28);
@@ -764,8 +758,12 @@ public final class PEWSRajal extends javax.swing.JDialog {
         FormInput.add(jLabel35);
         jLabel35.setBounds(80, 240, 110, 23);
 
-        Tatalaksana.setEditable(false);
-        Tatalaksana.setFocusTraversalPolicyProvider(true);
+        Penilaian.setHighlighter(null);
+        Penilaian.setName("Penilaian"); // NOI18N
+        FormInput.add(Penilaian);
+        Penilaian.setBounds(190, 210, 590, 23);
+
+        Tatalaksana.setHighlighter(null);
         Tatalaksana.setName("Tatalaksana"); // NOI18N
         FormInput.add(Tatalaksana);
         Tatalaksana.setBounds(190, 240, 590, 23);
