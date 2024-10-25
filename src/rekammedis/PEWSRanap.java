@@ -154,28 +154,28 @@ public final class PEWSRanap extends javax.swing.JDialog {
             });
         }
         
-//        petugas.addWindowListener(new WindowListener() {
-//            @Override
-//            public void windowOpened(WindowEvent e) {}
-//            @Override
-//            public void windowClosing(WindowEvent e) {}
-//            @Override
-//            public void windowClosed(WindowEvent e) {
-//                if(petugas.getTable().getSelectedRow()!= -1){                   
-//                    nik.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
-//                    namapetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-//                }  
-//                nik.requestFocus();
-//            }
-//            @Override
-//            public void windowIconified(WindowEvent e) {}
-//            @Override
-//            public void windowDeiconified(WindowEvent e) {}
-//            @Override
-//            public void windowActivated(WindowEvent e) {}
-//            @Override
-//            public void windowDeactivated(WindowEvent e) {}
-//        }); 
+        petugas.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(petugas.getTable().getSelectedRow()!= -1){                   
+                    nik.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
+                    namapetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
+                }  
+                nik.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        }); 
         
         pegawai.addWindowListener(new WindowListener() {
             @Override
@@ -462,7 +462,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -476,7 +476,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-10-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
