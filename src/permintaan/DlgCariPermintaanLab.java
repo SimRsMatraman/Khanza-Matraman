@@ -452,6 +452,20 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         jLabel27 = new widget.Label();
         TNoPermintaanPK = new widget.TextBox();
         TanggalPulang1 = new widget.Tanggal();
+        BtnKirimLISELIMS = new widget.Button();
+        BtnAmbilLISELIMS = new widget.Button();
+        BtnKirimLISTeras = new widget.Button();
+        BtnAmbilLISTeras = new widget.Button();
+        BtnKirimLISMADQLAB = new widget.Button();
+        BtnAmbilLISMADQLAB = new widget.Button();
+        BtnKirimLISSMARTLAB = new widget.Button();
+        BtnAmbilLISSMARTLAB = new widget.Button();
+        BtnKirimLISSOFTMEDIX = new widget.Button();
+        BtnAmbilLISSOFTMEDIX = new widget.Button();
+        BtnKirimVansLab = new widget.Button();
+        BtnAmbilVanslab = new widget.Button();
+        BtnKirimLica = new widget.Button();
+        BtnAmbilLica = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -508,29 +522,15 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         BtnCetakHasilLab = new widget.Button();
         BtnBarcodePermintaan = new widget.Button();
         BtnBarcodePermintaan2 = new widget.Button();
-        BtnKirimLica = new widget.Button();
-        BtnAmbilLica = new widget.Button();
         BtnKirimSysmex = new widget.Button();
         BtnAmbilSysmex = new widget.Button();
-        BtnKirimLISELIMS = new widget.Button();
-        BtnAmbilLISELIMS = new widget.Button();
-        BtnKirimLISTeras = new widget.Button();
-        BtnAmbilLISTeras = new widget.Button();
-        BtnKirimLISMADQLAB = new widget.Button();
-        BtnAmbilLISMADQLAB = new widget.Button();
-        BtnKirimLISSMARTLAB = new widget.Button();
-        BtnAmbilLISSMARTLAB = new widget.Button();
-        BtnKirimLISSOFTMEDIX = new widget.Button();
-        BtnAmbilLISSOFTMEDIX = new widget.Button();
-        BtnKirimVansLab = new widget.Button();
-        BtnAmbilVanslab = new widget.Button();
 
         WindowAmbilSampel.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowAmbilSampel.setName("WindowAmbilSampel"); // NOI18N
         WindowAmbilSampel.setUndecorated(true);
         WindowAmbilSampel.setResizable(false);
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Waktu Pengambilan Sampel ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Waktu Pengambilan Sampel ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setLayout(null);
 
@@ -565,7 +565,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-01-2024 11:30:13" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2024 11:17:38" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -616,14 +616,14 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         WindowTerkirim.getContentPane().add(jButton1);
-        jButton1.setBounds(200, 15, 51, 30);
+        jButton1.setBounds(200, 15, 48, 30);
 
         WindowGanti.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowGanti.setName("WindowGanti"); // NOI18N
         WindowGanti.setUndecorated(true);
         WindowGanti.setResizable(false);
 
-        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Tanggal Permintaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Tanggal Permintaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame6.setName("internalFrame6"); // NOI18N
         internalFrame6.setLayout(null);
 
@@ -672,7 +672,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-01-2024" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2024" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -696,6 +696,230 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
 
         WindowGanti.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
 
+        BtnKirimLISELIMS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimLISELIMS.setText("Kirim Permintaan ke ELIMS");
+        BtnKirimLISELIMS.setFocusPainted(false);
+        BtnKirimLISELIMS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimLISELIMS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimLISELIMS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimLISELIMS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimLISELIMS.setName("BtnKirimLISELIMS"); // NOI18N
+        BtnKirimLISELIMS.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKirimLISELIMS.setRoundRect(false);
+        BtnKirimLISELIMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimLISELIMSActionPerformed(evt);
+            }
+        });
+
+        BtnAmbilLISELIMS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilLISELIMS.setText("Ambil Hasil dari ELIMS");
+        BtnAmbilLISELIMS.setFocusPainted(false);
+        BtnAmbilLISELIMS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilLISELIMS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilLISELIMS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilLISELIMS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilLISELIMS.setName("BtnAmbilLISELIMS"); // NOI18N
+        BtnAmbilLISELIMS.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAmbilLISELIMS.setRoundRect(false);
+        BtnAmbilLISELIMS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilLISELIMSActionPerformed(evt);
+            }
+        });
+
+        BtnKirimLISTeras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimLISTeras.setText("Kirim Permintaan ke TERAS");
+        BtnKirimLISTeras.setFocusPainted(false);
+        BtnKirimLISTeras.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimLISTeras.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimLISTeras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimLISTeras.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimLISTeras.setName("BtnKirimLISTeras"); // NOI18N
+        BtnKirimLISTeras.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKirimLISTeras.setRoundRect(false);
+        BtnKirimLISTeras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimLISTerasActionPerformed(evt);
+            }
+        });
+
+        BtnAmbilLISTeras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilLISTeras.setText("Ambil Hasil dari TERAS");
+        BtnAmbilLISTeras.setFocusPainted(false);
+        BtnAmbilLISTeras.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilLISTeras.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilLISTeras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilLISTeras.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilLISTeras.setName("BtnAmbilLISTeras"); // NOI18N
+        BtnAmbilLISTeras.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAmbilLISTeras.setRoundRect(false);
+        BtnAmbilLISTeras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilLISTerasActionPerformed(evt);
+            }
+        });
+
+        BtnKirimLISMADQLAB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimLISMADQLAB.setText("Kirim Permintaan ke MEDQLAB ");
+        BtnKirimLISMADQLAB.setFocusPainted(false);
+        BtnKirimLISMADQLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimLISMADQLAB.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimLISMADQLAB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimLISMADQLAB.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimLISMADQLAB.setName("BtnKirimLISMADQLAB"); // NOI18N
+        BtnKirimLISMADQLAB.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKirimLISMADQLAB.setRoundRect(false);
+        BtnKirimLISMADQLAB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimLISMADQLABActionPerformed(evt);
+            }
+        });
+
+        BtnAmbilLISMADQLAB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilLISMADQLAB.setText("Ambil Hasil dari MEDQLAB");
+        BtnAmbilLISMADQLAB.setFocusPainted(false);
+        BtnAmbilLISMADQLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilLISMADQLAB.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilLISMADQLAB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilLISMADQLAB.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilLISMADQLAB.setName("BtnAmbilLISMADQLAB"); // NOI18N
+        BtnAmbilLISMADQLAB.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAmbilLISMADQLAB.setRoundRect(false);
+        BtnAmbilLISMADQLAB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilLISMADQLABActionPerformed(evt);
+            }
+        });
+
+        BtnKirimLISSMARTLAB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimLISSMARTLAB.setText("Kirim Permintaan ke SMARTLAB ");
+        BtnKirimLISSMARTLAB.setFocusPainted(false);
+        BtnKirimLISSMARTLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimLISSMARTLAB.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimLISSMARTLAB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimLISSMARTLAB.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimLISSMARTLAB.setName("BtnKirimLISSMARTLAB"); // NOI18N
+        BtnKirimLISSMARTLAB.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKirimLISSMARTLAB.setRoundRect(false);
+        BtnKirimLISSMARTLAB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimLISSMARTLABActionPerformed(evt);
+            }
+        });
+
+        BtnAmbilLISSMARTLAB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilLISSMARTLAB.setText("Ambil Hasil dari SMARTLAB");
+        BtnAmbilLISSMARTLAB.setFocusPainted(false);
+        BtnAmbilLISSMARTLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilLISSMARTLAB.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilLISSMARTLAB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilLISSMARTLAB.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilLISSMARTLAB.setName("BtnAmbilLISSMARTLAB"); // NOI18N
+        BtnAmbilLISSMARTLAB.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAmbilLISSMARTLAB.setRoundRect(false);
+        BtnAmbilLISSMARTLAB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilLISSMARTLABActionPerformed(evt);
+            }
+        });
+
+        BtnKirimLISSOFTMEDIX.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimLISSOFTMEDIX.setText("Kirim Permintaan ke SOFTMEDIX");
+        BtnKirimLISSOFTMEDIX.setFocusPainted(false);
+        BtnKirimLISSOFTMEDIX.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimLISSOFTMEDIX.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimLISSOFTMEDIX.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimLISSOFTMEDIX.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimLISSOFTMEDIX.setName("BtnKirimLISSOFTMEDIX"); // NOI18N
+        BtnKirimLISSOFTMEDIX.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKirimLISSOFTMEDIX.setRoundRect(false);
+        BtnKirimLISSOFTMEDIX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimLISSOFTMEDIXActionPerformed(evt);
+            }
+        });
+
+        BtnAmbilLISSOFTMEDIX.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilLISSOFTMEDIX.setText("Ambil Hasil dari SOFTMEDIX");
+        BtnAmbilLISSOFTMEDIX.setFocusPainted(false);
+        BtnAmbilLISSOFTMEDIX.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilLISSOFTMEDIX.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilLISSOFTMEDIX.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilLISSOFTMEDIX.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilLISSOFTMEDIX.setName("BtnAmbilLISSOFTMEDIX"); // NOI18N
+        BtnAmbilLISSOFTMEDIX.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAmbilLISSOFTMEDIX.setRoundRect(false);
+        BtnAmbilLISSOFTMEDIX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilLISSOFTMEDIXActionPerformed(evt);
+            }
+        });
+
+        BtnKirimVansLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimVansLab.setText("Kirim Permintaan ke VANSLAB");
+        BtnKirimVansLab.setFocusPainted(false);
+        BtnKirimVansLab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimVansLab.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimVansLab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimVansLab.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimVansLab.setName("BtnKirimVansLab"); // NOI18N
+        BtnKirimVansLab.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKirimVansLab.setRoundRect(false);
+        BtnKirimVansLab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimVansLabActionPerformed(evt);
+            }
+        });
+
+        BtnAmbilVanslab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilVanslab.setText("Ambil Hasil dari VANSLAB");
+        BtnAmbilVanslab.setFocusPainted(false);
+        BtnAmbilVanslab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilVanslab.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilVanslab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilVanslab.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilVanslab.setName("BtnAmbilVanslab"); // NOI18N
+        BtnAmbilVanslab.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAmbilVanslab.setRoundRect(false);
+        BtnAmbilVanslab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilVanslabActionPerformed(evt);
+            }
+        });
+
+        BtnKirimLica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimLica.setText("Kirim Permintaan ke LICA");
+        BtnKirimLica.setFocusPainted(false);
+        BtnKirimLica.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimLica.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimLica.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimLica.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimLica.setName("BtnKirimLica"); // NOI18N
+        BtnKirimLica.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKirimLica.setRoundRect(false);
+        BtnKirimLica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimLicaActionPerformed(evt);
+            }
+        });
+
+        BtnAmbilLica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilLica.setText("Ambil Hasil dari LICA");
+        BtnAmbilLica.setFocusPainted(false);
+        BtnAmbilLica.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilLica.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilLica.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilLica.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilLica.setName("BtnAmbilLica"); // NOI18N
+        BtnAmbilLica.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAmbilLica.setRoundRect(false);
+        BtnAmbilLica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilLicaActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -711,7 +935,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Permintaan Laboratorium Patologi Klinis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Permintaan Laboratorium Patologi Klinis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1298,40 +1522,6 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         });
         FormMenu.add(BtnBarcodePermintaan2);
 
-        BtnKirimLica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnKirimLica.setText("Kirim Permintaan ke LICA");
-        BtnKirimLica.setFocusPainted(false);
-        BtnKirimLica.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnKirimLica.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnKirimLica.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnKirimLica.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnKirimLica.setName("BtnKirimLica"); // NOI18N
-        BtnKirimLica.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKirimLica.setRoundRect(false);
-        BtnKirimLica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKirimLicaActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnKirimLica);
-
-        BtnAmbilLica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnAmbilLica.setText("Ambil Hasil dari LICA");
-        BtnAmbilLica.setFocusPainted(false);
-        BtnAmbilLica.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnAmbilLica.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnAmbilLica.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAmbilLica.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnAmbilLica.setName("BtnAmbilLica"); // NOI18N
-        BtnAmbilLica.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAmbilLica.setRoundRect(false);
-        BtnAmbilLica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAmbilLicaActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnAmbilLica);
-
         BtnKirimSysmex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnKirimSysmex.setText("Kirim Permintaan ke Sysmex");
         BtnKirimSysmex.setFocusPainted(false);
@@ -1365,210 +1555,6 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnAmbilSysmex);
-
-        BtnKirimLISELIMS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnKirimLISELIMS.setText("Kirim Permintaan ke ELIMS");
-        BtnKirimLISELIMS.setFocusPainted(false);
-        BtnKirimLISELIMS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnKirimLISELIMS.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnKirimLISELIMS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnKirimLISELIMS.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnKirimLISELIMS.setName("BtnKirimLISELIMS"); // NOI18N
-        BtnKirimLISELIMS.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKirimLISELIMS.setRoundRect(false);
-        BtnKirimLISELIMS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKirimLISELIMSActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnKirimLISELIMS);
-
-        BtnAmbilLISELIMS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnAmbilLISELIMS.setText("Ambil Hasil dari ELIMS");
-        BtnAmbilLISELIMS.setFocusPainted(false);
-        BtnAmbilLISELIMS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnAmbilLISELIMS.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnAmbilLISELIMS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAmbilLISELIMS.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnAmbilLISELIMS.setName("BtnAmbilLISELIMS"); // NOI18N
-        BtnAmbilLISELIMS.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAmbilLISELIMS.setRoundRect(false);
-        BtnAmbilLISELIMS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAmbilLISELIMSActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnAmbilLISELIMS);
-
-        BtnKirimLISTeras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnKirimLISTeras.setText("Kirim Permintaan ke TERAS");
-        BtnKirimLISTeras.setFocusPainted(false);
-        BtnKirimLISTeras.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnKirimLISTeras.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnKirimLISTeras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnKirimLISTeras.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnKirimLISTeras.setName("BtnKirimLISTeras"); // NOI18N
-        BtnKirimLISTeras.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKirimLISTeras.setRoundRect(false);
-        BtnKirimLISTeras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKirimLISTerasActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnKirimLISTeras);
-
-        BtnAmbilLISTeras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnAmbilLISTeras.setText("Ambil Hasil dari TERAS");
-        BtnAmbilLISTeras.setFocusPainted(false);
-        BtnAmbilLISTeras.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnAmbilLISTeras.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnAmbilLISTeras.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAmbilLISTeras.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnAmbilLISTeras.setName("BtnAmbilLISTeras"); // NOI18N
-        BtnAmbilLISTeras.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAmbilLISTeras.setRoundRect(false);
-        BtnAmbilLISTeras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAmbilLISTerasActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnAmbilLISTeras);
-
-        BtnKirimLISMADQLAB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnKirimLISMADQLAB.setText("Kirim Permintaan ke MEDQLAB ");
-        BtnKirimLISMADQLAB.setFocusPainted(false);
-        BtnKirimLISMADQLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnKirimLISMADQLAB.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnKirimLISMADQLAB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnKirimLISMADQLAB.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnKirimLISMADQLAB.setName("BtnKirimLISMADQLAB"); // NOI18N
-        BtnKirimLISMADQLAB.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKirimLISMADQLAB.setRoundRect(false);
-        BtnKirimLISMADQLAB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKirimLISMADQLABActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnKirimLISMADQLAB);
-
-        BtnAmbilLISMADQLAB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnAmbilLISMADQLAB.setText("Ambil Hasil dari MEDQLAB");
-        BtnAmbilLISMADQLAB.setFocusPainted(false);
-        BtnAmbilLISMADQLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnAmbilLISMADQLAB.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnAmbilLISMADQLAB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAmbilLISMADQLAB.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnAmbilLISMADQLAB.setName("BtnAmbilLISMADQLAB"); // NOI18N
-        BtnAmbilLISMADQLAB.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAmbilLISMADQLAB.setRoundRect(false);
-        BtnAmbilLISMADQLAB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAmbilLISMADQLABActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnAmbilLISMADQLAB);
-
-        BtnKirimLISSMARTLAB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnKirimLISSMARTLAB.setText("Kirim Permintaan ke SMARTLAB ");
-        BtnKirimLISSMARTLAB.setFocusPainted(false);
-        BtnKirimLISSMARTLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnKirimLISSMARTLAB.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnKirimLISSMARTLAB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnKirimLISSMARTLAB.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnKirimLISSMARTLAB.setName("BtnKirimLISSMARTLAB"); // NOI18N
-        BtnKirimLISSMARTLAB.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKirimLISSMARTLAB.setRoundRect(false);
-        BtnKirimLISSMARTLAB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKirimLISSMARTLABActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnKirimLISSMARTLAB);
-
-        BtnAmbilLISSMARTLAB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnAmbilLISSMARTLAB.setText("Ambil Hasil dari SMARTLAB");
-        BtnAmbilLISSMARTLAB.setFocusPainted(false);
-        BtnAmbilLISSMARTLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnAmbilLISSMARTLAB.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnAmbilLISSMARTLAB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAmbilLISSMARTLAB.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnAmbilLISSMARTLAB.setName("BtnAmbilLISSMARTLAB"); // NOI18N
-        BtnAmbilLISSMARTLAB.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAmbilLISSMARTLAB.setRoundRect(false);
-        BtnAmbilLISSMARTLAB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAmbilLISSMARTLABActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnAmbilLISSMARTLAB);
-
-        BtnKirimLISSOFTMEDIX.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnKirimLISSOFTMEDIX.setText("Kirim Permintaan ke SOFTMEDIX");
-        BtnKirimLISSOFTMEDIX.setFocusPainted(false);
-        BtnKirimLISSOFTMEDIX.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnKirimLISSOFTMEDIX.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnKirimLISSOFTMEDIX.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnKirimLISSOFTMEDIX.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnKirimLISSOFTMEDIX.setName("BtnKirimLISSOFTMEDIX"); // NOI18N
-        BtnKirimLISSOFTMEDIX.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKirimLISSOFTMEDIX.setRoundRect(false);
-        BtnKirimLISSOFTMEDIX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKirimLISSOFTMEDIXActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnKirimLISSOFTMEDIX);
-
-        BtnAmbilLISSOFTMEDIX.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnAmbilLISSOFTMEDIX.setText("Ambil Hasil dari SOFTMEDIX");
-        BtnAmbilLISSOFTMEDIX.setFocusPainted(false);
-        BtnAmbilLISSOFTMEDIX.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnAmbilLISSOFTMEDIX.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnAmbilLISSOFTMEDIX.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAmbilLISSOFTMEDIX.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnAmbilLISSOFTMEDIX.setName("BtnAmbilLISSOFTMEDIX"); // NOI18N
-        BtnAmbilLISSOFTMEDIX.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAmbilLISSOFTMEDIX.setRoundRect(false);
-        BtnAmbilLISSOFTMEDIX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAmbilLISSOFTMEDIXActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnAmbilLISSOFTMEDIX);
-
-        BtnKirimVansLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnKirimVansLab.setText("Kirim Permintaan ke VANSLAB");
-        BtnKirimVansLab.setFocusPainted(false);
-        BtnKirimVansLab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnKirimVansLab.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnKirimVansLab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnKirimVansLab.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnKirimVansLab.setName("BtnKirimVansLab"); // NOI18N
-        BtnKirimVansLab.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnKirimVansLab.setRoundRect(false);
-        BtnKirimVansLab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKirimVansLabActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnKirimVansLab);
-
-        BtnAmbilVanslab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnAmbilVanslab.setText("Ambil Hasil dari VANSLAB");
-        BtnAmbilVanslab.setFocusPainted(false);
-        BtnAmbilVanslab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnAmbilVanslab.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnAmbilVanslab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAmbilVanslab.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnAmbilVanslab.setName("BtnAmbilVanslab"); // NOI18N
-        BtnAmbilVanslab.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnAmbilVanslab.setRoundRect(false);
-        BtnAmbilVanslab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAmbilVanslabActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnAmbilVanslab);
 
         ScrollMenu.setViewportView(FormMenu);
 
