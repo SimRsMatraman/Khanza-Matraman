@@ -7067,7 +7067,18 @@ private void MnDataRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         if (tbKasirRalan.getSelectedRow() != -1) {
             if (Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?", TNoRw.getText()) > 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            } else {
+            } 
+            else if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0045")) {
+                dlgrwjl2.isCek();
+                dlgrwjl2.emptTeks1();
+                dlgrwjl2.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                dlgrwjl2.setLocationRelativeTo(internalFrame1);
+                dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
+                dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
+                dlgrwjl2.setNoRm1(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
+                dlgrwjl2.setVisible(true);
+            }
+            else {
                 dlgrwjl2.isCek();
                 dlgrwjl2.emptTeks();
                 dlgrwjl2.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
@@ -8457,7 +8468,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
                 } else {
                     dlgrwjl2.isCek();
-                    dlgrwjl2.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                    dlgrwjl2.setSize(internalFrame1.getWidth() - 0, internalFrame1.getHeight() - 0);
                     dlgrwjl2.setLocationRelativeTo(internalFrame1);
                     dlgrwjl2.SetPoli(tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(), 13).toString());
                     dlgrwjl2.SetPj(tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(), 14).toString());
