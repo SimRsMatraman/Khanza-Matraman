@@ -12433,10 +12433,11 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             pskasir = koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"
                     + "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,poliklinik.nm_poli,"
                     + "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur, "
-                    + "reg_periksa.status_bayar,IF(reg_periksa.status_poli='Lama','Pasien Lama','Pasien Baru') as status_poli,reg_periksa.kd_pj,reg_periksa.kd_poli,pasien.no_tlp,IF(bridging_sep.no_sep!='','1','0')as no_sep,IF(pemeriksaan_ralan.nik!='','Sudah SOAP','Belum SOAP') as soap, "
-                    + "IF(resume_pasien_rajal.kd_dokter!='' or resume_pasien.kd_dokter!='','Sudah','Belum') as resume "
+                    + "reg_periksa.status_bayar,IF(reg_periksa.status_poli='Lama','Pasien Lama','Pasien Baru') as status_poli,reg_periksa.kd_pj,reg_periksa.kd_poli,pasien.no_tlp,IF(bridging_sep.no_sep!='','1','0')as no_sep,IF(pemeriksaan_ralan.nik!='','Sudah','Belum') as soap, "
+                    + "IF(resume_pasien_rajal.kd_dokter!='' or resume_pasien.kd_dokter!='','Sudah','Belum') as resume,IF(pemeriksaan_ralan_rehab.nik!='','Sudah','Belum') as soapRM "
                     + "from reg_periksa "
                     + "left join pemeriksaan_ralan on pemeriksaan_ralan.no_rawat=reg_periksa.no_rawat "
+                    + "left join pemeriksaan_ralan_rehab on pemeriksaan_ralan_rehab.no_rawat=reg_periksa.no_rawat "
                     + "left join bridging_sep on bridging_sep.no_rawat=reg_periksa.no_rawat "
                     + "left join resume_pasien_rajal on resume_pasien_rajal.no_rawat = reg_periksa.no_rawat "
                     + "left join resume_pasien on resume_pasien.no_rawat = reg_periksa.no_rawat "
@@ -12513,13 +12514,21 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     } else {
                         SEP = "-";
                     }
+                    
+                    if (rskasir.getString("soap").equals("Sudah") || rskasir.getString("soapRM").equals("Sudah")) {
+                        Soap = "Sudah";
+                    }else if (rskasir.getString("soap").equals("Belum") || rskasir.getString("soapRM").equals("Belum")) {
+                        Soap = "Belum";
+                    }else {
+                        Soap = "Belum";
+                    }
 
                     tabModekasir.addRow(new String[]{
                         rskasir.getString("kd_dokter"), rskasir.getString("nm_dokter"), rskasir.getString("no_rkm_medis"), rskasir.getString("nm_pasien") + " (" + rskasir.getString("umur") + ")", SEP,
                         rskasir.getString("nm_poli"), rskasir.getString("no_reg"), rskasir.getString("p_jawab"), rskasir.getString("almt_pj"), rskasir.getString("hubunganpj"),
                         rskasir.getString("png_jawab"), rskasir.getString("stts"), rskasir.getString("no_rawat"), rskasir.getString("tgl_registrasi"),
                         rskasir.getString("jam_reg"), rskasir.getString("status_bayar"), rskasir.getString("status_poli"),
-                        rskasir.getString("kd_pj"), rskasir.getString("kd_poli"), rskasir.getString("no_tlp"), rskasir.getString("soap"), rskasir.getString("resume")
+                        rskasir.getString("kd_pj"), rskasir.getString("kd_poli"), rskasir.getString("no_tlp"), Soap, rskasir.getString("resume")
                     });
                 }
             } catch (Exception e) {
@@ -12622,7 +12631,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     }
 
     public void isCek() {
-        MnPermintaanKonsultasiMedik.setEnabled(akses.getkonsultasi_medik());
+        MnPermintaanKonsultasiMedik.setEnabled(akses.getresep_dokter());
 //        MnDataKonsultasiMedik.setEnabled(akses.getjawaban_konsultasi_medik());
         MnRawatJalan1.setEnabled(akses.gettindakan_ralan());
         MnPemberianObat.setEnabled(akses.getberi_obat());

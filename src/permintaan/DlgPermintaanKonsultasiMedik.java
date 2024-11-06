@@ -1859,12 +1859,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getkonsultasi_medik());
-        BtnHapus.setEnabled(akses.getkonsultasi_medik());
-        BtnPrint.setEnabled(akses.getkonsultasi_medik());
-        BtnJawabanDikonsuli.setEnabled(akses.getjawaban_konsultasi_medik());
+        BtnSimpan.setEnabled(akses.gettindakan_ralan());
+        BtnHapus.setEnabled(akses.gettindakan_ralan());
+        BtnPrint.setEnabled(akses.gettindakan_ralan());
+        BtnJawabanDikonsuli.setEnabled(akses.gettindakan_ralan());
         BtnRiwayatPasien.setEnabled(akses.getresume_pasien());
-        BtnEdit.setEnabled(akses.getkonsultasi_medik());   
+        BtnEdit.setEnabled(akses.gettindakan_ralan());   
         if(akses.getjml2()>=1){
             KdDokter.setEditable(false);
             BtnDokter.setEnabled(false);

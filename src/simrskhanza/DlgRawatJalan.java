@@ -540,31 +540,31 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }else if(i==5){
                 column.setPreferredWidth(75);
             }else if(i==6){
-                column.setPreferredWidth(75);
-            }else if(i==7){
-                column.setPreferredWidth(75);
-            }else if(i==8){
-                column.setPreferredWidth(75);
-            }else if(i==9){
-                column.setPreferredWidth(90);
-            }else if(i==10){
-                column.setPreferredWidth(75);
-            }else if(i==11){
-                column.setPreferredWidth(75);
-            }else if(i==12){
-                column.setPreferredWidth(75);
-            }else if(i==13){
-                column.setPreferredWidth(90);
-            }else if(i==14){
-                column.setPreferredWidth(180);
-            }else if(i==15){
-                column.setPreferredWidth(180);
-            }else if(i==16){
                 column.setPreferredWidth(130);
+            }else if(i==7){
+                column.setPreferredWidth(300);
+            }else if(i==8){
+                column.setPreferredWidth(300);
+            }else if(i==9){
+                column.setPreferredWidth(150);
+            }else if(i==10){
+                column.setPreferredWidth(300);
+            }else if(i==11){
+                column.setPreferredWidth(200);
+            }else if(i==12){
+                column.setPreferredWidth(250);
+            }else if(i==13){
+                column.setPreferredWidth(250);
+            }else if(i==14){
+                column.setPreferredWidth(100);
+            }else if(i==15){
+                column.setPreferredWidth(70);
+            }else if(i==16){
+                column.setPreferredWidth(70);
             }else if(i==17){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(70);
             }else if(i==18){
-                column.setPreferredWidth(180);
+                column.setPreferredWidth(70);
             }else if(i==19){
                 column.setPreferredWidth(180);
             }else if(i==20){
@@ -11273,6 +11273,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
+            form.tampil();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             this.setCursor(Cursor.getDefaultCursor());
         }
