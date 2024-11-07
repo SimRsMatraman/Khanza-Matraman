@@ -52,7 +52,7 @@ public final class akses {
             suplier_penunjang=false,utd_donor=false,bpjs_monitoring_klaim=false,utd_cekal_darah=false,utd_komponen_darah=false,utd_stok_darah=false,
             utd_pemisahan_darah=false,harian_kamar=false,rincian_piutang_pasien=false,keuntungan_beri_obat_nonpiutang=false,reklasifikasi_ralan=false,
             reklasifikasi_ranap=false,utd_penyerahan_darah=false,hutang_obat=false,riwayat_obat_alkes_bhp=false,sensus_harian_poli=false,rl4a=false,
-            aplicare_referensi_kamar=false,aplicare_ketersediaan_kamar=false,inacbg_klaim_baru_otomatis=false,inacbg_klaim_baru_manual=false,inacbg_coder_nik=false,
+            aplicare_referensi_kamar=false,aplicare_ketersediaan_kamar=false,riwayat_perawatan_icare_bpjs=false,inacbg_klaim_baru_otomatis=false,inacbg_klaim_baru_manual=false,inacbg_coder_nik=false,
             mutasi_berkas=false,akun_piutang=false,harian_kso=false,bulanan_kso=false,harian_menejemen=false,bulanan_menejemen=false,inhealth_cek_eligibilitas=false,
             inhealth_referensi_jenpel_ruang_rawat=false,inhealth_referensi_poli=false,inhealth_referensi_faskes=false,inhealth_sjp=false,piutang_ralan=false,
             piutang_ranap=false,detail_piutang_penjab=false,lama_pelayanan_ralan=false,catatan_pasien=false,rl4b=false,rl4asebab=false,rl4bsebab=false,
@@ -450,6 +450,7 @@ public final class akses {
                         akses.rl4a=true;
                         akses.aplicare_referensi_kamar=true;
                         akses.aplicare_ketersediaan_kamar=true;
+                        akses.riwayat_perawatan_icare_bpjs=true;
                         akses.inacbg_klaim_baru_otomatis=true;
                         akses.inacbg_klaim_baru_manual=true;
                         akses.inacbg_coder_nik=true;
@@ -1439,6 +1440,7 @@ public final class akses {
                         akses.rl4a=rs2.getBoolean("rl4a");
                         akses.aplicare_referensi_kamar=rs2.getBoolean("aplicare_referensi_kamar");
                         akses.aplicare_ketersediaan_kamar=rs2.getBoolean("aplicare_ketersediaan_kamar");
+                        akses.riwayat_perawatan_icare_bpjs=rs2.getBoolean("riwayat_perawatan_icare_bpjs");
                         akses.inacbg_klaim_baru_otomatis=rs2.getBoolean("inacbg_klaim_baru_otomatis");
                         akses.inacbg_klaim_baru_manual=rs2.getBoolean("inacbg_klaim_baru_manual");
                         akses.inacbg_coder_nik=rs2.getBoolean("inacbg_coder_nik");
@@ -2427,6 +2429,7 @@ public final class akses {
                         akses.rl4a=false;
                         akses.aplicare_referensi_kamar=false;
                         akses.aplicare_ketersediaan_kamar=false;
+                        akses.riwayat_perawatan_icare_bpjs=false;
                         akses.inacbg_klaim_baru_otomatis=false;
                         akses.inacbg_klaim_baru_manual=false;
                         akses.inacbg_coder_nik=false;
@@ -3437,6 +3440,7 @@ public final class akses {
         akses.rl4a=false;
         akses.aplicare_referensi_kamar=false;
         akses.aplicare_ketersediaan_kamar=false;
+        akses.riwayat_perawatan_icare_bpjs=false;
         akses.inacbg_klaim_baru_otomatis=false;
         akses.inacbg_klaim_baru_manual=false;
         akses.inacbg_coder_nik=false;
@@ -4507,6 +4511,7 @@ public final class akses {
     public static boolean getrl4a(){return akses.rl4a;}
     public static boolean getaplicare_referensi_kamar(){return akses.aplicare_referensi_kamar;}
     public static boolean getaplicare_ketersediaan_kamar(){return akses.aplicare_ketersediaan_kamar;}
+    public static boolean getriwayat_perawatan_icare_bpjs(){return akses.riwayat_perawatan_icare_bpjs;}
     public static boolean getinacbg_klaim_baru_otomatis(){return akses.inacbg_klaim_baru_otomatis;}
     public static boolean getinacbg_klaim_baru_manual(){return akses.inacbg_klaim_baru_manual;}
     public static boolean getinacbg_coder_nik(){return akses.inacbg_coder_nik;}
