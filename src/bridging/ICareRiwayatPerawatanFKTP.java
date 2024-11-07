@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.validasi;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
@@ -54,7 +55,7 @@ import org.springframework.http.MediaType;
 public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private ApiICareBPJS api=new ApiICareBPJS();
-    private String link="",utc="",requestJson="",otorisasi="";
+    private String link="",utc="",requestJson="",otorisasi="",noRawat="";
     private HttpHeaders headers ;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
@@ -63,6 +64,7 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
     private JsonNode response;
     private final JFXPanel jfxPanel = new JFXPanel();
     private WebEngine engine;
+    private sekuel Sequel=new sekuel();
  
     private final JLabel lblStatus = new JLabel();
 
@@ -125,6 +127,8 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
         BtnKeluar = new widget.Button();
+        jLabel6 = new widget.Label();
+        TCari = new widget.TextBox();
         PanelContent = new widget.panelisi();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -133,7 +137,7 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Riwayat Perawatan ICare FKTP BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Riwayat Perawatan ICare FKTL BPJS Via No. Peserta ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -206,6 +210,20 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
         });
         panelGlass6.add(BtnKeluar);
 
+        jLabel6.setText("No Rawat :");
+        jLabel6.setName("jLabel6"); // NOI18N
+        jLabel6.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelGlass6.add(jLabel6);
+
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(160, 23));
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCariKeyPressed(evt);
+            }
+        });
+        panelGlass6.add(TCari);
+
         internalFrame1.add(panelGlass6, java.awt.BorderLayout.PAGE_END);
 
         PanelContent.setName("PanelContent"); // NOI18N
@@ -256,6 +274,10 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_NoKartuKeyPressed
 
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+
+    }//GEN-LAST:event_TCariKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -279,9 +301,11 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
     private widget.Label LabelPoli6;
     private widget.TextBox NoKartu;
     private widget.panelisi PanelContent;
+    private widget.TextBox TCari;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
+    private widget.Label jLabel6;
     private widget.panelisi panelGlass6;
     // End of variables declaration//GEN-END:variables
 
@@ -430,6 +454,14 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
     
     public void CloseScane(){
         Platform.setImplicitExit(false);
+    }
+    
+        public void setNoRawat(String x,String y)
+    {
+        this.noRawat=x;
+        TCari.setText(y);
+        Sequel.cariIsi("SELECT b.no_peserta FROM reg_periksa a INNER JOIN pasien b ON a.no_rkm_medis=b.no_rkm_medis WHERE a.no_rawat='"+noRawat+"'", NoKartu);
+        Sequel.cariIsi("SELECT b.kd_dokter_bpjs FROM reg_periksa a INNER JOIN maping_dokter_dpjpvclaim b ON a.kd_dokter=b.kd_dokter WHERE a.no_rawat='"+noRawat+"'", KdDPJPLayanan);
     }
  
 }
