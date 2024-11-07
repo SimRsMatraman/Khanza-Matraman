@@ -92,37 +92,7 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
             System.out.println("E : "+e);
         }
         
-        if(koneksiDB.CARICEPAT().equals("aktif")){
-            NoKartu.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if(NoKartu.getText().equals("")){
-                        }else if(KdDPJPLayanan.getText().equals("")){
-                            Valid.textKosong(KdDPJPLayanan,"Dokter");
-                        }else{
-                    tampil();
-                    }
-                }
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if(NoKartu.getText().equals("")){
-                        }else if(KdDPJPLayanan.getText().equals("")){
-                            Valid.textKosong(KdDPJPLayanan,"Dokter");
-                        }else{
-                    tampil();
-                    }
-                }
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if(NoKartu.getText().equals("")){
-                        }else if(KdDPJPLayanan.getText().equals("")){
-                            Valid.textKosong(KdDPJPLayanan,"Dokter");
-                        }else{
-                    tampil();
-                    }
-                }
-            });
-        }
+        
     }
     
     private void initComponents2() {           
