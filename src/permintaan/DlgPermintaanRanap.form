@@ -397,7 +397,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="03-08-2024"/>
+                        <StringItem index="0" value="07-11-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -426,7 +426,7 @@
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="03-08-2024"/>
+                        <StringItem index="0" value="07-11-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -554,7 +554,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="03-08-2024"/>
+                        <StringItem index="0" value="07-11-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -834,15 +834,18 @@
                       </Border>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="8">
+                      <StringArray count="11">
                         <StringItem index="0" value="Rawat Inap Dewasa"/>
-                        <StringItem index="1" value="Rawat Inap Anak"/>
-                        <StringItem index="2" value="Perina"/>
-                        <StringItem index="3" value="ICU"/>
-                        <StringItem index="4" value="NICU"/>
-                        <StringItem index="5" value="PICU"/>
-                        <StringItem index="6" value="Isolasi Anak"/>
-                        <StringItem index="7" value="Isolasi Dewasa"/>
+                        <StringItem index="1" value="Rawat Inap Kebidanan"/>
+                        <StringItem index="2" value="Rawat Inap Anak"/>
+                        <StringItem index="3" value="Perina"/>
+                        <StringItem index="4" value="ICU"/>
+                        <StringItem index="5" value="NICU"/>
+                        <StringItem index="6" value="PICU"/>
+                        <StringItem index="7" value="HCU"/>
+                        <StringItem index="8" value="Isolasi Anak"/>
+                        <StringItem index="9" value="Isolasi Dewasa"/>
+                        <StringItem index="10" value="IGD Diamond/Transisi"/>
                       </StringArray>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value="SAPHIRE-01&#xa;SAPHIRE-01&#xa;SAPHIRE-01&#xa;SAPHIRE-01&#xa;SAPHIRE-01&#xa;SAPHIRE-01&#xa;SAPHIRE-01&#xa;SAPHIRE-01&#xa;"/>

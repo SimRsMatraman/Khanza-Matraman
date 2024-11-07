@@ -333,7 +333,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Permintaan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Permintaan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -570,7 +570,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(165, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-06-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -593,7 +593,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-06-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -661,7 +661,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         NmPasien.setBounds(288, 10, 330, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-06-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -810,7 +810,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
 
         JnKamar.setBackground(new java.awt.Color(240, 240, 240));
         JnKamar.setBorder(new javax.swing.border.MatteBorder(null));
-        JnKamar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rawat Inap Dewasa", "Rawat Inap Anak", "Perina", "ICU", "NICU", "PICU", "Isolasi Anak", "Isolasi Dewasa" }));
+        JnKamar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rawat Inap Dewasa", "Rawat Inap Kebidanan", "Rawat Inap Anak", "Perina", "ICU", "NICU", "PICU", "HCU", "Isolasi Anak", "Isolasi Dewasa", "IGD Diamond/Transisi" }));
         JnKamar.setToolTipText("SAPHIRE-01\nSAPHIRE-01\nSAPHIRE-01\nSAPHIRE-01\nSAPHIRE-01\nSAPHIRE-01\nSAPHIRE-01\nSAPHIRE-01\n");
         JnKamar.setName("JnKamar"); // NOI18N
         JnKamar.addActionListener(new java.awt.event.ActionListener() {
