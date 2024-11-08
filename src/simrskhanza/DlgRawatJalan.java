@@ -12,6 +12,8 @@
 //
 package simrskhanza;
 
+import bridging.ICareRiwayatPerawatan;
+import bridging.ICareRiwayatPerawatanFKTP;
 import surat.SuratKontrol;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
@@ -170,7 +172,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             Suspen_Piutang_Tindakan_Ralan="",Tindakan_Ralan="",Beban_Jasa_Medik_Dokter_Tindakan_Ralan="",Utang_Jasa_Medik_Dokter_Tindakan_Ralan="",
             Beban_Jasa_Medik_Paramedis_Tindakan_Ralan="",Utang_Jasa_Medik_Paramedis_Tindakan_Ralan="",Beban_KSO_Tindakan_Ralan="",Utang_KSO_Tindakan_Ralan="",
             Beban_Jasa_Sarana_Tindakan_Ralan="",Utang_Jasa_Sarana_Tindakan_Ralan="",HPP_BHP_Tindakan_Ralan="",Persediaan_BHP_Tindakan_Ralan="",
-            Beban_Jasa_Menejemen_Tindakan_Ralan="",Utang_Jasa_Menejemen_Tindakan_Ralan="",namaPenyakit="",Listpenyakit="",authEncrypt,auth;
+            Beban_Jasa_Menejemen_Tindakan_Ralan="",Utang_Jasa_Menejemen_Tindakan_Ralan="",namaPenyakit="",Listpenyakit="", variabel="", authEncrypt, auth;
     private final Properties prop = new Properties();
     private boolean[] pilih; 
     private String[] kode,nama,kategori;
@@ -1676,6 +1678,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         scrollPane7 = new widget.ScrollPane();
         Instruksi = new widget.TextArea();
         BtnTemplatePemeriksaan = new widget.Button();
+        ICareNIK = new widget.Button();
+        ICareNoKartu = new widget.Button();
         internalFrame9 = new widget.InternalFrame();
         Scroll12 = new widget.ScrollPane();
         tbPemeriksaanRM = new widget.Table();
@@ -1975,7 +1979,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -2137,7 +2141,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2151,7 +2155,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3134,7 +3138,46 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnTemplatePemeriksaan);
-        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 22);
+        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 25);
+
+        ICareNIK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ICareNIK.setMnemonic('K');
+        ICareNIK.setText("Cek Riwayat Perawatan ICare BPJS Via NIK");
+        ICareNIK.setToolTipText("");
+        ICareNIK.setActionCommand("Cek Riwayat Perawatan ICare BPJS Via NIK");
+        ICareNIK.setName("ICareNIK"); // NOI18N
+        ICareNIK.setPreferredSize(new java.awt.Dimension(160, 30));
+        ICareNIK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ICareNIKActionPerformed(evt);
+            }
+        });
+        ICareNIK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ICareNIKKeyPressed(evt);
+            }
+        });
+        panelGlass12.add(ICareNIK);
+        ICareNIK.setBounds(830, 260, 290, 30);
+
+        ICareNoKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ICareNoKartu.setMnemonic('K');
+        ICareNoKartu.setText("Cek Riwayat Perawatan ICare BPJS Via No. Peserta");
+        ICareNoKartu.setToolTipText("");
+        ICareNoKartu.setName("ICareNoKartu"); // NOI18N
+        ICareNoKartu.setPreferredSize(new java.awt.Dimension(160, 30));
+        ICareNoKartu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ICareNoKartuActionPerformed(evt);
+            }
+        });
+        ICareNoKartu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ICareNoKartuKeyPressed(evt);
+            }
+        });
+        panelGlass12.add(ICareNoKartu);
+        ICareNoKartu.setBounds(830, 300, 330, 30);
 
         PanelInput.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -3225,7 +3268,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         panelGlass16.add(scrollPane8);
         scrollPane8.setBounds(10, 10, 360, 80);
-        scrollPane8.getAccessibleContext().setAccessibleName("ANAMNESA");
 
         scrollPane9.setBorder(javax.swing.BorderFactory.createTitledBorder("PEMERIKSAAN FISIK DAN UJI FUNGSI"));
         scrollPane9.setName("scrollPane9"); // NOI18N
@@ -4539,7 +4581,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-11-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -11283,6 +11325,90 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnProsedurKFRKeyPressed
 
+    private void ICareNIKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ICareNIKActionPerformed
+        if(TNoRw.getText().trim().equals("") ){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
+            dlgki.setNoRawat(TNoRw.getText(),TNoRw.getText());
+            dlgki.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            dlgki.setLocationRelativeTo(internalFrame1);
+            dlgki.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+//    if(tabModekasir.getRowCount()==0){
+//            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+//            TCari.requestFocus();
+//        }else if(TNoRw.getText().trim().equals("")){
+//            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+//            tbKasirRalan.requestFocus();
+//        }else{
+//            if(tbKasirRalan.getSelectedRow()!= -1){
+//                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//                variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString());
+//                if(!variabel.equals("")){
+//                    akses.setform("DlgReg");
+//                    ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
+//                    dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//                    dlgki.setLocationRelativeTo(internalFrame1);
+//                    dlgki.setPasien(Sequel.cariIsi("select pasien.no_ktp from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()),variabel);   
+//                    dlgki.setVisible(true);
+//                }else{
+//                    JOptionPane.showMessageDialog(null,"Maaf, Dokter tidak terdaftar di mapping dokter BPJS...!!!");  
+//                }
+//                this.setCursor(Cursor.getDefaultCursor());
+//            }
+//        }
+    }//GEN-LAST:event_ICareNIKActionPerformed
+
+    private void ICareNIKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ICareNIKKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ICareNIKKeyPressed
+
+    private void ICareNoKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ICareNoKartuActionPerformed
+        if(TNoRw.getText().trim().equals("") ){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            ICareRiwayatPerawatanFKTP dlgki=new ICareRiwayatPerawatanFKTP(null,false);
+            dlgki.setNoRawat(TNoRw.getText(),TNoRw.getText());
+            dlgki.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            dlgki.setLocationRelativeTo(internalFrame1);
+            dlgki.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+//        if(tabModekasir.getRowCount()==0){
+//            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+//            TCari.requestFocus();
+//        }else if(TNoRw.getText().trim().equals("")){
+//            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+//            tbKasirRalan.requestFocus();
+//        }else{
+//            if(tbKasirRalan.getSelectedRow()!= -1){
+//                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//                variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString());
+//                if(!variabel.equals("")){
+//                    akses.setform("DlgReg");
+//                    ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
+//                    dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//                    dlgki.setLocationRelativeTo(internalFrame1);
+//                    dlgki.setPasien(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()),variabel);   
+//                    dlgki.setVisible(true);
+//                }else{
+//                    JOptionPane.showMessageDialog(null,"Maaf, Dokter tidak terdaftar di mapping dokter BPJS...!!!"); 
+//                }
+//                this.setCursor(Cursor.getDefaultCursor());
+//            }
+//        }
+    }//GEN-LAST:event_ICareNoKartuActionPerformed
+
+    private void ICareNoKartuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ICareNoKartuKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ICareNoKartuKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -11452,6 +11578,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.TextArea Evaluasi;
     private widget.PanelBiasa FormInput;
     private widget.PanelBiasa FormMenu;
+    private widget.Button ICareNIK;
+    private widget.Button ICareNoKartu;
     private widget.TextArea Instruksi;
     private widget.TextArea Instruksi1;
     private widget.TextBox KdDok;

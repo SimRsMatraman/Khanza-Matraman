@@ -150,6 +150,7 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
+import bridging.ICareRiwayatPerawatan;
 //import informasi.InformasiJadwal;
 //import informasi.InformasiKamar;
 //import informasi.InformasiKamarInap;
@@ -19703,6 +19704,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     } 
     
+        private void btnRiwayatPerawatanICareActionPerformed(java.awt.event.ActionEvent evt) {  
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        ICareRiwayatPerawatan aplikasi=new ICareRiwayatPerawatan(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -20315,7 +20327,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnPenilaianRisikoJatuhAnak,btnPenilaianAwalMedisRalanGeriatri,btnPenilaianTambahanGeriatri,btnSkriningNutrisiDewasa,btnHasilPemeriksaanUSG,
             btnSkriningNutrisiLansia,btnSkriningNutrisiAnak,btnAkunRekeningHtHBankJabar,btnPembayaranBankJabar,btnPernyataanPasienUmum,btnKonselingFarmasi,
             btnPelayananInformasiObat,btnPersetujuanUmum,btnTransferPasienAntarRuang,btnReferensiDokterSatuSehat,btnReferensiPasienSatuSehat,
-            btnMappingOrganisasiSatuSehat,btnMappingLokasiSatuSehat,btnKirimEncounterSatuSehat,btnCatatanCekGDS,btnKirimConditionSatuSehat,
+            btnMappingOrganisasiSatuSehat,btnMappingLokasiSatuSehat,btnKirimEncounterSatuSehat,btnCatatanCekGDS,btnKirimConditionSatuSehat,btnRiwayatPerawatanICare,
             btnChecklistPreOperasi,btnKirimObservationTTVSatuSehat,btnSignInSebelumAnestesi,btnKirimProcedureSatuSehat,btnOperasiPerBulan,btnTimeOutSebelumInsisi,
             btnBarangDapur,btnSignOutSebelumMenutupLuka,btnOpnameDapur,btnSuplierDapur,btnMappingVaksinSatuSehat,btnKirimVaksinSatuSehat,btnPembelianDapur,
             btnChecklistPostOperasi,btnPengeluaranDapur,btnRiwayatBarangDapur,btnPermintaanDapur,btnRBiayaDapur,btnRekapPengadaanDapur,btnLimbahB3MedisCair,
@@ -23057,6 +23069,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getpcare_cek_statuspulang()==true){
                 Panelmenu.add(btnPCareReferensiStatusPulang);
+                jmlmenu++;
+            }
+            
+            if(akses.getriwayat_perawatan_icare_bpjs()==true){
+                Panelmenu.add(btnRiwayatPerawatanICare);
                 jmlmenu++;
             }
             
@@ -26950,6 +26967,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
         }
         
+        if(akses.getriwayat_perawatan_icare_bpjs()==true){
+            Panelmenu.add(btnRiwayatPerawatanICare);
+            jmlmenu++;
+        }
+        
         if(akses.getskrining_ralan_pernapasan_pertahun()==true){  
             Panelmenu.add(btnSkriningRalanPernapasanPerTahun);                 
             jmlmenu++;
@@ -30707,6 +30729,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.gethibah_obat_bhp()==true){
             if(btnHibahObatBHP.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnHibahObatBHP);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getriwayat_perawatan_icare_bpjs()==true){
+            if(btnRiwayatPerawatanICare.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnRiwayatPerawatanICare);
                 jmlmenu++;
             }                
         }
@@ -40500,6 +40529,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnKonsultasiMedik.setName("btnKonsultasiMedik"); 
         btnKonsultasiMedik.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKonsultasiMedik.addActionListener(this::btnKonsultasiMedikActionPerformed);
+        
+        btnRiwayatPerawatanICare = new widget.ButtonBig();
+        btnRiwayatPerawatanICare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png"))); 
+        btnRiwayatPerawatanICare.setText("Riwayat Perawatan ICare BPJS");
+        btnRiwayatPerawatanICare.setIconTextGap(0);
+        btnRiwayatPerawatanICare.setName("btnRiwayatPerawatanICare"); 
+        btnRiwayatPerawatanICare.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRiwayatPerawatanICare.addActionListener(this::btnRiwayatPerawatanICareActionPerformed);
     }
     
     private static String getData(String address)throws Exception
