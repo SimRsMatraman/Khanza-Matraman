@@ -137,16 +137,16 @@ Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
     <entry key="IDCORONA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASSCORONA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
 
-    <entry key="CLIENTIDSATUSEHAT">84gc+gN5BhcCxLoJxHODBleZUdYHZiR2pYAb9T/w6hhyuWrFJFvPM7UvdNVtl7Sestw5ZVpC9SI/UUmSqSmYsA==</entry>
-    <entry key="SECRETKEYSATUSEHAT">ukhrihQzC2cCqQ+DQy7T+wkKxe2YFfvnv1vQr/eAycsbJOiU0j6eeo7CFJE6D/WlEcwqwFE15TGfO5qcMTm+wclfWqpiscCeYZA9pZ/+44o=</entry>
-    <entry key="URLAUTHSATUSEHAT">https://api-satusehat-dev.dto.kemkes.go.id/oauth2/v1</entry> 
-    <entry key="URLFHIRSATUSEHAT">https://api-satusehat-dev.dto.kemkes.go.id/fhir-r4/v1</entry>
-    <entry key="IDSATUSEHAT">Z64Bi97zYtxq3TuJDUb/ng==</entry>
-    <entry key="KELURAHANSATUSEHAT">3313160009</entry>
-    <entry key="KECAMATANSATUSEHAT">3313160</entry>
-    <entry key="KABUPATENSATUSEHAT">3313</entry>
-    <entry key="PROPINSISATUSEHAT">33</entry>
-    <entry key="KODEPOSSATUSEHAT">57752</entry>
+    <entry key="CLIENTIDSATUSEHAT">P7r+UhotZ+TD5Gxvo9z+Cu4XctfONdHedFnPb884a1CrfF5lGde278HU+KTDASyaq6I5ld16yNBlpNOVH/2iyQ==</entry>
+    <entry key="SECRETKEYSATUSEHAT">p2//pZik2fKNprNhYWGsj0v7PvaJrwNawRYseD1hOCCEwZiCIsqVgxFXXpXXAVg0HWBfjK7ZOh1uNT/vVtXbsjgxLVO4Pk02U5xt8isHLmE=</entry>
+    <entry key="URLAUTHSATUSEHAT">https://api-satusehat.kemkes.go.id/oauth2/v1</entry> 
+    <entry key="URLFHIRSATUSEHAT">https://api-satusehat.kemkes.go.id/fhir-r4/v1</entry>
+    <entry key="IDSATUSEHAT">gaBNwBHeS3L0v0VbJMiSXw==</entry>
+    <entry key="KELURAHANSATUSEHAT">3175101006</entry>
+    <entry key="KECAMATANSATUSEHAT">317510</entry>
+    <entry key="KABUPATENSATUSEHAT">3175</entry>
+    <entry key="PROPINSISATUSEHAT">31</entry>
+    <entry key="KODEPOSSATUSEHAT">13840</entry>
 
     <entry key="URLAPIINHEALTH">http://development.inhealth.co.id/pelkesws2</entry>
     <entry key="TOKENINHEALTH">l4nh5eVYrLAER/I2A4b3Tw==</entry>
