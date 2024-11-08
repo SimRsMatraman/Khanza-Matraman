@@ -12955,6 +12955,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         if (akses.getkode().equals("Admin Utama")) {
             MnHapusData.setEnabled(true);
         } else {
+            MnHapusData.setVisible(false);
             MnHapusData.setEnabled(false);
         }
 
