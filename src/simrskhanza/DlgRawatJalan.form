@@ -270,7 +270,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="07-11-2024"/>
+                        <StringItem index="0" value="11-11-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -298,7 +298,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="07-11-2024"/>
+                        <StringItem index="0" value="11-11-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1830,7 +1830,7 @@
                               <Image iconType="3" name="/picture/kanan.png"/>
                             </Property>
                             <Property name="mnemonic" type="int" value="75"/>
-                            <Property name="text" type="java.lang.String" value="CPPT"/>
+                            <Property name="text" type="java.lang.String" value=" CPPT"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                             <Property name="name" type="java.lang.String" value="BtnCppt" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1852,9 +1852,10 @@
                             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                               <Image iconType="3" name="/picture/kanan.png"/>
                             </Property>
-                            <Property name="mnemonic" type="int" value="75"/>
-                            <Property name="text" type="java.lang.String" value="Riwayat Pemeriksaan Radiologi &amp; Laboratotium"/>
+                            <Property name="mnemonic" type="int" value="82"/>
+                            <Property name="text" type="java.lang.String" value=" Riwayat Pemeriksaan Radiologi &amp; Laboratotium"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
                             <Property name="name" type="java.lang.String" value="BtnAntarFaskes" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[160, 30]"/>
@@ -1910,7 +1911,7 @@
                               <Image iconType="3" name="/picture/kanan.png"/>
                             </Property>
                             <Property name="mnemonic" type="int" value="75"/>
-                            <Property name="text" type="java.lang.String" value="EWS"/>
+                            <Property name="text" type="java.lang.String" value=" EWS"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                             <Property name="name" type="java.lang.String" value="BtnEWS" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1987,7 +1988,7 @@
                               <Image iconType="3" name="/picture/kanan.png"/>
                             </Property>
                             <Property name="mnemonic" type="int" value="75"/>
-                            <Property name="text" type="java.lang.String" value="PEWS"/>
+                            <Property name="text" type="java.lang.String" value=" PEWS"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                             <Property name="name" type="java.lang.String" value="BtnEWS1" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -2063,10 +2064,10 @@
                             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                               <Image iconType="3" name="/picture/kanan.png"/>
                             </Property>
-                            <Property name="mnemonic" type="int" value="75"/>
-                            <Property name="text" type="java.lang.String" value="Cek Riwayat Perawatan ICare BPJS Via NIK"/>
+                            <Property name="mnemonic" type="int" value="67"/>
+                            <Property name="text" type="java.lang.String" value=" Cek Riwayat Perawatan ICare BPJS Via NIK"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
-                            <Property name="actionCommand" type="java.lang.String" value="Cek Riwayat Perawatan ICare BPJS Via NIK"/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
                             <Property name="name" type="java.lang.String" value="ICareNIK" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[160, 30]"/>
@@ -2078,7 +2079,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="830" y="260" width="290" height="30"/>
+                              <AbsoluteConstraints x="830" y="260" width="360" height="30"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -2087,9 +2088,10 @@
                             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                               <Image iconType="3" name="/picture/kanan.png"/>
                             </Property>
-                            <Property name="mnemonic" type="int" value="75"/>
-                            <Property name="text" type="java.lang.String" value="Cek Riwayat Perawatan ICare BPJS Via No. Peserta"/>
+                            <Property name="mnemonic" type="int" value="67"/>
+                            <Property name="text" type="java.lang.String" value=" Cek Riwayat Perawatan ICare BPJS Via No. Peserta"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
                             <Property name="name" type="java.lang.String" value="ICareNoKartu" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[160, 30]"/>
@@ -2101,7 +2103,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="830" y="300" width="330" height="30"/>
+                              <AbsoluteConstraints x="830" y="300" width="360" height="30"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -4769,7 +4771,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="07-11-2024"/>
+                    <StringItem index="0" value="11-11-2024"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>

@@ -1979,7 +1979,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -2141,7 +2141,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2155,7 +2155,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2986,7 +2986,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         BtnCppt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         BtnCppt.setMnemonic('K');
-        BtnCppt.setText("CPPT");
+        BtnCppt.setText(" CPPT");
         BtnCppt.setToolTipText("");
         BtnCppt.setName("BtnCppt"); // NOI18N
         BtnCppt.setPreferredSize(new java.awt.Dimension(160, 30));
@@ -3004,9 +3004,10 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCppt.setBounds(830, 170, 120, 30);
 
         BtnAntarFaskes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        BtnAntarFaskes.setMnemonic('K');
-        BtnAntarFaskes.setText("Riwayat Pemeriksaan Radiologi & Laboratotium");
+        BtnAntarFaskes.setMnemonic('R');
+        BtnAntarFaskes.setText(" Riwayat Pemeriksaan Radiologi & Laboratotium");
         BtnAntarFaskes.setToolTipText("");
+        BtnAntarFaskes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnAntarFaskes.setName("BtnAntarFaskes"); // NOI18N
         BtnAntarFaskes.setPreferredSize(new java.awt.Dimension(160, 30));
         BtnAntarFaskes.addActionListener(new java.awt.event.ActionListener() {
@@ -3041,7 +3042,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         BtnEWS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         BtnEWS.setMnemonic('K');
-        BtnEWS.setText("EWS");
+        BtnEWS.setText(" EWS");
         BtnEWS.setToolTipText("");
         BtnEWS.setName("BtnEWS"); // NOI18N
         BtnEWS.setPreferredSize(new java.awt.Dimension(160, 30));
@@ -3092,7 +3093,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         BtnEWS1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         BtnEWS1.setMnemonic('K');
-        BtnEWS1.setText("PEWS");
+        BtnEWS1.setText(" PEWS");
         BtnEWS1.setToolTipText("");
         BtnEWS1.setName("BtnEWS1"); // NOI18N
         BtnEWS1.setPreferredSize(new java.awt.Dimension(160, 30));
@@ -3138,13 +3139,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnTemplatePemeriksaan);
-        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 25);
+        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 22);
 
         ICareNIK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        ICareNIK.setMnemonic('K');
-        ICareNIK.setText("Cek Riwayat Perawatan ICare BPJS Via NIK");
+        ICareNIK.setMnemonic('C');
+        ICareNIK.setText(" Cek Riwayat Perawatan ICare BPJS Via NIK");
         ICareNIK.setToolTipText("");
-        ICareNIK.setActionCommand("Cek Riwayat Perawatan ICare BPJS Via NIK");
+        ICareNIK.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ICareNIK.setName("ICareNIK"); // NOI18N
         ICareNIK.setPreferredSize(new java.awt.Dimension(160, 30));
         ICareNIK.addActionListener(new java.awt.event.ActionListener() {
@@ -3158,12 +3159,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(ICareNIK);
-        ICareNIK.setBounds(830, 260, 290, 30);
+        ICareNIK.setBounds(830, 260, 360, 30);
 
         ICareNoKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        ICareNoKartu.setMnemonic('K');
-        ICareNoKartu.setText("Cek Riwayat Perawatan ICare BPJS Via No. Peserta");
+        ICareNoKartu.setMnemonic('C');
+        ICareNoKartu.setText(" Cek Riwayat Perawatan ICare BPJS Via No. Peserta");
         ICareNoKartu.setToolTipText("");
+        ICareNoKartu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ICareNoKartu.setName("ICareNoKartu"); // NOI18N
         ICareNoKartu.setPreferredSize(new java.awt.Dimension(160, 30));
         ICareNoKartu.addActionListener(new java.awt.event.ActionListener() {
@@ -3177,7 +3179,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(ICareNoKartu);
-        ICareNoKartu.setBounds(830, 300, 330, 30);
+        ICareNoKartu.setBounds(830, 300, 360, 30);
 
         PanelInput.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -4581,7 +4583,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-11-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -7979,7 +7981,7 @@ private void BtnSeekDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         akses.setform("DlgRawatJalan");
         dokter.emptTeks();
         dokter.isCek();
-        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        dokter.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
 }//GEN-LAST:event_BtnSeekDokterActionPerformed
@@ -7998,7 +8000,7 @@ private void BtnSeekPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GE
         akses.setform("DlgRawatJalan");
         petugas.emptTeks();
         petugas.isCek();
-        petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        petugas.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
 }//GEN-LAST:event_BtnSeekPetugasActionPerformed
@@ -8386,7 +8388,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         akses.setform("DlgRawatJalan");
         petugas.emptTeks();
         petugas.isCek();
-        petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        petugas.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
     }//GEN-LAST:event_BtnSeekPetugas2ActionPerformed
@@ -8405,7 +8407,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         akses.setform("DlgRawatJalan");
         dokter.emptTeks();
         dokter.isCek();
-        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        dokter.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
     }//GEN-LAST:event_BtnSeekDokter2ActionPerformed
@@ -8434,7 +8436,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         akses.setform("DlgRawatJalan");
         pasien.emptTeks();
         pasien.isCek();
-        pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        pasien.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         pasien.setLocationRelativeTo(internalFrame1);
         pasien.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_btnPasienActionPerformed
@@ -8856,7 +8858,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         akses.setform("DlgRawatJalan");
         dokter.emptTeks();
         dokter.isCek();
-        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        dokter.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
     }//GEN-LAST:event_BtnSeekDokter3ActionPerformed
@@ -8870,7 +8872,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             RMTriaseIGD form=new RMTriaseIGD(null,false);
             form.isCek();
             form.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -8885,7 +8887,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataResumePasien resume=new RMDataResumePasien(null,false);
             resume.isCek();
-            resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            resume.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             resume.setLocationRelativeTo(internalFrame1);
             resume.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             resume.tampil();
@@ -8921,7 +8923,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanDewasa form=new RMPenilaianAwalMedisRalanDewasa(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -8953,7 +8955,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanKandungan form=new RMPenilaianAwalMedisRalanKandungan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -8972,7 +8974,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }else {
                 DlgBookingOperasi form=new DlgBookingOperasi(null,false);
                 form.isCek();
-                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
                 form.setLocationRelativeTo(internalFrame1);            
                 form.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Sequel.cariIsi("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli=?",kode_poli),"Ralan"); 
                 form.setVisible(true);
@@ -8988,7 +8990,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             AsesmenAwalMedisIGD form=new AsesmenAwalMedisIGD(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9005,7 +9007,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanAnak form=new RMPenilaianAwalMedisRalanAnak(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9022,7 +9024,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianFisioterapi form=new RMPenilaianFisioterapi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9039,7 +9041,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMMCU form=new RMMCU(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9056,7 +9058,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMUjiFungsiKFR form=new RMUjiFungsiKFR(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9073,7 +9075,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataCatatanObservasiIGD form=new RMDataCatatanObservasiIGD(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9091,7 +9093,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanTHT form=new RMPenilaianAwalMedisRalanTHT(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9108,7 +9110,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianPsikologi form=new RMPenilaianPsikologi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9125,7 +9127,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanPsikiatrik form=new RMPenilaianAwalMedisRalanPsikiatrik(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9152,7 +9154,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanPenyakitDalam form=new RMPenilaianAwalMedisRalanPenyakitDalam(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9169,7 +9171,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanMata form=new RMPenilaianAwalMedisRalanMata(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9186,7 +9188,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanNeurologi form=new RMPenilaianAwalMedisRalanNeurologi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9203,7 +9205,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanOrthopedi form=new RMPenilaianAwalMedisRalanOrthopedi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9220,7 +9222,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanBedah form=new RMPenilaianAwalMedisRalanBedah(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9237,7 +9239,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPemantauanPEWS form=new RMPemantauanPEWS(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9255,7 +9257,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianPreOperasi form=new RMPenilaianPreOperasi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9272,7 +9274,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianPreAnastesi form=new RMPenilaianPreAnastesi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9289,7 +9291,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianLanjutanRisikoJatuhDewasa form=new RMPenilaianLanjutanRisikoJatuhDewasa(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9307,7 +9309,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianLanjutanRisikoJatuhAnak form=new RMPenilaianLanjutanRisikoJatuhAnak(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9325,7 +9327,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanGeriatri form=new RMPenilaianAwalMedisRalanGeriatri(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9342,7 +9344,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianTambahanGeriatri form=new RMPenilaianTambahanGeriatri(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9359,7 +9361,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMHasilPemeriksaanUSG form=new RMHasilPemeriksaanUSG(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9377,7 +9379,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMSkriningNutrisiDewasa form=new RMSkriningNutrisiDewasa(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9395,7 +9397,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMSkriningNutrisiLansia form=new RMSkriningNutrisiLansia(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9413,7 +9415,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMSkriningNutrisiAnak form=new RMSkriningNutrisiAnak(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9431,7 +9433,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataSkriningGiziLanjut form=new RMDataSkriningGiziLanjut(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9449,7 +9451,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataAsuhanGizi form=new RMDataAsuhanGizi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9467,7 +9469,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataMonitoringAsuhanGizi form=new RMDataMonitoringAsuhanGizi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9485,7 +9487,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMKonselingFarmasi form=new RMKonselingFarmasi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9503,7 +9505,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgPermintaanPelayananInformasiObat form=new DlgPermintaanPelayananInformasiObat(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9521,7 +9523,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMTransferPasienAntarRuang form=new RMTransferPasienAntarRuang(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9540,9 +9542,9 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             GdsIgd form=new GdsIgd(null,false);
             form.isCek();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.emptTeks();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -9557,7 +9559,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMChecklistPreOperasi form=new RMChecklistPreOperasi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9574,7 +9576,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMSignInSebelumAnastesi form=new RMSignInSebelumAnastesi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9591,7 +9593,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMTimeOutSebelumInsisi form=new RMTimeOutSebelumInsisi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9608,7 +9610,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMSignOutSebelumMenutupLuka form=new RMSignOutSebelumMenutupLuka(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9625,7 +9627,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMChecklistPostOperasi form=new RMChecklistPostOperasi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9642,7 +9644,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMRekonsiliasiObat form=new RMRekonsiliasiObat(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9659,7 +9661,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianPasienTerminal form=new RMPenilaianPasienTerminal(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9676,7 +9678,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataMonitoringReaksiTranfusi form=new RMDataMonitoringReaksiTranfusi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9694,7 +9696,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianKorbanKekerasan form=new RMPenilaianKorbanKekerasan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9711,7 +9713,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianLanjutanRisikoJatuhLansia form=new RMPenilaianLanjutanRisikoJatuhLansia(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9729,7 +9731,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianPasienPenyakitMenular form=new RMPenilaianPasienPenyakitMenular(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9746,7 +9748,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMEdukasiPasienKeluargaRawatJalan form=new RMEdukasiPasienKeluargaRawatJalan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9764,7 +9766,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPemantauanPEWSD form=new RMPemantauanPEWSD(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9782,7 +9784,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianTambahanBunuhDiri form=new RMPenilaianTambahanBunuhDiri(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9800,7 +9802,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianTambahanPerilakuKekerasan form=new RMPenilaianTambahanPerilakuKekerasan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9818,7 +9820,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianTambahanMelarikanDiri form=new RMPenilaianTambahanMelarikanDiri(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -9836,7 +9838,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgOdontogram odontogram=new DlgOdontogram(null,false);
             odontogram.isCek();
-            odontogram.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            odontogram.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             odontogram.setLocationRelativeTo(internalFrame1);
             odontogram.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             odontogram.tampil();
@@ -9878,7 +9880,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataResumePasienRajal resumerajal=new RMDataResumePasienRajal(null,false);
             resumerajal.isCek();
-            resumerajal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            resumerajal.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             resumerajal.setLocationRelativeTo(internalFrame1);
             resumerajal.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             resumerajal.tampil();
@@ -9895,7 +9897,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMInacbgRajal inacbgrajal=new RMInacbgRajal(null,false);
             inacbgrajal.isCek();
-            inacbgrajal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            inacbgrajal.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             inacbgrajal.setLocationRelativeTo(internalFrame1);
             inacbgrajal.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             inacbgrajal.tampil();
@@ -9912,7 +9914,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMHasilEKG ekgrajal=new RMHasilEKG(null,false);
             ekgrajal.isCek();
-            ekgrajal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ekgrajal.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             ekgrajal.setLocationRelativeTo(internalFrame1);
             ekgrajal.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ekgrajal.tampil();
@@ -9929,7 +9931,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -9963,7 +9965,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgRujukIGD rujukigd=new DlgRujukIGD(null,false);
             rujukigd.isCek();
-            rujukigd.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            rujukigd.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             rujukigd.setLocationRelativeTo(internalFrame1);
             rujukigd.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             rujukigd.tampil();
@@ -10110,7 +10112,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         akses.setform("DlgRawatJalan");
         masters.isCek();
         masters.onCari();
-        masters.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        masters.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         masters.setLocationRelativeTo(internalFrame1);
         masters.setVisible(true);
     }//GEN-LAST:event_BtnDokter1ActionPerformed
@@ -10119,7 +10121,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         akses.setform("DlgRawatJalan");
         mastero.isCek();
         mastero.onCari();
-        mastero.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        mastero.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         mastero.setLocationRelativeTo(internalFrame1);
         mastero.setVisible(true);
     }//GEN-LAST:event_BtnDokter2ActionPerformed
@@ -10128,7 +10130,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         akses.setform("DlgRawatJalan");
         masterp.isCek();
         masterp.onCari();
-        masterp.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        masterp.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         masterp.setLocationRelativeTo(internalFrame1);
         masterp.setVisible(true);
     }//GEN-LAST:event_BtnDokter3ActionPerformed
@@ -10145,13 +10147,13 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         //        akses.setform("DlgRawatJalan");
         //        dokter.emptTeks();
         //        dokter.isCek();
-        //        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        //        dokter.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         //        dokter.setLocationRelativeTo(internalFrame1);
         //        dokter.setVisible(true);
         akses.setform("DlgRawatJalan");
         pegawai.emptTeks();
         //        pegawai.isCek();
-        pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        pegawai.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         pegawai.setLocationRelativeTo(internalFrame1);
         pegawai.setVisible(true);
     }//GEN-LAST:event_BtnDokterActionPerformed
@@ -10239,7 +10241,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         penyakit.isCek();
         penyakit.setNoRw(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
         //        penyakit.emptTeks();
-        penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        penyakit.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);    // TODO add your handling code here:
     }//GEN-LAST:event_AsesmenActionPerformed
@@ -10409,7 +10411,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         akses.setform("DlgRawatJalan");
         dokter.emptTeks();
         dokter.isCek();
-        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        dokter.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
     }//GEN-LAST:event_BtnDokter4ActionPerformed
@@ -10530,7 +10532,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         akses.setform("DlgRawatJalan");
         dokter.emptTeks();
         dokter.isCek();
-        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        dokter.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
     }//GEN-LAST:event_BtnDokter5ActionPerformed
@@ -10551,7 +10553,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanIGD form=new RMPenilaianAwalKeperawatanIGD(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10568,7 +10570,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanBayiAnak form=new RMPenilaianAwalKeperawatanBayiAnak(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10585,7 +10587,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanGigi form=new RMPenilaianAwalKeperawatanGigi(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10602,7 +10604,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanKebidanan form=new RMPenilaianAwalKeperawatanKebidanan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10619,7 +10621,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanRalan form=new RMPenilaianAwalKeperawatanRalan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10636,7 +10638,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanRalanGeriatri form=new RMPenilaianAwalKeperawatanRalanGeriatri(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10653,7 +10655,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanRalanPsikiatri form=new RMPenilaianAwalKeperawatanRalanPsikiatri(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10858,7 +10860,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }else {
                 DlgBookingOperasi form=new DlgBookingOperasi(null,false);
                 form.isCek();
-                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
                 form.setLocationRelativeTo(internalFrame1);            
                 form.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Sequel.cariIsi("select poliklinik.nm_poli from poliklinik where poliklinik.kd_poli=?",kode_poli),"Ralan"); 
                 form.setVisible(true);
@@ -10908,7 +10910,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             DlgPermintaanPelayananInformasiObat form=new DlgPermintaanPelayananInformasiObat(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10926,7 +10928,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMHasilPemeriksaanUSG form=new RMHasilPemeriksaanUSG(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10944,7 +10946,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMHasilEKG ekgrajal=new RMHasilEKG(null,false);
             ekgrajal.isCek();
-            ekgrajal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ekgrajal.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             ekgrajal.setLocationRelativeTo(internalFrame1);
             ekgrajal.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ekgrajal.tampil();
@@ -10961,7 +10963,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanRalan form=new RMPenilaianAwalKeperawatanRalan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10978,7 +10980,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanRalan form=new RMPenilaianAwalKeperawatanRalan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -10995,7 +10997,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanRalan form=new RMPenilaianAwalKeperawatanRalan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -11012,7 +11014,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanRalan form=new RMPenilaianAwalKeperawatanRalan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -11029,7 +11031,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanDewasa form=new RMPenilaianAwalMedisRalanDewasa(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -11046,7 +11048,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalKeperawatanRalan form=new RMPenilaianAwalKeperawatanRalan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -11063,7 +11065,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPenilaianAwalMedisRalanDewasa form=new RMPenilaianAwalMedisRalanDewasa(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -11109,7 +11111,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMRujukanFisio form=new RMRujukanFisio(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -11127,7 +11129,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgPermintaanKonsultasiMedik form=new DlgPermintaanKonsultasiMedik(null,false);
                     form.isCek();
-                    form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                    form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
                     form.emptTeks();
@@ -11241,7 +11243,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private void Asesmen1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Asesmen1ActionPerformed
         penyakit.isCek();
         penyakit.setNoRw(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
-        penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        penyakit.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);
     }//GEN-LAST:event_Asesmen1ActionPerformed
@@ -11278,7 +11280,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private void Asesmen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Asesmen2ActionPerformed
         penyakit.isCek();
         penyakit.setNoRw(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
-        penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        penyakit.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);    // TODO add your handling code here:
     }//GEN-LAST:event_Asesmen2ActionPerformed
@@ -11311,7 +11313,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMUjiFungsiKFR form=new RMUjiFungsiKFR(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -11351,7 +11353,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 //                if(!variabel.equals("")){
 //                    akses.setform("DlgReg");
 //                    ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
-//                    dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//                    dlgki.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
 //                    dlgki.setLocationRelativeTo(internalFrame1);
 //                    dlgki.setPasien(Sequel.cariIsi("select pasien.no_ktp from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()),variabel);   
 //                    dlgki.setVisible(true);
@@ -11393,7 +11395,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 //                if(!variabel.equals("")){
 //                    akses.setform("DlgReg");
 //                    ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
-//                    dlgki.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//                    dlgki.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
 //                    dlgki.setLocationRelativeTo(internalFrame1);
 //                    dlgki.setPasien(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()),variabel);   
 //                    dlgki.setVisible(true);
@@ -14213,7 +14215,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             MasterCariTemplatePemeriksaan templatepemeriksaan=new MasterCariTemplatePemeriksaan(null,false);
-            templatepemeriksaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            templatepemeriksaan.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             templatepemeriksaan.setLocationRelativeTo(internalFrame1);
             templatepemeriksaan.isCek();
             templatepemeriksaan.setDokter(KodeDokter.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),TNoRw.getText(),TNoRM.getText());
