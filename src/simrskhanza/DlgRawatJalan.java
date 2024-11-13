@@ -1667,7 +1667,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnDokter2 = new widget.Button();
         BtnDokter3 = new widget.Button();
         BtnCppt = new widget.Button();
-        BtnAntarFaskes = new widget.Button();
+        BtnRiwayatLabRad = new widget.Button();
         scrollPane6 = new widget.ScrollPane();
         Operasi = new widget.TextArea();
         BtnEWS = new widget.Button();
@@ -3003,25 +3003,25 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass12.add(BtnCppt);
         BtnCppt.setBounds(830, 170, 120, 30);
 
-        BtnAntarFaskes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        BtnAntarFaskes.setMnemonic('R');
-        BtnAntarFaskes.setText(" Riwayat Pemeriksaan Radiologi & Laboratotium");
-        BtnAntarFaskes.setToolTipText("");
-        BtnAntarFaskes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnAntarFaskes.setName("BtnAntarFaskes"); // NOI18N
-        BtnAntarFaskes.setPreferredSize(new java.awt.Dimension(160, 30));
-        BtnAntarFaskes.addActionListener(new java.awt.event.ActionListener() {
+        BtnRiwayatLabRad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        BtnRiwayatLabRad.setMnemonic('R');
+        BtnRiwayatLabRad.setText(" Riwayat Pemeriksaan Radiologi & Laboratotium");
+        BtnRiwayatLabRad.setToolTipText("");
+        BtnRiwayatLabRad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnRiwayatLabRad.setName("BtnRiwayatLabRad"); // NOI18N
+        BtnRiwayatLabRad.setPreferredSize(new java.awt.Dimension(160, 30));
+        BtnRiwayatLabRad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAntarFaskesActionPerformed(evt);
+                BtnRiwayatLabRadActionPerformed(evt);
             }
         });
-        BtnAntarFaskes.addKeyListener(new java.awt.event.KeyAdapter() {
+        BtnRiwayatLabRad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnAntarFaskesKeyPressed(evt);
+                BtnRiwayatLabRadKeyPressed(evt);
             }
         });
-        panelGlass12.add(BtnAntarFaskes);
-        BtnAntarFaskes.setBounds(830, 220, 360, 30);
+        panelGlass12.add(BtnRiwayatLabRad);
+        BtnRiwayatLabRad.setBounds(830, 220, 360, 30);
 
         scrollPane6.setBorder(javax.swing.BorderFactory.createTitledBorder("Riwayat Operasi"));
         scrollPane6.setName("scrollPane6"); // NOI18N
@@ -10181,38 +10181,25 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnCpptKeyPressed
 
-    private void BtnAntarFaskesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntarFaskesActionPerformed
+    private void BtnRiwayatLabRadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatLabRadActionPerformed
         if(TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMRiwayatRadLab resume=new RMRiwayatRadLab(null,true);
+            RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
+            resume.emptTeks();
             resume.setNoRm(TNoRM.getText(),TPasien.getText());
             resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             resume.setLocationRelativeTo(internalFrame1);
             resume.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
-//        if(TNoRw.getText().trim().equals("")){
-//            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
-//            TCari.requestFocus();
-//        }else{
-//            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//            DataPasienIntegration iemr=new DataPasienIntegration(null,true);
-//            iemr.setPasien(TNoRM.getText());
-//            iemr.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-//            iemr.setPasien(TNoRM.getText());
-//            //            iemr.tampil();
-//            iemr.setLocationRelativeTo(internalFrame1);
-//            iemr.setVisible(true);
-//            this.setCursor(Cursor.getDefaultCursor());
-//        }
-    }//GEN-LAST:event_BtnAntarFaskesActionPerformed
+    }//GEN-LAST:event_BtnRiwayatLabRadActionPerformed
 
-    private void BtnAntarFaskesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAntarFaskesKeyPressed
+    private void BtnRiwayatLabRadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnRiwayatLabRadKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnAntarFaskesKeyPressed
+    }//GEN-LAST:event_BtnRiwayatLabRadKeyPressed
 
     private void OperasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OperasiKeyPressed
         // TODO add your handling code here:
@@ -11223,7 +11210,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMRiwayatRadLab resume=new RMRiwayatRadLab(null,true);
+            RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
+            resume.emptTeks();
             resume.setNoRm(TNoRM.getText(),TPasien.getText());
             resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             resume.setLocationRelativeTo(internalFrame1);
@@ -11434,7 +11422,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button Asesmen1;
     private widget.Button Asesmen2;
     private widget.Button BtnAll;
-    private widget.Button BtnAntarFaskes;
     private widget.Button BtnAsuhanGizi;
     private widget.Button BtnAwalFisioterapi;
     private widget.Button BtnAwalKeperawatan;
@@ -11539,6 +11526,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnResumeRajal;
     private widget.Button BtnRiwayat;
     private widget.Button BtnRiwayat1;
+    private widget.Button BtnRiwayatLabRad;
     private widget.Button BtnRiwayatRadLab;
     private widget.Button BtnRujukIGD;
     private widget.Button BtnRujukInternal;
@@ -12236,15 +12224,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             TNadi.setText(Sequel.cariIsi("select nadi from penilaian_awal_keperawatan_kebidanan where no_rawat=?",TNoRw.getText()));
             TRespirasi.setText(Sequel.cariIsi("select rr from penilaian_awal_keperawatan_kebidanan where no_rawat=?",TNoRw.getText()));
             TGCS.setText(Sequel.cariIsi("select gcs from penilaian_awal_keperawatan_kebidanan where no_rawat=?",TNoRw.getText()));
-         }else if(Sequel.cariInteger("select count(no_rawat) from penilaian_awal_keperawatan_igd where no_rawat='"+TNoRw.getText()+"' ")>0){
-       //Menampilkan Keperawatan IGD
-            TSuhu.setText(Sequel.cariIsi("select suhu from penilaian_awal_keperawatan_igd where no_rawat=?",TNoRw.getText()));
-            TTensi.setText(Sequel.cariIsi("select td from penilaian_awal_keperawatan_igd where no_rawat=?",TNoRw.getText()));
-            TBerat.setText(Sequel.cariIsi("select bb from penilaian_awal_keperawatan_igd where no_rawat=?",TNoRw.getText()));
-            TTinggi.setText(Sequel.cariIsi("select tb from penilaian_awal_keperawatan_igd where no_rawat=?",TNoRw.getText()));
-            TNadi.setText(Sequel.cariIsi("select nadi from penilaian_awal_keperawatan_igd where no_rawat=?",TNoRw.getText()));
-            TRespirasi.setText(Sequel.cariIsi("select rr from penilaian_awal_keperawatan_igd where no_rawat=?",TNoRw.getText()));
-            TGCS.setText(Sequel.cariIsi("select gcs from penilaian_awal_keperawatan_igd where no_rawat=?",TNoRw.getText()));
          }else if(Sequel.cariInteger("select count(no_rawat) from penilaian_awal_keperawatan_igdkeb where no_rawat='"+TNoRw.getText()+"' ")>0){
        //Menampilkan Keperawatan IGD Kebidanan
             TSuhu.setText(Sequel.cariIsi("select suhu from penilaian_awal_keperawatan_igdkeb where no_rawat=?",TNoRw.getText()));

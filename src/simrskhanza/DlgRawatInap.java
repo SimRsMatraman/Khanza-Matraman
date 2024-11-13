@@ -1228,6 +1228,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TTnd = new javax.swing.JTextField();
         KSO = new javax.swing.JTextField();
         Menejemen = new javax.swing.JTextField();
+        BtnAntarFaskes = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -1334,14 +1335,13 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnDokter2 = new widget.Button();
         BtnDokter3 = new widget.Button();
         BtnCppt = new widget.Button();
-        BtnAntarFaskes = new widget.Button();
         BtnEWS = new widget.Button();
         BtnImplementasiKeperawatanRanap = new widget.Button();
         BtnEWS1 = new widget.Button();
         BtnImplementasiKeperawatanRanap1 = new widget.Button();
         scrollPane7 = new widget.ScrollPane();
         Instruksi = new widget.TextArea();
-        BtnAntarFaskes1 = new widget.Button();
+        BtnRiwayatRadLab = new widget.Button();
         internalFrame6 = new widget.InternalFrame();
         Scroll4 = new widget.ScrollPane();
         tbPemeriksaanObstetri = new widget.Table();
@@ -1550,6 +1550,23 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         Menejemen.setText("0");
         Menejemen.setName("Menejemen"); // NOI18N
 
+        BtnAntarFaskes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        BtnAntarFaskes.setMnemonic('K');
+        BtnAntarFaskes.setText("Antar Faskes");
+        BtnAntarFaskes.setToolTipText("");
+        BtnAntarFaskes.setName("BtnAntarFaskes"); // NOI18N
+        BtnAntarFaskes.setPreferredSize(new java.awt.Dimension(160, 30));
+        BtnAntarFaskes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAntarFaskesActionPerformed(evt);
+            }
+        });
+        BtnAntarFaskes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnAntarFaskesKeyPressed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -1724,7 +1741,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1738,7 +1755,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2571,25 +2588,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass12.add(BtnCppt);
         BtnCppt.setBounds(460, 290, 90, 30);
 
-        BtnAntarFaskes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        BtnAntarFaskes.setMnemonic('K');
-        BtnAntarFaskes.setText("Antar Faskes");
-        BtnAntarFaskes.setToolTipText("");
-        BtnAntarFaskes.setName("BtnAntarFaskes"); // NOI18N
-        BtnAntarFaskes.setPreferredSize(new java.awt.Dimension(160, 30));
-        BtnAntarFaskes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAntarFaskesActionPerformed(evt);
-            }
-        });
-        BtnAntarFaskes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnAntarFaskesKeyPressed(evt);
-            }
-        });
-        panelGlass12.add(BtnAntarFaskes);
-        BtnAntarFaskes.setBounds(850, 330, 160, 30);
-
         BtnEWS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         BtnEWS.setMnemonic('K');
         BtnEWS.setText("EWS");
@@ -2683,24 +2681,24 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass12.add(scrollPane7);
         scrollPane7.setBounds(420, 10, 480, 70);
 
-        BtnAntarFaskes1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        BtnAntarFaskes1.setMnemonic('K');
-        BtnAntarFaskes1.setText("Riwayat Pemeriksaan Radiologi & Laboratotium");
-        BtnAntarFaskes1.setToolTipText("");
-        BtnAntarFaskes1.setName("BtnAntarFaskes1"); // NOI18N
-        BtnAntarFaskes1.setPreferredSize(new java.awt.Dimension(160, 30));
-        BtnAntarFaskes1.addActionListener(new java.awt.event.ActionListener() {
+        BtnRiwayatRadLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        BtnRiwayatRadLab.setMnemonic('K');
+        BtnRiwayatRadLab.setText("Riwayat Pemeriksaan Radiologi & Laboratotium");
+        BtnRiwayatRadLab.setToolTipText("");
+        BtnRiwayatRadLab.setName("BtnRiwayatRadLab"); // NOI18N
+        BtnRiwayatRadLab.setPreferredSize(new java.awt.Dimension(160, 30));
+        BtnRiwayatRadLab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAntarFaskes1ActionPerformed(evt);
+                BtnRiwayatRadLabActionPerformed(evt);
             }
         });
-        BtnAntarFaskes1.addKeyListener(new java.awt.event.KeyAdapter() {
+        BtnRiwayatRadLab.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnAntarFaskes1KeyPressed(evt);
+                BtnRiwayatRadLabKeyPressed(evt);
             }
         });
-        panelGlass12.add(BtnAntarFaskes1);
-        BtnAntarFaskes1.setBounds(460, 250, 330, 30);
+        panelGlass12.add(BtnRiwayatRadLab);
+        BtnRiwayatRadLab.setBounds(460, 250, 330, 30);
 
         PanelInput1.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -3569,7 +3567,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TPasien.setBounds(283, 10, 260, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-10-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -5138,6 +5136,12 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 LCount.setText(""+tabModeGinekologi.getRowCount());
                         }
                     } break;
+//                case 6:
+//                    if(akses.getdiagnosa_pasien()==true){
+//                        panelDiagnosa1.setRM(TNoRw.getText(),TNoRM.getText(),Valid.SetTgl(DTPCari1.getSelectedItem()+""),Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Ranap",TCari.getText().trim());
+//                        panelDiagnosa1.simpan();
+//                    }
+//                    break;
                 default:
                     break;
             }
@@ -5883,6 +5887,13 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             case 5:
                 tampilPemeriksaanGinekologi();
                 break;
+//            case 6:
+//                if(akses.getdiagnosa_pasien()==true){
+//                    panelDiagnosa1.setRM(TNoRw.getText(),TNoRM.getText(),Valid.SetTgl(DTPCari1.getSelectedItem()+""), Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Ranap",TCari.getText().trim());
+//                    panelDiagnosa1.pilihTab();
+//                    LCount.setText(panelDiagnosa1.getRecord()+"");
+//                }  
+//                break;
             default:
                 break;
         }
@@ -8527,24 +8538,25 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_NamaDokterActionPerformed
 
-    private void BtnAntarFaskes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAntarFaskes1ActionPerformed
+    private void BtnRiwayatRadLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatRadLabActionPerformed
         if(TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMRiwayatRadLab resume=new RMRiwayatRadLab(null,true);
+            RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
+            resume.emptTeks();
             resume.setNoRm(TNoRM.getText(),TPasien.getText());
             resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             resume.setLocationRelativeTo(internalFrame1);
             resume.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
-    }//GEN-LAST:event_BtnAntarFaskes1ActionPerformed
+    }//GEN-LAST:event_BtnRiwayatRadLabActionPerformed
 
-    private void BtnAntarFaskes1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAntarFaskes1KeyPressed
+    private void BtnRiwayatRadLabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnRiwayatRadLabKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnAntarFaskes1KeyPressed
+    }//GEN-LAST:event_BtnRiwayatRadLabKeyPressed
 
     /**
     * @param args the command line arguments
@@ -8567,7 +8579,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private javax.swing.JTextField Bhp;
     private widget.Button BtnAll;
     private widget.Button BtnAntarFaskes;
-    private widget.Button BtnAntarFaskes1;
     private widget.Button BtnBatal;
     private widget.Button BtnBerkasDigital;
     private widget.Button BtnCari;
@@ -8635,6 +8646,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnResepObat;
     private widget.Button BtnResume;
     private widget.Button BtnRiwayat;
+    private widget.Button BtnRiwayatRadLab;
     private widget.Button BtnRujukKeluar;
     private widget.Button BtnSKDP;
     private widget.Button BtnSeekDokter;
@@ -9259,6 +9271,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }    
     
     public void setNoRm(String norwt,Date awal,Date akhir) {
+        emptTeks();
         TNoRw.setText(norwt);
         KdDok.setText(Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=?",norwt));
         if(KdDok.getText().equals("")){
@@ -9278,6 +9291,11 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         ChkInput1.setSelected(true);
         isForm2(); 
         TabRawatMouseClicked(null);
+    }
+    
+    public void emptTeks(){
+        BtnBatalActionPerformed(null);
+        TabRawat.setSelectedIndex(3);
     }
     
     public void setKamar(String kamar) {

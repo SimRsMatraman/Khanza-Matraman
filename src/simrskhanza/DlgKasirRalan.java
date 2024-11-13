@@ -996,6 +996,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         BtnSeek4 = new widget.Button();
         BtnEdit1 = new widget.Button();
         BtnEdit2 = new widget.Button();
+        BtnSuratKontrol = new widget.Button();
         panelGlass8 = new widget.panelisi();
         jLabel15 = new widget.Label();
         DTPCari1 = new widget.Tanggal();
@@ -1005,6 +1006,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         cmbStatus = new widget.ComboBox();
         jLabel20 = new widget.Label();
         cmbStatusBayar = new widget.ComboBox();
+        jLabel11 = new widget.Label();
         BtnKetWarna3 = new widget.Button();
         BtnKetWarna = new widget.Button();
         TabRawat = new javax.swing.JTabbedPane();
@@ -1015,10 +1017,9 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass9 = new widget.panelisi();
         jLabel4 = new widget.Label();
         TNoRwCari = new widget.TextBox();
+        TNoRMCari = new widget.TextBox();
         jLabel5 = new widget.Label();
         TNoReg = new widget.TextBox();
-        jLabel7 = new widget.Label();
-        TNoRMCari = new widget.TextBox();
         jLabel8 = new widget.Label();
         TPasienCari = new widget.TextBox();
         jLabel9 = new widget.Label();
@@ -5433,7 +5434,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2024" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2024" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5480,7 +5481,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2024" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2024" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -5652,7 +5653,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         LCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LCount.setText("0");
         LCount.setName("LCount"); // NOI18N
-        LCount.setPreferredSize(new java.awt.Dimension(100, 30));
+        LCount.setPreferredSize(new java.awt.Dimension(50, 30));
         panelGlass6.add(LCount);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
@@ -5721,7 +5722,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         jLabel16.setText("Poliklinik :");
         jLabel16.setName("jLabel16"); // NOI18N
-        jLabel16.setPreferredSize(new java.awt.Dimension(140, 23));
+        jLabel16.setPreferredSize(new java.awt.Dimension(80, 23));
         panelGlass7.add(jLabel16);
 
         CrPoli.setEditable(false);
@@ -5741,12 +5742,11 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         });
         panelGlass7.add(BtnSeek4);
 
-        BtnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/63.png"))); // NOI18N
-        BtnEdit1.setMnemonic('G');
+        BtnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/checked.png"))); // NOI18N
         BtnEdit1.setText("Pasien Check In");
-        BtnEdit1.setToolTipText("Alt+G");
+        BtnEdit1.setToolTipText("");
         BtnEdit1.setName("BtnEdit1"); // NOI18N
-        BtnEdit1.setPreferredSize(new java.awt.Dimension(150, 30));
+        BtnEdit1.setPreferredSize(new java.awt.Dimension(130, 30));
         BtnEdit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEdit1ActionPerformed(evt);
@@ -5758,7 +5758,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         BtnEdit2.setText("Pasien Batal");
         BtnEdit2.setToolTipText("");
         BtnEdit2.setName("BtnEdit2"); // NOI18N
-        BtnEdit2.setPreferredSize(new java.awt.Dimension(150, 30));
+        BtnEdit2.setPreferredSize(new java.awt.Dimension(130, 30));
         BtnEdit2.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
                 BtnEdit2ComponentHidden(evt);
@@ -5771,6 +5771,18 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         });
         panelGlass7.add(BtnEdit2);
 
+        BtnSuratKontrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/bpjs.png"))); // NOI18N
+        BtnSuratKontrol.setText("Surat Kontrol BPJS");
+        BtnSuratKontrol.setToolTipText("");
+        BtnSuratKontrol.setName("BtnSuratKontrol"); // NOI18N
+        BtnSuratKontrol.setPreferredSize(new java.awt.Dimension(170, 30));
+        BtnSuratKontrol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSuratKontrolActionPerformed(evt);
+            }
+        });
+        panelGlass7.add(BtnSuratKontrol);
+
         jPanel2.add(panelGlass7, java.awt.BorderLayout.CENTER);
 
         panelGlass8.setName("panelGlass8"); // NOI18N
@@ -5782,7 +5794,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5800,7 +5812,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -5814,28 +5826,33 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         jLabel12.setText("Status Periksa :");
         jLabel12.setName("jLabel12"); // NOI18N
-        jLabel12.setPreferredSize(new java.awt.Dimension(120, 23));
+        jLabel12.setPreferredSize(new java.awt.Dimension(100, 23));
         panelGlass8.add(jLabel12);
 
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum", "Sudah", "Batal", "Berkas Diterima", "Dirujuk", "Meninggal", "Dirawat", "Pulang Paksa" }));
         cmbStatus.setName("cmbStatus"); // NOI18N
-        cmbStatus.setPreferredSize(new java.awt.Dimension(150, 23));
+        cmbStatus.setPreferredSize(new java.awt.Dimension(100, 23));
         panelGlass8.add(cmbStatus);
 
         jLabel20.setText("Status Bayar :");
         jLabel20.setName("jLabel20"); // NOI18N
-        jLabel20.setPreferredSize(new java.awt.Dimension(120, 23));
+        jLabel20.setPreferredSize(new java.awt.Dimension(80, 23));
         panelGlass8.add(jLabel20);
 
         cmbStatusBayar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Sudah Bayar", "Belum Bayar" }));
         cmbStatusBayar.setName("cmbStatusBayar"); // NOI18N
-        cmbStatusBayar.setPreferredSize(new java.awt.Dimension(150, 23));
+        cmbStatusBayar.setPreferredSize(new java.awt.Dimension(100, 23));
         cmbStatusBayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbStatusBayarActionPerformed(evt);
             }
         });
         panelGlass8.add(cmbStatusBayar);
+
+        jLabel11.setToolTipText("");
+        jLabel11.setName("jLabel11"); // NOI18N
+        jLabel11.setPreferredSize(new java.awt.Dimension(13, 23));
+        panelGlass8.add(jLabel11);
 
         BtnKetWarna3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search.png"))); // NOI18N
         BtnKetWarna3.setMnemonic('K');
@@ -5947,13 +5964,19 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         TNoRwCari.setEditable(false);
         TNoRwCari.setHighlighter(null);
         TNoRwCari.setName("TNoRwCari"); // NOI18N
-        TNoRwCari.setPreferredSize(new java.awt.Dimension(140, 23));
+        TNoRwCari.setPreferredSize(new java.awt.Dimension(130, 23));
         TNoRwCari.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TNoRwCariMouseClicked(evt);
             }
         });
         panelGlass9.add(TNoRwCari);
+
+        TNoRMCari.setEditable(false);
+        TNoRMCari.setHighlighter(null);
+        TNoRMCari.setName("TNoRMCari"); // NOI18N
+        TNoRMCari.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelGlass9.add(TNoRMCari);
 
         jLabel5.setText("No. Reg. :");
         jLabel5.setName("jLabel5"); // NOI18N
@@ -5971,17 +5994,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         });
         panelGlass9.add(TNoReg);
 
-        jLabel7.setText("No.R.M. :");
-        jLabel7.setName("jLabel7"); // NOI18N
-        jLabel7.setPreferredSize(new java.awt.Dimension(65, 23));
-        panelGlass9.add(jLabel7);
-
-        TNoRMCari.setEditable(false);
-        TNoRMCari.setHighlighter(null);
-        TNoRMCari.setName("TNoRMCari"); // NOI18N
-        TNoRMCari.setPreferredSize(new java.awt.Dimension(90, 23));
-        panelGlass9.add(TNoRMCari);
-
         jLabel8.setText("Nama Pasien :");
         jLabel8.setName("jLabel8"); // NOI18N
         jLabel8.setPreferredSize(new java.awt.Dimension(85, 23));
@@ -5995,7 +6007,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         jLabel9.setToolTipText("");
         jLabel9.setName("jLabel9"); // NOI18N
-        jLabel9.setPreferredSize(new java.awt.Dimension(33, 23));
+        jLabel9.setPreferredSize(new java.awt.Dimension(13, 23));
         panelGlass9.add(jLabel9);
 
         BtnInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Stethoscope.png"))); // NOI18N
@@ -12110,7 +12122,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMRiwayatRadLab resume=new RMRiwayatRadLab(null,true);
+            RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
+            resume.emptTeks();
             resume.setNoRm(TNoRMCari.getText(),TPasienCari.getText());
             resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             resume.setLocationRelativeTo(internalFrame1);
@@ -12251,7 +12264,10 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     if (tabModekasir.getRowCount() == 0) {
         JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
         TCari.requestFocus();
-    } else {
+    }else if(tbKasirRalan.getSelectedRow()== -1){
+            JOptionPane.showMessageDialog(null,"Silahkan pilih pasien pada tabel");
+            TCari.requestFocus();
+        } else {
         if (tbKasirRalan.getSelectedRow() != -1) {
             if (Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?", TNoRw.getText()) > 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
@@ -12285,7 +12301,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
         } else if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            JOptionPane.showMessageDialog(null, "Silahkan pilih pasien pada tabel");
             tbKasirRalan.requestFocus();
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -12297,6 +12313,49 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnInput1ActionPerformed
+
+    private void BtnSuratKontrolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSuratKontrolActionPerformed
+        if (tabModekasir.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        } else if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        } else {
+            if (tbKasirRalan.getSelectedRow() != -1) {
+                try {
+                    pskasir = koneksi.prepareStatement("select no_sep,no_kartu,tanggal_lahir,jkel,nmdiagnosaawal from bridging_sep where no_rawat=?");
+                    try {
+                        pskasir.setString(1, TNoRw.getText());
+                        rskasir = pskasir.executeQuery();
+                        if (rskasir.next()) {
+                            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                            BPJSSuratKontrol form = new BPJSSuratKontrol(null, false);
+                            form.setNoRm(TNoRwCari.getText(), rskasir.getString("no_sep"), rskasir.getString("no_kartu"), TNoRMCari.getText(), TPasienCari.getText(), rskasir.getString("tanggal_lahir"), rskasir.getString("jkel"), rskasir.getString("nmdiagnosaawal"));
+                            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                            form.setLocationRelativeTo(internalFrame1);
+                            form.setVisible(true);
+                            this.setCursor(Cursor.getDefaultCursor());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
+                            TCari.requestFocus();
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    } finally {
+                        if (rskasir != null) {
+                            rskasir.close();
+                        }
+                        if (pskasir != null) {
+                            pskasir.close();
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnSuratKontrolActionPerformed
 
     /**
      * @param args the command line arguments
@@ -12341,6 +12400,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private widget.Button BtnSimpan1;
     private widget.Button BtnSimpan4;
     private widget.Button BtnSimpan5;
+    private widget.Button BtnSuratKontrol;
     private widget.TextBox CrDokter3;
     private widget.TextBox CrPoli;
     private widget.TextBox CrPtg;
@@ -12617,6 +12677,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private widget.InternalFrame internalFrame7;
     private widget.InternalFrame internalFrame8;
     private widget.Label jLabel10;
+    private widget.Label jLabel11;
     private widget.Label jLabel12;
     private widget.Label jLabel13;
     private widget.Label jLabel14;
@@ -12635,7 +12696,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private widget.Label jLabel4;
     private widget.Label jLabel5;
     private widget.Label jLabel6;
-    private widget.Label jLabel7;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private javax.swing.JMenu jMenu7;
