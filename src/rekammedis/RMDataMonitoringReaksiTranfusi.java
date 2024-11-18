@@ -64,7 +64,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
 
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.R.M.","Nama Pasien","Umur","JK","Tgl.Lahir","Tgl.Obser","Jam Obser","Produk/Jenis Darah",
-            "No.Kantong","Lokasi Insersi","TD(mmHg)","HR(x/menit)","RR(x/menit)","Suhu(°C)","Alergi","Keterangan",
+            "No.Kantong","Lokasi Insersi","TD(mmHg)","HR(x/menit)","RR(x/menit)","Suhu(°C)","Alergi","Keterangan","Gol Darah",
             "NIP","Nama Petugas"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -75,7 +75,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 19; i++) {
+        for (i = 0; i < 20; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -112,8 +112,10 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
             }else if(i==16){
                 column.setPreferredWidth(150);
             }else if(i==17){
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(80);
             }else if(i==18){
+                column.setPreferredWidth(90);
+            }else if(i==19){
                 column.setPreferredWidth(160);
             }
         }
@@ -257,6 +259,8 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         Alergi = new widget.TextBox();
         jLabel32 = new widget.Label();
         Keterangan = new widget.TextBox();
+        jLabel33 = new widget.Label();
+        cmbGolongan = new widget.ComboBox();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -445,7 +449,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-03-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -459,7 +463,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-03-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -555,7 +559,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-03-2023" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-11-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -675,7 +679,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         jLabel17.setText("x/menit");
         jLabel17.setName("jLabel17"); // NOI18N
         FormInput.add(jLabel17);
-        jLabel17.setBounds(367, 100, 50, 23);
+        jLabel17.setBounds(310, 100, 50, 23);
 
         HR.setFocusTraversalPolicyProvider(true);
         HR.setName("HR"); // NOI18N
@@ -685,17 +689,17 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
             }
         });
         FormInput.add(HR);
-        HR.setBounds(304, 100, 60, 23);
+        HR.setBounds(250, 100, 60, 23);
 
         jLabel20.setText("HR :");
         jLabel20.setName("jLabel20"); // NOI18N
         FormInput.add(jLabel20);
-        jLabel20.setBounds(260, 100, 40, 23);
+        jLabel20.setBounds(210, 100, 40, 23);
 
         jLabel22.setText("Suhu :");
         jLabel22.setName("jLabel22"); // NOI18N
         FormInput.add(jLabel22);
-        jLabel22.setBounds(664, 100, 40, 23);
+        jLabel22.setBounds(510, 100, 40, 23);
 
         Suhu.setFocusTraversalPolicyProvider(true);
         Suhu.setName("Suhu"); // NOI18N
@@ -705,7 +709,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
             }
         });
         FormInput.add(Suhu);
-        Suhu.setBounds(708, 100, 60, 23);
+        Suhu.setBounds(550, 100, 60, 23);
 
         jLabel23.setText("TD :");
         jLabel23.setName("jLabel23"); // NOI18N
@@ -726,7 +730,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         jLabel26.setText("°C");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
-        jLabel26.setBounds(771, 100, 30, 23);
+        jLabel26.setBounds(610, 100, 30, 23);
 
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel27.setText("mmHg");
@@ -738,7 +742,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         jLabel25.setText("x/menit");
         jLabel25.setName("jLabel25"); // NOI18N
         FormInput.add(jLabel25);
-        jLabel25.setBounds(567, 100, 50, 23);
+        jLabel25.setBounds(460, 100, 50, 23);
 
         RR.setFocusTraversalPolicyProvider(true);
         RR.setName("RR"); // NOI18N
@@ -748,12 +752,12 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
             }
         });
         FormInput.add(RR);
-        RR.setBounds(504, 100, 60, 23);
+        RR.setBounds(400, 100, 60, 23);
 
         jLabel28.setText("RR :");
         jLabel28.setName("jLabel28"); // NOI18N
         FormInput.add(jLabel28);
-        jLabel28.setBounds(460, 100, 40, 23);
+        jLabel28.setBounds(360, 100, 40, 23);
 
         jLabel24.setText("Jenis Darah :");
         jLabel24.setName("jLabel24"); // NOI18N
@@ -800,10 +804,10 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         FormInput.add(LokasiInsersi);
         LokasiInsersi.setBounds(589, 70, 200, 23);
 
-        jLabel31.setText("Alergi :");
+        jLabel31.setText("Golongan Darah :");
         jLabel31.setName("jLabel31"); // NOI18N
         FormInput.add(jLabel31);
-        jLabel31.setBounds(0, 130, 80, 23);
+        jLabel31.setBounds(640, 100, 90, 23);
 
         Alergi.setFocusTraversalPolicyProvider(true);
         Alergi.setName("Alergi"); // NOI18N
@@ -829,6 +833,17 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         });
         FormInput.add(Keterangan);
         Keterangan.setBounds(469, 130, 320, 23);
+
+        jLabel33.setText("Alergi :");
+        jLabel33.setName("jLabel33"); // NOI18N
+        FormInput.add(jLabel33);
+        jLabel33.setBounds(0, 130, 80, 23);
+
+        cmbGolongan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "A-", "B-", "AB-", "O-", "A+", "B+", "AB+", "O+" }));
+        cmbGolongan.setName("cmbGolongan"); // NOI18N
+        cmbGolongan.setPreferredSize(new java.awt.Dimension(62, 28));
+        FormInput.add(cmbGolongan);
+        cmbGolongan.setBounds(740, 100, 50, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -879,10 +894,10 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
         }else if(NIP.getText().trim().equals("")||NamaPetugas.getText().trim().equals("")){
             Valid.textKosong(NIP,"Petugas");
         }else{
-            if(Sequel.menyimpantf("monitoring_reaksi_tranfusi","?,?,?,?,?,?,?,?,?,?,?,?,?","Data",13,new String[]{
+            if(Sequel.menyimpantf("monitoring_reaksi_tranfusi","?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",14,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 JenisDarah.getText(),NoKantong.getText(),LokasiInsersi.getText(),TD.getText(),HR.getText(),RR.getText(),Suhu.getText(),Alergi.getText(), 
-                Keterangan.getText(),NIP.getText()
+                Keterangan.getText(),cmbGolongan.getSelectedItem().toString(),NIP.getText()
             })==true){
                 tampil();
                 emptTeks();
@@ -1396,6 +1411,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
     private widget.Tanggal Tanggal;
     private widget.TextBox TglLahir;
     private widget.Button btnPetugas;
+    private widget.ComboBox cmbGolongan;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
@@ -1414,6 +1430,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
     private widget.Label jLabel30;
     private widget.Label jLabel31;
     private widget.Label jLabel32;
+    private widget.Label jLabel33;
     private widget.Label jLabel4;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
@@ -1433,7 +1450,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                     "pasien.jk,pasien.tgl_lahir,monitoring_reaksi_tranfusi.tgl_perawatan,monitoring_reaksi_tranfusi.jam_rawat,monitoring_reaksi_tranfusi.produk_darah,"+
                     "monitoring_reaksi_tranfusi.no_kantong,monitoring_reaksi_tranfusi.lokasi_insersi,monitoring_reaksi_tranfusi.td,monitoring_reaksi_tranfusi.hr,"+
-                    "monitoring_reaksi_tranfusi.rr,monitoring_reaksi_tranfusi.suhu,monitoring_reaksi_tranfusi.jenis_reaksi_alergi,monitoring_reaksi_tranfusi.keterangan,"+
+                    "monitoring_reaksi_tranfusi.rr,monitoring_reaksi_tranfusi.suhu,monitoring_reaksi_tranfusi.jenis_reaksi_alergi,monitoring_reaksi_tranfusi.keterangan,monitoring_reaksi_tranfusi.gol_darah,"+
                     "monitoring_reaksi_tranfusi.nip,petugas.nama from monitoring_reaksi_tranfusi inner join reg_periksa on monitoring_reaksi_tranfusi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join petugas on monitoring_reaksi_tranfusi.nip=petugas.nip where "+
@@ -1443,7 +1460,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                     "pasien.jk,pasien.tgl_lahir,monitoring_reaksi_tranfusi.tgl_perawatan,monitoring_reaksi_tranfusi.jam_rawat,monitoring_reaksi_tranfusi.produk_darah,"+
                     "monitoring_reaksi_tranfusi.no_kantong,monitoring_reaksi_tranfusi.lokasi_insersi,monitoring_reaksi_tranfusi.td,monitoring_reaksi_tranfusi.hr,"+
-                    "monitoring_reaksi_tranfusi.rr,monitoring_reaksi_tranfusi.suhu,monitoring_reaksi_tranfusi.jenis_reaksi_alergi,monitoring_reaksi_tranfusi.keterangan,"+
+                    "monitoring_reaksi_tranfusi.rr,monitoring_reaksi_tranfusi.suhu,monitoring_reaksi_tranfusi.jenis_reaksi_alergi,monitoring_reaksi_tranfusi.keterangan,monitoring_reaksi_tranfusi.gol_darah,"+
                     "monitoring_reaksi_tranfusi.nip,petugas.nama from monitoring_reaksi_tranfusi inner join reg_periksa on monitoring_reaksi_tranfusi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join petugas on monitoring_reaksi_tranfusi.nip=petugas.nip where "+
@@ -1472,7 +1489,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
                         rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),rs.getString("jk"),rs.getString("tgl_lahir"),
                         rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),rs.getString("produk_darah"),rs.getString("no_kantong"),
                         rs.getString("lokasi_insersi"),rs.getString("td"),rs.getString("hr"),rs.getString("rr"),rs.getString("suhu"),
-                        rs.getString("jenis_reaksi_alergi"),rs.getString("keterangan"),rs.getString("nip"),rs.getString("nama")
+                        rs.getString("jenis_reaksi_alergi"),rs.getString("keterangan"),rs.getString("gol_darah"),rs.getString("nip"),rs.getString("nama")
                     });
                 }
             } catch (Exception e) {
@@ -1523,6 +1540,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
             Suhu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
             Alergi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
             Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            cmbGolongan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
             Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());  
         }
     }
@@ -1549,7 +1567,7 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,185));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,200));
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           
@@ -1632,10 +1650,10 @@ public final class RMDataMonitoringReaksiTranfusi extends javax.swing.JDialog {
 
     private void ganti() {
         Sequel.mengedit("monitoring_reaksi_tranfusi","tgl_perawatan=? and jam_rawat=? and no_rawat=?","no_rawat=?,tgl_perawatan=?,jam_rawat=?,produk_darah=?,"+
-            "no_kantong=?,lokasi_insersi=?,td=?,hr=?,rr=?,suhu=?,jenis_reaksi_alergi=?,keterangan=?,nip=?",16,new String[]{
+            "no_kantong=?,lokasi_insersi=?,td=?,hr=?,rr=?,suhu=?,jenis_reaksi_alergi=?,keterangan=?,gol_darah=?,nip=?",17,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
             JenisDarah.getText(),NoKantong.getText(),LokasiInsersi.getText(),TD.getText(),HR.getText(),RR.getText(),Suhu.getText(),Alergi.getText(), 
-            Keterangan.getText(),NIP.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),
+            Keterangan.getText(),cmbGolongan.getSelectedItem().toString(),NIP.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         });
         if(tabMode.getRowCount()!=0){tampil();}

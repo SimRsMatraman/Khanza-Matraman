@@ -39,6 +39,11 @@ public class WarnaTableIGD extends DefaultTableCellRenderer {
             component.setBackground(new Color(252, 192, 203));
             component.setForeground(new Color(0,0,0));
         }
+        
+        if (isSelected){
+            component.setBackground(new Color(245, 222, 179));
+            component.setForeground(new Color(220, 20, 60));
+        }
         return component;
     }
 
