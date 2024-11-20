@@ -475,7 +475,7 @@ public final class SuratMCUPegawai extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-10-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -489,7 +489,7 @@ public final class SuratMCUPegawai extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-10-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -686,7 +686,7 @@ public final class SuratMCUPegawai extends javax.swing.JDialog {
         jLabel28.setText("Kesimpulan :");
         jLabel28.setName("jLabel28"); // NOI18N
         FormInput.add(jLabel28);
-        jLabel28.setBounds(1430, 50, 60, 23);
+        jLabel28.setBounds(920, 70, 70, 23);
 
         CmbButaWarna.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Diperiksa", "Tidak", "Ya" }));
         CmbButaWarna.setName("CmbButaWarna"); // NOI18N
@@ -701,7 +701,7 @@ public final class SuratMCUPegawai extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbButaWarna);
-        CmbButaWarna.setBounds(1500, 10, 100, 23);
+        CmbButaWarna.setBounds(810, 70, 110, 23);
 
         CmbKesimpulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sehat", "Sehat dengan Catatan", "Tidak Sehat", "Pemeriksaan Tidak Lengkap" }));
         CmbKesimpulan.setName("CmbKesimpulan"); // NOI18N
@@ -711,10 +711,10 @@ public final class SuratMCUPegawai extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbKesimpulan);
-        CmbKesimpulan.setBounds(1500, 50, 100, 23);
+        CmbKesimpulan.setBounds(990, 70, 100, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-10-2024" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -781,7 +781,7 @@ public final class SuratMCUPegawai extends javax.swing.JDialog {
         jLabel30.setText("Buta Warna :");
         jLabel30.setName("jLabel30"); // NOI18N
         FormInput.add(jLabel30);
-        jLabel30.setBounds(1420, 10, 70, 23);
+        jLabel30.setBounds(740, 70, 70, 23);
 
         jLabel31.setText("Rekomendasi :");
         jLabel31.setName("jLabel31"); // NOI18N
@@ -809,7 +809,7 @@ public final class SuratMCUPegawai extends javax.swing.JDialog {
         scrollPane4.setViewportView(Catatan);
 
         FormInput.add(scrollPane4);
-        scrollPane4.setBounds(810, 10, 240, 80);
+        scrollPane4.setBounds(810, 10, 240, 50);
 
         scrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane5.setName("scrollPane5"); // NOI18N

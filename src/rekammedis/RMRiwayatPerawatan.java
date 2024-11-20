@@ -259,7 +259,9 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         });
         
         ChkAccor.setSelected(false);
+        ChkAccor1.setSelected(false);
         isMenu();
+        isMenu1();
     }    
 
     /** This method is called from within the constructor to
@@ -2413,7 +2415,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }//GEN-LAST:event_chkKonsultasiMedikActionPerformed
 
     private void ChkAccor1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccor1ActionPerformed
-        isMenu();
+        isMenu1();
     }//GEN-LAST:event_ChkAccor1ActionPerformed
 
     private void chkSemua1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkSemua1ItemStateChanged
@@ -2889,6 +2891,20 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
             FormMenu.setVisible(false);    
             ChkAccor.setVisible(true);
+        }
+    }
+    
+    private void isMenu1(){
+        if(ChkAccor1.isSelected()==true){
+            ChkAccor1.setVisible(false);
+            PanelAccor1.setPreferredSize(new Dimension(275,HEIGHT));
+            FormMenu1.setVisible(true); 
+            ChkAccor1.setVisible(true);
+        }else if(ChkAccor1.isSelected()==false){  
+            ChkAccor1.setVisible(false);
+            PanelAccor1.setPreferredSize(new Dimension(15,HEIGHT));
+            FormMenu1.setVisible(false);    
+            ChkAccor1.setVisible(true);
         }
     }
 
@@ -12555,7 +12571,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                  "<tr>"+
                                     "<td valign='top' align='center'>"+w+"</td>"+
                                     "<td valign='top'>"+rs2.getString("tgl_perawatan")+" "+rs2.getString("jam_rawat")+"</td>"+
-                                    "<td valign='top' colspan='6'>"+rs2.getString("nik")+" "+rs2.getString("nama")+"</td>"+
+                                    "<td valign='top' colspan='6'>"+rs2.getString("nama")+"</td>"+
                                     "<td valign='top'>"+rs2.getString("suhu_tubuh")+"</td>"+
                                     "<td valign='top'>"+rs2.getString("tensi")+"</td>"+
                                     "<td valign='top'>"+rs2.getString("nadi")+"</td>"+
