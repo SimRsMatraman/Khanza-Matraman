@@ -120,6 +120,7 @@ import rekammedis.AsesmenAwalMedisRanapAnak;
 import rekammedis.AsesmenAwalMedisRanapDewasa;
 import rekammedis.AsesmenAwalMedisRanapKandungan;
 import rekammedis.AsesmenAwalMedisRanapNeonatus;
+import rekammedis.DlgCatatanKeperawatan;
 import simrskhanza.DlgRujukRanap;
 
 /**
@@ -1231,6 +1232,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         KSO = new javax.swing.JTextField();
         Menejemen = new javax.swing.JTextField();
         BtnAntarFaskes = new widget.Button();
+        BtnImplementasiKeperawatanRanap = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -1338,12 +1340,14 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnDokter3 = new widget.Button();
         BtnCppt = new widget.Button();
         BtnEWS = new widget.Button();
-        BtnImplementasiKeperawatanRanap = new widget.Button();
         BtnEWS1 = new widget.Button();
         BtnImplementasiKeperawatanRanap1 = new widget.Button();
         scrollPane7 = new widget.ScrollPane();
         Instruksi = new widget.TextArea();
         BtnRiwayatRadLab = new widget.Button();
+        BtnCatatanKeperawatanRanap = new widget.Button();
+        BtnCaper = new widget.Button();
+        BtnObservasiRanap = new widget.Button();
         internalFrame6 = new widget.InternalFrame();
         Scroll4 = new widget.ScrollPane();
         tbPemeriksaanObstetri = new widget.Table();
@@ -1565,6 +1569,23 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
 
+        BtnImplementasiKeperawatanRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        BtnImplementasiKeperawatanRanap.setMnemonic('K');
+        BtnImplementasiKeperawatanRanap.setText("Implementasi Keperawatan");
+        BtnImplementasiKeperawatanRanap.setToolTipText("");
+        BtnImplementasiKeperawatanRanap.setName("BtnImplementasiKeperawatanRanap"); // NOI18N
+        BtnImplementasiKeperawatanRanap.setPreferredSize(new java.awt.Dimension(160, 30));
+        BtnImplementasiKeperawatanRanap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnImplementasiKeperawatanRanapActionPerformed(evt);
+            }
+        });
+        BtnImplementasiKeperawatanRanap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnImplementasiKeperawatanRanapKeyPressed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -1739,7 +1760,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1753,7 +1774,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2605,25 +2626,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass12.add(BtnEWS);
         BtnEWS.setBounds(560, 290, 90, 30);
 
-        BtnImplementasiKeperawatanRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        BtnImplementasiKeperawatanRanap.setMnemonic('K');
-        BtnImplementasiKeperawatanRanap.setText("Implementasi Keperawatan");
-        BtnImplementasiKeperawatanRanap.setToolTipText("");
-        BtnImplementasiKeperawatanRanap.setName("BtnImplementasiKeperawatanRanap"); // NOI18N
-        BtnImplementasiKeperawatanRanap.setPreferredSize(new java.awt.Dimension(160, 30));
-        BtnImplementasiKeperawatanRanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnImplementasiKeperawatanRanapActionPerformed(evt);
-            }
-        });
-        BtnImplementasiKeperawatanRanap.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnImplementasiKeperawatanRanapKeyPressed(evt);
-            }
-        });
-        panelGlass12.add(BtnImplementasiKeperawatanRanap);
-        BtnImplementasiKeperawatanRanap.setBounds(460, 330, 200, 30);
-
         BtnEWS1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         BtnEWS1.setMnemonic('K');
         BtnEWS1.setText("PEWS");
@@ -2645,7 +2647,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
 
         BtnImplementasiKeperawatanRanap1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         BtnImplementasiKeperawatanRanap1.setMnemonic('K');
-        BtnImplementasiKeperawatanRanap1.setText("Observasi Lanjutan");
+        BtnImplementasiKeperawatanRanap1.setText("Observasi Ranap");
         BtnImplementasiKeperawatanRanap1.setToolTipText("");
         BtnImplementasiKeperawatanRanap1.setName("BtnImplementasiKeperawatanRanap1"); // NOI18N
         BtnImplementasiKeperawatanRanap1.setPreferredSize(new java.awt.Dimension(160, 30));
@@ -2660,7 +2662,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnImplementasiKeperawatanRanap1);
-        BtnImplementasiKeperawatanRanap1.setBounds(680, 330, 150, 30);
+        BtnImplementasiKeperawatanRanap1.setBounds(710, 330, 150, 30);
 
         scrollPane7.setBorder(javax.swing.BorderFactory.createTitledBorder("Instruksi"));
         scrollPane7.setName("scrollPane7"); // NOI18N
@@ -2697,6 +2699,51 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         });
         panelGlass12.add(BtnRiwayatRadLab);
         BtnRiwayatRadLab.setBounds(460, 250, 330, 30);
+
+        BtnCatatanKeperawatanRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        BtnCatatanKeperawatanRanap.setMnemonic('K');
+        BtnCatatanKeperawatanRanap.setText("Catatan Keperawatan");
+        BtnCatatanKeperawatanRanap.setToolTipText("");
+        BtnCatatanKeperawatanRanap.setName("BtnCatatanKeperawatanRanap"); // NOI18N
+        BtnCatatanKeperawatanRanap.setPreferredSize(new java.awt.Dimension(160, 30));
+        BtnCatatanKeperawatanRanap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCatatanKeperawatanRanapActionPerformed(evt);
+            }
+        });
+        BtnCatatanKeperawatanRanap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCatatanKeperawatanRanapKeyPressed(evt);
+            }
+        });
+        panelGlass12.add(BtnCatatanKeperawatanRanap);
+        BtnCatatanKeperawatanRanap.setBounds(450, 330, 200, 30);
+
+        BtnCaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnCaper.setMnemonic('2');
+        BtnCaper.setToolTipText("Alt+2");
+        BtnCaper.setName("BtnCaper"); // NOI18N
+        BtnCaper.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCaper.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCaperActionPerformed(evt);
+            }
+        });
+        panelGlass12.add(BtnCaper);
+        BtnCaper.setBounds(650, 330, 30, 30);
+
+        BtnObservasiRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnObservasiRanap.setMnemonic('2');
+        BtnObservasiRanap.setToolTipText("Alt+2");
+        BtnObservasiRanap.setName("BtnObservasiRanap"); // NOI18N
+        BtnObservasiRanap.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnObservasiRanap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnObservasiRanapActionPerformed(evt);
+            }
+        });
+        panelGlass12.add(BtnObservasiRanap);
+        BtnObservasiRanap.setBounds(860, 330, 30, 30);
 
         PanelInput1.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -3472,7 +3519,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TPasien.setBounds(283, 10, 260, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-11-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -8558,6 +8605,61 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnAwalKeperawatanNeonatusActionPerformed
 
+    private void BtnCatatanKeperawatanRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCatatanKeperawatanRanapActionPerformed
+        if(TNoRw.getText().trim().equals("") ){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgCatatanKeperawatan dlgcatatankep=new DlgCatatanKeperawatan(null,false);
+            dlgcatatankep.setNoRawat(TNoRw.getText(),TNoRw.getText());
+            dlgcatatankep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            dlgcatatankep.setLocationRelativeTo(internalFrame1);
+            dlgcatatankep.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnCatatanKeperawatanRanapActionPerformed
+
+    private void BtnCatatanKeperawatanRanapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCatatanKeperawatanRanapKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnCatatanKeperawatanRanapKeyPressed
+
+    private void BtnCaperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCaperActionPerformed
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMDataCatatanKeperawatanRanap form=new RMDataCatatanKeperawatanRanap(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnCaperActionPerformed
+
+    private void BtnObservasiRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnObservasiRanapActionPerformed
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMDataCatatanObservasiRanap form=new RMDataCatatanObservasiRanap(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnObservasiRanapActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -8585,10 +8687,12 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnAwalKeperawatanNeonatus;
     private widget.Button BtnBatal;
     private widget.Button BtnBerkasDigital;
+    private widget.Button BtnCaper;
     private widget.Button BtnCari;
     private widget.Button BtnCatatan;
     private widget.Button BtnCatatanCekGDS;
     private widget.Button BtnCatatanKeperawatan;
+    private widget.Button BtnCatatanKeperawatanRanap;
     private widget.Button BtnCatatanObservasiRanap;
     private widget.Button BtnCatatanObservasiRanapKebidanan;
     private widget.Button BtnCatatanObservasiRanapPostPartum;
@@ -8623,6 +8727,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnMedisNeonatus;
     private widget.Button BtnMonitoringReaksiTranfusi;
     private widget.Button BtnObatBhp;
+    private widget.Button BtnObservasiRanap;
     private widget.Button BtnPemantauanPEWSAnak;
     private widget.Button BtnPemantauanPEWSDewasa;
     private widget.Button BtnPenilaianKorbanKekerasan;

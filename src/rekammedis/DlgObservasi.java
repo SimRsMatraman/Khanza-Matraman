@@ -36,9 +36,7 @@ public class DlgObservasi extends javax.swing.JDialog {
          setSize(1285,674);
         
         HTMLEditorKit kit = new HTMLEditorKit();
-        LoadHTML.setEditable(true);
-        LoadHTML.setEditorKit(kit);
-        LoadHTML.setEditable(true);
+        LoadHTML.setEditable(false);
         LoadHTML.setEditorKit(kit);
         StyleSheet styleSheet = kit.getStyleSheet();
         styleSheet.addRule(
@@ -400,7 +398,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     try {
                         rs2=koneksi.prepareStatement(
                                 "select catatan_observasi_ranap.tgl_perawatan,catatan_observasi_ranap.jam_rawat,catatan_observasi_ranap.gcs,catatan_observasi_ranap.td,catatan_observasi_ranap.hr,catatan_observasi_ranap.rr,catatan_observasi_ranap.suhu,catatan_observasi_ranap.spo2,"+
-                                "catatan_observasi_ranap.nip,petugas.nama,catatan_observasi_ranap.keterangan from catatan_observasi_ranap inner join petugas on catatan_observasi_ranap.nip=petugas.nip where catatan_observasi_ranap.no_rawat='"+rs.getString("no_rawat")+"' "+
+                                "catatan_observasi_ranap.nip,petugas.nama from catatan_observasi_ranap inner join petugas on catatan_observasi_ranap.nip=petugas.nip where catatan_observasi_ranap.no_rawat='"+rs.getString("no_rawat")+"' "+
                                 "order by catatan_observasi_ranap.tgl_perawatan,catatan_observasi_ranap.jam_rawat").executeQuery();
                         if(rs2.next()){
                             htmlContent.append(
@@ -413,7 +411,6 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='40%'>RR(x/menit)</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='40%'>Suhu(°C)</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='40%'>SpO2(%)</td>"+
-                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='40%'>Keterangan</td>"+
                                     "</tr>");
                             rs2.beforeFirst();
                             while(rs2.next()){
@@ -440,7 +437,6 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                         "<td align='left'>"+rs2.getString("rr")+"</td>"+
                                         "<td align='left'>"+rs2.getString("suhu")+"</td>"+
                                         "<td align='left'>"+rs2.getString("spo2")+"</td>"+
-                                        "<td align='left'>"+rs2.getString("keterangan")+"</td>"+
                                     "</tr>"
                                  ); 
                             } 
@@ -453,59 +449,6 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         }
                     }
                     
-//                    try {
-//                        rs2=koneksi.prepareStatement(
-//                                "select pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.keluhan,"+
-//                                "pemeriksaan_ranap.pemeriksaan,pemeriksaan_ranap.rtl,pemeriksaan_ranap.penilaian,pemeriksaan_ranap.nik,pegawai.nama,departemen.nama "+
-//                                "from pemeriksaan_ranap inner join pegawai on pemeriksaan_ranap.nik=pegawai.nik inner join departemen on pegawai.departemen=departemen.dep_id where pemeriksaan_ranap.no_rawat='"+rs.getString("no_rawat")+"' "+
-//                                "order by pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat").executeQuery();
-//                        if(rs2.next()){
-//                            htmlContent.append(
-//                                    "<tr class='isi'>"+
-//                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='10%'>Tanggal</td>"+
-//                                        "<td valign='middle' align='center'  width=40%' bgcolor='#FFFAF8'>Nama Pegawai</td>"+
-//                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Subjek</td>"+
-//                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='24%'>Objek</td>"+
-//                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Asesmen</td>"+
-//                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Plan</td>"+
-////                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Verifikasi</td>"+
-//                                    "</tr>");
-//                            rs2.beforeFirst();
-//                            while(rs2.next()){
-//                                String bagian="",stylee="";
-//                                
-//                                bagian=Sequel.cariIsi("SELECT bidang FROM pegawai WHERE nik='"+rs2.getString("nik")+"'");
-//                                
-//                                //19960928201806045
-//                                if(bagian.equals("Medis")){
-//                                    stylee=" style=' background-color:#f7d4e8 '";
-//                                }else{
-//                                    stylee=" style=' background-color:#ccffcc '";
-//                                }
-////                                 System.out.println("Notif Rekening : "+stylee);
-////                                 System.out.println("Notif Rekening : "+rs2.getString("nik"));
-//                                //2021/04/18/000056
-//                                 htmlContent.append(                             
-//                                    "<tr class='isi'  >"+
-//                                        "<td align='center' "+stylee+" >"+rs2.getString("tgl_perawatan")+"<br>"+rs2.getString("jam_rawat")+"</td>"+
-//                                        "<td valign='top'  "+stylee+" >"+rs2.getString("nama")+"<br>"+"("+rs2.getString("departemen.nama")+")</td>"+
-//                                        "<td align='left' "+stylee+" >"+rs2.getString("keluhan")+"</td>"+
-//                                        "<td align='left' "+stylee+">"+rs2.getString("pemeriksaan")+"</td>"+
-//                                        "<td align='left' "+stylee+">"+rs2.getString("penilaian")+"</td>"+
-//                                        "<td align='left' "+stylee+">"+rs2.getString("rtl")+"</td>"+
-////                                        "<td align='left' "+stylee+"><a class='button' href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"'>Verifikasi</a></td>"+
-//                                    "</tr>"
-//                                 ); 
-//                            } 
-//                        }       
-//                    } 
-//                    catch (Exception e) {
-//                        System.out.println("Notifikasi : "+e);
-//                    } finally{
-//                        if(rs2!=null){
-//                            rs2.close();
-//                        }
-//                    }
                     htmlContent.append(
                                 "</table>"+
                             "</td>"+
