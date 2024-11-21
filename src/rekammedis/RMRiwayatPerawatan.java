@@ -3096,7 +3096,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     //menampilkan asuhan awal keperawatan IGD
                     menampilkanAsuhanKeperawatanIGD(rs.getString("no_rawat"));
                      //menampilkan asuhan awal keperawatan Kebidanan IGD
-                    menampilkanAsuhanKeperawatanKebIGD(rs.getString("no_rawat"));
+                    menampilkanAsuhanKeperawatanKebIGD(rs.getString("no_rawat"));                    
+                    //menampilkan asuhan awal medis IGD
+                    menampilkanAsuhanMedisIGD(rs.getString("no_rawat"));
                     //menampilkan asuhan awal keperawatan rawat jalan
                     menampilkanAsuhanKeperawatanRalan(rs.getString("no_rawat"));
                     //menampilkan asuhan awal keperawatan rawat jalan gigi
@@ -3106,13 +3108,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     //menampilkan asuhan awal keperawatan rawat jalan kandungan
                     menampilkanAsuhanKeperawatanRalanKandungan(rs.getString("no_rawat"));
                     //menampilkan asuhan awal keperawatan rawat jalan psikiatri
-                    menampilkanAsuhanKeperawatanRalanPsikiatri(rs.getString("no_rawat"));
-                    //menampilkan asuhan fisioterapi
-                    menampilkanAsuhanFisioterapi(rs.getString("no_rawat"));
+                    menampilkanAsuhanKeperawatanRalanPsikiatri(rs.getString("no_rawat"));                    
                     //menampilkan asuhan psikolog
                     menampilkanAsuhanPsikolog(rs.getString("no_rawat"));
-                    //menampilkan asuhan awal medis IGD
-                    menampilkanAsuhanMedisIGD(rs.getString("no_rawat"));
                     //menampilkan asuhan awal medis rawat jalan
                     menampilkanAsuhanMedisRawatJalan(rs.getString("no_rawat"));
                     //menampilkan asuhan awal medis rawat jalan kandungan
@@ -3135,6 +3133,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanAsuhanMedisRawatJalanBedah(rs.getString("no_rawat"));
                     //menampilkan asuhan awal medis rawat jalan geriatri
                     menampilkanAsuhanMedisRawatJalanGeriatri(rs.getString("no_rawat"));
+                    //menampilkan asuhan fisioterapi
+                    menampilkanAsuhanFisioterapi(rs.getString("no_rawat"));
                     //menampilkan uji fungsi KFR
                     menampilkanUjiFungsiKFR(rs.getString("no_rawat"));
                     //menampilkan pemeriksaan rehab medik
@@ -9541,7 +9541,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         htmlContent.append(
                           "<tr class='isi'>"+ 
                             "<td valign='top' width='2%'></td>"+        
-                            "<td valign='top' width='18%'>Penilaian Awal Keperawatan Rawat Jalan Bayi/Anak</td>"+
+                            "<td valign='top' width='18%'>Penilaian Awal Keperawatan Bayi/Anak</td>"+
                             "<td valign='top' width='1%' align='center'>:</td>"+
                             "<td valign='top' width='79%'>"+
                               "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
