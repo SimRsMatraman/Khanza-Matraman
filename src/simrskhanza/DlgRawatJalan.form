@@ -270,7 +270,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="18-11-2024"/>
+                        <StringItem index="0" value="20-11-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -298,7 +298,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="18-11-2024"/>
+                        <StringItem index="0" value="20-11-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -4649,7 +4649,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="18-11-2024"/>
+                    <StringItem index="0" value="20-11-2024"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -5485,33 +5485,6 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSKDPActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="widget.Button" name="BtnKamar">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Kamar Inap"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnKamar" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnKamarActionPerformed"/>
-                              </Events>
-                            </Component>
                             <Component class="widget.Button" name="BtnRujukKeluar">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -5810,142 +5783,6 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnResepObat1ActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="widget.Button" name="BtnCopyResep1">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Copy Resep"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnCopyResep1" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCopyResep1ActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnTmpResep1">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Template Resep"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnTmpResep1" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTmpResep1ActionPerformed"/>
-                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnTmpResep1KeyPressed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnResepLuar1">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Resep Luar"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnResepLuar1" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnResepLuar1ActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnObatBhp1">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Data Obat &amp; BHP"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnObatBhp1" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnObatBhp1ActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnInformasiObat2">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Informasi Obat"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnInformasiObat2" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnInformasiObat2ActionPerformed"/>
-                              </Events>
-                            </Component>
                             <Component class="widget.Button" name="BtnPermintaanLab1">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -6000,12 +5837,12 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPermintaanRad1ActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="widget.Button" name="BtnJadwalOperasi1">
+                            <Component class="widget.Button" name="BtnPermintaanRanap">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/picture/item.png"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Jadwal Operasi"/>
+                                <Property name="text" type="java.lang.String" value="Permintaan Ranap"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="11" style="0"/>
@@ -6017,14 +5854,14 @@
                                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                                   <Insets value="[1, 1, 1, 1]"/>
                                 </Property>
-                                <Property name="name" type="java.lang.String" value="BtnJadwalOperasi1" noResource="true"/>
+                                <Property name="name" type="java.lang.String" value="BtnPermintaanRanap" noResource="true"/>
                                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                                   <Dimension value="[190, 23]"/>
                                 </Property>
                                 <Property name="roundRect" type="boolean" value="false"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnJadwalOperasi1ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPermintaanRanapActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="widget.Button" name="BtnTriaseIGD">
@@ -6052,33 +5889,6 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTriaseIGDActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnResume">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Resume Pasien IGD"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnResume" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnResumeActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="widget.Button" name="BtnAwalKeperawatanIGD">
@@ -6135,12 +5945,12 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAwalMedisIGDActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="widget.Button" name="BtnKamar1">
+                            <Component class="widget.Button" name="BtnCatatanKeperawatan">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/picture/item.png"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Kamar Inap"/>
+                                <Property name="text" type="java.lang.String" value="Catatan Keperawatan"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="11" style="0"/>
@@ -6152,14 +5962,14 @@
                                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                                   <Insets value="[1, 1, 1, 1]"/>
                                 </Property>
-                                <Property name="name" type="java.lang.String" value="BtnKamar1" noResource="true"/>
+                                <Property name="name" type="java.lang.String" value="BtnCatatanKeperawatan" noResource="true"/>
                                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                                   <Dimension value="[190, 23]"/>
                                 </Property>
                                 <Property name="roundRect" type="boolean" value="false"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnKamar1ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCatatanKeperawatanActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="widget.Button" name="BtnRujukIGD">
@@ -6405,12 +6215,12 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnHasilPemeriksaanUSG1ActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="widget.Button" name="BtnBerkasDigital1">
+                            <Component class="widget.Button" name="BtnResume">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/picture/item.png"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Berkas Digital"/>
+                                <Property name="text" type="java.lang.String" value="Resume Pasien IGD"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="11" style="0"/>
@@ -6422,41 +6232,14 @@
                                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                                   <Insets value="[1, 1, 1, 1]"/>
                                 </Property>
-                                <Property name="name" type="java.lang.String" value="BtnBerkasDigital1" noResource="true"/>
+                                <Property name="name" type="java.lang.String" value="BtnResume" noResource="true"/>
                                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                                   <Dimension value="[190, 23]"/>
                                 </Property>
                                 <Property name="roundRect" type="boolean" value="false"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBerkasDigital1ActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnIEMR1">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Riwayat Antar Faskes"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnIEMR1" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnIEMR1ActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnResumeActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>

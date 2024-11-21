@@ -254,6 +254,10 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         KdDokter = new widget.TextBox();
+        jLabel13 = new widget.Label();
+        CaraBayar = new widget.TextBox();
+        jLabel9 = new widget.Label();
+        Poli = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -290,14 +294,10 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         jLabel5 = new widget.Label();
         NoTelp = new widget.TextBox();
         jLabel8 = new widget.Label();
-        Poli = new widget.TextBox();
-        jLabel9 = new widget.Label();
         jLabel11 = new widget.Label();
         Dokter = new widget.TextBox();
         jLabel12 = new widget.Label();
         Diagnosa = new widget.TextBox();
-        CaraBayar = new widget.TextBox();
-        jLabel13 = new widget.Label();
         jLabel20 = new widget.Label();
         btnDiagnosa = new widget.Button();
         jLabel16 = new widget.Label();
@@ -320,6 +320,20 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         KdDokter.setEditable(false);
         KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
+
+        jLabel13.setText("Cara Bayar :");
+        jLabel13.setName("jLabel13"); // NOI18N
+
+        CaraBayar.setEditable(false);
+        CaraBayar.setHighlighter(null);
+        CaraBayar.setName("CaraBayar"); // NOI18N
+
+        jLabel9.setText("Unit/Poli :");
+        jLabel9.setName("jLabel9"); // NOI18N
+
+        Poli.setEditable(false);
+        Poli.setHighlighter(null);
+        Poli.setName("Poli"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -570,7 +584,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(165, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -593,7 +607,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -661,7 +675,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         NmPasien.setBounds(288, 10, 330, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-08-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -700,17 +714,6 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(0, 40, 69, 23);
 
-        Poli.setEditable(false);
-        Poli.setHighlighter(null);
-        Poli.setName("Poli"); // NOI18N
-        FormInput.add(Poli);
-        Poli.setBounds(459, 40, 159, 23);
-
-        jLabel9.setText("Unit/Poli :");
-        jLabel9.setName("jLabel9"); // NOI18N
-        FormInput.add(jLabel9);
-        jLabel9.setBounds(395, 40, 60, 23);
-
         jLabel11.setText("Dokter :");
         jLabel11.setName("jLabel11"); // NOI18N
         FormInput.add(jLabel11);
@@ -725,7 +728,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         jLabel12.setText("Diagnosa :");
         jLabel12.setName("jLabel12"); // NOI18N
         FormInput.add(jLabel12);
-        jLabel12.setBounds(218, 100, 60, 23);
+        jLabel12.setBounds(310, 70, 60, 23);
 
         Diagnosa.setHighlighter(null);
         Diagnosa.setName("Diagnosa"); // NOI18N
@@ -735,18 +738,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(Diagnosa);
-        Diagnosa.setBounds(280, 100, 140, 23);
-
-        CaraBayar.setEditable(false);
-        CaraBayar.setHighlighter(null);
-        CaraBayar.setName("CaraBayar"); // NOI18N
-        FormInput.add(CaraBayar);
-        CaraBayar.setBounds(271, 40, 120, 23);
-
-        jLabel13.setText("Cara Bayar :");
-        jLabel13.setName("jLabel13"); // NOI18N
-        FormInput.add(jLabel13);
-        jLabel13.setBounds(192, 40, 75, 23);
+        Diagnosa.setBounds(370, 70, 140, 23);
 
         jLabel20.setText("Kamar :");
         jLabel20.setName("jLabel20"); // NOI18N
@@ -768,12 +760,12 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(btnDiagnosa);
-        btnDiagnosa.setBounds(420, 100, 28, 23);
+        btnDiagnosa.setBounds(510, 70, 28, 23);
 
         jLabel16.setText("DPJP Ranap :");
         jLabel16.setName("jLabel16"); // NOI18N
         FormInput.add(jLabel16);
-        jLabel16.setBounds(320, 70, 69, 23);
+        jLabel16.setBounds(200, 40, 69, 23);
 
         NmDPJP.setEditable(false);
         NmDPJP.setHighlighter(null);
@@ -784,7 +776,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(NmDPJP);
-        NmDPJP.setBounds(460, 70, 260, 23);
+        NmDPJP.setBounds(340, 40, 260, 23);
 
         KdDPJP.setEditable(false);
         KdDPJP.setName("KdDPJP"); // NOI18N
@@ -794,7 +786,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(KdDPJP);
-        KdDPJP.setBounds(390, 70, 65, 23);
+        KdDPJP.setBounds(270, 40, 65, 23);
 
         btnDPJP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnDPJP.setMnemonic('2');
@@ -806,7 +798,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(btnDPJP);
-        btnDPJP.setBounds(720, 70, 28, 23);
+        btnDPJP.setBounds(600, 40, 28, 23);
 
         JnKamar.setBackground(new java.awt.Color(240, 240, 240));
         JnKamar.setBorder(new javax.swing.border.MatteBorder(null));
@@ -841,7 +833,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         scrollPane.setViewportView(Catatan);
 
         FormInput.add(scrollPane);
-        scrollPane.setBounds(460, 100, 280, 60);
+        scrollPane.setBounds(230, 100, 510, 60);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1664,6 +1656,20 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Dokter.setText(namadokter);
         CaraBayar.setText(carabayar);
         Poli.setText(poli);
+        NoTelp.setText(notelp);
+        TCari.setText(norwt);
+        ChkInput.setSelected(true);
+        aktif=false;
+        isForm();
+    }
+    
+    public void setNoRm(String norwt,String norm,String nama,String namadokter,String notelp) {
+        NoRw.setText(norwt);
+        NoRM.setText(norm);
+        NmPasien.setText(nama);
+        Dokter.setText(namadokter);
+//        CaraBayar.setText(carabayar);
+//        Poli.setText(poli);
         NoTelp.setText(notelp);
         TCari.setText(norwt);
         ChkInput.setSelected(true);

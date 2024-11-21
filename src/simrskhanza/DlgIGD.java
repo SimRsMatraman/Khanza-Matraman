@@ -5474,6 +5474,7 @@ private void MnRawatJalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
                     dlgrwjl.isCek();
+                    dlgrwjl.menuIGD();
                     dlgrwjl.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                     dlgrwjl.setLocationRelativeTo(internalFrame1);
                     dlgrwjl.SetPoli("IGDK");
@@ -9688,6 +9689,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     DlgRawatJalan dlgrwjl=new DlgRawatJalan(null,false);
                     dlgrwjl.isCek();
+                    dlgrwjl.menuIGD();
                     dlgrwjl.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                     dlgrwjl.setLocationRelativeTo(internalFrame1);
                     dlgrwjl.SetPoli("IGDK");
