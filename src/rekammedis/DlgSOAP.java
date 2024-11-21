@@ -613,13 +613,13 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                     stylee=" style=' background-color:#ccffcc '";
                                 }
                                 
-                                if(Sequel.cariInteger("select count(validasi_pemeriksaan_ranap.nik_validator) " +
-                                        "from pemeriksaan_ranap LEFT JOIN validasi_pemeriksaan_ranap ON validasi_pemeriksaan_ranap.no_rawat = pemeriksaan_ranap.no_rawat AND validasi_pemeriksaan_ranap.tgl_perawatan = pemeriksaan_ranap.tgl_perawatan AND validasi_pemeriksaan_ranap.jam_rawat = pemeriksaan_ranap.jam_rawat inner join pegawai on pemeriksaan_ranap.nik=pegawai.nik inner join departemen on pegawai.departemen=departemen.dep_id LEFT JOIN pegawai AS namavalidator ON validasi_pemeriksaan_ranap.nik_validator=namavalidator.nik where pemeriksaan_ranap.no_rawat='"+rs.getString("no_rawat")+"' AND validasi_pemeriksaan_ranap.nik_validator='"+rs2.getString("nik_validator")+"'" +
-                                        "order by pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat")>0){
-                                    gbrverif="<img src ='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/images/verif.png' align='center' width='100' height='50'/";
-                                }else{
-                                    gbrverif="<img src ='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/images/notverif.png' align='center' width='100' height='50'/";
-                                }
+//                                if(Sequel.cariInteger("select count(validasi_pemeriksaan_ranap.nik_validator) " +
+//                                        "from pemeriksaan_ranap LEFT JOIN validasi_pemeriksaan_ranap ON validasi_pemeriksaan_ranap.no_rawat = pemeriksaan_ranap.no_rawat AND validasi_pemeriksaan_ranap.tgl_perawatan = pemeriksaan_ranap.tgl_perawatan AND validasi_pemeriksaan_ranap.jam_rawat = pemeriksaan_ranap.jam_rawat inner join pegawai on pemeriksaan_ranap.nik=pegawai.nik inner join departemen on pegawai.departemen=departemen.dep_id LEFT JOIN pegawai AS namavalidator ON validasi_pemeriksaan_ranap.nik_validator=namavalidator.nik where pemeriksaan_ranap.no_rawat='"+rs.getString("no_rawat")+"' AND validasi_pemeriksaan_ranap.nik_validator='"+rs2.getString("nik_validator")+"'" +
+//                                        "order by pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat")>0){
+//                                    gbrverif="<img src ='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/images/verif.png' align='center' width='100' height='50'/";
+//                                }else{
+//                                    gbrverif="<img src ='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/images/notverif.png' align='center' width='100' height='50'/";
+//                                }
                                 
                                 
 //                                 System.out.println("Notif Rekening : "+stylee);
@@ -633,7 +633,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                         "<td align='left' "+stylee+">"+rs2.getString("pemeriksaan")+"</td>"+
                                         "<td align='left' "+stylee+">"+rs2.getString("penilaian")+"</td>"+
                                         "<td align='left' "+stylee+">"+rs2.getString("rtl")+"</td>"+
-                                        "<td align='left' "+stylee+" "+gbrverif+">"+"<br>"+rs2.getString("namavalidator")+"<br>"+rs2.getString("tgl_validasi")+"<br>"+rs2.getString("jam_validasi")+"</td>"+
+                                        "<td align='left' "+stylee+" "+gbrverif+">"+rs2.getString("namavalidator")+"<br>"+rs2.getString("tgl_validasi")+" "+rs2.getString("jam_validasi")+"</td>"+
 //                                        "<td align='left' "+stylee+"><a class='button' href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"'>Verifikasi</a></td>"+
                                     "</tr>"
                                  ); 

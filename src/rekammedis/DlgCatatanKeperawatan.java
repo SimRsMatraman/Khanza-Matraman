@@ -406,7 +406,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         rs2 = koneksi.prepareStatement(
                                 "select catatan_keperawatan_ranap.tanggal,catatan_keperawatan_ranap.jam,catatan_keperawatan_ranap.uraian,"
                                 + "catatan_keperawatan_ranap.nip,pegawai.nama,departemen.nama, "
-                                + "validasi_catatan_keperawatan_ranap.nik_validator,ifnull('',namavalidator.nama) as namavalidator,ifnull('',validasi_catatan_keperawatan_ranap.tgl_validasi) as tgl_validasi,ifnull('',validasi_catatan_keperawatan_ranap.jam_validasi) as jam_validasi,validasi_catatan_keperawatan_ranap.status_validasi "
+                                + "ifnull(validasi_catatan_keperawatan_ranap.nik_validator,'')as nik_validator,ifnull(namavalidator.nama,'') as namavalidator,ifnull(validasi_catatan_keperawatan_ranap.tgl_validasi,'') as tgl_validasi,ifnull(validasi_catatan_keperawatan_ranap.jam_validasi,'') as jam_validasi,validasi_catatan_keperawatan_ranap.status_validasi "
                                 + "from catatan_keperawatan_ranap "
                                 + "LEFT JOIN validasi_catatan_keperawatan_ranap ON validasi_catatan_keperawatan_ranap.no_rawat = catatan_keperawatan_ranap.no_rawat "
                                 + "AND validasi_catatan_keperawatan_ranap.tgl_perawatan = catatan_keperawatan_ranap.tanggal"
@@ -426,20 +426,20 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             while (rs2.next()) {
                                 String bagian = "", stylee = "", gbrverif = "";
 
-                                if (Sequel.cariInteger("select count(validasi_catatan_keperawatan_ranap.nik_validator) "
-                                        + "from catatan_keperawatan_ranap LEFT JOIN validasi_catatan_keperawatan_ranap ON validasi_catatan_keperawatan_ranap.no_rawat = catatan_keperawatan_ranap.no_rawat AND validasi_catatan_keperawatan_ranap.tgl_perawatan = catatan_keperawatan_ranap.tanggal AND validasi_catatan_keperawatan_ranap.jam_rawat = catatan_keperawatan_ranap.jam inner join pegawai on catatan_keperawatan_ranap.nip=pegawai.nik inner join departemen on pegawai.departemen=departemen.dep_id LEFT JOIN pegawai AS namavalidator ON validasi_catatan_keperawatan_ranap.nik_validator=namavalidator.nik where catatan_keperawatan_ranap.no_rawat='" + rs.getString("no_rawat") + "' AND validasi_catatan_keperawatan_ranap.nik_validator='" + rs2.getString("nik_validator") + "'"
-                                        + "order by catatan_keperawatan_ranap.tanggal,catatan_keperawatan_ranap.jam") > 0) {
-                                    gbrverif = "<img src ='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/images/verif.png' align='center' width='20' height='20'/";
-                                } else {
-                                    gbrverif = "<img src ='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/images/notverif.png' align='center' width='5' height='5'/";
-                                }
+//                                if (Sequel.cariInteger("select count(validasi_catatan_keperawatan_ranap.nik_validator) "
+//                                        + "from catatan_keperawatan_ranap LEFT JOIN validasi_catatan_keperawatan_ranap ON validasi_catatan_keperawatan_ranap.no_rawat = catatan_keperawatan_ranap.no_rawat AND validasi_catatan_keperawatan_ranap.tgl_perawatan = catatan_keperawatan_ranap.tanggal AND validasi_catatan_keperawatan_ranap.jam_rawat = catatan_keperawatan_ranap.jam inner join pegawai on catatan_keperawatan_ranap.nip=pegawai.nik inner join departemen on pegawai.departemen=departemen.dep_id LEFT JOIN pegawai AS namavalidator ON validasi_catatan_keperawatan_ranap.nik_validator=namavalidator.nik where catatan_keperawatan_ranap.no_rawat='" + rs.getString("no_rawat") + "' AND validasi_catatan_keperawatan_ranap.nik_validator='" + rs2.getString("nik_validator") + "'"
+//                                        + "order by catatan_keperawatan_ranap.tanggal,catatan_keperawatan_ranap.jam") > 0) {
+//                                    gbrverif = "<img src ='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/images/verif.png' align='center' width='50' height='50'/";
+//                                } else {
+//                                    gbrverif = "<img src ='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/images/notverif.png' align='center' width='5' height='5'/";
+//                                }
                                 htmlContent.append(
                                         "<tr class='isi'>"
                                         + "<td align='center'>" + rs2.getString("tanggal") + "<br>" + rs2.getString("jam") + "</td>"
                                         + "<td valign='top'>" + rs2.getString("nama") + "</td>"
                                         + "<td align='left'>" + rs2.getString("uraian") + "</td>"
 //                                        + "<td align='left'>" + rs2.getString("status_validasi") + "</td>"
-                                        + "<td align='left' " + stylee + " " + gbrverif + ">" + rs2.getString("namavalidator") +  rs2.getString("tgl_validasi") + rs2.getString("jam_validasi") + "</td>"
+                                        + "<td align='left' " + stylee + " " + gbrverif + ">" + rs2.getString("namavalidator") + "<br>" + rs2.getString("tgl_validasi") + " " +rs2.getString("jam_validasi") + "</td>"
                                         + "</tr>"
                                 );
                             }

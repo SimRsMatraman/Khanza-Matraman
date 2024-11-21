@@ -45,7 +45,7 @@ import java.text.SimpleDateFormat;
  *
  * @author perpustakaan
  */
-public final class ValidasiSOAP extends javax.swing.JDialog {
+public final class ValidasiCatPer extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -82,13 +82,12 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
-    public ValidasiSOAP(java.awt.Frame parent, boolean modal) {
+    public ValidasiCatPer(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
         tabMode=new DefaultTableModel(null,new Object[]{
-            "Tgl.Rawat","Status","No.Rawat","No.RM","Nama Pasien","NIP","Nama Pemeriksa","Tanggal SOAP","Jam SOAP","S (SUBJECTIVE)","O (OBJECTIVE)",
-            "A (ASSESSMENT)","P (PLAN)"
+            "Tgl.Rawat","Status","No.Rawat","No.RM","Nama Pasien","NIP","Nama Pemeriksa","Tanggal","Jam","Catatan Keperawatan"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -98,7 +97,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 13; i++) {
+        for (i = 0; i < 10; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(65);
@@ -120,12 +119,6 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
                 column.setPreferredWidth(90);
             }else if(i==9){
                 column.setPreferredWidth(250);
-            }else if(i==10){
-                column.setPreferredWidth(250);
-            }else if(i==11){
-                column.setPreferredWidth(250);
-            }else if(i==12){
-                column.setPreferredWidth(170);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -231,13 +224,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         NamaDokter = new widget.TextBox();
         BtnDokter = new widget.Button();
         scrollPane1 = new widget.ScrollPane();
-        TKeluhan = new widget.TextArea();
-        scrollPane2 = new widget.ScrollPane();
-        TPemeriksaan = new widget.TextArea();
-        scrollPane3 = new widget.ScrollPane();
-        TPenilaian = new widget.TextArea();
-        scrollPane4 = new widget.ScrollPane();
-        TindakLanjut = new widget.TextArea();
+        Implementasi = new widget.TextArea();
         label15 = new widget.Label();
         KodeDokter1 = new widget.TextBox();
         NamaDokter1 = new widget.TextBox();
@@ -311,7 +298,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Validasi SOAP ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Validasi Catatan Keperawatan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -499,7 +486,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 330));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 260));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -528,7 +515,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         FormInput.setBackground(new java.awt.Color(250, 255, 245));
         FormInput.setBorder(null);
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(100, 330));
+        FormInput.setPreferredSize(new java.awt.Dimension(100, 310));
         FormInput.setLayout(null);
 
         TNoRw.setHighlighter(null);
@@ -609,77 +596,23 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         FormInput.add(BtnDokter);
         BtnDokter.setBounds(519, 40, 28, 23);
 
-        scrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("S (SUBJECTIVE)"));
+        scrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Catatan Keperawatan"));
         scrollPane1.setName("scrollPane1"); // NOI18N
 
-        TKeluhan.setEditable(false);
-        TKeluhan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TKeluhan.setColumns(20);
-        TKeluhan.setRows(5);
-        TKeluhan.setName("TKeluhan"); // NOI18N
-        TKeluhan.addKeyListener(new java.awt.event.KeyAdapter() {
+        Implementasi.setEditable(false);
+        Implementasi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Implementasi.setColumns(20);
+        Implementasi.setRows(5);
+        Implementasi.setName("Implementasi"); // NOI18N
+        Implementasi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TKeluhanKeyPressed(evt);
+                ImplementasiKeyPressed(evt);
             }
         });
-        scrollPane1.setViewportView(TKeluhan);
+        scrollPane1.setViewportView(Implementasi);
 
         FormInput.add(scrollPane1);
-        scrollPane1.setBounds(30, 130, 360, 80);
-
-        scrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("O (OBJECTIVE)"));
-        scrollPane2.setName("scrollPane2"); // NOI18N
-
-        TPemeriksaan.setEditable(false);
-        TPemeriksaan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TPemeriksaan.setColumns(20);
-        TPemeriksaan.setRows(5);
-        TPemeriksaan.setName("TPemeriksaan"); // NOI18N
-        TPemeriksaan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TPemeriksaanKeyPressed(evt);
-            }
-        });
-        scrollPane2.setViewportView(TPemeriksaan);
-
-        FormInput.add(scrollPane2);
-        scrollPane2.setBounds(30, 220, 360, 80);
-
-        scrollPane3.setBorder(javax.swing.BorderFactory.createTitledBorder("A (ASSESSMENT)"));
-        scrollPane3.setName("scrollPane3"); // NOI18N
-
-        TPenilaian.setEditable(false);
-        TPenilaian.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TPenilaian.setColumns(20);
-        TPenilaian.setRows(5);
-        TPenilaian.setName("TPenilaian"); // NOI18N
-        TPenilaian.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TPenilaianKeyPressed(evt);
-            }
-        });
-        scrollPane3.setViewportView(TPenilaian);
-
-        FormInput.add(scrollPane3);
-        scrollPane3.setBounds(400, 130, 360, 80);
-
-        scrollPane4.setBorder(javax.swing.BorderFactory.createTitledBorder("P (PLAN)"));
-        scrollPane4.setName("scrollPane4"); // NOI18N
-
-        TindakLanjut.setEditable(false);
-        TindakLanjut.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        TindakLanjut.setColumns(20);
-        TindakLanjut.setRows(5);
-        TindakLanjut.setName("TindakLanjut"); // NOI18N
-        TindakLanjut.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TindakLanjutKeyPressed(evt);
-            }
-        });
-        scrollPane4.setViewportView(TindakLanjut);
-
-        FormInput.add(scrollPane4);
-        scrollPane4.setBounds(400, 220, 360, 80);
+        scrollPane1.setBounds(40, 140, 700, 80);
 
         label15.setText("Nama Pemeriksa:");
         label15.setName("label15"); // NOI18N
@@ -723,19 +656,19 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             }
         });
         FormInput.add(TanggalPemeriksaan);
-        TanggalPemeriksaan.setBounds(104, 100, 141, 23);
+        TanggalPemeriksaan.setBounds(140, 100, 141, 23);
 
-        label16.setText("Tanggal SOAP:");
+        label16.setText("Tanggal :");
         label16.setName("label16"); // NOI18N
         label16.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label16);
-        label16.setBounds(10, 100, 90, 23);
+        label16.setBounds(10, 100, 120, 23);
 
-        label17.setText("Jam SOAP:");
+        label17.setText("Jam :");
         label17.setName("label17"); // NOI18N
         label17.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label17);
-        label17.setBounds(250, 100, 60, 23);
+        label17.setBounds(290, 100, 100, 23);
 
         JamPemeriksaan.setEditable(false);
         JamPemeriksaan.setName("JamPemeriksaan"); // NOI18N
@@ -751,7 +684,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             }
         });
         FormInput.add(JamPemeriksaan);
-        JamPemeriksaan.setBounds(320, 100, 141, 23);
+        JamPemeriksaan.setBounds(400, 100, 141, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -784,13 +717,11 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             Valid.textKosong(BtnDokter,"Validator");
         }else if(KodeDokter1.getText().equals("")||NamaDokter.getText().equals("")){
             Valid.textKosong(BtnDokter,"Nama Pemeriksa");
-        }else if(TKeluhan.getText().equals("")){
-            Valid.textKosong(TKeluhan,"S (SUBJECTIVE");
-        }else if(TPemeriksaan.getText().equals("")){
-            Valid.textKosong(TPemeriksaan,"O (OBJECTIVE)");
+        }else if(Implementasi.getText().equals("")){
+            Valid.textKosong(Implementasi,"Catatan Keperawatan");
         }else{
-            if(Sequel.menyimpantf("validasi_pemeriksaan_ranap","?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",12,new String[]{
-                    TNoRw.getText(),TanggalPemeriksaan.getText(),JamPemeriksaan.getText(),TKeluhan.getText(),TPemeriksaan.getText(),TPenilaian.getText(),TindakLanjut.getText(), 
+            if(Sequel.menyimpantf("validasi_catatan_keperawatan_ranap","?,?,?,?,?,?,?,?,?","No.Rawat",9,new String[]{
+                    TNoRw.getText(),TanggalPemeriksaan.getText(),JamPemeriksaan.getText(),Implementasi.getText(), 
                     KodeDokter1.getText(),KodeDokter.getText(),tanggalNow.format(new Date()),jamNow.format(new Date()),"Validasi",
                 })==true){
                     tampil();
@@ -803,7 +734,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{
-            Valid.pindah(evt,TKeluhan,BtnBatal);
+            Valid.pindah(evt,Implementasi,BtnBatal);
         }
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
@@ -913,7 +844,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
 }//GEN-LAST:event_tbObatKeyPressed
 
     private void KodeDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeDokterKeyPressed
-        Valid.pindah(evt,TCari,TKeluhan);
+        Valid.pindah(evt,TCari,Implementasi);
     }//GEN-LAST:event_KodeDokterKeyPressed
 
     private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokterActionPerformed
@@ -925,7 +856,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
-       Valid.pindah(evt,TCari,TKeluhan);
+       Valid.pindah(evt,TCari,Implementasi);
     }//GEN-LAST:event_BtnDokterKeyPressed
 
     private void MnLaporanResumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanResumeActionPerformed
@@ -1017,28 +948,16 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_MnDigitalTTEActionPerformed
 
-    private void TKeluhanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKeluhanKeyPressed
+    private void ImplementasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ImplementasiKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TKeluhanKeyPressed
-
-    private void TPemeriksaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPemeriksaanKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TPemeriksaanKeyPressed
-
-    private void TPenilaianKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPenilaianKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TPenilaianKeyPressed
-
-    private void TindakLanjutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TindakLanjutKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TindakLanjutKeyPressed
+    }//GEN-LAST:event_ImplementasiKeyPressed
 
     private void KodeDokter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KodeDokter1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_KodeDokter1ActionPerformed
 
     private void KodeDokter1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeDokter1KeyPressed
-        Valid.pindah(evt,TCari,TKeluhan);
+        Valid.pindah(evt,TCari,Implementasi);
     }//GEN-LAST:event_KodeDokter1KeyPressed
 
     private void TanggalPemeriksaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TanggalPemeriksaanActionPerformed
@@ -1062,7 +981,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            ValidasiSOAP dialog = new ValidasiSOAP(new javax.swing.JFrame(), true);
+            ValidasiCatPer dialog = new ValidasiCatPer(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1084,6 +1003,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.PanelBiasa FormInput;
+    private widget.TextArea Implementasi;
     private widget.TextBox JamPemeriksaan;
     private widget.TextBox KodeDokter;
     private widget.TextBox KodeDokter1;
@@ -1096,14 +1016,10 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
-    private widget.TextArea TKeluhan;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
-    private widget.TextArea TPemeriksaan;
-    private widget.TextArea TPenilaian;
     private widget.TextBox TanggalPemeriksaan;
-    private widget.TextArea TindakLanjut;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel19;
     private widget.Label jLabel21;
@@ -1121,9 +1037,6 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     private javax.swing.JMenuItem ppBerkasDigital;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane1;
-    private widget.ScrollPane scrollPane2;
-    private widget.ScrollPane scrollPane3;
-    private widget.ScrollPane scrollPane4;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
@@ -1132,18 +1045,18 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         try{
             if(TCari.getText().equals("")){
                 ps=koneksi.prepareStatement(
-                    "select reg_periksa.tgl_registrasi,reg_periksa.status_lanjut,pemeriksaan_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
-                    "pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.keluhan, " +
-                    "pemeriksaan_ranap.pemeriksaan,pemeriksaan_ranap.penilaian,pemeriksaan_ranap.rtl,pemeriksaan_ranap.nik,pegawai.nama from pasien inner join reg_periksa inner join pemeriksaan_ranap "+
-                    "on pemeriksaan_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on pemeriksaan_ranap.nik=pegawai.nik LEFT JOIN validasi_pemeriksaan_ranap ON validasi_pemeriksaan_ranap.no_rawat = pemeriksaan_ranap.no_rawat AND validasi_pemeriksaan_ranap.tgl_perawatan = pemeriksaan_ranap.tgl_perawatan AND validasi_pemeriksaan_ranap.jam_rawat = pemeriksaan_ranap.jam_rawat where "+
-                    "pemeriksaan_ranap.no_rawat like ? and ISNULL(validasi_pemeriksaan_ranap.status_validasi) order by pemeriksaan_ranap.no_rawat desc");
+                    "select reg_periksa.tgl_registrasi,reg_periksa.status_lanjut,catatan_keperawatan_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
+                    "catatan_keperawatan_ranap.tanggal,catatan_keperawatan_ranap.jam,catatan_keperawatan_ranap.uraian, " +
+                    "catatan_keperawatan_ranap.nip,petugas.nama from pasien inner join reg_periksa inner join catatan_keperawatan_ranap "+
+                    "on catatan_keperawatan_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on catatan_keperawatan_ranap.nip=petugas.nip LEFT JOIN validasi_catatan_keperawatan_ranap ON validasi_catatan_keperawatan_ranap.no_rawat = catatan_keperawatan_ranap.no_rawat AND validasi_catatan_keperawatan_ranap.tgl_perawatan = catatan_keperawatan_ranap.tanggal AND validasi_catatan_keperawatan_ranap.jam_rawat = catatan_keperawatan_ranap.jam where "+
+                    "catatan_keperawatan_ranap.no_rawat like ? and ISNULL(validasi_catatan_keperawatan_ranap.status_validasi) order by catatan_keperawatan_ranap.no_rawat desc");
             }else{
                 ps=koneksi.prepareStatement(
-                    "select reg_periksa.tgl_registrasi,reg_periksa.status_lanjut,pemeriksaan_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
-                    "pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.keluhan, " +
-                    "pemeriksaan_ranap.pemeriksaan,pemeriksaan_ranap.penilaian,pemeriksaan_ranap.rtl,pemeriksaan_ranap.nik,pegawai.nama from pasien inner join reg_periksa inner join pemeriksaan_ranap "+
-                    "on pemeriksaan_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on pemeriksaan_ranap.nik=pegawai.nik LEFT JOIN validasi_pemeriksaan_ranap ON validasi_pemeriksaan_ranap.no_rawat = pemeriksaan_ranap.no_rawat AND validasi_pemeriksaan_ranap.tgl_perawatan = pemeriksaan_ranap.tgl_perawatan AND validasi_pemeriksaan_ranap.jam_rawat = pemeriksaan_ranap.jam_rawat where "+
-                    "pemeriksaan_ranap.no_rawat like ? and ISNULL(validasi_pemeriksaan_ranap.status_validasi) order by pemeriksaan_ranap.no_rawat desc");
+                    "select reg_periksa.tgl_registrasi,reg_periksa.status_lanjut,catatan_keperawatan_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
+                    "catatan_keperawatan_ranap.tanggal,catatan_keperawatan_ranap.jam,catatan_keperawatan_ranap.uraian, " +
+                    "catatan_keperawatan_ranap.nip,petugas.nama from pasien inner join reg_periksa inner join catatan_keperawatan_ranap "+
+                    "on catatan_keperawatan_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on catatan_keperawatan_ranap.nip=petugas.nip LEFT JOIN validasi_catatan_keperawatan_ranap ON validasi_catatan_keperawatan_ranap.no_rawat = catatan_keperawatan_ranap.no_rawat AND validasi_catatan_keperawatan_ranap.tgl_perawatan = catatan_keperawatan_ranap.tanggal AND validasi_catatan_keperawatan_ranap.jam_rawat = catatan_keperawatan_ranap.jam where "+
+                    "catatan_keperawatan_ranap.no_rawat like ? and ISNULL(validasi_catatan_keperawatan_ranap.status_validasi) order by catatan_keperawatan_ranap.no_rawat desc");
             }
             try {
                 if(!TCari.getText().equals("")){
@@ -1154,8 +1067,8 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new String[]{
-                        rs.getString("tgl_registrasi"),rs.getString("status_lanjut"),rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nik"),rs.getString("nama"),
-                        rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),rs.getString("keluhan"),rs.getString("pemeriksaan"),rs.getString("penilaian"),rs.getString("rtl")
+                        rs.getString("tgl_registrasi"),rs.getString("status_lanjut"),rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nip"),rs.getString("nama"),
+                        rs.getString("tanggal"),rs.getString("jam"),rs.getString("uraian")
                     });
                 }
             } catch (Exception e) {
@@ -1180,10 +1093,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         NamaDokter1.setText("");
         TanggalPemeriksaan.setText("");
         JamPemeriksaan.setText("");
-        TKeluhan.setText("");
-        TPemeriksaan.setText("");
-        TPenilaian.setText("");
-        TindakLanjut.setText("");
+        Implementasi.setText("");
         TNoRw.requestFocus();
         KodeDokter1.requestFocus();
         TanggalPemeriksaan.requestFocus();
@@ -1199,10 +1109,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             NamaDokter1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());  
             TanggalPemeriksaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
             JamPemeriksaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()); 
-            TKeluhan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());   
-            TPemeriksaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());  
-            TPenilaian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            TindakLanjut.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            Implementasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());  
         }
     }
 
@@ -1240,9 +1147,11 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             if(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString().equals("Ralan")){
                 param.put("ruang",Sequel.cariIsi("select poliklinik.nm_poli from poliklinik inner join reg_periksa on reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
                 param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_registrasi, '%d-%m-%Y') from reg_periksa where no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+                param.put("harirawat","1 Hari");
             }else{
-                param.put("ruang",Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar inner join kamar_inap on bangsal.kd_bangsal=kamar.kd_bangsal and kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+                param.put("ruang",Sequel.cariIsi("select concat(no_bed,' ',nm_kamar)  from  kamar inner join kamar_inap on  kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
                 param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_keluar, '%d-%m-%Y') from kamar_inap where no_rawat=? order by tgl_keluar desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+                param.put("harirawat",Sequel.cariIsi("select sum(lama) from kamar_inap where no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString())+" Hari");
             }
            
             Valid.MyReportPDFWithName("rptLaporanResume.jasper","report","tempfile",FileName,"::[ Laporan Resume Pasien ]::",param);
@@ -1273,7 +1182,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             KodeDokter.setEditable(false);
             BtnDokter.setEnabled(false);
             KodeDokter.setText(akses.getkode());
-            Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter,KodeDokter.getText());
+            Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", NamaDokter,KodeDokter.getText());
             if(NamaDokter.getText().equals("")){
                 KodeDokter.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan dokter...!!");
