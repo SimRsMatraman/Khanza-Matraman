@@ -12,8 +12,11 @@
 //
 package simrskhanza;
 
+import bridging.ApiICareBPJS;
 import bridging.ICareRiwayatPerawatan;
 import bridging.ICareRiwayatPerawatanFKTP;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import surat.SuratKontrol;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
@@ -141,7 +144,14 @@ import rekammedis.DlgSOAPOld;
 import rekammedis.DlgEWS;
 import rekammedis.DlgPEWS;
 import integration.DataPasienIntegration;
+import java.awt.Desktop;
+import java.net.URI;
 import laporan.DlgDiagnosaPenyakitSoap;
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import permintaan.DlgPermintaanRanap;
 import rekammedis.GdsIgd;
 import rekammedis.RMRujukanFisio;
@@ -158,6 +168,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
+    private ApiICareBPJS api=new ApiICareBPJS();
+    private HttpHeaders headers ;
+    private HttpEntity requestEntity;
+    private ObjectMapper mapper = new ObjectMapper();
+    private JsonNode root;
+    private JsonNode nameNode;
+    private JsonNode response;
     private DlgCariPasien pasien=new DlgCariPasien(null,false);
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     public  DlgCariPetugas petugas=new DlgCariPetugas(null,false);    
@@ -174,7 +191,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             Suspen_Piutang_Tindakan_Ralan="",Tindakan_Ralan="",Beban_Jasa_Medik_Dokter_Tindakan_Ralan="",Utang_Jasa_Medik_Dokter_Tindakan_Ralan="",
             Beban_Jasa_Medik_Paramedis_Tindakan_Ralan="",Utang_Jasa_Medik_Paramedis_Tindakan_Ralan="",Beban_KSO_Tindakan_Ralan="",Utang_KSO_Tindakan_Ralan="",
             Beban_Jasa_Sarana_Tindakan_Ralan="",Utang_Jasa_Sarana_Tindakan_Ralan="",HPP_BHP_Tindakan_Ralan="",Persediaan_BHP_Tindakan_Ralan="",
-            Beban_Jasa_Menejemen_Tindakan_Ralan="",Utang_Jasa_Menejemen_Tindakan_Ralan="",namaPenyakit="",Listpenyakit="", variabel="", authEncrypt, auth;
+            Beban_Jasa_Menejemen_Tindakan_Ralan="",Utang_Jasa_Menejemen_Tindakan_Ralan="",namaPenyakit="",Listpenyakit="", variabel="", authEncrypt, auth, link="",utc="",requestJson="",otorisasi="";
     private final Properties prop = new Properties();
     private boolean[] pilih; 
     private String[] kode,nama,kategori;
@@ -1680,7 +1697,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         scrollPane7 = new widget.ScrollPane();
         Instruksi = new widget.TextArea();
         BtnTemplatePemeriksaan = new widget.Button();
-        ICareNIK = new widget.Button();
         ICareNoKartu = new widget.Button();
         internalFrame9 = new widget.InternalFrame();
         Scroll12 = new widget.ScrollPane();
@@ -1725,6 +1741,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         KetSuspek = new widget.TextBox();
         jLabel86 = new widget.Label();
         BtnProsedurKFR = new widget.Button();
+        ICareNoKartu1 = new widget.Button();
         internalFrame6 = new widget.InternalFrame();
         Scroll4 = new widget.ScrollPane();
         tbPemeriksaanObstetri = new widget.Table();
@@ -2128,7 +2145,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2142,7 +2159,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3128,29 +3145,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass12.add(BtnTemplatePemeriksaan);
         BtnTemplatePemeriksaan.setBounds(545, 290, 240, 22);
 
-        ICareNIK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
-        ICareNIK.setMnemonic('C');
-        ICareNIK.setText(" Cek Riwayat Perawatan ICare BPJS Via NIK");
-        ICareNIK.setToolTipText("");
-        ICareNIK.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ICareNIK.setName("ICareNIK"); // NOI18N
-        ICareNIK.setPreferredSize(new java.awt.Dimension(160, 30));
-        ICareNIK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ICareNIKActionPerformed(evt);
-            }
-        });
-        ICareNIK.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                ICareNIKKeyPressed(evt);
-            }
-        });
-        panelGlass12.add(ICareNIK);
-        ICareNIK.setBounds(830, 260, 360, 30);
-
         ICareNoKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         ICareNoKartu.setMnemonic('C');
-        ICareNoKartu.setText(" Cek Riwayat Perawatan ICare BPJS Via No. Peserta");
+        ICareNoKartu.setText(" Cek Riwayat Perawatan ICare BPJS");
         ICareNoKartu.setToolTipText("");
         ICareNoKartu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         ICareNoKartu.setName("ICareNoKartu"); // NOI18N
@@ -3166,7 +3163,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(ICareNoKartu);
-        ICareNoKartu.setBounds(830, 300, 360, 30);
+        ICareNoKartu.setBounds(830, 260, 360, 30);
 
         PanelInput.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
@@ -3414,7 +3411,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         scrollPane12.setViewportView(Operasi1);
 
         panelGlass16.add(scrollPane12);
-        scrollPane12.setBounds(840, 260, 360, 60);
+        scrollPane12.setBounds(840, 230, 360, 50);
 
         Asesmen1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         Asesmen1.setMnemonic('2');
@@ -3463,7 +3460,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         scrollPane13.setViewportView(Instruksi1);
 
         panelGlass16.add(scrollPane13);
-        scrollPane13.setBounds(840, 190, 360, 60);
+        scrollPane13.setBounds(840, 180, 360, 50);
 
         scrollPane14.setBorder(javax.swing.BorderFactory.createTitledBorder("TATA LAKSANA KFR (ICD-9)"));
         scrollPane14.setName("scrollPane14"); // NOI18N
@@ -3579,6 +3576,21 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         panelGlass16.add(BtnProsedurKFR);
         BtnProsedurKFR.setBounds(840, 330, 180, 30);
+
+        ICareNoKartu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ICareNoKartu1.setMnemonic('C');
+        ICareNoKartu1.setText(" Cek Riwayat Perawatan ICare BPJS");
+        ICareNoKartu1.setToolTipText("");
+        ICareNoKartu1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ICareNoKartu1.setName("ICareNoKartu1"); // NOI18N
+        ICareNoKartu1.setPreferredSize(new java.awt.Dimension(160, 30));
+        ICareNoKartu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ICareNoKartu1ActionPerformed(evt);
+            }
+        });
+        panelGlass16.add(ICareNoKartu1);
+        ICareNoKartu1.setBounds(840, 290, 260, 30);
 
         PanelInput4.add(panelGlass16, java.awt.BorderLayout.CENTER);
 
@@ -4484,7 +4496,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -10846,86 +10858,96 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnProsedurKFRKeyPressed
 
-    private void ICareNIKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ICareNIKActionPerformed
-        if(TNoRw.getText().trim().equals("") ){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
-            TCari.requestFocus();
-        }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
-            dlgki.setNoRawat(TNoRw.getText(),TNoRw.getText());
-            dlgki.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            dlgki.setLocationRelativeTo(internalFrame1);
-            dlgki.setVisible(true);
-            this.setCursor(Cursor.getDefaultCursor());
-        }
-//    if(tabModekasir.getRowCount()==0){
-//            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
-//            TCari.requestFocus();
-//        }else if(TNoRw.getText().trim().equals("")){
-//            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
-//            tbKasirRalan.requestFocus();
-//        }else{
-//            if(tbKasirRalan.getSelectedRow()!= -1){
-//                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//                variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString());
-//                if(!variabel.equals("")){
-//                    akses.setform("DlgReg");
-//                    ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
-//                    dlgki.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-//                    dlgki.setLocationRelativeTo(internalFrame1);
-//                    dlgki.setPasien(Sequel.cariIsi("select pasien.no_ktp from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()),variabel);   
-//                    dlgki.setVisible(true);
-//                }else{
-//                    JOptionPane.showMessageDialog(null,"Maaf, Dokter tidak terdaftar di mapping dokter BPJS...!!!");  
-//                }
-//                this.setCursor(Cursor.getDefaultCursor());
-//            }
-//        }
-    }//GEN-LAST:event_ICareNIKActionPerformed
-
-    private void ICareNIKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ICareNIKKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ICareNIKKeyPressed
-
     private void ICareNoKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ICareNoKartuActionPerformed
-        if(TNoRw.getText().trim().equals("") ){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
-            TCari.requestFocus();
-        }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            ICareRiwayatPerawatanFKTP dlgki=new ICareRiwayatPerawatanFKTP(null,false);
-            dlgki.setNoRawat(TNoRw.getText(),TNoRw.getText());
-            dlgki.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            dlgki.setLocationRelativeTo(internalFrame1);
-            dlgki.setVisible(true);
-            this.setCursor(Cursor.getDefaultCursor());
+        try {
+            otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
+            link=koneksiDB.URLAPIICARE();
+        } catch (Exception e) {
+            System.out.println("E : "+e);
         }
-//        if(tabModekasir.getRowCount()==0){
-//            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
-//            TCari.requestFocus();
-//        }else if(TNoRw.getText().trim().equals("")){
-//            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
-//            tbKasirRalan.requestFocus();
-//        }else{
-//            if(tbKasirRalan.getSelectedRow()!= -1){
-//                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//                variabel=Sequel.cariIsi("select maping_dokter_dpjpvclaim.kd_dokter_bpjs from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter=?",tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString());
-//                if(!variabel.equals("")){
-//                    akses.setform("DlgReg");
-//                    ICareRiwayatPerawatan dlgki=new ICareRiwayatPerawatan(null,false);
-//                    dlgki.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-//                    dlgki.setLocationRelativeTo(internalFrame1);
-//                    dlgki.setPasien(Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=?",TNoRMCari.getText()),variabel);   
-//                    dlgki.setVisible(true);
-//                }else{
-//                    JOptionPane.showMessageDialog(null,"Maaf, Dokter tidak terdaftar di mapping dokter BPJS...!!!"); 
-//                }
-//                this.setCursor(Cursor.getDefaultCursor());
-//            }
-//        }
+        try {
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("Content-Type","application/json");
+            headers.add("x-cons-id",koneksiDB.CONSIDAPIICARE());
+            utc=String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("x-timestamp",utc);
+            headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
+            headers.add("x-signature",api.getHmac(utc));
+            headers.add("user_key",koneksiDB.USERKEYAPIICARE());
+            requestJson="{"+
+                            "\"param\": \""+Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=?",TNoRM.getText())+"\","+
+                            "\"kodedokter\": "+Sequel.cariIsi("SELECT b.kd_dokter_bpjs FROM reg_periksa a INNER JOIN maping_dokter_dpjpvclaim b ON a.kd_dokter=b.kd_dokter WHERE a.no_rawat='"+TNoRw.getText()+"'")+""+
+                        "}";
+            System.out.println("JSON : "+requestJson+"\n");
+            System.out.println("URL:"+link+"/validate");
+	    requestEntity = new HttpEntity(requestJson,headers);
+            requestJson= mapper.writeValueAsString(api.getRest().exchange(link+"/validate", HttpMethod.POST, requestEntity,Object.class).getBody());
+            System.out.println("JSON : "+requestJson);
+            root = mapper.readTree(requestJson);
+            nameNode = root.path("metaData");
+            if(nameNode.path("code").asText().equals("200")){
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
+                System.out.println("Response : "+response.path("url"));
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(new URI(response.path("url").asText()));
+                }
+            }else {
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
+            }   
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : "+ex.getMessage());
+            if(ex.toString().contains("UnknownHostException")){
+                JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
+            }
+        }
     }//GEN-LAST:event_ICareNoKartuActionPerformed
 
+    public void tampilICare() {
+        try {
+            otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
+            link=koneksiDB.URLAPIICARE();
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+        }
+        try {
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("Content-Type","application/json");
+            headers.add("x-cons-id",koneksiDB.CONSIDAPIICARE());
+            utc=String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("x-timestamp",utc);
+            headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
+            headers.add("x-signature",api.getHmac(utc));
+            headers.add("user_key",koneksiDB.USERKEYAPIICARE());
+            requestJson="{"+
+                            "\"param\": \""+Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=?",TNoRM.getText())+"\","+
+                            "\"kodedokter\": "+Sequel.cariIsi("SELECT b.kd_dokter_bpjs FROM reg_periksa a INNER JOIN maping_dokter_dpjpvclaim b ON a.kd_dokter=b.kd_dokter WHERE a.no_rawat='"+TNoRw.getText()+"'")+""+
+                        "}";
+            System.out.println("JSON : "+requestJson+"\n");
+            System.out.println("URL:"+link+"/validate");
+	    requestEntity = new HttpEntity(requestJson,headers);
+            requestJson= mapper.writeValueAsString(api.getRest().exchange(link+"/validate", HttpMethod.POST, requestEntity,Object.class).getBody());
+            System.out.println("JSON : "+requestJson);
+            root = mapper.readTree(requestJson);
+            nameNode = root.path("metaData");
+            if(nameNode.path("code").asText().equals("200")){
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
+                System.out.println("Response : "+response.path("url"));
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(new URI(response.path("url").asText()));
+                }
+            }else {
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
+            }   
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : "+ex.getMessage());
+            if(ex.toString().contains("UnknownHostException")){
+                JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
+            }
+        }
+    }
+    
     private void ICareNoKartuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ICareNoKartuKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_ICareNoKartuKeyPressed
@@ -10968,6 +10990,51 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnCatatanKeperawatanActionPerformed
+
+    private void ICareNoKartu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ICareNoKartu1ActionPerformed
+        try {
+            otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
+            link=koneksiDB.URLAPIICARE();
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+        }
+        try {
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("Content-Type","application/json");
+            headers.add("x-cons-id",koneksiDB.CONSIDAPIICARE());
+            utc=String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("x-timestamp",utc);
+            headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
+            headers.add("x-signature",api.getHmac(utc));
+            headers.add("user_key",koneksiDB.USERKEYAPIICARE());
+            requestJson="{"+
+                            "\"param\": \""+Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=?",TNoRM.getText())+"\","+
+                            "\"kodedokter\": "+Sequel.cariIsi("SELECT b.kd_dokter_bpjs FROM reg_periksa a INNER JOIN maping_dokter_dpjpvclaim b ON a.kd_dokter=b.kd_dokter WHERE a.no_rawat='"+TNoRw.getText()+"'")+""+
+                        "}";
+            System.out.println("JSON : "+requestJson+"\n");
+            System.out.println("URL:"+link+"/validate");
+	    requestEntity = new HttpEntity(requestJson,headers);
+            requestJson= mapper.writeValueAsString(api.getRest().exchange(link+"/validate", HttpMethod.POST, requestEntity,Object.class).getBody());
+            System.out.println("JSON : "+requestJson);
+            root = mapper.readTree(requestJson);
+            nameNode = root.path("metaData");
+            if(nameNode.path("code").asText().equals("200")){
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
+                System.out.println("Response : "+response.path("url"));
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(new URI(response.path("url").asText()));
+                }
+            }else {
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
+            }   
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : "+ex.getMessage());
+            if(ex.toString().contains("UnknownHostException")){
+                JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
+            }
+        }
+    }//GEN-LAST:event_ICareNoKartu1ActionPerformed
 
     /**
     * @param args the command line arguments
@@ -11128,8 +11195,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.TextArea Evaluasi;
     private widget.PanelBiasa FormInput;
     private widget.PanelBiasa FormMenu;
-    private widget.Button ICareNIK;
     private widget.Button ICareNoKartu;
+    private widget.Button ICareNoKartu1;
     private widget.TextArea Instruksi;
     private widget.TextArea Instruksi1;
     private widget.TextBox KdDok;

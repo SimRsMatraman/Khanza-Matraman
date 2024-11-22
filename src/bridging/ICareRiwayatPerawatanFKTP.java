@@ -13,6 +13,8 @@
 package bridging;
 
 import java.awt.Dimension;
+import java.awt.Desktop;
+import java.net.URI;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.validasi;
@@ -340,11 +342,14 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
             if(nameNode.path("code").asText().equals("200")){
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                 System.out.println("Response : "+response.path("url"));
-                try {
-                    loadURL(response.path("url").asText());
-                } catch (Exception ex) {
-                    System.out.println("Notifikasi : "+ex);
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(new URI(response.path("url").asText()));
                 }
+//                try {
+//                    loadURL(response.path("url").asText());
+//                } catch (Exception ex) {
+//                    System.out.println("Notifikasi : "+ex);
+//                }
             }else {
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
             }   
@@ -456,7 +461,7 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
         Platform.setImplicitExit(false);
     }
     
-        public void setNoRawat(String x,String y)
+    public void setNoRawat(String x,String y)
     {
         this.noRawat=x;
         TCari.setText(y);

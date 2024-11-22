@@ -123,6 +123,16 @@ import rekammedis.AsesmenAwalMedisRanapKandungan;
 import rekammedis.AsesmenAwalMedisRanapNeonatus;
 import rekammedis.DlgCatatanKeperawatan;
 import simrskhanza.DlgRujukRanap;
+import java.awt.Desktop;
+import java.net.URI;
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import bridging.ApiICareBPJS;
 
 /**
  *
@@ -135,6 +145,13 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
     private Connection koneksi=koneksiDB.condb();
+    private ApiICareBPJS api=new ApiICareBPJS();
+    private HttpHeaders headers ;
+    private HttpEntity requestEntity;
+    private ObjectMapper mapper = new ObjectMapper();
+    private JsonNode root;
+    private JsonNode nameNode;
+    private JsonNode response;
     public  DlgCariPerawatanRanap perawatan=new DlgCariPerawatanRanap(null,false);
     public  DlgCariPerawatanRanap2 perawatan2=new DlgCariPerawatanRanap2(null,false);
     public  DlgCariPegawai pegawai=new DlgCariPegawai(null,false);  
@@ -152,7 +169,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private String Suspen_Piutang_Tindakan_Ranap="",Tindakan_Ranap="",Beban_Jasa_Medik_Dokter_Tindakan_Ranap="",Utang_Jasa_Medik_Dokter_Tindakan_Ranap="",
             Beban_Jasa_Medik_Paramedis_Tindakan_Ranap="",Utang_Jasa_Medik_Paramedis_Tindakan_Ranap="",Beban_KSO_Tindakan_Ranap="",Utang_KSO_Tindakan_Ranap="",
             Beban_Jasa_Sarana_Tindakan_Ranap="",Utang_Jasa_Sarana_Tindakan_Ranap="",Beban_Jasa_Menejemen_Tindakan_Ranap="",Utang_Jasa_Menejemen_Tindakan_Ranap="",
-            HPP_BHP_Tindakan_Ranap="",Persediaan_BHP_Tindakan_Ranap="",kode_poli="",kamar="",jenisbayar="";
+            HPP_BHP_Tindakan_Ranap="",Persediaan_BHP_Tindakan_Ranap="",kode_poli="",kamar="",jenisbayar="", link="",utc="",requestJson="",otorisasi="";
 
     /** Creates new form DlgRawatInap
      * @param parent
@@ -1236,6 +1253,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnImplementasiKeperawatanRanap = new widget.Button();
         BtnValidasiImpKep = new widget.Button();
         BtnImplementasiPerawatRanap = new widget.Button();
+        ICareNoKartu = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -1618,6 +1636,24 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
 
+        ICareNoKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ICareNoKartu.setMnemonic('C');
+        ICareNoKartu.setText(" Cek Riwayat Perawatan ICare BPJS");
+        ICareNoKartu.setToolTipText("");
+        ICareNoKartu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ICareNoKartu.setName("ICareNoKartu"); // NOI18N
+        ICareNoKartu.setPreferredSize(new java.awt.Dimension(160, 30));
+        ICareNoKartu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ICareNoKartuActionPerformed(evt);
+            }
+        });
+        ICareNoKartu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ICareNoKartuKeyPressed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -1792,7 +1828,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1806,7 +1842,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3525,7 +3561,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TPasien.setBounds(283, 10, 260, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-11-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -8631,6 +8667,55 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnValidasiCatatanKeperawatanActionPerformed
 
+    private void ICareNoKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ICareNoKartuActionPerformed
+        try {
+            otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
+            link=koneksiDB.URLAPIICARE();
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+        }
+        try {
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("Content-Type","application/json");
+            headers.add("x-cons-id",koneksiDB.CONSIDAPIICARE());
+            utc=String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("x-timestamp",utc);
+            headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
+            headers.add("x-signature",api.getHmac(utc));
+            headers.add("user_key",koneksiDB.USERKEYAPIICARE());
+            requestJson="{"+
+            "\"param\": \""+Sequel.cariIsi("select pasien.no_peserta from pasien where pasien.no_rkm_medis=?",TNoRM.getText())+"\","+
+            "\"kodedokter\": "+Sequel.cariIsi("SELECT b.kd_dokter_bpjs FROM reg_periksa a INNER JOIN maping_dokter_dpjpvclaim b ON a.kd_dokter=b.kd_dokter WHERE a.no_rawat='"+TNoRw.getText()+"'")+""+
+            "}";
+            System.out.println("JSON : "+requestJson+"\n");
+            System.out.println("URL:"+link+"/validate");
+            requestEntity = new HttpEntity(requestJson,headers);
+            requestJson= mapper.writeValueAsString(api.getRest().exchange(link+"/validate", HttpMethod.POST, requestEntity,Object.class).getBody());
+            System.out.println("JSON : "+requestJson);
+            root = mapper.readTree(requestJson);
+            nameNode = root.path("metaData");
+            if(nameNode.path("code").asText().equals("200")){
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
+                System.out.println("Response : "+response.path("url"));
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(new URI(response.path("url").asText()));
+                }
+            }else {
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : "+ex.getMessage());
+            if(ex.toString().contains("UnknownHostException")){
+                JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
+            }
+        }
+    }//GEN-LAST:event_ICareNoKartuActionPerformed
+
+    private void ICareNoKartuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ICareNoKartuKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ICareNoKartuKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -8752,6 +8837,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Tanggal DTPTgl;
     private widget.PanelBiasa FormInput;
     private widget.PanelBiasa FormMenu;
+    private widget.Button ICareNoKartu;
     private widget.TextArea Instruksi;
     private javax.swing.JTextField JmDokter;
     private javax.swing.JTextField JmPerawat;
