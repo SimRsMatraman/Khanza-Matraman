@@ -565,7 +565,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2024 11:17:38" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-10-2024 10:36:44" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -672,7 +672,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2024" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-10-2024" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -1982,11 +1982,15 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         }else{
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             DlgPeriksaLaboratorium dlgro=new DlgPeriksaLaboratorium(null,false);
-                            dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                            dlgro.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                             dlgro.setLocationRelativeTo(internalFrame1);
                             dlgro.emptTeks();
                             dlgro.isCek(); 
-                            dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
+                            if (Sequel.cariIntegerSysmex("select count(ONO) from resdt where resdt.ONO=?", NoPermintaan.trim()) > 0) {
+                                dlgro.setOrderSysmex(NoPermintaan,NoRawat,"Ralan");
+                            }else{
+                                dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
+                            }                            
                             dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
                             TeksKosong();
                             dlgro.setVisible(true);
@@ -2105,34 +2109,38 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         })==true){
                             WindowAmbilSampel.dispose();
                             try {
-                                pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
-                                switch (pilihan) {
-                                    case "Tidak Ada":
-                                        break;
-                                    case "Barcode No.Permintaan 1":
-                                        BtnBarcodePermintaanActionPerformed(evt);
-                                        break;
-                                    case "Barcode No.Permintaan 2":
-                                        BtnBarcodePermintaan2ActionPerformed(evt);
-                                        break;
-                                    case "Lembar Permintaan Lab":
-                                        BtnCetakHasilLabActionPerformed(evt);
-                                        break;
-                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 1":
-                                        BtnBarcodePermintaanActionPerformed(evt);
-                                        getData();
-                                        getData2();
-                                        BtnCetakHasilLabActionPerformed(evt);
-                                        break;
-                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 2":
-                                        BtnBarcodePermintaan2ActionPerformed(evt);
-                                        getData();
-                                        getData2();
-                                        BtnCetakHasilLabActionPerformed(evt);
-                                        break;
-                                }  
-                            } catch (Exception e) {
-                            }   
+//                                pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, Mau apa lagi?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Kirim Sysmex","Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Kirim Sysmex");
+//                                switch (pilihan) {
+//                                    case "Kirim Sysmex":
+//                                        BtnKirimSysmexActionPerformed(evt);
+//                                        break;
+//                                    case "Tidak Ada":
+//                                        break;
+//                                    case "Barcode No.Permintaan 1":
+//                                        BtnBarcodePermintaanActionPerformed(evt);
+//                                        break;
+//                                    case "Barcode No.Permintaan 2":
+//                                        BtnBarcodePermintaan2ActionPerformed(evt);
+//                                        break;
+//                                    case "Lembar Permintaan Lab":
+//                                        BtnCetakHasilLabActionPerformed(evt);
+//                                        break;
+//                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 1":
+//                                        BtnBarcodePermintaanActionPerformed(evt);
+//                                        getData();
+//                                        getData2();
+//                                        BtnCetakHasilLabActionPerformed(evt);
+//                                        break;
+//                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 2":
+//                                        BtnBarcodePermintaan2ActionPerformed(evt);
+//                                        getData();
+//                                        getData2();
+//                                        BtnCetakHasilLabActionPerformed(evt);
+//                                        break;
+//                                }
+                                BtnKirimSysmexActionPerformed(evt);
+                                } catch (Exception e) {
+                                    }   
                             Sequel.queryu("delete from antrilabpk");
                             Sequel.queryu("insert into antrilabpk values('1')");
                             TeksKosong();
@@ -2155,25 +2163,28 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         })==true){
                             WindowAmbilSampel.dispose();
                             try {
-                                pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, Apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Tidak Ada");
-                                switch (pilihan) {
-                                    case "Tidak Ada":
-                                        break;
-                                    case "Barcode No.Permintaan 1":
-                                        BtnBarcodePermintaanActionPerformed(evt);
-                                        break;
-                                    case "Barcode No.Permintaan 2":
-                                        BtnBarcodePermintaan2ActionPerformed(evt);
-                                        break;
-                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 1":
-                                        BtnBarcodePermintaanActionPerformed(evt);
-                                        BtnCetakHasilLabActionPerformed(null);
-                                        break;
-                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 2":
-                                        BtnBarcodePermintaan2ActionPerformed(evt);
-                                        BtnCetakHasilLabActionPerformed(null);
-                                        break;
-                                }  
+                                BtnKirimSysmexActionPerformed(evt);
+//                                pilihan = (String)JOptionPane.showInputDialog(null,"Waktu pengambilan sampel berhasil disimpan, Apakah ada yang ingin dicetak..?","Konfirmasi",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Kirim Sysmex","Tidak Ada","Barcode No.Permintaan 1","Barcode No.Permintaan 2","Lembar Permintaan Lab & Barcode No.Permintaan 1","Lembar Permintaan Lab & Barcode No.Permintaan 2"},"Kirim Sysmex");
+//                                switch (pilihan) {
+//                                    case "Kirim Sysmex":
+//                                        break;
+//                                    case "Tidak Ada":
+//                                        break;
+//                                    case "Barcode No.Permintaan 1":
+//                                        BtnBarcodePermintaanActionPerformed(evt);
+//                                        break;
+//                                    case "Barcode No.Permintaan 2":
+//                                        BtnBarcodePermintaan2ActionPerformed(evt);
+//                                        break;
+//                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 1":
+//                                        BtnBarcodePermintaanActionPerformed(evt);
+//                                        BtnCetakHasilLabActionPerformed(null);
+//                                        break;
+//                                    case "Lembar Permintaan Lab & Barcode No.Permintaan 2":
+//                                        BtnBarcodePermintaan2ActionPerformed(evt);
+//                                        BtnCetakHasilLabActionPerformed(null);
+//                                        break;
+//                                }  
                             } catch (Exception e) {
                             }
                             TeksKosong();

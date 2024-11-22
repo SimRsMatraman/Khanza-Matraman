@@ -12,6 +12,7 @@
 
 package fungsi;
 
+import bridging.koneksiDBSysmex;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -52,6 +53,7 @@ public final class sekuel {
     private javax.swing.ImageIcon icon = null;
     private String folder,AKTIFKANTRACKSQL = koneksiDB.AKTIFKANTRACKSQL();
     private final Connection connect=koneksiDB.condb();
+    private final Connection connectsysmex=koneksiDBSysmex.condb();
     private PreparedStatement ps;
     private ResultSet rs;
     private int angka=0;
@@ -1623,6 +1625,37 @@ public final class sekuel {
         angka=0;
         try {
             ps=connect.prepareStatement(sql);
+            try{
+                ps.setString(1,data);
+                rs=ps.executeQuery();            
+                if(rs.next()){
+                    angka=rs.getInt(1);
+                }else{
+                    angka=0;
+                }  
+            }catch(Exception e){
+                angka=0;
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+                
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+            
+        return angka;
+    }
+    
+    public Integer cariIntegerSysmex(String sql,String data){
+        angka=0;
+        try {
+            ps=connectsysmex.prepareStatement(sql);
             try{
                 ps.setString(1,data);
                 rs=ps.executeQuery();            
