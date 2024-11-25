@@ -10888,15 +10888,16 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
-                System.out.println("Response : "+response.path("url"));
-                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                System.out.println("Response : "+response.path("url"));                
+                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     Desktop.getDesktop().browse(new URI(response.path("url").asText()));
-                }
+                    }
             }else {
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
             }   
         } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex.getMessage());
+            System.out.println("Notifikasi 2 : "+ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Icare pasien tidak ditemukan");
             if(ex.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
