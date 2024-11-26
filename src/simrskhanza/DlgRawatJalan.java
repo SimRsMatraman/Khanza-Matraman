@@ -11697,10 +11697,10 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
         //
         //Menampilkan Assesmen
-//        if(TPenilaian.getText().isEmpty()){
+        if(TPenilaian.getText().isEmpty()){
 //          TPenilaian.setText(Sequel.cariIsi("select penilaian from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));
             try {
-            TPenilaian.setText("");
+//            TPenilaian.setText("");
             ps=koneksi.prepareStatement(
                     "select diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit,diagnosa_pasien.prioritas "+
                     "from diagnosa_pasien inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit "+
@@ -11726,7 +11726,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
-//        }
+        }
          
         //Menampilkan Plan
         if(TindakLanjut.getText().isEmpty()){
