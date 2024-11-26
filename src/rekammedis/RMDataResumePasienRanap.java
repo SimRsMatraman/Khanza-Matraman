@@ -253,7 +253,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         KeluarLainnya.setDocument(new batasInput((int)100).getKata(KeluarLainnya));
         KeadaanLainnya.setDocument(new batasInput((int)100).getKata(KeadaanLainnya));
         PengobatanLainnya.setDocument(new batasInput((int)100).getKata(PengobatanLainnya));
-        Obat.setDocument(new batasInput((int)15).getKata(Obat));
+        Obat.setDocument(new batasInput((int)1000).getKata(Obat));
 //        Jumlah.setDocument(new batasInput((int)5).getKata(Jumlah));
 //        Dosis.setDocument(new batasInput((int)20).getKata(Dosis));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
@@ -1256,9 +1256,6 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         label27 = new widget.Label();
         Obat9 = new widget.TextBox();
         PObat1 = new widget.Button();
-        jLabel42 = new widget.Label();
-        Pengobatan = new widget.ComboBox();
-        PengobatanLainnya = new widget.TextBox();
         label13 = new widget.Label();
         Kontrol = new widget.Tanggal();
         label11 = new widget.Label();
@@ -1435,8 +1432,6 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         BtnImplementasiKeperawatanRanap = new widget.Button();
         jLabel49 = new widget.Label();
         Keluar = new widget.Tanggal();
-        scrollPane12 = new widget.ScrollPane();
-        Obat = new widget.TextArea();
         scrollPane13 = new widget.ScrollPane();
         DiagnosaUtama = new widget.TextArea();
         scrollPane14 = new widget.ScrollPane();
@@ -1445,6 +1440,11 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         cmbMnt = new widget.ComboBox();
         cmbDtk = new widget.ComboBox();
         ChkJln = new widget.CekBox();
+        scrollPane12 = new widget.ScrollPane();
+        Obat = new widget.TextArea();
+        PengobatanLainnya = new widget.TextBox();
+        Pengobatan = new widget.ComboBox();
+        jLabel42 = new widget.Label();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -1731,31 +1731,12 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             }
         });
 
-        jLabel42.setText("Pengobatan Dilanjutkan :");
-        jLabel42.setName("jLabel42"); // NOI18N
-
-        Pengobatan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Poliklinik RSUD Matraman", "RS Lain", "Dokter Luar", "Puskesmes", "Lainnya" }));
-        Pengobatan.setName("Pengobatan"); // NOI18N
-        Pengobatan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PengobatanActionPerformed(evt);
-            }
-        });
-        Pengobatan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                PengobatanKeyPressed(evt);
-            }
-        });
-
-        PengobatanLainnya.setHighlighter(null);
-        PengobatanLainnya.setName("PengobatanLainnya"); // NOI18N
-
         label13.setText("Tanggal & Jam Kontrol :");
         label13.setName("label13"); // NOI18N
         label13.setPreferredSize(new java.awt.Dimension(70, 23));
 
         Kontrol.setForeground(new java.awt.Color(50, 70, 50));
-        Kontrol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-11-2024 16:15:20" }));
+        Kontrol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024 11:22:53" }));
         Kontrol.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         Kontrol.setName("Kontrol"); // NOI18N
         Kontrol.setOpaque(false);
@@ -2275,7 +2256,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         });
 
         JamKeluar.setForeground(new java.awt.Color(50, 70, 50));
-        JamKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16:15:20" }));
+        JamKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11:22:53" }));
         JamKeluar.setDisplayFormat("HH:mm:ss");
         JamKeluar.setName("JamKeluar"); // NOI18N
         JamKeluar.setOpaque(false);
@@ -2311,7 +2292,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Resume Medis Pasien Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Resume Medis Pasien Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -2478,7 +2459,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2492,7 +2473,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3079,7 +3060,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         jLabel43.setText("Sudah Dijelaskan :");
         jLabel43.setName("jLabel43"); // NOI18N
         FormInput.add(jLabel43);
-        jLabel43.setBounds(70, 1130, 100, 23);
+        jLabel43.setBounds(70, 1070, 100, 23);
 
         Sudah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
         Sudah.setName("Sudah"); // NOI18N
@@ -3094,7 +3075,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(Sudah);
-        Sudah.setBounds(180, 1130, 60, 23);
+        Sudah.setBounds(180, 1070, 60, 23);
 
         CaraBayar1.setEditable(false);
         CaraBayar1.setHighlighter(null);
@@ -3196,7 +3177,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         jLabel49.setBounds(0, 630, 150, 23);
 
         Keluar.setForeground(new java.awt.Color(50, 70, 50));
-        Keluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-11-2024" }));
+        Keluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
         Keluar.setDisplayFormat("dd-MM-yyyy");
         Keluar.setName("Keluar"); // NOI18N
         Keluar.setOpaque(false);
@@ -3207,23 +3188,6 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         });
         FormInput.add(Keluar);
         Keluar.setBounds(110, 130, 90, 23);
-
-        scrollPane12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        scrollPane12.setName("scrollPane12"); // NOI18N
-
-        Obat.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        Obat.setColumns(20);
-        Obat.setRows(5);
-        Obat.setName("Obat"); // NOI18N
-        Obat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                ObatKeyPressed(evt);
-            }
-        });
-        scrollPane12.setViewportView(Obat);
-
-        FormInput.add(scrollPane12);
-        scrollPane12.setBounds(180, 1010, 610, 110);
 
         scrollPane13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane13.setName("scrollPane13"); // NOI18N
@@ -3302,6 +3266,48 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         });
         FormInput.add(ChkJln);
         ChkJln.setBounds(433, 132, 20, 20);
+
+        scrollPane12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPane12.setName("scrollPane12"); // NOI18N
+
+        Obat.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Obat.setColumns(20);
+        Obat.setRows(5);
+        Obat.setName("Obat"); // NOI18N
+        Obat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ObatKeyPressed(evt);
+            }
+        });
+        scrollPane12.setViewportView(Obat);
+
+        FormInput.add(scrollPane12);
+        scrollPane12.setBounds(181, 1010, 610, 50);
+
+        PengobatanLainnya.setHighlighter(null);
+        PengobatanLainnya.setName("PengobatanLainnya"); // NOI18N
+        FormInput.add(PengobatanLainnya);
+        PengobatanLainnya.setBounds(460, 1100, 330, 24);
+
+        Pengobatan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Poliklinik RSUD Matraman", "RS Lain", "Dokter Luar", "Puskesmes", "Lainnya" }));
+        Pengobatan.setName("Pengobatan"); // NOI18N
+        Pengobatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PengobatanActionPerformed(evt);
+            }
+        });
+        Pengobatan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PengobatanKeyPressed(evt);
+            }
+        });
+        FormInput.add(Pengobatan);
+        Pengobatan.setBounds(180, 1100, 270, 20);
+
+        jLabel42.setText("Pengobatan Dilanjutkan :");
+        jLabel42.setName("jLabel42"); // NOI18N
+        FormInput.add(jLabel42);
+        jLabel42.setBounds(10, 1100, 160, 14);
 
         scrollInput.setViewportView(FormInput);
 
@@ -4322,10 +4328,6 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_JamKeluarKeyPressed
 
-    private void ObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ObatKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ObatKeyPressed
-
     private void MnDigitalTTEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDigitalTTEActionPerformed
         if(tbObat.getSelectedRow()>-1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -4370,6 +4372,10 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkJlnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ChkJlnActionPerformed
+
+    private void ObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ObatKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ObatKeyPressed
 
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
