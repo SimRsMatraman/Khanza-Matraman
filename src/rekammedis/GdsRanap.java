@@ -1716,17 +1716,17 @@ public final class GdsRanap extends javax.swing.JDialog {
 //    }
     
     private void hasil(){
-        if(Integer.parseInt(Hasil.getText())<250){
-            IU.setText("4 IU");
-        }else if(Integer.parseInt(Hasil.getText())<300){
-            IU.setText("8 IU");
-        }else if(Integer.parseInt(Hasil.getText())<350){
-            IU.setText("12 IU");
-        }else if(Integer.parseInt(Hasil.getText())<400){
-            IU.setText("16 IU");
-        }else if(Integer.parseInt(Hasil.getText())>=400){
-            IU.setText("REGULASI CEPAT");
-        }
+//        if(Integer.parseInt(Hasil.getText())<250){
+//            IU.setText("4 IU");
+//        }else if(Integer.parseInt(Hasil.getText())<300){
+//            IU.setText("8 IU");
+//        }else if(Integer.parseInt(Hasil.getText())<350){
+//            IU.setText("12 IU");
+//        }else if(Integer.parseInt(Hasil.getText())<400){
+//            IU.setText("16 IU");
+//        }else if(Integer.parseInt(Hasil.getText())>=400){
+//            IU.setText("REGULASI CEPAT");
+//        }
 //        isTotalKlasifikasi();
 //        isTotalRespon();
 //        isTotalTindakan();
