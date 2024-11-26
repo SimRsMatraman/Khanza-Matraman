@@ -34,7 +34,7 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import kepegawaian.DlgCariDokter;
+import kepegawaian.DlgCariPegawai;
 import laporan.DlgBerkasRawat;
 import laporan.DlgDiagnosaPenyakit;
 import digitalsignature.DlgViewPdf;
@@ -54,7 +54,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     private ResultSet rs;
     private String FileName;
     private int i=0;    
-    private DlgCariDokter dokter=new DlgCariDokter(null,false);
+    private DlgCariPegawai dokter=new DlgCariPegawai(null,false);
     private RMCariKeluhan carikeluhan=new RMCariKeluhan(null,false);
     private RMCariPemeriksaan caripemeriksaan=new RMCariPemeriksaan(null,false);
     private RMCariHasilRadiologi cariradiologi=new RMCariHasilRadiologi(null,false);
@@ -918,7 +918,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
 
     private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokterActionPerformed
         dokter.emptTeks();
-        dokter.isCek();
+//        dokter.isCek();
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
@@ -1263,7 +1263,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     }
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getdata_resume_pasien());
+//        BtnSimpan.setEnabled(akses.getdata_resume_pasien());
 //        BtnHapus.setEnabled(akses.getdata_resume_pasien());
 //        BtnEdit.setEnabled(akses.getdata_resume_pasien());
 //        BtnPrint.setEnabled(akses.getdata_resume_pasien()); 
@@ -1276,7 +1276,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter,KodeDokter.getText());
             if(NamaDokter.getText().equals("")){
                 KodeDokter.setText("");
-                JOptionPane.showMessageDialog(null,"User login bukan dokter...!!");
+//                JOptionPane.showMessageDialog(null,"User login bukan dokter...!!");
             }
         }            
     }
