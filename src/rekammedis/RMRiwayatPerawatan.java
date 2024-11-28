@@ -13,6 +13,7 @@ package rekammedis;
 
 import bridging.ApiOrthanc;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -2074,7 +2075,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     panggilLaporan(LoadHTMLRiwayatPerawatan.getText()); 
                     break;
                 case 3:
-                    panggilLaporan(LoadHTMLRiwayatPerawatan.getText()); 
+                    panggilLaporan(LoadHTMLRiwayatRadLab.getText()); 
                     break;
                 case 4:
                     panggilLaporan(LoadHTMLRetensi.getText()); 
@@ -4129,16 +4130,16 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                         "</tr>");
                                                     rs3.beforeFirst();
                                                     while(rs3.next()){
-                                                        htmlContent.append(
-                                                            "<tr>"+
-                                                               "<td valign='top' align='center'></td>"+
-                                                               "<td valign='top'></td>"+
-                                                               "<td valign='top'></td>"+
-                                                               "<td valign='top'>"+rs3.getString("Pemeriksaan")+"</td>"+
-                                                               "<td valign='top'>"+rs3.getString("nilai")+" "+rs3.getString("satuan")+"</td>"+
-                                                               "<td valign='top'>"+rs3.getString("nilai_rujukan")+"</td>"+
-                                                               "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_item"))+"</td>"+
-                                                            "</tr>"); 
+                                                                htmlContent.append(
+                                                                    "<tr>"+
+                                                                       "<td valign='top' align='center'></td>"+
+                                                                       "<td valign='top'></td>"+
+                                                                       "<td valign='top'></td>"+
+                                                                       "<td valign='top'>"+rs3.getString("Pemeriksaan")+"</td>"+
+                                                                       "<td valign='top'>"+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
+                                                                       "<td valign='top'>"+rs3.getString("nilai_rujukan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                                                       "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_item"))+"</td>"+
+                                                                    "</tr>"); 
                                                         biayaperawatan=biayaperawatan+rs3.getDouble("biaya_item");
                                                     }                                               
                                                 }
@@ -4153,7 +4154,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                         }
 
                                         try {
-                                            rs3=koneksi.prepareStatement("select saran,kesan from saran_kesan_lab where no_rawat='"+rs.getString("no_rawat")+"' and tgl_periksa='"+rs4.getString("tgl_periksa")+"' and jam='"+rs4.getString("jam")+"'").executeQuery();
+                                            rs3=koneksi.prepareStatement("select saran_kesan_lab.saran,saran_kesan_lab.kesan from saran_kesan_lab where saran_kesan_lab.no_rawat='"+rs.getString("no_rawat")+"' and saran_kesan_lab.tgl_periksa='"+rs4.getString("tgl_periksa")+"' and saran_kesan_lab.jam='"+rs4.getString("jam")+"'").executeQuery();
                                             if(rs3.next()){      
                                                 htmlContent.append(
                                                         "<tr>"+
@@ -4186,7 +4187,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                            "<td valign='top' colspan='5'>: "+rs3.getString("gambaran")+"</td>"+
                                                         "</tr>");
                                             } 
-                                        } catch (Exception e) {
+                                    } catch (Exception e) {
                                             System.out.println("Notif : "+e);
                                         } finally{
                                             if(rs3!=null){
@@ -4250,11 +4251,11 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     biayaperawatan=biayaperawatan+rs2.getDouble("biaya");
                                     try {
                                         rs3=koneksi.prepareStatement(
-                                            "select diagnosa_klinik,makroskopik,mikroskopik,kesimpulan,kesan from detail_periksa_labpa "+
-                                            "where no_rawat='"+rs.getString("no_rawat")+"' and kd_jenis_prw='"+rs2.getString("kd_jenis_prw")+"' and "+
-                                            "tgl_periksa='"+rs2.getString("tgl_periksa")+"' and jam='"+rs2.getString("jam")+"'").executeQuery();
+                                            "select detail_periksa_labpa.diagnosa_klinik,detail_periksa_labpa.makroskopik,detail_periksa_labpa.mikroskopik,detail_periksa_labpa.kesimpulan,detail_periksa_labpa.kesan from detail_periksa_labpa "+
+                                            "where detail_periksa_labpa.no_rawat='"+rs.getString("no_rawat")+"' and detail_periksa_labpa.kd_jenis_prw='"+rs2.getString("kd_jenis_prw")+"' and "+
+                                            "detail_periksa_labpa.tgl_periksa='"+rs2.getString("tgl_periksa")+"' and detail_periksa_labpa.jam='"+rs2.getString("jam")+"'").executeQuery();
                                         if(rs3.next()){ 
-                                            file=Sequel.cariIsi("select photo from detail_periksa_labpa_gambar where no_rawat='"+rs.getString("no_rawat")+"' and kd_jenis_prw='"+rs2.getString("kd_jenis_prw")+"' and tgl_periksa='"+rs2.getString("tgl_periksa")+"' and jam='"+rs2.getString("jam")+"'");
+                                            file=Sequel.cariIsi("select detail_periksa_labpa_gambar.photo from detail_periksa_labpa_gambar where detail_periksa_labpa_gambar.no_rawat='"+rs.getString("no_rawat")+"' and detail_periksa_labpa_gambar.kd_jenis_prw='"+rs2.getString("kd_jenis_prw")+"' and detail_periksa_labpa_gambar.tgl_periksa='"+rs2.getString("tgl_periksa")+"' and detail_periksa_labpa_gambar.jam='"+rs2.getString("jam")+"'");
                                             htmlContent.append(
                                                 "<tr>"+
                                                    "<td valign='top' align='center'></td>"+
@@ -5327,8 +5328,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<tr class='isi'>"+
                                         "<td align='center'>"+rs2.getString("tgl_perawatan")+"<br>"+rs2.getString("jam_rawat")+"</td>"+
                                         "<td align='center'>"+rs2.getString("nik")+"<br>"+rs2.getString("nama")+"</td>"+
-                                        "<td align='left'>"+rs2.getString("keluhan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                        "<td align='left'>"+rs2.getString("pemeriksaan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+
+                                        "<td align='left'>"+rs2.getString("keluhan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                        "<td align='left'>"+rs2.getString("pemeriksaan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+
                                         (rs2.getString("alergi").equals("")?"":"<br>Alergi : "+rs2.getString("alergi"))+
                                         (rs2.getString("suhu_tubuh").equals("")?"":"<br>Suhu(C) : "+rs2.getString("suhu_tubuh"))+
                                         (rs2.getString("tensi").equals("")?"":"<br>Tensi : "+rs2.getString("tensi"))+
@@ -5391,8 +5392,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     "<tr class='isi'>"+
                                         "<td align='center'>"+rs2.getString("tgl_perawatan")+"<br>"+rs2.getString("jam_rawat")+"</td>"+
                                         "<td align='center'>"+rs2.getString("nik")+"<br>"+rs2.getString("nama")+"</td>"+
-                                        "<td align='left'>"+rs2.getString("keluhan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                        "<td align='left'>"+rs2.getString("pemeriksaan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+
+                                        "<td align='left'>"+rs2.getString("keluhan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                        "<td align='left'>"+rs2.getString("pemeriksaan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+
                                         (rs2.getString("alergi").equals("")?"":"<br>Alergi : "+rs2.getString("alergi"))+
                                         (rs2.getString("suhu_tubuh").equals("")?"":"<br>Suhu(C) : "+rs2.getString("suhu_tubuh"))+
                                         (rs2.getString("tensi").equals("")?"":"<br>Tensi : "+rs2.getString("tensi"))+
@@ -5912,9 +5913,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                                "<td valign='top'></td>"+
                                                                "<td valign='top'></td>"+
                                                                "<td valign='top'>"+rs3.getString("Pemeriksaan")+"</td>"+
-                                                               "<td valign='top'>"+rs3.getString("nilai")+" "+rs3.getString("satuan")+"</td>"+
-                                                               "<td valign='top'>"+rs3.getString("nilai_rujukan")+"</td>"+
-                                                               //"<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_item"))+"</td>"+
+                                                               "<td valign='top'>"+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
+                                                               "<td valign='top'>"+rs3.getString("nilai_rujukan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                                               "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_item"))+"</td>"+
                                                             "</tr>"); 
                                                         //biayaperawatan=biayaperawatan+rs3.getDouble("biaya_item");
                                                     }                                               
@@ -12589,7 +12590,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                     "<td valign='top' align='center'></td>"+
                                                     "<td valign='top' align='center'></td>"+
                                                     "<td valign='top' colspan='2'>S (SUBJECTIVE)</td>"+
-                                                    "<td valign='top' colspan='14'> : "+rs2.getString("keluhan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                                    "<td valign='top' colspan='14'> : "+rs2.getString("keluhan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                                  "</tr>");
                                         }
                                         
@@ -12599,7 +12600,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                     "<td valign='top' align='center'></td>"+
                                                     "<td valign='top' align='center'></td>"+
                                                     "<td valign='top' colspan='2'>O (OBJECTIVE)</td>"+
-                                                    "<td valign='top' colspan='14'> : "+rs2.getString("pemeriksaan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                                    "<td valign='top' colspan='14'> : "+rs2.getString("pemeriksaan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                                  "</tr>");
                                         }
                                         
@@ -13885,7 +13886,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             "penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_pupil,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_kelopak,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_kelopak_keterangan,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_konjungtiva,"+
                             "penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_konjungtiva_keterangan,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_sklera,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_sklera_keterangan,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_pendengaran,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_pendengaran_keterangan,"+
                             "penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_penciuman,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_neurologi_penciuman_keterangan,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_integument_warnakulit,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_integument_vernic,"+
-                            "penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_integument_lanugo,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_integument_turgor,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_integument_kulit,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_reproduksi_laki,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_reproduksi_laki_keterangan,"+
+                            "penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_integument_lanugo,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_integument_turgor,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_integument_kulit,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_reproduksi,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_reproduksi_keterangan,"+
                             "penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_reproduksi_perempuan,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_reproduksi_perempuan_keterangan,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_muskuloskletal_lengan,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_muskuloskletal_lengan_keterangan,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_muskuloskletal_tungkai,"+
                             "penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_muskuloskletal_tungkai_keterangan,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_muskuloskletal_rekoil,penilaian_awal_keperawatan_ranap_neonatus.pemeriksaan_muskuloskletal_garis,penilaian_awal_keperawatan_ranap_neonatus.riwayat_psiko_kondisi_psiko,"+
                             "penilaian_awal_keperawatan_ranap_neonatus.riwayat_psiko_gangguan_jiwa,penilaian_awal_keperawatan_ranap_neonatus.riwayat_psiko_perilaku,penilaian_awal_keperawatan_ranap_neonatus.riwayat_psiko_perilaku_keterangan,penilaian_awal_keperawatan_ranap_neonatus.riwayat_psiko_hubungan_keluarga,penilaian_awal_keperawatan_ranap_neonatus.riwayat_psiko_tinggal,"+

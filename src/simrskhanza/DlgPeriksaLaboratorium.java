@@ -2018,7 +2018,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rstampil=pstampil.executeQuery();
                         while(rstampil.next()){
                             System.out.println("ID Detail Laborat RS : "+rstampil.getString("id_template")+" "+rstampil.getString("Pemeriksaan"));
-                            pstindakan=koneksisysmex.prepareStatement("select RESDT.ORDER_TESTID,RESDT.DATA_TYP,RESDT.RESULT_VALUE,RESDT.RESULT_FT,RESDT.UNIT,RESDT.FLAG,RESDT.REF_RANGE,test_mapping.TM_TI_CODE from RESDT inner join test_mapping on test_mapping.TM_TI_CODE=resdt.TEST_CD where RESDT.ONO=? and test_mapping.TM_HIS_CODE=?");
+                            pstindakan=koneksisysmex.prepareStatement("select RESDT.ORDER_TESTID,RESDT.DATA_TYP,RESDT.RESULT_VALUE,RESDT.RESULT_FT,RESDT.UNIT,RESDT.FLAG,RESDT.REF_RANGE,test_mapping.TM_TI_CODE,RESDT.TEST_COMMENT from RESDT inner join test_mapping on test_mapping.TM_TI_CODE=resdt.TEST_CD where RESDT.ONO=? and test_mapping.TM_HIS_CODE=?");
                             try {
                                 pstindakan.setString(1,order);
                                 pstindakan.setString(2,rstampil.getString("id_template"));
@@ -2045,7 +2045,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                         tabMode.addRow(new Object[]{
                                             true,"   "+rstampil.getString("Pemeriksaan"),rstindakan.getString("RESULT_VALUE"),
                                                  rstindakan.getString("UNIT"),
-                                                 rstindakan.getString("REF_RANGE"),rstindakan.getString("FLAG").replaceAll("LL","L").replaceAll("HH","H"),
+                                                 rstindakan.getString("REF_RANGE").replaceAll("MRR",rstindakan.getString("TEST_COMMENT")),rstindakan.getString("FLAG").replaceAll("LL","L").replaceAll("HH","H"),
                                                  rstampil.getString("id_template"),
                                                  rstampil.getDouble("biaya_item"),
                                                  rstampil.getDouble("bagian_rs"),
