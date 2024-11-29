@@ -198,6 +198,10 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                 column.setPreferredWidth(150);
             }else if(i==60){
                 column.setPreferredWidth(170);
+            }else if(i==64){
+                column.setPreferredWidth(170);
+            }else if(i==65){
+                column.setPreferredWidth(170);
             }else if(i==67){
                 column.setPreferredWidth(250);
             }else if(i==107){
@@ -2292,7 +2296,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Resume Medis Pasien Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Resume Medis Pasien Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -3289,7 +3293,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
         FormInput.add(PengobatanLainnya);
         PengobatanLainnya.setBounds(460, 1100, 330, 24);
 
-        Pengobatan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Poliklinik RSUD Matraman", "RS Lain", "Dokter Luar", "Puskesmes", "Lainnya" }));
+        Pengobatan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Poliklinik RSUD Matraman", "RS Lain", "Dokter Luar", "Puskesmas", "Lainnya" }));
         Pengobatan.setName("Pengobatan"); // NOI18N
         Pengobatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
