@@ -51,6 +51,7 @@
     <entry key="IPPRINTERTRACER">10.50.150.57/label2</entry>
     <entry key="AKTIFKANBILLINGPARSIAL">yes</entry> <!--Aktifasi Billing Parsial-->
     <entry key="AKTIFKANTRACKSQL">88tE0ZUstuza/UrtfBYkFA==</entry> <!--Aktifasi Mapping sql-->
+    <entry key="TANGGALMUNDUR">yes</entry>
     <!--Apotik--> 
     <entry key="ALARMAPOTEK">yes</entry> <!--Suara resep baru apotik-->
     <entry key="RESEPRAJALKEPLAN">yes</entry>
