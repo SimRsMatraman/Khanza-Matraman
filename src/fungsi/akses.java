@@ -209,7 +209,7 @@ public final class akses {
             pemantauan_meows_obstetri=false,catatan_adime_gizi=false,pengajuan_biaya=false,penilaian_awal_keperawatan_ralan_geriatri=false,master_masalah_keperawatan_geriatri=false,
             master_rencana_keperawatan_geriatri=false,checklist_kriteria_masuk_hcu=false,checklist_kriteria_keluar_hcu=false,penilaian_risiko_dekubitus=false,
             master_menolak_anjuran_medis=false,penolakan_anjuran_medis=false,laporan_tahunan_penolakan_anjuran_medis=false,template_laporan_operasi=false,hasil_tindakan_eswl=false,
-            checklist_kriteria_masuk_icu=false,checklist_kriteria_keluar_icu=false,akses_dokter_lain_rawat_jalan=false,follow_up_dbd=false,satu_sehat_kirim_diet=false,
+            balance_cairan=false,checklist_kriteria_masuk_icu=false,checklist_kriteria_keluar_icu=false,akses_dokter_lain_rawat_jalan=false,follow_up_dbd=false,satu_sehat_kirim_diet=false,
             satu_sehat_mapping_obat=false,dapur_ringkasan_pembelian=false,satu_sehat_kirim_medication=false,satu_sehat_kirim_medicationrequest=false,
             penatalaksanaan_terapi_okupasi=false,satu_sehat_kirim_medicationdispense=false,hasil_usg_neonatus=false,hasil_endoskopi_faring_laring=false,
             satu_sehat_mapping_radiologi=false,satu_sehat_kirim_servicerequest_radiologi=false,hasil_endoskopi_hidung=false,satu_sehat_kirim_specimen_radiologi=false,satu_sehat_kirim_observation_radiologi=false,satu_sehat_kirim_diagnosticreport_radiologi=false,hasil_endoskopi_telinga=false,satu_sehat_mapping_lab=false,
@@ -329,6 +329,7 @@ public final class akses {
                         akses.tarif_ralan=true;
                         akses.tarif_ranap=true;
                         akses.tarif_lab=true;
+                        akses.balance_cairan=true;
                         akses.tarif_radiologi=true;
                         akses.tarif_operasi=true;
                         akses.akun_rekening=true;
@@ -1818,6 +1819,7 @@ public final class akses {
                         akses.kedatangan_pasien=rs2.getBoolean("kedatangan_pasien");
                         akses.utd_pendonor=rs2.getBoolean("utd_pendonor");
                         akses.toko_suplier=rs2.getBoolean("toko_suplier");
+                        akses.balance_cairan=rs2.getBoolean("balance_cairan");
                         akses.toko_jenis=rs2.getBoolean("toko_jenis");
                         akses.toko_set_harga=rs2.getBoolean("toko_set_harga");
                         akses.toko_barang=rs2.getBoolean("toko_barang");
@@ -2830,6 +2832,7 @@ public final class akses {
                         akses.pasien_corona=false;
                         akses.toko_pendapatan_harian=false;
                         akses.diagnosa_pasien_corona=false;
+                        akses.balance_cairan=false;
                         akses.perawatan_pasien_corona=false;
                         akses.penilaian_awal_keperawatan_gigi=false;
                         akses.master_masalah_keperawatan_gigi=false;
@@ -3855,6 +3858,7 @@ public final class akses {
         akses.booking_periksa=false;
         akses.toko_sirkulasi=false;
         akses.toko_retur_jual=false;
+        akses.balance_cairan=false;
         akses.toko_retur_piutang=false;
         akses.toko_sirkulasi2=false;
         akses.toko_keuntungan_barang=false;
@@ -4694,6 +4698,7 @@ public final class akses {
     public static boolean getpcare_cek_khusus(){return akses.pcare_cek_khusus;}
     public static boolean getpcare_cek_obat(){return akses.pcare_cek_obat;}
     public static boolean getpcare_cek_tindakan(){return akses.pcare_cek_tindakan;}
+    public static boolean getbalance_cairan(){return akses.balance_cairan;}
     public static boolean getpcare_cek_faskessubspesialis(){return akses.pcare_cek_faskessubspesialis;}
     public static boolean getpcare_cek_faskesalihrawat(){return akses.pcare_cek_faskesalihrawat;}
     public static boolean getpcare_cek_faskesthalasemia(){return akses.pcare_cek_faskesthalasemia;}

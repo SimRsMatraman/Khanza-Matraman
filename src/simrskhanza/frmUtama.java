@@ -780,6 +780,7 @@ import permintaan.DlgPermintaanRanap;
 import perpustakaan.PerpustakaanAnggota;
 import perpustakaan.PerpustakaanBayarDenda;
 import perpustakaan.PerpustakaanCariEbook;
+import rekammedis.RMDataCatatanKeseimbanganCairan;
 import perpustakaan.PerpustakaanCariInventaris;
 import perpustakaan.PerpustakaanDenda;
 import perpustakaan.PerpustakaanEbook;
@@ -17509,6 +17510,19 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+        private void btnCatatanKeseimbanganCairanActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMDataCatatanKeseimbanganCairan aplikasi=new RMDataCatatanKeseimbanganCairan(this,false);
+        aplikasi.isCek();
+        aplikasi.emptTeks();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+        
     private void btnPenilaianMCUActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
@@ -20338,7 +20352,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnPenilaianTambahanMelarikanDiri,btnPersetujuanPenundaanPelayanan,btnJadwalTelemedicine,btnBookingTelemedicine,btnRalanMasuk2,
             btnRekapPembayaranPerUnit2,btnRekapPembayaranPerUnit3,btnRl38v2,btnFrekuensiRalan2,btnEmergencyIGD,btnValidasiSoap,btnSkriningMandiri,btnDlgBerkasTTE,
             btnManageSignatureUser,btnManageSignatureLog,btnManageSignatureFile,btnManageSignatureFileKlaim,btnDataInstansiTerintegrasi,btnMappingAntrianDokter,
-            btnReferensiPendaftaranJakSehat,btnBatalPendaftaranJakSehat,btnKonsultasiMedik;
+            btnReferensiPendaftaranJakSehat,btnBatalPendaftaranJakSehat,btnKonsultasiMedik,btnCatatanKeseimbanganCairan;
     
     public void isWall(){
         try{            
@@ -20713,6 +20727,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getkegiatan_ilmiah()==true){                
                 Panelmenu.add(btnKegiatanIlmiah); 
+                jmlmenu++;
+            }
+            
+            if(akses.getbalance_cairan()==true){
+                Panelmenu.add(btnCatatanKeseimbanganCairan);
                 jmlmenu++;
             }
             
@@ -26348,6 +26367,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
         }
         
+        if(akses.getbalance_cairan()==true){
+            Panelmenu.add(btnCatatanKeseimbanganCairan);
+            jmlmenu++;
+        }
+                
         if(akses.getpest_control()==true){
             Panelmenu.add(btnPestControl);
             jmlmenu++;
@@ -32783,6 +32807,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getpiutang_obat_belum_lunas()==true){
             if(btnPiutangObatBelumLunas.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPiutangObatBelumLunas); 
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getbalance_cairan()==true){
+            if(btnCatatanKeseimbanganCairan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnCatatanKeseimbanganCairan);
                 jmlmenu++;
             }                
         }
@@ -40537,6 +40568,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnRiwayatPerawatanICare.setName("btnRiwayatPerawatanICare"); 
         btnRiwayatPerawatanICare.setPreferredSize(new java.awt.Dimension(200, 90));
         btnRiwayatPerawatanICare.addActionListener(this::btnRiwayatPerawatanICareActionPerformed);
+        
+        btnCatatanKeseimbanganCairan = new widget.ButtonBig();
+        btnCatatanKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7150134_water_drink_drop_blue_icon.png"))); 
+        btnCatatanKeseimbanganCairan.setText("Keseimbangan Cairan");
+        btnCatatanKeseimbanganCairan.setIconTextGap(0);
+        btnCatatanKeseimbanganCairan.setName("btnCatatanKeseimbanganCairan"); 
+        btnCatatanKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnCatatanKeseimbanganCairan.addActionListener(this::btnCatatanKeseimbanganCairanActionPerformed);
     }
     
     private static String getData(String address)throws Exception
