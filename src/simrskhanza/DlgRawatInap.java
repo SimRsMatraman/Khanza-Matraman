@@ -133,6 +133,7 @@ import org.springframework.http.MediaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import bridging.ApiICareBPJS;
+import rekammedis.RMDataCatatanKeseimbanganCairan;
 
 /**
  *
@@ -1499,6 +1500,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnKepAnak = new widget.Button();
         BtnResume = new widget.Button();
         BtnLepasPerawatan = new widget.Button();
+        BtnKeseimbanganCairan = new widget.Button();
         BtnChecklistPreOperasi = new widget.Button();
         BtnSignInSebelumAnestesi = new widget.Button();
         BtnTimeOutSebelumInsisi = new widget.Button();
@@ -1658,7 +1660,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -4121,6 +4123,23 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnLepasPerawatan);
+
+        BtnKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKeseimbanganCairan.setText("Catatan Keseimbangan Cairan");
+        BtnKeseimbanganCairan.setFocusPainted(false);
+        BtnKeseimbanganCairan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKeseimbanganCairan.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKeseimbanganCairan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKeseimbanganCairan.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKeseimbanganCairan.setName("BtnKeseimbanganCairan"); // NOI18N
+        BtnKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKeseimbanganCairan.setRoundRect(false);
+        BtnKeseimbanganCairan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeseimbanganCairanActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnKeseimbanganCairan);
 
         BtnChecklistPreOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnChecklistPreOperasi.setText("Check List Pre Operasi");
@@ -8716,6 +8735,24 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_ICareNoKartuKeyPressed
 
+    private void BtnKeseimbanganCairanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeseimbanganCairanActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{ 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMDataCatatanKeseimbanganCairan resume=new RMDataCatatanKeseimbanganCairan(null,false);
+            resume.isCek();
+            resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            resume.setLocationRelativeTo(internalFrame1);
+//            resume.setNoRm(TNoRw.getText(),DTPCari2.getDate(),Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()),TNoRM.getText());
+            resume.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            resume.tampil();
+            resume.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnKeseimbanganCairanActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -8775,6 +8812,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnJadwalOperasi;
     private widget.Button BtnKeluar;
     private widget.Button BtnKepAnak;
+    private widget.Button BtnKeseimbanganCairan;
     private widget.Button BtnKonselingFarmasi;
     private widget.Button BtnLepasPerawatan;
     private widget.Button BtnMedisDewasa;

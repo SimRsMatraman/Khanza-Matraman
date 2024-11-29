@@ -94,6 +94,7 @@ import rekammedis.RMPenilaianAwalKeperawatanMata;
 import rekammedis.RMPenilaianAwalKeperawatanRalanPsikiatri;
 import rekammedis.RMPenilaianAwalKeperawatanRalanGeriatri;
 import rekammedis.AsesmenAwalMedisIGD;
+import rekammedis.RMDataCatatanKeseimbanganCairan;
 import rekammedis.RMPenilaianAwalMedisRalanAnak;
 import rekammedis.RMPenilaianAwalMedisRalanBedah;
 import rekammedis.RMPenilaianAwalMedisRalanDewasa;
@@ -1909,6 +1910,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilEKG1 = new widget.Button();
         BtnHasilPemeriksaanUSG1 = new widget.Button();
         BtnResume = new widget.Button();
+        BtnKeseimbanganCairan = new widget.Button();
         MPd = new widget.PanelBiasa();
         BtnAwalMedisPenyakitDalam = new widget.Button();
         BtnAwalKeperawatan1 = new widget.Button();
@@ -1983,7 +1985,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -2145,7 +2147,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2159,7 +2161,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3143,7 +3145,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnTemplatePemeriksaan);
-        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 22);
+        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 25);
 
         ICareNoKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         ICareNoKartu.setMnemonic('C');
@@ -4496,7 +4498,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -5361,6 +5363,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MIgd.add(BtnResume);
+
+        BtnKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKeseimbanganCairan.setText("Catatan Keseimbangan Ciran");
+        BtnKeseimbanganCairan.setFocusPainted(false);
+        BtnKeseimbanganCairan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKeseimbanganCairan.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKeseimbanganCairan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKeseimbanganCairan.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKeseimbanganCairan.setName("BtnKeseimbanganCairan"); // NOI18N
+        BtnKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKeseimbanganCairan.setRoundRect(false);
+        BtnKeseimbanganCairan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeseimbanganCairanActionPerformed(evt);
+            }
+        });
+        MIgd.add(BtnKeseimbanganCairan);
 
         jTabbedPane1.addTab("IGD", MIgd);
 
@@ -11037,6 +11056,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_ICareNoKartu1ActionPerformed
 
+    private void BtnKeseimbanganCairanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeseimbanganCairanActionPerformed
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMDataCatatanKeseimbanganCairan form=new RMDataCatatanKeseimbanganCairan(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnKeseimbanganCairanActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -11118,6 +11154,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnInformasiObat;
     private widget.Button BtnJadwalOperasi;
     private widget.Button BtnKeluar;
+    private widget.Button BtnKeseimbanganCairan;
     private widget.Button BtnKonselingFarmasi;
     private widget.Button BtnMedicalCheckUp;
     private widget.Button BtnMonitoringAsuhanGizi;

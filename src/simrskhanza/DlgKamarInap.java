@@ -145,6 +145,7 @@ import surat.SuratSakit;
 import surat.SuratSakitPihak2;
 import integration_orthanc.DicomViewerHybridSplitRad;
 import kepegawaian.DlgCariDokter;
+import rekammedis.RMDataCatatanKeseimbanganCairan;
 
 /**
  *
@@ -977,6 +978,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanKeperawatan = new javax.swing.JMenuItem();
         MnCatatanCekGDS = new javax.swing.JMenuItem();
         MnMonitoringReaksiTranfusi = new javax.swing.JMenuItem();
+        MnKeseimbanganCairan = new javax.swing.JMenuItem();
         MnRMFarmasi = new javax.swing.JMenu();
         MnKonselingFarmasi = new javax.swing.JMenuItem();
         MnRekonsiliasiObat = new javax.swing.JMenuItem();
@@ -2372,6 +2374,22 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         });
         MnObservasi.add(MnMonitoringReaksiTranfusi);
+
+        MnKeseimbanganCairan.setBackground(new java.awt.Color(255, 255, 254));
+        MnKeseimbanganCairan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKeseimbanganCairan.setForeground(new java.awt.Color(50, 50, 50));
+        MnKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKeseimbanganCairan.setText("Catatan Keseimbangan Cairan");
+        MnKeseimbanganCairan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnKeseimbanganCairan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnKeseimbanganCairan.setName("MnKeseimbanganCairan"); // NOI18N
+        MnKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(240, 26));
+        MnKeseimbanganCairan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKeseimbanganCairanActionPerformed(evt);
+            }
+        });
+        MnObservasi.add(MnKeseimbanganCairan);
 
         MnDataRM.add(MnObservasi);
 
@@ -16159,6 +16177,32 @@ if(tabMode.getRowCount()==0){
       } 
     }//GEN-LAST:event_MnPermintaanAmbulanceActionPerformed
 
+    private void MnKeseimbanganCairanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKeseimbanganCairanActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else{
+            if(tbKamIn.getSelectedRow()>-1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMDataCatatanKeseimbanganCairan form=new RMDataCatatanKeseimbanganCairan(null,false);
+                form.isCek();
+                form.emptTeks();
+                form.setNoRm(norawat.getText(),DTPCari2.getDate());
+//                if(R1.isSelected()==true){
+//                    form.setNoRm(norawat.getText(),new Date(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString(),TNoRMCari.getText());
+//                }else if(R2.isSelected()==true){
+//                    form.setNoRm(norawat.getText(),DTPCari2.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString(),TNoRMCari.getText());
+//                }else if(R3.isSelected()==true){
+//                    form.setNoRm(norawat.getText(),DTPCari4.getDate(),tbKamIn.getValueAt(tbKamIn.getSelectedRow(),6).toString(),TNoRMCari.getText());
+//                }
+                form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnKeseimbanganCairanActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -16280,6 +16324,7 @@ if(tabMode.getRowCount()==0){
     private javax.swing.JMenuItem MnHasilPemeriksaanUSG;
     private javax.swing.JMenuItem MnHemodialisa;
     private javax.swing.JMenuItem MnJadwalOperasi;
+    private javax.swing.JMenuItem MnKeseimbanganCairan;
     private javax.swing.JMenuItem MnKonselingFarmasi;
     private javax.swing.JMenuItem MnLabelTracker;
     private javax.swing.JMenuItem MnLabelTracker1;
