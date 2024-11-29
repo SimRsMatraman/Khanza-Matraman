@@ -23,7 +23,7 @@
 	<parameter name="propinsirs" class="java.lang.String"/>
 	<parameter name="kontakrs" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT a.no_rawat, c.nm_pasien, c.umur, c.no_rkm_medis, c.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama 
+		<![CDATA[SELECT a.no_rawat, c.nm_pasien, c.umur, c.no_rkm_medis, a.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama 
 FROM detail_permintaan_ambulance a
 INNER JOIN reg_periksa b on b.no_rawat=a.no_rawat
 INNER JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis
@@ -59,10 +59,10 @@ INNER JOIN petugas j on j.nip=a.nip]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="no_peserta" class="java.sql.Date">
+	<field name="no_peserta" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="no_peserta"/>
 		<property name="com.jaspersoft.studio.field.label" value="no_peserta"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detail_permintaan_ambulance"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="alamat" class="java.lang.String">

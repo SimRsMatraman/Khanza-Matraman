@@ -701,6 +701,7 @@ public class DlgPermintaanAmbulance extends javax.swing.JDialog {
             }else{
                 if(Sequel.menyimpantf("detail_permintaan_ambulance","'"+TNoRw.getText()+"','"+Kamar.getText()+"','"+
                         Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"','"+
+                        NoKartu.getText()+"','"+
                         RsTujuan.getText()+"','"+
                         KdPetugas.getText()+"','"+
                         "'","data")==true){
@@ -734,6 +735,7 @@ public class DlgPermintaanAmbulance extends javax.swing.JDialog {
                     if(Sequel.queryutf("delete from detail_permintaan_ambulance " +
                             "where no_rawat='"+TNoRw.getText()+"' " +
                             "and tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"' " +
+                            "and no_peserta='"+NoKartu.getText()+"' " +
                             "and rstujuan='"+RsTujuan.getText()+"'")==true){
                         tabMode.removeRow(tbDataDiet.getSelectedRow());
                         LCount.setText(""+tabMode.getRowCount());
@@ -852,7 +854,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPernyataanAmbulance.jasper","report","::[ Pernyataan Penggunaan Ambulance ]::",
-                "SELECT a.no_rawat, c.no_rkm_medis, c.nm_pasien, c.umur, c.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
+                "SELECT a.no_rawat, c.no_rkm_medis, c.nm_pasien, c.umur, a.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
                 "FROM detail_permintaan_ambulance a "+
                 "INNER JOIN reg_periksa b on b.no_rawat=a.no_rawat "+
                 "INNER JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis " +
@@ -864,7 +866,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 "INNER JOIN kamar_inap i on i.no_rawat=a.no_rawat "+
                 "INNER JOIN petugas j on j.nip=a.nip "+
                 "where a.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"' "+
-                "and a.no_rawat='"+TNoRw.getText()+"' and a.rstujuan='"+RsTujuan.getText()+"'",param);
+                "and a.no_rawat='"+TNoRw.getText()+"' and a.no_peserta='"+NoKartu.getText()+"' and a.rstujuan='"+RsTujuan.getText()+"'",param);
         }
     }//GEN-LAST:event_MnPermintaanAmbulanceActionPerformed
 
@@ -977,7 +979,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         try{
             Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
-                "SELECT a.no_rawat, c.nm_pasien, c.umur, c.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
+                "SELECT a.no_rawat, c.nm_pasien, c.umur, a.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
                 "FROM detail_permintaan_ambulance a "+
                 "INNER JOIN reg_periksa b on b.no_rawat=a.no_rawat "+
                 "INNER JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis " +
