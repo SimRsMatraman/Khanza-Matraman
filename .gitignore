@@ -22,3 +22,5 @@
 /Service-SatuSehat/nbproject/private/
 /bproject/project.properties
 nbproject/project.properties
+.DS_Store
+src/.DS_Store
