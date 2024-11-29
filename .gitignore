@@ -23,4 +23,5 @@
 /bproject/project.properties
 nbproject/project.properties
 .DS_Store
+**/.DS_Store
 src/.DS_Store
