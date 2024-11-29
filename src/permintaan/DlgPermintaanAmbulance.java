@@ -211,7 +211,6 @@ public class DlgPermintaanAmbulance extends javax.swing.JDialog {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnPermintaanAmbulance = new javax.swing.JMenuItem();
-        MnPermintaanAmbulance1 = new javax.swing.JMenuItem();
         Ruang = new widget.TextBox();
         Diagnosa = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -266,27 +265,13 @@ public class DlgPermintaanAmbulance extends javax.swing.JDialog {
         MnPermintaanAmbulance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnPermintaanAmbulance.setText("Cetak Pernyataan Penggunaan Ambulance");
         MnPermintaanAmbulance.setName("MnPermintaanAmbulance"); // NOI18N
-        MnPermintaanAmbulance.setPreferredSize(new java.awt.Dimension(150, 28));
+        MnPermintaanAmbulance.setPreferredSize(new java.awt.Dimension(450, 28));
         MnPermintaanAmbulance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnPermintaanAmbulanceActionPerformed(evt);
             }
         });
         jPopupMenu1.add(MnPermintaanAmbulance);
-
-        MnPermintaanAmbulance1.setBackground(new java.awt.Color(255, 255, 254));
-        MnPermintaanAmbulance1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnPermintaanAmbulance1.setForeground(java.awt.Color.darkGray);
-        MnPermintaanAmbulance1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnPermintaanAmbulance1.setText("Cetak Semua Pernyataan Penggunaan Ambulance");
-        MnPermintaanAmbulance1.setName("MnPermintaanAmbulance1"); // NOI18N
-        MnPermintaanAmbulance1.setPreferredSize(new java.awt.Dimension(150, 28));
-        MnPermintaanAmbulance1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnPermintaanAmbulance1ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnPermintaanAmbulance1);
 
         Ruang.setEditable(false);
         Ruang.setHighlighter(null);
@@ -426,7 +411,7 @@ public class DlgPermintaanAmbulance extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -440,7 +425,7 @@ public class DlgPermintaanAmbulance extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -544,7 +529,7 @@ public class DlgPermintaanAmbulance extends javax.swing.JDialog {
         TPasien.setBounds(205, 12, 290, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-11-2024" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -866,52 +851,22 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptLabelDiet.jasper","report","::[ Label Diet ]::",
-                "select detail_beri_diet.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir, " +
-                "concat(detail_beri_diet.kd_kamar,', ',bangsal.nm_bangsal) as kamar,detail_beri_diet.tanggal,detail_beri_diet.waktu,jam_diet_pasien.jam,diet.nama_diet " +
-                "from detail_beri_diet inner join reg_periksa inner join pasien inner join diet inner join kamar inner join bangsal inner join jam_diet_pasien " +
-                "on detail_beri_diet.no_rawat=reg_periksa.no_rawat " +
-                "and detail_beri_diet.kd_kamar=kamar.kd_kamar "+
-                "and kamar.kd_bangsal=bangsal.kd_bangsal "+
-                "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                "and detail_beri_diet.kd_diet=diet.kd_diet " +
-                "and detail_beri_diet.waktu=jam_diet_pasien.waktu " +
-                "where detail_beri_diet.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"' and detail_beri_diet.waktu='' "+
-                "and detail_beri_diet.no_rawat='"+TNoRw.getText()+"' and diet.nama_diet='"+NmPetugas.getText()+"'",param);
+            Valid.MyReportqry("rptPernyataanAmbulance.jasper","report","::[ Pernyataan Penggunaan Ambulance ]::",
+                "SELECT a.no_rawat, c.no_rkm_medis, c.nm_pasien, c.umur, c.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
+                "FROM detail_permintaan_ambulance a "+
+                "INNER JOIN reg_periksa b on b.no_rawat=a.no_rawat "+
+                "INNER JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis " +
+                "INNER JOIN kamar_inap d on d.no_rawat=a.no_rawat "+
+                "INNER JOIN kelurahan e on e.kd_kel=c.kd_kel "+
+                "INNER JOIN kecamatan f on f.kd_kec=c.kd_kec "+
+                "INNER JOIN kabupaten g on g.kd_kab=c.kd_kab  "+
+                "INNER JOIN propinsi h on h.kd_prop=c.kd_prop "+
+                "INNER JOIN kamar_inap i on i.no_rawat=a.no_rawat "+
+                "INNER JOIN petugas j on j.nip=a.nip "+
+                "where a.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"' "+
+                "and a.no_rawat='"+TNoRw.getText()+"' and a.rstujuan='"+RsTujuan.getText()+"'",param);
         }
     }//GEN-LAST:event_MnPermintaanAmbulanceActionPerformed
-
-    private void MnPermintaanAmbulance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanAmbulance1ActionPerformed
-//        if(tabMode.getRowCount()==0){
-//            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-//            BtnBatal.requestFocus();
-//        }else if(tabMode.getRowCount()!=0){
-//            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//            Map<String, Object> param = new HashMap<>();
-//            param.put("namars",akses.getnamars());
-//            param.put("alamatrs",akses.getalamatrs());
-//            param.put("kotars",akses.getkabupatenrs());
-//            param.put("propinsirs",akses.getpropinsirs());
-//            param.put("kontakrs",akses.getkontakrs());
-//            param.put("emailrs",akses.getemailrs());
-//            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-//            Valid.MyReportqry("rptLabelDiet.jasper","report","::[ Label Diet ]::",
-//                "select detail_beri_diet.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir, " +
-//                "concat(detail_beri_diet.kd_kamar,', ',bangsal.nm_bangsal) as kamar,detail_beri_diet.tanggal,detail_beri_diet.waktu,jam_diet_pasien.jam,diet.nama_diet " +
-//                "from detail_beri_diet inner join reg_periksa inner join pasien inner join diet inner join kamar inner join bangsal inner join jam_diet_pasien " +
-//                "on detail_beri_diet.no_rawat=reg_periksa.no_rawat " +
-//                "and detail_beri_diet.kd_kamar=kamar.kd_kamar "+
-//                "and kamar.kd_bangsal=bangsal.kd_bangsal "+
-//                "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-//                "and detail_beri_diet.kd_diet=diet.kd_diet " +
-//                "and detail_beri_diet.waktu=jam_diet_pasien.waktu " +
-//                "where detail_beri_diet.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and detail_beri_diet.waktu like '' and bangsal.nm_bangsal like '%"+NmBangsalCari.getText().trim()+"%' and detail_beri_diet.no_rawat like '%"+TCari.getText().trim()+"%' or "+
-//                "detail_beri_diet.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and detail_beri_diet.waktu like '' and bangsal.nm_bangsal like '%"+NmBangsalCari.getText().trim()+"%' and reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
-//                "detail_beri_diet.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and detail_beri_diet.waktu like '' and bangsal.nm_bangsal like '%"+NmBangsalCari.getText().trim()+"%' and pasien.nm_pasien like '%"+TCari.getText().trim()+"%' "+
-//                "order by bangsal.nm_bangsal,diet.nama_diet",param);
-//            this.setCursor(Cursor.getDefaultCursor());
-//        }
-    }//GEN-LAST:event_MnPermintaanAmbulance1ActionPerformed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
         if(TabRawat.getSelectedIndex()==1){
@@ -986,7 +941,6 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.TextBox KdPetugas;
     private widget.Label LCount;
     private javax.swing.JMenuItem MnPermintaanAmbulance;
-    private javax.swing.JMenuItem MnPermintaanAmbulance1;
     private widget.TextBox NmPetugas;
     private widget.TextBox NoKartu;
     private javax.swing.JPanel PanelInput;
@@ -1023,23 +977,20 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         try{
             Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
-                "SELECT a.no_rawat, b.nm_pasien, b.umur, b.no_peserta, concat(b.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, concat(l.kd_penyakit, ' - ', m.nm_penyakit) as penyakit, i.tanggal, i.rstujuan, j.kd_kamar, i.nip, k.nama "+
-                "FROM reg_periksa a "+
-                "INNER JOIN pasien b on b.no_rkm_medis=a.no_rkm_medis "+
-                "INNER JOIN diagnosa_pasien c on c.no_rawat=a.no_rawat "+
-                "INNER JOIN penyakit d on d.kd_penyakit=c.kd_penyakit "+
-                "inner join kelurahan e on e.kd_kel=b.kd_kel "+
-                "inner join kecamatan f on f.kd_kec=b.kd_kec "+
-                "inner join kabupaten g on g.kd_kab=b.kd_kab  "+
-                "inner join propinsi h on h.kd_prop=b.kd_prop "+
-                "INNER JOIN detail_permintaan_ambulance i on i.no_rawat=a.no_rawat "+
-                "INNER JOIN kamar_inap j on j.no_rawat=a.no_rawat "+
-                "INNER JOIN petugas k on k.nip=i.nip "+
-                "LEFT JOIN diagnosa_pasien l on l.no_rawat=a.no_rawat "+
-                "INNER JOIN penyakit m on m.kd_penyakit=l.kd_penyakit "+
-                "where i.tanggal between ? and ? "+
-                (TCari.getText().trim().equals("")?"":"and (a.no_rawat like ? or a.no_rkm_medis like ? or b.nm_pasien like ?) ")+
-                "order by i.tanggal,i.rstujuan");
+                "SELECT a.no_rawat, c.nm_pasien, c.umur, c.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
+                "FROM detail_permintaan_ambulance a "+
+                "INNER JOIN reg_periksa b on b.no_rawat=a.no_rawat "+
+                "INNER JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis " +
+                "INNER JOIN kamar_inap d on d.no_rawat=a.no_rawat "+
+                "INNER JOIN kelurahan e on e.kd_kel=c.kd_kel "+
+                "INNER JOIN kecamatan f on f.kd_kec=c.kd_kec "+
+                "INNER JOIN kabupaten g on g.kd_kab=c.kd_kab  "+
+                "INNER JOIN propinsi h on h.kd_prop=c.kd_prop "+
+                "INNER JOIN kamar_inap i on i.no_rawat=a.no_rawat "+
+                "INNER JOIN petugas j on j.nip=a.nip "+
+                "WHERE a.tanggal between ? and ? "+
+                (TCari.getText().trim().equals("")?"":"and (a.no_rawat like ? or b.no_rkm_medis like ? or c.nm_pasien like ?) ")+
+                "order by a.tanggal,a.rstujuan");
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
@@ -1052,7 +1003,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 while(rs.next()){
                     tabMode.addRow(new String[]{
                         rs.getString(1),rs.getString(2),rs.getString("umur"),rs.getString("alamat"),rs.getString("no_peserta"),rs.getString("kd_kamar"),rs.getString("tanggal"),rs.getString("rstujuan"),
-                        rs.getString("penyakit"),rs.getString("nama"),rs.getString("nip")
+                        rs.getString("diagnosa_awal"),rs.getString("nama"),rs.getString("nip")
                     });
                 }
             } catch (Exception e) {
@@ -1115,8 +1066,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         ChkInput.setSelected(true);
         Sequel.cariIsi("select pasien.no_peserta from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where reg_periksa.no_rawat=? ",NoKartu,TNoRw.getText());
         Sequel.cariIsi("select concat(pasien.alamat, ', ', kelurahan.nm_kel, ', ', kecamatan.nm_kec, ', ', kabupaten.nm_kab, ' - ', propinsi.nm_prop) as alamat from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis inner join kelurahan on kelurahan.kd_kel=pasien.kd_kel inner join kecamatan on kecamatan.kd_kec=pasien.kd_kec inner join kabupaten on kabupaten.kd_kab=pasien.kd_kab  inner join propinsi on propinsi.kd_prop=pasien.kd_prop where reg_periksa.no_rawat=? ",Alamat,TNoRw.getText());
-        Sequel.cariIsi("select concat(diagnosa_pasien.kd_penyakit, ' - ', penyakit.nm_penyakit) as penyakit FROM reg_periksa INNER JOIN diagnosa_pasien on diagnosa_pasien.no_rawat=reg_periksa.no_rawat INNER JOIN penyakit on penyakit.kd_penyakit=diagnosa_pasien.kd_penyakit where reg_periksa.no_rawat=? ",Penyakit,TNoRw.getText());
-        
+//        Sequel.cariIsi("select concat(diagnosa_pasien.kd_penyakit, ' - ', penyakit.nm_penyakit) as penyakit FROM reg_periksa INNER JOIN diagnosa_pasien on diagnosa_pasien.no_rawat=reg_periksa.no_rawat INNER JOIN penyakit on penyakit.kd_penyakit=diagnosa_pasien.kd_penyakit where reg_periksa.no_rawat=? ",Penyakit,TNoRw.getText());
+        Sequel.cariIsi("select diagnosa_awal from kamar_inap where kamar_inap.no_rawat=? ",Penyakit,TNoRw.getText());
         isForm();
     }
     
