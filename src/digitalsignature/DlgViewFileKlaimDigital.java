@@ -534,7 +534,7 @@ void createZip(){
 //                File srcFile = new File(url);
 //                File srcFile = Paths.get(url.toURI().getPath()).toFile();
                 
-                URL website = new URL("http://192.168.20.254/api-tte/berkastte/resume/"+tbListFileTte.getValueAt(i,2).toString());
+                URL website = new URL("http://100.10.1.4/api-tte/berkastte/resume/"+tbListFileTte.getValueAt(i,2).toString());
                 ReadableByteChannel rbc;
                 rbc = Channels.newChannel(website.openStream());
                 FileOutputStream fos1 = new FileOutputStream("tempfile/"+tbListFileTte.getValueAt(i,2).toString());
