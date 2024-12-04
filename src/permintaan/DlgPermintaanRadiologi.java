@@ -821,7 +821,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }else if(InformasiTambahan.getText().equals("")){
             Valid.textKosong(InformasiTambahan,"Informasi Tambahan");
         }else if(Cmbstatus.getSelectedItem().equals("")){
-            Valid.textKosong(Cmbstatus,"Alarm");
+            Valid.textKosong(Cmbstatus,"No Alarm");
         }else if(DiagnosisKlinis.getText().equals("")){
             Valid.textKosong(DiagnosisKlinis,"Diagnosis Klinis");
         }else if(tabMode.getRowCount()==0){
@@ -1411,7 +1411,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                                     TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                                     CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
                                     "0000-00-00","00:00:00","0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
-                                    InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("No Alarm","")
+                                    InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("No Alarm","Cito")
                                 })==true){
                                 for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
                                     if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){

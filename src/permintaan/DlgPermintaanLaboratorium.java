@@ -683,7 +683,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         jLabel9.setBounds(0, 40, 92, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -791,7 +791,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         PanelInput.add(jLabel7);
         jLabel7.setBounds(0, 70, 92, 23);
 
-        Cmbstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No Alarm", "Cito" }));
+        Cmbstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Cito", "Cito" }));
         Cmbstatus.setName("Cmbstatus"); // NOI18N
         Cmbstatus.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -799,12 +799,12 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             }
         });
         PanelInput.add(Cmbstatus);
-        Cmbstatus.setBounds(920, 10, 100, 23);
+        Cmbstatus.setBounds(880, 70, 100, 23);
 
-        jLabel25.setText("Informasi Tambahan :");
+        jLabel25.setText("Urgensi :");
         jLabel25.setName("jLabel25"); // NOI18N
         PanelInput.add(jLabel25);
-        jLabel25.setBounds(800, 10, 110, 23);
+        jLabel25.setBounds(780, 70, 90, 23);
 
         FormInput.add(PanelInput, java.awt.BorderLayout.CENTER);
 
@@ -1032,7 +1032,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         jLabel17.setBounds(235, 10, 120, 23);
 
         TanggalPA.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2024" }));
+        TanggalPA.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024" }));
         TanggalPA.setDisplayFormat("dd-MM-yyyy");
         TanggalPA.setName("TanggalPA"); // NOI18N
         TanggalPA.setOpaque(false);
@@ -1075,7 +1075,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         DiagnosaPA.setBounds(432, 100, 340, 23);
 
         TanggalBahan.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalBahan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-09-2024" }));
+        TanggalBahan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2024" }));
         TanggalBahan.setDisplayFormat("dd-MM-yyyy");
         TanggalBahan.setName("TanggalBahan"); // NOI18N
         TanggalBahan.setOpaque(false);
@@ -1482,7 +1482,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         }else if(InformasiTambahan.getText().equals("")){
             Valid.textKosong(InformasiTambahan,"Informasi Tambahan");
         }else if(Cmbstatus.getSelectedItem().equals("")){
-            Valid.textKosong(Cmbstatus,"Alarm");
+            Valid.textKosong(Cmbstatus,"Tidak Cito");
         }else if(DiagnosisKlinis.getText().equals("")){
             Valid.textKosong(DiagnosisKlinis,"Indikasi/Diagnosis Klinis");
         }else if((jml+jml2+jml3)==0){
@@ -2601,7 +2601,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             TNoPermintaanPK.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                             CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
                             "0000-00-00","00:00:00","0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
-                            InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("No Alarm","Cito")
+                            InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("Tidak Cito","Cito")
                         })==true){
                         for(i=0;i<tbTarifPK.getRowCount();i++){ 
                             if(tbTarifPK.getValueAt(i,0).toString().equals("true")){
@@ -2624,7 +2624,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                 TNoPermintaanPK.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                                 CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
                                 "0000-00-00","00:00:00","0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
-                                InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("Tidak Ada","Cito")
+                                InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("Tidak Cito","Cito")
                             })==true){
                             for(i=0;i<tbTarifPK.getRowCount();i++){ 
                                 if(tbTarifPK.getValueAt(i,0).toString().equals("true")){
@@ -2647,7 +2647,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                     TNoPermintaanPK.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                                     CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
                                     "0000-00-00","00:00:00","0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
-                                    InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("Tidak Ada","Cito")
+                                    InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("Tidak Cito","Cito")
                                 })==true){
                                 for(i=0;i<tbTarifPK.getRowCount();i++){ 
                                     if(tbTarifPK.getValueAt(i,0).toString().equals("true")){
@@ -2670,7 +2670,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                         TNoPermintaanPK.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
                                         CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
                                         "0000-00-00","00:00:00","0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
-                                        InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("Tidak Ada","Cito")
+                                        InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("Tidak Cito","Cito")
                                     })==true){
                                     for(i=0;i<tbTarifPK.getRowCount();i++){ 
                                         if(tbTarifPK.getValueAt(i,0).toString().equals("true")){

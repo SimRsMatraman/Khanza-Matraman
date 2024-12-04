@@ -51,7 +51,7 @@ public class koneksiDB {
 //                        "  Informasi dan panduan bisa dicek di halaman https://github.com/mas-elkhanza/SIMRS-Khanza/wiki \n"+
 //                        "  Bagi yang ingin berdonasi untuk pengembangan aplikasi ini bisa ke BSI 1015369872 atas nama Windiarto\n"+
 //                        "                                                                           ");
-                System.out.println("  Success connecting to server. \n\n"+
+                System.out.println("  Success connecting to server data. \n\n"+
                         "  SIM RSUD MATRAMAN v."+propVer.getProperty("VERSION")+" \n"+
                         "");
             }catch(Exception e){

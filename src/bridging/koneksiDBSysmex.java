@@ -30,7 +30,7 @@ public class koneksiDBSysmex {
                 dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USERSYSMEX")));
                 dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PASSYSMEX")));
                 connection=dataSource.getConnection();       
-//                System.out.println("  Koneksi Berhasil. Menyambungkan ke database bridging Sysmex...!!!");
+                System.out.println("Success connecting to server sysmex.");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(null,"Koneksi ke server bridging Sysmex terputus : "+e);
             }

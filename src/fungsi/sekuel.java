@@ -1538,6 +1538,37 @@ public final class sekuel {
         return dicari;
     }
     
+    public String cariIsiSysmex(String sql,String data){
+        dicari="";
+        try {
+            ps=connectsysmex.prepareStatement(sql);
+            try{                            
+                ps.setString(1,data);
+                rs=ps.executeQuery();            
+                if(rs.next()){
+                    dicari=rs.getString(1);
+                }else{
+                    dicari="";
+                }   
+            }catch(Exception e){
+                dicari="";
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null ){
+                    rs.close();
+                }
+
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+            
+        return dicari;
+    }
+    
     public Date cariIsi2(String sql){
         try {
             ps=connect.prepareStatement(sql);

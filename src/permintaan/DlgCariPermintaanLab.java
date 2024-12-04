@@ -2733,7 +2733,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             "select permintaan_lab.noorder,permintaan_lab.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,permintaan_lab.tgl_permintaan,pasien.tgl_lahir,"+
                             "permintaan_lab.jam_permintaan,pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,"+
                             "if(pasien.jk='L','1','2') as jk,permintaan_lab.dokter_perujuk,dokter.nm_dokter,reg_periksa.kd_poli,"+
-                            "poliklinik.nm_poli,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
+                            "poliklinik.nm_poli,permintaan_lab.tambahan,permintaan_lab.diagnosa_klinis "+
                             "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter "+
@@ -2748,7 +2748,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             rs=ps.executeQuery();
                             if(rs.next()){
                                 pilihan="R";
-                                if(rs.getString("informasi_tambahan").toLowerCase().contains("cito")){
+                                if(rs.getString("tambahan").equals("Cito")){
                                     pilihan="U";
                                 }
                                 Permintaan="";
@@ -2772,7 +2772,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 }
                                 
                                 koneksisysmex.prepareStatement(
-                                        "insert into LIS_ORDER values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
+                                        "insert into lis_order values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
                                         "'"+rs.getString("alamat")+"','"+rs.getString("nm_kel")+"','"+rs.getString("nm_kec")+"','"+rs.getString("nm_kab")+"',"+
                                         "'OP','"+rs.getString("tgl_lahir")+"','"+rs.getString("jk")+"','"+rs.getString("noorder")+"','"+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"',"+
                                         "'"+rs.getString("kd_poli")+"^"+rs.getString("nm_poli")+"','"+rs.getString("dokter_perujuk")+"^"+rs.getString("nm_dokter")+"',"+
@@ -2800,7 +2800,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 }
                                 
                                 koneksisysmex.prepareStatement(
-                                        "insert into LIS_ORDER_DETAIL values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
+                                        "insert into lis_order_detail values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
                                         "'"+rs.getString("alamat")+"','"+rs.getString("nm_kel")+"','"+rs.getString("nm_kec")+"','"+rs.getString("nm_kab")+"',"+
                                         "'OP','"+rs.getString("tgl_lahir")+"','"+rs.getString("jk")+"','"+rs.getString("noorder")+"','"+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"',"+
                                         "'"+rs.getString("kd_poli")+"^"+rs.getString("nm_poli")+"','"+rs.getString("dokter_perujuk")+"^"+rs.getString("nm_dokter")+"',"+
@@ -2881,7 +2881,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 }
                                 
                                 koneksisysmex.prepareStatement(
-                                        "insert into LIS_ORDER values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
+                                        "insert into lis_order values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
                                         "'"+rs.getString("alamat")+"','"+rs.getString("nm_kel")+"','"+rs.getString("nm_kec")+"','"+rs.getString("nm_kab")+"',"+
                                         "'OP','"+rs.getString("tgl_lahir")+"','"+rs.getString("jk")+"','"+rs.getString("noorder")+"','"+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"',"+
                                         "'"+rs.getString("kd_bangsal")+"^"+rs.getString("nm_bangsal")+"','"+rs.getString("dokter_perujuk")+"^"+rs.getString("nm_dokter")+"',"+
@@ -2909,7 +2909,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 }
                                 
                                 koneksisysmex.prepareStatement(
-                                        "insert into LIS_ORDER_DETAIL values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
+                                        "insert into lis_order_detail values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
                                         "'"+rs.getString("alamat")+"','"+rs.getString("nm_kel")+"','"+rs.getString("nm_kec")+"','"+rs.getString("nm_kab")+"',"+
                                         "'OP','"+rs.getString("tgl_lahir")+"','"+rs.getString("jk")+"','"+rs.getString("noorder")+"','"+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"',"+
                                         "'"+rs.getString("kd_bangsal")+"^"+rs.getString("nm_bangsal")+"','"+rs.getString("dokter_perujuk")+"^"+rs.getString("nm_dokter")+"',"+

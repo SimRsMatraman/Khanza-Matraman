@@ -6,7 +6,7 @@
     <entry key="URLSERVERUPDATE">100.10.2.18/webapps13/serverupdate</entry> <!--link webapps Update -->
     <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
     <!--BSSN TTE-->
-    <entry key="URLTTE">http://192.168.20.254/api-tte/berkastte/</entry>
+    <entry key="URLTTE">http://100.10.1.100/api-tte/berkastte/</entry>
     <entry key="URLAPIINTEGRATION">http://10.15.37.39/</entry>
     <entry key="IDINTEGRATION">j3CI0CJDdhdR09OcWOCWRQ==</entry>
     <entry key="PASSINTEGRATION">ykaGr/DmyKI/yKKln4QIvg==</entry>
@@ -207,7 +207,7 @@ Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
     <entry key="USERVANSLAB">kMR3WfAwUK6MbhCyydxa0g==</entry>
     <entry key="PASVANSLAB">l4nh5eVYrLAER/I2A4b3Tw==</entry>
 
-    <entry key="URLORTHANC">http://192.168.20.24</entry>
+    <entry key="URLORTHANC">http://100.10.1.41</entry>
     <entry key="PORTORTHANC">gie5pRePkRsFe+dOh84P4A==</entry>
     <entry key="USERORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>
     <entry key="PASSORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>

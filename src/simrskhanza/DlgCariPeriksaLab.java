@@ -67,7 +67,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             Suspen_Piutang_Laborat_Ralan="",Laborat_Ralan="",Beban_Jasa_Medik_Dokter_Laborat_Ralan="",Utang_Jasa_Medik_Dokter_Laborat_Ralan="",
             Beban_Jasa_Medik_Petugas_Laborat_Ralan="",Utang_Jasa_Medik_Petugas_Laborat_Ralan="",Beban_Kso_Laborat_Ralan="",Utang_Kso_Laborat_Ralan="",
             HPP_Persediaan_Laborat_Rawat_Jalan="",Persediaan_BHP_Laborat_Rawat_Jalan="",Beban_Jasa_Sarana_Laborat_Ralan="",Utang_Jasa_Sarana_Laborat_Ralan="",
-            Beban_Jasa_Perujuk_Laborat_Ralan="",Utang_Jasa_Perujuk_Laborat_Ralan="",Beban_Jasa_Menejemen_Laborat_Ralan="",Utang_Jasa_Menejemen_Laborat_Ralan="",status="";
+            Beban_Jasa_Perujuk_Laborat_Ralan="",Utang_Jasa_Perujuk_Laborat_Ralan="",Beban_Jasa_Menejemen_Laborat_Ralan="",Utang_Jasa_Menejemen_Laborat_Ralan="",status="",saranrs="",kesanrs="";
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -1700,9 +1700,14 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+rs.getString("nm_dokter")+"\nID "+(finger.equals("")?rs.getString("kd_dokter"):finger)+"\n"+rs.getString("tgl_periksa"));  
                         finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",rs.getString("nip"));
                         param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+rs.getString("nama")+"\nID "+(finger.equals("")?rs.getString("nip"):finger)+"\n"+rs.getString("tgl_periksa"));  
-                        saran=Sequel.cariIsi("select saran from saran_kesan_lab where no_rawat=?",rs.getString("no_rawat"));
-                        param.put("Catatan",saran);
+                        saranrs=Sequel.cariIsi("select saran from saran_kesan_lab where no_rawat=?",rs.getString("no_rawat"));
                         kesan=Sequel.cariIsi("select kesan from saran_kesan_lab where no_rawat=?",rs.getString("no_rawat"));
+                        if(!saranrs.equals("")){
+                            saran=saranrs;
+                        }else {                            
+                            saran=Sequel.cariIsiSysmex("select COMMENT from reshd where VISITNO=? order by REQUEST_DT desc limit 1 ",rs.getString("no_rawat"));
+                        } 
+                        param.put("Catatan",saran);
                         param.put("kesan",kesan);
 
                         Sequel.queryu("delete from temporary_lab");
@@ -2183,9 +2188,15 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+rs.getString("nm_dokter")+"\nID "+(finger.equals("")?rs.getString("kd_dokter"):finger)+"\n"+rs.getString("tgl_periksa"));  
                         finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",rs.getString("nip"));
                         param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+rs.getString("nama")+"\nID "+(finger.equals("")?rs.getString("nip"):finger)+"\n"+rs.getString("tgl_periksa"));  
-                        saran=Sequel.cariIsi("select saran from saran_kesan_lab where no_rawat=?",rs.getString("no_rawat"));
-                        param.put("Catatan",saran);
+                        saranrs=Sequel.cariIsi("select saran from saran_kesan_lab where no_rawat=?",rs.getString("no_rawat"));
                         kesan=Sequel.cariIsi("select kesan from saran_kesan_lab where no_rawat=?",rs.getString("no_rawat"));
+                        if(!saranrs.equals("")){
+                            saran=saranrs;
+                        }else {                            
+                            saran=Sequel.cariIsiSysmex("select COMMENT from reshd where VISITNO=? order by REQUEST_DT desc limit 1 ",rs.getString("no_rawat"));
+                        }                        
+                        
+                        param.put("Catatan",saran);                        
                         param.put("kesan",kesan);
 
                         Sequel.queryu("delete from temporary_lab");
@@ -2863,7 +2874,11 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         rs5=ps5.executeQuery();
                         if(rs5.next()){      
                             kesan=rs5.getString("kesan");saran=rs5.getString("saran");
-                        } 
+                        }
+                        else {
+                            saran=Sequel.cariIsiSysmex(
+                                "select COMMENT from reshd where VISITNO=? order by REQUEST_DT desc limit 1 ",rs.getString("no_rawat"));
+                        }
                     } catch (Exception e) {
                         System.out.println("Notif : "+e);
                     } finally{
