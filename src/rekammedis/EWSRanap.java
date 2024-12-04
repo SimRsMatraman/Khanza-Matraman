@@ -464,6 +464,7 @@ public final class EWSRanap extends javax.swing.JDialog {
     private void initComponents() {
 
         LoadHTML = new widget.editorpane();
+        Respon = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -491,40 +492,29 @@ public final class EWSRanap extends javax.swing.JDialog {
         jLabel11 = new widget.Label();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel219 = new widget.Label();
-        jLabel220 = new widget.Label();
         ScorePernafasan = new widget.TextBox();
         jLabel222 = new widget.Label();
         ScoreSaturasi = new widget.TextBox();
-        jLabel224 = new widget.Label();
         jLabel225 = new widget.Label();
         Alat = new widget.ComboBox();
-        jLabel227 = new widget.Label();
         ScoreAlat = new widget.TextBox();
         jLabel228 = new widget.Label();
-        jLabel230 = new widget.Label();
         ScoreSuhu = new widget.TextBox();
         jLabel231 = new widget.Label();
-        jLabel233 = new widget.Label();
         ScoreDenyut = new widget.TextBox();
-        jLabel236 = new widget.Label();
         ScoreTekanan = new widget.TextBox();
         jLabel237 = new widget.Label();
         Total = new widget.TextBox();
         jLabel238 = new widget.Label();
         Kesadaran = new widget.ComboBox();
-        jLabel240 = new widget.Label();
         ScoreKesadaran = new widget.TextBox();
         jLabel106 = new widget.Label();
         scrollPane17 = new widget.ScrollPane();
-        Respon = new widget.TextArea();
-        jLabel262 = new widget.Label();
+        Frekuensi = new widget.TextArea();
         jLabel241 = new widget.Label();
         Klasifikasi = new widget.TextBox();
         scrollPane18 = new widget.ScrollPane();
         Tindakan = new widget.TextArea();
-        jLabel243 = new widget.Label();
-        jLabel244 = new widget.Label();
-        Frekuensi = new widget.TextBox();
         Suhu1 = new widget.TextBox();
         Pernafasan1 = new widget.TextBox();
         Saturasi1 = new widget.TextBox();
@@ -572,6 +562,12 @@ public final class EWSRanap extends javax.swing.JDialog {
         Tekanan1 = new widget.TextBox();
         jLabel239 = new widget.Label();
         Tekanan2 = new widget.TextBox();
+        jLabel240 = new widget.Label();
+        jLabel242 = new widget.Label();
+        jLabel261 = new widget.Label();
+        jLabel262 = new widget.Label();
+        jLabel263 = new widget.Label();
+        jLabel264 = new widget.Label();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -588,6 +584,10 @@ public final class EWSRanap extends javax.swing.JDialog {
 
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
+
+        Respon.setEditable(false);
+        Respon.setFocusTraversalPolicyProvider(true);
+        Respon.setName("Respon"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -865,16 +865,16 @@ public final class EWSRanap extends javax.swing.JDialog {
         FormInput.add(jLabel219);
         jLabel219.setBounds(30, 110, 160, 23);
 
-        jLabel220.setText("Respon Klinis :");
-        jLabel220.setName("jLabel220"); // NOI18N
-        FormInput.add(jLabel220);
-        jLabel220.setBounds(470, 160, 75, 23);
-
         ScorePernafasan.setEditable(false);
         ScorePernafasan.setFocusTraversalPolicyProvider(true);
         ScorePernafasan.setName("ScorePernafasan"); // NOI18N
+        ScorePernafasan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ScorePernafasanActionPerformed(evt);
+            }
+        });
         FormInput.add(ScorePernafasan);
-        ScorePernafasan.setBounds(400, 110, 60, 23);
+        ScorePernafasan.setBounds(400, 110, 50, 23);
 
         jLabel222.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel222.setText("2. Saturasi Oksigen(%)");
@@ -887,12 +887,7 @@ public final class EWSRanap extends javax.swing.JDialog {
         ScoreSaturasi.setFocusTraversalPolicyProvider(true);
         ScoreSaturasi.setName("ScoreSaturasi"); // NOI18N
         FormInput.add(ScoreSaturasi);
-        ScoreSaturasi.setBounds(400, 140, 60, 23);
-
-        jLabel224.setText("Score EWS :");
-        jLabel224.setName("jLabel224"); // NOI18N
-        FormInput.add(jLabel224);
-        jLabel224.setBounds(320, 140, 75, 23);
+        ScoreSaturasi.setBounds(400, 140, 50, 23);
 
         jLabel225.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel225.setText("3. Penggunaan Alat Bantu O2");
@@ -900,11 +895,16 @@ public final class EWSRanap extends javax.swing.JDialog {
         FormInput.add(jLabel225);
         jLabel225.setBounds(30, 170, 160, 23);
 
-        Alat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
+        Alat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         Alat.setName("Alat"); // NOI18N
         Alat.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 AlatItemStateChanged(evt);
+            }
+        });
+        Alat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlatActionPerformed(evt);
             }
         });
         Alat.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -915,28 +915,18 @@ public final class EWSRanap extends javax.swing.JDialog {
         FormInput.add(Alat);
         Alat.setBounds(190, 170, 120, 23);
 
-        jLabel227.setText("Score EWS :");
-        jLabel227.setName("jLabel227"); // NOI18N
-        FormInput.add(jLabel227);
-        jLabel227.setBounds(320, 170, 75, 23);
-
         ScoreAlat.setEditable(false);
         ScoreAlat.setText("2");
         ScoreAlat.setFocusTraversalPolicyProvider(true);
         ScoreAlat.setName("ScoreAlat"); // NOI18N
         FormInput.add(ScoreAlat);
-        ScoreAlat.setBounds(400, 170, 60, 23);
+        ScoreAlat.setBounds(400, 170, 50, 23);
 
         jLabel228.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel228.setText("4. Suhu(C)");
         jLabel228.setName("jLabel228"); // NOI18N
         FormInput.add(jLabel228);
         jLabel228.setBounds(30, 200, 160, 23);
-
-        jLabel230.setText("Score EWS :");
-        jLabel230.setName("jLabel230"); // NOI18N
-        FormInput.add(jLabel230);
-        jLabel230.setBounds(320, 200, 75, 23);
 
         ScoreSuhu.setEditable(false);
         ScoreSuhu.setFocusTraversalPolicyProvider(true);
@@ -947,7 +937,7 @@ public final class EWSRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(ScoreSuhu);
-        ScoreSuhu.setBounds(400, 200, 60, 23);
+        ScoreSuhu.setBounds(400, 200, 50, 23);
 
         jLabel231.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel231.setText("5. Denyut Jantung");
@@ -955,32 +945,22 @@ public final class EWSRanap extends javax.swing.JDialog {
         FormInput.add(jLabel231);
         jLabel231.setBounds(30, 230, 150, 23);
 
-        jLabel233.setText("Score EWS :");
-        jLabel233.setName("jLabel233"); // NOI18N
-        FormInput.add(jLabel233);
-        jLabel233.setBounds(320, 230, 75, 23);
-
         ScoreDenyut.setEditable(false);
         ScoreDenyut.setFocusTraversalPolicyProvider(true);
         ScoreDenyut.setName("ScoreDenyut"); // NOI18N
         FormInput.add(ScoreDenyut);
-        ScoreDenyut.setBounds(400, 230, 60, 23);
-
-        jLabel236.setText("Score EWS :");
-        jLabel236.setName("jLabel236"); // NOI18N
-        FormInput.add(jLabel236);
-        jLabel236.setBounds(320, 260, 75, 23);
+        ScoreDenyut.setBounds(400, 230, 50, 23);
 
         ScoreTekanan.setEditable(false);
         ScoreTekanan.setFocusTraversalPolicyProvider(true);
         ScoreTekanan.setName("ScoreTekanan"); // NOI18N
         FormInput.add(ScoreTekanan);
-        ScoreTekanan.setBounds(400, 260, 60, 23);
+        ScoreTekanan.setBounds(400, 260, 50, 23);
 
         jLabel237.setText("Total Score EWS:");
         jLabel237.setName("jLabel237"); // NOI18N
         FormInput.add(jLabel237);
-        jLabel237.setBounds(280, 320, 110, 23);
+        jLabel237.setBounds(270, 320, 110, 23);
 
         Total.setEditable(false);
         Total.setText("2");
@@ -992,7 +972,7 @@ public final class EWSRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(Total);
-        Total.setBounds(400, 320, 60, 23);
+        Total.setBounds(400, 320, 50, 23);
 
         jLabel238.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel238.setText("7. Kesadaran");
@@ -1000,7 +980,7 @@ public final class EWSRanap extends javax.swing.JDialog {
         FormInput.add(jLabel238);
         jLabel238.setBounds(30, 290, 150, 23);
 
-        Kesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "P-V-U" }));
+        Kesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alert", "Verbal, Pain atau Unresponsive" }));
         Kesadaran.setName("Kesadaran"); // NOI18N
         Kesadaran.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1013,19 +993,14 @@ public final class EWSRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(Kesadaran);
-        Kesadaran.setBounds(190, 290, 120, 23);
-
-        jLabel240.setText("Score EWS :");
-        jLabel240.setName("jLabel240"); // NOI18N
-        FormInput.add(jLabel240);
-        jLabel240.setBounds(320, 290, 75, 23);
+        Kesadaran.setBounds(190, 290, 190, 23);
 
         ScoreKesadaran.setEditable(false);
         ScoreKesadaran.setText("0");
         ScoreKesadaran.setFocusTraversalPolicyProvider(true);
         ScoreKesadaran.setName("ScoreKesadaran"); // NOI18N
         FormInput.add(ScoreKesadaran);
-        ScoreKesadaran.setBounds(400, 290, 60, 23);
+        ScoreKesadaran.setBounds(400, 290, 50, 23);
 
         jLabel106.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel106.setText("EARLY WARNING SCORE (EWS)");
@@ -1036,42 +1011,37 @@ public final class EWSRanap extends javax.swing.JDialog {
         scrollPane17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane17.setName("scrollPane17"); // NOI18N
 
-        Respon.setEditable(false);
-        Respon.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        Respon.setColumns(20);
-        Respon.setRows(5);
-        Respon.setName("Respon"); // NOI18N
-        Respon.addKeyListener(new java.awt.event.KeyAdapter() {
+        Frekuensi.setEditable(false);
+        Frekuensi.setBorder(javax.swing.BorderFactory.createTitledBorder("Frekuensi Monitoring"));
+        Frekuensi.setColumns(20);
+        Frekuensi.setRows(5);
+        Frekuensi.setName("Frekuensi"); // NOI18N
+        Frekuensi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                ResponKeyPressed(evt);
+                FrekuensiKeyPressed(evt);
             }
         });
-        scrollPane17.setViewportView(Respon);
+        scrollPane17.setViewportView(Frekuensi);
 
         FormInput.add(scrollPane17);
-        scrollPane17.setBounds(560, 160, 280, 150);
-
-        jLabel262.setText("Score EWS :");
-        jLabel262.setName("jLabel262"); // NOI18N
-        FormInput.add(jLabel262);
-        jLabel262.setBounds(320, 110, 75, 23);
+        scrollPane17.setBounds(490, 150, 220, 160);
 
         jLabel241.setText("Klasifikasi :");
         jLabel241.setName("jLabel241"); // NOI18N
         FormInput.add(jLabel241);
-        jLabel241.setBounds(470, 110, 70, 23);
+        jLabel241.setBounds(490, 110, 50, 23);
 
         Klasifikasi.setEditable(false);
         Klasifikasi.setFocusTraversalPolicyProvider(true);
         Klasifikasi.setName("Klasifikasi"); // NOI18N
         FormInput.add(Klasifikasi);
-        Klasifikasi.setBounds(560, 110, 170, 23);
+        Klasifikasi.setBounds(550, 110, 490, 23);
 
         scrollPane18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane18.setName("scrollPane18"); // NOI18N
 
         Tindakan.setEditable(false);
-        Tindakan.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Tindakan.setBorder(javax.swing.BorderFactory.createTitledBorder("Tatalaksana dan Asuhan Yang Dilakukan"));
         Tindakan.setColumns(20);
         Tindakan.setRows(5);
         Tindakan.setName("Tindakan"); // NOI18N
@@ -1083,23 +1053,7 @@ public final class EWSRanap extends javax.swing.JDialog {
         scrollPane18.setViewportView(Tindakan);
 
         FormInput.add(scrollPane18);
-        scrollPane18.setBounds(950, 160, 280, 150);
-
-        jLabel243.setText("Tindakan :");
-        jLabel243.setName("jLabel243"); // NOI18N
-        FormInput.add(jLabel243);
-        jLabel243.setBounds(860, 160, 75, 23);
-
-        jLabel244.setText("Frekuensi Monitoring:");
-        jLabel244.setName("jLabel244"); // NOI18N
-        FormInput.add(jLabel244);
-        jLabel244.setBounds(810, 110, 120, 23);
-
-        Frekuensi.setEditable(false);
-        Frekuensi.setFocusTraversalPolicyProvider(true);
-        Frekuensi.setName("Frekuensi"); // NOI18N
-        FormInput.add(Frekuensi);
-        Frekuensi.setBounds(950, 110, 170, 23);
+        scrollPane18.setBounds(750, 150, 290, 160);
 
         Suhu1.setFocusTraversalPolicyProvider(true);
         Suhu1.setName("Suhu1"); // NOI18N
@@ -1506,6 +1460,36 @@ public final class EWSRanap extends javax.swing.JDialog {
         FormInput.add(Tekanan2);
         Tekanan2.setBounds(260, 260, 50, 23);
 
+        jLabel240.setText("Score EWS:");
+        jLabel240.setName("jLabel240"); // NOI18N
+        FormInput.add(jLabel240);
+        jLabel240.setBounds(320, 263, 70, 20);
+
+        jLabel242.setText("Score EWS:");
+        jLabel242.setName("jLabel242"); // NOI18N
+        FormInput.add(jLabel242);
+        jLabel242.setBounds(320, 233, 70, 20);
+
+        jLabel261.setText("Score EWS:");
+        jLabel261.setName("jLabel261"); // NOI18N
+        FormInput.add(jLabel261);
+        jLabel261.setBounds(320, 203, 70, 20);
+
+        jLabel262.setText("Score EWS:");
+        jLabel262.setName("jLabel262"); // NOI18N
+        FormInput.add(jLabel262);
+        jLabel262.setBounds(320, 173, 70, 20);
+
+        jLabel263.setText("Score EWS:");
+        jLabel263.setName("jLabel263"); // NOI18N
+        FormInput.add(jLabel263);
+        jLabel263.setBounds(320, 143, 70, 20);
+
+        jLabel264.setText("Score EWS:");
+        jLabel264.setName("jLabel264"); // NOI18N
+        FormInput.add(jLabel264);
+        jLabel264.setBounds(320, 113, 70, 20);
+
         scrollInput.setViewportView(FormInput);
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -1548,7 +1532,7 @@ public final class EWSRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1562,7 +1546,7 @@ public final class EWSRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-10-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1661,12 +1645,10 @@ public final class EWSRanap extends javax.swing.JDialog {
             Valid.textKosong(Total,"Total Score");
         }else if(Klasifikasi.getText().trim().equals("")){
             Valid.textKosong(Klasifikasi,"Klasifikasi");
-        }else if(Respon.getText().trim().equals("")){
-            Valid.textKosong(Respon,"Respon Klinis");
+        }else if(Frekuensi.getText().trim().equals("")){
+            Valid.textKosong(Frekuensi,"Respon Klinis");
         }else if(Tindakan.getText().trim().equals("")){
             Valid.textKosong(Tindakan,"Tindakan");
-        }else if(Frekuensi.getText().trim().equals("")){
-            Valid.textKosong(Frekuensi,"Frekuensi Monitoring");
         }else if(Masuk1.getText().trim().equals("")){
             Valid.textKosong(Masuk1,"Peroral/NGT");
         }else if(Masuk2.getText().trim().equals("")){
@@ -1774,12 +1756,10 @@ public final class EWSRanap extends javax.swing.JDialog {
             Valid.textKosong(Total,"Total Score");
         }else if(Klasifikasi.getText().trim().equals("")){
             Valid.textKosong(Klasifikasi,"Klasifikasi");
-        }else if(Respon.getText().trim().equals("")){
-            Valid.textKosong(Respon,"Respon Klinis");
+        }else if(Frekuensi.getText().trim().equals("")){
+            Valid.textKosong(Frekuensi,"Respon Klinis");
         }else if(Tindakan.getText().trim().equals("")){
             Valid.textKosong(Tindakan,"Tindakan");
-        }else if(Frekuensi.getText().trim().equals("")){
-            Valid.textKosong(Frekuensi,"Frekuensi Monitoring");
         }else if(Masuk1.getText().trim().equals("")){
             Valid.textKosong(Masuk1,"Peroral/NGT");
         }else if(Masuk2.getText().trim().equals("")){
@@ -2347,9 +2327,9 @@ public final class EWSRanap extends javax.swing.JDialog {
 
     private void AlatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_AlatItemStateChanged
         if(Alat.getSelectedIndex()==0){
-            ScoreAlat.setText("2");
-        }else if(Alat.getSelectedIndex()==1){
             ScoreAlat.setText("0");
+        }else if(Alat.getSelectedIndex()==1){
+            ScoreAlat.setText("2");
         }
 //        isjml();
         isTotalKlasifikasi();
@@ -2379,9 +2359,9 @@ public final class EWSRanap extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_KesadaranKeyPressed
 
-    private void ResponKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ResponKeyPressed
+    private void FrekuensiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FrekuensiKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ResponKeyPressed
+    }//GEN-LAST:event_FrekuensiKeyPressed
 
     private void TindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TindakanKeyPressed
         // TODO add your handling code here:
@@ -2580,6 +2560,14 @@ public final class EWSRanap extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_Tekanan2KeyTyped
 
+    private void ScorePernafasanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScorePernafasanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ScorePernafasanActionPerformed
+
+    private void AlatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AlatActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2613,7 +2601,7 @@ public final class EWSRanap extends javax.swing.JDialog {
     private widget.Tanggal DTPCari2;
     private widget.TextBox Denyut1;
     private widget.PanelBiasa FormInput;
-    private widget.TextBox Frekuensi;
+    private widget.TextArea Frekuensi;
     private widget.TextBox Jk;
     private widget.TextBox JumlahKeluar;
     private widget.TextBox JumlahMasuk;
@@ -2634,7 +2622,7 @@ public final class EWSRanap extends javax.swing.JDialog {
     private widget.TextBox NmPetugas;
     private usu.widget.glass.PanelGlass PanelWall;
     private widget.TextBox Pernafasan1;
-    private widget.TextArea Respon;
+    private widget.TextBox Respon;
     private widget.TextBox Saturasi1;
     private widget.TextBox ScoreAlat;
     private widget.TextBox ScoreDenyut;
@@ -2666,24 +2654,17 @@ public final class EWSRanap extends javax.swing.JDialog {
     private widget.Label jLabel19;
     private widget.Label jLabel21;
     private widget.Label jLabel219;
-    private widget.Label jLabel220;
     private widget.Label jLabel222;
-    private widget.Label jLabel224;
     private widget.Label jLabel225;
-    private widget.Label jLabel227;
     private widget.Label jLabel228;
-    private widget.Label jLabel230;
     private widget.Label jLabel231;
-    private widget.Label jLabel233;
     private widget.Label jLabel234;
-    private widget.Label jLabel236;
     private widget.Label jLabel237;
     private widget.Label jLabel238;
     private widget.Label jLabel239;
     private widget.Label jLabel240;
     private widget.Label jLabel241;
-    private widget.Label jLabel243;
-    private widget.Label jLabel244;
+    private widget.Label jLabel242;
     private widget.Label jLabel245;
     private widget.Label jLabel246;
     private widget.Label jLabel247;
@@ -2700,7 +2681,10 @@ public final class EWSRanap extends javax.swing.JDialog {
     private widget.Label jLabel258;
     private widget.Label jLabel259;
     private widget.Label jLabel260;
+    private widget.Label jLabel261;
     private widget.Label jLabel262;
+    private widget.Label jLabel263;
+    private widget.Label jLabel264;
     private widget.Label jLabel53;
     private widget.Label jLabel54;
     private widget.Label jLabel55;
@@ -2969,59 +2953,30 @@ public final class EWSRanap extends javax.swing.JDialog {
         try {
             Total.setText((Integer.parseInt(ScorePernafasan.getText())+Integer.parseInt(ScoreSaturasi.getText())+Integer.parseInt(ScoreAlat.getText())+Integer.parseInt(ScoreSuhu.getText())+Integer.parseInt(ScoreDenyut.getText())+Integer.parseInt(ScoreTekanan.getText())+Integer.parseInt(ScoreKesadaran.getText()))+"");
             if(Total.getText().equals("0")){
-                Respon.setText("Dilakukan monitoring");
+                Respon.setText("Minimal "
+                        +"Setiap 1 shift ( 7-10 jam)");
             }else if(Total.getText().equals("1")){
-                Respon.setText(
-                        "Harus segera dievaluasi oleh perawat \n"
-                        + "terdaftar yang kompeten, harus memutuskan \n"
-                        + "apakah perubahan frekuensi pemantauan \n"
-                        + "klinis atau wajib eskalasi perawatan klinis");
+                Respon.setText("Minimal "
+                        + "Setiap 4-6 Jam Sekali");
             }else if(Total.getText().equals("2")){
-                Respon.setText(
-                        "Harus segera dievaluasi oleh perawat \n"
-                        + "terdaftar yang kompeten, harus memutuskan \n"
-                        + "apakah perubahan frekuensi pemantauan \n"
-                        + "klinis atau wajib eskalasi perawatan klinis");
+                Respon.setText("Minimal "
+                        + "Setiap 4-6 Jam Sekali");
             }else if(Total.getText().equals("3")){
-                Respon.setText(
-                        "Harus segera dievaluasi oleh perawat \n"
-                        + "terdaftar yang kompeten, harus memutuskan \n"
-                        + "apakah perubahan frekuensi pemantauan \n"
-                        + "klinis atau wajib eskalasi perawatan klinis");
+                Respon.setText("Minimal "
+                        + "Setiap 4-6 Jam Sekali");
             }else if(Total.getText().equals("4")){
-                 Respon.setText(
-                        "Harus segera dievaluasi oleh perawat \n"
-                        + "terdaftar yang kompeten, harus memutuskan \n"
-                        + "apakah perubahan frekuensi pemantauan \n"
-                        + "klinis atau wajib eskalasi perawatan klinis");
+                Respon.setText("Minimal "
+                        + "Setiap 4-6 Jam Sekali");
             }else if(Total.getText().equals("5")){
-                 Respon.setText(
-                        "Harus segera melakukan tinjauan \n"
-                        + "mendesak oleh klinis yang terampil \n"
-                        + "dengan kompetensi dalam penilaian \n"
-                        + "penyakit akut di bangsal biasanya \n"
-                        + "oleh dokter atau perawat dengan \n"
-                        + "mempertimbangkan apakah eskalasi \n"
-                        + "perawatan ke tim perawatan kritis \n"
-                        + "diperlukan (yaitu tim penjangkauan perawatan kritis)");
+                Respon.setText("Peningkatan Frekuensi Observasi/"
+                        + "Monitoring. "
+                        + "Setidaknya Setiap 1 Jam Sekali");
             }else if(Total.getText().equals("6")){
-                 Respon.setText(
-                        "Harus segera melakukan tinjauan \n"
-                        + "mendesak oleh klinis yang terampil \n"
-                        + "dengan kompetensi dalam penilaian \n"
-                        + "penyakit akut di bangsal biasanya \n"
-                        + "oleh dokter atau perawat dengan \n"
-                        + "mempertimbangkan apakah eskalasi \n"
-                        + "perawatan ke tim perawatan kritis \n"
-                        + "diperlukan (yaitu tim penjangkauan perawatan kritis)");
+                Respon.setText("Pemantauan tanda tanda Vital "
+                        + "secara kontinyu");
             }else{
-            Respon.setText(
-                        "Harus segera memberikan penilaian \n"
-                        + "darurat secara klinis oleh tim \n"
-                        + "critical care outreach atau code blue \n"
-                        + "dengan kompetensi penanganan pasien \n"
-                        + "kritis dan biasanya terjadi transper \n"
-                        + "pasien ke area perawatan dengan alat bantu");
+            Respon.setText("Pemantauan tanda tanda Vital "
+                        + "secara kontinyu");
         }
         } catch (Exception e) {
             Total.setText("0");
@@ -3032,37 +2987,47 @@ public final class EWSRanap extends javax.swing.JDialog {
         try {
             Total.setText((Integer.parseInt(ScorePernafasan.getText())+Integer.parseInt(ScoreSaturasi.getText())+Integer.parseInt(ScoreAlat.getText())+Integer.parseInt(ScoreSuhu.getText())+Integer.parseInt(ScoreDenyut.getText())+Integer.parseInt(ScoreTekanan.getText())+Integer.parseInt(ScoreKesadaran.getText()))+"");
             if(Total.getText().equals("0")){
-                Tindakan.setText("Melanjutkan monitoring");
+                Tindakan.setText(
+                        " - Stabil. /n"
+                       +" - Lanjutkan observasi / monitoring secara rutin");
             }else if(Total.getText().equals("1")){
                 Tindakan.setText(
-                        "Perawat menassesment atau perawat meningkatkan \n"
-                        + "frekuensi monitor");
+                        " - Pengkajian ulang dilakukan oleh perawat primer / PJ Shift /n"
+                       +" - Perawatan menentukan tindakan keperawatan yang dibutuhkan /n"
+                       +" - Pastikan kondisi pasien tercatat di catatan perkembangan pasien");
             }else if(Total.getText().equals("2")){
                  Tindakan.setText(
-                        "Perawat menassesment atau perawat meningkatkan \n"
-                        + "frekuensi monitor");
+                        " - Pengkajian ulang dilakukan oleh perawat primer / PJ Shift /n"
+                       +" - Perawatan menentukan tindakan keperawatan yang dibutuhkan /n"
+                       +" - Pastikan kondisi pasien tercatat di catatan perkembangan pasien");
             }else if(Total.getText().equals("3")){
                  Tindakan.setText(
-                        "Perawat menassesment atau perawat meningkatkan \n"
-                        + "frekuensi monitor");
+                        " - Pengkajian ulang dilakukan oleh perawat primer / PJ Shift /n"
+                       +" - Perawatan menentukan tindakan keperawatan yang dibutuhkan /n"
+                       +" - Pastikan kondisi pasien tercatat di catatan perkembangan pasien");
             }else if(Total.getText().equals("4")){
                   Tindakan.setText(
-                        "Perawat menassesment atau perawat meningkatkan \n"
-                        + "frekuensi monitor");
+                        " - Pengkajian ulang dilakukan oleh perawat primer / PJ Shift /n"
+                       +" - Perawatan menentukan tindakan keperawatan yang dibutuhkan /n"
+                       +" - Pastikan kondisi pasien tercatat di catatan perkembangan pasien");
             }else if(Total.getText().equals("5")){
                  Tindakan.setText(
-                        "Perawat berkolaborasi dengan tim/pemberian \n"
-                        + "assesment kegawatan/meningkatkan perawatan \n"
-                        + "dengan fasilitas monitor yang lengkap");
+                        "1. Pengkajian ulang dilakukan oleh PP / PJ Unit /n"
+                       +"2. Perawat menentukan tindakan keperawatan yang dibutuhkan /n"
+                       +"3. Pastikan kondisi pasien tercatat di catatan perkembangan pasien /n"
+                       +"4. Kwtua Tim (Perawat) segera memberikan informasi tentang kondisi pasien kepada dokter jaga atau DPJP /n"
+                       +"5. Dokter jaga atau DPJB melakukan asesmen sesuai kompetensi /n"
+                       +"6. Perawatan pasien dengan fasilitas pemantauan yang ketat ");
             }else if(Total.getText().equals("6")){
                  Tindakan.setText(
-                        "Perawat berkolaborasi dengan tim/pemberian \n"
-                        + "assesment kegawatan/meningkatkan perawatan \n"
-                        + "dengan fasilitas monitor yang lengkap");
+                        "1. Dokter jaga / DPJP hadir disamping pasienuntuk menentukan rencana perawatan selanjutnya /n"
+                       +"2. Dokter jaga atau DPJP melakukan assesmen lanjutan /n"
+                       +"3. Alih rawat ke ruang intensive (HCU/ICU) atau rujuk ke RS lain jika tidak ada ruang Intensive");
             }else{
             Tindakan.setText(
-                        "Berkolaborasi dengan tim medis/pemberian \n"
-                        + "assesment kegawatan/pindah ruang HCU/ICU");
+                        "1. Dokter jaga / DPJP hadir disamping pasienuntuk menentukan rencana perawatan selanjutnya /n"
+                       +"2. Dokter jaga atau DPJP melakukan assesmen lanjutan /n"
+                       +"3. Alih rawat ke ruang intensive (HCU/ICU) atau rujuk ke RS lain jika tidak ada ruang Intensive");
         }
         } catch (Exception e) {
             Total.setText("0");
@@ -3073,21 +3038,30 @@ public final class EWSRanap extends javax.swing.JDialog {
         try {
             Total.setText((Integer.parseInt(ScorePernafasan.getText())+Integer.parseInt(ScoreSaturasi.getText())+Integer.parseInt(ScoreAlat.getText())+Integer.parseInt(ScoreSuhu.getText())+Integer.parseInt(ScoreDenyut.getText())+Integer.parseInt(ScoreTekanan.getText())+Integer.parseInt(ScoreKesadaran.getText()))+"");
             if(Total.getText().equals("0")){
-                Frekuensi.setText("Minimal 12 Jam");
+                Frekuensi.setText("Minimal "
+                        +"Setiap 1 shift ( 7-10 jam)");
             }else if(Total.getText().equals("1")){
-                Frekuensi.setText("Minimal 4-6 Jam");
+                Frekuensi.setText("Minimal "
+                        + "Setiap 4-6 Jam Sekali");
             }else if(Total.getText().equals("2")){
-                Frekuensi.setText("Minimal 4-6 Jam");
+                Frekuensi.setText("Minimal "
+                        + "Setiap 4-6 Jam Sekali");
             }else if(Total.getText().equals("3")){
-                Frekuensi.setText("Minimal 4-6 Jam");
+                Frekuensi.setText("Minimal "
+                        + "Setiap 4-6 Jam Sekali");
             }else if(Total.getText().equals("4")){
-                Frekuensi.setText("Minimal 4-6 Jam");
+                Frekuensi.setText("Minimal "
+                        + "Setiap 4-6 Jam Sekali");
             }else if(Total.getText().equals("5")){
-                Frekuensi.setText("Minimal 1 Jam");
+                Frekuensi.setText("Peningkatan Frekuensi Observasi/"
+                        + "Monitoring. "
+                        + "Setidaknya Setiap 1 Jam Sekali");
             }else if(Total.getText().equals("6")){
-                Frekuensi.setText("Minimal 1 Jam");
+                Frekuensi.setText("Pemantauan tanda tanda Vital "
+                        + "secara kontinyu");
             }else{
-            Frekuensi.setText("Bed side monitor/every time");
+            Frekuensi.setText("Pemantauan tanda tanda Vital "
+                        + "secara kontinyu");
         }
         } catch (Exception e) {
             Total.setText("0");
@@ -3146,7 +3120,7 @@ public final class EWSRanap extends javax.swing.JDialog {
         Saturasi1.setText("");
         ScoreSaturasi.setText("0");
         Alat.setSelectedIndex(0);
-        ScoreAlat.setText("2");
+        ScoreAlat.setText("0");
         Suhu1.setText("");
         ScoreSuhu.setText("0");
         Denyut1.setText("");
@@ -3155,11 +3129,10 @@ public final class EWSRanap extends javax.swing.JDialog {
         ScoreTekanan.setText("0");
         Kesadaran.setSelectedIndex(0);
         ScoreKesadaran.setText("0");
-        Total.setText("2");
+        Total.setText("0");
         Klasifikasi.setText("");
-        Respon.setText("");
-        Tindakan.setText("");
         Frekuensi.setText("");
+        Tindakan.setText("");
         SkalaNyeri.setSelectedIndex(0);
         BB.setText("");
         TB.setText("");
@@ -3203,9 +3176,8 @@ public final class EWSRanap extends javax.swing.JDialog {
             ScoreKesadaran.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
             Total.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
             Klasifikasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
-            Respon.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
+            Frekuensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
             Tindakan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
-            Frekuensi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
             SkalaNyeri.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
             BB.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
             TB.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
