@@ -273,7 +273,8 @@ public final class PEWSRanap extends javax.swing.JDialog {
         jLabel34 = new widget.Label();
         jLabel35 = new widget.Label();
         Penilaian = new widget.TextBox();
-        Tatalaksana = new widget.TextBox();
+        scrollPane17 = new widget.ScrollPane();
+        Tatalaksana = new widget.TextArea();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -462,7 +463,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -476,7 +477,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-10-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-12-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -542,10 +543,12 @@ public final class PEWSRanap extends javax.swing.JDialog {
 
         FormInput.setBackground(new java.awt.Color(250, 255, 245));
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(100, 225));
+        FormInput.setPreferredSize(new java.awt.Dimension(100, 380));
         FormInput.setLayout(null);
 
+        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("No.Rawat :");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 75, 23);
@@ -582,7 +585,9 @@ public final class PEWSRanap extends javax.swing.JDialog {
         FormInput.add(TNoRM);
         TNoRM.setBounds(222, 10, 112, 23);
 
+        jLabel18.setForeground(new java.awt.Color(255, 0, 0));
         jLabel18.setText("Petugas :");
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
         jLabel18.setBounds(5, 40, 70, 23);
@@ -620,7 +625,9 @@ public final class PEWSRanap extends javax.swing.JDialog {
         FormInput.add(btnPetugas);
         btnPetugas.setBounds(370, 40, 28, 23);
 
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("Tgl.Lahir :");
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setName("jLabel8"); // NOI18N
         FormInput.add(jLabel8);
         jLabel8.setBounds(625, 10, 60, 23);
@@ -637,6 +644,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel14.setText("1.  Perilaku");
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel14.setName("jLabel14"); // NOI18N
         FormInput.add(jLabel14);
         jLabel14.setBounds(80, 80, 110, 23);
@@ -678,12 +686,16 @@ public final class PEWSRanap extends javax.swing.JDialog {
         FormInput.add(Skor1);
         Skor1.setBounds(730, 80, 44, 23);
 
+        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Skor :");
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel20.setName("jLabel20"); // NOI18N
         FormInput.add(jLabel20);
         jLabel20.setBounds(660, 80, 60, 23);
 
+        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setText("Skor :");
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel22.setName("jLabel22"); // NOI18N
         FormInput.add(jLabel22);
         jLabel22.setBounds(660, 110, 60, 23);
@@ -710,7 +722,9 @@ public final class PEWSRanap extends javax.swing.JDialog {
         FormInput.add(cmbSkor3);
         cmbSkor3.setBounds(190, 140, 490, 23);
 
+        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
         jLabel26.setText("Skor :");
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
         jLabel26.setBounds(660, 140, 60, 23);
@@ -722,7 +736,9 @@ public final class PEWSRanap extends javax.swing.JDialog {
         FormInput.add(Skor3);
         Skor3.setBounds(730, 140, 44, 23);
 
+        jLabel27.setForeground(new java.awt.Color(255, 0, 0));
         jLabel27.setText("Total Skor :");
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel27.setName("jLabel27"); // NOI18N
         FormInput.add(jLabel27);
         jLabel27.setBounds(650, 170, 75, 23);
@@ -734,44 +750,65 @@ public final class PEWSRanap extends javax.swing.JDialog {
         FormInput.add(TotalSkor);
         TotalSkor.setBounds(730, 170, 50, 23);
 
+        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
         jLabel28.setText("Parameter :");
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel28.setName("jLabel28"); // NOI18N
         FormInput.add(jLabel28);
         jLabel28.setBounds(0, 80, 75, 23);
 
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel31.setText("2.  Kardiovaskuler");
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel31.setName("jLabel31"); // NOI18N
         FormInput.add(jLabel31);
         jLabel31.setBounds(80, 110, 100, 23);
 
+        jLabel33.setForeground(new java.awt.Color(255, 0, 0));
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel33.setText("Penilaian Ulang");
+        jLabel33.setText("Penilaian Ulang :");
+        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel33.setName("jLabel33"); // NOI18N
         FormInput.add(jLabel33);
-        jLabel33.setBounds(80, 210, 110, 23);
+        jLabel33.setBounds(20, 210, 110, 23);
 
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel34.setText("3.  Respirasi");
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel34.setName("jLabel34"); // NOI18N
         FormInput.add(jLabel34);
         jLabel34.setBounds(80, 140, 110, 23);
 
+        jLabel35.setForeground(new java.awt.Color(255, 0, 0));
         jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel35.setText("Tatalaksana");
+        jLabel35.setText("Tatalaksana :");
+        jLabel35.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel35.setName("jLabel35"); // NOI18N
         FormInput.add(jLabel35);
-        jLabel35.setBounds(80, 240, 110, 23);
+        jLabel35.setBounds(430, 210, 110, 23);
 
         Penilaian.setHighlighter(null);
         Penilaian.setName("Penilaian"); // NOI18N
         FormInput.add(Penilaian);
-        Penilaian.setBounds(190, 210, 590, 23);
+        Penilaian.setBounds(120, 210, 300, 23);
 
-        Tatalaksana.setHighlighter(null);
+        scrollPane17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPane17.setName("scrollPane17"); // NOI18N
+
+        Tatalaksana.setEditable(false);
+        Tatalaksana.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Tatalaksana.setColumns(20);
+        Tatalaksana.setRows(5);
         Tatalaksana.setName("Tatalaksana"); // NOI18N
-        FormInput.add(Tatalaksana);
-        Tatalaksana.setBounds(190, 240, 590, 23);
+        Tatalaksana.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TatalaksanaKeyPressed(evt);
+            }
+        });
+        scrollPane17.setViewportView(Tatalaksana);
+
+        FormInput.add(scrollPane17);
+        scrollPane17.setBounds(510, 200, 460, 80);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -836,7 +873,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
             if(Sequel.menyimpantf("pews_ranap","?,?,?,?,?,?,?,?,?,?,?,?,?","Data",13,new String[]{
                 TNoRw.getText(),tanggalNow.format(new Date()),jamNow.format(new Date()),nik.getText(),
                 cmbSkor1.getSelectedItem().toString(),Skor1.getText(),cmbSkor2.getSelectedItem().toString(),Skor2.getText(),
-                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),TglLahir.getText(),Tatalaksana.getText()
+                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),Penilaian.getText(),Tatalaksana.getText()
             })==true){
                 tampil();
                 emptTeks();
@@ -907,7 +944,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
                 "parameter_2=?,skor_2=?,parameter_3=?,skor_3=?,skor_total=?,penilaian=?,tatalaksana=?",14,new String[]{
                 TNoRw.getText(),tanggalNow.format(new Date()),jamNow.format(new Date()),nik.getText(),
                 cmbSkor1.getSelectedItem().toString(),Skor1.getText(),cmbSkor2.getSelectedItem().toString(),Skor2.getText(),
-                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),TglLahir.getText(),Tatalaksana.getText(),
+                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),Penilaian.getText(),Tatalaksana.getText(),
                 tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
             });
             if(tabMode.getRowCount()!=0){tampil();}
@@ -1128,6 +1165,10 @@ public final class PEWSRanap extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_TglLahirActionPerformed
 
+    private void TatalaksanaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TatalaksanaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TatalaksanaKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1169,7 +1210,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
-    private widget.TextBox Tatalaksana;
+    private widget.TextArea Tatalaksana;
     private widget.TextBox TglLahir;
     private widget.TextBox TotalSkor;
     private widget.Button btnPetugas;
@@ -1200,6 +1241,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
     private widget.TextBox nik;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
+    private widget.ScrollPane scrollPane17;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
     
@@ -1320,23 +1362,25 @@ public final class PEWSRanap extends javax.swing.JDialog {
     
     private void isHitung(){
         if(TotalSkor.getText().equals("0")){
-            Penilaian.setText("Tiap 7 jam");
-            Tatalaksana.setText("Terapi sebelumnya dilanjutkan");
+            Penilaian.setText("Setiap 7 jam");
+            Tatalaksana.setText("Lanjutkan Observasi/Monitoring Sacara Rutin");
         }else if(TotalSkor.getText().equals("1")){
-            Penilaian.setText("Tiap 7 jam");
-            Tatalaksana.setText("Terapi sebelumnya dilanjutkan");
+            Penilaian.setText("Setiap 7 jam");
+            Tatalaksana.setText("Lanjutkan Observasi/Monitoring Sacara Rutin");
         }else if(TotalSkor.getText().equals("2")){
-            Penilaian.setText("Tiap 7 jam");
-            Tatalaksana.setText("Terapi sebelumnya dilanjutkan");
+            Penilaian.setText("Setiap 7 jam");
+            Tatalaksana.setText("Lanjutkan Observasi/Monitoring Sacara Rutin");
         }else if(TotalSkor.getText().equals("3")){
-            Penilaian.setText("Tiap 7 jam");
+            Penilaian.setText("Setiap 4-6 Jam Sekali");
             Tatalaksana.setText("Respon dan anjuran dokter spesialis anak dalam 1 jam untuk tatalaksana selanjutnya");
         }else if(TotalSkor.getText().equals("4")){
-            Penilaian.setText("Tiap 7 jam");
-            Tatalaksana.setText("Respon dan anjuran dokter spesialis anak dalam 10 menit untuk tatalaksana selanjutnya");
+            Penilaian.setText("Setiap 1 jam");
+            Tatalaksana.setText("Pengkajian ulang dilakukan oleh perawat diketahui oleh dokter jaga dan dilaporakan ke DPJP dan memberikan instruksi tatalaksana pasien tersebut");
         }else{
-            Penilaian.setText("Tiap 7 jam");
-            Tatalaksana.setText("Respon dan anjuran dokter spesialis anak untuk tatalaksana selanjutnya");
+            Penilaian.setText("Observasi Ketat Minimal Setiap 15 Menit Sekali");
+            Tatalaksana.setText("Lakukan Tatalaksana Kegawatdaruratan pada pasien."
+                    + "Dokter Jaga / DPJP Hadir disamping pasien untuk menentukan rencana perawtan selanjutnya."
+                    + "Rekomendasi untuk alih rawat ke ruang intensive");
         }
     }
     
@@ -1396,7 +1440,7 @@ public final class PEWSRanap extends javax.swing.JDialog {
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,320));
+            PanelInput.setPreferredSize(new Dimension(WIDTH,380));
             FormInput.setVisible(true);      
             ChkInput.setVisible(true);
         }else if(ChkInput.isSelected()==false){           
