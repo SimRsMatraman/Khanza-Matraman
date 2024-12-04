@@ -3129,7 +3129,7 @@ public final class EWSRanap extends javax.swing.JDialog {
         ScoreTekanan.setText("0");
         Kesadaran.setSelectedIndex(0);
         ScoreKesadaran.setText("0");
-        Total.setText("2");
+        Total.setText("0");
         Klasifikasi.setText("");
         Frekuensi.setText("");
         Tindakan.setText("");
