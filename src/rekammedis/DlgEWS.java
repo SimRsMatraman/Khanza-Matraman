@@ -79,6 +79,9 @@ public class DlgEWS extends javax.swing.JDialog {
     private void initComponents() {
 
         Kd2 = new widget.TextBox();
+        internalFrame7 = new widget.InternalFrame();
+        Bc = new widget.ScrollPane();
+        jPanelBc = new javax.swing.JPanel();
         internalFrame1 = new widget.InternalFrame();
         PanelInput = new javax.swing.JPanel();
         TabRawat = new javax.swing.JTabbedPane();
@@ -91,9 +94,6 @@ public class DlgEWS extends javax.swing.JDialog {
         internalFrame5 = new widget.InternalFrame();
         Tensi = new widget.ScrollPane();
         jPanelTensi = new javax.swing.JPanel();
-        internalFrame7 = new widget.InternalFrame();
-        Bc = new widget.ScrollPane();
-        jPanelBc = new javax.swing.JPanel();
         internalFrame8 = new widget.InternalFrame();
         Nadi = new widget.ScrollPane();
         jPanelNadi = new javax.swing.JPanel();
@@ -118,6 +118,18 @@ public class DlgEWS extends javax.swing.JDialog {
 
         Kd2.setName("Kd2"); // NOI18N
         Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
+
+        internalFrame7.setBorder(null);
+        internalFrame7.setName("internalFrame7"); // NOI18N
+        internalFrame7.setLayout(new java.awt.BorderLayout(1, 1));
+
+        Bc.setName("Bc"); // NOI18N
+        Bc.setOpaque(true);
+
+        jPanelBc.setName("jPanelBc"); // NOI18N
+        Bc.setViewportView(jPanelBc);
+
+        internalFrame7.add(Bc, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -182,20 +194,6 @@ public class DlgEWS extends javax.swing.JDialog {
         internalFrame5.add(Tensi, java.awt.BorderLayout.CENTER);
 
         TabRawat.addTab("Sistole / Diastole", internalFrame5);
-
-        internalFrame7.setBorder(null);
-        internalFrame7.setName("internalFrame7"); // NOI18N
-        internalFrame7.setLayout(new java.awt.BorderLayout(1, 1));
-
-        Bc.setName("Bc"); // NOI18N
-        Bc.setOpaque(true);
-
-        jPanelBc.setName("jPanelBc"); // NOI18N
-        Bc.setViewportView(jPanelBc);
-
-        internalFrame7.add(Bc, java.awt.BorderLayout.CENTER);
-
-        TabRawat.addTab("Balance Cairan", internalFrame7);
 
         internalFrame8.setBorder(null);
         internalFrame8.setName("internalFrame8"); // NOI18N
@@ -597,7 +595,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Tekanan Darah Sistolik / Diastolik</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Kesadaran</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Total Score</td>"+
-                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Balance Cairan(Masuk-Keluar)</td>"+
+                                        //"<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Balance Cairan(Masuk-Keluar)</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Klasifikasi</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Respon Klinis</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Tindakan</td>"+
@@ -688,7 +686,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Tekanan Darah Sistolik / Diastolik</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Kesadaran</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Total Score</td>"+
-                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Balance Cairan(Masuk-Keluar)</td>"+
+                                        //"<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Balance Cairan(Masuk-Keluar)</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Klasifikasi</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Respon Klinis</td>"+
                                         "<td valign='middle' bgcolor='#FFFFF8' align='center' width='23%'>Tindakan</td>"+
@@ -805,8 +803,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         jPanelTensi.add(chartPanelTensi);
         JPanel chartPanelSkor = createPanelSkor(x);
         jPanelSkor.add(chartPanelSkor);
-        JPanel chartPanelBc = createPanelBc(x);
-        jPanelBc.add(chartPanelBc);
+//        JPanel chartPanelBc = createPanelBc(x);
+//        jPanelBc.add(chartPanelBc);
         JPanel chartPanelNadi = createPanelNadi(x);
         jPanelNadi.add(chartPanelNadi);
     }
@@ -835,10 +833,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
              return new ChartPanel(chart);
          }
     
-    public static JPanel createPanelBc(String noRawat) {
-             JFreeChart chart = createChartBc(noRawat);
-             return new ChartPanel(chart);
-         }
+//    public static JPanel createPanelBc(String noRawat) {
+//             JFreeChart chart = createChartBc(noRawat);
+//             return new ChartPanel(chart);
+//         }
     
     public static JPanel createPanelNadi(String noRawat) {
              JFreeChart chart = createChartNadi(noRawat);
@@ -949,32 +947,32 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
 
          } 
     
-    private static JFreeChart createChartBc(String noRawat) {
-
-             CategoryDataset datasetBc = createDatasetBc(noRawat);
-             NumberAxis rangeAxis1 = new NumberAxis("cc");
-             rangeAxis1.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-              rangeAxis1.setAutoRangeIncludesZero(true);
-             LineAndShapeRenderer renderer1 = new LineAndShapeRenderer();
-             renderer1.setBaseToolTipGenerator(
-                     new StandardCategoryToolTipGenerator());
-            
-             CategoryPlot subplot1 = new CategoryPlot(datasetBc, null, rangeAxis1,
-                     renderer1);
-             subplot1.setDomainGridlinesVisible(true);
-             
-             CategoryAxis domainAxis = new CategoryAxis("");
-             
-             CombinedDomainCategoryPlot plot = new CombinedDomainCategoryPlot(domainAxis);
-             plot.add(subplot1,2 );
-             CategoryAxis domainAxis2 = plot.getDomainAxis();
-             domainAxis2.setCategoryLabelPositions(CategoryLabelPositions.DOWN_90);
-             JFreeChart result = new JFreeChart(
-                     "",
-                     new Font("SansSerif", Font.PLAIN,6 ), plot, true);
-             return result;
-
-         } 
+//    private static JFreeChart createChartBc(String noRawat) {
+//
+//             CategoryDataset datasetBc = createDatasetBc(noRawat);
+//             NumberAxis rangeAxis1 = new NumberAxis("cc");
+//             rangeAxis1.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+//              rangeAxis1.setAutoRangeIncludesZero(true);
+//             LineAndShapeRenderer renderer1 = new LineAndShapeRenderer();
+//             renderer1.setBaseToolTipGenerator(
+//                     new StandardCategoryToolTipGenerator());
+//            
+//             CategoryPlot subplot1 = new CategoryPlot(datasetBc, null, rangeAxis1,
+//                     renderer1);
+//             subplot1.setDomainGridlinesVisible(true);
+//             
+//             CategoryAxis domainAxis = new CategoryAxis("");
+//             
+//             CombinedDomainCategoryPlot plot = new CombinedDomainCategoryPlot(domainAxis);
+//             plot.add(subplot1,2 );
+//             CategoryAxis domainAxis2 = plot.getDomainAxis();
+//             domainAxis2.setCategoryLabelPositions(CategoryLabelPositions.DOWN_90);
+//             JFreeChart result = new JFreeChart(
+//                     "",
+//                     new Font("SansSerif", Font.PLAIN,6 ), plot, true);
+//             return result;
+//
+//         } 
     
      private static JFreeChart createChartNadi(String noRawat) {
 
@@ -1116,41 +1114,41 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             return result;
        }
      
-     public static CategoryDataset createDatasetBc(String noRawat) { //data grafik nilai K dan D
-
-          DefaultCategoryDataset result = new DefaultCategoryDataset();
-          String series1 = "Grafik Cairan Masuk";
-           String series2 = "Grafik Cairan Keluar";
-           String series3 = "Grafik Balance Cairan";
-            try {
-                Statement stat = koneksiDB.condb().createStatement();
-                ResultSet rs = stat.executeQuery("select concat(tanggal,' ',jam) as period,jumlahmasuk,jumlahkeluar,bc "+
-                   "from ews_rajal where no_rawat='"+noRawat+"'  ");
-                while (rs.next()) {
-                    String tksbr=rs.getString("period");
-                    double jumlahmasuk=rs.getDouble("jumlahmasuk");
-                    double jumlahkeluar=rs.getDouble("jumlahkeluar");
-                    double bc=rs.getDouble("bc");
-                    result.addValue(jumlahmasuk, series1,tksbr);
-                    result.addValue(jumlahkeluar, series2,tksbr);
-//                    result.addValue(bc, series3,tksbr);
-                }
-                ResultSet rs2 = stat.executeQuery("select concat(tanggal,' ',jam) as period,jumlahmasuk,jumlahkeluar,bc "+
-                   "from ews_ranap where no_rawat='"+noRawat+"'  ");
-                while (rs2.next()) {
-                   String tksbr=rs2.getString("period");
-                    double jumlahmasuk=rs2.getDouble("jumlahmasuk");
-                    double jumlahkeluar=rs2.getDouble("jumlahkeluar");
-                    double bc=rs2.getDouble("bc");
-                    result.addValue(jumlahmasuk, series1,tksbr);
-                    result.addValue(jumlahkeluar, series2,tksbr);
-//                    result.addValue(bc, series3,tksbr);
-                }
-            } catch (SQLException e) {
-                System.out.println("Notifikasi Q: " + e);
-            }
-            return result;
-       }
+//     public static CategoryDataset createDatasetBc(String noRawat) { //data grafik nilai K dan D
+//
+//          DefaultCategoryDataset result = new DefaultCategoryDataset();
+//          String series1 = "Grafik Cairan Masuk";
+//           String series2 = "Grafik Cairan Keluar";
+//           String series3 = "Grafik Balance Cairan";
+//            try {
+//                Statement stat = koneksiDB.condb().createStatement();
+//                ResultSet rs = stat.executeQuery("select concat(tanggal,' ',jam) as period,jumlahmasuk,jumlahkeluar,bc "+
+//                   "from ews_rajal where no_rawat='"+noRawat+"'  ");
+//                while (rs.next()) {
+//                    String tksbr=rs.getString("period");
+//                    double jumlahmasuk=rs.getDouble("jumlahmasuk");
+//                    double jumlahkeluar=rs.getDouble("jumlahkeluar");
+//                    double bc=rs.getDouble("bc");
+//                    result.addValue(jumlahmasuk, series1,tksbr);
+//                    result.addValue(jumlahkeluar, series2,tksbr);
+////                    result.addValue(bc, series3,tksbr);
+//                }
+//                ResultSet rs2 = stat.executeQuery("select concat(tanggal,' ',jam) as period,jumlahmasuk,jumlahkeluar,bc "+
+//                   "from ews_ranap where no_rawat='"+noRawat+"'  ");
+//                while (rs2.next()) {
+//                   String tksbr=rs2.getString("period");
+//                    double jumlahmasuk=rs2.getDouble("jumlahmasuk");
+//                    double jumlahkeluar=rs2.getDouble("jumlahkeluar");
+//                    double bc=rs2.getDouble("bc");
+//                    result.addValue(jumlahmasuk, series1,tksbr);
+//                    result.addValue(jumlahkeluar, series2,tksbr);
+////                    result.addValue(bc, series3,tksbr);
+//                }
+//            } catch (SQLException e) {
+//                System.out.println("Notifikasi Q: " + e);
+//            }
+//            return result;
+//       }
      
       public static CategoryDataset createDatasetNadi(String noRawat) { //data grafik nilai K dan D
 
