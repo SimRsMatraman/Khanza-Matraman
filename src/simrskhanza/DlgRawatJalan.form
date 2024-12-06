@@ -270,7 +270,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="29-11-2024"/>
+                        <StringItem index="0" value="06-12-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -298,7 +298,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="29-11-2024"/>
+                        <StringItem index="0" value="06-12-2024"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -4648,7 +4648,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="29-11-2024"/>
+                    <StringItem index="0" value="06-12-2024"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -6057,7 +6057,7 @@
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/picture/item.png"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="PEWS IGD &amp; Ralan"/>
+                                <Property name="text" type="java.lang.String" value="PEWS"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="11" style="0"/>
@@ -6084,7 +6084,7 @@
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/picture/item.png"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="EWS IGD &amp; Ralan"/>
+                                <Property name="text" type="java.lang.String" value="EWS"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="11" style="0"/>
@@ -6246,7 +6246,7 @@
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/picture/item.png"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Catatan Keseimbangan Ciran"/>
+                                <Property name="text" type="java.lang.String" value="Catatan Keseimbangan Cairan"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="11" style="0"/>

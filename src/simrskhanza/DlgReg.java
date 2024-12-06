@@ -156,7 +156,7 @@ import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
 import rekammedis.RMUjiFungsiKFR;
 import rekammedis.SkriningIGD;
-import rekammedis.EWSRajal;
+import rekammedis.EWSRajalOLD;
 import rekammedis.PEWSRajal;
 import rekammedis.GdsIgd;
 import rekammedis.RMDataResumePasienRajal;
@@ -13897,7 +13897,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                EWSRajal form=new EWSRajal(null,false);
+                EWSRajalOLD form=new EWSRajalOLD(null,false);
                 form.isCek();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
                 form.emptTeks();
