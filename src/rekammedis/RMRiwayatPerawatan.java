@@ -15584,105 +15584,105 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                      "</tr>");
                             }
                             
-                            if(!rs2.getString("masuk1").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Masuk(Peroral/NGT)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("masuk1").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
+//                            if(!rs2.getString("masuk1").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Masuk(Peroral/NGT)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("masuk1").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
                             
-                            if(!rs2.getString("masuk2").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Masuk(Parenteral/Transfusi)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("masuk2").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
+//                            if(!rs2.getString("masuk2").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Masuk(Parenteral/Transfusi)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("masuk2").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
                             
-                            if(!rs2.getString("jumlahmasuk").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Jumlah Masuk</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("jumlahmasuk").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
+//                            if(!rs2.getString("jumlahmasuk").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Jumlah Masuk</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("jumlahmasuk").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
                             
-                            if(!rs2.getString("keluar1").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(Feses)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar1").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("keluar2").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(Urine)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar2").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("keluar3").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(Muntah/NGT)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar3").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("keluar4").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(Drain/Darah)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar4").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("keluar5").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(IWL)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar5").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("jumlahkeluar").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Jumlah Keluar</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("jumlahkeluar").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("bc").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Balance Cairan</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("bc").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
+//                            if(!rs2.getString("keluar1").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(Feses)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar1").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("keluar2").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(Urine)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar2").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("keluar3").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(Muntah/NGT)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar3").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("keluar4").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(Drain/Darah)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar4").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("keluar5").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(IWL)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar5").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("jumlahkeluar").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Jumlah Keluar</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("jumlahkeluar").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("bc").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Balance Cairan</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("bc").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
                             w++;
                         }
                         htmlContent.append(
@@ -21249,105 +21249,105 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                      "</tr>");
                             }
                             
-                            if(!rs2.getString("masuk1").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Masuk(Peroral/NGT)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("masuk1").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("masuk2").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Masuk(Parenteral/Transfusi)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("masuk2").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("jumlahmasuk").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Jumlah Masuk</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("jumlahmasuk").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("keluar1").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(Feses)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar1").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("keluar2").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(Urine)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar2").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("keluar3").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(Muntah/NGT)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar3").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("keluar4").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(Drain/Darah)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar4").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("keluar5").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Keluar(IWL)</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar5").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("jumlahkeluar").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Jumlah Keluar</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("jumlahkeluar").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
-                            
-                            if(!rs2.getString("bc").equals("")){
-                                htmlContent.append(
-                                     "<tr>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' align='center'></td>"+
-                                        "<td valign='top' colspan='2'>Balance Cairan</td>"+
-                                        "<td valign='top' colspan='14'> : "+rs2.getString("bc").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                     "</tr>");
-                            }
+//                            if(!rs2.getString("masuk1").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Masuk(Peroral/NGT)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("masuk1").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("masuk2").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Masuk(Parenteral/Transfusi)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("masuk2").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("jumlahmasuk").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Jumlah Masuk</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("jumlahmasuk").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("keluar1").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(Feses)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar1").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("keluar2").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(Urine)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar2").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("keluar3").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(Muntah/NGT)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar3").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("keluar4").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(Drain/Darah)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar4").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("keluar5").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Keluar(IWL)</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("keluar5").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("jumlahkeluar").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Jumlah Keluar</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("jumlahkeluar").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
+//                            
+//                            if(!rs2.getString("bc").equals("")){
+//                                htmlContent.append(
+//                                     "<tr>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' align='center'></td>"+
+//                                        "<td valign='top' colspan='2'>Balance Cairan</td>"+
+//                                        "<td valign='top' colspan='14'> : "+rs2.getString("bc").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+//                                     "</tr>");
+//                            }
                             w++;
                         }
                         htmlContent.append(

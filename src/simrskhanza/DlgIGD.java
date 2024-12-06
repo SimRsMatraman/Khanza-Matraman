@@ -97,7 +97,7 @@ import rekammedis.RMRiwayatRadLab;
 import rekammedis.AsesmenAwalMedisIGD;
 import rekammedis.EWSRajal;
 import rekammedis.GdsIgd;
-import rekammedis.PEWSRajal;
+import rekammedis.PEWSRalan;
 import rekammedis.RMChecklistPostOperasi;
 import rekammedis.RMChecklistPreOperasi;
 import rekammedis.RMDataAsuhanGizi;
@@ -8377,7 +8377,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                PEWSRajal form=new PEWSRajal(null,false);
+                PEWSRalan form=new PEWSRalan(null,false);
                 form.isCek();
                 form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                 form.setLocationRelativeTo(internalFrame1);

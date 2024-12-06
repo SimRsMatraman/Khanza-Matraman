@@ -82,8 +82,7 @@ public final class EWSRanap extends javax.swing.JDialog {
             "No.Rawat","No.RM","Nama Pasien","Tanggal Lahir","J.K.","NIP","Nama Petugas","Tanggal","Jam","Pernafasan","Score Pernafasan","Saturasi Oksigen",
             "Score Saturasi Oksigen","Penggunaan Alat Bantu O2","Score Penggunaan Alat Bantu O2","Suhu","Score Suhu","Denyut Jantung","Score Denyut Jantung",
             "Tekanan Darah Sistolik","Score Tekanan Darah Sistolik","Kesadaran","Score Kesadaran","Total Score","Klasifikasi","Respon Klinis","Tindakan","Frekuensi Monitoring",
-            "Skor Nyeri","BB(Kg)","TB(Cm)","Lingkar Kepala","Lingkar Perut","Masuk(Peroral/NGT)","Masuk(Parenteral/Transfusi)","Jumlah Masuk","Keluar(Fases)","Keluar(Urine)",
-            "Keluar(Muntah/NGT)","Keluar(Drain/Darah)","Keluar(IWL)","Jumlah Keluar","Balance Cairan","Tekanan Darah Diastolik"
+            "Skor Nyeri","BB(Kg)","TB(Cm)","Lingkar Kepala","Lingkar Perut","Tekanan Darah Diastolik"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -93,7 +92,7 @@ public final class EWSRanap extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 44; i++) {
+        for (i = 0; i < 34; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -162,25 +161,25 @@ public final class EWSRanap extends javax.swing.JDialog {
             }else if(i==32){
                 column.setPreferredWidth(100);
             }else if(i==33){
-                column.setPreferredWidth(60);
-            }else if(i==34){
-                column.setPreferredWidth(90);
-            }else if(i==35){
-                column.setPreferredWidth(60);
-            }else if(i==36){
-                column.setPreferredWidth(90);
-            }else if(i==37){
-                column.setPreferredWidth(60);
-            }else if(i==38){
-                column.setPreferredWidth(60);
-            }else if(i==39){
-                column.setPreferredWidth(60);
-            }else if(i==40){
-                column.setPreferredWidth(60);
-            }else if(i==41){
-                column.setPreferredWidth(60);
-            }else if(i==42){
-                column.setPreferredWidth(60);
+//                column.setPreferredWidth(60);
+//            }else if(i==34){
+//                column.setPreferredWidth(90);
+//            }else if(i==35){
+//                column.setPreferredWidth(60);
+//            }else if(i==36){
+//                column.setPreferredWidth(90);
+//            }else if(i==37){
+//                column.setPreferredWidth(60);
+//            }else if(i==38){
+//                column.setPreferredWidth(60);
+//            }else if(i==39){
+//                column.setPreferredWidth(60);
+//            }else if(i==40){
+//                column.setPreferredWidth(60);
+//            }else if(i==41){
+//                column.setPreferredWidth(60);
+//            }else if(i==42){
+//                column.setPreferredWidth(60);
             }else if(i==43){
                 column.setPreferredWidth(60);
             }
@@ -465,6 +464,29 @@ public final class EWSRanap extends javax.swing.JDialog {
 
         LoadHTML = new widget.editorpane();
         Respon = new widget.TextBox();
+        jLabel54 = new widget.Label();
+        jLabel55 = new widget.Label();
+        jLabel251 = new widget.Label();
+        Masuk1 = new widget.TextBox();
+        jLabel252 = new widget.Label();
+        Masuk2 = new widget.TextBox();
+        jLabel253 = new widget.Label();
+        JumlahMasuk = new widget.TextBox();
+        jLabel56 = new widget.Label();
+        jLabel254 = new widget.Label();
+        Keluar1 = new widget.TextBox();
+        jLabel255 = new widget.Label();
+        Keluar2 = new widget.TextBox();
+        jLabel256 = new widget.Label();
+        Keluar3 = new widget.TextBox();
+        jLabel257 = new widget.Label();
+        Keluar4 = new widget.TextBox();
+        jLabel258 = new widget.Label();
+        Keluar5 = new widget.TextBox();
+        jLabel259 = new widget.Label();
+        JumlahKeluar = new widget.TextBox();
+        jLabel260 = new widget.Label();
+        BC = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -535,29 +557,6 @@ public final class EWSRanap extends javax.swing.JDialog {
         jSeparator2 = new javax.swing.JSeparator();
         jLabel53 = new widget.Label();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel54 = new widget.Label();
-        jLabel55 = new widget.Label();
-        jLabel251 = new widget.Label();
-        Masuk1 = new widget.TextBox();
-        jLabel252 = new widget.Label();
-        Masuk2 = new widget.TextBox();
-        jLabel253 = new widget.Label();
-        JumlahMasuk = new widget.TextBox();
-        jLabel56 = new widget.Label();
-        jLabel254 = new widget.Label();
-        Keluar1 = new widget.TextBox();
-        jLabel255 = new widget.Label();
-        Keluar2 = new widget.TextBox();
-        jLabel256 = new widget.Label();
-        Keluar3 = new widget.TextBox();
-        jLabel257 = new widget.Label();
-        Keluar4 = new widget.TextBox();
-        jLabel258 = new widget.Label();
-        Keluar5 = new widget.TextBox();
-        jLabel259 = new widget.Label();
-        JumlahKeluar = new widget.TextBox();
-        jLabel260 = new widget.Label();
-        BC = new widget.TextBox();
         jLabel234 = new widget.Label();
         Tekanan1 = new widget.TextBox();
         jLabel239 = new widget.Label();
@@ -589,6 +588,160 @@ public final class EWSRanap extends javax.swing.JDialog {
         Respon.setFocusTraversalPolicyProvider(true);
         Respon.setName("Respon"); // NOI18N
 
+        jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel54.setText("BALANCE CAIRAN");
+        jLabel54.setName("jLabel54"); // NOI18N
+
+        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel55.setText("MASUK");
+        jLabel55.setName("jLabel55"); // NOI18N
+
+        jLabel251.setText("Peroral/NGT : ");
+        jLabel251.setName("jLabel251"); // NOI18N
+
+        Masuk1.setFocusTraversalPolicyProvider(true);
+        Masuk1.setName("Masuk1"); // NOI18N
+        Masuk1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Masuk1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Masuk1KeyReleased(evt);
+            }
+        });
+
+        jLabel252.setText("Parenteral/Transfusi : ");
+        jLabel252.setName("jLabel252"); // NOI18N
+
+        Masuk2.setFocusTraversalPolicyProvider(true);
+        Masuk2.setName("Masuk2"); // NOI18N
+        Masuk2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Masuk2KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Masuk2KeyReleased(evt);
+            }
+        });
+
+        jLabel253.setText("Jumlah : ");
+        jLabel253.setName("jLabel253"); // NOI18N
+
+        JumlahMasuk.setFocusTraversalPolicyProvider(true);
+        JumlahMasuk.setName("JumlahMasuk"); // NOI18N
+        JumlahMasuk.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JumlahMasukKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JumlahMasukKeyReleased(evt);
+            }
+        });
+
+        jLabel56.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel56.setText("KELUAR");
+        jLabel56.setName("jLabel56"); // NOI18N
+
+        jLabel254.setText("Feses : ");
+        jLabel254.setName("jLabel254"); // NOI18N
+
+        Keluar1.setFocusTraversalPolicyProvider(true);
+        Keluar1.setName("Keluar1"); // NOI18N
+        Keluar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Keluar1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Keluar1KeyReleased(evt);
+            }
+        });
+
+        jLabel255.setText("Urine : ");
+        jLabel255.setName("jLabel255"); // NOI18N
+
+        Keluar2.setFocusTraversalPolicyProvider(true);
+        Keluar2.setName("Keluar2"); // NOI18N
+        Keluar2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Keluar2KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Keluar2KeyReleased(evt);
+            }
+        });
+
+        jLabel256.setText("Muntah/NGT : ");
+        jLabel256.setName("jLabel256"); // NOI18N
+
+        Keluar3.setFocusTraversalPolicyProvider(true);
+        Keluar3.setName("Keluar3"); // NOI18N
+        Keluar3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Keluar3KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Keluar3KeyReleased(evt);
+            }
+        });
+
+        jLabel257.setText("Drain/Darah : ");
+        jLabel257.setName("jLabel257"); // NOI18N
+
+        Keluar4.setFocusTraversalPolicyProvider(true);
+        Keluar4.setName("Keluar4"); // NOI18N
+        Keluar4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Keluar4KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Keluar4KeyReleased(evt);
+            }
+        });
+
+        jLabel258.setText("IWL : ");
+        jLabel258.setName("jLabel258"); // NOI18N
+
+        Keluar5.setFocusTraversalPolicyProvider(true);
+        Keluar5.setName("Keluar5"); // NOI18N
+        Keluar5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Keluar5KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Keluar5KeyReleased(evt);
+            }
+        });
+
+        jLabel259.setText("Jumlah : ");
+        jLabel259.setName("jLabel259"); // NOI18N
+
+        JumlahKeluar.setEditable(false);
+        JumlahKeluar.setFocusTraversalPolicyProvider(true);
+        JumlahKeluar.setName("JumlahKeluar"); // NOI18N
+        JumlahKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JumlahKeluarKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JumlahKeluarKeyReleased(evt);
+            }
+        });
+
+        jLabel260.setText("Balance Cairan : ");
+        jLabel260.setName("jLabel260"); // NOI18N
+
+        BC.setEditable(false);
+        BC.setFocusTraversalPolicyProvider(true);
+        BC.setName("BC"); // NOI18N
+        BC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BCKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BCKeyReleased(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -598,7 +751,7 @@ public final class EWSRanap extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Early Warning Score Dewasa Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Early Warning Score Dewasa Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -1222,206 +1375,6 @@ public final class EWSRanap extends javax.swing.JDialog {
         jSeparator3.setName("jSeparator3"); // NOI18N
         FormInput.add(jSeparator3);
         jSeparator3.setBounds(0, 520, 880, 1);
-
-        jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel54.setText("BALANCE CAIRAN");
-        jLabel54.setName("jLabel54"); // NOI18N
-        FormInput.add(jLabel54);
-        jLabel54.setBounds(30, 540, 380, 23);
-
-        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel55.setText("MASUK");
-        jLabel55.setName("jLabel55"); // NOI18N
-        FormInput.add(jLabel55);
-        jLabel55.setBounds(50, 570, 50, 23);
-
-        jLabel251.setText("Peroral/NGT : ");
-        jLabel251.setName("jLabel251"); // NOI18N
-        FormInput.add(jLabel251);
-        jLabel251.setBounds(80, 590, 100, 23);
-
-        Masuk1.setFocusTraversalPolicyProvider(true);
-        Masuk1.setName("Masuk1"); // NOI18N
-        Masuk1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Masuk1KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Masuk1KeyReleased(evt);
-            }
-        });
-        FormInput.add(Masuk1);
-        Masuk1.setBounds(180, 590, 70, 23);
-
-        jLabel252.setText("Parenteral/Transfusi : ");
-        jLabel252.setName("jLabel252"); // NOI18N
-        FormInput.add(jLabel252);
-        jLabel252.setBounds(60, 620, 120, 23);
-
-        Masuk2.setFocusTraversalPolicyProvider(true);
-        Masuk2.setName("Masuk2"); // NOI18N
-        Masuk2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Masuk2KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Masuk2KeyReleased(evt);
-            }
-        });
-        FormInput.add(Masuk2);
-        Masuk2.setBounds(180, 620, 70, 23);
-
-        jLabel253.setText("Jumlah : ");
-        jLabel253.setName("jLabel253"); // NOI18N
-        FormInput.add(jLabel253);
-        jLabel253.setBounds(60, 650, 120, 23);
-
-        JumlahMasuk.setFocusTraversalPolicyProvider(true);
-        JumlahMasuk.setName("JumlahMasuk"); // NOI18N
-        JumlahMasuk.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JumlahMasukKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                JumlahMasukKeyReleased(evt);
-            }
-        });
-        FormInput.add(JumlahMasuk);
-        JumlahMasuk.setBounds(180, 650, 70, 23);
-
-        jLabel56.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel56.setText("KELUAR");
-        jLabel56.setName("jLabel56"); // NOI18N
-        FormInput.add(jLabel56);
-        jLabel56.setBounds(290, 570, 50, 23);
-
-        jLabel254.setText("Feses : ");
-        jLabel254.setName("jLabel254"); // NOI18N
-        FormInput.add(jLabel254);
-        jLabel254.setBounds(320, 590, 100, 23);
-
-        Keluar1.setFocusTraversalPolicyProvider(true);
-        Keluar1.setName("Keluar1"); // NOI18N
-        Keluar1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Keluar1KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Keluar1KeyReleased(evt);
-            }
-        });
-        FormInput.add(Keluar1);
-        Keluar1.setBounds(420, 590, 70, 23);
-
-        jLabel255.setText("Urine : ");
-        jLabel255.setName("jLabel255"); // NOI18N
-        FormInput.add(jLabel255);
-        jLabel255.setBounds(300, 620, 120, 23);
-
-        Keluar2.setFocusTraversalPolicyProvider(true);
-        Keluar2.setName("Keluar2"); // NOI18N
-        Keluar2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Keluar2KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Keluar2KeyReleased(evt);
-            }
-        });
-        FormInput.add(Keluar2);
-        Keluar2.setBounds(420, 620, 70, 23);
-
-        jLabel256.setText("Muntah/NGT : ");
-        jLabel256.setName("jLabel256"); // NOI18N
-        FormInput.add(jLabel256);
-        jLabel256.setBounds(300, 650, 120, 23);
-
-        Keluar3.setFocusTraversalPolicyProvider(true);
-        Keluar3.setName("Keluar3"); // NOI18N
-        Keluar3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Keluar3KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Keluar3KeyReleased(evt);
-            }
-        });
-        FormInput.add(Keluar3);
-        Keluar3.setBounds(420, 650, 70, 23);
-
-        jLabel257.setText("Drain/Darah : ");
-        jLabel257.setName("jLabel257"); // NOI18N
-        FormInput.add(jLabel257);
-        jLabel257.setBounds(320, 680, 100, 23);
-
-        Keluar4.setFocusTraversalPolicyProvider(true);
-        Keluar4.setName("Keluar4"); // NOI18N
-        Keluar4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Keluar4KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Keluar4KeyReleased(evt);
-            }
-        });
-        FormInput.add(Keluar4);
-        Keluar4.setBounds(420, 680, 70, 23);
-
-        jLabel258.setText("IWL : ");
-        jLabel258.setName("jLabel258"); // NOI18N
-        FormInput.add(jLabel258);
-        jLabel258.setBounds(300, 710, 120, 23);
-
-        Keluar5.setFocusTraversalPolicyProvider(true);
-        Keluar5.setName("Keluar5"); // NOI18N
-        Keluar5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                Keluar5KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Keluar5KeyReleased(evt);
-            }
-        });
-        FormInput.add(Keluar5);
-        Keluar5.setBounds(420, 710, 70, 23);
-
-        jLabel259.setText("Jumlah : ");
-        jLabel259.setName("jLabel259"); // NOI18N
-        FormInput.add(jLabel259);
-        jLabel259.setBounds(300, 740, 120, 23);
-
-        JumlahKeluar.setEditable(false);
-        JumlahKeluar.setFocusTraversalPolicyProvider(true);
-        JumlahKeluar.setName("JumlahKeluar"); // NOI18N
-        JumlahKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JumlahKeluarKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                JumlahKeluarKeyReleased(evt);
-            }
-        });
-        FormInput.add(JumlahKeluar);
-        JumlahKeluar.setBounds(420, 740, 70, 23);
-
-        jLabel260.setText("Balance Cairan : ");
-        jLabel260.setName("jLabel260"); // NOI18N
-        FormInput.add(jLabel260);
-        jLabel260.setBounds(520, 570, 100, 23);
-
-        BC.setEditable(false);
-        BC.setFocusTraversalPolicyProvider(true);
-        BC.setName("BC"); // NOI18N
-        BC.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BCKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                BCKeyReleased(evt);
-            }
-        });
-        FormInput.add(BC);
-        BC.setBounds(620, 570, 70, 23);
 
         jLabel234.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel234.setText("6. TDSistolik / Diastolik");
@@ -3138,14 +3091,14 @@ public final class EWSRanap extends javax.swing.JDialog {
         TB.setText("");
         LK.setText("");
         LP.setText("");
-        Masuk1.setText("");
-        Masuk2.setText("");
+        Masuk1.setText("-");
+        Masuk2.setText("-");
         JumlahMasuk.setText("0");
-        Keluar1.setText("");
-        Keluar2.setText("");
-        Keluar3.setText("");
-        Keluar4.setText("");
-        Keluar5.setText("");
+        Keluar1.setText("-");
+        Keluar2.setText("-");
+        Keluar3.setText("-");
+        Keluar4.setText("-");
+        Keluar5.setText("-");
         JumlahKeluar.setText("0");
         BC.setText("0");
         TNoRw.requestFocus();
