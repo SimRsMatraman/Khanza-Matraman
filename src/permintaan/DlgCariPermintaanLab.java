@@ -2021,7 +2021,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             dlgro.setLocationRelativeTo(internalFrame1);
                             dlgro.emptTeks();
                             dlgro.isCek(); 
-                            dlgro.setOrder(NoPermintaan,NoRawat,"Ranap");
+                            dlgro.setOrderSysmex(NoPermintaan,NoRawat,"Ranap");
                             dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
                             TeksKosong();
                             dlgro.setVisible(true);
