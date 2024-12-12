@@ -234,6 +234,8 @@ public final class GdsIgd extends javax.swing.JDialog {
                 }
             });
         }
+        ChkJln.setSelected(true);
+        jam();
         
         petugas.addWindowListener(new WindowListener() {
             @Override
@@ -447,6 +449,12 @@ public final class GdsIgd extends javax.swing.JDialog {
         jLabel221 = new widget.Label();
         Scroll6 = new widget.ScrollPane();
         tbRiwayatKehamilan = new widget.Table();
+        Tanggal = new widget.Tanggal();
+        jLabel15 = new widget.Label();
+        CmbJam = new widget.ComboBox();
+        CmbMenit = new widget.ComboBox();
+        CmbDetik = new widget.ComboBox();
+        ChkJln = new widget.CekBox();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -752,6 +760,11 @@ public final class GdsIgd extends javax.swing.JDialog {
 
         Hasil.setFocusTraversalPolicyProvider(true);
         Hasil.setName("Hasil"); // NOI18N
+        Hasil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HasilActionPerformed(evt);
+            }
+        });
         Hasil.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 HasilKeyReleased(evt);
@@ -797,6 +810,58 @@ public final class GdsIgd extends javax.swing.JDialog {
         FormInput.add(Scroll6);
         Scroll6.setBounds(40, 130, 800, 160);
 
+        Tanggal.setForeground(new java.awt.Color(50, 70, 50));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-12-2024" }));
+        Tanggal.setDisplayFormat("dd-MM-yyyy");
+        Tanggal.setName("Tanggal"); // NOI18N
+        Tanggal.setOpaque(false);
+        Tanggal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalItemStateChanged(evt);
+            }
+        });
+        Tanggal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TanggalKeyPressed(evt);
+            }
+        });
+        FormInput.add(Tanggal);
+        Tanggal.setBounds(530, 40, 90, 23);
+
+        jLabel15.setText("Tanggal :");
+        jLabel15.setName("jLabel15"); // NOI18N
+        FormInput.add(jLabel15);
+        jLabel15.setBounds(460, 40, 67, 23);
+
+        CmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        CmbJam.setName("CmbJam"); // NOI18N
+        FormInput.add(CmbJam);
+        CmbJam.setBounds(620, 40, 62, 23);
+
+        CmbMenit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbMenit.setName("CmbMenit"); // NOI18N
+        FormInput.add(CmbMenit);
+        CmbMenit.setBounds(690, 40, 62, 23);
+
+        CmbDetik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        CmbDetik.setName("CmbDetik"); // NOI18N
+        FormInput.add(CmbDetik);
+        CmbDetik.setBounds(750, 40, 62, 23);
+
+        ChkJln.setBorder(null);
+        ChkJln.setSelected(true);
+        ChkJln.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkJln.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkJln.setName("ChkJln"); // NOI18N
+        ChkJln.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkJlnActionPerformed(evt);
+            }
+        });
+        FormInput.add(ChkJln);
+        ChkJln.setBounds(820, 40, 23, 23);
+
         scrollInput.setViewportView(FormInput);
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -839,7 +904,7 @@ public final class GdsIgd extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-12-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -853,7 +918,7 @@ public final class GdsIgd extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-12-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -933,10 +998,13 @@ public final class GdsIgd extends javax.swing.JDialog {
         }else if(IU.getText().trim().equals("")){
             Valid.textKosong(IU,"IU");
         }else{
+            ChkJln.setSelected(false);
             if(Sequel.menyimpantf("gds_igd","?,?,?,?,?,?,?","No.Rawat",7,new String[]{
-                    TNoRw.getText(),tanggalNow.format(new Date()),jamNow.format(new Date()),KdPetugas.getText(),Hasil.getText(),Pemberian.getText(),IU.getText()
+                    TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
+                    CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),KdPetugas.getText(),Hasil.getText(),Pemberian.getText(),IU.getText()
                 })==true){
                     emptTeks();
+                    ChkJln.setSelected(false);
             }
         tampilPersalinan();
         }
@@ -1561,6 +1629,25 @@ public final class GdsIgd extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_PemberianKeyTyped
 
+    private void HasilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HasilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HasilActionPerformed
+
+    private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
+        try {
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_TanggalItemStateChanged
+
+    private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
+     
+    }//GEN-LAST:event_TanggalKeyPressed
+
+    private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkJlnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChkJlnActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1587,6 +1674,10 @@ public final class GdsIgd extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.CekBox ChkJln;
+    private widget.ComboBox CmbDetik;
+    private widget.ComboBox CmbJam;
+    private widget.ComboBox CmbMenit;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.PanelBiasa FormInput;
@@ -1605,12 +1696,14 @@ public final class GdsIgd extends javax.swing.JDialog {
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
     private javax.swing.JTabbedPane TabRawat;
+    private widget.Tanggal Tanggal;
     private widget.TextBox TglLahir;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
+    private widget.Label jLabel15;
     private widget.Label jLabel19;
     private widget.Label jLabel21;
     private widget.Label jLabel219;
@@ -1716,17 +1809,17 @@ public final class GdsIgd extends javax.swing.JDialog {
 //    }
     
     private void hasil(){
-        if(Integer.parseInt(Hasil.getText())<250){
-            IU.setText("4 IU");
-        }else if(Integer.parseInt(Hasil.getText())<300){
-            IU.setText("8 IU");
-        }else if(Integer.parseInt(Hasil.getText())<350){
-            IU.setText("12 IU");
-        }else if(Integer.parseInt(Hasil.getText())<400){
-            IU.setText("16 IU");
-        }else if(Integer.parseInt(Hasil.getText())>=400){
-            IU.setText("REGULASI CEPAT");
-        }
+//        if(Integer.parseInt(Hasil.getText())<250){
+//            IU.setText("4 IU");
+//        }else if(Integer.parseInt(Hasil.getText())<300){
+//            IU.setText("8 IU");
+//        }else if(Integer.parseInt(Hasil.getText())<350){
+//            IU.setText("12 IU");
+//        }else if(Integer.parseInt(Hasil.getText())<400){
+//            IU.setText("16 IU");
+//        }else if(Integer.parseInt(Hasil.getText())>=400){
+//            IU.setText("REGULASI CEPAT");
+//        }
 //        isTotalKlasifikasi();
 //        isTotalRespon();
 //        isTotalTindakan();
@@ -1902,6 +1995,65 @@ public final class GdsIgd extends javax.swing.JDialog {
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
        tampil();
+    }
+    
+    private void jam(){
+        ActionListener taskPerformer = new ActionListener(){
+            private int nilai_jam;
+            private int nilai_menit;
+            private int nilai_detik;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nol_jam = "";
+                String nol_menit = "";
+                String nol_detik = "";
+                // Membuat Date
+                Date dt = new Date();
+                Date now = Calendar.getInstance().getTime();
+
+                // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
+                if(ChkJln.isSelected()==true){
+                    nilai_jam = now.getHours();
+                    nilai_menit = now.getMinutes();
+                    nilai_detik = now.getSeconds();
+                }else if(ChkJln.isSelected()==false){
+                    nilai_jam =CmbJam.getSelectedIndex();
+                    nilai_menit =CmbMenit.getSelectedIndex();
+                    nilai_detik =CmbDetik.getSelectedIndex();
+                }
+
+                // Jika nilai JAM lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_jam <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_jam = "0";
+                }
+                // Jika nilai MENIT lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_menit <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_menit = "0";
+                }
+                // Jika nilai DETIK lebih kecil dari 10 (hanya 1 digit)
+                if (nilai_detik <= 9) {
+                    // Tambahkan "0" didepannya
+                    nol_detik = "0";
+                }
+                // Membuat String JAM, MENIT, DETIK
+                String jam = nol_jam + Integer.toString(nilai_jam);
+                String menit = nol_menit + Integer.toString(nilai_menit);
+                String detik = nol_detik + Integer.toString(nilai_detik);
+                // Menampilkan pada Layar
+//                tampil_jam.setText("  " + jam + " : " + menit + " : " + detik + "  ");
+                CmbJam.setSelectedItem(jam);
+                CmbMenit.setSelectedItem(menit);
+                CmbDetik.setSelectedItem(detik);
+            }
+        };
+        // Timer
+        new Timer(1000, taskPerformer).start();
+    }
+    
+    private void CmbJamActionPerformed(java.awt.event.ActionEvent evt) {                                       
+        // TODO add your handling code here:
     }
     
 //    private void tampilMasalah() {
