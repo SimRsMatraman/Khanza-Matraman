@@ -74,18 +74,80 @@ public final class GdsIgd extends javax.swing.JDialog {
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
-    public GdsIgd(java.awt.Frame parent, boolean modal) {
+//    public GdsIgd(java.awt.Frame parent, boolean modal) {
+//        super(parent, modal);
+//        initComponents();
+//        
+//        tabMode=new DefaultTableModel(null,new Object[]{
+//            "No.Rawat","No.RM","Nama Pasien","Tanggal Lahir","J.K.","NIP","Nama Petugas","Tanggal","Jam","Hasil GDS","Pemberian","IU"
+//        }){
+//              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+//        };
+//        tbObat.setModel(tabMode);
+//
+//        //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
+//        tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
+//        tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//
+//        for (i = 0; i < 12; i++) {
+//            TableColumn column = tbObat.getColumnModel().getColumn(i);
+//            if(i==0){
+//                column.setPreferredWidth(105);
+//            }else if(i==1){
+//                column.setPreferredWidth(65);
+//            }else if(i==2){
+//                column.setPreferredWidth(160);
+//            }else if(i==3){
+//                column.setPreferredWidth(50);
+//            }else if(i==4){
+//                column.setPreferredWidth(60);
+//            }else if(i==5){
+//                column.setPreferredWidth(90);
+//            }else if(i==6){
+//                column.setPreferredWidth(90);
+//            }else if(i==7){
+//                column.setPreferredWidth(65);
+//            }else if(i==8){
+//                column.setPreferredWidth(120);
+//            }else if(i==9){
+//                column.setPreferredWidth(90);
+//            }else if(i==10){
+//                column.setPreferredWidth(35);
+//            }else if(i==11){
+//                column.setPreferredWidth(40);
+//            }
+//        }
+//        tbObat.setDefaultRenderer(Object.class, new WarnaTable());
+//        
+//        tabModeMasalah=new DefaultTableModel(null,new Object[]{
+//                "P","KODE","MASALAH KEPERAWATAN"
+//            }){
+//             @Override public boolean isCellEditable(int rowIndex, int colIndex){
+//                boolean a = false;
+//                if (colIndex==0) {
+//                    a=true;
+//                }
+//                return a;
+//             }
+//             Class[] types = new Class[] {
+//                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
+//             };
+//             @Override
+//             public Class getColumnClass(int columnIndex) {
+//                return types [columnIndex];
+//             }
+//        };
+        
+        public GdsIgd(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Rawat","No.RM","Nama Pasien","Tanggal Lahir","J.K.","NIP","Nama Petugas","Tanggal","Jam","Hasil GDS","Pemberian","IU"
-        }){
+                "No.Rawat","No.RM","Nama Pasien","Tanggal Lahir","J.K.","NIP","Nama Petugas","Tanggal","Jam","Hasil GDS","Pemberian","IU"
+            }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbObat.setModel(tabMode);
-
-        //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
@@ -118,24 +180,11 @@ public final class GdsIgd extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeMasalah=new DefaultTableModel(null,new Object[]{
                 "P","KODE","MASALAH KEPERAWATAN"
             }){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if (colIndex==0) {
-                    a=true;
-                }
-                return a;
-             }
-             Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-             }
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
 //        tbMasalahKeperawatan.setModel(tabModeMasalah);
 //
@@ -1031,8 +1080,12 @@ public final class GdsIgd extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
-            if(Sequel.queryu2tf("delete from gds_igd where jam=?",1,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()
+            if(Sequel.queryu2tf("delete from gds_igd where no_rawat=? and jam=? and hasil=? and pemberian=? and iu=?",5,new String[]{
+                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),8).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),9).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),10).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()
             })==true){
                 tampil();
                 emptTeks();
@@ -1853,7 +1906,7 @@ public final class GdsIgd extends javax.swing.JDialog {
         TNoRw.requestFocus();
         tampilPersalinan();
     } 
-
+    
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
@@ -1863,9 +1916,25 @@ public final class GdsIgd extends javax.swing.JDialog {
             Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
             KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             Hasil.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             Pemberian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             IU.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+        }
+    }
+
+//    private void getData() {
+//        if(tbObat.getSelectedRow()!= -1){
+//            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+//            TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+//            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
+//            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+//            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()); 
+//            KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+//            NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+//            Hasil.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+//            Pemberian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+//            IU.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             
              
             
@@ -1895,9 +1964,9 @@ public final class GdsIgd extends javax.swing.JDialog {
 //            } catch (Exception e) {
 //                System.out.println("Notif : "+e);
 //            }
-        }
-    }
-    
+//        }
+//    }
+//    
     private void tampilPersalinan() {
         Valid.tabelKosong(tabModeRiwayatKehamilan);
         try {
@@ -1976,9 +2045,9 @@ public final class GdsIgd extends javax.swing.JDialog {
     
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
-        BtnHapus.setEnabled(akses.getadmin());
-        BtnEdit.setEnabled(akses.getadmin());
-        BtnEdit.setEnabled(akses.getadmin());
+        BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
+        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
+        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_ralan());
 //        BtnTambahMasalah.setEnabled(akses.getmaster_masalah_keperawatan());  
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
