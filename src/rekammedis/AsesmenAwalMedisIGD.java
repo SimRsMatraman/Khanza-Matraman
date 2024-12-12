@@ -2447,18 +2447,13 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(tabMode.getRowCount()!=0){
-            if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
+            if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)||(evt.getKeyCode()==KeyEvent.VK_SPACE)){
                 try {
 //                    ChkAccor.setSelected(true);
 //                    isMenu();
 //                    getMasalah();
-                    getData();
-                } catch (java.lang.NullPointerException e) {
-                }
-            }else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-                try {
-                    getData();
                     TabRawat.setSelectedIndex(0);
+                    getData();
                 } catch (java.lang.NullPointerException e) {
                 }
             }

@@ -3809,6 +3809,8 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
         int row=tbDokter.getSelectedRow();
         if(row!= -1){
             Kd2.setText(tabMode.getValueAt(row,0).toString());
+//            NoRawat.setText(tabMode.getValueAt(row,1).toString());
+//            kdmem.setText(tabMode.getValueAt(row,2).toString());
         }
     }
      
