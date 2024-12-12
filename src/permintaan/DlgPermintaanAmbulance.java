@@ -704,6 +704,7 @@ public class DlgPermintaanAmbulance extends javax.swing.JDialog {
                         NoKartu.getText()+"','"+
                         RsTujuan.getText()+"','"+
                         KdPetugas.getText()+"','"+
+                        Penyakit.getText()+"','"+
                         "'","data")==true){
                     tabMode.addRow(new String[]{
 //                        TNoRw.getText(),TPasien.getText(),Ruang.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),Penyakit.getText(),NmPetugas.getText(),"-",Kamar.getText(),KdPetugas.getText()
@@ -854,17 +855,17 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPernyataanAmbulance.jasper","report","::[ Pernyataan Penggunaan Ambulance ]::",
-                "SELECT a.no_rawat, c.no_rkm_medis, c.nm_pasien, c.umur, a.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
+                "SELECT a.no_rawat, c.no_rkm_medis, c.nm_pasien, c.umur, a.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, a.diagnosa, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
                 "FROM detail_permintaan_ambulance a "+
                 "INNER JOIN reg_periksa b on b.no_rawat=a.no_rawat "+
-                "INNER JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis " +
-                "INNER JOIN kamar_inap d on d.no_rawat=a.no_rawat "+
-                "INNER JOIN kelurahan e on e.kd_kel=c.kd_kel "+
-                "INNER JOIN kecamatan f on f.kd_kec=c.kd_kec "+
-                "INNER JOIN kabupaten g on g.kd_kab=c.kd_kab  "+
-                "INNER JOIN propinsi h on h.kd_prop=c.kd_prop "+
-                "INNER JOIN kamar_inap i on i.no_rawat=a.no_rawat "+
-                "INNER JOIN petugas j on j.nip=a.nip "+
+                "LEFT JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis " +
+                "LEFT JOIN kamar_inap d on d.no_rawat=a.no_rawat "+
+                "LEFT JOIN kelurahan e on e.kd_kel=c.kd_kel "+
+                "LEFT JOIN kecamatan f on f.kd_kec=c.kd_kec "+
+                "LEFT JOIN kabupaten g on g.kd_kab=c.kd_kab  "+
+                "LEFT JOIN propinsi h on h.kd_prop=c.kd_prop "+
+                "LEFT JOIN kamar_inap i on i.no_rawat=a.no_rawat "+
+                "LEFT JOIN petugas j on j.nip=a.nip "+
                 "where a.tanggal='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"' "+
                 "and a.no_rawat='"+TNoRw.getText()+"' and a.no_peserta='"+NoKartu.getText()+"' and a.rstujuan='"+RsTujuan.getText()+"'",param);
         }
@@ -979,17 +980,17 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         try{
             Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
-                "SELECT a.no_rawat, c.nm_pasien, c.umur, a.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
+                "SELECT a.no_rawat, c.nm_pasien, c.umur, a.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, a.diagnosa, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama " +
                 "FROM detail_permintaan_ambulance a "+
                 "INNER JOIN reg_periksa b on b.no_rawat=a.no_rawat "+
-                "INNER JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis " +
-                "INNER JOIN kamar_inap d on d.no_rawat=a.no_rawat "+
-                "INNER JOIN kelurahan e on e.kd_kel=c.kd_kel "+
-                "INNER JOIN kecamatan f on f.kd_kec=c.kd_kec "+
-                "INNER JOIN kabupaten g on g.kd_kab=c.kd_kab  "+
-                "INNER JOIN propinsi h on h.kd_prop=c.kd_prop "+
-                "INNER JOIN kamar_inap i on i.no_rawat=a.no_rawat "+
-                "INNER JOIN petugas j on j.nip=a.nip "+
+                "LEFT JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis " +
+                "LEFT JOIN kamar_inap d on d.no_rawat=a.no_rawat "+
+                "LEFT JOIN kelurahan e on e.kd_kel=c.kd_kel "+
+                "LEFT JOIN kecamatan f on f.kd_kec=c.kd_kec "+
+                "LEFT JOIN kabupaten g on g.kd_kab=c.kd_kab  "+
+                "LEFT JOIN propinsi h on h.kd_prop=c.kd_prop "+
+                "LEFT JOIN kamar_inap i on i.no_rawat=a.no_rawat "+
+                "LEFT JOIN petugas j on j.nip=a.nip "+
                 "WHERE a.tanggal between ? and ? "+
                 (TCari.getText().trim().equals("")?"":"and (a.no_rawat like ? or b.no_rkm_medis like ? or c.nm_pasien like ?) ")+
                 "order by a.tanggal,a.rstujuan");
@@ -1005,7 +1006,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 while(rs.next()){
                     tabMode.addRow(new String[]{
                         rs.getString(1),rs.getString(2),rs.getString("umur"),rs.getString("alamat"),rs.getString("no_peserta"),rs.getString("kd_kamar"),rs.getString("tanggal"),rs.getString("rstujuan"),
-                        rs.getString("diagnosa_awal"),rs.getString("nama"),rs.getString("nip")
+                        rs.getString("diagnosa"),rs.getString("nama"),rs.getString("nip")
                     });
                 }
             } catch (Exception e) {

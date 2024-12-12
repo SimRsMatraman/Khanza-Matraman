@@ -23,17 +23,17 @@
 	<parameter name="propinsirs" class="java.lang.String"/>
 	<parameter name="kontakrs" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT a.no_rawat, c.nm_pasien, c.umur, c.no_rkm_medis, a.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, d.diagnosa_awal, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama 
+		<![CDATA[SELECT a.no_rawat, c.nm_pasien, c.umur, c.no_rkm_medis, a.no_peserta, concat(c.alamat, ', ', e.nm_kel, ', ', f.nm_kec, ', ', g.nm_kab, ' - ', h.nm_prop) as alamat, a.diagnosa, a.tanggal, a.rstujuan, a.kd_kamar, a.nip, j.nama 
 FROM detail_permintaan_ambulance a
 INNER JOIN reg_periksa b on b.no_rawat=a.no_rawat
-INNER JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis
-INNER JOIN kamar_inap d on d.no_rawat=a.no_rawat 
-INNER JOIN kelurahan e on e.kd_kel=c.kd_kel 
-INNER JOIN kecamatan f on f.kd_kec=c.kd_kec 
-INNER JOIN kabupaten g on g.kd_kab=c.kd_kab  
-INNER JOIN propinsi h on h.kd_prop=c.kd_prop 
-INNER JOIN kamar_inap i on i.no_rawat=a.no_rawat 
-INNER JOIN petugas j on j.nip=a.nip]]>
+LEFT JOIN pasien c on c.no_rkm_medis=b.no_rkm_medis
+LEFT JOIN kamar_inap d on d.no_rawat=a.no_rawat 
+LEFT JOIN kelurahan e on e.kd_kel=c.kd_kel 
+LEFT JOIN kecamatan f on f.kd_kec=c.kd_kec 
+LEFT JOIN kabupaten g on g.kd_kab=c.kd_kab  
+LEFT JOIN propinsi h on h.kd_prop=c.kd_prop 
+LEFT JOIN kamar_inap i on i.no_rawat=a.no_rawat 
+LEFT JOIN petugas j on j.nip=a.nip]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="no_rawat"/>
@@ -81,10 +81,10 @@ INNER JOIN petugas j on j.nip=a.nip]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="detail_permintaan_ambulance"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="diagnosa_awal" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.name" value="diagnosa_awal"/>
-		<property name="com.jaspersoft.studio.field.label" value="diagnosa_awal"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="kamar_inap"/>
+	<field name="diagnosa" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="diagnosa"/>
+		<property name="com.jaspersoft.studio.field.label" value="diagnosa"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="detail_permintaan_ambulance"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nama" class="java.lang.String">
@@ -278,7 +278,7 @@ INNER JOIN petugas j on j.nip=a.nip]]>
 					<font fontName="Tahoma" size="11"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{diagnosa_awal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{diagnosa}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="129" y="256" width="396" height="19" uuid="287127f7-5e78-4897-90f1-ec620acb7406"/>
