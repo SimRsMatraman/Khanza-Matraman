@@ -5,23 +5,24 @@
     <!--UPDATE-->
     <entry key="URLSERVERUPDATE">100.10.2.18/webapps13/serverupdate</entry> <!--link webapps Update -->
     <entry key="AUTOUPDATESISTEM">no</entry> <!--no:aktif-->
+    <entry key="DEFAULTAPLIKASIRUN">SimRSUDMATRAMAN.jar</entry> <!--no:aktif-->
+    
     <!--BSSN TTE-->
-    <entry key="URLTTE">http://100.10.1.100/api-tte/berkastte/</entry>
+    <entry key="URLTTE">http://100.10.1.4/api-tte/berkastte/</entry>
     <entry key="URLAPIINTEGRATION">http://10.15.37.39/</entry>
     <entry key="IDINTEGRATION">j3CI0CJDdhdR09OcWOCWRQ==</entry>
     <entry key="PASSINTEGRATION">ykaGr/DmyKI/yKKln4QIvg==</entry>
+    
      <!--INTEGRASI FASKES-->
     <entry key="URLAPIINTEGRATIONFASKES">http://localhost/api-faskes/</entry>
     <entry key="IDINTEGRATIONFASKES">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
     <entry key="PASSINTEGRATIONFASKES">Fygcm+8VZnyqQF/FL8r9wQ==</entry>
     <entry key="PROXY">NO</entry>
-    <!-- ORTHANC -->
-    <!-- <entry key="URLORTHANC">http://localhost</entry>
-    <entry key="PORTORTHANC">tQAOT8APOLqHeGs54a6lNg==</entry>
-    <entry key="USERORTHANC">AqOU3p5RZEIAk8HazTrV+Q==</entry>
-    <entry key="PASSORTHANC">AqOU3p5RZEIAk8HazTrV+Q==</entry> -->
-    <!--Server--> 
+    
+    <!--Server 100.10.1.2--> 
     <entry key="HOST">4RXos1g9GbDiO6Mq5mEeSg==</entry>
+    <!--Server dummy 100.10.1.6--> 
+    <!--<entry key="HOST">83hXXGjrM5AAxg7AOa6oMg==</entry>-->
     <entry key="DATABASE">AZHNccBwSmSho84f+X8GyQ==</entry>
     <entry key="PORT">nioxtijcpDaKSUiUiP5FAg==</entry>
     <entry key="USER">kMR3WfAwUK6MbhCyydxa0g==</entry>
@@ -32,6 +33,7 @@
     <entry key="PASHYBRIDWEB">AsJ/0/gCnYnD+gK4fw9uKA==</entry>
     <entry key="HYBRIDWEB">webapps</entry>
     <entry key="PORTWEB">80</entry>
+    
     <!--Aplikasi--> 
     <entry key="AKTIFKANWARNARALAN">yes</entry> <!--Warna status di rawat jalan-->
     <entry key="ANTRIAN">player</entry>
@@ -52,6 +54,7 @@
     <entry key="AKTIFKANBILLINGPARSIAL">yes</entry> <!--Aktifasi Billing Parsial-->
     <entry key="AKTIFKANTRACKSQL">88tE0ZUstuza/UrtfBYkFA==</entry> <!--Aktifasi Mapping sql-->
     <entry key="TANGGALMUNDUR">yes</entry>
+    
     <!--Apotik--> 
     <entry key="ALARMAPOTEK">yes</entry> <!--Suara resep baru apotik-->
     <entry key="RESEPRAJALKEPLAN">yes</entry>
@@ -61,17 +64,6 @@
     <entry key="HPPTOKO">dasar</entry>
     <entry key="PEMBULATANHARGAOBAT">no</entry>
     <entry key="AKTIFKANBATCHOBAT">no</entry> 
-<!--Catat Mengenai Batch Obat Fifo Fefo
-Pengelolaan obat dalam konteks penyimpanan obat di apotek harus menjadi perhatian khusus mengingat aspek ini berperan penting dalam kelancaran delivery obat dari apotek ke pasien. Penyusunan obat yang sesuai dan tertata rapi akan mempermudah farmasis dalam proses 
--First In First Out (FIFO) adalah penyimpanan obat berdasarkan obat yang datang lebih dulu dan dikeluarkan lebih dulu.
--First Expired First Out (FEFO) adalah penyimpanan obat berdasarkan obat yang memiliki tanggal kadaluarsa lebih cepat maka dikeluarkan lebih dulu.
-Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
-
-1. Setting database.xml pada opsi AKTIFKANBATCHOBAT dibuat yes
-2. Pada saat peneriman obat batch obat harus diisi beserta tanggal kadaluarsa obatnya
-3. Saat pemberian obat kita bisa memilih obat mana yang akan di kasihkan ke pasiennya berdasarkan nomor batch nya, sebelumnya pastikan data batch nya valid dulu
-4. Pengaruhnya apabila batch diaktifkan harga akan menyesuikan sesuai batchnya-->
-
     <entry key="CETAKRINCIANOBAT">no</entry> <!--Setelah Pemberian obat melalui pemberian obat otomatis muncul rincian resep-->
     <entry key="DEPOAKTIFOBAT">B0015</entry> <!--Set lokasi pemberian obat menggunakan lokasi mana-->
     <entry key="VALIDASIULANGBERIOBAT">no</entry>
@@ -79,6 +71,7 @@ Di SIMRSKhanza versi 5 Februari 2019 fitur FIFO dan FEFO sudah di akomodir
     <!--Laboratorium--> 
     <entry key="ALARMLAB">yes</entry>
     <entry key="FORMALARMLAB">ralan + ranap</entry>
+    
     <!--Radiologi--> 
     <entry key="ALARMRADIOLOGI">yes</entry>
     <entry key="FORMALARMRADIOLOGI">ralan + ranap</entry>
