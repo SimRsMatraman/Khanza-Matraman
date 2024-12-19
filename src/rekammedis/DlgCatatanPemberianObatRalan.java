@@ -1653,9 +1653,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 //    }
     
     private void isRawat() {
-         Sequel.cariIsi("select pasien.nm_pasien from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where reg_periksa.no_rawat=? ",TPasien,TNoRw.getText());
-//         Sequel.cariIsi("select kamar_inap.kd_kamar from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",Kamar,TNoRw.getText());
-         Sequel.cariIsi("select poliklinik.nm_poli from reg_periksa inner join poliklinik on poliklinik.kd_poli=reg_periksa.kd_poli where reg_periksa.no_rawat=? order by reg_periksa.tgl_registrasi desc limit 1",Kamar,TNoRw.getText());
+        Sequel.cariIsi("select pasien.nm_pasien from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where reg_periksa.no_rawat=? ",TPasien,TNoRw.getText());
+        Sequel.cariIsi("select poliklinik.nm_poli from reg_periksa inner join poliklinik on poliklinik.kd_poli=reg_periksa.kd_poli where reg_periksa.no_rawat=? order by reg_periksa.tgl_registrasi desc limit 1",Kamar,TNoRw.getText());
     }
     
     public void setNoRm(String norwt,String posisi){
@@ -1686,8 +1685,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 //        BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_ranap());
 //        BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_ranap());
         if(akses.getjml2()>=1){
-//            KdPetugas.setEditable(false);
-//            BtnDokter.setEnabled(false);
+            KdPetugas.setEditable(false);
+            BtnDokter.setEnabled(false);
             KdPetugas.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nik=?", NmPetugas,KdPetugas.getText());
         }
