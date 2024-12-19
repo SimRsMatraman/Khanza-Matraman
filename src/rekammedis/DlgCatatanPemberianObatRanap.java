@@ -1685,13 +1685,12 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 //        BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_anak());
 //        BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_ranap());
 //        BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_ranap());
-//        if(akses.getjml2()>=1){
+        if(akses.getjml2()>=1){
 //            KdPetugas.setEditable(false);
 //            BtnDokter.setEnabled(false);
-//            NmPetugas.setText(akses.getkode());
-//            Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", NamaDokter,KodeDokter.getText());
-//            Sequel.cariIsi("select nama from pegawai where nik=?", NmPetugas,KdPetugas.getText());
-//        }
+            KdPetugas.setText(akses.getkode());
+            Sequel.cariIsi("select nama from pegawai where nik=?", NmPetugas,KdPetugas.getText());
+        }
     }
     
     private void isPsien(){
