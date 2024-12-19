@@ -16650,10 +16650,11 @@ if(tabMode.getRowCount()==0){
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    int SttResume,SttSEP;
-                    String Resume,SEP;
+                    int SttResume,SttSEP,HitungJarak;
+                    String Resume,SEP,Jarak;
                     SttResume=Sequel.cariInteger("select count(no_rawat) from resume_pasien_ranap where no_rawat='"+rs.getString("no_rawat")+"' ");
                     SttSEP=Sequel.cariInteger("select count(no_rawat) from bridging_sep where bridging_sep.jnspelayanan='1' and no_rawat='"+rs.getString("no_rawat")+"' ");
+                    HitungJarak=Sequel.cariInteger("SELECT IFNULL(DATEDIFF(kontrol,CONCAT(kamar_inap.tgl_keluar,' ',kamar_inap.jam_keluar)),'0')as jeda FROM resume_pasien_ranap INNER JOIN kamar_inap on kamar_inap.no_rawat=resume_pasien_ranap.no_rawat where resume_pasien_ranap.no_rawat='"+rs.getString("no_rawat")+"' GROUP BY resume_pasien_ranap.no_rawat");
 
                     if (rs.getString("kd_pj").equals("BPJ") && SttSEP>0) {
                         SEP = "SEP Terbit";
@@ -16663,10 +16664,16 @@ if(tabMode.getRowCount()==0){
                         SEP = "-";
                     }
                     
-                    if(SttResume>0){
-                        Resume="Sudah Resume";
+                    Jarak="x24 jam";
+                    
+                    if(HitungJarak<1){
+                        HitungJarak=1;
+                    }
+                    
+                    if(SttResume>0 && HitungJarak>0){
+                        Resume="Sudah, "+HitungJarak+Jarak;                        
                     }else{
-                        Resume="Belum Resume";
+                        Resume="Belum";
                     }
                     tabMode.addRow(new String[] {
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien")+" ("+rs.getString("umur")+")",
