@@ -612,6 +612,7 @@ import inventory.DlgSatuan;
 import inventory.DlgSirkulasiBarang4;
 import inventory.DlgSirkulasiBarang5;
 import inventory.DlgSirkulasiBarang6;
+import inventory.DlgSirkulasiBarang7;
 import inventory.DlgSisaStok;
 import inventory.InventoryCariResepLuar;
 import inventory.InventoryHibahObatBHP;
@@ -14973,6 +14974,18 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnSirkulasiObat7ActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSirkulasiBarang7 sirkulasi=new DlgSirkulasiBarang7(this,false);
+        sirkulasi.isCek();
+        sirkulasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        sirkulasi.setLocationRelativeTo(PanelUtama);
+        sirkulasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     private void btnSirkulasiNonMedis2ActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -20283,7 +20296,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             btnGrafikHAIsLajuVAP,btnGrafikHAIsLajuIAD,btnGrafikHAIsLajuPleb,btnGrafikHAIsLajuISK,btnGrafikHAIsLajuILO,btnGrafikHAIsLajuHAP,
             btnMappingPoliInhealth,btnMappingDokterInhealth,btnMappingTindakanRalanInhealth,btnMappingTindakanRanapInhealth,btnMappingTindakanRadiologiInhealth,
             btnMappingTindakanLaboratInhealth,btnMappingTindakanOperasiInhealth,btnHibahObatBHP,btnAsalHibah,btnAsuhanGizi,btnKirimTagihanInheath,
-            btnSirkulasiObat4,btnSirkulasiObat5,btnSirkulasiObat6,btnSirkulasiNonMedis2,btnMonitoringAsuhanGizi,btnGrafikPenerimaanObatPerBulan,btnRekapKunjungan,
+            btnSirkulasiObat4,btnSirkulasiObat5,btnSirkulasiObat6,btnSirkulasiObat7,btnSirkulasiNonMedis2,btnMonitoringAsuhanGizi,btnGrafikPenerimaanObatPerBulan,btnRekapKunjungan,
             btnSuratSakit,btnPenilaianAwalKeperawatanRalan,btnMasterMasalahKeperawatan,btnPengajuanCuti,btnKedatanganPasienPerJam,btnPendonorDarah,
             btnSuplierToko,btnJenisToko,btnSetHargaToko,btnBarangToko,btnPenagihanPiutangPasien,btnAkunPenagihanPiutang,btnStokOpnameToko,
             btnRiwayatBarangToko,btnSuratPemesananToko,btnPengajuanBarangToko,btnPenerimaanBarangToko,btnPengadaanBarangToko,btnHutangToko,
@@ -21163,6 +21176,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if(akses.getsirkulasi_obat6()==true){
                 Panelmenu.add(btnSirkulasiObat6);
+                jmlmenu++;
+            }
+            
+            if(akses.getsirkulasi_obat6()==true){
+                Panelmenu.add(btnSirkulasiObat7);
                 jmlmenu++;
             }
             
@@ -25909,6 +25927,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         
         if(akses.getsirkulasi_obat6()==true){
             Panelmenu.add(btnSirkulasiObat6);
+            jmlmenu++;
+        }
+        
+        if(akses.getsirkulasi_obat6()==true){
+            Panelmenu.add(btnSirkulasiObat7);
             jmlmenu++;
         }
 
@@ -30935,6 +30958,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.getsirkulasi_obat6()==true){
             if(btnSirkulasiObat6.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSirkulasiObat6);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getsirkulasi_obat6()==true){
+            if(btnSirkulasiObat7.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSirkulasiObat7);
                 jmlmenu++;
             }                
         }
@@ -37567,6 +37597,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         btnSirkulasiObat6.setName("btnSirkulasiObat6"); 
         btnSirkulasiObat6.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSirkulasiObat6.addActionListener(this::btnSirkulasiObat6ActionPerformed);
+        
+        btnSirkulasiObat7 = new widget.ButtonBig();
+        btnSirkulasiObat7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Rank-History_49609.png"))); 
+        btnSirkulasiObat7.setText("Laporan Pemakaian Dan Permintaan Obat (LPLPO)");
+        btnSirkulasiObat7.setIconTextGap(0);
+        btnSirkulasiObat7.setName("btnSirkulasiObat7"); 
+        btnSirkulasiObat7.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSirkulasiObat7.addActionListener(this::btnSirkulasiObat7ActionPerformed);
         
         btnSirkulasiNonMedis2=new widget.ButtonBig();
         btnSirkulasiNonMedis2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487125_system-restart-panel.png"))); 
