@@ -64,7 +64,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new Object[]{
                 "Tanggal","No.Rawat","No.R.M.","Nama Pasien",
                 "Shift","Kamar","Kebersihan","APD","Disinfeksi","Insersi",
-                "hari1","hari2","hari3","hari4","hari5","hari6","hari7","Keterangan"
+                "hari1","hari2","hari3","hari4","hari5","hari6","hari7","Keterangan","Kode Petugas","Petugas"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -74,7 +74,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 17; i++) {
+        for (i = 0; i < 19; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -110,6 +110,11 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
                 column.setPreferredWidth(180);
             }else if(i==16){
                 column.setPreferredWidth(180);
+            }else if(i==17){
+                column.setPreferredWidth(180);
+            }else if(i==18){
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
             }
 //                column.setMinWidth(0);
 //                column.setMaxWidth(0);
@@ -193,6 +198,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BtnEdit = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -201,7 +207,6 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         BtnSimpan = new widget.Button();
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
-        BtnEdit = new widget.Button();
         BtnPrint = new widget.Button();
         BtnAll = new widget.Button();
         BtnKeluar = new widget.Button();
@@ -255,6 +260,23 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         NamaPetugas = new widget.TextBox();
         btnPetugas = new widget.Button();
         ChkInput = new widget.CekBox();
+
+        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
+        BtnEdit.setMnemonic('G');
+        BtnEdit.setText("Ganti");
+        BtnEdit.setToolTipText("Alt+G");
+        BtnEdit.setName("BtnEdit"); // NOI18N
+        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnEditKeyPressed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -349,24 +371,6 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         });
         panelGlass8.add(BtnHapus);
 
-        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
-        BtnEdit.setText("Ganti");
-        BtnEdit.setToolTipText("Alt+G");
-        BtnEdit.setName("BtnEdit"); // NOI18N
-        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEditActionPerformed(evt);
-            }
-        });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnEditKeyPressed(evt);
-            }
-        });
-        panelGlass8.add(BtnEdit);
-
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
@@ -433,7 +437,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-12-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-12-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -447,7 +451,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-12-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-12-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -531,7 +535,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         TPasien.setBounds(330, 10, 309, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-12-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-12-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -632,7 +636,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         jLabel31.setText("Pemilihan Lokasi Insersi:");
         jLabel31.setName("jLabel31"); // NOI18N
         FormInput.add(jLabel31);
-        jLabel31.setBounds(660, 100, 121, 23);
+        jLabel31.setBounds(660, 100, 115, 23);
 
         Insersi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Proksim", "Distal. Sin", "Dext" }));
         Insersi.setName("Insersi"); // NOI18N
@@ -788,7 +792,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
             }
         });
         FormInput.add(keterangan);
-        keterangan.setBounds(370, 220, 182, 40);
+        keterangan.setBounds(370, 220, 162, 40);
 
         jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel40.setText("Keterangan  :");
@@ -894,11 +898,11 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         }else if(keterangan.getText().trim().equals("")){
             Valid.textKosong(keterangan,"Keterangan");
         }else{
-            if(Sequel.menyimpantf("hais1","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",16,new String[]{
+            if(Sequel.menyimpantf("hais1","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",17,new String[]{
                     Valid.SetTgl(Tanggal.getSelectedItem()+""),TNoRw.getText(),
                     Kebersihan.getSelectedItem().toString(),Kamar.getText(),
                     Shift.getSelectedItem().toString(),APD.getSelectedItem().toString(),Disinfeksi.getSelectedItem().toString(),Insersi.getSelectedItem().toString(),hari1.getSelectedItem().toString(),
-                    hari2.getSelectedItem().toString(),hari3.getSelectedItem().toString(),hari4.getSelectedItem().toString(),hari5.getSelectedItem().toString(),hari6.getSelectedItem().toString(),hari7.getSelectedItem().toString(),keterangan.getText().toString()
+                    hari2.getSelectedItem().toString(),hari3.getSelectedItem().toString(),hari4.getSelectedItem().toString(),hari5.getSelectedItem().toString(),hari6.getSelectedItem().toString(),hari7.getSelectedItem().toString(),keterangan.getText().toString(),NIP.getText().toString()
                 })==true){
                     tampil();
                     emptTeks();
@@ -926,7 +930,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()!= -1){
-            if(Sequel.queryu2tf("delete from hasi1 where tanggal=? and no_rawat=?",2,new String[]{
+            if(Sequel.queryu2tf("delete from hais1 where tanggal=? and no_rawat=?",2,new String[]{
                 tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()
             })==true){
                 tampil();
@@ -952,14 +956,11 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         }else if(keterangan.getText().trim().equals("")){
             Valid.textKosong(keterangan,"Keterangan");
         }else{         
-            Sequel.mengedit("hais1","tanggal=? and no_rawat=?","tanggal=?,no_rawat=?,Kebersihan=?,Shift=?,APD=?,Disinfeksi=?,Insersi=?,hari1=?,hari2=?,hari3=?,hari4=?,hari5=?,hari6=?,hari7=?,keterangan=?",17,new String[]{
+            Sequel.mengedit("hais1","tanggal=? and no_rawat=?","tanggal=?,no_rawat=?,Kebersihan=?,kd_kamar=?,Shift=?,APD=?,Disinfeksi=?,Insersi=?,hari1=?,hari2=?,hari3=?,hari4=?,hari5=?,hari6=?,hari7=?,keterangan=?,nip=?",18,new String[]{
                 Valid.SetTgl(Tanggal.getSelectedItem()+""),TNoRw.getText(),
-//                ETT.getText(),CVL.getText(),IVL.getText(),UC.getText(),VAP.getText(),IAD.getText(),PLEB.getText(),ISK.getText(),ILO.getText(),
-                Kebersihan.getSelectedItem().toString(),
-//                Sputum.getText(),Darah.getText(),Urine.getText(),Antibiotik.getText(),HAP.getText(),Tania.getText(),Scabies.getText(),
-                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString(),
+                Kebersihan.getSelectedItem().toString(),Kamar.getText(),
                 Shift.getSelectedItem().toString(),APD.getSelectedItem().toString(),Disinfeksi.getSelectedItem().toString(),Insersi.getSelectedItem().toString(),hari1.getSelectedItem().toString(),
-                hari2.getSelectedItem().toString(),hari3.getSelectedItem().toString(),hari4.getSelectedItem().toString(),hari5.getSelectedItem().toString(),hari6.getSelectedItem().toString(),hari7.getSelectedItem().toString(),keterangan.getText().toString()
+                hari2.getSelectedItem().toString(),hari3.getSelectedItem().toString(),hari4.getSelectedItem().toString(),hari5.getSelectedItem().toString(),hari6.getSelectedItem().toString(),hari7.getSelectedItem().toString(),keterangan.getText().toString(),NIP.getText().toString()
             });
             if(tabMode.getRowCount()!=0){tampil();}
             emptTeks();
@@ -1262,9 +1263,9 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
                     "hais1.Shift,hais1.APD,hais1.kebersihan,hais1.Disinfeksi,hais1.Insersi,"+
                     "hais1.hari1,hais1.hari2,hais1.hari3,hais1.hari4,hais1.hari5,hais1.hari5,hais1.hari6,hais1.hari7,hais1.keterangan,"+
                     //"data_HAIs.DEKU,data_HAIs.SPUTUM,data_HAIs.DARAH,data_HAIs.URINE,data_HAIs.ANTIBIOTIK,,hais1.CVL"+
-                    "concat(hais1.kd_kamar,', ',bangsal.nm_bangsal),hais1.kd_kamar from hais1 inner join reg_periksa "+
-                    "inner join pasien inner join kamar inner join bangsal on hais1.kd_kamar=kamar.kd_kamar "+
-                    "and kamar.kd_bangsal=bangsal.kd_bangsal and hais1.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis where "+
+                    "concat(hais1.kd_kamar,', ',bangsal.nm_bangsal),hais1.kd_kamar,hais1.nip,petugas.nama from hais1 inner join reg_periksa "+
+                    "inner join pasien inner join kamar inner join petugas inner join bangsal on hais1.kd_kamar=kamar.kd_kamar "+
+                    "and kamar.kd_bangsal=bangsal.kd_bangsal and hais1.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and petugas.nip=hais1.nip where "+
                     "hais1.tanggal between ? and ? and hais1.no_rawat like ? or "+
                     "hais1.tanggal between ? and ? and reg_periksa.no_rkm_medis like ? or "+
                     "hais1.tanggal between ? and ? and bangsal.nm_bangsal like ? or "+
@@ -1290,7 +1291,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
                         rs.getString("Disinfeksi"),rs.getString("Insersi"),rs.getString("hari1"),
                         rs.getString("hari2"),rs.getString("hari3"),rs.getString("hari4"),
                         rs.getString("hari5"),rs.getString("hari6"),rs.getString("hari7"),
-                        rs.getString("keterangan")
+                        rs.getString("keterangan"),rs.getString("nip"),rs.getString("nama")
                     });
                 }
             } catch (Exception e) {
@@ -1312,22 +1313,10 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
 
     public void emptTeks() {
         Tanggal.requestFocus();
-//        ETT.setText("0");
-//        CVL.setText("0");
-//        IVL.setText("0");
-//        UC.setText("0");
-//        VAP.setText("0");
-//        IAD.setText("0");
-//        PLEB.setText("0");
-//        ISK.setText("0");
-//        HAP.setText("0");
-//        ILO.setText("0");
-//        Tania.setText("0");
-//        Scabies.setText("0");
-//        Sputum.setText("");
-//        Urine.setText("");
-//        Darah.setText("");
-//        Antibiotik.setText("");
+        TNoRw.setText("");
+        TPasien.setText("");
+        TNoRM.setText("");
+        keterangan.setText("");
         Tanggal.setDate(new Date());
     }
 
@@ -1357,6 +1346,8 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
 //            Antibiotik.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
             Kamar.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+            NIP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
+            NamaPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
         }
     }
 
@@ -1403,6 +1394,12 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getdata_HAIs());
         BtnHapus.setEnabled(akses.getdata_HAIs());
         BtnPrint.setEnabled(akses.getdata_HAIs());
+        if(akses.getjml2()>=1){
+            NIP.setEditable(false);
+            btnPetugas.setEnabled(false);
+            NIP.setText(akses.getkode());
+            Sequel.cariIsi("select nama from pegawai where nik=?", NamaPetugas,NIP.getText());
+        }
     }
 
    

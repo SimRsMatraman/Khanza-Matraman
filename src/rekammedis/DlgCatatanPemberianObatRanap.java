@@ -68,7 +68,7 @@ public class DlgCatatanPemberianObatRanap extends javax.swing.JDialog {
         for (i = 0; i < 3; i++) {
             TableColumn column = tbDataDiet.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(20);
+                column.setPreferredWidth(40);
             }else if(i==1){
                 column.setPreferredWidth(400);
             }else if(i==2){
@@ -1501,9 +1501,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Table tbDataDiet1;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {   
+    public void tampil() { 
+        Valid.tabelKosong(tabMode);  
         try{
-            Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
                 "SELECT c.nama_brng,b.no_rawat, b.aturan, b.kode_brng, b.tgl_perawatan, " +
                 "CONCAT(c.nama_brng,' - ',b.aturan) as obat FROM reg_periksa a " +
@@ -1514,8 +1514,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 ps.setString(1,TNoRw.getText());
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    tabMode.addRow(new String[]{
-                        "",rs.getString("obat"),rs.getString("aturan"),rs.getString("kode_brng")
+                    tabMode.addRow(new Object[]{
+                        false,rs.getString("obat"),rs.getString("aturan"),rs.getString("kode_brng")
                     });
                 }
             } catch (Exception e) {
@@ -1527,11 +1527,11 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(ps!=null){
                     ps.close();
                 }
-            }   
-            LCount.setText(""+tabMode.getRowCount());
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }
+        }   
+        LCount.setText(""+tabMode.getRowCount());
     }
     
     public void tampil2() {   
