@@ -14977,11 +14977,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private void btnSirkulasiObat7ActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgSirkulasiBarang7 sirkulasi=new DlgSirkulasiBarang7(this,false);
-        sirkulasi.isCek();
-        sirkulasi.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-        sirkulasi.setLocationRelativeTo(PanelUtama);
-        sirkulasi.setVisible(true);
+        DlgSirkulasiBarang7 lplpo=new DlgSirkulasiBarang7(this,false);
+        lplpo.isCek();
+        lplpo.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        lplpo.setLocationRelativeTo(PanelUtama);
+        lplpo.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
