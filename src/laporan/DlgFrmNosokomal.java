@@ -52,7 +52,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private DlgCariPetugas petugas1=new DlgCariPetugas(null,false);
     private StringBuilder htmlContent;
-    private String finger="",namaPenyakit="",namaPenyakitt="",Listpenyakit="",Listpenyakitt="";
+    private String finger="",namaPenyakit="",namaPenyakitt="",Listpenyakit="",Listpenyakitt="",norawatibu="";
     
     /** Creates new form DlgRujuk
      * @param parent
@@ -585,6 +585,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         NmPetugas1 = new widget.TextBox();
         BtnMenerima = new widget.Button();
         TglInput = new widget.Tanggal();
+        Kamar1 = new widget.ComboBox();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -637,7 +638,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         jLabel124.setText("Mulai");
         jLabel124.setName("jLabel124"); // NOI18N
 
-        TglMulaiLokasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulaiLokasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulaiLokasi.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         TglMulaiLokasi.setDisplayFormat("dd-MM-yyyy");
         TglMulaiLokasi.setName("TglMulaiLokasi"); // NOI18N
@@ -659,7 +660,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSdLokasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSdLokasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSdLokasi.setDisplayFormat("dd-MM-yyyy");
         TglSdLokasi.setName("TglSdLokasi"); // NOI18N
         TglSdLokasi.setOpaque(false);
@@ -675,7 +676,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglMulaiLokasi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulaiLokasi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulaiLokasi1.setDisplayFormat("dd-MM-yyyy");
         TglMulaiLokasi1.setName("TglMulaiLokasi1"); // NOI18N
         TglMulaiLokasi1.setOpaque(false);
@@ -696,7 +697,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSdLokasi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSdLokasi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSdLokasi1.setDisplayFormat("dd-MM-yyyy");
         TglSdLokasi1.setName("TglSdLokasi1"); // NOI18N
         TglSdLokasi1.setOpaque(false);
@@ -712,7 +713,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglMulaiLokasi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulaiLokasi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulaiLokasi2.setDisplayFormat("dd-MM-yyyy");
         TglMulaiLokasi2.setName("TglMulaiLokasi2"); // NOI18N
         TglMulaiLokasi2.setOpaque(false);
@@ -728,7 +729,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSdLokasi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSdLokasi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSdLokasi2.setDisplayFormat("dd-MM-yyyy");
         TglSdLokasi2.setName("TglSdLokasi2"); // NOI18N
         TglSdLokasi2.setOpaque(false);
@@ -744,7 +745,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSdLokasi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSdLokasi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSdLokasi3.setDisplayFormat("dd-MM-yyyy");
         TglSdLokasi3.setName("TglSdLokasi3"); // NOI18N
         TglSdLokasi3.setOpaque(false);
@@ -760,7 +761,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglMulaiLokasi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulaiLokasi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulaiLokasi3.setDisplayFormat("dd-MM-yyyy");
         TglMulaiLokasi3.setName("TglMulaiLokasi3"); // NOI18N
         TglMulaiLokasi3.setOpaque(false);
@@ -776,7 +777,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglMulaiLokasi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulaiLokasi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulaiLokasi4.setDisplayFormat("dd-MM-yyyy");
         TglMulaiLokasi4.setName("TglMulaiLokasi4"); // NOI18N
         TglMulaiLokasi4.setOpaque(false);
@@ -792,7 +793,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSdLokasi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSdLokasi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSdLokasi4.setDisplayFormat("dd-MM-yyyy");
         TglSdLokasi4.setName("TglSdLokasi4"); // NOI18N
         TglSdLokasi4.setOpaque(false);
@@ -808,7 +809,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSdLokasi5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSdLokasi5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSdLokasi5.setDisplayFormat("dd-MM-yyyy");
         TglSdLokasi5.setName("TglSdLokasi5"); // NOI18N
         TglSdLokasi5.setOpaque(false);
@@ -824,7 +825,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglMulaiLokasi5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulaiLokasi5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulaiLokasi5.setDisplayFormat("dd-MM-yyyy");
         TglMulaiLokasi5.setName("TglMulaiLokasi5"); // NOI18N
         TglMulaiLokasi5.setOpaque(false);
@@ -840,7 +841,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglMulaiLokasi6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulaiLokasi6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulaiLokasi6.setDisplayFormat("dd-MM-yyyy");
         TglMulaiLokasi6.setName("TglMulaiLokasi6"); // NOI18N
         TglMulaiLokasi6.setOpaque(false);
@@ -856,7 +857,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglMulaiLokasi7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulaiLokasi7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulaiLokasi7.setDisplayFormat("dd-MM-yyyy");
         TglMulaiLokasi7.setName("TglMulaiLokasi7"); // NOI18N
         TglMulaiLokasi7.setOpaque(false);
@@ -872,7 +873,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglMulaiLokasi8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulaiLokasi8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulaiLokasi8.setDisplayFormat("dd-MM-yyyy");
         TglMulaiLokasi8.setName("TglMulaiLokasi8"); // NOI18N
         TglMulaiLokasi8.setOpaque(false);
@@ -888,7 +889,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSdLokasi8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSdLokasi8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSdLokasi8.setDisplayFormat("dd-MM-yyyy");
         TglSdLokasi8.setName("TglSdLokasi8"); // NOI18N
         TglSdLokasi8.setOpaque(false);
@@ -904,7 +905,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSdLokasi7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSdLokasi7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSdLokasi7.setDisplayFormat("dd-MM-yyyy");
         TglSdLokasi7.setName("TglSdLokasi7"); // NOI18N
         TglSdLokasi7.setOpaque(false);
@@ -920,7 +921,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSdLokasi6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSdLokasi6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSdLokasi6.setDisplayFormat("dd-MM-yyyy");
         TglSdLokasi6.setName("TglSdLokasi6"); // NOI18N
         TglSdLokasi6.setOpaque(false);
@@ -936,7 +937,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSelesai2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSelesai2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSelesai2.setDisplayFormat("dd-MM-yyyy");
         TglSelesai2.setName("TglSelesai2"); // NOI18N
         TglSelesai2.setOpaque(false);
@@ -958,7 +959,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         jLabel86.setText("s/d");
         jLabel86.setName("jLabel86"); // NOI18N
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
@@ -977,7 +978,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         jLabel78.setText("s/d");
         jLabel78.setName("jLabel78"); // NOI18N
 
-        TglSelesai1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSelesai1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSelesai1.setDisplayFormat("dd-MM-yyyy");
         TglSelesai1.setName("TglSelesai1"); // NOI18N
         TglSelesai1.setOpaque(false);
@@ -993,7 +994,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
 
-        TglSelesai3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglSelesai3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglSelesai3.setDisplayFormat("dd-MM-yyyy");
         TglSelesai3.setName("TglSelesai3"); // NOI18N
         TglSelesai3.setOpaque(false);
@@ -1232,16 +1233,15 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(TanggalMasuk);
         TanggalMasuk.setBounds(510, 40, 140, 20);
 
-        DiagnosaAwal.setEditable(false);
         DiagnosaAwal.setHighlighter(null);
         DiagnosaAwal.setName("DiagnosaAwal"); // NOI18N
-        DiagnosaAwal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DiagnosaAwalActionPerformed(evt);
+        DiagnosaAwal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DiagnosaAwalKeyPressed(evt);
             }
         });
         FormInput.add(DiagnosaAwal);
-        DiagnosaAwal.setBounds(170, 104, 270, 20);
+        DiagnosaAwal.setBounds(170, 103, 280, 24);
 
         Kamar.setEditable(false);
         Kamar.setHighlighter(null);
@@ -1252,7 +1252,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
         FormInput.add(Kamar);
-        Kamar.setBounds(550, 104, 120, 20);
+        Kamar.setBounds(650, 103, 100, 24);
 
         CaraRawat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Emergency", "Efektif" }));
         CaraRawat.setName("CaraRawat"); // NOI18N
@@ -1311,7 +1311,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(PindahKe);
         PindahKe.setBounds(30, 180, 470, 23);
 
-        Tglke.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        Tglke.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         Tglke.setDisplayFormat("dd-MM-yyyy");
         Tglke.setName("Tglke"); // NOI18N
         Tglke.setOpaque(false);
@@ -1339,7 +1339,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(PindahKe1);
         PindahKe1.setBounds(30, 150, 470, 23);
 
-        Tglke1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        Tglke1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         Tglke1.setDisplayFormat("dd-MM-yyyy");
         Tglke1.setName("Tglke1"); // NOI18N
         Tglke1.setOpaque(false);
@@ -1524,7 +1524,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(Thari);
         Thari.setBounds(530, 260, 110, 23);
 
-        TglInfeksi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInfeksi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInfeksi.setDisplayFormat("dd-MM-yyyy");
         TglInfeksi.setName("TglInfeksi"); // NOI18N
         TglInfeksi.setOpaque(false);
@@ -1567,7 +1567,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(Thari1);
         Thari1.setBounds(530, 290, 110, 23);
 
-        TglInfeksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInfeksi1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInfeksi1.setDisplayFormat("dd-MM-yyyy");
         TglInfeksi1.setName("TglInfeksi1"); // NOI18N
         TglInfeksi1.setOpaque(false);
@@ -1585,7 +1585,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(TglInfeksi1);
         TglInfeksi1.setBounds(650, 290, 100, 23);
 
-        TglInfeksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInfeksi2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInfeksi2.setDisplayFormat("dd-MM-yyyy");
         TglInfeksi2.setName("TglInfeksi2"); // NOI18N
         TglInfeksi2.setOpaque(false);
@@ -1653,7 +1653,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(Lokasi3);
         Lokasi3.setBounds(200, 350, 320, 23);
 
-        TglInfeksi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInfeksi3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInfeksi3.setDisplayFormat("dd-MM-yyyy");
         TglInfeksi3.setName("TglInfeksi3"); // NOI18N
         TglInfeksi3.setOpaque(false);
@@ -1671,7 +1671,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(TglInfeksi3);
         TglInfeksi3.setBounds(650, 350, 100, 23);
 
-        TglInfeksi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInfeksi4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInfeksi4.setDisplayFormat("dd-MM-yyyy");
         TglInfeksi4.setName("TglInfeksi4"); // NOI18N
         TglInfeksi4.setOpaque(false);
@@ -1739,7 +1739,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(Lokasi5);
         Lokasi5.setBounds(200, 410, 320, 23);
 
-        TglInfeksi5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInfeksi5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInfeksi5.setDisplayFormat("dd-MM-yyyy");
         TglInfeksi5.setName("TglInfeksi5"); // NOI18N
         TglInfeksi5.setOpaque(false);
@@ -1782,7 +1782,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(Thari6);
         Thari6.setBounds(530, 440, 110, 23);
 
-        TglInfeksi6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInfeksi6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInfeksi6.setDisplayFormat("dd-MM-yyyy");
         TglInfeksi6.setName("TglInfeksi6"); // NOI18N
         TglInfeksi6.setOpaque(false);
@@ -1825,7 +1825,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(Thari7);
         Thari7.setBounds(530, 470, 110, 23);
 
-        TglInfeksi7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInfeksi7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInfeksi7.setDisplayFormat("dd-MM-yyyy");
         TglInfeksi7.setName("TglInfeksi7"); // NOI18N
         TglInfeksi7.setOpaque(false);
@@ -1868,7 +1868,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(Lokasi8);
         Lokasi8.setBounds(200, 500, 320, 23);
 
-        TglInfeksi8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInfeksi8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInfeksi8.setDisplayFormat("dd-MM-yyyy");
         TglInfeksi8.setName("TglInfeksi8"); // NOI18N
         TglInfeksi8.setOpaque(false);
@@ -2478,7 +2478,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(jLabel88);
         jLabel88.setBounds(460, 1100, 60, 23);
 
-        TglMulai1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulai1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulai1.setDisplayFormat("dd-MM-yyyy");
         TglMulai1.setName("TglMulai1"); // NOI18N
         TglMulai1.setOpaque(false);
@@ -2496,7 +2496,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(TglMulai1);
         TglMulai1.setBounds(530, 1010, 90, 23);
 
-        TglMulai2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulai2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulai2.setDisplayFormat("dd-MM-yyyy");
         TglMulai2.setName("TglMulai2"); // NOI18N
         TglMulai2.setOpaque(false);
@@ -2514,7 +2514,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(TglMulai2);
         TglMulai2.setBounds(530, 1040, 90, 23);
 
-        TglMulai3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulai3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulai3.setDisplayFormat("dd-MM-yyyy");
         TglMulai3.setName("TglMulai3"); // NOI18N
         TglMulai3.setOpaque(false);
@@ -2532,7 +2532,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(TglMulai3);
         TglMulai3.setBounds(530, 1070, 90, 23);
 
-        TglMulai4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglMulai4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglMulai4.setDisplayFormat("dd-MM-yyyy");
         TglMulai4.setName("TglMulai4"); // NOI18N
         TglMulai4.setOpaque(false);
@@ -2562,7 +2562,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         jLabel90.setBounds(10, 1160, 90, 23);
 
         TanggalKeluar.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024 10:27:14" }));
+        TanggalKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025 12:48:39" }));
         TanggalKeluar.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalKeluar.setName("TanggalKeluar"); // NOI18N
         TanggalKeluar.setOpaque(false);
@@ -2650,7 +2650,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         FormInput.add(BtnMenerima);
         BtnMenerima.setBounds(400, 1220, 28, 23);
 
-        TglInput.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        TglInput.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         TglInput.setDisplayFormat("dd-MM-yyyy");
         TglInput.setName("TglInput"); // NOI18N
         TglInput.setOpaque(false);
@@ -2666,7 +2666,27 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             }
         });
         FormInput.add(TglInput);
-        TglInput.setBounds(680, 103, 170, 20);
+        TglInput.setBounds(760, 105, 90, 20);
+
+        Kamar1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ranap", "Ralan" }));
+        Kamar1.setName("Kamar1"); // NOI18N
+        Kamar1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                Kamar1ItemStateChanged(evt);
+            }
+        });
+        Kamar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Kamar1ActionPerformed(evt);
+            }
+        });
+        Kamar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Kamar1KeyPressed(evt);
+            }
+        });
+        FormInput.add(Kamar1);
+        Kamar1.setBounds(540, 105, 110, 20);
 
         scrollInput.setViewportView(FormInput);
 
@@ -2709,7 +2729,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2723,7 +2743,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-12-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2791,6 +2811,8 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             Valid.textKosong(KdPetugas,"Nama Petugas");
         }else if(KdPetugas1.getText().trim().equals("")){
             Valid.textKosong(KdPetugas1,"Nama Ka. Ruangan");
+        }else if(Kamar.getText().trim().equals("")){
+            Valid.textKosong(Kamar,"Kamar Inap Atau Rawat Jalan");
         }else{
             if(Sequel.menyimpantf("survei_nosokomal1","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",79,new String[]{
                     TNoRw.getText(),KdPetugas.getText(),KdPetugas1.getText(),PindahKe1.getText(),Valid.SetTgl(Tglke.getSelectedItem()+""),PindahKe.getText(),Valid.SetTgl(Tglke1.getSelectedItem()+""),Lokasi.getText(),Thari.getText(),Valid.SetTgl(TglInfeksi.getSelectedItem()+""),
@@ -3192,10 +3214,6 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
     private void KamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KamarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_KamarActionPerformed
-
-    private void DiagnosaAwalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiagnosaAwalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DiagnosaAwalActionPerformed
 
     private void AlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatKeyPressed
 
@@ -3797,6 +3815,31 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_TglInputKeyPressed
 
+    private void Kamar1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Kamar1ItemStateChanged
+        if(Kamar1.getSelectedIndex()==0){
+        norawatibu=Sequel.cariIsi("select ranap_gabung.no_rawat from ranap_gabung where ranap_gabung.no_rawat2=?",TNoRw.getText());
+        if(!norawatibu.equals("")){
+            Kamar.setText(Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",norawatibu));
+        }else{
+            Kamar.setText(Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",TNoRw.getText()));
+        }
+        }else if(Kamar1.getSelectedIndex()==1){
+            Kamar.setText(Sequel.cariIsi("select ifnull(reg_periksa.kd_poli,'') from reg_periksa where reg_periksa.no_rawat=? order by reg_periksa.tgl_registrasi desc limit 1",TNoRw.getText()));
+        }
+    }//GEN-LAST:event_Kamar1ItemStateChanged
+
+    private void Kamar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kamar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Kamar1ActionPerformed
+
+    private void Kamar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kamar1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Kamar1KeyPressed
+
+    private void DiagnosaAwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosaAwalKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DiagnosaAwalKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -3853,6 +3896,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
     private widget.ComboBox JenisOperasi;
     private widget.TextBox Jk;
     private widget.TextBox Kamar;
+    private widget.ComboBox Kamar1;
     private widget.TextBox KdPetugas;
     private widget.TextBox KdPetugas1;
     private widget.TextArea KetLokalis;
@@ -4121,6 +4165,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
 
     public void emptTeks() {
         
+//        DiagnosaAwal.setText("-");
         CaraRawat.setSelectedIndex(0);
         PindahKe.setText("-");
         Tglke.setDate(new Date());
@@ -4311,24 +4356,24 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
                     "kamar_inap.kd_kamar, "+
                     "kamar_inap.diagnosa_akhir "+
                     "from reg_periksa "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join kelurahan on kelurahan.kd_kel=pasien.kd_kel "+
-                    "inner join kecamatan on kecamatan.kd_kec=pasien.kd_kec "+
-                    "inner join kabupaten on kabupaten.kd_kab=pasien.kd_kab "+
-                    "inner join propinsi on propinsi.kd_prop=pasien.kd_prop "+
-                    "inner join kamar_inap on kamar_inap.no_rawat=reg_periksa.no_rawat "+
+                    "left join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                    "left join kelurahan on kelurahan.kd_kel=pasien.kd_kel "+
+                    "left join kecamatan on kecamatan.kd_kec=pasien.kd_kec "+
+                    "left join kabupaten on kabupaten.kd_kab=pasien.kd_kab "+
+                    "left join propinsi on propinsi.kd_prop=pasien.kd_prop "+
+                    "left join kamar_inap on kamar_inap.no_rawat=reg_periksa.no_rawat "+
                     "where reg_periksa.no_rawat=?");
             try {
                 ps.setString(1,TNoRw.getText());
                 rs=ps.executeQuery();
                 if(rs.next()){
                     TNoRM.setText(rs.getString("no_rkm_medis"));
-//                    DTPCari1.setDate(rs.getDate("tgl_registrasi"));
+//                    TanggalMasuk1.setDate(rs.getDate("tgl_masuk"));
                     TPasien.setText(rs.getString("nm_pasien"));
                     Jk.setText(rs.getString("jk"));
                     TglLahir.setText(rs.getString("tgl_lahir"));
                     Alamat.setText(rs.getString("alamat"));
-                    TanggalMasuk.setText(rs.getString("tgl_masuk"));
+                    TanggalMasuk.setText(rs.getString("tgl_registrasi"));
                     Kamar.setText(rs.getString("kd_kamar"));
                     DiagnosaAwal.setText(rs.getString("diagnosa_awal"));
                     DiagnosaAkhir.setText(rs.getString("diagnosa_akhir"));
@@ -4384,7 +4429,7 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
             ps=koneksi.prepareStatement(
                     "select diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit,diagnosa_pasien.prioritas "+
                     "from diagnosa_pasien inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit "+
-                    "where diagnosa_pasien.no_rawat='"+TNoRw.getText()+"' and diagnosa_pasien.status='Ranap' order by diagnosa_pasien.prioritas ASC ");
+                    "where diagnosa_pasien.no_rawat='"+TNoRw.getText()+"' order by diagnosa_pasien.prioritas ASC ");
             try {
                 rs=ps.executeQuery();
                 namaPenyakit="";
@@ -4414,8 +4459,12 @@ public final class DlgFrmNosokomal extends javax.swing.JDialog {
         DTPCari2.setDate(tgl2);     
         isRawat(); 
         Sequel.cariIsi("select pasien.nm_pasien from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",TPasien); 
-        Sequel.cariIsi("select pasien.nm_pasien from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",TPasien); 
-        Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",TNoRM);              
+        Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",TNoRM); 
+//        if(!TglLahir.equals("")){
+//            Kamar.setText(Sequel.cariIsi("select pasien.tgl_lahir from kamar_inap inner join reg_periksa on reg_periksa.no_rawat=kamar_inap.no_rawat inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where kamar_inap.no_rawat=?",TNoRw.getText()));
+//        }else{
+//            Kamar.setText(Sequel.cariIsi("select pasien.tgl_lahir from reg_periksa where inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where reg_periksa.no_rawat=?",TNoRM.getText()));
+//        }
     }
     
     private void isPsien() {

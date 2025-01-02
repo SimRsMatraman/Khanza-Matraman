@@ -50,7 +50,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
     private ResultSet rs;
     private int i=0;
     private Date date = new Date();
-    private String norawatibu="";
+    private String norawatibu="",norawat="";
     private DlgCariPetugas petugas=new DlgCariPetugas (null,false);
     /** Creates new form DlgRujuk
      * @param parent
@@ -259,6 +259,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         NIP = new widget.TextBox();
         NamaPetugas = new widget.TextBox();
         btnPetugas = new widget.Button();
+        Kamar1 = new widget.ComboBox();
         ChkInput = new widget.CekBox();
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
@@ -437,7 +438,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-12-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -451,7 +452,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-12-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -535,7 +536,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         TPasien.setBounds(330, 10, 309, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-12-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -592,7 +593,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
             }
         });
         FormInput.add(Kamar);
-        Kamar.setBounds(640, 10, 100, 23);
+        Kamar.setBounds(490, 40, 100, 23);
 
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel28.setText("No.Rawat :");
@@ -849,6 +850,26 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         FormInput.add(btnPetugas);
         btnPetugas.setBounds(390, 70, 28, 23);
 
+        Kamar1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ranap", "Ralan" }));
+        Kamar1.setName("Kamar1"); // NOI18N
+        Kamar1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                Kamar1ItemStateChanged(evt);
+            }
+        });
+        Kamar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Kamar1ActionPerformed(evt);
+            }
+        });
+        Kamar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Kamar1KeyPressed(evt);
+            }
+        });
+        FormInput.add(Kamar1);
+        Kamar1.setBounds(350, 40, 120, 20);
+
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -897,6 +918,8 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"pasien");
         }else if(keterangan.getText().trim().equals("")){
             Valid.textKosong(keterangan,"Keterangan");
+        }else if(Kamar.getText().trim().equals("")){
+            Valid.textKosong(Kamar,"Kamar Inap Atau Rawat Jalan");
         }else{
             if(Sequel.menyimpantf("hais1","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",17,new String[]{
                     Valid.SetTgl(Tanggal.getSelectedItem()+""),TNoRw.getText(),
@@ -1174,6 +1197,28 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_NamaPetugasActionPerformed
 
+    
+    private void Kamar1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Kamar1ItemStateChanged
+        if(Kamar1.getSelectedIndex()==0){
+        norawatibu=Sequel.cariIsi("select ranap_gabung.no_rawat from ranap_gabung where ranap_gabung.no_rawat2=?",TNoRw.getText());
+        if(!norawatibu.equals("")){
+            Kamar.setText(Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",norawatibu));
+        }else{
+            Kamar.setText(Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",TNoRw.getText()));
+        }
+        }else if(Kamar1.getSelectedIndex()==1){
+            Kamar.setText(Sequel.cariIsi("select ifnull(reg_periksa.kd_poli,'') from reg_periksa where reg_periksa.no_rawat=? order by reg_periksa.tgl_registrasi desc limit 1",TNoRw.getText()));
+        }
+    }//GEN-LAST:event_Kamar1ItemStateChanged
+
+    private void Kamar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kamar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Kamar1ActionPerformed
+
+    private void Kamar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kamar1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Kamar1KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1207,6 +1252,7 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
     private widget.PanelBiasa FormInput;
     private widget.ComboBox Insersi;
     private widget.TextBox Kamar;
+    private widget.ComboBox Kamar1;
     private widget.ComboBox Kebersihan;
     private widget.Label LCount;
     private widget.TextBox NIP;
@@ -1374,6 +1420,11 @@ public final class DlgDataHAIs1 extends javax.swing.JDialog {
         }else{
             Kamar.setText(Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",TNoRw.getText()));
         }
+//        if(!Kamar.equals("")){
+//            Kamar.setText(Sequel.cariIsi("select ifnull(reg_periksa.kd_poli,'') from reg_periksa where reg_periksa.no_rawat=? and not reg_periksa.status_lanjut='Ranap' order by reg_periksa.tgl_registrasi desc limit 1",norawat));
+//        }else{
+//            Kamar.setText(Sequel.cariIsi("select ifnull(reg_periksa.kd_poli,'') from reg_periksa where reg_periksa.no_rawat=? and not reg_periksa.status_lanjut='Ranap' order by reg_periksa.tgl_registrasi desc limit 1",TNoRw.getText()));
+//        }
     }
     
     private void isForm(){
