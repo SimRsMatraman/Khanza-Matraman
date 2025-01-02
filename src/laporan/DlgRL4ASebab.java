@@ -1,5 +1,4 @@
 package laporan;
-import keuangan.Jurnal;
 import fungsi.koneksiDB;
 import fungsi.validasi;
 import fungsi.akses;

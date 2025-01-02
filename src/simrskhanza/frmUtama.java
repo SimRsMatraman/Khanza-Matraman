@@ -1430,7 +1430,6 @@ public class frmUtama extends javax.swing.JFrame {
         btnHutangObat = new widget.ButtonBig();
         btnRiwayatBarangMedis = new widget.ButtonBig();
         btnSensusHarianPoli = new widget.ButtonBig();
-        btnRl4a = new widget.ButtonBig();
         btnAplicareReferensiKamar = new widget.ButtonBig();
         btnAplicareKetersediaanKamar = new widget.ButtonBig();
         btnInaCBGKlaimBaruOtomatis = new widget.ButtonBig();
@@ -1452,6 +1451,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnPiutangPerCaraBayar = new widget.ButtonBig();
         btnLamaPelayananRalan = new widget.ButtonBig();
         btnCatatanPasien = new widget.ButtonBig();
+        btnRl4a = new widget.ButtonBig();
         btnRl4b = new widget.ButtonBig();
         btnRl4asebab = new widget.ButtonBig();
         btnRl4bsebab = new widget.ButtonBig();
@@ -1929,7 +1929,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27/08/2024" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28/11/2024" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -4222,17 +4222,6 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
 
-        btnRl4a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582089_Finance_financial_report.png"))); // NOI18N
-        btnRl4a.setText("RL 4A Morbiditas Ranap");
-        btnRl4a.setIconTextGap(0);
-        btnRl4a.setName("btnRl4a"); // NOI18N
-        btnRl4a.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnRl4a.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRl4aActionPerformed(evt);
-            }
-        });
-
         btnAplicareReferensiKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png"))); // NOI18N
         btnAplicareReferensiKamar.setText("Referensi Kamar Aplicare");
         btnAplicareReferensiKamar.setIconTextGap(0);
@@ -4464,8 +4453,19 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
 
+        btnRl4a.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582089_Finance_financial_report.png"))); // NOI18N
+        btnRl4a.setText("RL 4A Morbiditas Ranap - Dinkes");
+        btnRl4a.setIconTextGap(0);
+        btnRl4a.setName("btnRl4a"); // NOI18N
+        btnRl4a.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnRl4a.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRl4aActionPerformed(evt);
+            }
+        });
+
         btnRl4b.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582089_Finance_financial_report.png"))); // NOI18N
-        btnRl4b.setText("RL 4B Morbiditas Ralan");
+        btnRl4b.setText("RL 4B Morbiditas Ralan - Dinkes");
         btnRl4b.setIconTextGap(0);
         btnRl4b.setName("btnRl4b"); // NOI18N
         btnRl4b.setPreferredSize(new java.awt.Dimension(200, 90));
@@ -4476,7 +4476,8 @@ public class frmUtama extends javax.swing.JFrame {
         });
 
         btnRl4asebab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582089_Finance_financial_report.png"))); // NOI18N
-        btnRl4asebab.setText("RL 4A Sebab Morbiditas Ranap");
+        btnRl4asebab.setText("RL 4A Morbiditas Ranap - Kemkes");
+        btnRl4asebab.setToolTipText("");
         btnRl4asebab.setIconTextGap(0);
         btnRl4asebab.setName("btnRl4asebab"); // NOI18N
         btnRl4asebab.setPreferredSize(new java.awt.Dimension(200, 90));
@@ -4487,7 +4488,7 @@ public class frmUtama extends javax.swing.JFrame {
         });
 
         btnRl4bsebab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1491582089_Finance_financial_report.png"))); // NOI18N
-        btnRl4bsebab.setText("RL 4B Sebab Morbiditas Ralan");
+        btnRl4bsebab.setText("RL 4B Morbiditas Ralan - Kemkes");
         btnRl4bsebab.setIconTextGap(0);
         btnRl4bsebab.setName("btnRl4bsebab"); // NOI18N
         btnRl4bsebab.setPreferredSize(new java.awt.Dimension(200, 90));
