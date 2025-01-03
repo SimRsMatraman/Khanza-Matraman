@@ -243,6 +243,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         jLabel27 = new widget.Label();
         Scabies = new widget.TextBox();
         Kamar = new widget.TextBox();
+        Kamar1 = new widget.ComboBox();
         ChkInput = new widget.CekBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -422,7 +423,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-11-2019" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-12-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -436,7 +437,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-11-2019" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-12-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -556,7 +557,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         TPasien.setBounds(309, 10, 309, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-11-2019" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-12-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -830,7 +831,27 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             }
         });
         FormInput.add(Kamar);
-        Kamar.setBounds(620, 10, 100, 23);
+        Kamar.setBounds(730, 10, 100, 23);
+
+        Kamar1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ranap", "Ralan" }));
+        Kamar1.setName("Kamar1"); // NOI18N
+        Kamar1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                Kamar1ItemStateChanged(evt);
+            }
+        });
+        Kamar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Kamar1ActionPerformed(evt);
+            }
+        });
+        Kamar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Kamar1KeyPressed(evt);
+            }
+        });
+        FormInput.add(Kamar1);
+        Kamar1.setBounds(620, 10, 100, 20);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -910,6 +931,8 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
             Valid.textKosong(Tania,"Tania");
         }else if(Scabies.getText().trim().equals("")){
             Valid.textKosong(Scabies,"Scabies");
+        }else if(Kamar.getText().trim().equals("")){
+            Valid.textKosong(Kamar,"Kamar Inap Atau Rawat Jalan");
         }else{
             if(Sequel.menyimpantf("data_HAIs","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",20,new String[]{
                     Valid.SetTgl(Tanggal.getSelectedItem()+""),TNoRw.getText(),ETT.getText(),CVL.getText(),
@@ -1188,6 +1211,27 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_KamarKeyPressed
 
+    private void Kamar1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Kamar1ItemStateChanged
+        if(Kamar1.getSelectedIndex()==0){
+        norawatibu=Sequel.cariIsi("select ranap_gabung.no_rawat from ranap_gabung where ranap_gabung.no_rawat2=?",TNoRw.getText());
+        if(!norawatibu.equals("")){
+            Kamar.setText(Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",norawatibu));
+        }else{
+            Kamar.setText(Sequel.cariIsi("select ifnull(kamar_inap.kd_kamar,'') from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",TNoRw.getText()));
+        }
+        }else if(Kamar1.getSelectedIndex()==1){
+            Kamar.setText(Sequel.cariIsi("select ifnull(reg_periksa.kd_poli,'') from reg_periksa where reg_periksa.no_rawat=? order by reg_periksa.tgl_registrasi desc limit 1",TNoRw.getText()));
+        }
+    }//GEN-LAST:event_Kamar1ItemStateChanged
+
+    private void Kamar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kamar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Kamar1ActionPerformed
+
+    private void Kamar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kamar1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Kamar1KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1228,6 +1272,7 @@ public final class DlgDataHAIs extends javax.swing.JDialog {
     private widget.TextBox ISK;
     private widget.TextBox IVL;
     private widget.TextBox Kamar;
+    private widget.ComboBox Kamar1;
     private widget.Label LCount;
     private widget.TextBox PLEB;
     private javax.swing.JPanel PanelInput;
