@@ -63,7 +63,8 @@ public final class DlgPeriksaFisio extends javax.swing.JDialog {
     private String[] kode,nama;
     private int jml=0,i=0,index=0,jmlparsial=0;
     private String kelas_radiologi="Yes",kelas="",cara_bayar_radiologi="Yes",kamar,namakamar,status="",
-            norawatibu="",aktifkanparsial="no",finger="",noorder="";
+            norawatibu="",aktifkanparsial="no",finger="",noorder="",kdPetugas="";
+    private boolean sukses=false;
     private File file;
     private FileWriter fileWriter;
     private String iyem;
@@ -113,10 +114,26 @@ public final class DlgPeriksaFisio extends javax.swing.JDialog {
                 column.setPreferredWidth(130);
             }else if(i==2){
                 column.setPreferredWidth(480);
-            }else {
+            }
+            
+//            else if(i==3){
+//                column.setPreferredWidth(100);
+//            }else if(i==4){
+//                column.setPreferredWidth(100);
+//            }else if(i==5){
+//                column.setPreferredWidth(100);
+//            }else if(i==6){
+//                column.setPreferredWidth(100);
+//            }else if(i==7){
+//                column.setPreferredWidth(100);
+//            }else if(i==8){
+//                column.setPreferredWidth(100);
+//            }
+            else{
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }
+    
             
         }
         tbPemeriksaan.setDefaultRenderer(Object.class, new WarnaTable());
@@ -556,6 +573,7 @@ public final class DlgPeriksaFisio extends javax.swing.JDialog {
         PanelInput.add(jLabel6);
         jLabel6.setBounds(0, 132, 209, 23);
 
+        listDok.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         listDok.setName("listDok"); // NOI18N
         listDok.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -692,10 +710,10 @@ public final class DlgPeriksaFisio extends javax.swing.JDialog {
 
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
-    DlgCariPermintaanFisio form=new DlgCariPermintaanFisio(null,false);
+    DlgRawatJalan form=new DlgRawatJalan(null,false);
     form.isCek();
-    form.setPasien(TNoRw.getText());
     form.setSize(this.getWidth(),this.getHeight());
+    form.emptTind(TNoRw.getText(),TNoRM.getText());
     form.setLocationRelativeTo(this);
     form.setVisible(true);
     this.setCursor(Cursor.getDefaultCursor());
@@ -803,8 +821,8 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KodePerujuk.getText().equals("")||NmPerujuk.getText().equals("")){
             Valid.textKosong(KodePerujuk,"Dokter Perujuk");
-        }else if(Cmbstatus.getSelectedItem().equals("")){
-            Valid.textKosong(Cmbstatus,"No Alarm");
+        }else if(listDok.getSelectedItem().equals("")){
+            Valid.textKosong(listDok,"Petugas");
         }else if(tabMode.getRowCount()==0){
             Valid.textKosong(TCariPeriksa,"Data Permintaan");
         }else if(jml==0){
@@ -1270,7 +1288,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     
     private void listPetugas(){
        try{
-            ps=koneksi.prepareStatement("SELECT nip,nama FROM petugas WHERE petugas.status='1' and petugas.kd_jbtn='J020' ORDER BY nama asc");
+            ps=koneksi.prepareStatement("SELECT nip,nama FROM petugas WHERE petugas.status='1' and petugas.kd_jbtn='J020' ORDER BY nip asc");
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){
@@ -1288,91 +1306,45 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         KodePerujuk.setText(kodeperujuk);
         NmPerujuk.setText(namaperujuk);
     }
+    
+    public void setCatatanDiagnosa(String catatan,String diagnosa){
+        InformasiTambahan.setText(catatan);
+        DiagnosisKlinis.setText(diagnosa);
+    }
 
     private void simpan() {
         int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
-//        if (reply == JOptionPane.YES_OPTION) {
-//            ChkJln.setSelected(false);
-//            try {                    
-//                koneksi.setAutoCommit(false);
-//                //autoNomor();
-//                if(Sequel.menyimpantf2("permintaan_fisio","?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",11,new String[]{
-//                        TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
-//                        CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
-//                        "0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
-//                        InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("No Alarm","Cito")
-//                    })==true){
-//                    for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
-//                        if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-//                            Sequel.menyimpan2("permintaan_pemeriksaan_fisio","?,?,?","pemeriksaan fisio",3,new String[]{
-//                                TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum"
-//                            });
-//                        }                        
-//                    } 
-//                    isReset();
-//                    emptTeks();
-//                }else{
-//                    autoNomor();
-//                    if(Sequel.menyimpantf2("permintaan_fisio","?,?,?,?,?,?,?,?,?,?","No.Permintaan",11,new String[]{
-//                            TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
-//                            CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
-//                            "0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
-//                            InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("No Alarm","Cito")
-//                        })==true){
-//                        for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
-//                            if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-//                                Sequel.menyimpan2("permintaan_pemeriksaan_fisio","?,?,?","pemeriksaan fisio",3,new String[]{
-//                                    TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum"
-//                                });
-//                            }                        
-//                        } 
-//                        isReset();
-//                        emptTeks();
-//                    }else{
-//                        autoNomor();
-//                        if(Sequel.menyimpantf2("permintaan_fisio","?,?,?,?,?,?,?,?,?,?","No.Permintaan",11,new String[]{
-//                                TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
-//                                CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
-//                                "0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
-//                                InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("No Alarm","Cito")
-//                            })==true){
-//                            for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
-//                                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-//                                    Sequel.menyimpan2("permintaan_pemeriksaan_fisio","?,?,?","pemeriksaan fisio",3,new String[]{
-//                                        TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum"
-//                                    });
-//                                }                        
-//                            } 
-//                            isReset();
-//                            emptTeks();
-//                        }else{
-//                            autoNomor();
-//                            if(Sequel.menyimpantf2("permintaan_fisio","?,?,?,?,?,?,?,?,?,?","No.Permintaan",11,new String[]{
-//                                    TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
-//                                    CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
-//                                    "0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
-//                                    InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("No Alarm","Cito")
-//                                })==true){
-//                                for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
-//                                    if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-//                                        Sequel.menyimpan2("permintaan_pemeriksaan_fisio","?,?,?","pemeriksaan fisio",3,new String[]{
-//                                            TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum"
-//                                        });
-//                                    }                        
-//                                } 
-//                                isReset();
-//                                emptTeks();
-//                            } 
-//                        } 
-//                    } 
-//                }   
-//
-//                koneksi.setAutoCommit(true);                    
-//                JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
-//            } catch (Exception e) {
-//                System.out.println(e);
-//            }    
-//            ChkJln.setSelected(true);            
-//        }
+        if (reply == JOptionPane.YES_OPTION) {
+            ChkJln.setSelected(false);
+            kdPetugas=Sequel.cariIsi("select nip from petugas where petugas.nama=?",listDok.getSelectedItem().toString());                    
+            Sequel.AutoComitFalse();
+            sukses=true;
+            for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
+                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                    if(Sequel.menyimpantf2("rawat_jl_pr","?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",12,new String[]{
+                        TNoRw.getText(),tbPemeriksaan.getValueAt(i,1).toString(),kdPetugas,Valid.SetTgl(Tanggal.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
+                        "0","0",Sequel.cariIsi("select tarif_tindakanpr from jns_perawatan where kd_jenis_prw=?",tbPemeriksaan.getValueAt(i,1).toString()),
+                        "0","0",Sequel.cariIsi("select total_byrpr from jns_perawatan where kd_jenis_prw=?",tbPemeriksaan.getValueAt(i,1).toString()),"Belum"                        
+                    })==true){
+                    Sequel.mengedittf("permintaan_fisio","noorder=?","tgl_periksa=?,jam_periksa=?",3,new String[]{
+                    Valid.SetTgl(Tanggal.getSelectedItem()+""),CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),noorder
+                    });                    
+                    }
+                    else{
+                        sukses=false;
+                    }
+                }                                   
+            }     
+            if(sukses==true){
+                Sequel.Commit();
+                JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+                isReset();
+            }else{
+                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                Sequel.RollBack();
+            }
+            Sequel.AutoComitTrue();    
+            ChkJln.setSelected(true);          
+        }
     }
 }

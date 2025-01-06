@@ -1694,6 +1694,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnToolLab = new widget.ButtonBig();
         btnToolRad = new widget.ButtonBig();
         BtnToolJualObat = new widget.ButtonBig();
+        BtnToolFisio = new widget.ButtonBig();
         jSeparator9 = new javax.swing.JSeparator();
         BtnToolKamnap = new widget.ButtonBig();
         BtnToolKasir = new widget.ButtonBig();
@@ -1932,7 +1933,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03/01/2025" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06/01/2025" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7169,6 +7170,24 @@ public class frmUtama extends javax.swing.JFrame {
         });
         internalFrame1.add(BtnToolJualObat);
 
+        BtnToolFisio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/tasksgroup.png"))); // NOI18N
+        BtnToolFisio.setMnemonic('K');
+        BtnToolFisio.setText("Fisioterapi");
+        BtnToolFisio.setToolTipText("");
+        BtnToolFisio.setEnabled(false);
+        BtnToolFisio.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnToolFisio.setIconTextGap(2);
+        BtnToolFisio.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        BtnToolFisio.setName("BtnToolFisio"); // NOI18N
+        BtnToolFisio.setPreferredSize(new java.awt.Dimension(107, 38));
+        BtnToolFisio.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnToolFisio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnToolFisioActionPerformed(evt);
+            }
+        });
+        internalFrame1.add(BtnToolFisio);
+
         jSeparator9.setBackground(new java.awt.Color(255, 81, 102));
         jSeparator9.setForeground(new java.awt.Color(255, 81, 102));
         jSeparator9.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -7538,6 +7557,7 @@ public class frmUtama extends javax.swing.JFrame {
             case "Log Out":
                 BtnToolReg.setEnabled(false);
                 BtnToolKamnap.setEnabled(false);
+                BtnToolFisio.setEnabled(false);
                 BtnToolKasir.setEnabled(false);
                 btnToolIGD.setEnabled(false);
                 MnGantiPassword.setEnabled(false);
@@ -7581,6 +7601,7 @@ public class frmUtama extends javax.swing.JFrame {
                     BtnMenu.setEnabled(true);
                     BtnToolReg.setEnabled(true);
                     BtnToolKamnap.setEnabled(true);
+                    BtnToolFisio.setEnabled(true);
                     BtnToolKasir.setEnabled(true); 
                     btnToolIGD.setEnabled(true);
                     btnPermintaanLab.setEnabled(true);
@@ -7636,6 +7657,12 @@ public class frmUtama extends javax.swing.JFrame {
                         btnPermintaanRadiologi.setEnabled(akses.getpermintaan_radiologi());
                     }
                     
+                    if((akses.getkasir_ralan()==true)){
+                        BtnToolFisio.setEnabled(true);
+                    }else{
+                        BtnToolFisio.setEnabled(akses.getkasir_ralan());
+                    }
+                    
                     if((akses.getpermintaan_lab()==true)||(akses.getperiksa_lab()==true)||(akses.getpemeriksaan_lab_pa()==true)||(akses.getpemeriksaan_lab_mb()==true)){
                         btnPermintaanLab.setEnabled(true);
                         btnPermintaanLabPA.setEnabled(true);
@@ -7664,6 +7691,7 @@ public class frmUtama extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Maaf, Gagal login. ID User atau password ada yang salah ...!");
                     BtnToolReg.setEnabled(false);
                     BtnToolKamnap.setEnabled(false);
+                    BtnToolFisio.setEnabled(false);
                     BtnToolKasir.setEnabled(false);
                     MnGantiPassword.setEnabled(false);  
 //                    MnPengajuanCutiPegawai.setEnabled(false);
@@ -13562,6 +13590,19 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnPermintaanFisioActionPerformed
+
+    private void BtnToolFisioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolFisioActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPermintaanFisio form=new DlgCariPermintaanFisio(this,false);
+        form.isCek();
+        form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnToolFisioActionPerformed
 
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -19790,6 +19831,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig BtnLog;
     private widget.Button BtnLogin;
     private widget.ButtonBig BtnMenu;
+    private widget.ButtonBig BtnToolFisio;
     private widget.ButtonBig BtnToolJualObat;
     private widget.ButtonBig BtnToolJualObat1;
     private widget.ButtonBig BtnToolKamnap;
@@ -20449,7 +20491,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     
     private void setToolbar(){
         if(internalFrame1.getWidth()<(BtnMenu.getWidth()+BtnToolReg.getWidth()+btnToolIGD.getWidth()+
-                btnToolLab.getWidth()+btnToolRad.getWidth()+BtnToolJualObat.getWidth()+BtnToolKamnap.getWidth()+
+                btnToolLab.getWidth()+btnToolRad.getWidth()+BtnToolJualObat.getWidth()+BtnToolFisio.getWidth()+BtnToolKamnap.getWidth()+
                 BtnToolKasir.getWidth()+BtnLog.getWidth()+BtnClose.getWidth()+8)){
             internalFrame1.setSize(new Dimension(PanelUtama.getWidth(),90));
         }else{

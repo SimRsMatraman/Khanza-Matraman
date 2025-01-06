@@ -14238,7 +14238,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
-    
+    public void emptTind(String norwt,String norm){     
+        TNoRw.setText(norwt);
+        TCari.setText("");
+        isRawat();
+        isPsien();  
+        KdDok.setText(Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",norwt));
+        TDokter.setText(dokter.tampil3(KdDok.getText()));
+        KdDok2.setText(KdDok.getText());
+        KdDok3.setText(KdDok.getText());
+        TDokter2.setText(TDokter.getText()); 
+        TDokter3.setText(TDokter.getText()); 
+        BtnBatalActionPerformed(null);        
+        ChkAccor.setSelected(true);
+        TabRawat.setSelectedIndex(1);
+        TabRawatTindakanPetugas.setSelectedIndex(1);
+        TabRawatTindakanPetugasMouseClicked(null);
+    }
     public void emptTeks(){
         BtnBatalActionPerformed(null);
         TabRawat.setSelectedIndex(3);

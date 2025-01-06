@@ -565,7 +565,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-10-2024 10:36:44" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-12-2024 07:54:58" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -672,7 +672,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-10-2024" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-12-2024" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -2840,13 +2840,13 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         ps=koneksi.prepareStatement(
                             "select permintaan_lab.noorder,permintaan_lab.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,permintaan_lab.tgl_permintaan,pasien.tgl_lahir,"+
                             "permintaan_lab.jam_permintaan,pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,if(pasien.jk='L','1','2') as jk,"+
-                            "permintaan_lab.dokter_perujuk,dokter.nm_dokter,kamar_inap.kd_kamar,bangsal.kd_bangsal,bangsal.nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
+                            "permintaan_lab.dokter_perujuk,dokter.nm_dokter,IFNULL(kamar_inap.kd_kamar,'Ranap Gabung') as kd_kamar,IFNULL(bangsal.kd_bangsal,'-') as kd_bangsal,IFNULL(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
                             "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter "+
-                            "inner join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                            "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
-                            "inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                            "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
+                            "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+                            "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
                             "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
                             "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                             "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+

@@ -1354,7 +1354,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             tampil();
                         }
                     }else{
-                        JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        JOptionPane.showMessageDialog(null,"Maaf, Bukan user admin");
                     }                     
                 }
             }else{            
@@ -1380,7 +1380,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             tampil3();
                         } 
                     }else{
-                        JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan sampel...!!!!");
+                        JOptionPane.showMessageDialog(null,"Maaf, Bukan user admin");
                     }                    
                 }
             }else{            
@@ -1421,11 +1421,12 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 //                        this.setCursor(Cursor.getDefaultCursor());
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         DlgPeriksaFisio dlgro=new DlgPeriksaFisio(null,false);
-                        dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        dlgro.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                         dlgro.setLocationRelativeTo(internalFrame1);
                         dlgro.isCek();
                         dlgro.setOrder(tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),0).toString(),tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),1).toString(),"Ralan");
                         dlgro.setDokterPerujuk(tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),7).toString(),tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),8).toString());
+                        dlgro.setCatatanDiagnosa(tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),10).toString(),tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),11).toString());
                         dlgro.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
@@ -1972,9 +1973,9 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }
     
     public void isCek(){
-        BtnHasil.setEnabled(akses.getperiksa_radiologi());
-        BtnHapus.setEnabled(akses.getpermintaan_radiologi());
-        BtnPrint.setEnabled(akses.getpermintaan_radiologi());
+        BtnHasil.setEnabled(akses.getpermintaan_lab());
+//        BtnHapus.setEnabled(akses.getpermintaan_radiologi());
+//        BtnPrint.setEnabled(akses.getpermintaan_radiologi());
     }
     
     public void setPasien(String pasien){

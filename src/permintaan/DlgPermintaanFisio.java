@@ -1114,7 +1114,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
     private void isPsien(){
         InformasiTambahan.setText("-");
-        DiagnosisKlinis.setText("");
+        DiagnosisKlinis.setText(Sequel.cariIsi("select diagnosis_medis from uji_fungsi_kfr where uji_fungsi_kfr.no_rawat=?",TNoRw.getText()));
         try {
             pspemeriksaan=koneksi.prepareStatement(
                 "select reg_periksa.no_rkm_medis,reg_periksa.kd_pj,reg_periksa.kd_dokter,dokter.nm_dokter,pasien.nm_pasien,pasien.jk,pasien.umur,"+
@@ -1206,7 +1206,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     }
 
     public void setNoRm(String norwt,String posisi){
-        TNoRw.setText(norwt);
+        TNoRw.setText(norwt);        
         this.status=posisi;        
         isRawat();
         isPsien();
