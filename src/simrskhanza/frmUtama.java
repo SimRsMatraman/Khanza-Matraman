@@ -228,6 +228,7 @@ import keuangan.DlgFeeVisitDokter;
 import keuangan.DlgJnsPerawatanLab;
 import keuangan.DlgJnsPerawatanOperasi;
 import keuangan.DlgJnsPerawatanRadiologi;
+import keuangan.DlgJnsPerawatanFisio;
 import keuangan.DlgJnsPerawatanUTD;
 import keuangan.DlgJurnal;
 import keuangan.DlgJurnalHarian;
@@ -774,6 +775,7 @@ import laporan.LaporanRekapSkriningPernapasanRalanPerTahun;
 import laporan.LaporanTahunanIGD;
 import laporan.LaporanTahunanIRJ;
 import permintaan.DlgBookingPeriksa;
+import permintaan.DlgCariPermintaanFisio;
 import permintaan.DlgCariPermintaanLabMB;
 import permintaan.DlgCariPermintaanLabPA;
 import permintaan.DlgPermintaanPelayananInformasiObat;
@@ -1681,6 +1683,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnGrafikLimbahDomestikPerTanggal = new widget.ButtonBig();
         btnLaboratoriumPA = new widget.ButtonBig();
         btnLaboratoriumMB = new widget.ButtonBig();
+        btnPermintaanFisio = new widget.ButtonBig();
         internalFrame1 = new widget.InternalFrame();
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1929,7 +1932,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28/11/2024" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03/01/2025" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -6984,6 +6987,17 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
 
+        btnPermintaanFisio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6141440_boy_man_old_people_elderly and kid_icon.png"))); // NOI18N
+        btnPermintaanFisio.setText("Permintaan Fisioterapi");
+        btnPermintaanFisio.setIconTextGap(0);
+        btnPermintaanFisio.setName("btnPermintaanFisio"); // NOI18N
+        btnPermintaanFisio.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPermintaanFisio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPermintaanFisioActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("::[ Khanza SIMKES 2022 ]::");
         setBackground(new java.awt.Color(255, 254, 254));
@@ -7575,6 +7589,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnLaboratorium.setEnabled(true);
 //                    btnLaboratoriumPA.setEnabled(true);
 //                    btnLaboratoriumMB.setEnabled(true);
+                    btnPermintaanFisio.setEnabled(true);
                     btnPermintaanRadiologi.setEnabled(true);
                     btnPeriksaRadiologi.setEnabled(true);
                     btnInputPenjualan.setEnabled(true);
@@ -7635,7 +7650,8 @@ public class frmUtama extends javax.swing.JFrame {
                     btnLaboratorium.setEnabled(akses.getperiksa_lab());
                     btnLaboratoriumPA.setEnabled(akses.getpemeriksaan_lab_pa());
                     btnLaboratoriumMB.setEnabled(akses.getpemeriksaan_lab_pa());
-                    btnPeriksaRadiologi.setEnabled(akses.getperiksa_radiologi());  
+                    btnPeriksaRadiologi.setEnabled(akses.getperiksa_radiologi());
+                    btnPermintaanFisio.setEnabled(akses.getperiksa_radiologi()); 
                     btnInputPenjualan.setEnabled(akses.getpenjualan_obat());
                     btnDataPenjualan.setEnabled(akses.getpenjualan_obat());
                     btnDataPenyerahanDarah.setEnabled(akses.getutd_penyerahan_darah());
@@ -7659,6 +7675,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnLaboratoriumPA.setEnabled(false);
                     btnLaboratoriumMB.setEnabled(false);
                     btnPermintaanRadiologi.setEnabled(false);
+                    btnPermintaanFisio.setEnabled(false);
                     btnPeriksaRadiologi.setEnabled(false);    
                     btnInputPenjualan.setEnabled(false);
                     btnDataPenjualan.setEnabled(false);
@@ -13532,6 +13549,19 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private void edAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edAdminActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_edAdminActionPerformed
+
+    private void btnPermintaanFisioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermintaanFisioActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPermintaanFisio form=new DlgCariPermintaanFisio(this,false);
+        form.isCek();
+        form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnPermintaanFisioActionPerformed
 
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -20057,6 +20087,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig btnPenyakitPD3I;
     private widget.ButtonBig btnPenyakitRanapCaraBayar;
     private widget.ButtonBig btnPeriksaRadiologi;
+    private widget.ButtonBig btnPermintaanFisio;
     private widget.ButtonBig btnPermintaanLab;
     private widget.ButtonBig btnPermintaanMedis;
     private widget.ButtonBig btnPermintaanNonMedis;
@@ -20545,6 +20576,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             
             if((akses.getpermintaan_radiologi()==true)||(akses.getperiksa_radiologi()==true)){
                 Panelmenu.add(btnPermintaanRadiologi);
+                jmlmenu++;
+            }
+            
+            if((akses.getpermintaan_radiologi()==true)){
+                Panelmenu.add(btnPermintaanFisio);
                 jmlmenu++;
             }
             
@@ -22420,8 +22456,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             if(akses.gettarif_radiologi()==true){
                 Panelmenu.add(btnTarifRadiologi);
                 jmlmenu++;
-            }          
-
+            }  
+            
             if(akses.gettarif_operasi()==true){
                 Panelmenu.add(btnPaketOperasi);
                 jmlmenu++;
@@ -25300,6 +25336,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             Panelmenu.add(btnPermintaanRadiologi);
             jmlmenu++;
         }
+        
+        if((akses.getpermintaan_radiologi()==true)){
+            Panelmenu.add(btnPermintaanFisio);
+            jmlmenu++;
+        }
 
         if(akses.getdpjp_ranap()==true){
             Panelmenu.add(BtnDpjp);
@@ -27164,8 +27205,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         if(akses.gettarif_radiologi()==true){
             Panelmenu.add(btnTarifRadiologi);
             jmlmenu++;
-        }          
-
+        }    
+        
         if(akses.gettarif_operasi()==true){
             Panelmenu.add(btnPaketOperasi);
             jmlmenu++;
@@ -30068,6 +30109,13 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
             }                
         }
+        
+        if((akses.getpermintaan_radiologi()==true)){
+            if(btnPermintaanFisio.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPermintaanFisio);
+                jmlmenu++;
+            }                
+        }
 
         if(akses.getdpjp_ranap()==true){
             if(BtnDpjp.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
@@ -32686,7 +32734,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnTarifRadiologi);
                 jmlmenu++;
             }                
-        }          
+        }  
 
         if(akses.gettarif_operasi()==true){
             if(btnPaketOperasi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){

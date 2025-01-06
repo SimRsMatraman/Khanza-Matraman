@@ -31,7 +31,7 @@ import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariPoli;
-import simrskhanza.DlgPeriksaRadiologi;
+import simrskhanza.DlgPeriksaFisio;
 
 public class DlgCariPermintaanFisio extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2,tabMode3,tabMode4;
@@ -51,7 +51,8 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
     private boolean aktif=false,semua;
     private String alarm="",formalarm="",nol_detik,detik,tglsampel="",tglhasil="",norm="",kamar="",namakamar="",
             NoPermintaan="",NoRawat="",Pasien="",Permintaan="",JamPermintaan="",Sampel="",JamSampel="",Hasil="",JamHasil="",KodeDokter="",DokterPerujuk="",Ruang="",
-            InformasiTambahan="",Klinis="",finger="";
+            InformasiTambahan="",Klinis="",finger="",noorder="";
+    private PreparedStatement pspemeriksaan;
     
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -59,8 +60,9 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
     public DlgCariPermintaanFisio(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        listPetugas();
 
-        WindowAmbilSampel.setSize(600,80);
+        WindowAmbilSampel.setSize(686,123);
         WindowGanti.setSize(530,80);
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Permintaan","No.Rawat","Pasien","Permintaan","Jam","Validasi","Jam",
@@ -457,7 +459,7 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(BtnCloseIn4);
-        BtnCloseIn4.setBounds(230, 80, 100, 30);
+        BtnCloseIn4.setBounds(570, 70, 100, 30);
 
         BtnSimpan4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpan4.setMnemonic('S');
@@ -470,14 +472,14 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(BtnSimpan4);
-        BtnSimpan4.setBounds(110, 80, 100, 30);
+        BtnSimpan4.setBounds(450, 70, 100, 30);
 
         jLabel26.setText("Tanggal & Jam :");
         jLabel26.setName("jLabel26"); // NOI18N
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2025 14:56:41" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-01-2025 09:52:40" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -485,7 +487,6 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
         internalFrame5.add(TanggalPulang);
         TanggalPulang.setBounds(110, 32, 150, 23);
 
-        listDok.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua" }));
         listDok.setName("listDok"); // NOI18N
         listDok.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -493,14 +494,14 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(listDok);
-        listDok.setBounds(340, 30, 160, 22);
+        listDok.setBounds(390, 30, 280, 22);
 
         label30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label30.setText("Petugas :");
         label30.setName("label30"); // NOI18N
         label30.setPreferredSize(new java.awt.Dimension(55, 23));
         internalFrame5.add(label30);
-        label30.setBounds(270, 30, 80, 23);
+        label30.setBounds(300, 30, 80, 23);
 
         WindowAmbilSampel.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
@@ -543,7 +544,7 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
         jLabel27.setBounds(6, 32, 100, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2025" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-01-2025" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -1413,10 +1414,19 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     if(tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),0).toString().trim().equals("")){
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{ 
-                        TanggalPulang.setDate(new Date());
-                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
-                        WindowAmbilSampel.setLocationRelativeTo(internalFrame1);
-                        WindowAmbilSampel.setVisible(true);
+//                        TanggalPulang.setDate(new Date());
+//                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//                        WindowAmbilSampel.setLocationRelativeTo(internalFrame1);
+//                        WindowAmbilSampel.setVisible(true);
+//                        this.setCursor(Cursor.getDefaultCursor());
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                        DlgPeriksaFisio dlgro=new DlgPeriksaFisio(null,false);
+                        dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        dlgro.setLocationRelativeTo(internalFrame1);
+                        dlgro.isCek();
+                        dlgro.setOrder(tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),0).toString(),tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),1).toString(),"Ralan");
+                        dlgro.setDokterPerujuk(tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),7).toString(),tbFisioRalan.getValueAt(tbFisioRalan.getSelectedRow(),8).toString());
+                        dlgro.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
                 }else{            
@@ -1451,7 +1461,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             } 
         }                       
     }//GEN-LAST:event_BtnHasilActionPerformed
-
+    
     private void BtnHasilKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHasilKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnHasilKeyPressed
@@ -1565,7 +1575,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         tbFisioRalan.setValueAt(TNoPermintaanPR.getText(),tbFisioRalan.getSelectedRow(),0);
                         tbFisioRalan.setValueAt(Valid.SetTgl(TanggalPulang1.getSelectedItem()+""),tbFisioRalan.getSelectedRow(),3);
 //              Jika Mau merubah jam juga
-                        //tbRadiologiRalan.setValueAt(TanggalPulang1.getSelectedItem().toString().substring(11,19),tbRadiologiRalan.getSelectedRow(),6);
+                        //tbFisioRalan.setValueAt(TanggalPulang1.getSelectedItem().toString().substring(11,19),tbFisioRalan.getSelectedRow(),6);
                     }
                 }
             }else{            
@@ -2270,9 +2280,9 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         
     }
     
-    private void listDokter(){
+    private void listPetugas(){
        try{
-            ps=koneksi.prepareStatement("SELECT nip,nama FROM petugas WHERE petugas.status='1' and petugas.kd_jbtn='20' ORDER BY nama asc");
+            ps=koneksi.prepareStatement("SELECT nip,nama FROM petugas WHERE petugas.status='1' and petugas.kd_jbtn='J020' ORDER BY nama asc");
             ResultSet rs=ps.executeQuery();
 
             while(rs.next()){
