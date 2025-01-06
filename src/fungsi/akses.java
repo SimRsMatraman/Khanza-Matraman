@@ -215,7 +215,7 @@ public final class akses {
             satu_sehat_mapping_radiologi=false,satu_sehat_kirim_servicerequest_radiologi=false,hasil_endoskopi_hidung=false,satu_sehat_kirim_specimen_radiologi=false,satu_sehat_kirim_observation_radiologi=false,satu_sehat_kirim_diagnosticreport_radiologi=false,hasil_endoskopi_telinga=false,satu_sehat_mapping_lab=false,
             satu_sehat_kirim_servicerequest_lab=false,satu_sehat_kirim_servicerequest_labmb=false,satu_sehat_kirim_specimen_lab=false,satu_sehat_kirim_specimen_labmb=false,
             satu_sehat_kirim_observation_lab=false,satu_sehat_kirim_observation_labmb=false,satu_sehat_kirim_diagnosticreport_lab=false,satu_sehat_kirim_diagnosticreport_labmb=false,penilaian_risiko_jatuh_neonatus=false,monitoring_emr=false,hapus_data_salah_kamar_inap=false,
-            konsultasi_medik=false,jawaban_konsultasi_medik=false;
+            konsultasi_medik=false,jawaban_konsultasi_medik=false,permintaan_fisio=false;
     
     public static void setData(String user, String pass) {
         try {        
@@ -1223,6 +1223,7 @@ public final class akses {
                         akses.satu_sehat_kirim_diagnosticreport_labmb=true;
                         akses.konsultasi_medik=true;
                         akses.jawaban_konsultasi_medik=true;
+                        akses.permintaan_fisio=true;
                     }else if(rs2.getRow()>=1){   
                         rs2.beforeFirst();
                         rs2.next();
@@ -2215,6 +2216,7 @@ public final class akses {
                         akses.satu_sehat_kirim_diagnosticreport_labmb=rs2.getBoolean("satu_sehat_kirim_diagnosticreport_labmb");
                         akses.konsultasi_medik=rs2.getBoolean("konsultasi_medik");
                         akses.jawaban_konsultasi_medik=rs2.getBoolean("jawaban_konsultasi_medik");
+                        akses.permintaan_fisio=rs2.getBoolean("permintaan_fisio");
                     }else if((rs.getRow()==0)&&(rs2.getRow()==0)){
                         akses.kode="";                  
                         akses.penyakit= false;
@@ -3205,6 +3207,7 @@ public final class akses {
                         akses.satu_sehat_kirim_diagnosticreport_labmb=false;
                         akses.konsultasi_medik=false;
                         akses.jawaban_konsultasi_medik=false;
+                        akses.permintaan_fisio=false;
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -4270,6 +4273,7 @@ public final class akses {
         //akses.catatan_observasi_chbp=false;
         akses.konsultasi_medik=false;
         akses.jawaban_konsultasi_medik=false;
+        akses.permintaan_fisio=false;
     }
     
     public static int getjml1() {return akses.jml1;}    
@@ -4676,6 +4680,7 @@ public final class akses {
     public static void setperiksalabmbfalse(){akses.pemeriksaan_lab_mb=false;} 
     public static void setpermintaanlabfalse(){akses.permintaan_lab=false;} 
     public static boolean getpermintaan_radiologi(){return akses.permintaan_radiologi;}
+    public static boolean getpermintaan_fisio(){return akses.permintaan_fisio;}
     public static void setperiksaradiologifalse(){akses.periksa_radiologi=false;} 
     public static void setpermintaanradiologifalse(){akses.permintaan_radiologi=false;} 
     public static boolean getsurat_indeks(){return akses.surat_indeks;}
@@ -5299,5 +5304,6 @@ public final class akses {
     public static boolean getsatu_sehat_kirim_diagnosticreport_labmb(){return akses.satu_sehat_kirim_diagnosticreport_labmb;}
     public static boolean getkonsultasi_medik(){return akses.konsultasi_medik;}
     public static boolean getjawaban_konsultasi_medik(){return akses.jawaban_konsultasi_medik;}
+    public static boolean permintaan_fisio(){return akses.permintaan_fisio;}
     
 }   

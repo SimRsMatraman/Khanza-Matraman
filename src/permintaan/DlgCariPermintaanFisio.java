@@ -380,6 +380,8 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
         BtnSimpan4 = new widget.Button();
         jLabel26 = new widget.Label();
         TanggalPulang = new widget.Tanggal();
+        listDok = new javax.swing.JComboBox<>();
+        label30 = new widget.Label();
         WindowGanti = new javax.swing.JDialog();
         internalFrame6 = new widget.InternalFrame();
         BtnCloseIn5 = new widget.Button();
@@ -455,7 +457,7 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(BtnCloseIn4);
-        BtnCloseIn4.setBounds(400, 30, 100, 30);
+        BtnCloseIn4.setBounds(230, 80, 100, 30);
 
         BtnSimpan4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpan4.setMnemonic('S');
@@ -468,20 +470,37 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(BtnSimpan4);
-        BtnSimpan4.setBounds(290, 30, 100, 30);
+        BtnSimpan4.setBounds(110, 80, 100, 30);
 
         jLabel26.setText("Tanggal & Jam :");
         jLabel26.setName("jLabel26"); // NOI18N
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025 14:09:25" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2025 14:56:41" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
         TanggalPulang.setPreferredSize(new java.awt.Dimension(95, 23));
         internalFrame5.add(TanggalPulang);
         TanggalPulang.setBounds(110, 32, 150, 23);
+
+        listDok.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua" }));
+        listDok.setName("listDok"); // NOI18N
+        listDok.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listDokMouseClicked(evt);
+            }
+        });
+        internalFrame5.add(listDok);
+        listDok.setBounds(340, 30, 160, 22);
+
+        label30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label30.setText("Petugas :");
+        label30.setName("label30"); // NOI18N
+        label30.setPreferredSize(new java.awt.Dimension(55, 23));
+        internalFrame5.add(label30);
+        label30.setBounds(270, 30, 80, 23);
 
         WindowAmbilSampel.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
@@ -524,7 +543,7 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
         jLabel27.setBounds(6, 32, 100, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2025" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2025" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -1668,6 +1687,10 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         // TODO add your handling code here:
     }//GEN-LAST:event_tbFisioRalan2MouseClicked
 
+    private void listDokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listDokMouseClicked
+
+    }//GEN-LAST:event_listDokMouseClicked
+
     /**
     * @param args the command line arguments
     */
@@ -1733,6 +1756,8 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Label label10;
     private widget.Label label11;
     private widget.Label label18;
+    private widget.Label label30;
+    private javax.swing.JComboBox<String> listDok;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
@@ -2243,5 +2268,21 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         TanggalPulang1.setDate(new Date());
         autoNomor();
         
+    }
+    
+    private void listDokter(){
+       try{
+            ps=koneksi.prepareStatement("SELECT nip,nama FROM petugas WHERE petugas.status='1' and petugas.kd_jbtn='20' ORDER BY nama asc");
+            ResultSet rs=ps.executeQuery();
+
+            while(rs.next()){
+                 listDok.addItem(rs.getString("nama"));
+            }               
+            rs.close();                
+        }
+
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 }
