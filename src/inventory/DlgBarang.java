@@ -55,6 +55,7 @@ public class DlgBarang extends javax.swing.JDialog {
     private PreparedStatement ps, ps2, ps3, ps4;
     private ResultSet rs, rs2, rs3;
     private int i = 0;
+    private DlgGudangBangsal kamar = new DlgGudangBangsal(null, false);
     public String aktifkanbatch="no",pengaturanharga=Sequel.cariIsi("select set_harga_obat.setharga from set_harga_obat");
     private String kdlokasi = "", nmlokasi = "", tanggal = "0000-00-00",qrystok="";
 
@@ -516,6 +517,7 @@ public class DlgBarang extends javax.swing.JDialog {
         BtnPrint = new widget.Button();
         BtnAll = new widget.Button();
         BtnKeluar = new widget.Button();
+        BtnTambah = new widget.Button();
         scrollPane1 = new widget.ScrollPane();
         tbObat = new widget.Table();
         PanelInput = new javax.swing.JPanel();
@@ -1092,6 +1094,18 @@ public class DlgBarang extends javax.swing.JDialog {
         });
         panelisi1.add(BtnKeluar);
 
+        BtnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
+        BtnTambah.setMnemonic('3');
+        BtnTambah.setToolTipText("Alt+3");
+        BtnTambah.setName("BtnTambah"); // NOI18N
+        BtnTambah.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTambahActionPerformed(evt);
+            }
+        });
+        panelisi1.add(BtnTambah);
+
         jPanel2.add(panelisi1, java.awt.BorderLayout.CENTER);
 
         internalFrame1.add(jPanel2, java.awt.BorderLayout.PAGE_END);
@@ -1304,7 +1318,7 @@ public class DlgBarang extends javax.swing.JDialog {
         Kapasitas.setBounds(410, 132, 70, 23);
 
         DTPExpired.setForeground(new java.awt.Color(50, 70, 50));
-        DTPExpired.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-05-2023" }));
+        DTPExpired.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2025" }));
         DTPExpired.setDisplayFormat("dd-MM-yyyy");
         DTPExpired.setName("DTPExpired"); // NOI18N
         DTPExpired.setOpaque(false);
@@ -2446,6 +2460,17 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         // TODO add your handling code here:
     }//GEN-LAST:event_maxobatKeyPressed
 
+    private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        kamar.emptTeks();
+        kamar.isCek();
+        kamar.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        kamar.setLocationRelativeTo(internalFrame1);
+        kamar.setAlwaysOnTop(false);
+        kamar.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnTambahActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2477,6 +2502,7 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.Button BtnSatuan;
     private widget.Button BtnSatuanBesar;
     private widget.Button BtnSimpan;
+    private widget.Button BtnTambah;
     private widget.CekBox ChkInput;
     private widget.CekBox ChkKadaluarsa;
     private widget.Tanggal DTPExpired;
