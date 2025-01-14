@@ -273,10 +273,10 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ppDisetujui1 = new javax.swing.JMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         ppHapus = new javax.swing.JMenuItem();
         ppDisetujui = new javax.swing.JMenuItem();
-        ppDisetujui1 = new javax.swing.JMenuItem();
         ppTidakDisetujui = new javax.swing.JMenuItem();
         kdjenis = new widget.TextBox();
         kdgolongan = new widget.TextBox();
@@ -294,6 +294,7 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
         BtnAll = new widget.Button();
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
+        No = new widget.TextBox();
         panelisi4 = new widget.panelisi();
         label7 = new widget.Label();
         nmjenis = new widget.TextBox();
@@ -328,6 +329,21 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
         label14 = new widget.Label();
         Status = new widget.ComboBox();
 
+        ppDisetujui1.setBackground(new java.awt.Color(255, 255, 254));
+        ppDisetujui1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppDisetujui1.setForeground(new java.awt.Color(50, 50, 50));
+        ppDisetujui1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppDisetujui1.setText("Disetujui ( Stok Keluar )");
+        ppDisetujui1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppDisetujui1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppDisetujui1.setName("ppDisetujui1"); // NOI18N
+        ppDisetujui1.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppDisetujui1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppDisetujui1ActionPerformed(evt);
+            }
+        });
+
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
         ppHapus.setBackground(new java.awt.Color(255, 255, 254));
@@ -361,22 +377,6 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(ppDisetujui);
-
-        ppDisetujui1.setBackground(new java.awt.Color(255, 255, 254));
-        ppDisetujui1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppDisetujui1.setForeground(new java.awt.Color(50, 50, 50));
-        ppDisetujui1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppDisetujui1.setText("Disetujui ( Stok Keluar )");
-        ppDisetujui1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppDisetujui1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppDisetujui1.setName("ppDisetujui1"); // NOI18N
-        ppDisetujui1.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppDisetujui1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppDisetujui1ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(ppDisetujui1);
 
         ppTidakDisetujui.setBackground(new java.awt.Color(255, 255, 254));
         ppTidakDisetujui.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -560,6 +560,15 @@ public class DlgCariPermintaan extends javax.swing.JDialog {
             }
         });
         panelisi1.add(BtnKeluar);
+
+        No.setName("No"); // NOI18N
+        No.setPreferredSize(new java.awt.Dimension(207, 23));
+        No.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NoKeyPressed(evt);
+            }
+        });
+        panelisi1.add(No);
 
         jPanel1.add(panelisi1, java.awt.BorderLayout.PAGE_END);
 
@@ -1067,9 +1076,10 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }else{
             if(Sequel.cariIsi("select permintaan_medis.status from permintaan_medis where permintaan_medis.no_permintaan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim()).equals("Baru")){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgMutasiBarang aplikasi=new DlgMutasiBarang(null,false);
+                DlgMutasiBarangPermintaan aplikasi=new DlgMutasiBarangPermintaan(null,false);
                 aplikasi.tampilkanpermintaan=false;
-                aplikasi.tampil(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+//                aplikasi.tampil(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+                aplikasi.setNoPermintaan(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
                 aplikasi.isCek();
                 aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 aplikasi.setLocationRelativeTo(internalFrame1);
@@ -1082,6 +1092,55 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
     }//GEN-LAST:event_ppDisetujuiActionPerformed
 
+    private void getData() {
+        if(tabMode.getRowCount()!=0){
+            No.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()); 
+        }
+    }
+    
+    private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {                                    
+        if(tabMode.getRowCount()!=0){
+            if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
+                try {
+                    getData();
+                } catch (java.lang.NullPointerException e) {
+                }
+            }
+        }
+    }      
+    
+    private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {
+        if(tabMode.getRowCount()!=0){
+            if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
+                try {
+                    getData();
+                } catch (java.lang.NullPointerException e) {
+                }
+            }
+        }
+    }
+    
+    private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {                                      
+        if(tabMode.getRowCount()!=0){
+            try {
+                getData();
+            } catch (java.lang.NullPointerException e) {
+            }
+        }
+    } 
+    
+    public void keyPressed(java.awt.event.KeyEvent evt) {
+        tbDokterKeyPressed(evt);
+    }
+    
+    public void keyReleased(java.awt.event.KeyEvent evt) {
+        tbDokterKeyReleased(evt);
+    }
+    
+    public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tbDokterMouseClicked(evt);
+    }
+    
     private void ppTidakDisetujuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTidakDisetujuiActionPerformed
         if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"pilihan data");
@@ -1140,6 +1199,10 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         // TODO add your handling code here:
     }//GEN-LAST:event_kdkategoriKeyPressed
 
+    private void NoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NoKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1170,6 +1233,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private widget.Label LTotal;
     private widget.TextBox NmBangsal;
     private widget.TextBox NmPeg;
+    private widget.TextBox No;
     private widget.TextBox NoPermintaan;
     private javax.swing.JPanel PanelInput;
     private widget.ComboBox Status;
