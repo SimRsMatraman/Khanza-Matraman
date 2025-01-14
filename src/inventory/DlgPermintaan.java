@@ -167,10 +167,12 @@ public class DlgPermintaan extends javax.swing.JDialog {
                         kdgudangTujuan.setText(caribangsal.getTable().getValueAt(caribangsal.getTable().getSelectedRow(), 0).toString());
                         nmgudangTujuan.setText(caribangsal.getTable().getValueAt(caribangsal.getTable().getSelectedRow(), 1).toString());
                         kdgudangTujuan.requestFocus();
+                        tampil();
                     } else if (i == 2) {
                         kdgudangasal.setText(caribangsal.getTable().getValueAt(caribangsal.getTable().getSelectedRow(), 0).toString());
                         nmgudangasal.setText(caribangsal.getTable().getValueAt(caribangsal.getTable().getSelectedRow(), 1).toString());
                         kdgudangasal.requestFocus();
+                        tampil();
                     }
                 }
             }
@@ -1276,19 +1278,15 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         }
                     }
                     
-                    
-//                    if( jml >rs2.getDouble("stok_max")){
-//                            JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
                         tabMode.addRow(new Object[]{
                             "", rs.getString(1), rs.getString(2), rs.getString(3),
                             rs.getString(4), rs.getString(5), rs.getString(6), Valid.SetAngka(jumlahbeli), Valid.SetAngka(totalbeli), "", Valid.SetAngka(stok), Valid.SetAngka(jumlahbeli1)
                         });
-//                        }else{
-//                            tabMode.addRow(new Object[] {
-//                                 "", rs.getString(1), rs.getString(2), rs.getString(3),
-//                            rs.getString(4), rs.getString(5), rs.getString(6), Valid.SetAngka(jumlahbeli), Valid.SetAngka(totalbeli), "", Valid.SetAngka(stok), Valid.SetAngka(jumlahbeli1)
-//                            }); 
-//                        }
+                        
+//                        tabMode.addRow(new Object[]{
+//                            "", rs.getString(1), rs.getString(2), rs.getString(3),
+//                            rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(8), rs.getString(9), "", Valid.SetAngka(stok), Valid.SetAngka(jumlahbeli1)
+//                        });
                     iyem = iyem + "{\"KodeBarang\":\"" + rs.getString(1) + "\",\"NamaBarang\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"Satuan\":\"" + rs.getString(3) + "\",\"JenisObat\":\"" + rs.getString(4) + "\",\"Kategori\":\"" + rs.getString(5) + "\",\"Golongan\":\"" + rs.getString(6) + "\",\"Min. Permintaan\":\"" + rs.getString(8) + "\",\"Max.Permintaan\":\"" + rs.getString(9) + "\",\"Stok Bangsal\":\"" + Valid.SetAngka(stok) + "\",\"Stok Asal\":\"" + Valid.SetAngka(jumlahbeli1) + "\"},";
                 }
             } catch (Exception e) {
@@ -1373,6 +1371,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 //    }
     public void isCek() {
         autoNomor();
+        tampil();
         kdgudangasal.setText("B0016");
         nmgudangasal.setText("GUDANG");
         TCari.requestFocus();
@@ -1394,6 +1393,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private void autoNomor() {
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_medis.no_permintaan,3),signed)),0) from permintaan_medis where permintaan_medis.tanggal='" + Valid.SetTgl(Tanggal.getSelectedItem() + "") + "' ",
                 "PM" + Tanggal.getSelectedItem().toString().substring(6, 10) + Tanggal.getSelectedItem().toString().substring(3, 5) + Tanggal.getSelectedItem().toString().substring(0, 2), 3, NoPermintaan);
+        tampil();
     }
     
     private void getCekStok() {
@@ -1402,6 +1402,9 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 try {
                     if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
                         if(Valid.SetAngka(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>Valid.SetAngka(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())){
+                            JOptionPane.showMessageDialog(rootPane,"Maaf permintaan melebihi batas maximum..!!");
+                            tbDokter.setValueAt("",tbDokter.getRowCount(),0);
+                        }else if(Valid.SetAngka(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>Valid.SetAngka(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())){
                             JOptionPane.showMessageDialog(rootPane,"Maaf permintaan melebihi batas maximum..!!");
                             tbDokter.setValueAt("",tbDokter.getRowCount(),0);
                         }
