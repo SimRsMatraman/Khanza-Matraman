@@ -849,11 +849,11 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
             getCekStok();
             getCekStokMin();
-            i=tbDokter.getSelectedColumn();
-            if((i==0)||(i==1)||(i==2)){
-                TCari.requestFocus();
-                getData();
-            }
+//            i=tbDokter.getSelectedColumn();
+//            if((i==0)||(i==1)||(i==2)){
+//                TCari.requestFocus();
+//                getData();
+//            }
         } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             i = tbDokter.getSelectedRow();
             if (i != -1) {
@@ -870,14 +870,15 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         } else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
             getCekStok();  
             getCekStokMin();    
-        } else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            getCekStok(); 
-            getCekStokMin();     
         }
-        else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            getCekStok();  
-            getCekStokMin();    
-        }
+//        else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+//            getCekStok(); 
+//            getCekStokMin();     
+//        }
+//        else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+//            getCekStok();  
+//            getCekStokMin();    
+//        }
     }
 }//GEN-LAST:event_tbDokterKeyPressed
 
