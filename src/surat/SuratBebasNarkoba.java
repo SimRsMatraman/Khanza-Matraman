@@ -1145,12 +1145,12 @@ if(TPasien.getText().trim().equals("")){
                 param.put("kategori",Kategori.getSelectedItem().toString());
                 param.put("nosurat",NoSurat.getText());
                 param.put("dokter",TDokter.getText());
-                param.put("opiat",hasil1.getSelectedItem().toString());
-                param.put("ganja",hasil2.getSelectedItem().toString());
-                param.put("amphetamin",hasil3.getSelectedItem().toString());
-                param.put("methamphetamin",hasil4.getSelectedItem().toString());
-                param.put("benzodiazepin",hasil5.getSelectedItem().toString());
-                param.put("cocain",hasil6.getSelectedItem().toString());
+//                param.put("opiat",hasil1.getSelectedItem().toString());
+//                param.put("ganja",hasil2.getSelectedItem().toString());
+//                param.put("amphetamin",hasil3.getSelectedItem().toString());
+//                param.put("methamphetamin",hasil4.getSelectedItem().toString());
+//                param.put("benzodiazepin",hasil5.getSelectedItem().toString());
+//                param.put("cocain",hasil6.getSelectedItem().toString());
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
@@ -1161,10 +1161,10 @@ if(TPasien.getText().trim().equals("")){
                 param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+TDokter.getText()+"\nID "+(finger.equals("")?KdDok.getText():finger)+"\n"+TanggalSurat.getSelectedItem());  
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
                 Valid.MyReportqry("rptBebasNarkoba4.jasper","report","::[ Surat SKBN 4 ]::",
-                              " select reg_periksa.no_rawat,dokter.nm_dokter,dokter.no_ijn_praktek,dokter.nip1,pasien.tgl_lahir,pasien.nm_pasien,pasien.pekerjaan,"+
+                              " select reg_periksa.no_rawat,dokter.nm_dokter,dokter.no_ijn_praktek,dokter.nip1,pasien.tgl_lahir,pasien.nm_pasien,pasien.pekerjaan,surat_skbn.opiat,surat_skbn.benzodiazepin,surat_skbn.amphetamin,surat_skbn.ganja,surat_skbn.methamphetamin,"+
                               " concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,pasien.jk,reg_periksa.kd_dokter " +
-                              " from reg_periksa inner join pasien inner join dokter inner join kelurahan inner join kecamatan inner join kabupaten " +
-                              " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter and pasien.kd_kel=kelurahan.kd_kel "+
+                              " from reg_periksa inner join pasien inner join dokter inner join kelurahan inner join kecamatan inner join kabupaten inner join surat_skbn " +
+                              " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter and pasien.kd_kel=kelurahan.kd_kel and surat_skbn.no_rawat=reg_periksa.no_rawat "+
                               " and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
                 this.setCursor(Cursor.getDefaultCursor());  
        }

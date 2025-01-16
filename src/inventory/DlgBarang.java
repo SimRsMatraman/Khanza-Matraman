@@ -173,6 +173,14 @@ public class DlgBarang extends javax.swing.JDialog {
                 column.setPreferredWidth(85);
             } else if (i == 33) {
                 column.setPreferredWidth(85);
+//            } else if (i == 34) {
+//                column.setPreferredWidth(45);
+//            } else if (i == 35) {
+//                column.setPreferredWidth(45);
+//            } else if (i == 36) {
+//                column.setPreferredWidth(45);
+//            } else if (i == 37) {
+//                column.setPreferredWidth(45);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());   
@@ -566,6 +574,16 @@ public class DlgBarang extends javax.swing.JDialog {
         label41 = new widget.Label();
         label42 = new widget.Label();
         maxobat = new widget.TextBox();
+        kdapotek = new widget.TextBox();
+        label43 = new widget.Label();
+        label44 = new widget.Label();
+        kdigd = new widget.TextBox();
+        label45 = new widget.Label();
+        label46 = new widget.Label();
+        apotekmax = new widget.TextBox();
+        apotekmin = new widget.TextBox();
+        igdmax = new widget.TextBox();
+        igdmin = new widget.TextBox();
         ChkInput = new widget.CekBox();
 
         Popup.setName("Popup"); // NOI18N
@@ -1318,7 +1336,7 @@ public class DlgBarang extends javax.swing.JDialog {
         Kapasitas.setBounds(410, 132, 70, 23);
 
         DTPExpired.setForeground(new java.awt.Color(50, 70, 50));
-        DTPExpired.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2025" }));
+        DTPExpired.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2025" }));
         DTPExpired.setDisplayFormat("dd-MM-yyyy");
         DTPExpired.setName("DTPExpired"); // NOI18N
         DTPExpired.setOpaque(false);
@@ -1551,11 +1569,11 @@ public class DlgBarang extends javax.swing.JDialog {
         FormInput.add(label41);
         label41.setBounds(490, 10, 130, 23);
 
-        label42.setText("Max. Permintaan Obat : ");
+        label42.setText("Apotek :");
         label42.setName("label42"); // NOI18N
         label42.setPreferredSize(new java.awt.Dimension(65, 23));
         FormInput.add(label42);
-        label42.setBounds(490, 40, 130, 23);
+        label42.setBounds(460, 90, 100, 23);
 
         maxobat.setName("maxobat"); // NOI18N
         maxobat.setPreferredSize(new java.awt.Dimension(207, 23));
@@ -1576,6 +1594,130 @@ public class DlgBarang extends javax.swing.JDialog {
         });
         FormInput.add(maxobat);
         maxobat.setBounds(630, 40, 110, 23);
+
+        kdapotek.setName("kdapotek"); // NOI18N
+        kdapotek.setPreferredSize(new java.awt.Dimension(80, 23));
+        kdapotek.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                kdapotekKeyPressed(evt);
+            }
+        });
+        FormInput.add(kdapotek);
+        kdapotek.setBounds(570, 90, 70, 23);
+
+        label43.setText("Max. Permintaan Obat : ");
+        label43.setName("label43"); // NOI18N
+        label43.setPreferredSize(new java.awt.Dimension(65, 23));
+        FormInput.add(label43);
+        label43.setBounds(490, 40, 130, 23);
+
+        label44.setText("IGD :");
+        label44.setName("label44"); // NOI18N
+        label44.setPreferredSize(new java.awt.Dimension(65, 23));
+        FormInput.add(label44);
+        label44.setBounds(460, 120, 100, 23);
+
+        kdigd.setName("kdigd"); // NOI18N
+        kdigd.setPreferredSize(new java.awt.Dimension(80, 23));
+        kdigd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                kdigdKeyPressed(evt);
+            }
+        });
+        FormInput.add(kdigd);
+        kdigd.setBounds(570, 120, 70, 23);
+
+        label45.setText("MAX");
+        label45.setName("label45"); // NOI18N
+        label45.setPreferredSize(new java.awt.Dimension(65, 23));
+        FormInput.add(label45);
+        label45.setBounds(650, 60, 40, 30);
+
+        label46.setText("MIN");
+        label46.setName("label46"); // NOI18N
+        label46.setPreferredSize(new java.awt.Dimension(65, 23));
+        FormInput.add(label46);
+        label46.setBounds(720, 60, 40, 30);
+
+        apotekmax.setName("apotekmax"); // NOI18N
+        apotekmax.setPreferredSize(new java.awt.Dimension(207, 23));
+        apotekmax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                apotekmaxMouseMoved(evt);
+            }
+        });
+        apotekmax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                apotekmaxMouseExited(evt);
+            }
+        });
+        apotekmax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                apotekmaxKeyPressed(evt);
+            }
+        });
+        FormInput.add(apotekmax);
+        apotekmax.setBounds(650, 90, 60, 23);
+
+        apotekmin.setName("apotekmin"); // NOI18N
+        apotekmin.setPreferredSize(new java.awt.Dimension(207, 23));
+        apotekmin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                apotekminMouseMoved(evt);
+            }
+        });
+        apotekmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                apotekminMouseExited(evt);
+            }
+        });
+        apotekmin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                apotekminKeyPressed(evt);
+            }
+        });
+        FormInput.add(apotekmin);
+        apotekmin.setBounds(720, 90, 60, 23);
+
+        igdmax.setName("igdmax"); // NOI18N
+        igdmax.setPreferredSize(new java.awt.Dimension(207, 23));
+        igdmax.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                igdmaxMouseMoved(evt);
+            }
+        });
+        igdmax.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                igdmaxMouseExited(evt);
+            }
+        });
+        igdmax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                igdmaxKeyPressed(evt);
+            }
+        });
+        FormInput.add(igdmax);
+        igdmax.setBounds(650, 120, 60, 23);
+
+        igdmin.setName("igdmin"); // NOI18N
+        igdmin.setPreferredSize(new java.awt.Dimension(207, 23));
+        igdmin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                igdminMouseMoved(evt);
+            }
+        });
+        igdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                igdminMouseExited(evt);
+            }
+        });
+        igdmin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                igdminKeyPressed(evt);
+            }
+        });
+        FormInput.add(igdmin);
+        igdmin.setBounds(720, 120, 60, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1739,6 +1881,8 @@ public class DlgBarang extends javax.swing.JDialog {
                         dasar.getText(), dasar.getText(), stok_minimal.getText(), kdjns.getText(),dasar.getText(), dasar.getText(), 
                         dasar.getText(), dasar.getText(),dasar.getText(), dasar.getText(), dasar.getText(),tanggal,KdIF.getText(),
                         kdkategori.getText(),kdgolongan.getText(),kdsatBesar.getText(),dasar.getText(),Isi.getText(),minobat.getText(),maxobat.getText(),
+//                        kdapotek.getText()+""+apotekmax.getText(),kdapotek.getText()+""+apotekmin.getText(),
+//                        kdigd.getText()+""+igdmax.getText(),kdigd.getText()+""+igdmin.getText(),
                         tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(),
                     })==true){
                 tbObat.setValueAt(false,tbObat.getSelectedRow(),0);
@@ -1950,6 +2094,8 @@ public class DlgBarang extends javax.swing.JDialog {
                     dasar.getText(), dasar.getText(), dasar.getText(),dasar.getText(), dasar.getText(), dasar.getText(),dasar.getText(), 
                     dasar.getText(), dasar.getText(),stok_minimal.getText(), kdjns.getText(), Isi.getText(),Kapasitas.getText(), tanggal,"1",
                     KdIF.getText(),kdkategori.getText(),kdgolongan.getText(),minobat.getText(),maxobat.getText()
+//                    ,kdapotek.getText()+""+apotekmax.getText(),kdapotek.getText()+""+apotekmin.getText(),
+//                    kdigd.getText()+""+igdmax.getText(),kdigd.getText()+""+igdmin.getText()
                 })==true){
                 tabMode.addRow(new Object[]{
                     false,Kd.getText(),Nm.getText(),kdsatBesar.getText(),nmsatBesar.getText(),Double.parseDouble(Isi.getText()),kdsat.getText(),nmsat.getText(),
@@ -2471,6 +2617,62 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
+    private void kdapotekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdapotekKeyPressed
+       // TODO add your handling code here: 
+    }//GEN-LAST:event_kdapotekKeyPressed
+
+    private void kdigdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdigdKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kdigdKeyPressed
+
+    private void apotekmaxMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apotekmaxMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apotekmaxMouseMoved
+
+    private void apotekmaxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apotekmaxMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apotekmaxMouseExited
+
+    private void apotekmaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apotekmaxKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apotekmaxKeyPressed
+
+    private void apotekminMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apotekminMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apotekminMouseMoved
+
+    private void apotekminMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apotekminMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apotekminMouseExited
+
+    private void apotekminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apotekminKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_apotekminKeyPressed
+
+    private void igdminMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_igdminMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_igdminMouseMoved
+
+    private void igdminMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_igdminMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_igdminMouseExited
+
+    private void igdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_igdminKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_igdminKeyPressed
+
+    private void igdmaxMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_igdmaxMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_igdmaxMouseMoved
+
+    private void igdmaxMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_igdmaxMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_igdmaxMouseExited
+
+    private void igdmaxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_igdmaxKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_igdmaxKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -2519,14 +2721,20 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private javax.swing.JPanel PanelInput;
     private javax.swing.JPopupMenu Popup;
     private widget.TextBox TCari;
+    private widget.TextBox apotekmax;
+    private widget.TextBox apotekmin;
     private widget.TextBox beli;
     private widget.TextBox beliluar;
     private widget.TextBox dasar;
+    private widget.TextBox igdmax;
+    private widget.TextBox igdmin;
     private widget.InternalFrame internalFrame1;
     private javax.swing.JPanel jPanel2;
     private widget.TextBox jualbebas;
     private widget.TextBox karyawan;
+    private widget.TextBox kdapotek;
     private widget.TextBox kdgolongan;
+    private widget.TextBox kdigd;
     private widget.TextBox kdjns;
     private widget.TextBox kdkategori;
     private widget.TextBox kdsat;
@@ -2563,6 +2771,10 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.Label label40;
     private widget.Label label41;
     private widget.Label label42;
+    private widget.Label label43;
+    private widget.Label label44;
+    private widget.Label label45;
+    private widget.Label label46;
     private widget.Label label9;
     private widget.TextBox maxobat;
     private widget.TextBox minobat;
@@ -2597,6 +2809,7 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             + " databarang.karyawan,databarang.stokminimal, databarang.kdjns,"
                             + " jenis.nama,kapasitas,databarang.expire,databarang.kode_industri,industrifarmasi.nama_industri, "
                             + " databarang.kode_kategori,kategori_barang.nama as kategori,databarang.kode_golongan,golongan_barang.nama as golongan,databarang.minobat,databarang.maxobat "
+//                            + " , databarang.apotekmax,databarang.apotekmin,databarang.igdmax,databarang.igdmin"
                             + " from databarang inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "
                             + " inner join kodesatuan as satuanbesar on databarang.kode_satbesar=satuanbesar.kode_sat "
                             + " inner join jenis on databarang.kdjns=jenis.kdjns "
@@ -2613,6 +2826,7 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             + " databarang.karyawan,databarang.stokminimal, databarang.kdjns,"
                             + " jenis.nama,kapasitas,databarang.expire,databarang.kode_industri,industrifarmasi.nama_industri, "
                             + " databarang.kode_kategori,kategori_barang.nama as kategori,databarang.kode_golongan,golongan_barang.nama as golongan,databarang.minobat,databarang.maxobat "
+//                            + " , databarang.apotekmax,databarang.apotekmin,databarang.igdmax,databarang.igdmin "
                             + " from databarang inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "
                             + " inner join kodesatuan as satuanbesar on databarang.kode_satbesar=satuanbesar.kode_sat "
                             + " inner join jenis on databarang.kdjns=jenis.kdjns "
@@ -3316,6 +3530,12 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         nmgolongan.setText("");
         minobat.setText("0");
         maxobat.setText("0");
+        kdapotek.setText("B0015");
+        apotekmin.setText("0");
+        apotekmax.setText("0");
+        kdigd.setText("B0066");
+        igdmin.setText("0");
+        igdmax.setText("0");
 
         Kd.requestFocus();
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(databarang.kode_brng,4),signed)),0)  from databarang ", "B", 9, Kd);
@@ -3357,7 +3577,11 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             nmgolongan.setText(tbObat.getValueAt(row, 31).toString());
             minobat.setText(tbObat.getValueAt(row, 32).toString());
             maxobat.setText(tbObat.getValueAt(row, 33).toString());
-           
+            apotekmax.setText(tbObat.getValueAt(row, 34).toString().substring(5,6));
+            apotekmin.setText(tbObat.getValueAt(row, 35).toString().substring(5,6));
+            igdmax.setText(tbObat.getValueAt(row, 36).toString().substring(5,6));
+            igdmin.setText(tbObat.getValueAt(row, 37).toString().substring(5,6));
+            
             ChkKadaluarsa.setSelected(false);
             DTPExpired.setDate(new Date());
             if(tbObat.getValueAt(row, 25).toString().equals("")||(tbObat.getValueAt(row, 25).toString().length()==0)){
