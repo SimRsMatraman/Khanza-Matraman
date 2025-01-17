@@ -17,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -39,6 +40,7 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
+import rekammedis.DlgMasterBedah;
 
 
 /**
@@ -54,6 +56,7 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
     private ResultSet rs;
     private int i=0;
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
+    public DlgMasterBedah masterp=new DlgMasterBedah(null,false);
     private StringBuilder htmlContent;
     private String finger="";
     
@@ -170,6 +173,46 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
         
+        masterp.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(akses.getform().equals("DlgRawatJalan")){
+                    if(masterp.getTable().getSelectedRow()!= -1){
+                        TindakanBedah.setText(masterp.getTable().getValueAt(masterp.getTable().getSelectedRow(),2).toString());
+                        LaporanBedah.setText(masterp.getTable().getValueAt(masterp.getTable().getSelectedRow(),3).toString());
+                    }  
+                    LaporanBedah.requestFocus();
+                }
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        masterp.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(akses.getform().equals("DlgRawatJalan")){
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                        masterp.dispose();
+                    }                
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -199,9 +242,9 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MnPenilaianMedis = new javax.swing.JMenuItem();
         LoadHTML = new widget.editorpane();
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnPenilaianMedis = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -262,6 +305,7 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
         NoImplan = new widget.TextBox();
         Anestesi = new widget.ComboBox();
         jLabel4 = new widget.Label();
+        BtnDokter3 = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -276,11 +320,6 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
 
-        LoadHTML.setBorder(null);
-        LoadHTML.setName("LoadHTML"); // NOI18N
-
-        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
-
         MnPenilaianMedis.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianMedis.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPenilaianMedis.setForeground(new java.awt.Color(50, 50, 50));
@@ -293,7 +332,11 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
                 MnPenilaianMedisActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(MnPenilaianMedis);
+
+        LoadHTML.setBorder(null);
+        LoadHTML.setName("LoadHTML"); // NOI18N
+
+        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -596,7 +639,7 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
         jLabel16.setBounds(0, 80, 70, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-12-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -654,7 +697,7 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
         jLabel17.setBounds(0, 110, 70, 23);
 
         Tanggal1.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-12-2024" }));
+        Tanggal1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2025" }));
         Tanggal1.setDisplayFormat("dd-MM-yyyy");
         Tanggal1.setName("Tanggal1"); // NOI18N
         Tanggal1.setOpaque(false);
@@ -840,6 +883,20 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(410, 80, 110, 23);
 
+        BtnDokter3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnDokter3.setMnemonic('2');
+        BtnDokter3.setText("   Template Laporan");
+        BtnDokter3.setToolTipText("Alt+2");
+        BtnDokter3.setName("BtnDokter3"); // NOI18N
+        BtnDokter3.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnDokter3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDokter3ActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnDokter3);
+        BtnDokter3.setBounds(470, 230, 180, 23);
+
         scrollInput.setViewportView(FormInput);
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -881,7 +938,7 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-12-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -895,7 +952,7 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-12-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-01-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1263,6 +1320,16 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
         Valid.pindah(evt,Tanggal1,JenisPembedahan);
     }//GEN-LAST:event_AnestesiKeyPressed
 
+    private void BtnDokter3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokter3ActionPerformed
+        akses.setform("DlgRawatJalan");
+        masterp.isCek();
+        masterp.onCari();
+        masterp.emptTeks();
+        masterp.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+        masterp.setLocationRelativeTo(internalFrame1);
+        masterp.setVisible(true);
+    }//GEN-LAST:event_BtnDokter3ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1285,6 +1352,7 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
     private widget.Button BtnDokter;
+    private widget.Button BtnDokter3;
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
@@ -1401,7 +1469,7 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("tgl_lahir"),rs.getString("jk"),
                         rs.getString("nm_dokter"),rs.getString("mulai"),rs.getString("selesai"),rs.getString("diagnosa_preop"),rs.getString("diagnosa_postop"),
                         rs.getString("jaringan"),rs.getString("komplikasi"),rs.getString("jenis_anestesi"),rs.getString("jenis_pembedahan"),
-                        rs.getString("implan"),rs.getString("no_implan"),rs.getString("laporan_bedah"),rs.getString("laporan_bedah"),rs.getString("operator")
+                        rs.getString("implan"),rs.getString("no_implan"),rs.getString("tindakan_bedah"),rs.getString("laporan_bedah"),rs.getString("operator")
                     });
                 }
             } catch (Exception e) {
