@@ -15,6 +15,7 @@ import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -479,6 +480,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         panelisi1 = new widget.panelisi();
         BtnHapus = new widget.Button();
         BtnSampel = new widget.Button();
+        BtnBatalSampel = new widget.Button();
         BtnHasil = new widget.Button();
         BtnEditTgl = new widget.Button();
         BtnAll = new widget.Button();
@@ -530,7 +532,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         WindowAmbilSampel.setUndecorated(true);
         WindowAmbilSampel.setResizable(false);
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Waktu Pengambilan Sampel ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Waktu Pengambilan Sampel ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setLayout(null);
 
@@ -565,7 +567,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-12-2024 07:54:58" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2025 10:41:24" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -616,14 +618,14 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         WindowTerkirim.getContentPane().add(jButton1);
-        jButton1.setBounds(200, 15, 48, 30);
+        jButton1.setBounds(200, 15, 51, 30);
 
         WindowGanti.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowGanti.setName("WindowGanti"); // NOI18N
         WindowGanti.setUndecorated(true);
         WindowGanti.setResizable(false);
 
-        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Tanggal Permintaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Tanggal Permintaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame6.setName("internalFrame6"); // NOI18N
         internalFrame6.setLayout(null);
 
@@ -672,7 +674,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-12-2024" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2025" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -935,7 +937,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Permintaan Laboratorium Patologi Klinis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Permintaan Laboratorium Patologi Klinis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1055,6 +1057,24 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         panelisi1.add(BtnSampel);
+
+        BtnBatalSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnBatalSampel.setMnemonic('B');
+        BtnBatalSampel.setText("Batal Sampel");
+        BtnBatalSampel.setToolTipText("Alt+B");
+        BtnBatalSampel.setName("BtnBatalSampel"); // NOI18N
+        BtnBatalSampel.setPreferredSize(new java.awt.Dimension(120, 30));
+        BtnBatalSampel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBatalSampelActionPerformed(evt);
+            }
+        });
+        BtnBatalSampel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnBatalSampelKeyPressed(evt);
+            }
+        });
+        panelisi1.add(BtnBatalSampel);
 
         BtnHasil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
         BtnHasil.setMnemonic('I');
@@ -4137,6 +4157,32 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         // TODO add your handling code here:
     }//GEN-LAST:event_TanggalPulang1KeyPressed
 
+    private void BtnBatalSampelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalSampelActionPerformed
+        if(TabPilihRawat.getSelectedIndex()==0){
+            if(!NoRawat.equals("")){
+                    if(Sequel.mengedittf("permintaan_lab","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
+                        "0000-00-00", "00:00:00",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString(),
+                    })==true){
+                        tbLabRalan.setValueAt("",tbLabRalan.getSelectedRow(),5);
+                        tbLabRalan.setValueAt("",tbLabRalan.getSelectedRow(),6);
+                    }
+            } 
+        }else if(TabPilihRawat.getSelectedIndex()==1){
+            if(!NoRawat.equals("")){
+                if(Sequel.mengedittf("permintaan_lab","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
+                        "0000-00-00", "00:00:00",tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString(),
+                    })==true){
+                        tbLabRanap.setValueAt("",tbLabRanap.getSelectedRow(),5);
+                        tbLabRanap.setValueAt("",tbLabRanap.getSelectedRow(),6);
+                    }
+            } 
+        }
+    }//GEN-LAST:event_BtnBatalSampelActionPerformed
+
+    private void BtnBatalSampelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalSampelKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnBatalSampelKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -4165,6 +4211,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.Button BtnAmbilVanslab;
     private widget.Button BtnBarcodePermintaan;
     private widget.Button BtnBarcodePermintaan2;
+    private widget.Button BtnBatalSampel;
     private widget.Button BtnCari;
     private widget.Button BtnCetakHasilLab;
     private widget.Button BtnCloseIn4;
