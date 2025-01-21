@@ -12163,9 +12163,9 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         //pemeriksaan_ralan
         Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",TNoRM,TNoRw.getText());
         Sequel.cariIsi("select pemeriksaan_ralan.alergi from pemeriksaan_ralan INNER JOIN reg_periksa ON pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat where no_rkm_medis=? ORDER BY pemeriksaan_ralan.tgl_perawatan desc",TAlergi,TNoRM.getText());
-        Sequel.cariIsi("select pemeriksaan_ralan.rpd from pemeriksaan_ralan INNER JOIN reg_periksa ON pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat where no_rkm_medis=? ORDER BY pemeriksaan_ralan.tgl_perawatan desc",TRpd,TNoRM.getText());
-        Sequel.cariIsi("select pemeriksaan_ralan.rpk from pemeriksaan_ralan INNER JOIN reg_periksa ON pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat where no_rkm_medis=? ORDER BY pemeriksaan_ralan.tgl_perawatan desc",TRpk,TNoRM.getText());
-        Sequel.cariIsi("select pemeriksaan_ralan.rpo from pemeriksaan_ralan INNER JOIN reg_periksa ON pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat where no_rkm_medis=? ORDER BY pemeriksaan_ralan.tgl_perawatan desc",TRpo,TNoRM.getText());
+        Sequel.cariIsi("select IFNULL(pemeriksaan_ralan.rpd,'-') as rpd from reg_periksa LEFT JOIN pemeriksaan_ralan ON pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat where no_rkm_medis=? ORDER BY pemeriksaan_ralan.tgl_perawatan desc",TRpd,TNoRM.getText());
+        Sequel.cariIsi("select IFNULL(pemeriksaan_ralan.rpk,'-') as rpk from reg_periksa LEFT JOIN pemeriksaan_ralan ON pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat where no_rkm_medis=? ORDER BY pemeriksaan_ralan.tgl_perawatan desc",TRpk,TNoRM.getText());
+        Sequel.cariIsi("select IFNULL(pemeriksaan_ralan.rpo,'-') as rpo from reg_periksa LEFT JOIN pemeriksaan_ralan ON pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat where no_rkm_medis=? ORDER BY pemeriksaan_ralan.tgl_perawatan desc",TRpo,TNoRM.getText());
         Sequel.cariIsi("select pemeriksaan_ralan.operasi from pemeriksaan_ralan INNER JOIN reg_periksa ON pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat where no_rkm_medis=? ORDER BY pemeriksaan_ralan.tgl_perawatan desc",Operasi,TNoRM.getText());
         
         //pemeriksaan_ralan_rehab
