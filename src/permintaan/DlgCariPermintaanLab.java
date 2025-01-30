@@ -58,7 +58,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private Connection koneksisysmex;
+    private Connection koneksisysmex=koneksiDBSysmex.condb();
     private Connection koneksielims;
     private Connection koneksismartlab;
     private Connection koneksivanslab;
@@ -532,7 +532,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         WindowAmbilSampel.setUndecorated(true);
         WindowAmbilSampel.setResizable(false);
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Waktu Pengambilan Sampel ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Waktu Pengambilan Sampel ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setLayout(null);
 
@@ -618,14 +618,14 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         WindowTerkirim.getContentPane().add(jButton1);
-        jButton1.setBounds(200, 15, 51, 30);
+        jButton1.setBounds(200, 15, 48, 30);
 
         WindowGanti.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowGanti.setName("WindowGanti"); // NOI18N
         WindowGanti.setUndecorated(true);
         WindowGanti.setResizable(false);
 
-        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Tanggal Permintaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Update Tanggal Permintaan Laboratorium ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame6.setName("internalFrame6"); // NOI18N
         internalFrame6.setLayout(null);
 
@@ -937,7 +937,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Permintaan Laboratorium Patologi Klinis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Permintaan Laboratorium Patologi Klinis ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -2748,7 +2748,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     Valid.textKosong(TCari,"No.Permintaan");
                 }else{   
                     try {
-                        koneksisysmex=koneksiDBSysmex.condb();
+//                        koneksisysmex=koneksiDBSysmex.condb();
                         ps=koneksi.prepareStatement(
                             "select permintaan_lab.noorder,permintaan_lab.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,permintaan_lab.tgl_permintaan,pasien.tgl_lahir,"+
                             "permintaan_lab.jam_permintaan,pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,"+
@@ -2856,7 +2856,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     Valid.textKosong(TCari,"No.Permintaan");
                 }else{   
                     try {
-                        koneksisysmex=koneksiDBSysmex.condb();
+//                        koneksisysmex=koneksiDBSysmex.condb();
                         ps=koneksi.prepareStatement(
                             "select permintaan_lab.noorder,permintaan_lab.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,permintaan_lab.tgl_permintaan,pasien.tgl_lahir,"+
                             "permintaan_lab.jam_permintaan,pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,if(pasien.jk='L','1','2') as jk,"+
@@ -4160,9 +4160,23 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private void BtnBatalSampelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalSampelActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
             if(!NoRawat.equals("")){
+//                    try {
+//                        koneksisysmex.prepareStatement(
+//                                        "update into lis_order_detail values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
+//                                        "'"+rs.getString("alamat")+"','"+rs.getString("nm_kel")+"','"+rs.getString("nm_kec")+"','"+rs.getString("nm_kab")+"',"+
+//                                        "'OP','"+rs.getString("tgl_lahir")+"','"+rs.getString("jk")+"','"+rs.getString("noorder")+"','"+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"',"+
+//                                        "'"+rs.getString("kd_poli")+"^"+rs.getString("nm_poli")+"','"+rs.getString("dokter_perujuk")+"^"+rs.getString("nm_dokter")+"',"+
+//                                        "'"+rs.getString("kd_poli")+"','"+pilihan+"','"+rs.getString("diagnosa_klinis")+"','"+rs.getString("no_rawat")+"',"+
+//                                        "'"+Permintaan+"','0')").executeUpdate();
+//                    }
+//                    catch (Exception e) {
+//                        System.out.println("Notif : "+e);
+//                    }
                     if(Sequel.mengedittf("permintaan_lab","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
                         "0000-00-00", "00:00:00",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString(),
                     })==true){
+                        Sequel.mengeditsysmex("lis_order","ONO=?","ORDER_CONTROL=?",2,new String[]{"CA",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
+                        Sequel.mengeditsysmex("lis_order_detail","ONO=?","ORDER_CONTROL=?",2,new String[]{"CA",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
                         tbLabRalan.setValueAt("",tbLabRalan.getSelectedRow(),5);
                         tbLabRalan.setValueAt("",tbLabRalan.getSelectedRow(),6);
                     }
@@ -4172,6 +4186,8 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 if(Sequel.mengedittf("permintaan_lab","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
                         "0000-00-00", "00:00:00",tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString(),
                     })==true){
+                        Sequel.mengeditsysmex("lis_order","ONO=?","ORDER_CONTROL=?",2,new String[]{"CA",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
+                        Sequel.mengeditsysmex("lis_order_detail","ONO=?","ORDER_CONTROL=?",2,new String[]{"CA",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
                         tbLabRanap.setValueAt("",tbLabRanap.getSelectedRow(),5);
                         tbLabRanap.setValueAt("",tbLabRanap.getSelectedRow(),6);
                     }
