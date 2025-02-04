@@ -77,7 +77,7 @@ public class DlgPermintaan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] judul = {"Jml", "Kode Barang", "Nama Barang", "Satuan", "Jenis Obat", "Kategori", "Golongan", "Min. Permintaan", "Max. Permintaan", "Keterangan", "Stok Bangsal", "Stok Asal", ""};
+        Object[] judul = {"Jml", "Kode Barang", "Nama Barang", "Satuan", "Jenis Obat", "Kategori", "Golongan", "Min. Permintaan", "Max. Permintaan", "Keterangan", "Stok Unit Peminta", "Stok Unit yg Menerima Permintaan", ""};
         tabMode = new DefaultTableModel(null, judul) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -117,9 +117,9 @@ public class DlgPermintaan extends javax.swing.JDialog {
             } else if (i == 9) {
                 column.setPreferredWidth(180);
             } else if (i == 10) {
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(250);
             } else if (i == 11) {
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(250);
             } else if (i == 12) {
                 column.setPreferredWidth(250);
             }
@@ -610,7 +610,7 @@ public class DlgPermintaan extends javax.swing.JDialog {
         panelisi3.add(kdgudangTujuan);
         kdgudangTujuan.setBounds(95, 40, 70, 23);
 
-        label16.setText("Ditujukan Ke :");
+        label16.setText("Unit Peminta :");
         label16.setName("label16"); // NOI18N
         label16.setPreferredSize(new java.awt.Dimension(60, 23));
         panelisi3.add(label16);
@@ -664,11 +664,11 @@ public class DlgPermintaan extends javax.swing.JDialog {
         panelisi3.add(btnPetugas);
         btnPetugas.setBounds(734, 10, 28, 23);
 
-        label14.setText("Asal Permintaan :");
+        label14.setText("Unit yang Menerima Permintaan :");
         label14.setName("label14"); // NOI18N
         label14.setPreferredSize(new java.awt.Dimension(70, 23));
         panelisi3.add(label14);
-        label14.setBounds(386, 40, 100, 23);
+        label14.setBounds(386, 40, 190, 23);
 
         btnSuplier1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSuplier1.setMnemonic('1');
@@ -681,13 +681,13 @@ public class DlgPermintaan extends javax.swing.JDialog {
             }
         });
         panelisi3.add(btnSuplier1);
-        btnSuplier1.setBounds(734, 40, 28, 23);
+        btnSuplier1.setBounds(830, 40, 28, 23);
 
         nmgudangasal.setEditable(false);
         nmgudangasal.setName("nmgudangasal"); // NOI18N
         nmgudangasal.setPreferredSize(new java.awt.Dimension(207, 23));
         panelisi3.add(nmgudangasal);
-        nmgudangasal.setBounds(561, 40, 170, 23);
+        nmgudangasal.setBounds(650, 40, 170, 23);
 
         kdgudangasal.setName("kdgudangasal"); // NOI18N
         kdgudangasal.setPreferredSize(new java.awt.Dimension(80, 23));
@@ -697,7 +697,7 @@ public class DlgPermintaan extends javax.swing.JDialog {
             }
         });
         panelisi3.add(kdgudangasal);
-        kdgudangasal.setBounds(489, 40, 70, 23);
+        kdgudangasal.setBounds(580, 40, 70, 23);
 
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_START);
 
@@ -1343,8 +1343,8 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     public void isCek() {
         autoNomor();
         tampil();
-        kdgudangasal.setText("B0016");
-        nmgudangasal.setText("GUDANG");
+        kdgudangasal.setText("");
+        nmgudangasal.setText("");
         TCari.requestFocus();
         if (akses.getjml2() >= 1) {
             kdptg.setEditable(false);

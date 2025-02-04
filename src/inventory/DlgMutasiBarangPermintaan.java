@@ -488,7 +488,7 @@ public class DlgMutasiBarangPermintaan extends javax.swing.JDialog {
         panelisi3.add(kdgudangTujuan);
         kdgudangTujuan.setBounds(540, 10, 70, 23);
 
-        label16.setText("Ditujukan Ke :");
+        label16.setText("Tujuan Ke :");
         label16.setName("label16"); // NOI18N
         label16.setPreferredSize(new java.awt.Dimension(60, 23));
         panelisi3.add(label16);
