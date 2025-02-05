@@ -852,6 +852,25 @@ public final class sekuel {
         }
     }
     
+    public void mengeditsysmex(String table,String acuan_field,String update){
+        try {
+            ps=connectsysmex.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+            try{                        
+                ps.executeUpdate();       
+             }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Mungkin kode sudah digunakan sebelumnya...!!!!");
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+            SimpanTrack("update "+table+" set "+update+" where "+acuan_field);
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+    }
+    
     public boolean mengedittf(String table,String acuan_field,String update){
         bool=true;
         try {
@@ -879,6 +898,35 @@ public final class sekuel {
     public void mengedit(String table,String acuan_field,String update,int i,String[] a){
         try {
             ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+            try{
+                for(angka=1;angka<=i;angka++){
+                    ps.setString(angka,a[angka-1]);
+                } 
+                ps.executeUpdate();       
+             }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Periksa kembali data...!!!!");
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+            
+            if(AKTIFKANTRACKSQL.equals("yes")){
+                dicari="";
+                for(angka=1;angka<=i;angka++){
+                    dicari=dicari+"|"+a[angka-1];
+                }
+            }
+            SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }    
+    }
+    
+    public void mengeditsysmex(String table,String acuan_field,String update,int i,String[] a){
+        try {
+            ps=connectsysmex.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
             try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
@@ -998,6 +1046,25 @@ public final class sekuel {
     public void mengedit(String table,String acuan_field,String update,JTextField AlmGb){
         try {
             ps = connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+            try{            
+                ps.setBinaryStream(1, new FileInputStream(AlmGb.getText()), new File(AlmGb.getText()).length());
+                ps.executeUpdate();
+             }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+                JOptionPane.showMessageDialog(null,"Maaf, Pilih dulu data yang mau anda edit...\n Klik data pada table untuk memilih...!!!!");
+             }finally{
+                if(ps != null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+    }
+    
+    public void mengeditsysmex(String table,String acuan_field,String update,JTextField AlmGb){
+        try {
+            ps=connectsysmex.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
             try{            
                 ps.setBinaryStream(1, new FileInputStream(AlmGb.getText()), new File(AlmGb.getText()).length());
                 ps.executeUpdate();

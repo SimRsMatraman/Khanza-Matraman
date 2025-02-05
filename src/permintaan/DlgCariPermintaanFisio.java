@@ -405,7 +405,6 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
         BtnHapus = new widget.Button();
         BtnHasil = new widget.Button();
         BtnAll = new widget.Button();
-        BtnPrint = new widget.Button();
         jLabel10 = new widget.Label();
         LCount = new widget.Label();
         BtnKeluar = new widget.Button();
@@ -479,7 +478,7 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-01-2025 09:52:40" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-01-2025 15:41:36" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -731,24 +730,6 @@ public class DlgCariPermintaanFisio extends javax.swing.JDialog {
             }
         });
         panelisi1.add(BtnAll);
-
-        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
-        BtnPrint.setText("Cetak");
-        BtnPrint.setToolTipText("Alt+T");
-        BtnPrint.setName("BtnPrint"); // NOI18N
-        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPrintActionPerformed(evt);
-            }
-        });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnPrintKeyPressed(evt);
-            }
-        });
-        panelisi1.add(BtnPrint);
 
         jLabel10.setText("Record :");
         jLabel10.setName("jLabel10"); // NOI18N
@@ -1121,210 +1102,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
-        if(TabPilihRawat.getSelectedIndex()==0){
-            if(TabRawatJalan.getSelectedIndex()==0){
-                if(tabMode.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode.getRowCount()!=0){
-                    
-                    Sequel.queryu("delete from temporary_permintaan_fisio");
-                    int row=tabMode.getRowCount();
-                    for(i=0;i<row;i++){  
-                        tglsampel="";
-                        try {
-                            tglsampel=tabMode.getValueAt(i,5).toString();
-                        } catch (Exception e) {
-                            tglsampel="";
-                        }
-                        tglhasil="";
-                        try {
-                            tglhasil=tabMode.getValueAt(i,7).toString();
-                        } catch (Exception e) {
-                            tglhasil="";
-                        }
-                        Sequel.menyimpan("temporary_permintaan_fisio","'0','"+
-                            tabMode.getValueAt(i,0).toString()+"','"+
-                            tabMode.getValueAt(i,1).toString()+"','"+
-                            tabMode.getValueAt(i,2).toString()+"','"+
-                            tabMode.getValueAt(i,3).toString()+"','"+
-                            tabMode.getValueAt(i,4).toString()+"','"+
-                            tglsampel+"','"+
-                            tabMode.getValueAt(i,6).toString()+"','"+
-                            tglhasil+"','"+
-                            tabMode.getValueAt(i,8).toString()+"','"+
-                            tabMode.getValueAt(i,9).toString()+"','"+
-                            tabMode.getValueAt(i,10).toString()+"','"+
-                            tabMode.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab"); 
-                    }
-                    
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                    Valid.MyReport("rptLapPermintaanRadiologi.jasper","report","::[ Data Permintaan Radiologi ]::",param);
-                }
-            }else if(TabRawatJalan.getSelectedIndex()==1){
-                if(tabMode2.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode2.getRowCount()!=0){
-                    
-                    Sequel.queryu("delete from temporary_permintaan_fisio");
-                    int row=tabMode2.getRowCount();
-                    for(i=0;i<row;i++){  
-                        tglsampel="";
-                        try {
-                            tglsampel=tabMode2.getValueAt(i,6).toString();
-                        } catch (Exception e) {
-                            tglsampel="";
-                        }
-                        tglhasil="";
-                        try {
-                            tglhasil=tabMode2.getValueAt(i,8).toString();
-                        } catch (Exception e) {
-                            tglhasil="";
-                        }
-                        Sequel.menyimpan("temporary_permintaan_fisio","'0','"+
-                                        tabMode2.getValueAt(i,0).toString()+"','"+
-                                        tabMode2.getValueAt(i,1).toString()+"','"+
-                                        tabMode2.getValueAt(i,2).toString()+"','"+
-                                        tabMode2.getValueAt(i,3).toString()+"','"+
-                                        tabMode2.getValueAt(i,4).toString()+"','"+
-                                        tabMode2.getValueAt(i,5).toString()+"','"+
-                                        tglsampel+"','"+
-                                        tabMode2.getValueAt(i,7).toString()+"','"+
-                                        tglhasil+"','"+
-                                        tabMode2.getValueAt(i,9).toString()+"','"+
-                                        tabMode2.getValueAt(i,10).toString()+"','"+
-                                        tabMode2.getValueAt(i,11).toString()+"','"+
-                                        tabMode2.getValueAt(i,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab"); 
-                    }
-                    
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                    Valid.MyReport("rptLapPermintaanRadiologi2.jasper","report","::[ Data Detail Permintaan Radiologi ]::",param);
-                }
-            }            
-        }else if(TabPilihRawat.getSelectedIndex()==1){
-            if(TabRawatInap.getSelectedIndex()==0){
-                if(tabMode3.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode3.getRowCount()!=0){
-                    
-                    Sequel.queryu("delete from temporary_permintaan_fisio");
-                    int row=tabMode3.getRowCount();
-                    for(i=0;i<row;i++){  
-                        tglsampel="";
-                        try {
-                            tglsampel=tabMode.getValueAt(i,5).toString();
-                        } catch (Exception e) {
-                            tglsampel="";
-                        }
-                        tglhasil="";
-                        try {
-                            tglhasil=tabMode.getValueAt(i,7).toString();
-                        } catch (Exception e) {
-                            tglhasil="";
-                        }
-                        Sequel.menyimpan("temporary_permintaan_fisio","'0','"+
-                            tabMode3.getValueAt(i,0).toString()+"','"+
-                            tabMode3.getValueAt(i,1).toString()+"','"+
-                            tabMode3.getValueAt(i,2).toString()+"','"+
-                            tabMode3.getValueAt(i,3).toString()+"','"+
-                            tabMode3.getValueAt(i,4).toString()+"','"+
-                            tglsampel+"','"+
-                            tabMode3.getValueAt(i,6).toString()+"','"+
-                            tglhasil+"','"+
-                            tabMode3.getValueAt(i,8).toString()+"','"+
-                            tabMode3.getValueAt(i,9).toString()+"','"+
-                            tabMode3.getValueAt(i,10).toString()+"','"+
-                            tabMode3.getValueAt(i,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab"); 
-                    }
-                    
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                    Valid.MyReport("rptLapPermintaanRadiologi3.jasper","report","::[ Data Permintaan Radiologi ]::",param);
-                }
-            }else if(TabRawatInap.getSelectedIndex()==1){
-                if(tabMode4.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-                    TCari.requestFocus();
-                }else if(tabMode4.getRowCount()!=0){
-                    
-                    Sequel.queryu("delete from temporary_permintaan_fisio");
-                    int row=tabMode4.getRowCount();
-                    for(i=0;i<row;i++){  
-                        tglsampel="";
-                        try {
-                            tglsampel=tabMode4.getValueAt(i,6).toString();
-                        } catch (Exception e) {
-                            tglsampel="";
-                        }
-                        tglhasil="";
-                        try {
-                            tglhasil=tabMode4.getValueAt(i,8).toString();
-                        } catch (Exception e) {
-                            tglhasil="";
-                        }
-                        Sequel.menyimpan("temporary_permintaan_fisio","'0','"+
-                                        tabMode4.getValueAt(i,0).toString()+"','"+
-                                        tabMode4.getValueAt(i,1).toString()+"','"+
-                                        tabMode4.getValueAt(i,2).toString()+"','"+
-                                        tabMode4.getValueAt(i,3).toString()+"','"+
-                                        tabMode4.getValueAt(i,4).toString()+"','"+
-                                        tabMode4.getValueAt(i,5).toString()+"','"+
-                                        tglsampel+"','"+
-                                        tabMode4.getValueAt(i,7).toString()+"','"+
-                                        tglhasil+"','"+
-                                        tabMode4.getValueAt(i,9).toString()+"','"+
-                                        tabMode4.getValueAt(i,10).toString()+"','"+
-                                        tabMode4.getValueAt(i,11).toString()+"','"+
-                                        tabMode4.getValueAt(i,12).toString()+"','','','','','','','','','','','','','','','','','','','','','','','',''","Periksa Lab"); 
-                    }
-                    
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                    Valid.MyReport("rptLapPermintaanRadiologi4.jasper","report","::[ Data Detail Permintaan Radiologi ]::",param);
-                }
-            }            
-        }            
-        this.setCursor(Cursor.getDefaultCursor());
-    }//GEN-LAST:event_BtnPrintActionPerformed
-
-    private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            BtnPrintActionPerformed(null);
-        }else{
-            Valid.pindah(evt,BtnAll,BtnAll);
-        }
-    }//GEN-LAST:event_BtnPrintKeyPressed
-
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         WindowAmbilSampel.dispose();
         WindowGanti.dispose();
@@ -1336,7 +1113,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             WindowAmbilSampel.dispose();
             WindowGanti.dispose();
             dispose();
-        }else{Valid.pindah(evt,BtnPrint,BtnHapus);}
+        }else{Valid.pindah(evt,BtnHasil,BtnHapus);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
 private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
@@ -1726,7 +1503,6 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Button BtnHapus;
     private widget.Button BtnHasil;
     private widget.Button BtnKeluar;
-    private widget.Button BtnPrint;
     private widget.Button BtnSeek3;
     private widget.Button BtnSeek4;
     private widget.Button BtnSeek5;
