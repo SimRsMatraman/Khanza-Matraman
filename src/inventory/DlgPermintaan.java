@@ -859,12 +859,11 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_ppBersihkanActionPerformed
 
 private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-    if(tbDokter.getSelectedRow()!= -1){
+    if(tbDokter.getRowCount()!=0){
         try {
             getCekStok();
             getCekStokMin();
             getCekStokMax();
-            getData();
         } catch (java.lang.NullPointerException e) {
         }
     }
@@ -877,14 +876,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             getCekStokMin();
             getCekStokMax();   
         } else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
-            getCekStok();  
-            getCekStokMin();
-            getCekStokMax();   
-        } else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            getCekStok();  
-            getCekStokMin();
-            getCekStokMax();   
-        } else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
             getCekStok();  
             getCekStokMin();
             getCekStokMax();   
@@ -907,25 +898,25 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_tbDokterKeyPressed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {
-        if (tabMode.getRowCount() != 0) {
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            getCekStok();  
-            getCekStokMin();
-            getCekStokMax();   
-        } else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
-            getCekStok();  
-            getCekStokMin();
-            getCekStokMax();   
-        } else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            getCekStok();  
-            getCekStokMin();
-            getCekStokMax();   
-        } else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
-            getCekStok();  
-            getCekStokMin();
-            getCekStokMax();   
-        }
-        }
+//        if (tabMode.getRowCount() != 0) {
+//        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+//            getCekStok();  
+//            getCekStokMin();
+//            getCekStokMax();   
+//        } else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
+//            getCekStok();  
+//            getCekStokMin();
+//            getCekStokMax();   
+//        } else if(evt.getKeyCode()==KeyEvent.VK_UP){
+//            getCekStok();  
+//            getCekStokMin();
+//            getCekStokMax();   
+//        } else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+//            getCekStok();  
+//            getCekStokMin();
+//            getCekStokMax();   
+//        }
+//        }
     }
     
     private void tbDokterPropertyChange(java.beans.PropertyChangeEvent evt) {                                       
