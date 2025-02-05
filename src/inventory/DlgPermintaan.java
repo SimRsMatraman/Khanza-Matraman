@@ -1184,6 +1184,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try {
+            if(TCari.getText().trim().equals("")){
             ps = koneksi.prepareStatement(
                     "select databarang.kode_brng,databarang.nama_brng,databarang.kode_sat,jenis.nama,"
                     + "kategori_barang.nama as kategori,golongan_barang.nama as golongan,gudangbarang.stok,databarang.minobat,databarang.maxobat "
@@ -1191,8 +1192,28 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     + " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "
                     + " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "
                     + " left join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "
-                    + " where databarang.status='1' and gudangbarang.kd_bangsal=? and gudangbarang.stok>'0' group by databarang.nama_brng order by databarang.nama_brng");
+                    + " where databarang.status='1' and gudangbarang.kd_bangsal=? and gudangbarang.stok>'0' "
+                    + " group by databarang.nama_brng order by databarang.nama_brng");
+
+            }else{
+            ps = koneksi.prepareStatement(
+                    "select databarang.kode_brng,databarang.nama_brng,databarang.kode_sat,jenis.nama,"
+                    + "kategori_barang.nama as kategori,golongan_barang.nama as golongan,gudangbarang.stok,databarang.minobat,databarang.maxobat "
+                    + " from databarang inner join jenis on databarang.kdjns=jenis.kdjns "
+                    + " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "
+                    + " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "
+                    + " left join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "
+                    + " where databarang.status='1' and databarang.kode_brng like ? and gudangbarang.stok>'0' or "
+                    + " databarang.status='1' and databarang.nama_brng like ? and gudangbarang.stok>'0' or "
+                    + " databarang.status='1' and gudangbarang.kd_bangsal=? and gudangbarang.stok>'0' "
+                    + "group by databarang.nama_brng order by databarang.nama_brng");    
+            }
             try {
+                if(!TCari.getText().trim().equals("")){
+                    ps.setString(1, "%" + TCari.getText().trim() + "%");
+                    ps.setString(2, "%" + TCari.getText().trim() + "%");
+                    ps.setString(3, "%" + kdgudangasal.getText().trim() + "%"); 
+                }
                 ttltotaljual = 0;
                 ttltotalbeli = 0;
                 ttltotalpesan = 0;
