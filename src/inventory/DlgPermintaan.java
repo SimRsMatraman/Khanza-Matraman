@@ -897,7 +897,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }
 }//GEN-LAST:event_tbDokterKeyPressed
 
-    private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {
+//    private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {
 //        if (tabMode.getRowCount() != 0) {
 //        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
 //            getCekStok();  
@@ -917,7 +917,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 //            getCekStokMax();   
 //        }
 //        }
-    }
+//    }
     
     private void tbDokterPropertyChange(java.beans.PropertyChangeEvent evt) {                                       
         if(this.isVisible()==true){
@@ -927,9 +927,9 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }
     }
 
-    public void keyReleased(java.awt.event.KeyEvent evt) {
-        tbDokterKeyReleased(evt);
-    }
+//    public void keyReleased(java.awt.event.KeyEvent evt) {
+//        tbDokterKeyReleased(evt);
+//    }
     
     public void propertyChange(java.beans.PropertyChangeEvent evt) {
         tbDokterPropertyChange(evt);
