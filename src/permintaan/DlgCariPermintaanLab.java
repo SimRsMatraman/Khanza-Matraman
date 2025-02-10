@@ -4176,6 +4176,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "0000-00-00", "00:00:00",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString(),
                     })==true){
                         Sequel.mengeditsysmex("lis_order","ONO=?","ORDER_CONTROL=?",2,new String[]{"CA",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
+                        Sequel.mengeditsysmex("lis_order","ONO=?","FLAG=?",2,new String[]{"0",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
                         Sequel.mengeditsysmex("lis_order_detail","ONO=?","ORDER_CONTROL=?",2,new String[]{"CA",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
                         tbLabRalan.setValueAt("",tbLabRalan.getSelectedRow(),5);
                         tbLabRalan.setValueAt("",tbLabRalan.getSelectedRow(),6);
@@ -4187,6 +4188,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "0000-00-00", "00:00:00",tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString(),
                     })==true){
                         Sequel.mengeditsysmex("lis_order","ONO=?","ORDER_CONTROL=?",2,new String[]{"CA",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
+                        Sequel.mengeditsysmex("lis_order","ONO=?","FLAG=?",2,new String[]{"0",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
                         Sequel.mengeditsysmex("lis_order_detail","ONO=?","ORDER_CONTROL=?",2,new String[]{"CA",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString()});
                         tbLabRanap.setValueAt("",tbLabRanap.getSelectedRow(),5);
                         tbLabRanap.setValueAt("",tbLabRanap.getSelectedRow(),6);

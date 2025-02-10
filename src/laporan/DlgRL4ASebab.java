@@ -23,8 +23,11 @@ public class DlgRL4ASebab extends javax.swing.JDialog {
     private PreparedStatement ps,ps2,ps3;
     private ResultSet rs,rs2;
     private StringBuilder htmlContent;
-    private int hr0s6l=0,hr0s6p=0,hr7s28l=0,hr7s28p=0,hr28s1thl=0,hr28s1thp=0,th1s4l=0,th1s4p=0,th5s14l=0,th5s14p=0,
-                th15s24l=0,th15s24p=0,th25s44l=0,th25s44p=0,th45s64l=0,th45s64p=0,lbth65l=0,lbth65p=0,mati=0;
+    private int jam0s23p=0,jam0s23l=0,hr1s7p=0,hr1s7l=0,hr8s28p=0,hr8s28l=0,hr29s3p=0,hr29s3l=0,bl3s5p=0,bl3s5l=0,
+                bl6s11p=0,bl6s11l=0,th1s4p=0,th1s4l=0,th5s9l=0,th5s9p=0,th10s14l=0,th10s14p=0,th15s19l=0,th15s19p=0,
+                th20s24l=0,th20s24p=0,th25s29l=0,th25s29p=0,th30s34l=0,th30s34p=0,th35s39l=0,th35s39p=0,th40s44l=0,th40s44p=0,
+                th45s49l=0,th45s49p=0,th50s54l=0,th50s54p=0,th55s59l=0,th55s59p=0,th60s64l=0,th60s64p=0,th65s69l=0,th65s69p=0,
+                th70s74l=0,th70s74p=0,th75s79l=0,th75s79p=0,th80s84l=0,th80s84p=0,th85s100l=0,th85s100p=0,mati=0;
     
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -90,7 +93,7 @@ public class DlgRL4ASebab extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ RL 4A Sebab Data Keadaan Morbiditas Pasien Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ RL 4A Sebab Data Keadaan Morbiditas Pasien Rawat Inap Kemkes ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -365,21 +368,42 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='3'>No.Urut</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>No.Daftar Terperinci</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='18%' rowspan='3'>Golongan Sebab Penyakit</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='55%' colspan='18'>Jumlah Pasien Hidup dan Mati menurut Golongan Umur & Jenis Kelamin</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='55%' colspan='50'>Jumlah Pasien Hidup dan Mati menurut Golongan Umur & Jenis Kelamin</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%' colspan='2'>Pasien Keluar (Hidup & Mati) Menurut Jenis Kelamin</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Jumlah Pasien Keluar Hidup (23+24)</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Jumlah Pasien Keluar Hidup (54+55)</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Jumlah Pasien Keluar Mati</td>"+
                 "</tr>"+
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>0-6 hr</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>7-28hr</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>28hr-<1th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-4th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>5-14th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>15-24th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>25-44th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>45-64th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>> 65</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>&lt;1 Jam</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-23 Jam</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-7 Hr</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>8-28 Hr</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>29 hari- &gt;3 Bl</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>3- &gt;6 Bl</td>"+    
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>6-11 Bl</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-4 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>5-9 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>10-14 Th</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>15-19 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>20-24 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>25-29 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>30-34 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>35-39 Th</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>40-44 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>45-49 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>50-54 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>55-59 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>60-64 Th</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>65-69 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>70-74 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>75-79 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>80-84 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>&ge;85 Th</td>"+
+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2'>LK</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2'>PR</td>"+
                 "</tr>"+
@@ -392,6 +416,42 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
@@ -407,6 +467,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>1</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>2</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>3</td>"+
+                        //start
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>4</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>5</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>6</td>"+
@@ -417,24 +478,60 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>11</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>12</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>13</td>"+
+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>14</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>15</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>16</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>17</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>18</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>18</td>"+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>19</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>20</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>21</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>22</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>23</td>"+
+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>24</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>25</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>26</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>27</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>28</td>"+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>29</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>30</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>31</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>32</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>33</td>"+ 
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>34</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>35</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>36</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>37</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>38</td>"+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>39</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>40</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>41</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>42</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>43</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>44</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>45</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>46</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>47</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>48</td>"+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>49</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>50</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>51</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>52</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>53</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>54</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>55</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>56</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>57</td>"+
                 "</tr>"
-            );            
+            );              
             ps=koneksi.prepareStatement("select diagnosa_pasien.kd_penyakit,SUBSTRING(penyakit.nm_penyakit,1,80) as nm_penyakit from diagnosa_pasien inner join penyakit "+
                     "inner join reg_periksa on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit and reg_periksa.no_rawat=diagnosa_pasien.no_rawat "+
-                    "where diagnosa_pasien.status='Ranap' and reg_periksa.tgl_registrasi between ? and ? and (left(diagnosa_pasien.kd_penyakit,1)='V' or "+
-                    "left(diagnosa_pasien.kd_penyakit,1)='W' or left(diagnosa_pasien.kd_penyakit,1)='X' or left(diagnosa_pasien.kd_penyakit,1)='Y') "+
+                    "where diagnosa_pasien.status='Ranap' and reg_periksa.tgl_registrasi between ? and ? "+
                     " group by diagnosa_pasien.kd_penyakit order by diagnosa_pasien.kd_penyakit");
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -442,8 +539,11 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 rs=ps.executeQuery();
                 i=1;
                 while(rs.next()){
-                    hr0s6l=0;hr0s6p=0;hr7s28l=0;hr7s28p=0;hr28s1thl=0;hr28s1thp=0;th1s4l=0;th1s4p=0;th5s14l=0;th5s14p=0;
-                    th15s24l=0;th15s24p=0;th25s44l=0;th25s44p=0;th45s64l=0;th45s64p=0;lbth65l=0;lbth65p=0;mati=0;
+                    jam0s23p=0;jam0s23l=0;hr1s7p=0;hr1s7l=0;hr8s28p=0;hr8s28l=0;hr29s3p=0;hr29s3l=0;bl3s5p=0;bl3s5l=0;
+                    bl6s11p=0;bl6s11l=0;th1s4p=0;th1s4l=0;th5s9l=0;th5s9p=0;th10s14l=0;th10s14p=0;th15s19l=0;th15s19p=0;
+                    th20s24l=0;th20s24p=0;th25s29l=0;th25s29p=0;th30s34l=0;th30s34p=0;th35s39l=0;th35s39p=0;th40s44l=0;th40s44p=0;
+                    th45s49l=0;th45s49p=0;th50s54l=0;th50s54p=0;th55s59l=0;th55s59p=0;th60s64l=0;th60s64p=0;th65s69l=0;th65s69p=0;
+                    th70s74l=0;th70s74p=0;th75s79l=0;th75s79p=0;th80s84l=0;th80s84p=0;th85s100l=0;th85s100p=0;mati=0;
                     ps2=koneksi.prepareStatement(
                             "select diagnosa_pasien.kd_penyakit,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk "+
                             "from diagnosa_pasien inner join reg_periksa inner join pasien "+
@@ -457,67 +557,153 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             if(rs2.getString("sttsumur").equals("Hr")){
-                                if((rs2.getInt("umurdaftar")>=0)&&(rs2.getInt("umurdaftar")<=6)){
+                                if((rs2.getInt("umurdaftar")>=0)&&(rs2.getInt("umurdaftar")<1)){
                                     if(rs2.getString("jk").equals("L")){
-                                        hr0s6l++;
+                                        jam0s23l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        hr0s6p++;
+                                        jam0s23p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=7)&&(rs2.getInt("umurdaftar")<=28)){
+                                }else if((rs2.getInt("umurdaftar")>=1)&&(rs2.getInt("umurdaftar")<=7)){
                                     if(rs2.getString("jk").equals("L")){
-                                        hr7s28l++;
+                                        hr1s7l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        hr7s28p++;
+                                        hr1s7p++;
                                     }
-                                }else if(rs2.getInt("umurdaftar")>28){
+                                }else if((rs2.getInt("umurdaftar")>=8)&&(rs2.getInt("umurdaftar")<=31)){
                                     if(rs2.getString("jk").equals("L")){
-                                        hr28s1thl++;
+                                        hr8s28l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        hr28s1thp++;
+                                        hr8s28p++;
                                     }
                                 }
                             }else if(rs2.getString("sttsumur").equals("Bl")){
-                                if(rs2.getString("jk").equals("L")){
-                                    hr28s1thl++;
-                                }else if(rs2.getString("jk").equals("P")){
-                                    hr28s1thp++;
+                                if((rs2.getInt("umurdaftar")>=1)&&(rs2.getInt("umurdaftar")<3)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        hr29s3l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        hr29s3p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=3)&&(rs2.getInt("umurdaftar")<6)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        bl3s5l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        bl3s5p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=6)&&(rs2.getInt("umurdaftar")<=11)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        bl6s11l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        bl6s11p++;
+                                    }
                                 }
                             }else if(rs2.getString("sttsumur").equals("Th")){
-                                if((rs2.getInt("umurdaftar")>=0)&&(rs2.getInt("umurdaftar")<=4)){
+                                if((rs2.getInt("umurdaftar")>=1)&&(rs2.getInt("umurdaftar")<=4)){
                                     if(rs2.getString("jk").equals("L")){
                                         th1s4l++;
                                     }else if(rs2.getString("jk").equals("P")){
                                         th1s4p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=5)&&(rs2.getInt("umurdaftar")<=14)){
+                                }else if((rs2.getInt("umurdaftar")>=5)&&(rs2.getInt("umurdaftar")<=9)){
                                     if(rs2.getString("jk").equals("L")){
-                                        th5s14l++;
+                                        th5s9l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        th5s14p++;
+                                        th5s9p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=15)&&(rs2.getInt("umurdaftar")<=24)){
+                                }else if((rs2.getInt("umurdaftar")>=10)&&(rs2.getInt("umurdaftar")<=14)){
                                     if(rs2.getString("jk").equals("L")){
-                                        th15s24l++;
+                                        th10s14l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        th15s24p++;
+                                        th10s14p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=25)&&(rs2.getInt("umurdaftar")<=44)){
+                                }else if((rs2.getInt("umurdaftar")>=15)&&(rs2.getInt("umurdaftar")<=19)){
                                     if(rs2.getString("jk").equals("L")){
-                                        th25s44l++;
+                                        th15s19l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        th25s44p++;
+                                        th15s19p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=45)&&(rs2.getInt("umurdaftar")<=64)){
+                                }else if((rs2.getInt("umurdaftar")>=20)&&(rs2.getInt("umurdaftar")<=24)){
                                     if(rs2.getString("jk").equals("L")){
-                                        th45s64l++;
+                                        th20s24l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        th45s64p++;
+                                        th20s24p++;
                                     }
-                                }else if(rs2.getInt("umurdaftar")>=65){
+                                }else if((rs2.getInt("umurdaftar")>=25)&&(rs2.getInt("umurdaftar")<=29)){
                                     if(rs2.getString("jk").equals("L")){
-                                        lbth65l++;
+                                        th25s29l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        lbth65p++;
+                                        th25s29p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=30)&&(rs2.getInt("umurdaftar")<=34)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th30s34l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th30s34p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=35)&&(rs2.getInt("umurdaftar")<=39)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th35s39l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th35s39p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=40)&&(rs2.getInt("umurdaftar")<=44)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th40s44l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th40s44p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=45)&&(rs2.getInt("umurdaftar")<=49)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th45s49l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th45s49p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=50)&&(rs2.getInt("umurdaftar")<=54)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th50s54l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th50s54p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=55)&&(rs2.getInt("umurdaftar")<=59)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th55s59l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th55s59p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=60)&&(rs2.getInt("umurdaftar")<=64)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th60s64l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th60s64p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=65)&&(rs2.getInt("umurdaftar")<=69)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th65s69l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th65s69p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=70)&&(rs2.getInt("umurdaftar")<=74)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th70s74l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th70s74p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=75)&&(rs2.getInt("umurdaftar")<=79)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th75s79l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th75s79p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=80)&&(rs2.getInt("umurdaftar")<=84)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th80s84l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th80s84p++;
+                                    }
+                                }else if(rs2.getInt("umurdaftar")>=85){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th85s100l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th85s100p++;
                                     }
                                 }
                             }
@@ -563,27 +749,71 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+i+"</td>"+
                             "<td valign='middle' align='center'>"+rs.getString("kd_penyakit")+"</td>"+
                             "<td valign='middle' align='left'>"+rs.getString("nm_penyakit")+"</td>"+
-                            "<td valign='middle' align='center'>"+hr0s6l+"</td>"+
-                            "<td valign='middle' align='center'>"+hr0s6p+"</td>"+
-                            "<td valign='middle' align='center'>"+hr7s28l+"</td>"+
-                            "<td valign='middle' align='center'>"+hr7s28p+"</td>"+
-                            "<td valign='middle' align='center'>"+hr28s1thl+"</td>"+
-                            "<td valign='middle' align='center'>"+hr28s1thp+"</td>"+
-                            "<td valign='middle' align='center'>"+th1s4l+"</td>"+
-                            "<td valign='middle' align='center'>"+th1s4p+"</td>"+
-                            "<td valign='middle' align='center'>"+th5s14l+"</td>"+
-                            "<td valign='middle' align='center'>"+th5s14p+"</td>"+
-                            "<td valign='middle' align='center'>"+th15s24l+"</td>"+
-                            "<td valign='middle' align='center'>"+th15s24p+"</td>"+
-                            "<td valign='middle' align='center'>"+th25s44l+"</td>"+
-                            "<td valign='middle' align='center'>"+th25s44p+"</td>"+
-                            "<td valign='middle' align='center'>"+th45s64l+"</td>"+
-                            "<td valign='middle' align='center'>"+th45s64p+"</td>"+
-                            "<td valign='middle' align='center'>"+lbth65l+"</td>"+
-                            "<td valign='middle' align='center'>"+lbth65p+"</td>"+
-                            "<td valign='middle' align='center'>"+(hr0s6l+hr7s28l+hr28s1thl+th1s4l+th5s14l+th15s24l+th25s44l+th45s64l+lbth65l)+"</td>"+
-                            "<td valign='middle' align='center'>"+(hr0s6p+hr7s28p+hr28s1thp+th1s4p+th5s14p+th15s24p+th25s44p+th45s64p+lbth65p)+"</td>"+
-                            "<td valign='middle' align='center'>"+(hr0s6l+hr7s28l+hr28s1thl+th1s4l+th5s14l+th15s24l+th25s44l+th45s64l+lbth65l+hr0s6p+hr7s28p+hr28s1thp+th1s4p+th5s14p+th15s24p+th25s44p+th45s64p+lbth65p-mati)+"</td>"+
+                                    //1
+                            "<td valign='middle' align='center'>0</td>"+ //< 1jam l
+                            "<td valign='middle' align='center'>0</td>"+ //< 1jam p
+                            "<td valign='middle' align='center'>"+jam0s23l+"</td>"+ // 1hari L
+                            "<td valign='middle' align='center'>"+jam0s23p+"</td>"+ // 1hari P
+                            "<td valign='middle' align='center'>"+hr1s7l+"</td>"+ // 1-7hari L 
+                            "<td valign='middle' align='center'>"+hr1s7p+"</td>"+ //1-7hari P 
+                            "<td valign='middle' align='center'>"+hr8s28l+"</td>"+ // 8-28hari L 
+                            "<td valign='middle' align='center'>"+hr8s28p+"</td>"+ // 8-28hari P 
+                            "<td valign='middle' align='center'>"+hr29s3l+"</td>"+ // 29hari - 3bulan L 
+                            "<td valign='middle' align='center'>"+hr29s3p+"</td>"+ // 29hari - 3bulan P 
+                                    //2
+                            "<td valign='middle' align='center'>"+bl3s5l+"</td>"+ //3-6bulan L
+                            "<td valign='middle' align='center'>"+bl3s5p+"</td>"+ //3-6bulan P
+                            "<td valign='middle' align='center'>"+bl6s11l+"</td>"+ //6-11bulan L
+                            "<td valign='middle' align='center'>"+bl6s11p+"</td>"+ //6-11bulan P
+                            "<td valign='middle' align='center'>"+th1s4l+"</td>"+ //1-4tahun L
+                            "<td valign='middle' align='center'>"+th1s4p+"</td>"+ //1-4tahun P 
+                            "<td valign='middle' align='center'>"+th5s9l+"</td>"+ //5-9tahun L
+                            "<td valign='middle' align='center'>"+th5s9p+"</td>"+ //5-9tahun P
+                            "<td valign='middle' align='center'>"+th10s14p+"</td>"+ //10-14tahun L
+                            "<td valign='middle' align='center'>"+th10s14p+"</td>"+ //10-14tahun P    
+                                    //3
+                            "<td valign='middle' align='center'>"+th15s19l+"</td>"+ //15 th L
+                            "<td valign='middle' align='center'>"+th15s19p+"</td>"+ //15 th P
+                            "<td valign='middle' align='center'>"+th20s24l+"</td>"+ //20 th L
+                            "<td valign='middle' align='center'>"+th20s24p+"</td>"+ //20 th P
+                            "<td valign='middle' align='center'>"+th25s29l+"</td>"+ //25
+                            "<td valign='middle' align='center'>"+th25s29p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th30s34l+"</td>"+ //30
+                            "<td valign='middle' align='center'>"+th30s34p+"</td>"+  
+                            "<td valign='middle' align='center'>"+th35s39l+"</td>"+ //35
+                            "<td valign='middle' align='center'>"+th35s39p+"</td>"+ 
+                                    //4
+                            "<td valign='middle' align='center'>"+th40s44l+"</td>"+
+                            "<td valign='middle' align='center'>"+th40s44p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th45s49l+"</td>"+
+                            "<td valign='middle' align='center'>"+th45s49p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th50s54l+"</td>"+
+                            "<td valign='middle' align='center'>"+th50s54p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th55s59l+"</td>"+
+                            "<td valign='middle' align='center'>"+th55s59p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th60s64l+"</td>"+
+                            "<td valign='middle' align='center'>"+th60s64p+"</td>"+
+                                    //5
+                            "<td valign='middle' align='center'>"+th65s69l+"</td>"+
+                            "<td valign='middle' align='center'>"+th65s69p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th70s74l+"</td>"+
+                            "<td valign='middle' align='center'>"+th70s74p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th75s79l+"</td>"+
+                            "<td valign='middle' align='center'>"+th75s79p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th80s84l+"</td>"+
+                            "<td valign='middle' align='center'>"+th80s84p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th85s100l+"</td>"+
+                            "<td valign='middle' align='center'>"+th85s100p+"</td>"+
+                                    //
+                            "<td valign='middle' align='center'>"+(jam0s23l+hr1s7l+hr8s28l+hr29s3l+bl3s5l+bl6s11l+th1s4l+th5s9l+th10s14l+th15s19l+
+                                    th20s24l+th25s29l+th30s34l+th35s39l+th40s44l+th45s49l+th50s54l+th55s59l+th60s64l+th65s69l+th70s74l+th75s79l+th80s84l+th85s100l)+"</td>"+
+                            "<td valign='middle' align='center'>"+(jam0s23p+hr1s7p+hr8s28p+hr29s3p+bl3s5p+bl6s11p+th1s4p+th5s9p+th10s14p+th15s19p+
+                                    th20s24p+th25s29p+th30s34p+th35s39p+th40s44p+th45s49p+th50s54p+th55s59p+th60s64p+th65s69p+th70s74p+th75s79p+th80s84p+th85s100p)+"</td>"+
+                            "<td valign='middle' align='center'>"+(jam0s23p+jam0s23l+hr1s7p+hr1s7l+hr8s28p+hr8s28l+hr29s3p+hr29s3l+bl3s5p+bl3s5l+
+                            bl6s11p+bl6s11l+th1s4p+th1s4l+th5s9l+th5s9p+th10s14l+th10s14p+th15s19l+th15s19p+
+                            th20s24l+th20s24p+th25s29l+th25s29p+th30s34l+th30s34p+th35s39l+th35s39p+th40s44l+th40s44p+
+                            th45s49l+th45s49p+th50s54l+th50s54p+th55s59l+th55s59p+th60s64l+th60s64p+th65s69l+th65s69p+
+                            th70s74l+th70s74p+th75s79l+th75s79p+th80s84l+th80s84p+th85s100l+th85s100p-mati)+"</td>"+
                             "<td valign='middle' align='center'>"+mati+"</td>"+
                         "</tr>"
                     );
@@ -621,21 +851,42 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='3'>No.Urut</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>No.Daftar Terperinci</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='18%' rowspan='3'>Golongan Sebab Penyakit</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='55%' colspan='18'>Jumlah Pasien Hidup dan Mati menurut Golongan Umur & Jenis Kelamin</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='55%' colspan='50'>Jumlah Pasien Hidup dan Mati menurut Golongan Umur & Jenis Kelamin</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%' colspan='2'>Pasien Keluar (Hidup & Mati) Menurut Jenis Kelamin</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Jumlah Pasien Keluar Hidup (23+24)</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Jumlah Pasien Keluar Hidup (54+55)</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Jumlah Pasien Keluar Mati</td>"+
                 "</tr>"+
                 "<tr class='isi'>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>0-6 hr</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>7-28hr</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>28hr-<1th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-4th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>5-14th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>15-24th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>25-44th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>45-64th</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>> 65</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>&lt;1 Jam</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-23 Jam</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-7 Hr</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>8-28 Hr</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>29 hari- &gt;3 Bl</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>3- &gt;6 Bl</td>"+    
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>6-11 Bl</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>1-4 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>5-9 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>10-14 Th</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>15-19 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>20-24 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>25-29 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>30-34 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>35-39 Th</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>40-44 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>45-49 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>50-54 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>55-59 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>60-64 Th</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>65-69 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>70-74 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>75-79 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>80-84 Th</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>&ge;85 Th</td>"+
+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2'>LK</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2'>PR</td>"+
                 "</tr>"+
@@ -648,6 +899,42 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>P</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>L</td>"+
@@ -663,6 +950,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>1</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>2</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>3</td>"+
+                        //start
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>4</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>5</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>6</td>"+
@@ -673,33 +961,73 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>11</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>12</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>13</td>"+
+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>14</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>15</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>16</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>17</td>"+
-                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>18</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>18</td>"+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>19</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>20</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>21</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>22</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>23</td>"+
+                        //
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>24</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>25</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>26</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>27</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>28</td>"+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>29</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>30</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>31</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>32</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>33</td>"+ 
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>34</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>35</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>36</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>37</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>38</td>"+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>39</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>40</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>41</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>42</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>43</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>44</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>45</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>46</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>47</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>48</td>"+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>49</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>50</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>51</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>52</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>53</td>"+
+                        //
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>54</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>55</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>56</td>"+
+                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>57</td>"+
                 "</tr>"
             );            
             ps=koneksi.prepareStatement("select diagnosa_pasien.kd_penyakit,SUBSTRING(penyakit.nm_penyakit,1,80) as nm_penyakit from diagnosa_pasien inner join penyakit "+
                     "inner join reg_periksa inner join kamar_inap on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit and reg_periksa.no_rawat=diagnosa_pasien.no_rawat "+
                     "and kamar_inap.no_rawat=reg_periksa.no_rawat where diagnosa_pasien.status='Ranap' and diagnosa_pasien.prioritas='1' and "+
-                    " kamar_inap.tgl_keluar between ? and ? and (left(diagnosa_pasien.kd_penyakit,1)='V' or left(diagnosa_pasien.kd_penyakit,1)='W' or "+
-                    " left(diagnosa_pasien.kd_penyakit,1)='X' or left(diagnosa_pasien.kd_penyakit,1)='Y') group by diagnosa_pasien.kd_penyakit order by diagnosa_pasien.kd_penyakit");
+                    "kamar_inap.tgl_keluar between ? and ? "+
+                    "group by diagnosa_pasien.kd_penyakit order by diagnosa_pasien.kd_penyakit");
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                 rs=ps.executeQuery();
                 i=1;
                 while(rs.next()){
-                    hr0s6l=0;hr0s6p=0;hr7s28l=0;hr7s28p=0;hr28s1thl=0;hr28s1thp=0;th1s4l=0;th1s4p=0;th5s14l=0;th5s14p=0;
-                    th15s24l=0;th15s24p=0;th25s44l=0;th25s44p=0;th45s64l=0;th45s64p=0;lbth65l=0;lbth65p=0;mati=0;
+                    jam0s23p=0;jam0s23l=0;hr1s7p=0;hr1s7l=0;hr8s28p=0;hr8s28l=0;hr29s3p=0;hr29s3l=0;bl3s5p=0;bl3s5l=0;
+                    bl6s11p=0;bl6s11l=0;th1s4p=0;th1s4l=0;th5s9l=0;th5s9p=0;th10s14l=0;th10s14p=0;th15s19l=0;th15s19p=0;
+                    th20s24l=0;th20s24p=0;th25s29l=0;th25s29p=0;th30s34l=0;th30s34p=0;th35s39l=0;th35s39p=0;th40s44l=0;th40s44p=0;
+                    th45s49l=0;th45s49p=0;th50s54l=0;th50s54p=0;th55s59l=0;th55s59p=0;th60s64l=0;th60s64p=0;th65s69l=0;th65s69p=0;
+                    th70s74l=0;th70s74p=0;th75s79l=0;th75s79p=0;th80s84l=0;th80s84p=0;th85s100l=0;th85s100p=0;mati=0;
                     ps2=koneksi.prepareStatement(
                             "select diagnosa_pasien.kd_penyakit,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk "+
                             "from diagnosa_pasien inner join reg_periksa inner join pasien inner join kamar_inap "+
@@ -713,67 +1041,153 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             if(rs2.getString("sttsumur").equals("Hr")){
-                                if((rs2.getInt("umurdaftar")>=0)&&(rs2.getInt("umurdaftar")<=6)){
+                                if((rs2.getInt("umurdaftar")>=0)&&(rs2.getInt("umurdaftar")<1)){
                                     if(rs2.getString("jk").equals("L")){
-                                        hr0s6l++;
+                                        jam0s23l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        hr0s6p++;
+                                        jam0s23p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=7)&&(rs2.getInt("umurdaftar")<=28)){
+                                }else if((rs2.getInt("umurdaftar")>=1)&&(rs2.getInt("umurdaftar")<=7)){
                                     if(rs2.getString("jk").equals("L")){
-                                        hr7s28l++;
+                                        hr1s7l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        hr7s28p++;
+                                        hr1s7p++;
                                     }
-                                }else if(rs2.getInt("umurdaftar")>28){
+                                }else if((rs2.getInt("umurdaftar")>=8)&&(rs2.getInt("umurdaftar")<=31)){
                                     if(rs2.getString("jk").equals("L")){
-                                        hr28s1thl++;
+                                        hr8s28l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        hr28s1thp++;
+                                        hr8s28p++;
                                     }
                                 }
                             }else if(rs2.getString("sttsumur").equals("Bl")){
-                                if(rs2.getString("jk").equals("L")){
-                                    hr28s1thl++;
-                                }else if(rs2.getString("jk").equals("P")){
-                                    hr28s1thp++;
+                                if((rs2.getInt("umurdaftar")>=1)&&(rs2.getInt("umurdaftar")<3)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        hr29s3l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        hr29s3p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=3)&&(rs2.getInt("umurdaftar")<6)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        bl3s5l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        bl3s5p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=6)&&(rs2.getInt("umurdaftar")<=11)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        bl6s11l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        bl6s11p++;
+                                    }
                                 }
                             }else if(rs2.getString("sttsumur").equals("Th")){
-                                if((rs2.getInt("umurdaftar")>=0)&&(rs2.getInt("umurdaftar")<=4)){
+                                if((rs2.getInt("umurdaftar")>=1)&&(rs2.getInt("umurdaftar")<=4)){
                                     if(rs2.getString("jk").equals("L")){
                                         th1s4l++;
                                     }else if(rs2.getString("jk").equals("P")){
                                         th1s4p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=5)&&(rs2.getInt("umurdaftar")<=14)){
+                                }else if((rs2.getInt("umurdaftar")>=5)&&(rs2.getInt("umurdaftar")<=9)){
                                     if(rs2.getString("jk").equals("L")){
-                                        th5s14l++;
+                                        th5s9l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        th5s14p++;
+                                        th5s9p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=15)&&(rs2.getInt("umurdaftar")<=24)){
+                                }else if((rs2.getInt("umurdaftar")>=10)&&(rs2.getInt("umurdaftar")<=14)){
                                     if(rs2.getString("jk").equals("L")){
-                                        th15s24l++;
+                                        th10s14l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        th15s24p++;
+                                        th10s14p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=25)&&(rs2.getInt("umurdaftar")<=44)){
+                                }else if((rs2.getInt("umurdaftar")>=15)&&(rs2.getInt("umurdaftar")<=19)){
                                     if(rs2.getString("jk").equals("L")){
-                                        th25s44l++;
+                                        th15s19l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        th25s44p++;
+                                        th15s19p++;
                                     }
-                                }else if((rs2.getInt("umurdaftar")>=45)&&(rs2.getInt("umurdaftar")<=64)){
+                                }else if((rs2.getInt("umurdaftar")>=20)&&(rs2.getInt("umurdaftar")<=24)){
                                     if(rs2.getString("jk").equals("L")){
-                                        th45s64l++;
+                                        th20s24l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        th45s64p++;
+                                        th20s24p++;
                                     }
-                                }else if(rs2.getInt("umurdaftar")>=65){
+                                }else if((rs2.getInt("umurdaftar")>=25)&&(rs2.getInt("umurdaftar")<=29)){
                                     if(rs2.getString("jk").equals("L")){
-                                        lbth65l++;
+                                        th25s29l++;
                                     }else if(rs2.getString("jk").equals("P")){
-                                        lbth65p++;
+                                        th25s29p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=30)&&(rs2.getInt("umurdaftar")<=34)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th30s34l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th30s34p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=35)&&(rs2.getInt("umurdaftar")<=39)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th35s39l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th35s39p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=40)&&(rs2.getInt("umurdaftar")<=44)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th40s44l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th40s44p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=45)&&(rs2.getInt("umurdaftar")<=49)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th45s49l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th45s49p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=50)&&(rs2.getInt("umurdaftar")<=54)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th50s54l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th50s54p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=55)&&(rs2.getInt("umurdaftar")<=59)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th55s59l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th55s59p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=60)&&(rs2.getInt("umurdaftar")<=64)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th60s64l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th60s64p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=65)&&(rs2.getInt("umurdaftar")<=69)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th65s69l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th65s69p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=70)&&(rs2.getInt("umurdaftar")<=74)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th70s74l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th70s74p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=75)&&(rs2.getInt("umurdaftar")<=79)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th75s79l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th75s79p++;
+                                    }
+                                }else if((rs2.getInt("umurdaftar")>=80)&&(rs2.getInt("umurdaftar")<=84)){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th80s84l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th80s84p++;
+                                    }
+                                }else if(rs2.getInt("umurdaftar")>=85){
+                                    if(rs2.getString("jk").equals("L")){
+                                        th85s100l++;
+                                    }else if(rs2.getString("jk").equals("P")){
+                                        th85s100p++;
                                     }
                                 }
                             }
@@ -819,27 +1233,71 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+i+"</td>"+
                             "<td valign='middle' align='center'>"+rs.getString("kd_penyakit")+"</td>"+
                             "<td valign='middle' align='left'>"+rs.getString("nm_penyakit")+"</td>"+
-                            "<td valign='middle' align='center'>"+hr0s6l+"</td>"+
-                            "<td valign='middle' align='center'>"+hr0s6p+"</td>"+
-                            "<td valign='middle' align='center'>"+hr7s28l+"</td>"+
-                            "<td valign='middle' align='center'>"+hr7s28p+"</td>"+
-                            "<td valign='middle' align='center'>"+hr28s1thl+"</td>"+
-                            "<td valign='middle' align='center'>"+hr28s1thp+"</td>"+
-                            "<td valign='middle' align='center'>"+th1s4l+"</td>"+
-                            "<td valign='middle' align='center'>"+th1s4p+"</td>"+
-                            "<td valign='middle' align='center'>"+th5s14l+"</td>"+
-                            "<td valign='middle' align='center'>"+th5s14p+"</td>"+
-                            "<td valign='middle' align='center'>"+th15s24l+"</td>"+
-                            "<td valign='middle' align='center'>"+th15s24p+"</td>"+
-                            "<td valign='middle' align='center'>"+th25s44l+"</td>"+
-                            "<td valign='middle' align='center'>"+th25s44p+"</td>"+
-                            "<td valign='middle' align='center'>"+th45s64l+"</td>"+
-                            "<td valign='middle' align='center'>"+th45s64p+"</td>"+
-                            "<td valign='middle' align='center'>"+lbth65l+"</td>"+
-                            "<td valign='middle' align='center'>"+lbth65p+"</td>"+
-                            "<td valign='middle' align='center'>"+(hr0s6l+hr7s28l+hr28s1thl+th1s4l+th5s14l+th15s24l+th25s44l+th45s64l+lbth65l)+"</td>"+
-                            "<td valign='middle' align='center'>"+(hr0s6p+hr7s28p+hr28s1thp+th1s4p+th5s14p+th15s24p+th25s44p+th45s64p+lbth65p)+"</td>"+
-                            "<td valign='middle' align='center'>"+(hr0s6l+hr7s28l+hr28s1thl+th1s4l+th5s14l+th15s24l+th25s44l+th45s64l+lbth65l+hr0s6p+hr7s28p+hr28s1thp+th1s4p+th5s14p+th15s24p+th25s44p+th45s64p+lbth65p-mati)+"</td>"+
+                                    //1
+                            "<td valign='middle' align='center'>0</td>"+ //< 1jam l
+                            "<td valign='middle' align='center'>0</td>"+ //< 1jam p
+                            "<td valign='middle' align='center'>"+jam0s23l+"</td>"+ // 1hari L
+                            "<td valign='middle' align='center'>"+jam0s23p+"</td>"+ // 1hari P
+                            "<td valign='middle' align='center'>"+hr1s7l+"</td>"+ // 1-7hari L 
+                            "<td valign='middle' align='center'>"+hr1s7p+"</td>"+ //1-7hari P 
+                            "<td valign='middle' align='center'>"+hr8s28l+"</td>"+ // 8-28hari L 
+                            "<td valign='middle' align='center'>"+hr8s28p+"</td>"+ // 8-28hari P 
+                            "<td valign='middle' align='center'>"+hr29s3l+"</td>"+ // 29hari - 3bulan L 
+                            "<td valign='middle' align='center'>"+hr29s3p+"</td>"+ // 29hari - 3bulan P 
+                                    //2
+                            "<td valign='middle' align='center'>"+bl3s5l+"</td>"+ //3-6bulan L
+                            "<td valign='middle' align='center'>"+bl3s5p+"</td>"+ //3-6bulan P
+                            "<td valign='middle' align='center'>"+bl6s11l+"</td>"+ //6-11bulan L
+                            "<td valign='middle' align='center'>"+bl6s11p+"</td>"+ //6-11bulan P
+                            "<td valign='middle' align='center'>"+th1s4l+"</td>"+ //1-4tahun L
+                            "<td valign='middle' align='center'>"+th1s4p+"</td>"+ //1-4tahun P 
+                            "<td valign='middle' align='center'>"+th5s9l+"</td>"+ //5-9tahun L
+                            "<td valign='middle' align='center'>"+th5s9p+"</td>"+ //5-9tahun P
+                            "<td valign='middle' align='center'>"+th10s14p+"</td>"+ //10-14tahun L
+                            "<td valign='middle' align='center'>"+th10s14p+"</td>"+ //10-14tahun P    
+                                    //3
+                            "<td valign='middle' align='center'>"+th15s19l+"</td>"+ //15 th L
+                            "<td valign='middle' align='center'>"+th15s19p+"</td>"+ //15 th P
+                            "<td valign='middle' align='center'>"+th20s24l+"</td>"+ //20 th L
+                            "<td valign='middle' align='center'>"+th20s24p+"</td>"+ //20 th P
+                            "<td valign='middle' align='center'>"+th25s29l+"</td>"+ //25
+                            "<td valign='middle' align='center'>"+th25s29p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th30s34l+"</td>"+ //30
+                            "<td valign='middle' align='center'>"+th30s34p+"</td>"+  
+                            "<td valign='middle' align='center'>"+th35s39l+"</td>"+ //35
+                            "<td valign='middle' align='center'>"+th35s39p+"</td>"+ 
+                                    //4
+                            "<td valign='middle' align='center'>"+th40s44l+"</td>"+
+                            "<td valign='middle' align='center'>"+th40s44p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th45s49l+"</td>"+
+                            "<td valign='middle' align='center'>"+th45s49p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th50s54l+"</td>"+
+                            "<td valign='middle' align='center'>"+th50s54p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th55s59l+"</td>"+
+                            "<td valign='middle' align='center'>"+th55s59p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th60s64l+"</td>"+
+                            "<td valign='middle' align='center'>"+th60s64p+"</td>"+
+                                    //5
+                            "<td valign='middle' align='center'>"+th65s69l+"</td>"+
+                            "<td valign='middle' align='center'>"+th65s69p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th70s74l+"</td>"+
+                            "<td valign='middle' align='center'>"+th70s74p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th75s79l+"</td>"+
+                            "<td valign='middle' align='center'>"+th75s79p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th80s84l+"</td>"+
+                            "<td valign='middle' align='center'>"+th80s84p+"</td>"+ 
+                            "<td valign='middle' align='center'>"+th85s100l+"</td>"+
+                            "<td valign='middle' align='center'>"+th85s100p+"</td>"+
+                                    //
+                            "<td valign='middle' align='center'>"+(jam0s23l+hr1s7l+hr8s28l+hr29s3l+bl3s5l+bl6s11l+th1s4l+th5s9l+th10s14l+th15s19l+
+                                    th20s24l+th25s29l+th30s34l+th35s39l+th40s44l+th45s49l+th50s54l+th55s59l+th60s64l+th65s69l+th70s74l+th75s79l+th80s84l+th85s100l)+"</td>"+
+                            "<td valign='middle' align='center'>"+(jam0s23p+hr1s7p+hr8s28p+hr29s3p+bl3s5p+bl6s11p+th1s4p+th5s9p+th10s14p+th15s19p+
+                                    th20s24p+th25s29p+th30s34p+th35s39p+th40s44p+th45s49p+th50s54p+th55s59p+th60s64p+th65s69p+th70s74p+th75s79p+th80s84p+th85s100p)+"</td>"+
+                            "<td valign='middle' align='center'>"+(jam0s23p+jam0s23l+hr1s7p+hr1s7l+hr8s28p+hr8s28l+hr29s3p+hr29s3l+bl3s5p+bl3s5l+
+                            bl6s11p+bl6s11l+th1s4p+th1s4l+th5s9l+th5s9p+th10s14l+th10s14p+th15s19l+th15s19p+
+                            th20s24l+th20s24p+th25s29l+th25s29p+th30s34l+th30s34p+th35s39l+th35s39p+th40s44l+th40s44p+
+                            th45s49l+th45s49p+th50s54l+th50s54p+th55s59l+th55s59p+th60s64l+th60s64p+th65s69l+th65s69p+
+                            th70s74l+th70s74p+th75s79l+th75s79p+th80s84l+th80s84p+th85s100l+th85s100p-mati)+"</td>"+
                             "<td valign='middle' align='center'>"+mati+"</td>"+
                         "</tr>"
                     );
