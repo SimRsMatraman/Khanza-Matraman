@@ -1579,6 +1579,15 @@ public final class RMLaporanBedah extends javax.swing.JDialog {
         NmDokter.setText(NamaDokter);
     }
     
+    public void setNoRm1(String norwt,Date tgl2) {
+        TNoRw.setText(norwt);
+        TCari.setText(norwt);
+        DTPCari2.setDate(tgl2);    
+        isRawat(); 
+        KdDokter.setText(akses.getkode());
+        Sequel.cariIsi("select nama from pegawai where nik=?", NmDokter,KdDokter.getText());
+    }
+    
     public void isCek(){
         BtnSimpan.setEnabled(akses.getoperasi());
         BtnHapus.setEnabled(akses.getoperasi());
