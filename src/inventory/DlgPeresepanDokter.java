@@ -75,7 +75,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
         tabModeResep=new DefaultTableModel(null,new Object[]{
-                "K","Jumlah","Aturan Pakai","Kode Barang","Nama Barang","Satuan",
+                "U","Jumlah","Aturan Pakai","Kode Barang","Nama Barang","Satuan",
                 "Komposisi","Harga(Rp)","Jenis Obat","I.F.","H.Beli","Stok"
             }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -105,8 +105,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         for (i = 0; i < 12; i++) {
             TableColumn column = tbResep.getColumnModel().getColumn(i);
             if(i==0){
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                column.setPreferredWidth(45);
             }else if(i==1){
                 column.setPreferredWidth(45);
             }else if(i==2){
@@ -757,7 +756,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-11-2024" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-02-2025" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -814,6 +813,11 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         ChkRM.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ChkRMItemStateChanged(evt);
+            }
+        });
+        ChkRM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkRMActionPerformed(evt);
             }
         });
         FormInput.add(ChkRM);
@@ -916,7 +920,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         TabRawat.setBackground(new java.awt.Color(255, 255, 253));
         TabRawat.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(241, 246, 236)));
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
-        TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         TabRawat.setName("TabRawat"); // NOI18N
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1550,6 +1553,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private void TindakLanjutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TindakLanjutKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_TindakLanjutKeyPressed
+
+    private void ChkRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkRMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChkRMActionPerformed
 
     /**
     * @param args the command line arguments
@@ -3773,18 +3780,18 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             pscarikapasitas.setString(1,tbResep.getValueAt(i,3).toString());
                             carikapasitas=pscarikapasitas.executeQuery();
                             if(carikapasitas.next()){ 
-                                if(Sequel.menyimpantf2("resep_dokter","?,?,?,?","data",4,new String[]{
+                                if(Sequel.menyimpantf2("resep_dokter","?,?,?,?,?","data",5,new String[]{
                                     NoResep.getText(),tbResep.getValueAt(i,3).toString(),
-                                    ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())/carikapasitas.getDouble(1)),
-                                    tbResep.getValueAt(i,2).toString()
+                                    ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())),
+                                    tbResep.getValueAt(i,2).toString(),tbResep.getValueAt(i,0).toString()
                                 })==false){
                                     sukses=false;
                                 }
                             }else{
-                                if(Sequel.menyimpantf2("resep_dokter","?,?,?,?","data",4,new String[]{
+                                if(Sequel.menyimpantf2("resep_dokter","?,?,?,?,?","data",5,new String[]{
                                     NoResep.getText(),tbResep.getValueAt(i,3).toString(),
                                     ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())),
-                                    tbResep.getValueAt(i,2).toString()
+                                    tbResep.getValueAt(i,2).toString(),tbResep.getValueAt(i,0).toString()
                                 })==false){
                                     sukses=false;
                                 }                               
@@ -3800,10 +3807,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             }
                         }
                     }else{
-                        if(Sequel.menyimpantf2("resep_dokter","?,?,?,?","data",4,new String[]{
+                        if(Sequel.menyimpantf2("resep_dokter","?,?,?,?,?","data",5,new String[]{
                             NoResep.getText(),tbResep.getValueAt(i,3).toString(),
                             ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())),
-                            tbResep.getValueAt(i,2).toString()
+                            tbResep.getValueAt(i,2).toString(),tbResep.getValueAt(i,0).toString()
                         })==false){
                             sukses=false;
                         }                                   

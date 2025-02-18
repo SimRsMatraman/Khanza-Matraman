@@ -40,7 +40,7 @@ public class WarnaTableApt extends DefaultTableCellRenderer {
                 }
             } catch (Exception e) {
                 } 
-        } 
+        }
 //        if(table.getSelectedRow()!= 0){
 //            try {
 //                if(Double.parseDouble(table.getValueAt(row,11).toString())>0){
