@@ -43,8 +43,9 @@ public class DlgPermintaan extends javax.swing.JDialog {
     private Connection koneksi = koneksiDB.condb();
     private PreparedStatement ps, ps2;
     private ResultSet rs, rs2;
-    private int jml = 0, i = 0, row = 0, index = 0, min = 0, max = 0;
-    private String[] jumlah, kodebarang, namabarang, satuan, jenis, kategori, golongan, keterangan, stokbangsal;
+    private int jml = 0, i = 0, row = 0, index = 0, min = 0, max = 0, z=0;
+    private String[] jumlah, kodebarang, namabarang, satuan, jenis, kategori, golongan, keterangan, ket;
+    private double[] minp, maxp, stokb, stokasal, j;
     private WarnaTable2 warna = new WarnaTable2();
     private DlgCariPegawai pegawai = new DlgCariPegawai(null, false);
     private DlgCariBangsal caribangsal = new DlgCariBangsal(null, false);
@@ -58,7 +59,7 @@ public class DlgPermintaan extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode response;
     private FileReader myObj;
-    private String qrystok = "", aktifkanbatch = "no", hppfarmasi = "";
+    private String qrystok = "", aktifkanbatch = "no", hppfarmasi = "",qrystokkosong="";
     private double ttltotaljual = 0, totaljual = 0, jumlahjual = 0, ttltotalbeli = 0, totalbeli = 0, jumlahbeli = 0, jumlahbeli1 = 0, jumlahbeli2 = 0, jumlahbeli3 = 0, totalbeli1 = 0, totalbeli2 = 0, totalbeli3 = 0,
             ttltotalpesan = 0, totalpesan = 0, jumlahpesan = 0, jumlahutd, totalutd, ttltotalutd, jumlahkeluar, totalkeluar, ttltotalkeluar,
             ttltotalpiutang = 0, totalpiutang = 0, jumlahpiutang = 0, ttltotalretbeli = 0, totalretbeli = 0, jumlahretbeli = 0,
@@ -88,6 +89,19 @@ public class DlgPermintaan extends javax.swing.JDialog {
 
                 return a;
             }
+//             Class[] types = new Class[] {
+//                java.lang.Double.class,java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+//                java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
+//                java.lang.Double.class,java.lang.Object.class,java.lang.Double.class,java.lang.Double.class, 
+//                java.lang.Object.class
+//             };
+//             /*Class[] types = new Class[] {
+//                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+//             };*/
+//             @Override
+//             public Class getColumnClass(int columnIndex) {
+//                return types [columnIndex];
+//             }
         };
         tbDokter.setModel(tabMode);
 
@@ -1173,7 +1187,76 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }
 
     private void tampil() {
+        z=0;
+        for(i=0;i<tbDokter.getRowCount();i++){
+            if(!tbDokter.getValueAt(i,0).toString().equals("")){
+                z++;
+            }
+        }    
+        
+        j=null;
+        j=new double[z];
+        kodebarang=null;
+        kodebarang=new String[z];
+        namabarang=null;
+        namabarang=new String[z];
+        satuan=null;
+        satuan=new String[z];
+        jenis=null;
+        jenis=new String[z];
+        kategori=null;
+        kategori=new String[z];                   
+        golongan=null;
+        golongan=new String[z];           
+        minp=null;
+        minp=new double[z];         
+        maxp=null;
+        maxp=new double[z];
+        keterangan=null;
+        keterangan=new String[z]; 
+        stokb=null;
+        stokb=new double[z]; 
+        stokasal=null;
+        stokasal=new double[z]; 
+        ket=null;
+        ket=new String[z]; 
+        z=0;        
+        for(i=0;i<tbDokter.getRowCount();i++){
+            if(!tbDokter.getValueAt(i,0).toString().equals("")){
+               try {
+                    j[z]=Double.parseDouble(tbDokter.getValueAt(i,0).toString());
+                } catch (Exception e) {
+                    j[z]=0;
+                } 
+                kodebarang[z]=tbDokter.getValueAt(i,1).toString();
+                namabarang[z]=tbDokter.getValueAt(i,2).toString();
+                satuan[z]=tbDokter.getValueAt(i,3).toString();
+                jenis[z]=tbDokter.getValueAt(i,4).toString();
+                kategori[z]=tbDokter.getValueAt(i,5).toString();
+                golongan[z]=tbDokter.getValueAt(i,6).toString();
+                minp[z]=Double.parseDouble(tbDokter.getValueAt(i,7).toString());
+                maxp[z]=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
+                try {
+                    keterangan[z]=tbDokter.getValueAt(i,9).toString();
+                } catch (Exception e) {
+                    keterangan[z]="";
+                }
+                stokb[z]=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
+                stokasal[z]=Double.parseDouble(tbDokter.getValueAt(i,11).toString());
+                ket[z]=tbDokter.getValueAt(i,12).toString(); 
+                z++;
+            }
+        }
+        
         Valid.tabelKosong(tabMode);
+        
+        for(i=0;i<z;i++){
+            tabMode.addRow(new Object[] {
+                j[i],kodebarang[i],namabarang[i],satuan[i],jenis[i],kategori[i],golongan[i],
+                minp[i],maxp[i],keterangan[i],stokb[i],stokasal[i],ket[i]
+            });
+        }
+        
         try {
             if(TCari.getText().trim().equals("")){
             ps = koneksi.prepareStatement(
@@ -1324,11 +1407,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             ps2.close();
                         }
                     }
-                    
-//                        tabMode.addRow(new Object[]{
-//                            "", rs.getString(1), rs.getString(2), rs.getString(3),
-//                            rs.getString(4), rs.getString(5), rs.getString(6), Valid.SetAngka(jumlahbeli), Valid.SetAngka(totalbeli), "", Valid.SetAngka(stok), Valid.SetAngka(jumlahbeli1)
-//                        });
                         
                         tabMode.addRow(new Object[]{
                             "", rs.getString(1), rs.getString(2), rs.getString(3),

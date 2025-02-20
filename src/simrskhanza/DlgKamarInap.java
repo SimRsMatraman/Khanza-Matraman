@@ -891,6 +891,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        MnResepUlang = new javax.swing.JMenuItem();
         WindowInputKamar = new javax.swing.JDialog();
         internalFrame2 = new widget.InternalFrame();
         norawat = new widget.TextBox();
@@ -1028,7 +1029,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnObat = new javax.swing.JMenu();
         MnResepDOkter = new javax.swing.JMenuItem();
         MnNoResep = new javax.swing.JMenuItem();
-        MnResepUlang = new javax.swing.JMenuItem();
         MnPermintaanStokObatPasien = new javax.swing.JMenuItem();
         MnPermintaanResepPulang = new javax.swing.JMenuItem();
         MnStokObatPasien = new javax.swing.JMenuItem();
@@ -1281,6 +1281,22 @@ public class DlgKamarInap extends javax.swing.JDialog {
         BtnInput = new widget.Button();
         BtnInput1 = new widget.Button();
         BtnResume = new widget.Button();
+
+        MnResepUlang.setBackground(new java.awt.Color(255, 255, 254));
+        MnResepUlang.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnResepUlang.setForeground(new java.awt.Color(50, 50, 50));
+        MnResepUlang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnResepUlang.setText("Obat Etter 7/23");
+        MnResepUlang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnResepUlang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnResepUlang.setName("MnResepUlang"); // NOI18N
+        MnResepUlang.setPreferredSize(new java.awt.Dimension(160, 23));
+        MnResepUlang.setRequestFocusEnabled(false);
+        MnResepUlang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnResepUlangActionPerformed(evt);
+            }
+        });
 
         WindowInputKamar.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowInputKamar.setName("WindowInputKamar"); // NOI18N
@@ -3111,23 +3127,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         });
         MnObat.add(MnNoResep);
-
-        MnResepUlang.setBackground(new java.awt.Color(255, 255, 254));
-        MnResepUlang.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnResepUlang.setForeground(new java.awt.Color(50, 50, 50));
-        MnResepUlang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnResepUlang.setText("Obat Etter 7/23");
-        MnResepUlang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnResepUlang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnResepUlang.setName("MnResepUlang"); // NOI18N
-        MnResepUlang.setPreferredSize(new java.awt.Dimension(160, 23));
-        MnResepUlang.setRequestFocusEnabled(false);
-        MnResepUlang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnResepUlangActionPerformed(evt);
-            }
-        });
-        MnObat.add(MnResepUlang);
 
         MnPermintaanStokObatPasien.setBackground(new java.awt.Color(255, 255, 254));
         MnPermintaanStokObatPasien.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -5899,7 +5898,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-12-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-02-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5922,7 +5921,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-12-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-02-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -5948,7 +5947,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-12-2024" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-02-2025" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -5971,7 +5970,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-12-2024" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-02-2025" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
