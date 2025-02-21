@@ -885,10 +885,10 @@ private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 
 private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
     if (tbDokter.getRowCount() != 0) {
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            getCekStok();  
+        if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
             getCekStokMin();
-            getCekStokMax();   
+            getCekStokMax();
+            getCekStok();
         } else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
             getCekStok();  
             getCekStokMin();
