@@ -83,7 +83,7 @@ public class DlgEtter extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] judul = {"Jml", "Sebelum", "Kode Barang", "Nama Barang", "Aturan", "Satuan", "Letak Barang", "Stok", "Harga", "Harga Beli", "Kayrawan", "ralan", "Luar", "Stok"};
+        Object[] judul = {"Jml", "Sebelum", "Kode Barang", "Nama Barang", "Aturan", "Satuan", "Letak Barang", "Stok", "Harga", "Harga Beli", "Kayrawan", "ralan", "Luar"};
         tabMode = new DefaultTableModel(null, judul) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -100,7 +100,7 @@ public class DlgEtter extends javax.swing.JDialog {
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800, 800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 14; i++) {
+        for (i = 0; i < 13; i++) {
             TableColumn column = tbDokter.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(50);
@@ -127,8 +127,6 @@ public class DlgEtter extends javax.swing.JDialog {
             } else if (i == 11) {
                 column.setPreferredWidth(100);
             } else if (i == 12) {
-                column.setPreferredWidth(100);
-            } else if (i == 13) {
                 column.setPreferredWidth(100);
             }
         }
@@ -937,6 +935,7 @@ private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     if(tbDokter.getSelectedRow()!= -1){
         try {
             getData();
+            getCekStok();
         } catch (java.lang.NullPointerException e) {
         }
     }
@@ -946,6 +945,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     if (tbDokter.getRowCount() != 0) {
         if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
             hitungObat();
+            getCekStok();
 //            i=tbDokter.getSelectedColumn();
 //            if((i==0)||(i==1)||(i==2)){
 //                TCari.requestFocus();
@@ -965,7 +965,8 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 tbDokter.setValueAt("", i, 0);
             }
         } else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
-           hitungObat();   
+           hitungObat();  
+           getCekStok();
         }
 //        else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
 //            getCekStok(); 
@@ -991,7 +992,8 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     
     private void tbDokterPropertyChange(java.beans.PropertyChangeEvent evt) {                                       
         if(this.isVisible()==true){
-          hitungObat();  
+          hitungObat();
+          getCekStok();  
         }
     }
 
@@ -1487,7 +1489,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     
                     tabMode.addRow(new Object[]{
                         "",rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getString(6), Valid.SetAngka(stok), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), Valid.SetAngka(stok)
+                        rs.getString(5), rs.getString(6), Valid.SetAngka(stok), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)
                     });
                  }
             } catch (Exception e) {
@@ -1746,4 +1748,21 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             tbDokter.setValueAt(0,data,10);
         } 
     } 
+    
+    private void getCekStok() {
+        if(tbDokter.getSelectedRow()!= -1){
+            if(STOKKOSONGRESEP.equals("no")){
+                try {
+                    if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>0){
+                        if(Valid.SetAngka(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString())>Valid.SetAngka(tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString())){
+                            JOptionPane.showMessageDialog(rootPane,"Maaf jumlah melebihi stok..!!");
+                            tbDokter.setValueAt("",tbDokter.getRowCount(),0);
+                        }
+                    }
+                } catch (Exception e) {
+                    tbDokter.setValueAt("",tbDokter.getSelectedRow(),0);
+                } 
+            } 
+        }
+    }
 }
