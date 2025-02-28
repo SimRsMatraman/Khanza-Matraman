@@ -44,8 +44,9 @@ public class DlgEtter extends javax.swing.JDialog {
     private Connection koneksi = koneksiDB.condb();
     private PreparedStatement ps, ps2, pscarikapasitas, psstok;
     private ResultSet rs, rs2, carikapasitas, rsstok;
-    private int jml = 0, i = 0, row = 0, index = 0, min = 0, max = 0, row2, r;
-    private String[] jumlah, kodebarang, namabarang, satuan, jenis, kategori, golongan, keterangan, stokbangsal;
+    private int jml = 0, i = 0, row = 0, index = 0, min = 0, max = 0, row2, r, z=0;
+    private String[] jumlah, stokasal, kodebarang, namabarang, satuan, aturan, letak;
+    private double[] j, sebelum, harga, harga_b, harga_k, harga_r, harga_l;
     private WarnaTable2 warna = new WarnaTable2();
     private riwayatobat Trackobat=new riwayatobat();
     private DlgPindahGudang pindah=new DlgPindahGudang(null,false);
@@ -932,7 +933,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_ppBersihkanActionPerformed
 
 private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
-    if(tbDokter.getSelectedRow()!= -1){
+    if(tbDokter.getSelectedRow()!= 0){
         try {
             getData();
             getCekStok();
@@ -946,11 +947,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
             hitungObat();
             getCekStok();
-//            i=tbDokter.getSelectedColumn();
-//            if((i==0)||(i==1)||(i==2)){
-//                TCari.requestFocus();
-//                getData();
-//            }
         } else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             i = tbDokter.getSelectedRow();
             if (i != -1) {
@@ -968,14 +964,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
            hitungObat();  
            getCekStok();
         }
-//        else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-//            getCekStok(); 
-//            getCekStokMin();     
-//        }
-//        else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-//            getCekStok();  
-//            getCekStokMin();    
-//        }
     }
 }//GEN-LAST:event_tbDokterKeyPressed
 
@@ -1360,7 +1348,71 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 //            System.out.println("Notifikasi : " + e);
 //        }
 //        
-    Valid.tabelKosong(tabMode);
+        z=0;
+        for(i=0;i<tbDokter.getRowCount();i++){
+            if(!tbDokter.getValueAt(i,0).toString().equals("")){
+                z++;
+            }
+        }    
+        
+        j=null;
+        j=new double[z];
+        sebelum=null;
+        sebelum=new double[z];
+        kodebarang=null;
+        kodebarang=new String[z];
+        namabarang=null;
+        namabarang=new String[z];
+        aturan=null;
+        aturan=new String[z];
+        satuan=null;
+        satuan=new String[z];
+        letak=null;
+        letak=new String[z];
+        stokasal=null;
+        stokasal=new String[z];                   
+        harga=null;
+        harga=new double[z];           
+        harga_b=null;
+        harga_b=new double[z];         
+        harga_k=null;
+        harga_k=new double[z];
+        harga_r=null;
+        harga_r=new double[z]; 
+        harga_l=null;
+        harga_l=new double[z]; 
+        z=0;        
+        for(i=0;i<tbDokter.getRowCount();i++){
+            if(!tbDokter.getValueAt(i,0).toString().equals("")){
+               try {
+                    j[z]=Double.parseDouble(tbDokter.getValueAt(i,0).toString());
+                } catch (Exception e) {
+                    j[z]=0;
+                } 
+                sebelum[z]=Double.parseDouble(tbDokter.getValueAt(i,1).toString());
+                kodebarang[z]=tbDokter.getValueAt(i,2).toString();
+                namabarang[z]=tbDokter.getValueAt(i,3).toString();
+                aturan[z]=tbDokter.getValueAt(i,4).toString();
+                satuan[z]=tbDokter.getValueAt(i,5).toString();
+                letak[z]=tbDokter.getValueAt(i,6).toString();
+                stokasal[z]=tbDokter.getValueAt(i,7).toString();
+                harga[z]=Double.parseDouble(tbDokter.getValueAt(i,8).toString());
+                harga_b[z]=Double.parseDouble(tbDokter.getValueAt(i,9).toString());
+                harga_k[z]=Double.parseDouble(tbDokter.getValueAt(i,10).toString());
+                harga_r[z]=Double.parseDouble(tbDokter.getValueAt(i,11).toString());
+                harga_l[z]=Double.parseDouble(tbDokter.getValueAt(i,12).toString());
+                z++;
+            }
+        }
+        
+        Valid.tabelKosong(tabMode);
+        
+        for(i=0;i<z;i++){
+            tabMode.addRow(new Object[] {
+                j[i],sebelum[i],kodebarang[i],namabarang[i],aturan[i],satuan[i],letak[i],stokasal[i],
+                harga[i],harga_b[i],harga_k[i],harga_r[i],harga_l[i]
+            });
+        }
         try {
             if(TCari.getText().trim().equals("")){
             ps = koneksi.prepareStatement(
@@ -1382,7 +1434,8 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 "inner join reg_periksa on reg_periksa.no_rawat=resep_obat.no_rawat " +
                 "inner join databarang on databarang.kode_brng=resep_dokter.kode_brng " +
                 "inner join kodesatuan on kodesatuan.kode_sat=databarang.kode_sat " +
-                "where reg_periksa.no_rkm_medis=? and resep_dokter.ulang='true' group by databarang.nama_brng order by resep_obat.tgl_perawatan limit 20");
+                "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng " +
+                "where reg_periksa.no_rkm_medis=? and resep_dokter.ulang='true' and gudangbarang.stok>'0' group by databarang.nama_brng order by resep_obat.tgl_perawatan limit 20");
 
             }else{
             ps = koneksi.prepareStatement(
@@ -1404,13 +1457,17 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 "inner join reg_periksa on reg_periksa.no_rawat=resep_obat.no_rawat " +
                 "inner join databarang on databarang.kode_brng=resep_dokter.kode_brng " +
                 "inner join kodesatuan on kodesatuan.kode_sat=databarang.kode_sat " +
-                "where reg_periksa.no_rkm_medis=? and resep_dokter.ulang='true' or " +
-                "databarang.nama_brng like ? and resep_dokter.ulang='true' group by databarang.nama_brng order by resep_obat.tgl_perawatan limit 20");    
+                "inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng " +
+                "where resep_dokter.ulang='true' and databarang.kode_brng like ? and gudangbarang.stok>'0' or " +
+                "resep_dokter.ulang='true' and databarang.nama_brng like ? and gudangbarang.stok>'0' or " +
+                "resep_dokter.ulang='true' and reg_periksa.no_rkm_medis=? and gudangbarang.stok>'0' " +
+                "group by databarang.nama_brng order by databarang.nama_brng");    
             }
             try {
                 if(!TCari.getText().trim().equals("")){
-                    ps.setString(1, "%" + TNoRM.getText().trim() + "%");
-                    ps.setString(2, "%" + TCari.getText().trim() + "%"); 
+                    ps.setString(1, "%" + TCari.getText().trim() + "%");
+                    ps.setString(2, "%" + TCari.getText().trim() + "%");
+                    ps.setString(3, "%" + TNoRM.getText().trim() + "%"); 
                 }
                 ttltotaljual = 0;
                 ttltotalbeli = 0;
@@ -1474,7 +1531,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         ps2.setString(2, kdgudang.getText().trim());
                         rs2 = ps2.executeQuery();
                         if (rs2.next()) {
-                            stok = rs2.getDouble(1);
+//                            stok = rs2.getDouble(1);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi Stok : " + e);
@@ -1487,10 +1544,33 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         }
                     }
                     
+                    //Permintaan Stok  
+                    ps2 = koneksi.prepareStatement(
+                            "select gudangbarang.stok "
+                            + "from gudangbarang where gudangbarang.kode_brng=? and gudangbarang.kd_bangsal=?");
+                    try {
+                        ps2.setString(1, rs.getString(2));
+                        ps2.setString(2, kdgudang.getText().trim());
+                        rs2 = ps2.executeQuery();
+                        if (rs2.next()) {
+
+                            stok = rs2.getDouble(1);
+                        }
+                    
                     tabMode.addRow(new Object[]{
                         "",rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getString(6), Valid.SetAngka(stok), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)
+                        rs.getString(5), rs.getString(6), rs2.getString(1), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)
                     });
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi Detail Beli : " + e);
+                    } finally {
+                        if (rs2 != null) {
+                            rs2.close();
+                        }
+                        if (ps2 != null) {
+                            ps2.close();
+                        }
+                    }
                  }
             } catch (Exception e) {
                 System.out.println("Notifikasi Data Barang : " + e);
