@@ -10213,7 +10213,11 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         } else if (TPasienCari.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             tbKasirRalan.requestFocus();
-        } else {
+        } else if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 4).toString().equals("SEP Terbit")) {
+            JOptionPane.showMessageDialog(null, "Pasien sudah berobat dan terbit SEP ralan.. silahkan pilih no rawat yang lain");
+            tbKasirRalan.requestFocus();
+        }
+        else {
             if (tbKasirRalan.getSelectedRow() != -1) {
                 if (Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?", TNoRw.getText()) > 0) {
                     JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
