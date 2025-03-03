@@ -1994,7 +1994,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         FormInput.add(jLabel18);
         jLabel18.setBounds(170, 160, 90, 23);
 
-        TSuhu.setEditable(false);
         TSuhu.setFocusTraversalPolicyProvider(true);
         TSuhu.setName("TSuhu"); // NOI18N
         TSuhu.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2010,7 +2009,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         FormInput.add(jLabel20);
         jLabel20.setBounds(500, 130, 40, 23);
 
-        TTensi.setEditable(false);
         TTensi.setHighlighter(null);
         TTensi.setName("TTensi"); // NOI18N
         TTensi.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2026,7 +2024,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         FormInput.add(jLabel22);
         jLabel22.setBounds(620, 130, 79, 23);
 
-        TNadi.setEditable(false);
         TNadi.setFocusTraversalPolicyProvider(true);
         TNadi.setName("TNadi"); // NOI18N
         TNadi.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2042,7 +2039,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         FormInput.add(jLabel23);
         jLabel23.setBounds(10, 160, 97, 23);
 
-        TRespirasi.setEditable(false);
         TRespirasi.setHighlighter(null);
         TRespirasi.setName("TRespirasi"); // NOI18N
         TRespirasi.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2058,7 +2054,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         FormInput.add(jLabel24);
         jLabel24.setBounds(250, 130, 70, 23);
 
-        TGCS.setEditable(false);
         TGCS.setFocusTraversalPolicyProvider(true);
         TGCS.setName("TGCS"); // NOI18N
         TGCS.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2074,7 +2069,6 @@ public final class DlgRujukRanap extends javax.swing.JDialog {
         FormInput.add(jLabel38);
         jLabel38.setBounds(340, 160, 60, 23);
 
-        TSpo2.setEditable(false);
         TSpo2.setHighlighter(null);
         TSpo2.setName("TSpo2"); // NOI18N
         TSpo2.addActionListener(new java.awt.event.ActionListener() {

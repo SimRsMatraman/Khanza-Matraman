@@ -373,7 +373,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="25-10-2024"/>
+                        <StringItem index="0" value="03-03-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -401,7 +401,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="25-10-2024"/>
+                        <StringItem index="0" value="03-03-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1837,7 +1837,6 @@
                     </Component>
                     <Component class="widget.TextBox" name="TSuhu">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                         <Property name="name" type="java.lang.String" value="TSuhu" noResource="true"/>
                       </Properties>
@@ -1863,7 +1862,6 @@
                     </Component>
                     <Component class="widget.TextBox" name="TTensi">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
@@ -1891,7 +1889,6 @@
                     </Component>
                     <Component class="widget.TextBox" name="TNadi">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                         <Property name="name" type="java.lang.String" value="TNadi" noResource="true"/>
                       </Properties>
@@ -1917,7 +1914,6 @@
                     </Component>
                     <Component class="widget.TextBox" name="TRespirasi">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
@@ -1945,7 +1941,6 @@
                     </Component>
                     <Component class="widget.TextBox" name="TGCS">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                         <Property name="name" type="java.lang.String" value="TGCS" noResource="true"/>
                       </Properties>
@@ -1971,7 +1966,6 @@
                     </Component>
                     <Component class="widget.TextBox" name="TSpo2">
                       <Properties>
-                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                           <ComponentRef name="null"/>
                         </Property>
@@ -2092,7 +2086,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="25-10-2024"/>
+                            <StringItem index="0" value="03-03-2025"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
