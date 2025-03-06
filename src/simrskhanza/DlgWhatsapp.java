@@ -23,6 +23,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -43,7 +44,8 @@ public class DlgWhatsapp extends javax.swing.JDialog {
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
-    private String requestJson,URL="";
+    private String requestJson,URL="",auth,authEncrypt;
+    private byte[] encodedBytes;
     private ApiBPJS api=new ApiBPJS();
 
     /** Creates new form DlgPemberianObat
@@ -196,21 +198,28 @@ public class DlgWhatsapp extends javax.swing.JDialog {
     
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         try{
+            auth="simrs"+":"+"RotiBakar69";
+            encodedBytes = Base64.encodeBase64(auth.getBytes());
+            authEncrypt= new String(encodedBytes);
             String no_hp=TTelf.getText();
-            String nama=TPasien.getText();
-            String pesan=TCatatan.getText();
+            String pesan=TCatatan.getText().replaceAll("(\r\n|\r|\n|\n\r)",". ");
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("Authorization", "Basic "+authEncrypt);
             requestJson ="{" +
-            "\"chatId\": \""+no_hp+"\","+ 
-            "\"reply_to\": null,"+    
-            "\"text\": \""+pesan+"\","+        
-            "\"linkPreview\": true,"+ 
-            "\"session\": \"default\""+          
+//            "\"chatId\": \""+no_hp+"\","+ 
+//            "\"reply_to\": null,"+    
+//            "\"text\": \""+pesan+"\","+        
+//            "\"linkPreview\": true,"+ 
+//            "\"session\": \"default\""+          
+//            "}";
+            "\"phone\": \""+no_hp+"\","+ 
+            "\"message\": \""+pesan+"\","+  
+            "\"reply_message_id\": \"\""+          
             "}";
             requestEntity = new HttpEntity(requestJson,headers);
-            URL =  "http://100.10.3.5:3000/api/sendText";
+            URL =  "http://100.10.3.5:4000/send/message";
             System.out.println("URL : "+URL+"");
             System.out.println("Request JSON : "+requestJson);
             requestJson=api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody();
