@@ -1167,9 +1167,7 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutRMDesc = new javax.swing.JMenuItem();
         MnUrutRMAsc = new javax.swing.JMenuItem();
         MnKonfirmasi = new javax.swing.JMenu();
-        MnSms = new javax.swing.JMenuItem();
-        MnSmsVaksin = new javax.swing.JMenuItem();
-        MnSmsBatal = new javax.swing.JMenuItem();
+        MnWA = new javax.swing.JMenuItem();
         MnHapusData = new javax.swing.JMenu();
         MnHapusTagihanOperasi = new javax.swing.JMenuItem();
         MnHapusObatOperasi = new javax.swing.JMenuItem();
@@ -1311,6 +1309,9 @@ public final class DlgReg extends javax.swing.JDialog {
         MnLaporanRekapPenyakitRalan = new javax.swing.JMenuItem();
         MnLaporanRekapPerujuk = new javax.swing.JMenuItem();
         ppTelemedicine = new javax.swing.JMenuItem();
+        MnSms = new javax.swing.JMenuItem();
+        MnSmsVaksin = new javax.swing.JMenuItem();
+        MnSmsBatal = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass6 = new widget.panelisi();
@@ -4425,53 +4426,21 @@ public final class DlgReg extends javax.swing.JDialog {
         MnKonfirmasi.setName("MnKonfirmasi"); // NOI18N
         MnKonfirmasi.setPreferredSize(new java.awt.Dimension(260, 26));
 
-        MnSms.setBackground(new java.awt.Color(255, 255, 254));
-        MnSms.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnSms.setForeground(new java.awt.Color(50, 50, 50));
-        MnSms.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnSms.setText("SMS Kehadiran");
-        MnSms.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnSms.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnSms.setName("MnSms"); // NOI18N
-        MnSms.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnSms.addActionListener(new java.awt.event.ActionListener() {
+        MnWA.setBackground(new java.awt.Color(255, 255, 254));
+        MnWA.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnWA.setForeground(new java.awt.Color(50, 50, 50));
+        MnWA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnWA.setText("Kirim WA");
+        MnWA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnWA.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnWA.setName("MnWA"); // NOI18N
+        MnWA.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnWA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnSmsActionPerformed(evt);
+                MnWAActionPerformed(evt);
             }
         });
-        MnKonfirmasi.add(MnSms);
-
-        MnSmsVaksin.setBackground(new java.awt.Color(255, 255, 254));
-        MnSmsVaksin.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnSmsVaksin.setForeground(new java.awt.Color(50, 50, 50));
-        MnSmsVaksin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnSmsVaksin.setText("SMS Vaksin");
-        MnSmsVaksin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnSmsVaksin.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnSmsVaksin.setName("MnSmsVaksin"); // NOI18N
-        MnSmsVaksin.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnSmsVaksin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnSmsVaksinActionPerformed(evt);
-            }
-        });
-        MnKonfirmasi.add(MnSmsVaksin);
-
-        MnSmsBatal.setBackground(new java.awt.Color(255, 255, 254));
-        MnSmsBatal.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnSmsBatal.setForeground(new java.awt.Color(50, 50, 50));
-        MnSmsBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnSmsBatal.setText("SMS Batal Periksa");
-        MnSmsBatal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnSmsBatal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnSmsBatal.setName("MnSmsBatal"); // NOI18N
-        MnSmsBatal.setPreferredSize(new java.awt.Dimension(180, 26));
-        MnSmsBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnSmsBatalActionPerformed(evt);
-            }
-        });
-        MnKonfirmasi.add(MnSmsBatal);
+        MnKonfirmasi.add(MnWA);
 
         jPopupMenu1.add(MnKonfirmasi);
 
@@ -4734,7 +4703,7 @@ public final class DlgReg extends javax.swing.JDialog {
         DlgDemografi.setUndecorated(true);
         DlgDemografi.setResizable(false);
 
-        internalFrame4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Demografi Pendaftar ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 70, 50))); // NOI18N
+        internalFrame4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Demografi Pendaftar ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 70, 50))); // NOI18N
         internalFrame4.setName("internalFrame4"); // NOI18N
         internalFrame4.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -4888,7 +4857,7 @@ public final class DlgReg extends javax.swing.JDialog {
         DlgSakit2.setUndecorated(true);
         DlgSakit2.setResizable(false);
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Cetak Surat Keterangan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 70, 50))); // NOI18N
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Cetak Surat Keterangan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 70, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -5810,7 +5779,7 @@ public final class DlgReg extends javax.swing.JDialog {
         WindowListRadologi.setResizable(false);
         WindowListRadologi.getContentPane().setLayout(new java.awt.BorderLayout(1, 1));
 
-        internalFrame9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ List Pemeriksan Radiologi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame9.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ List Pemeriksan Radiologi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(70, 70, 70))); // NOI18N
         internalFrame9.setName("internalFrame9"); // NOI18N
         internalFrame9.setLayout(new java.awt.BorderLayout());
 
@@ -6339,6 +6308,51 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
 
+        MnSms.setBackground(new java.awt.Color(255, 255, 254));
+        MnSms.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnSms.setForeground(new java.awt.Color(50, 50, 50));
+        MnSms.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSms.setText("SMS Kehadiran");
+        MnSms.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSms.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSms.setName("MnSms"); // NOI18N
+        MnSms.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnSms.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnSmsActionPerformed(evt);
+            }
+        });
+
+        MnSmsVaksin.setBackground(new java.awt.Color(255, 255, 254));
+        MnSmsVaksin.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnSmsVaksin.setForeground(new java.awt.Color(50, 50, 50));
+        MnSmsVaksin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSmsVaksin.setText("SMS Vaksin");
+        MnSmsVaksin.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSmsVaksin.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSmsVaksin.setName("MnSmsVaksin"); // NOI18N
+        MnSmsVaksin.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnSmsVaksin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnSmsVaksinActionPerformed(evt);
+            }
+        });
+
+        MnSmsBatal.setBackground(new java.awt.Color(255, 255, 254));
+        MnSmsBatal.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnSmsBatal.setForeground(new java.awt.Color(50, 50, 50));
+        MnSmsBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSmsBatal.setText("SMS Batal Periksa");
+        MnSmsBatal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSmsBatal.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSmsBatal.setName("MnSmsBatal"); // NOI18N
+        MnSmsBatal.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnSmsBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnSmsBatalActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -6348,7 +6362,7 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Registrasi Periksa Hari Ini ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Registrasi Periksa Hari Ini ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -6544,7 +6558,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-03-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6557,7 +6571,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-03-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6725,7 +6739,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-02-2025" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-03-2025" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -14623,6 +14637,25 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }//GEN-LAST:event_MnResepUlangActionPerformed
 
+    private void MnWAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnWAActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
+            TNoRw.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            String nama=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),8).toString();
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgWhatsapp whatsapp=new DlgWhatsapp(null,false);
+            whatsapp.setNoRm(TNoRM.getText(),nama);
+            whatsapp.setSize(720,330);
+            whatsapp.setLocationRelativeTo(internalFrame1);
+            whatsapp.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }      
+    }//GEN-LAST:event_MnWAActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -14935,6 +14968,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem MnUrutTanggalAsc1;
     private javax.swing.JMenuItem MnUrutTanggalDesc;
     private javax.swing.JMenuItem MnUrutTanggalDesc1;
+    private javax.swing.JMenuItem MnWA;
     private widget.TextBox NoBalasan;
     private widget.TextBox NoKa;
     private widget.TextBox NoTelp;
