@@ -25,7 +25,7 @@ public class WarnaTableEtter extends DefaultTableCellRenderer {
             component.setBackground(new Color(255,255,255));
             component.setForeground(new Color(50,50,50));
         } 
-        if(table.getValueAt(row,19).toString().equals("OBAT ETTER ( 7/23 )")){
+        if(table.getValueAt(row,20).toString().equals("OBAT ETTER ( 7/23 )")){
             component.setBackground(new Color(252,165,3));
             component.setForeground(new Color(0,0,0));
         }

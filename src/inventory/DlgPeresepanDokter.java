@@ -75,7 +75,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
         tabModeResep=new DefaultTableModel(null,new Object[]{
-                "U","Jumlah","Aturan Pakai","Kode Barang","Nama Barang","Satuan",
+                "Etter","Jumlah","Aturan Pakai","Kode Barang","Nama Barang","Satuan",
                 "Komposisi","Harga(Rp)","Jenis Obat","I.F.","H.Beli","Stok"
             }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -105,9 +105,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         for (i = 0; i < 12; i++) {
             TableColumn column = tbResep.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(45);
+                column.setPreferredWidth(50);
             }else if(i==1){
-                column.setPreferredWidth(45);
+                column.setPreferredWidth(50);
             }else if(i==2){
                 column.setPreferredWidth(150);
             }else if(i==3){
@@ -447,6 +447,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Jenis = new widget.ComboBox();
         scrollPane5 = new widget.ScrollPane();
         TindakLanjut = new widget.TextArea();
+        etter = new widget.ComboBox();
+        jLabel26 = new widget.Label();
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbResep = new widget.Table();
@@ -673,7 +675,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_END);
 
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(440, 107));
+        FormInput.setPreferredSize(new java.awt.Dimension(440, 157));
         FormInput.setLayout(null);
 
         TNoRw.setHighlighter(null);
@@ -756,7 +758,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-02-2025" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -914,6 +916,22 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
         FormInput.add(scrollPane5);
         scrollPane5.setBounds(1130, 10, 360, 90);
+
+        etter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "3", "2", "1", "-" }));
+        etter.setName("etter"); // NOI18N
+        etter.setPreferredSize(new java.awt.Dimension(55, 28));
+        etter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                etterKeyPressed(evt);
+            }
+        });
+        FormInput.add(etter);
+        etter.setBounds(100, 120, 180, 20);
+
+        jLabel26.setText("Jumlah Etter");
+        jLabel26.setName("jLabel26"); // NOI18N
+        FormInput.add(jLabel26);
+        jLabel26.setBounds(10, 120, 80, 20);
 
         internalFrame1.add(FormInput, java.awt.BorderLayout.PAGE_START);
 
@@ -1558,6 +1576,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         // TODO add your handling code here:
     }//GEN-LAST:event_ChkRMActionPerformed
 
+    private void etterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_etterKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_etterKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1610,10 +1632,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.ComboBox cmbDtk;
     private widget.ComboBox cmbJam;
     private widget.ComboBox cmbMnt;
+    private widget.ComboBox etter;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel11;
     private widget.Label jLabel13;
     private widget.Label jLabel25;
+    private widget.Label jLabel26;
     private widget.Label jLabel3;
     private widget.Label jLabel4;
     private widget.Label jLabel5;
@@ -3774,24 +3798,24 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         try {
             for(i=0;i<tbResep.getRowCount();i++){ 
                 if(Valid.SetAngka(tbResep.getValueAt(i,1).toString())>0){                        
-                    if(tbResep.getValueAt(i,0).toString().equals("true")){
+                    if(tbResep.getValueAt(i,0).toString().equals("uhuy")){
                         pscarikapasitas= koneksi.prepareStatement("select IFNULL(databarang.kapasitas,1) from databarang where databarang.kode_brng=?");                                      
                         try {
                             pscarikapasitas.setString(1,tbResep.getValueAt(i,3).toString());
                             carikapasitas=pscarikapasitas.executeQuery();
                             if(carikapasitas.next()){ 
-                                if(Sequel.menyimpantf2("resep_dokter","?,?,?,?,?","data",5,new String[]{
+                                if(Sequel.menyimpantf2("resep_dokter","?,?,?,?,?,?","data",6,new String[]{
                                     NoResep.getText(),tbResep.getValueAt(i,3).toString(),
                                     ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())),
-                                    tbResep.getValueAt(i,2).toString(),tbResep.getValueAt(i,0).toString()
+                                    tbResep.getValueAt(i,2).toString(),tbResep.getValueAt(i,0).toString(),etter.getSelectedItem().toString()
                                 })==false){
                                     sukses=false;
                                 }
                             }else{
-                                if(Sequel.menyimpantf2("resep_dokter","?,?,?,?,?","data",5,new String[]{
+                                if(Sequel.menyimpantf2("resep_dokter","?,?,?,?,?,?","data",6,new String[]{
                                     NoResep.getText(),tbResep.getValueAt(i,3).toString(),
                                     ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())),
-                                    tbResep.getValueAt(i,2).toString(),tbResep.getValueAt(i,0).toString()
+                                    tbResep.getValueAt(i,2).toString(),tbResep.getValueAt(i,0).toString(),etter.getSelectedItem().toString()
                                 })==false){
                                     sukses=false;
                                 }                               
@@ -3807,10 +3831,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             }
                         }
                     }else{
-                        if(Sequel.menyimpantf2("resep_dokter","?,?,?,?,?","data",5,new String[]{
+                        if(Sequel.menyimpantf2("resep_dokter","?,?,?,?,?,?","data",6,new String[]{
                             NoResep.getText(),tbResep.getValueAt(i,3).toString(),
                             ""+(Double.parseDouble(tbResep.getValueAt(i,1).toString())),
-                            tbResep.getValueAt(i,2).toString(),tbResep.getValueAt(i,0).toString()
+                            tbResep.getValueAt(i,2).toString(),tbResep.getValueAt(i,0).toString(),etter.getSelectedItem().toString()
                         })==false){
                             sukses=false;
                         }                                   
