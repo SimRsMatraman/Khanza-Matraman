@@ -1805,19 +1805,19 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                         );
                                     }
                                             
-                                            if(!NoResep.getText().equals("")){
-                                                Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","etter=etter-1",3,new String[]{
-                                                NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,19).toString()
-//                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
-                                                });  
-                                            }
-                                            
-                                            if(!NoResep.getText().equals("")){
-                                                Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","ulang=?",4,new String[]{
-                                                tbObat.getValueAt(i,19).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
-//                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
-                                                });  
-                                            }
+//                                            if(!NoResep.getText().equals("")){
+//                                                Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","etter=etter-1",3,new String[]{
+//                                                NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,19).toString()
+////                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
+//                                                });  
+//                                            }
+//                                            
+//                                            if(!NoResep.getText().equals("")){
+//                                                Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","ulang=?",4,new String[]{
+//                                                tbObat.getValueAt(i,19).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
+////                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
+//                                                });  
+//                                            }
                                             
                                 }else{
                                     sukses=false;
