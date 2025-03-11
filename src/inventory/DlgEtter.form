@@ -138,7 +138,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="::[ Pemberian Obat, Alkes &amp; BHP Medis Etter 7/23 ]::">
+            <TitledBorder title="::[ Pemberian Obat, Alkes &amp; BHP Medis Iterasi 7/23 ]::">
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
                   <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>

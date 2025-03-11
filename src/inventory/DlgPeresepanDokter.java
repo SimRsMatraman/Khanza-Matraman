@@ -75,7 +75,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
         tabModeResep=new DefaultTableModel(null,new Object[]{
-                "Etter","Jumlah","Aturan Pakai","Kode Barang","Nama Barang","Satuan",
+                "Iter","Jumlah","Aturan Pakai","Kode Barang","Nama Barang","Satuan",
                 "Komposisi","Harga(Rp)","Jenis Obat","I.F.","H.Beli","Stok"
             }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
@@ -678,7 +678,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(440, 157));
         FormInput.setLayout(null);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -689,12 +688,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         TNoRw.setBounds(75, 12, 120, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(196, 12, 487, 23);
 
-        KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
         KdDokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -705,7 +702,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         KdDokter.setBounds(75, 72, 120, 23);
 
         NmDokter.setEditable(false);
-        NmDokter.setHighlighter(null);
         NmDokter.setName("NmDokter"); // NOI18N
         FormInput.add(NmDokter);
         NmDokter.setBounds(196, 72, 230, 23);
@@ -742,7 +738,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(455, 72, 70, 23);
 
-        NoResep.setHighlighter(null);
         NoResep.setName("NoResep"); // NOI18N
         NoResep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -758,7 +753,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-03-2025" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -806,7 +801,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.add(cmbDtk);
         cmbDtk.setBounds(298, 42, 62, 23);
 
-        ChkRM.setBorder(null);
         ChkRM.setSelected(true);
         ChkRM.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ChkRM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -825,7 +819,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.add(ChkRM);
         ChkRM.setBounds(660, 72, 23, 23);
 
-        ChkJln.setBorder(null);
         ChkJln.setSelected(true);
         ChkJln.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -873,7 +866,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(690, 10, 110, 20);
 
-        Judul.setHighlighter(null);
         Judul.setName("Judul"); // NOI18N
         Judul.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -928,7 +920,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.add(etter);
         etter.setBounds(100, 120, 180, 20);
 
-        jLabel26.setText("Jumlah Etter");
+        jLabel26.setText("Jumlah Iterasi :");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
         jLabel26.setBounds(10, 120, 80, 20);

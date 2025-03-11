@@ -100,7 +100,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         tabModeobat=new DefaultTableModel(null,new Object[]{
                 "E","Jumlah","Kode Barang","Nama Barang","Satuan","Kandungan",
                 "Harga(Rp)","Jenis Obat","Emb","Tsl","Stok","Aturan Pakai","I.F.",
-                "H.Beli","Kategori","Golongan","No.Batch","No.Faktur","Kadaluarsa","Edit Etter","Etter","jumlah Etter"
+                "H.Beli","Kategori","Golongan","No.Batch","No.Faktur","Kadaluarsa","Edit Iterasi","Iterasi","jumlah Iterasi"
             }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -644,10 +644,10 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
         BtnEdit.setMnemonic('U');
-        BtnEdit.setText("Update Etter");
+        BtnEdit.setText("Update Iter");
         BtnEdit.setToolTipText("Alt+U");
         BtnEdit.setName("BtnEdit"); // NOI18N
-        BtnEdit.setPreferredSize(new java.awt.Dimension(130, 30));
+        BtnEdit.setPreferredSize(new java.awt.Dimension(110, 30));
         BtnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEditActionPerformed(evt);
@@ -906,7 +906,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         jLabel8.setBounds(4, 40, 65, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-03-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -2324,37 +2324,21 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             if(tbObat.getValueAt(i,0).toString().equals("true")){
                                 pscarikapasitas= koneksi.prepareStatement("select IFNULL(databarang.kapasitas,1) from databarang where databarang.kode_brng=?");                                      
                                 try {
-                                    pscarikapasitas.setString(1,tbObat.getValueAt(i,2).toString());
+                                    pscarikapasitas.setString(1,tbObat.getValueAt(i,1).toString());
                                     carikapasitas=pscarikapasitas.executeQuery();
                                     if(carikapasitas.next()){ 
-                                            if(!NoResep.getText().equals("")){
-                                                Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","etter=?",4,new String[]{
-                                                tbObat.getValueAt(i,21).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
-//                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
-                                                });  
-                                            }
-                                            
-                                            if(!NoResep.getText().equals("")){
+                                            if(Valid.SetAngka(tbObat.getValueAt(i,1).toString())>0){ 
                                                 Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","ulang=?",4,new String[]{
-                                                tbObat.getValueAt(i,19).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
-//                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
-                                                });  
-                                            }
+                                                    tbObat.getValueAt(i,19).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
+                                                });
+                                             }
                                             
                                     }else{
-                                            if(!NoResep.getText().equals("")){
-                                                Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","etter=?",4,new String[]{
-                                                tbObat.getValueAt(i,21).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
-//                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
-                                                });  
-                                            }
-                                            
-                                            if(!NoResep.getText().equals("")){
+                                            if(Valid.SetAngka(tbObat.getValueAt(i,1).toString())>0){ 
                                                 Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","ulang=?",4,new String[]{
-                                                tbObat.getValueAt(i,19).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
-//                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
-                                                });  
-                                            }                                
+                                                    tbObat.getValueAt(i,19).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
+                                                });
+                                             }                                
                                     }        
                                 } catch (Exception e) {
                                     System.out.println("Notifikasi Kapasitas : "+e);
@@ -2367,19 +2351,11 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                     }
                                 }
                             }else{
-                                 if(!NoResep.getText().equals("")){
-                                                Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","etter=?",4,new String[]{
-                                                tbObat.getValueAt(i,21).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
-//                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
-                                                });  
-                                            }
-                                            
-                                            if(!NoResep.getText().equals("")){
+                                 if(Valid.SetAngka(tbObat.getValueAt(i,1).toString())>0){ 
                                                 Sequel.mengedit("resep_dokter","no_resep=? and kode_brng=? and aturan_pakai=?","ulang=?",4,new String[]{
-                                                tbObat.getValueAt(i,19).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
-//                                                        ,"'"+(Double.parseDouble(tbDokter.getValueAt(i,13).toString()))+"'-1"
-                                                });  
-                                            }                                  
+                                                    tbObat.getValueAt(i,19).toString(),NoResep.getText(),tbObat.getValueAt(i,2).toString(),tbObat.getValueAt(i,11).toString()
+                                                });
+                                             }                                 
                             }                      
                         }
                     }
@@ -2900,6 +2876,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     
     public void tampilobat2(String no_resep) {     
         this.noresep=no_resep; 
+        NoResep.setText(noresep);
         try {
             Valid.tabelKosong(tabModeobat);
             Valid.tabelKosong(tabModeObatRacikan);
@@ -2910,7 +2887,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "select databarang.kode_brng, databarang.nama_brng,jenis.nama, "+
                         "databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                         " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli, "+
-                        " resep_dokter.jml, resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ETTER ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
+                        " resep_dokter.jml, resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
                         " from databarang inner join jenis inner join golongan_barang inner join kategori_barang "+
                         " inner join industrifarmasi inner join resep_dokter on databarang.kdjns=jenis.kdjns "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
@@ -2992,7 +2969,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "select databarang.kode_brng, databarang.nama_brng,jenis.nama, "+
                         "databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                         " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,databarang."+hppfarmasi+" as dasar, "+
-                        " resep_dokter.jml, resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ETTER ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
+                        " resep_dokter.jml, resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
                         " from databarang inner join jenis inner join golongan_barang inner join kategori_barang "+
                         " inner join industrifarmasi inner join resep_dokter on databarang.kdjns=jenis.kdjns "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
@@ -3057,7 +3034,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "databarang.kode_sat,databarang.karyawan,databarang.ralan,"+
                         "databarang.beliluar,databarang.letak_barang,databarang.utama,"+
                         "industrifarmasi.nama_industri,databarang.h_beli,resep_dokter.jml, "+
-                        "resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ETTER ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
+                        "resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
                         " from databarang inner join jenis inner join golongan_barang inner join kategori_barang "+
                         " inner join industrifarmasi inner join resep_dokter on databarang.kdjns=jenis.kdjns "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
@@ -3141,7 +3118,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "databarang.kode_sat,databarang.karyawan,databarang.ralan,"+
                         "databarang.beliluar,databarang.letak_barang,databarang.utama,"+
                         "industrifarmasi.nama_industri,databarang.h_beli,resep_dokter.jml,databarang."+hppfarmasi+" as dasar, "+
-                        "resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ETTER ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
+                        "resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
                         " from databarang inner join jenis inner join golongan_barang inner join kategori_barang "+
                         " inner join industrifarmasi inner join resep_dokter on databarang.kdjns=jenis.kdjns "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
@@ -3858,10 +3835,11 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         LblNoRawat.setText(norwt);
         TNoRM.setText(norm);
         TPasien.setText(nama);
+        NoResep.setText(noresep);
         noresep="";
         Tanggal.setText(tanggal);
         Jam.setText(jam);
-        NoResep.setText(Sequel.cariIsi("select resep_obat.no_resep from resep_obat where resep_obat.no_rawat=?",norwt));
+//        NoResep.setText(Sequel.cariIsi("select resep_obat.no_resep from resep_obat where resep_obat.no_rawat=?",norwt));
         KdPj.setText(Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",norwt));
         kenaikan=Sequel.cariIsiAngka("select (set_harga_obat_ralan.hargajual/100) from set_harga_obat_ralan where set_harga_obat_ralan.kd_pj=?",KdPj.getText());
         TCari.requestFocus();
@@ -3920,7 +3898,8 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         LblNoRawat.setText(norwt);
         TNoRM.setText(norm);
         TPasien.setText(nama);
-        noresep="";
+        NoResep.setText(noresep);
+//        noresep="";
         DTPTgl.setDate(tanggal);
         cmbJam.setSelectedItem(jam); 
         cmbMnt.setSelectedItem(menit); 

@@ -84,7 +84,7 @@ public class DlgEtter extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] judul = {"Jml", "Sebelum", "Kode Barang", "Nama Barang", "Aturan", "Satuan", "Letak Barang", "Stok", "Harga", "Harga Beli", "Kayrawan", "ralan", "Luar", "Jumlah Etter", "Resep di Etter", "No. Rawat"};
+        Object[] judul = {"Jml", "Sebelum", "Kode Barang", "Nama Barang", "Aturan", "Satuan", "Letak Barang", "Stok", "Harga", "Harga Beli", "Kayrawan", "ralan", "Luar", "Jumlah Iterasi", "Resep di Iter", "No. Rawat"};
         tabMode = new DefaultTableModel(null, judul) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -363,7 +363,7 @@ public class DlgEtter extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pemberian Obat, Alkes & BHP Medis Etter 7/23 ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pemberian Obat, Alkes & BHP Medis Iterasi 7/23 ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -499,7 +499,6 @@ public class DlgEtter extends javax.swing.JDialog {
         panelisi3.add(jLabel3);
         jLabel3.setBounds(0, 12, 72, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         panelisi3.add(TNoRw);
         TNoRw.setBounds(81, 10, 170, 24);
@@ -534,12 +533,10 @@ public class DlgEtter extends javax.swing.JDialog {
         btnDokter.setBounds(430, 40, 28, 23);
 
         NmDokter.setEditable(false);
-        NmDokter.setHighlighter(null);
         NmDokter.setName("NmDokter"); // NOI18N
         panelisi3.add(NmDokter);
         NmDokter.setBounds(200, 40, 230, 23);
 
-        KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
         KdDokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -561,7 +558,7 @@ public class DlgEtter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 80, 65, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -607,7 +604,6 @@ public class DlgEtter extends javax.swing.JDialog {
         panelisi3.add(cmbDtk);
         cmbDtk.setBounds(290, 80, 62, 23);
 
-        ChkJln.setBorder(null);
         ChkJln.setSelected(true);
         ChkJln.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ChkJln.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -709,7 +705,6 @@ public class DlgEtter extends javax.swing.JDialog {
         panelisi3.add(ChkNoResep);
         ChkNoResep.setBounds(600, 80, 100, 23);
 
-        NoResep.setHighlighter(null);
         NoResep.setName("NoResep"); // NOI18N
         NoResep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -719,7 +714,6 @@ public class DlgEtter extends javax.swing.JDialog {
         panelisi3.add(NoResep);
         NoResep.setBounds(530, 40, 130, 23);
 
-        ChkRM.setBorder(null);
         ChkRM.setSelected(true);
         ChkRM.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         ChkRM.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

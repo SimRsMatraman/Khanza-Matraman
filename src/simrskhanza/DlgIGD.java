@@ -2130,7 +2130,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnResepUlang.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnResepUlang.setForeground(new java.awt.Color(50, 50, 50));
         MnResepUlang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnResepUlang.setText("Obat Etter 7/23");
+        MnResepUlang.setText("Obat Iterasi 7/23");
         MnResepUlang.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnResepUlang.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnResepUlang.setName("MnResepUlang"); // NOI18N
