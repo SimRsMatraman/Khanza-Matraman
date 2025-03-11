@@ -184,7 +184,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             Beban_Jasa_Sarana_Tindakan_Ralan = "", Utang_Jasa_Sarana_Tindakan_Ralan = "", HPP_BHP_Tindakan_Ralan = "", Persediaan_BHP_Tindakan_Ralan = "",
             Beban_Jasa_Menejemen_Tindakan_Ralan = "", Utang_Jasa_Menejemen_Tindakan_Ralan = "", tampildiagnosa = "", finger = "", norawatdipilih = "", normdipilih = "", variabel="";
     public DlgBilingRalan billing = new DlgBilingRalan(null, false);
-    private int i = 0, pilihan = 0, sudah = 0, jmlparsial = 0;
+    private int i = 0, j = 0, pilihan = 0, sudah = 0, jmlparsial = 0;
     public DlgKamarInap kamarinap = new DlgKamarInap(null, false);
     private DlgRawatJalan dlgrwjl2 = new DlgRawatJalan(null, false);
     private boolean semua;
@@ -10214,8 +10214,28 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             tbKasirRalan.requestFocus();
         } else if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 4).toString().equals("SEP Terbit")) {
-            JOptionPane.showMessageDialog(null, "Pasien sudah berobat dan terbit SEP ralan.. silahkan pilih no rawat yang lain");
-            tbKasirRalan.requestFocus();
+            i = JOptionPane.showConfirmDialog(null, "Pasien memiliki SEP rawat jalan di nomor rawat ini, apakah anda ingin tetap melanjutkan ?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                        if (i == JOptionPane.YES_OPTION) { 
+                            j = JOptionPane.showConfirmDialog(null, "Pastikan pasien masuk rawat inap di hari yang sama dengan tanggal registrasi rawat jalan", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+                            if (j == JOptionPane.YES_OPTION) {  
+                                if (Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?", TNoRw.getText()) > 0) {
+                                    JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+                                } else {
+                                    DlgPermintaanRanap form = new DlgPermintaanRanap(null, false);
+                                    form.isCek();
+                                    form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                                    form.setLocationRelativeTo(internalFrame1);
+                                    form.setNoRm(TNoRw.getText(), TNoRMCari.getText(), TPasienCari.getText(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 1).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 10).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 5).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 19).toString());
+                                    form.setVisible(true);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Silahkan pilih no rawat lain dari pasien ini atau hubungi FO untuk konfirmasi");
+                                tbKasirRalan.requestFocus();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Silahkan hubungi FO untuk konfirmasi");
+                            tbKasirRalan.requestFocus();
+                        }                            
         }
         else {
             if (tbKasirRalan.getSelectedRow() != -1) {
