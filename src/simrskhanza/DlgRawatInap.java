@@ -1666,7 +1666,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -2591,7 +2591,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass12.add(jLabel41);
         jLabel41.setBounds(440, 220, 80, 23);
 
-        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Somnolence", "Sopor", "Coma" }));
+        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis 15-14", "Apatis 13-12", "Delirium 11-10", "Somnolen 9-7", "Sopor 6-4", "Coma 3" }));
         cmbKesadaran.setName("cmbKesadaran"); // NOI18N
         cmbKesadaran.setPreferredSize(new java.awt.Dimension(62, 28));
         cmbKesadaran.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -5597,33 +5597,34 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }
                     Sequel.AutoComitTrue();
                 }   break;
-//            case 3:
-//                if(tabModePemeriksaan.getRowCount()==0){
-//                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-//                    TNoRw.requestFocus();
-//                }else{
-//                    for(i=0;i<tbPemeriksaan.getRowCount();i++){
-//                        if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-//                            if(akses.getkode().equals("Admin Utama")){
-//                                Sequel.queryu("delete from pemeriksaan_ranap where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
-//                                        "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
-//                                        "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
-//                                tabModePemeriksaan.removeRow(i);
-//                                i--;
-//                            }else{
-//                                if(akses.getkode().equals(tbPemeriksaan.getValueAt(i,22).toString())){
+            case 3:
+                if(tabModePemeriksaan.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+                    TNoRw.requestFocus();
+                }else{
+                    for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                        if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                            if(akses.getkode().equals("Admin Utama")){
+                                Sequel.queryu("delete from pemeriksaan_ranap where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
+                                        "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
+                                        "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
+                                tabModePemeriksaan.removeRow(i);
+                                i--;
+                            }else{
+                                if(akses.getkode().equals(tbPemeriksaan.getValueAt(i,22).toString())){
+                                    JOptionPane.showMessageDialog(null,"Hanya bisa dihapus admin");
 //                                    Sequel.queryu("delete from pemeriksaan_ranap where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
 //                                            "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
 //                                            "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
 //                                    tabModePemeriksaan.removeRow(i);
 //                                    i--;
-//                                }else{
-//                                    JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh dokter/petugas yang bersangkutan..!!");
-//                                }
-//                            }
-//                        }
-//                    }
-//                }   break;
+                                }else{
+                                    JOptionPane.showMessageDialog(null,"Hanya bisa dihapus admin");
+                                }
+                            }
+                        }
+                    }
+                }   break;
             case 4:
                 if(tabModeObstetri.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
