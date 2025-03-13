@@ -407,7 +407,6 @@ public final class DlgOdontogram extends javax.swing.JDialog {
         label15 = new widget.Label();
         gigi18 = new widget.RadioButton();
         gigi17 = new widget.RadioButton();
-        gigi28 = new widget.RadioButton();
         gigi16 = new widget.RadioButton();
         gigi15 = new widget.RadioButton();
         gigi14 = new widget.RadioButton();
@@ -421,6 +420,7 @@ public final class DlgOdontogram extends javax.swing.JDialog {
         gigi25 = new widget.RadioButton();
         gigi26 = new widget.RadioButton();
         gigi27 = new widget.RadioButton();
+        gigi28 = new widget.RadioButton();
         gigi31 = new widget.RadioButton();
         gigi32 = new widget.RadioButton();
         gigi33 = new widget.RadioButton();
@@ -682,7 +682,7 @@ public final class DlgOdontogram extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-04-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -696,7 +696,7 @@ public final class DlgOdontogram extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-04-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1483,19 +1483,6 @@ public final class DlgOdontogram extends javax.swing.JDialog {
         FormInput.add(gigi17);
         gigi17.setBounds(50, 80, 40, 23);
 
-        buttonGroup1.add(gigi28);
-        gigi28.setText("28");
-        gigi28.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        gigi28.setName("gigi28"); // NOI18N
-        gigi28.setPreferredSize(new java.awt.Dimension(40, 20));
-        gigi28.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gigi28ActionPerformed(evt);
-            }
-        });
-        FormInput.add(gigi28);
-        gigi28.setBounds(610, 80, 40, 23);
-
         buttonGroup1.add(gigi16);
         gigi16.setText("16");
         gigi16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -1664,6 +1651,19 @@ public final class DlgOdontogram extends javax.swing.JDialog {
         });
         FormInput.add(gigi27);
         gigi27.setBounds(570, 80, 40, 23);
+
+        buttonGroup1.add(gigi28);
+        gigi28.setText("28");
+        gigi28.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        gigi28.setName("gigi28"); // NOI18N
+        gigi28.setPreferredSize(new java.awt.Dimension(40, 20));
+        gigi28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gigi28ActionPerformed(evt);
+            }
+        });
+        FormInput.add(gigi28);
+        gigi28.setBounds(610, 80, 40, 23);
 
         buttonGroup1.add(gigi31);
         gigi31.setText("31");
@@ -2164,7 +2164,7 @@ public final class DlgOdontogram extends javax.swing.JDialog {
         jLabel15.setBounds(540, 40, 67, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-04-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-07-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -2462,170 +2462,171 @@ private void autoNomor() {
             Valid.textKosong(TNoRw,"Pasien");
         }else if(KodeDokter.getText().equals("")||NamaDokter.getText().equals("")){
             Valid.textKosong(BtnDokter,"Dokter Gigi");
-        }else{
-        if(tbObat.getSelectedRow()>-1){
-        if(gigi11.isSelected()==true){
-                bagian="1.1";
-            }
-        if(gigi12.isSelected()==true){
-                bagian="1.2";
-            }
-        if(gigi13.isSelected()==true){
-                bagian="1.3";
-            }
-        if(gigi14.isSelected()==true){
-                bagian="1.4";
-            }
-        if(gigi15.isSelected()==true){
-                bagian="1.5";
-            }
-        if(gigi16.isSelected()==true){
-                bagian="1.6";
-            }
-        if(gigi17.isSelected()==true){
-                bagian="1.7";
-            }
-        if(gigi18.isSelected()==true){
-                bagian="1.8";
-            }
-        if(gigi21.isSelected()==true){
-                bagian="2.1";
-            }
-        if(gigi22.isSelected()==true){
-                bagian="2.2";
-            }
-        if(gigi23.isSelected()==true){
-                bagian="2.3";
-            }
-        if(gigi24.isSelected()==true){
-                bagian="2.4";
-            }
-        if(gigi25.isSelected()==true){
-                bagian="2.5";
-            }
-        if(gigi26.isSelected()==true){
-                bagian="2.6";
-            }
-        if(gigi27.isSelected()==true){
-                bagian="2.7";
-            }
-        if(gigi28.isSelected()==true){
-                bagian="2.8";
-            }
-        if(gigi31.isSelected()==true){
-                bagian="3.1";
-            }
-        if(gigi32.isSelected()==true){
-                bagian="3.2";
-            }
-        if(gigi33.isSelected()==true){
-                bagian="3.3";
-            }
-        if(gigi34.isSelected()==true){
-                bagian="3.4";
-            }
-        if(gigi35.isSelected()==true){
-                bagian="3.5";
-            }
-        if(gigi36.isSelected()==true){
-                bagian="3.6";
-            }
-        if(gigi37.isSelected()==true){
-                bagian="3.7";
-            }
-        if(gigi38.isSelected()==true){
-                bagian="3.8";
-            }
-        if(gigi41.isSelected()==true){
-                bagian="4.1";
-            }
-        if(gigi42.isSelected()==true){
-                bagian="4.2";
-            }
-        if(gigi43.isSelected()==true){
-                bagian="4.3";
-            }
-        if(gigi44.isSelected()==true){
-                bagian="4.4";
-            }
-        if(gigi45.isSelected()==true){
-                bagian="4.5";
-            }
-        if(gigi46.isSelected()==true){
-                bagian="4.6";
-            }
-        if(gigi47.isSelected()==true){
-                bagian="4.7";
-            }
-        if(gigi48.isSelected()==true){
-                bagian="4.8";
-            }
-        if(gigi51.isSelected()==true){
-                bagian="5.1";
-            }
-        if(gigi52.isSelected()==true){
-                bagian="5.2";
-            }
-        if(gigi53.isSelected()==true){
-                bagian="5.3";
-            }
-        if(gigi54.isSelected()==true){
-                bagian="5.4";
-            }
-        if(gigi55.isSelected()==true){
-                bagian="5.5";
-            }
-        if(gigi61.isSelected()==true){
-                bagian="6.1";
-            }
-        if(gigi62.isSelected()==true){
-                bagian="6.2";
-            }
-        if(gigi63.isSelected()==true){
-                bagian="6.3";
-            }
-        if(gigi64.isSelected()==true){
-                bagian="6.4";
-            }
-        if(gigi65.isSelected()==true){
-                bagian="6.5";
-            }
-        if(gigi71.isSelected()==true){
-                bagian="7.1";
-            }
-        if(gigi72.isSelected()==true){
-                bagian="7.2";
-            }
-        if(gigi73.isSelected()==true){
-                bagian="7.3";
-            }
-        if(gigi74.isSelected()==true){
-                bagian="7.4";
-            }
-        if(gigi75.isSelected()==true){
-                bagian="7.5";
-            }
-        if(gigi81.isSelected()==true){
-                bagian="8.1";
-            }
-        if(gigi82.isSelected()==true){
-                bagian="8.2";
-            }
-        if(gigi83.isSelected()==true){
-                bagian="8.3";
-            }
-        if(gigi84.isSelected()==true){
-                bagian="8.4";
-            }
-        if(gigi85.isSelected()==true){
-                bagian="8.5";
-            }
         }else if(DiagnosaUtama.getText().equals("")){
             Valid.textKosong(DiagnosaUtama,"Diagnosa Gigi");
         }else if(Catatan.getText().equals("")){
             Valid.textKosong(Catatan,"Catatan Pemeriksaan");
         }else{
-            if(tbObat.getSelectedRow()>-1){
+        if(tbObat.getSelectedRow()>-1){
+            if(gigi11.isSelected()==true){
+                    bagian="1.1";
+                }
+            if(gigi12.isSelected()==true){
+                    bagian="1.2";
+                }
+            if(gigi13.isSelected()==true){
+                    bagian="1.3";
+                }
+            if(gigi14.isSelected()==true){
+                    bagian="1.4";
+                }
+            if(gigi15.isSelected()==true){
+                    bagian="1.5";
+                }
+            if(gigi16.isSelected()==true){
+                    bagian="1.6";
+                }
+            if(gigi17.isSelected()==true){
+                    bagian="1.7";
+                }
+            if(gigi18.isSelected()==true){
+                    bagian="1.8";
+                }
+            if(gigi21.isSelected()==true){
+                    bagian="2.1";
+                }
+            if(gigi22.isSelected()==true){
+                    bagian="2.2";
+                }
+            if(gigi23.isSelected()==true){
+                    bagian="2.3";
+                }
+            if(gigi24.isSelected()==true){
+                    bagian="2.4";
+                }
+            if(gigi25.isSelected()==true){
+                    bagian="2.5";
+                }
+            if(gigi26.isSelected()==true){
+                    bagian="2.6";
+                }
+            if(gigi27.isSelected()==true){
+                    bagian="2.7";
+                }
+            if(gigi28.isSelected()==true){
+                    bagian="2.8";
+                }
+            if(gigi31.isSelected()==true){
+                    bagian="3.1";
+                }
+            if(gigi32.isSelected()==true){
+                    bagian="3.2";
+                }
+            if(gigi33.isSelected()==true){
+                    bagian="3.3";
+                }
+            if(gigi34.isSelected()==true){
+                    bagian="3.4";
+                }
+            if(gigi35.isSelected()==true){
+                    bagian="3.5";
+                }
+            if(gigi36.isSelected()==true){
+                    bagian="3.6";
+                }
+            if(gigi37.isSelected()==true){
+                    bagian="3.7";
+                }
+            if(gigi38.isSelected()==true){
+                    bagian="3.8";
+                }
+            if(gigi41.isSelected()==true){
+                    bagian="4.1";
+                }
+            if(gigi42.isSelected()==true){
+                    bagian="4.2";
+                }
+            if(gigi43.isSelected()==true){
+                    bagian="4.3";
+                }
+            if(gigi44.isSelected()==true){
+                    bagian="4.4";
+                }
+            if(gigi45.isSelected()==true){
+                    bagian="4.5";
+                }
+            if(gigi46.isSelected()==true){
+                    bagian="4.6";
+                }
+            if(gigi47.isSelected()==true){
+                    bagian="4.7";
+                }
+            if(gigi48.isSelected()==true){
+                    bagian="4.8";
+                }
+            if(gigi51.isSelected()==true){
+                    bagian="5.1";
+                }
+            if(gigi52.isSelected()==true){
+                    bagian="5.2";
+                }
+            if(gigi53.isSelected()==true){
+                    bagian="5.3";
+                }
+            if(gigi54.isSelected()==true){
+                    bagian="5.4";
+                }
+            if(gigi55.isSelected()==true){
+                    bagian="5.5";
+                }
+            if(gigi61.isSelected()==true){
+                    bagian="6.1";
+                }
+            if(gigi62.isSelected()==true){
+                    bagian="6.2";
+                }
+            if(gigi63.isSelected()==true){
+                    bagian="6.3";
+                }
+            if(gigi64.isSelected()==true){
+                    bagian="6.4";
+                }
+            if(gigi65.isSelected()==true){
+                    bagian="6.5";
+                }
+            if(gigi71.isSelected()==true){
+                    bagian="7.1";
+                }
+            if(gigi72.isSelected()==true){
+                    bagian="7.2";
+                }
+            if(gigi73.isSelected()==true){
+                    bagian="7.3";
+                }
+            if(gigi74.isSelected()==true){
+                    bagian="7.4";
+                }
+            if(gigi75.isSelected()==true){
+                    bagian="7.5";
+                }
+            if(gigi81.isSelected()==true){
+                    bagian="8.1";
+                }
+            if(gigi82.isSelected()==true){
+                    bagian="8.2";
+                }
+            if(gigi83.isSelected()==true){
+                    bagian="8.3";
+                }
+            if(gigi84.isSelected()==true){
+                    bagian="8.4";
+                }
+            if(gigi85.isSelected()==true){
+                    bagian="8.5";
+                }
+//            System.out.println("Notifikasi : "+TNoRw.getText()+","+KodeDokter.getText()+","+bagian+","+DiagnosaUtama.getText()+","+KodeDiagnosaUtama.getText()+","+
+//                    Hasil.getSelectedItem().toString()+","+Catatan.getText()+","+Valid.SetTgl(Tanggal.getSelectedItem()+"")+","+
+//                    Rahang.getSelectedItem().toString()+","+tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
                 if(Sequel.mengedittf("pemeriksaan_gigi","no_rawat=?","no_rawat=?,kd_dokter=?,bagian=?,diagnosa=?,kd_diagnosa=?,hasil=?,catatan=?,tanggal=?,rahang=?",10,new String[]{
                     TNoRw.getText(),KodeDokter.getText(),bagian,DiagnosaUtama.getText(),KodeDiagnosaUtama.getText(),
                     Hasil.getSelectedItem().toString(),Catatan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
@@ -2635,9 +2636,8 @@ private void autoNomor() {
                        tampil();
                        emptTeks();
                 }
-            }else{
+        }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            }
         }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
