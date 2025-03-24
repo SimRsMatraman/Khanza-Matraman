@@ -454,6 +454,7 @@ import laporan.DlgRekapRadiologiPerTahun;
 import setting.DlgRunTeksApotek;
 import setting.DlgSetInputParsial;
 import kepegawaian.DlgJadwal;
+import kepegawaian.DlgAbsen;
 import inventory.DlgResepPulang;
 import keuangan.DlgPembayaranPerAKunBayar3;
 import bridging.DlgDataTB;
@@ -1684,6 +1685,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaboratoriumPA = new widget.ButtonBig();
         btnLaboratoriumMB = new widget.ButtonBig();
         btnPermintaanFisio = new widget.ButtonBig();
+        BtnAbsen = new widget.ButtonBig();
         internalFrame1 = new widget.InternalFrame();
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1933,7 +1935,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06/01/2025" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20/03/2025" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -6996,6 +6998,17 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanFisio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPermintaanFisioActionPerformed(evt);
+            }
+        });
+
+        BtnAbsen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/rekap.png"))); // NOI18N
+        BtnAbsen.setText("Jadwal Dokter");
+        BtnAbsen.setIconTextGap(0);
+        BtnAbsen.setName("BtnAbsen"); // NOI18N
+        BtnAbsen.setPreferredSize(new java.awt.Dimension(200, 90));
+        BtnAbsen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAbsenActionPerformed(evt);
             }
         });
 
@@ -13604,6 +13617,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnToolFisioActionPerformed
 
+    private void BtnAbsenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAbsenActionPerformed
+        isTutup();
+        DlgAbsen jadwal=new DlgAbsen(this,false);
+        jadwal.emptTeks();
+        jadwal.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        jadwal.setLocationRelativeTo(PanelUtama);
+        jadwal.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnAbsenActionPerformed
+
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -19824,6 +19848,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.ButtonBig BtnAbsen;
     private widget.Button BtnCancel;
     private widget.ButtonBig BtnClose;
     private widget.ButtonBig BtnDpjp;
@@ -20562,6 +20587,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(BtnJadwal);
                 jmlmenu++;
                 Panelmenu.add(btnJadwalTelemedicine);
+                jmlmenu++;
+                Panelmenu.add(BtnAbsen);
                 jmlmenu++;
             }
 
@@ -25321,6 +25348,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
             Panelmenu.add(btnJadwalTelemedicine);
             jmlmenu++;
+            Panelmenu.add(BtnAbsen);
+            jmlmenu++;
         }
 
         if(akses.getregistrasi()==true){
@@ -30061,7 +30090,11 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             if(BtnJadwal.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(BtnJadwal);
                 jmlmenu++;
-            }    
+            }
+            if(BtnAbsen.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(BtnAbsen);
+                jmlmenu++;
+            }
             if(btnJadwalTelemedicine.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnJadwalTelemedicine);
                 jmlmenu++;
