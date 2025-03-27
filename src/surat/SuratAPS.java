@@ -1249,7 +1249,7 @@ public final class SuratAPS extends javax.swing.JDialog {
                                 "surat_aps.tanggal_surat, " +
                                 "surat_aps.jam, " +
                                 "surat_aps.hubungan, " +
-                                "surat_aps.No_ktp, " +
+                                "surat_aps.No_ktp as ktp, " +
                                 "surat_aps.JK, " +
                                 "surat_aps.tte " +
                                 "FROM surat_aps " +
