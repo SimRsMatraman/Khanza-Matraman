@@ -1254,6 +1254,7 @@ public final class SuratAPS extends javax.swing.JDialog {
 //                              "where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
 //                this.setCursor(Cursor.getDefaultCursor());  
 //       }
+<<<<<<< Updated upstream
     }//GEN-LAST:event_MnCetakSuratSakitActionPerformed
 
     private void KodeDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeDokterKeyPressed
