@@ -52,7 +52,11 @@ public final class SuratAPS extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
+<<<<<<< Updated upstream
     private String tgl;
+=======
+    private String tgl,finger="",kodedokter="",namadokter="",kodepetugas="",namapetugas="";
+>>>>>>> Stashed changes
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     public  DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
     private SimpleDateFormat jamNow = new SimpleDateFormat("HH:mm:ss");
@@ -1255,6 +1259,57 @@ public final class SuratAPS extends javax.swing.JDialog {
 //                this.setCursor(Cursor.getDefaultCursor());  
 //       }
 <<<<<<< Updated upstream
+=======
+        if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("nosakit",NoSurat.getText());
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());  
+                kodedokter=Sequel.cariIsi("select surat_aps.kd_dokter from surat_aps where surat_aps.no_rawat=?",TNoRw.getText());
+                namadokter=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter);
+                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodedokter);
+                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+" Ditandatangani secara elektronik oleh dokter "+namadokter+" dengan ID "+(finger.equals("")?kodedokter:finger)+" "+Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));  
+                kodepetugas=Sequel.cariIsi("select surat_aps.nik from surat_aps where surat_aps.no_rawat=?",TNoRw.getText());
+                namapetugas=Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",kodepetugas);
+                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodepetugas);
+                param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+" Ditandatangani secara elektronik oleh petugas "+namapetugas+" dengan ID "+(finger.equals("")?kodepetugas:finger)+" "+Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));  
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                Valid.MyReportqry("rptSuratAps.jasper","report","::[ Surat Pernyataan Pasien Pulang Atas Permintaan Sendiri (APS) ]::",
+                                "SELECT " +
+                                "pasien.nm_pasien, " +
+                                "pasien.umur, " +
+                                "pasien.no_ktp, " +
+                                "concat(pasien.alamat, ', ', c.nm_kel, ', ', d.nm_kec,', ', e.nm_kab,', ', f.nm_prop) as alamat, " +
+                                "if(pasien.jk='L','Laki-laki','Perempuan') as kelamin, " +
+                                "pasien.keluarga, " +
+                                "pasien.namakeluarga,  " +
+                                "concat(pasien.alamatpj, ', ', pasien.kelurahanpj, ', ', pasien.kecamatanpj,', ', pasien.kabupatenpj,', ', pasien.propinsipj) as alamatpj, " +
+                                "a.nama as petugas, " +
+                                "b.nama as dokter, " +
+                                "surat_aps.tanggal_surat, " +
+                                "surat_aps.jam, " +
+                                "surat_aps.hubungan, " +
+                                "surat_aps.tte " +
+                                "FROM surat_aps " +
+                                "INNER JOIN reg_periksa on reg_periksa.no_rawat=surat_aps.no_rawat " +
+                                "INNER JOIN pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis " +
+                                "INNER JOIN pegawai a ON a.nik=surat_aps.nik " +
+                                "INNER JOIN pegawai b on b.nik=surat_aps.kd_dokter " +
+                                "INNER JOIN kelurahan c on c.kd_kel=pasien.kd_kel " +
+                                "INNER JOIN kecamatan d on d.kd_kec=pasien.kd_kec " +
+                                "INNER JOIN kabupaten e on e.kd_kab=pasien.kd_kab " +
+                                "INNER JOIN propinsi f on f.kd_prop=pasien.kd_prop " +
+                                "WHERE surat_aps.no_rawat='"+TNoRw.getText()+"' ",param);
+                this.setCursor(Cursor.getDefaultCursor());  
+       }
+>>>>>>> Stashed changes
     }//GEN-LAST:event_MnCetakSuratSakitActionPerformed
 
     private void KodeDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeDokterKeyPressed
