@@ -1910,6 +1910,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         MIgd = new widget.PanelBiasa();
         BtnRiwayat1 = new widget.Button();
         BtnResepObat1 = new widget.Button();
+        BtnPORanap1 = new widget.Button();
         BtnPermintaanLab1 = new widget.Button();
         BtnPermintaanRad1 = new widget.Button();
         BtnPermintaanRanap = new widget.Button();
@@ -2200,7 +2201,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-03-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2219,7 +2220,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-03-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4637,7 +4638,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-03-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -5298,6 +5299,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MIgd.add(BtnResepObat1);
+
+        BtnPORanap1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPORanap1.setText("Daftar Pemberian Obat");
+        BtnPORanap1.setFocusPainted(false);
+        BtnPORanap1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPORanap1.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPORanap1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPORanap1.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPORanap1.setName("BtnPORanap1"); // NOI18N
+        BtnPORanap1.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPORanap1.setRoundRect(false);
+        BtnPORanap1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPORanap1ActionPerformed(evt);
+            }
+        });
+        MIgd.add(BtnPORanap1);
 
         BtnPermintaanLab1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnPermintaanLab1.setText("Permintaan Lab");
@@ -12792,6 +12810,10 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnPORanapActionPerformed
 
+    private void BtnPORanap1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPORanap1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnPORanap1ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -12917,6 +12939,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnObatBhp;
     private widget.Button BtnOdontogram;
     private widget.Button BtnPORanap;
+    private widget.Button BtnPORanap1;
     private widget.Button BtnPemantauanPEWSAnak;
     private widget.Button BtnPemantauanPEWSDewasa;
     private widget.Button BtnPenilaianKorbanKekerasan;

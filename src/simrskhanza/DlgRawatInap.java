@@ -1488,7 +1488,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPermintaanResepPulang = new widget.Button();
         BtnInputObat = new widget.Button();
         BtnObatBhp = new widget.Button();
-        BtnCatatanObat = new widget.Button();
         BtnBerkasDigital = new widget.Button();
         BtnPermintaanLab = new widget.Button();
         BtnPermintaanRad = new widget.Button();
@@ -1838,7 +1837,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-03-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1852,7 +1851,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-03-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3571,7 +3570,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         TPasien.setBounds(283, 10, 260, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-03-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -3858,23 +3857,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnObatBhp);
-
-        BtnCatatanObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnCatatanObat.setText("Catatan Pemberian Obat");
-        BtnCatatanObat.setFocusPainted(false);
-        BtnCatatanObat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnCatatanObat.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnCatatanObat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnCatatanObat.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnCatatanObat.setName("BtnCatatanObat"); // NOI18N
-        BtnCatatanObat.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObat.setRoundRect(false);
-        BtnCatatanObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCatatanObatActionPerformed(evt);
-            }
-        });
-        FormMenu.add(BtnCatatanObat);
 
         BtnBerkasDigital.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnBerkasDigital.setText("Berkas Digital");
@@ -8830,25 +8812,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnKeseimbanganCairanActionPerformed
 
-    private void BtnCatatanObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCatatanObatActionPerformed
-        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
-            TCari.requestFocus();
-        } else {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            DlgCatatanPemberianObatRanap form = new DlgCatatanPemberianObatRanap(null, false);
-            form.isCek();
-            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            form.setLocationRelativeTo(internalFrame1);
-            form.setVisible(true);
-            form.emptTeks();
-            form.setNoRm(TNoRw.getText(), "Rawat Jalan");
-            form.tampil();
-            form.tampil2();
-            this.setCursor(Cursor.getDefaultCursor());
-        }
-    }//GEN-LAST:event_BtnCatatanObatActionPerformed
-
     private void BtnEPRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEPRanapActionPerformed
         if(TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -8936,7 +8899,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnCatatanCekGDS;
     private widget.Button BtnCatatanKeperawatan;
     private widget.Button BtnCatatanKeperawatanRanap;
-    private widget.Button BtnCatatanObat;
     private widget.Button BtnCatatanObservasiRanap;
     private widget.Button BtnCatatanObservasiRanapKebidanan;
     private widget.Button BtnCatatanObservasiRanapPostPartum;

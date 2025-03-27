@@ -35,6 +35,9 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 
 
@@ -51,7 +54,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     private ResultSet rs;
     private int i=0;    
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
-    private String status, resep, identitas, obat,  campuran, jumlah, dosis, rute, tidak1, tidak2, tidak3, benar1, benar2, benar3, benar4, benar5, NOKDO, AP, IKO, PO, CPO, WPO, KAO;
+    private String status, resep, identitas, obat,  campuran, jumlah, dosis, rute, tidak1, tidak2, tidak3, benar1, benar2, benar3, benar4, benar5;
     private SimpleDateFormat tanggalNow = new SimpleDateFormat("yyyy-MM-dd");
 //    private SimpleDateFormat tanggalNow = new SimpleDateFormat("dd-MM-yyyy");
     private SimpleDateFormat jamNow = new SimpleDateFormat("HH:mm:ss");
@@ -66,8 +69,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Resep","Tanggal Resep","Jam Resep","No.Rawat","No.RM","Nama Pasien","Kode Dokter","Dokter","NIP","Petugas","Status","Resep Lengkap","Identitas Pasien Sesuai","Obat Tepat",
             "Campuran Obat Stabil","Jumlah Tepat","Dosis/Kekuatan/Frekuensi Tepat","Rute Pemberian Tepat","Tidak Ada Interaksi Obat","Tidak Ada Duplikasi","Tidak Ada Alergi/Kontraindikasi",
-            "Benar Pasien","Benar Obat","Benar Dosis Pemberian","Benar Rute Pemberian","Benar Waktu Pemberian",
-            "Nama Obat & Dosis Obat","Aturan Pakai","Indikasi/Kegunaan Obat","Penyimpanan Obat","Cara Pemakaian Obat","Waktu Penggunaan Obat","Kemungkinan Alergi Obat","Tanggal Telaah","Jam Telaah"
+            "Benar Pasien","Benar Obat","Benar Dosis Pemberian","Benar Rute Pemberian","Benar Waktu Pemberian","Tanggal Telaah","Jam Telaah","Hubungan Dgn Pasien","Acc","No Tlf"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -77,7 +79,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 35; i++) {
+        for (i = 0; i < 30; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(180);
@@ -141,16 +143,6 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
                 column.setPreferredWidth(180);
             }else if(i==30){
                 column.setPreferredWidth(180);
-            }else if(i==31){
-                column.setPreferredWidth(180);
-            }else if(i==32){
-                column.setPreferredWidth(180);
-            }else if(i==33){
-                column.setPreferredWidth(180);
-            }else if(i==34){
-                column.setPreferredWidth(180);
-            }else if(i==35){
-                column.setPreferredWidth(180);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -159,6 +151,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         KodeDokter.setDocument(new batasInput((byte)20).getKata(KodeDokter));
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
+        TLP.setDocument(new batasInput((int)50).getKata(TLP));
         
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
@@ -207,6 +200,25 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
         
+        HTMLEditorKit kit = new HTMLEditorKit();
+        LoadHTML.setEditable(true);
+        LoadHTML.setEditorKit(kit);
+        StyleSheet styleSheet = kit.getStyleSheet();
+        styleSheet.addRule(
+                ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
+                ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
+                ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
+                ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
+                ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
+                ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
+        );
+        
+        Document doc = kit.createDefaultDocument();
+        LoadHTML.setDocument(doc);
+        
         ChkInput.setSelected(false);
         isForm();
       
@@ -238,13 +250,6 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         buttonGroup13 = new javax.swing.ButtonGroup();
         buttonGroup14 = new javax.swing.ButtonGroup();
         buttonGroup15 = new javax.swing.ButtonGroup();
-        buttonGroup16 = new javax.swing.ButtonGroup();
-        buttonGroup17 = new javax.swing.ButtonGroup();
-        buttonGroup18 = new javax.swing.ButtonGroup();
-        buttonGroup19 = new javax.swing.ButtonGroup();
-        buttonGroup20 = new javax.swing.ButtonGroup();
-        buttonGroup21 = new javax.swing.ButtonGroup();
-        buttonGroup22 = new javax.swing.ButtonGroup();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -254,10 +259,10 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
         BtnEdit = new widget.Button();
+        BtnKeluar = new widget.Button();
         BtnPrint = new widget.Button();
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
-        BtnKeluar = new widget.Button();
         panelGlass9 = new widget.panelisi();
         jLabel19 = new widget.Label();
         DTPCari1 = new widget.Tanggal();
@@ -337,34 +342,25 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         jLabel8 = new widget.Label();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         TglRw = new widget.TextBox();
         jLabel9 = new widget.Label();
         JamRw = new widget.TextBox();
         jLabel11 = new widget.Label();
         Status = new widget.TextBox();
-        label36 = new widget.Label();
-        label37 = new widget.Label();
-        label38 = new widget.Label();
-        label39 = new widget.Label();
-        label40 = new widget.Label();
-        label41 = new widget.Label();
-        label42 = new widget.Label();
-        label43 = new widget.Label();
-        Benar5Tidak1 = new widget.RadioButton();
-        NOKDOy = new widget.RadioButton();
-        NOKDOt = new widget.RadioButton();
-        APy = new widget.RadioButton();
-        APt = new widget.RadioButton();
-        IKOy = new widget.RadioButton();
-        IKOt = new widget.RadioButton();
-        POy = new widget.RadioButton();
-        POt = new widget.RadioButton();
-        CPOy = new widget.RadioButton();
-        CPOt = new widget.RadioButton();
-        WPOy = new widget.RadioButton();
-        WPOt = new widget.RadioButton();
-        KAOy = new widget.RadioButton();
-        KAOt = new widget.RadioButton();
+        jLabel15 = new widget.Label();
+        Hubungan = new widget.TextBox();
+        jLabel27 = new widget.Label();
+        accic = new widget.TextBox();
+        FormPhoto = new widget.PanelBiasa();
+        FormPass2 = new widget.PanelBiasa();
+        BtnRefreshPhoto = new widget.Button();
+        Scroll4 = new widget.ScrollPane();
+        LoadHTML = new widget.editorpane();
+        jLabel22 = new widget.Label();
+        TLP = new widget.TextBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -480,6 +476,24 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         });
         panelGlass8.add(BtnEdit);
 
+        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('K');
+        BtnKeluar.setText("Keluar");
+        BtnKeluar.setToolTipText("Alt+K");
+        BtnKeluar.setName("BtnKeluar"); // NOI18N
+        BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluarActionPerformed(evt);
+            }
+        });
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnKeluarKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnKeluar);
+
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
@@ -509,24 +523,6 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         LCount.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(LCount);
 
-        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
-        BtnKeluar.setText("Keluar");
-        BtnKeluar.setToolTipText("Alt+K");
-        BtnKeluar.setName("BtnKeluar"); // NOI18N
-        BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKeluarActionPerformed(evt);
-            }
-        });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnKeluarKeyPressed(evt);
-            }
-        });
-        panelGlass8.add(BtnKeluar);
-
         jPanel3.add(panelGlass8, java.awt.BorderLayout.CENTER);
 
         panelGlass9.setName("panelGlass9"); // NOI18N
@@ -539,7 +535,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-07-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -553,7 +549,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-07-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -735,7 +731,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         label15.setName("label15"); // NOI18N
         label15.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label15);
-        label15.setBounds(670, 130, 80, 23);
+        label15.setBounds(320, 130, 80, 23);
 
         KodeDokter.setEditable(false);
         KodeDokter.setName("KodeDokter"); // NOI18N
@@ -754,12 +750,11 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         FormInput.add(NamaDokter);
         NamaDokter.setBounds(210, 40, 270, 23);
 
-        label16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label16.setText("7. Kemungkinan Alergi Obat :");
+        label16.setText("1. Resep Lengkap :");
         label16.setName("label16"); // NOI18N
         label16.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label16);
-        label16.setBounds(10, 270, 150, 23);
+        label16.setBounds(20, 170, 100, 23);
 
         label17.setText("Dokter  :");
         label17.setName("label17"); // NOI18N
@@ -767,284 +762,272 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         FormInput.add(label17);
         label17.setBounds(0, 40, 60, 23);
 
-        label18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label18.setText("Aspek Administratif");
         label18.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         label18.setName("label18"); // NOI18N
         label18.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label18);
-        label18.setBounds(390, 150, 100, 23);
+        label18.setBounds(20, 150, 100, 23);
 
         buttonGroup1.add(ResepYa);
         ResepYa.setText("Ya");
         ResepYa.setName("ResepYa"); // NOI18N
         ResepYa.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(ResepYa);
-        ResepYa.setBounds(560, 170, 45, 23);
+        ResepYa.setBounds(190, 170, 45, 23);
 
         buttonGroup1.add(ResepTidak);
         ResepTidak.setText("Tidak");
         ResepTidak.setName("ResepTidak"); // NOI18N
+        ResepTidak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResepTidakActionPerformed(evt);
+            }
+        });
         FormInput.add(ResepTidak);
-        ResepTidak.setBounds(600, 170, 60, 23);
+        ResepTidak.setBounds(230, 170, 60, 23);
 
-        label19.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label19.setText("2. Identitas Pasien Sesuai :");
         label19.setName("label19"); // NOI18N
         label19.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label19);
-        label19.setBounds(390, 190, 140, 23);
+        label19.setBounds(19, 190, 140, 23);
 
         buttonGroup2.add(IdentitasYa);
         IdentitasYa.setText("Ya");
         IdentitasYa.setName("IdentitasYa"); // NOI18N
         IdentitasYa.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(IdentitasYa);
-        IdentitasYa.setBounds(560, 190, 45, 23);
+        IdentitasYa.setBounds(190, 190, 45, 23);
 
         buttonGroup2.add(IdentitasTidak);
         IdentitasTidak.setText("Tidak");
         IdentitasTidak.setName("IdentitasTidak"); // NOI18N
         FormInput.add(IdentitasTidak);
-        IdentitasTidak.setBounds(600, 190, 60, 23);
+        IdentitasTidak.setBounds(230, 190, 60, 23);
 
-        label20.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label20.setText("Aspek Farmasetik");
         label20.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         label20.setName("label20"); // NOI18N
         label20.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label20);
-        label20.setBounds(390, 210, 90, 23);
+        label20.setBounds(20, 210, 90, 23);
 
-        label21.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label21.setText("1. Obat Tepat :");
         label21.setName("label21"); // NOI18N
         label21.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label21);
-        label21.setBounds(390, 230, 100, 23);
+        label21.setBounds(0, 230, 100, 23);
 
-        label22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label22.setText("3. Jumlah Tepat :");
         label22.setName("label22"); // NOI18N
         label22.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label22);
-        label22.setBounds(390, 270, 110, 23);
+        label22.setBounds(0, 270, 110, 23);
 
-        label23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label23.setText("2. Campuran Obat Stabil :");
         label23.setName("label23"); // NOI18N
         label23.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label23);
-        label23.setBounds(390, 250, 140, 23);
+        label23.setBounds(12, 250, 140, 23);
 
-        label24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label24.setText("Aspek Klinis");
         label24.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         label24.setName("label24"); // NOI18N
         label24.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label24);
-        label24.setBounds(390, 290, 70, 23);
+        label24.setBounds(10, 290, 70, 23);
 
-        label25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label25.setText("1. Dosis/Kekuatan/Frekuensi :");
         label25.setName("label25"); // NOI18N
         label25.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label25);
-        label25.setBounds(390, 310, 170, 23);
+        label25.setBounds(0, 310, 170, 23);
 
-        label26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label26.setText("2. Rute Pemberian Tepat :");
         label26.setName("label26"); // NOI18N
         label26.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label26);
-        label26.setBounds(390, 330, 140, 23);
+        label26.setBounds(15, 330, 140, 23);
 
-        label27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label27.setText("3. Tidak Ada Interaksi Obat :");
         label27.setName("label27"); // NOI18N
         label27.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label27);
-        label27.setBounds(390, 350, 160, 23);
+        label27.setBounds(6, 350, 160, 23);
 
-        label28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label28.setText("4. Tidak Ada Duplikasi :");
         label28.setName("label28"); // NOI18N
         label28.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label28);
-        label28.setBounds(390, 370, 140, 23);
+        label28.setBounds(0, 370, 140, 23);
 
-        label29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label29.setText("5. Tidak Ada Alergi/Kontradikasi :");
         label29.setName("label29"); // NOI18N
         label29.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label29);
-        label29.setBounds(390, 390, 170, 23);
+        label29.setBounds(17, 390, 170, 23);
 
-        label30.setText("Pemberian Informasi Obat (PIO)");
+        label30.setText("Telaah Resep");
         label30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         label30.setName("label30"); // NOI18N
         label30.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label30);
-        label30.setBounds(10, 130, 190, 23);
+        label30.setBounds(0, 130, 80, 23);
 
-        label31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label31.setText("1. Benar Pasien :");
         label31.setName("label31"); // NOI18N
         label31.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label31);
-        label31.setBounds(670, 150, 110, 23);
+        label31.setBounds(307, 150, 110, 23);
 
-        label32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label32.setText("2. Benar Obat :");
         label32.setName("label32"); // NOI18N
         label32.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label32);
-        label32.setBounds(670, 170, 90, 23);
+        label32.setBounds(320, 170, 90, 23);
 
-        label33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label33.setText("3. Benar Dosis Pemberian :");
         label33.setName("label33"); // NOI18N
         label33.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label33);
-        label33.setBounds(670, 190, 160, 23);
+        label33.setBounds(308, 190, 160, 23);
 
-        label34.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label34.setText("4. Benar Rute Pemberian :");
         label34.setName("label34"); // NOI18N
         label34.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label34);
-        label34.setBounds(670, 210, 140, 23);
+        label34.setBounds(325, 210, 140, 23);
 
-        label35.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label35.setText("5. Benar Waktu Pemberian :");
         label35.setName("label35"); // NOI18N
         label35.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label35);
-        label35.setBounds(670, 230, 170, 23);
+        label35.setBounds(302, 230, 170, 23);
 
         buttonGroup3.add(ObatYa);
         ObatYa.setText("Ya");
         ObatYa.setName("ObatYa"); // NOI18N
         ObatYa.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(ObatYa);
-        ObatYa.setBounds(560, 230, 45, 23);
+        ObatYa.setBounds(190, 230, 45, 23);
 
         buttonGroup3.add(ObatTidak);
         ObatTidak.setText("Tidak");
         ObatTidak.setName("ObatTidak"); // NOI18N
         FormInput.add(ObatTidak);
-        ObatTidak.setBounds(600, 230, 60, 23);
+        ObatTidak.setBounds(230, 230, 60, 23);
 
         buttonGroup4.add(CampuranYa);
         CampuranYa.setText("Ya");
         CampuranYa.setName("CampuranYa"); // NOI18N
         CampuranYa.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(CampuranYa);
-        CampuranYa.setBounds(560, 250, 45, 23);
+        CampuranYa.setBounds(190, 250, 45, 23);
 
         buttonGroup4.add(CampuranTidak);
         CampuranTidak.setText("Tidak");
         CampuranTidak.setName("CampuranTidak"); // NOI18N
         FormInput.add(CampuranTidak);
-        CampuranTidak.setBounds(600, 250, 60, 23);
+        CampuranTidak.setBounds(230, 250, 60, 23);
 
         buttonGroup5.add(JumlahYa);
         JumlahYa.setText("Ya");
         JumlahYa.setName("JumlahYa"); // NOI18N
         JumlahYa.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(JumlahYa);
-        JumlahYa.setBounds(560, 270, 45, 23);
+        JumlahYa.setBounds(190, 270, 45, 23);
 
         buttonGroup5.add(JumlahTidak);
         JumlahTidak.setText("Tidak");
         JumlahTidak.setName("JumlahTidak"); // NOI18N
         FormInput.add(JumlahTidak);
-        JumlahTidak.setBounds(600, 270, 60, 23);
+        JumlahTidak.setBounds(230, 270, 60, 23);
 
         buttonGroup6.add(DosisYa);
         DosisYa.setText("Ya");
         DosisYa.setName("DosisYa"); // NOI18N
         DosisYa.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(DosisYa);
-        DosisYa.setBounds(560, 310, 45, 23);
+        DosisYa.setBounds(190, 310, 45, 23);
 
         buttonGroup6.add(DosisTidak);
         DosisTidak.setText("Tidak");
         DosisTidak.setName("DosisTidak"); // NOI18N
         FormInput.add(DosisTidak);
-        DosisTidak.setBounds(600, 310, 60, 20);
+        DosisTidak.setBounds(230, 310, 60, 20);
 
         buttonGroup7.add(RuteYa);
         RuteYa.setText("Ya");
         RuteYa.setName("RuteYa"); // NOI18N
         RuteYa.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(RuteYa);
-        RuteYa.setBounds(560, 330, 45, 23);
+        RuteYa.setBounds(190, 330, 45, 23);
 
         buttonGroup7.add(RuteTidak);
         RuteTidak.setText("Tidak");
         RuteTidak.setName("RuteTidak"); // NOI18N
         FormInput.add(RuteTidak);
-        RuteTidak.setBounds(600, 330, 60, 23);
+        RuteTidak.setBounds(230, 330, 60, 23);
 
         buttonGroup8.add(Tidak1Ya);
         Tidak1Ya.setText("Ya");
         Tidak1Ya.setName("Tidak1Ya"); // NOI18N
         Tidak1Ya.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(Tidak1Ya);
-        Tidak1Ya.setBounds(560, 350, 45, 23);
+        Tidak1Ya.setBounds(190, 350, 45, 23);
 
         buttonGroup8.add(Tidak1Tidak);
         Tidak1Tidak.setText("Tidak");
         Tidak1Tidak.setName("Tidak1Tidak"); // NOI18N
         FormInput.add(Tidak1Tidak);
-        Tidak1Tidak.setBounds(600, 350, 60, 23);
+        Tidak1Tidak.setBounds(230, 350, 60, 23);
 
         buttonGroup9.add(Tidak2Ya);
         Tidak2Ya.setText("Ya");
         Tidak2Ya.setName("Tidak2Ya"); // NOI18N
         Tidak2Ya.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(Tidak2Ya);
-        Tidak2Ya.setBounds(560, 370, 45, 23);
+        Tidak2Ya.setBounds(190, 370, 45, 23);
 
         buttonGroup9.add(Tidak2Tidak);
         Tidak2Tidak.setText("Tidak");
         Tidak2Tidak.setName("Tidak2Tidak"); // NOI18N
         FormInput.add(Tidak2Tidak);
-        Tidak2Tidak.setBounds(600, 370, 60, 23);
+        Tidak2Tidak.setBounds(230, 370, 60, 23);
 
         buttonGroup10.add(Tidak3Ya);
         Tidak3Ya.setText("Ya");
         Tidak3Ya.setName("Tidak3Ya"); // NOI18N
         Tidak3Ya.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(Tidak3Ya);
-        Tidak3Ya.setBounds(560, 390, 45, 23);
+        Tidak3Ya.setBounds(190, 390, 45, 23);
 
         buttonGroup10.add(Tidak3Tidak);
         Tidak3Tidak.setText("Tidak");
         Tidak3Tidak.setName("Tidak3Tidak"); // NOI18N
         FormInput.add(Tidak3Tidak);
-        Tidak3Tidak.setBounds(600, 390, 60, 23);
+        Tidak3Tidak.setBounds(230, 390, 60, 23);
 
         buttonGroup11.add(Benar1Ya);
         Benar1Ya.setText("Ya");
         Benar1Ya.setName("Benar1Ya"); // NOI18N
         Benar1Ya.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(Benar1Ya);
-        Benar1Ya.setBounds(830, 150, 45, 23);
+        Benar1Ya.setBounds(480, 150, 45, 23);
 
         buttonGroup11.add(Benar1Tidak);
         Benar1Tidak.setText("Tidak");
         Benar1Tidak.setName("Benar1Tidak"); // NOI18N
         FormInput.add(Benar1Tidak);
-        Benar1Tidak.setBounds(870, 150, 60, 23);
+        Benar1Tidak.setBounds(520, 150, 60, 23);
 
         buttonGroup12.add(Benar2Ya);
         Benar2Ya.setText("Ya");
         Benar2Ya.setName("Benar2Ya"); // NOI18N
         Benar2Ya.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(Benar2Ya);
-        Benar2Ya.setBounds(830, 170, 45, 23);
+        Benar2Ya.setBounds(480, 170, 45, 23);
 
         buttonGroup12.add(Benar2Tidak);
         Benar2Tidak.setText("Tidak");
@@ -1055,46 +1038,46 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             }
         });
         FormInput.add(Benar2Tidak);
-        Benar2Tidak.setBounds(870, 170, 60, 23);
+        Benar2Tidak.setBounds(520, 170, 60, 23);
 
         buttonGroup13.add(Benar3Ya);
         Benar3Ya.setText("Ya");
         Benar3Ya.setName("Benar3Ya"); // NOI18N
         Benar3Ya.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(Benar3Ya);
-        Benar3Ya.setBounds(830, 190, 45, 23);
+        Benar3Ya.setBounds(480, 190, 45, 23);
 
         buttonGroup13.add(Benar3Tidak);
         Benar3Tidak.setText("Tidak");
         Benar3Tidak.setName("Benar3Tidak"); // NOI18N
         FormInput.add(Benar3Tidak);
-        Benar3Tidak.setBounds(870, 190, 60, 23);
+        Benar3Tidak.setBounds(520, 190, 60, 23);
 
         buttonGroup14.add(Benar4Ya);
         Benar4Ya.setText("Ya");
         Benar4Ya.setName("Benar4Ya"); // NOI18N
         Benar4Ya.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(Benar4Ya);
-        Benar4Ya.setBounds(830, 210, 45, 23);
+        Benar4Ya.setBounds(480, 210, 45, 23);
 
         buttonGroup14.add(Benar4Tidak);
         Benar4Tidak.setText("Tidak");
         Benar4Tidak.setName("Benar4Tidak"); // NOI18N
         FormInput.add(Benar4Tidak);
-        Benar4Tidak.setBounds(870, 210, 60, 23);
+        Benar4Tidak.setBounds(520, 210, 60, 23);
 
         buttonGroup15.add(Benar5Ya);
         Benar5Ya.setText("Ya");
         Benar5Ya.setName("Benar5Ya"); // NOI18N
         Benar5Ya.setPreferredSize(new java.awt.Dimension(40, 20));
         FormInput.add(Benar5Ya);
-        Benar5Ya.setBounds(830, 230, 45, 23);
+        Benar5Ya.setBounds(480, 230, 45, 23);
 
         buttonGroup15.add(Benar5Tidak);
         Benar5Tidak.setText("Tidak");
         Benar5Tidak.setName("Benar5Tidak"); // NOI18N
         FormInput.add(Benar5Tidak);
-        Benar5Tidak.setBounds(870, 230, 60, 23);
+        Benar5Tidak.setBounds(520, 230, 60, 23);
 
         jLabel8.setText("Tgl. Resep :");
         jLabel8.setName("jLabel8"); // NOI18N
@@ -1106,14 +1089,35 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
         jSeparator1.setName("jSeparator1"); // NOI18N
         FormInput.add(jSeparator1);
-        jSeparator1.setBounds(0, 129, 1010, 2);
+        jSeparator1.setBounds(0, 130, 780, 1);
 
         jSeparator2.setBackground(new java.awt.Color(239, 244, 234));
         jSeparator2.setForeground(new java.awt.Color(239, 244, 234));
         jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
         jSeparator2.setName("jSeparator2"); // NOI18N
         FormInput.add(jSeparator2);
-        jSeparator2.setBounds(0, 149, 1010, 2);
+        jSeparator2.setBounds(0, 150, 780, 1);
+
+        jSeparator3.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator3.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator3.setName("jSeparator3"); // NOI18N
+        FormInput.add(jSeparator3);
+        jSeparator3.setBounds(0, 170, 300, 1);
+
+        jSeparator4.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator4.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator4.setName("jSeparator4"); // NOI18N
+        FormInput.add(jSeparator4);
+        jSeparator4.setBounds(0, 230, 300, 1);
+
+        jSeparator5.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator5.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator5.setName("jSeparator5"); // NOI18N
+        FormInput.add(jSeparator5);
+        jSeparator5.setBounds(0, 310, 300, 1);
 
         TglRw.setEditable(false);
         TglRw.setHighlighter(null);
@@ -1150,7 +1154,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         jLabel11.setText("Status Resep:");
         jLabel11.setName("jLabel11"); // NOI18N
         FormInput.add(jLabel11);
-        jLabel11.setBounds(450, 100, 80, 23);
+        jLabel11.setBounds(440, 100, 80, 23);
 
         Status.setEditable(false);
         Status.setHighlighter(null);
@@ -1161,160 +1165,99 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             }
         });
         FormInput.add(Status);
-        Status.setBounds(540, 100, 141, 23);
+        Status.setBounds(530, 100, 141, 23);
 
-        label36.setText("Telaah Resep");
-        label36.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        label36.setName("label36"); // NOI18N
-        label36.setPreferredSize(new java.awt.Dimension(70, 23));
-        FormInput.add(label36);
-        label36.setBounds(400, 130, 80, 23);
+        jLabel15.setText("Hubungan Dgn pasien :");
+        jLabel15.setName("jLabel15"); // NOI18N
+        FormInput.add(jLabel15);
+        jLabel15.setBounds(10, 470, 130, 23);
 
-        label37.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label37.setText("1. Resep Lengkap :");
-        label37.setName("label37"); // NOI18N
-        label37.setPreferredSize(new java.awt.Dimension(70, 23));
-        FormInput.add(label37);
-        label37.setBounds(390, 170, 100, 23);
+        Hubungan.setEditable(false);
+        Hubungan.setHighlighter(null);
+        Hubungan.setName("Hubungan"); // NOI18N
+        Hubungan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                HubunganKeyPressed(evt);
+            }
+        });
+        FormInput.add(Hubungan);
+        Hubungan.setBounds(150, 470, 270, 23);
 
-        label38.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label38.setText("1. Nama Obat dan Ketentuan Dosis Obat :");
-        label38.setName("label38"); // NOI18N
-        label38.setPreferredSize(new java.awt.Dimension(70, 23));
-        FormInput.add(label38);
-        label38.setBounds(10, 150, 210, 23);
+        jLabel27.setText("Saya Sudah Membaca, Mengerti dan Menyetujui “Resep Obat Ini”  ");
+        jLabel27.setName("jLabel27"); // NOI18N
+        FormInput.add(jLabel27);
+        jLabel27.setBounds(0, 500, 350, 20);
 
-        label39.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label39.setText("2. Aturan Pakai :");
-        label39.setName("label39"); // NOI18N
-        label39.setPreferredSize(new java.awt.Dimension(70, 23));
-        FormInput.add(label39);
-        label39.setBounds(10, 170, 90, 23);
+        accic.setEditable(false);
+        accic.setHighlighter(null);
+        accic.setName("accic"); // NOI18N
+        accic.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                accicKeyPressed(evt);
+            }
+        });
+        FormInput.add(accic);
+        accic.setBounds(350, 500, 140, 24);
 
-        label40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label40.setText("3. Indikasi / Kegunaan Obat :");
-        label40.setName("label40"); // NOI18N
-        label40.setPreferredSize(new java.awt.Dimension(70, 23));
-        FormInput.add(label40);
-        label40.setBounds(10, 190, 150, 23);
+        FormPhoto.setBackground(new java.awt.Color(255, 255, 255));
+        FormPhoto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "TTE Pasien : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        FormPhoto.setName("FormPhoto"); // NOI18N
+        FormPhoto.setPreferredSize(new java.awt.Dimension(115, 73));
+        FormPhoto.setLayout(new java.awt.BorderLayout());
 
-        label41.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label41.setText("4. Penyimpanan Obat :");
-        label41.setName("label41"); // NOI18N
-        label41.setPreferredSize(new java.awt.Dimension(70, 23));
-        FormInput.add(label41);
-        label41.setBounds(10, 210, 120, 23);
+        FormPass2.setBackground(new java.awt.Color(255, 255, 255));
+        FormPass2.setBorder(null);
+        FormPass2.setName("FormPass2"); // NOI18N
+        FormPass2.setPreferredSize(new java.awt.Dimension(115, 40));
 
-        label42.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label42.setText("5. Cara Pemakaian Obat :");
-        label42.setName("label42"); // NOI18N
-        label42.setPreferredSize(new java.awt.Dimension(70, 23));
-        FormInput.add(label42);
-        label42.setBounds(10, 230, 130, 23);
+        BtnRefreshPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnRefreshPhoto.setMnemonic('U');
+        BtnRefreshPhoto.setText("Refresh");
+        BtnRefreshPhoto.setToolTipText("Alt+U");
+        BtnRefreshPhoto.setName("BtnRefreshPhoto"); // NOI18N
+        BtnRefreshPhoto.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnRefreshPhoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRefreshPhotoActionPerformed(evt);
+            }
+        });
+        FormPass2.add(BtnRefreshPhoto);
 
-        label43.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        label43.setText("6. Waktu Penggunaan Obat :");
-        label43.setName("label43"); // NOI18N
-        label43.setPreferredSize(new java.awt.Dimension(70, 23));
-        FormInput.add(label43);
-        label43.setBounds(10, 250, 150, 23);
+        FormPhoto.add(FormPass2, java.awt.BorderLayout.PAGE_END);
 
-        buttonGroup15.add(Benar5Tidak1);
-        Benar5Tidak1.setText("Tidak");
-        Benar5Tidak1.setName("Benar5Tidak1"); // NOI18N
-        FormInput.add(Benar5Tidak1);
-        Benar5Tidak1.setBounds(870, 230, 60, 23);
+        Scroll4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Scroll4.setName("Scroll4"); // NOI18N
+        Scroll4.setOpaque(true);
+        Scroll4.setPreferredSize(new java.awt.Dimension(200, 200));
 
-        buttonGroup16.add(NOKDOy);
-        NOKDOy.setText("Ya");
-        NOKDOy.setName("NOKDOy"); // NOI18N
-        NOKDOy.setPreferredSize(new java.awt.Dimension(40, 20));
-        FormInput.add(NOKDOy);
-        NOKDOy.setBounds(220, 150, 45, 23);
+        LoadHTML.setBorder(null);
+        LoadHTML.setName("LoadHTML"); // NOI18N
+        Scroll4.setViewportView(LoadHTML);
 
-        buttonGroup16.add(NOKDOt);
-        NOKDOt.setText("Tidak");
-        NOKDOt.setName("NOKDOt"); // NOI18N
-        FormInput.add(NOKDOt);
-        NOKDOt.setBounds(260, 150, 60, 23);
+        FormPhoto.add(Scroll4, java.awt.BorderLayout.CENTER);
 
-        buttonGroup17.add(APy);
-        APy.setText("Ya");
-        APy.setName("APy"); // NOI18N
-        APy.setPreferredSize(new java.awt.Dimension(40, 20));
-        FormInput.add(APy);
-        APy.setBounds(220, 170, 45, 23);
+        FormInput.add(FormPhoto);
+        FormPhoto.setBounds(350, 270, 210, 190);
 
-        buttonGroup17.add(APt);
-        APt.setText("Tidak");
-        APt.setName("APt"); // NOI18N
-        FormInput.add(APt);
-        APt.setBounds(260, 170, 60, 23);
+        jLabel22.setText("No.Telp Pengambil Obat:");
+        jLabel22.setName("jLabel22"); // NOI18N
+        FormInput.add(jLabel22);
+        jLabel22.setBounds(510, 70, 130, 23);
 
-        buttonGroup18.add(IKOy);
-        IKOy.setText("Ya");
-        IKOy.setName("IKOy"); // NOI18N
-        IKOy.setPreferredSize(new java.awt.Dimension(40, 20));
-        FormInput.add(IKOy);
-        IKOy.setBounds(220, 190, 45, 23);
-
-        buttonGroup18.add(IKOt);
-        IKOt.setText("Tidak");
-        IKOt.setName("IKOt"); // NOI18N
-        FormInput.add(IKOt);
-        IKOt.setBounds(260, 190, 60, 23);
-
-        buttonGroup19.add(POy);
-        POy.setText("Ya");
-        POy.setName("POy"); // NOI18N
-        POy.setPreferredSize(new java.awt.Dimension(40, 20));
-        FormInput.add(POy);
-        POy.setBounds(220, 210, 45, 23);
-
-        buttonGroup19.add(POt);
-        POt.setText("Tidak");
-        POt.setName("POt"); // NOI18N
-        FormInput.add(POt);
-        POt.setBounds(260, 210, 60, 23);
-
-        buttonGroup20.add(CPOy);
-        CPOy.setText("Ya");
-        CPOy.setName("CPOy"); // NOI18N
-        CPOy.setPreferredSize(new java.awt.Dimension(40, 20));
-        FormInput.add(CPOy);
-        CPOy.setBounds(220, 230, 45, 23);
-
-        buttonGroup20.add(CPOt);
-        CPOt.setText("Tidak");
-        CPOt.setName("CPOt"); // NOI18N
-        FormInput.add(CPOt);
-        CPOt.setBounds(260, 230, 60, 23);
-
-        buttonGroup21.add(WPOy);
-        WPOy.setText("Ya");
-        WPOy.setName("WPOy"); // NOI18N
-        WPOy.setPreferredSize(new java.awt.Dimension(40, 20));
-        FormInput.add(WPOy);
-        WPOy.setBounds(220, 250, 45, 23);
-
-        buttonGroup21.add(WPOt);
-        WPOt.setText("Tidak");
-        WPOt.setName("WPOt"); // NOI18N
-        FormInput.add(WPOt);
-        WPOt.setBounds(260, 250, 60, 23);
-
-        buttonGroup22.add(KAOy);
-        KAOy.setText("Ya");
-        KAOy.setName("KAOy"); // NOI18N
-        KAOy.setPreferredSize(new java.awt.Dimension(40, 20));
-        FormInput.add(KAOy);
-        KAOy.setBounds(220, 270, 45, 23);
-
-        buttonGroup22.add(KAOt);
-        KAOt.setText("Tidak");
-        KAOt.setName("KAOt"); // NOI18N
-        FormInput.add(KAOt);
-        KAOt.setBounds(260, 270, 60, 23);
+        TLP.setFocusTraversalPolicyProvider(true);
+        TLP.setName("TLP"); // NOI18N
+        TLP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TLPActionPerformed(evt);
+            }
+        });
+        TLP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TLPKeyPressed(evt);
+            }
+        });
+        FormInput.add(TLP);
+        TLP.setBounds(650, 70, 220, 23);
 
         scrollInput.setViewportView(FormInput);
 
@@ -1363,13 +1306,6 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             benar3="Tidak";
             benar4="Tidak";
             benar5="Tidak";
-            NOKDO="Tidak";
-            AP="Tidak";
-            IKO="Tidak";
-            PO="Tidak";
-            CPO="Tidak";
-            WPO="Tidak";
-            KAO="Tidak";
             if(ResepYa.isSelected()==true){
                 resep="Ya";
             }
@@ -1415,34 +1351,12 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             if(Benar5Ya.isSelected()==true){
                 benar5="Ya";
             }
-            if(NOKDOy.isSelected()==true){
-                NOKDO="Ya";
-            }
-            if(APy.isSelected()==true){
-                AP="Ya";
-            }
-            if(IKOy.isSelected()==true){
-                IKO="Ya";
-            }
-            if(POy.isSelected()==true){
-                PO="Ya";
-            }
-            if(CPOy.isSelected()==true){
-                CPO="Ya";
-            }
-            if(NOKDOy.isSelected()==true){
-                NOKDO="Ya";
-            }
-            if(WPOy.isSelected()==true){
-                WPO="Ya";
-            }
-            if(KAOy.isSelected()==true){
-                KAO="Ya";
-            }
-            if(Sequel.menyimpantf("telaah_resep_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Resep",31,new String[]{
+            
+            if(Sequel.menyimpantf("telaah_resep_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Resep",28,new String[]{
                TNoResep.getText(),TglRw.getText(),JamRw.getText(),
-               TNoRw.getText(),KodeDokter.getText(),KdPetugas.getText(),Status.getText(),resep,identitas,obat,campuran,jumlah,dosis,
-               rute,tidak1,tidak2,tidak3,benar1,benar2,benar3,benar4,benar5,NOKDO,AP,IKO,PO,CPO,WPO,KAO,tanggalNow.format(new Date()),jamNow.format(new Date())
+               TNoRw.getText(),KodeDokter.getText(),KdPetugas.getText(),TLP.getText(),Status.getText(),resep,identitas,obat,campuran,jumlah,dosis,
+               rute,tidak1,tidak2,tidak3,benar1,benar2,benar3,benar4,benar5,tanggalNow.format(new Date()),jamNow.format(new Date()),
+               "-","-",""
                 })==true){
                     tampil();
                     emptTeks();
@@ -1522,13 +1436,6 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             benar3="Tidak";
             benar4="Tidak";
             benar5="Tidak";
-            NOKDO="Tidak";
-            AP="Tidak";
-            IKO="Tidak";
-            PO="Tidak";
-            CPO="Tidak";
-            WPO="Tidak";
-            KAO="Tidak";
             if(ResepYa.isSelected()==true){
                 resep="Ya";
             }
@@ -1574,33 +1481,12 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             if(Benar5Ya.isSelected()==true){
                 benar5="Ya";
             }
-            if(NOKDOy.isSelected()==true){
-                NOKDO="Ya";
-            }
-            if(APy.isSelected()==true){
-                AP="Ya";
-            }
-            if(IKOy.isSelected()==true){
-                IKO="Ya";
-            }
-            if(POy.isSelected()==true){
-                PO="Ya";
-            }
-            if(CPOy.isSelected()==true){
-                CPO="Ya";
-            }
-            if(WPOy.isSelected()==true){
-                WPO="Ya";
-            }
-            if(KAOy.isSelected()==true){
-                KAO="Ya";
-            }
-            
                 
-                if(Sequel.mengedittf("telaah_resep_obat","no_resep=? and tanggal=?","no_resep=?,tanggal=?,jam=?,no_rawat=?,kd_dokter=?,nip=?,status=?,resep=?,identitas=?,obat=?,campuran=?,jumlah=?,dosis=?,rute=?,tidak1=?,tidak2=?,tidak3=?,benar1=?,benar2=?,benar3=?,benar4=?,benar5=?,NOKDO=?,AP=?,IKO=?,PO=?,CPO=?,WPO=?,KAO=?,tgl=?,jam_telaah=?",33,new String[]{
+                if(Sequel.mengedittf("telaah_resep_obat","no_resep=? and tanggal=?","no_resep=?,tanggal=?,jam=?,no_rawat=?,kd_dokter=?,nip=?,TLP=?,status=?,resep=?,identitas=?,obat=?,campuran=?,jumlah=?,dosis=?,rute=?,tidak1=?,tidak2=?,tidak3=?,benar1=?,benar2=?,benar3=?,benar4=?,benar5=?,tgl=?,jam_telaah=?,hubungan=?,acc_tr=?",29,new String[]{
                 TNoResep.getText(),TglRw.getText(),JamRw.getText(),
-                TNoRw.getText(),KodeDokter.getText(),KdPetugas.getText(),Status.getText(),resep,identitas,obat,campuran,jumlah,dosis,
-                rute,tidak1,tidak2,tidak3,benar1,benar2,benar3,benar4,benar5,NOKDO,AP,IKO,PO,CPO,WPO,KAO,tanggalNow.format(new Date()),jamNow.format(new Date()),
+                TNoRw.getText(),KodeDokter.getText(),KdPetugas.getText(),TLP.getText(),Status.getText(),resep,identitas,obat,campuran,jumlah,dosis,
+                rute,tidak1,tidak2,tidak3,benar1,benar2,benar3,benar4,benar5,tanggalNow.format(new Date()),jamNow.format(new Date()),
+                Hubungan.getText(),accic.getText(),
                 tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),1).toString()
                     })==true){
                         tampil();
@@ -1797,6 +1683,30 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_StatusKeyPressed
 
+    private void HubunganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HubunganKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HubunganKeyPressed
+
+    private void accicKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_accicKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accicKeyPressed
+
+    private void BtnRefreshPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRefreshPhotoActionPerformed
+        panggilPhoto();
+    }//GEN-LAST:event_BtnRefreshPhotoActionPerformed
+
+    private void TLPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TLPKeyPressed
+    
+    }//GEN-LAST:event_TLPKeyPressed
+
+    private void TLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TLPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TLPActionPerformed
+
+    private void ResepTidakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResepTidakActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ResepTidakActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1814,8 +1724,6 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private widget.RadioButton APt;
-    private widget.RadioButton APy;
     private widget.RadioButton Benar1Tidak;
     private widget.RadioButton Benar1Ya;
     private widget.RadioButton Benar2Tidak;
@@ -1825,7 +1733,6 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     private widget.RadioButton Benar4Tidak;
     private widget.RadioButton Benar4Ya;
     private widget.RadioButton Benar5Tidak;
-    private widget.RadioButton Benar5Tidak1;
     private widget.RadioButton Benar5Ya;
     private widget.Button BtnAll;
     private widget.Button BtnBatal;
@@ -1835,9 +1742,8 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
+    private widget.Button BtnRefreshPhoto;
     private widget.Button BtnSimpan;
-    private widget.RadioButton CPOt;
-    private widget.RadioButton CPOy;
     private widget.RadioButton CampuranTidak;
     private widget.RadioButton CampuranYa;
     private widget.CekBox ChkInput;
@@ -1846,34 +1752,32 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     private widget.RadioButton DosisTidak;
     private widget.RadioButton DosisYa;
     private widget.PanelBiasa FormInput;
-    private widget.RadioButton IKOt;
-    private widget.RadioButton IKOy;
+    private widget.PanelBiasa FormPass2;
+    private widget.PanelBiasa FormPhoto;
+    private widget.TextBox Hubungan;
     private widget.RadioButton IdentitasTidak;
     private widget.RadioButton IdentitasYa;
     private widget.TextBox JamRw;
     private widget.RadioButton JumlahTidak;
     private widget.RadioButton JumlahYa;
-    private widget.RadioButton KAOt;
-    private widget.RadioButton KAOy;
     private widget.TextBox KdPetugas;
     private widget.TextBox KodeDokter;
     private widget.Label LCount;
-    private widget.RadioButton NOKDOt;
-    private widget.RadioButton NOKDOy;
+    private widget.editorpane LoadHTML;
     private widget.TextBox NamaDokter;
     private widget.TextBox NmPetugas;
     private widget.RadioButton ObatTidak;
     private widget.RadioButton ObatYa;
-    private widget.RadioButton POt;
-    private widget.RadioButton POy;
     private javax.swing.JPanel PanelInput;
     private widget.RadioButton ResepTidak;
     private widget.RadioButton ResepYa;
     private widget.RadioButton RuteTidak;
     private widget.RadioButton RuteYa;
     private widget.ScrollPane Scroll;
+    private widget.ScrollPane Scroll4;
     private widget.TextBox Status;
     private widget.TextBox TCari;
+    private widget.TextBox TLP;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoResep;
     private widget.TextBox TNoRw;
@@ -1885,8 +1789,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     private widget.RadioButton Tidak2Ya;
     private widget.RadioButton Tidak3Tidak;
     private widget.RadioButton Tidak3Ya;
-    private widget.RadioButton WPOt;
-    private widget.RadioButton WPOy;
+    private widget.TextBox accic;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup10;
     private javax.swing.ButtonGroup buttonGroup11;
@@ -1894,14 +1797,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup13;
     private javax.swing.ButtonGroup buttonGroup14;
     private javax.swing.ButtonGroup buttonGroup15;
-    private javax.swing.ButtonGroup buttonGroup16;
-    private javax.swing.ButtonGroup buttonGroup17;
-    private javax.swing.ButtonGroup buttonGroup18;
-    private javax.swing.ButtonGroup buttonGroup19;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup20;
-    private javax.swing.ButtonGroup buttonGroup21;
-    private javax.swing.ButtonGroup buttonGroup22;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.ButtonGroup buttonGroup5;
@@ -1912,8 +1808,11 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
+    private widget.Label jLabel15;
     private widget.Label jLabel19;
     private widget.Label jLabel21;
+    private widget.Label jLabel22;
+    private widget.Label jLabel27;
     private widget.Label jLabel5;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
@@ -1923,6 +1822,9 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private widget.Label label14;
     private widget.Label label15;
     private widget.Label label16;
@@ -1945,14 +1847,6 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
     private widget.Label label33;
     private widget.Label label34;
     private widget.Label label35;
-    private widget.Label label36;
-    private widget.Label label37;
-    private widget.Label label38;
-    private widget.Label label39;
-    private widget.Label label40;
-    private widget.Label label41;
-    private widget.Label label42;
-    private widget.Label label43;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private widget.ScrollPane scrollInput;
@@ -1983,8 +1877,8 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
                         "telaah_resep_obat.kd_dokter,telaah_resep_obat.nip,telaah_resep_obat.status,telaah_resep_obat.resep,"+
                         "telaah_resep_obat.identitas,telaah_resep_obat.obat,telaah_resep_obat.campuran,telaah_resep_obat.jumlah,"+
                         "telaah_resep_obat.dosis,telaah_resep_obat.rute,telaah_resep_obat.tidak1,telaah_resep_obat.tidak2,telaah_resep_obat.tidak3,"+
-                        "telaah_resep_obat.benar1,telaah_resep_obat.benar2,telaah_resep_obat.benar3,telaah_resep_obat.benar4,telaah_resep_obat.benar5,telaah_resep_obat.NOKDO,telaah_resep_obat.AP,telaah_resep_obat.IKO,telaah_resep_obat.PO,telaah_resep_obat.CPO,telaah_resep_obat.WPO,telaah_resep_obat.KAO,"+
-                        "telaah_resep_obat.tgl,telaah_resep_obat.jam_telaah,dokter.nm_dokter,petugas.nama "+
+                        "telaah_resep_obat.benar1,telaah_resep_obat.benar2,telaah_resep_obat.benar3,telaah_resep_obat.benar4,telaah_resep_obat.benar5,"+
+                        "telaah_resep_obat.tgl,telaah_resep_obat.jam_telaah,telaah_resep_obat.hubungan,telaah_resep_obat.acc_tr,dokter.nm_dokter,petugas.nama, telaah_resep_obat.TLP "+
                         "from resep_obat inner join telaah_resep_obat on resep_obat.no_resep=telaah_resep_obat.no_resep "+
                         "inner join dokter on telaah_resep_obat.kd_dokter=dokter.kd_dokter "+
                         "inner join petugas on telaah_resep_obat.nip=petugas.nip "+
@@ -2014,8 +1908,8 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
                         "telaah_resep_obat.kd_dokter,telaah_resep_obat.nip,telaah_resep_obat.status,telaah_resep_obat.resep,"+
                         "telaah_resep_obat.identitas,telaah_resep_obat.obat,telaah_resep_obat.campuran,telaah_resep_obat.jumlah,"+
                         "telaah_resep_obat.dosis,telaah_resep_obat.rute,telaah_resep_obat.tidak1,telaah_resep_obat.tidak2,telaah_resep_obat.tidak3,"+
-                        "telaah_resep_obat.benar1,telaah_resep_obat.benar2,telaah_resep_obat.benar3,telaah_resep_obat.benar4,telaah_resep_obat.benar5,telaah_resep_obat.NOKDO,telaah_resep_obat.AP,telaah_resep_obat.IKO,telaah_resep_obat.PO,telaah_resep_obat.CPO,telaah_resep_obat.WPO,telaah_resep_obat.KAO,"+
-                        "telaah_resep_obat.tgl,telaah_resep_obat.jam_telaah,dokter.nm_dokter,petugas.nama "+
+                        "telaah_resep_obat.benar1,telaah_resep_obat.benar2,telaah_resep_obat.benar3,telaah_resep_obat.benar4,telaah_resep_obat.benar5,"+
+                        "telaah_resep_obat.tgl,telaah_resep_obat.jam_telaah,telaah_resep_obat.hubungan,telaah_resep_obat.acc_tr,dokter.nm_dokter,petugas.nama, telaah_resep_obat.TLP "+
                         "from resep_obat inner join telaah_resep_obat on resep_obat.no_resep=telaah_resep_obat.no_resep "+
                         "inner join dokter on telaah_resep_obat.kd_dokter=dokter.kd_dokter "+
                         "inner join petugas on telaah_resep_obat.nip=petugas.nip "+
@@ -2062,9 +1956,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
                         rs.getString("obat"),rs.getString("campuran"),rs.getString("jumlah"),rs.getString("dosis"),
                         rs.getString("rute"),rs.getString("tidak1"),rs.getString("tidak2"),rs.getString("tidak3"),
                         rs.getString("benar1"),rs.getString("benar2"),rs.getString("benar3"),rs.getString("benar4"),
-                        rs.getString("benar5"),rs.getString("NOKDO"),rs.getString("AP"),rs.getString("IKO"),rs.getString("PO"),rs.getString("CPO"),
-                        rs.getString("WPO"),rs.getString("KAO"),
-                        rs.getString("tgl"),rs.getString("jam_telaah")
+                        rs.getString("benar5"),rs.getString("tgl"),rs.getString("jam_telaah"),rs.getString("hubungan"),rs.getString("acc_tr"),rs.getString("TLP")
                     });
                 }
             } catch (Exception e) {
@@ -2102,13 +1994,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         Benar3Ya.setSelected(true);
         Benar4Ya.setSelected(true);
         Benar5Ya.setSelected(true);
-        NOKDOy.setSelected(true);
-        APy.setSelected(true);
-        IKOy.setSelected(true);
-        POy.setSelected(true);
-        CPOy.setSelected(true);
-        WPOy.setSelected(true);
-        KAOy.setSelected(true);
+        TLP.setText("-");
         TNoResep.requestFocus();
     } 
 
@@ -2124,7 +2010,8 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             NamaDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()); 
             KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString()); 
-            Status.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());          
+            Status.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            TLP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
             if(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString().equals("Ya")){
                 ResepYa.setSelected(true);
             }else{
@@ -2200,41 +2087,10 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             }else{
                 Benar5Tidak.setSelected(true);
             }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString().equals("Ya")){
-                NOKDOy.setSelected(true);
-            }else{
-                NOKDOt.setSelected(true);
-            }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString().equals("Ya")){
-                APy.setSelected(true);
-            }else{
-                APt.setSelected(true);
-            }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString().equals("Ya")){
-                IKOy.setSelected(true);
-            }else{
-                IKOt.setSelected(true);
-            }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString().equals("Ya")){
-                POy.setSelected(true);
-            }else{
-                POt.setSelected(true);
-            }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString().equals("Ya")){
-                CPOy.setSelected(true);
-            }else{
-                CPOt.setSelected(true);
-            }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString().equals("Ya")){
-                WPOy.setSelected(true);
-            }else{
-                WPOt.setSelected(true);
-            }
-            if(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString().equals("Ya")){
-                KAOy.setSelected(true);
-            }else{
-                KAOt.setSelected(true);
-            }
+            Hubungan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString()); 
+            accic.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
+            TLP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
+            panggilPhoto();
 //            TglRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
 //            JamRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
 //            Valid.SetTgl(TglRw,tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
@@ -2316,6 +2172,39 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             }
         }            
     }
+    
+    private void panggilPhoto() {
+//        if(FormPhotoPass.isVisible()==true){
+            try {
+                ps=koneksi.prepareStatement("select telaah_resep_obat.tte from telaah_resep_obat where telaah_resep_obat.no_resep=?");
+                try {
+                    ps.setString(1,TNoResep.getText());
+                    rs=ps.executeQuery();
+                    if(rs.next()){
+                        if(rs.getString("tte").equals("")||rs.getString("tte").equals("-")){
+                            LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
+                        }else{
+                            LoadHTML.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+rs.getString("tte")+"' alt='photo' width='150' height='150'/></center></body></html>");
+                        }  
+//                        PasswordPasien.setText(rs.getString("password"));
+                    }else{
+                        LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
+//                        PasswordPasien.setText("");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : "+e);
+                } finally{
+                    if(rs!=null){
+                        rs.close();
+                    }
+                    if(ps!=null){
+                        ps.close();
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            } 
+        }
 
     
 }
