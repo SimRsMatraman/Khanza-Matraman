@@ -52,11 +52,7 @@ public final class SuratAPS extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
-<<<<<<< Updated upstream
-    private String tgl;
-=======
     private String tgl,finger="",kodedokter="",namadokter="",kodepetugas="",namapetugas="";
->>>>>>> Stashed changes
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     public  DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
     private SimpleDateFormat jamNow = new SimpleDateFormat("HH:mm:ss");
@@ -1258,8 +1254,7 @@ public final class SuratAPS extends javax.swing.JDialog {
 //                              "where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
 //                this.setCursor(Cursor.getDefaultCursor());  
 //       }
-<<<<<<< Updated upstream
-=======
+
         if(TPasien.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
@@ -1309,7 +1304,6 @@ public final class SuratAPS extends javax.swing.JDialog {
                                 "WHERE surat_aps.no_rawat='"+TNoRw.getText()+"' ",param);
                 this.setCursor(Cursor.getDefaultCursor());  
        }
->>>>>>> Stashed changes
     }//GEN-LAST:event_MnCetakSuratSakitActionPerformed
 
     private void KodeDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeDokterKeyPressed
