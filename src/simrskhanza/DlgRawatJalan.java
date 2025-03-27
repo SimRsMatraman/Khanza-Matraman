@@ -162,6 +162,7 @@ import rekammedis.GdsIgd;
 import rekammedis.RMRujukanFisio;
 import rekammedis.RMDataCatatanKeperawatanRalan;
 import surat.SuratAPS;
+import rekammedis.RMPemberianObatRalan;
 
 /**
  *
@@ -1884,6 +1885,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCopyResep = new widget.Button();
         BtnTmpResep = new widget.Button();
         BtnResepLuar = new widget.Button();
+        BtnPORanap = new widget.Button();
         BtnObatBhp = new widget.Button();
         BtnBerkasDigital = new widget.Button();
         BtnInformasiObat = new widget.Button();
@@ -2036,7 +2038,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -3201,7 +3203,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnTemplatePemeriksaan);
-        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 22);
+        BtnTemplatePemeriksaan.setBounds(545, 290, 240, 32);
 
         ICareNoKartu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
         ICareNoKartu.setMnemonic('C');
@@ -4880,6 +4882,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MRalan.add(BtnResepLuar);
+
+        BtnPORanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPORanap.setText("Daftar Pemberian Obat");
+        BtnPORanap.setFocusPainted(false);
+        BtnPORanap.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPORanap.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPORanap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPORanap.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPORanap.setName("BtnPORanap"); // NOI18N
+        BtnPORanap.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPORanap.setRoundRect(false);
+        BtnPORanap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPORanapActionPerformed(evt);
+            }
+        });
+        MRalan.add(BtnPORanap);
 
         BtnObatBhp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnObatBhp.setText("Data Obat & BHP");
@@ -12755,6 +12774,24 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_RefreshObatActionPerformed
 
+    private void BtnPORanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPORanapActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPemberianObatRalan form=new RMPemberianObatRalan(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPORanapActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -12879,6 +12916,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnMonitoringReaksiTranfusi;
     private widget.Button BtnObatBhp;
     private widget.Button BtnOdontogram;
+    private widget.Button BtnPORanap;
     private widget.Button BtnPemantauanPEWSAnak;
     private widget.Button BtnPemantauanPEWSDewasa;
     private widget.Button BtnPenilaianKorbanKekerasan;
