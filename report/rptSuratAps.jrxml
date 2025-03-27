@@ -33,7 +33,7 @@
 			surat_aps.tanggal_surat, 
 			surat_aps.jam, 
 			surat_aps.hubungan, 
-			surat_aps.No_ktp,
+			surat_aps.No_ktp as ktp, 
 			surat_aps.JK,
 			surat_aps.tte 
 			FROM surat_aps 
@@ -73,7 +73,7 @@
 	<field name="Alasan" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="No_ktp" class="java.lang.String">
+	<field name="ktp" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="JK" class="java.lang.String">
@@ -540,7 +540,7 @@
 					<font fontName="Times New Roman" size="12"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{No_ktp}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ktp}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="91" y="287" width="290" height="21" uuid="6f158461-d927-419a-b844-3f95ddafd714"/>
