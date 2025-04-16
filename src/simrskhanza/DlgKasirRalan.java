@@ -6195,6 +6195,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 4).toString().equals("Belum Terbit")
                             && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0015") //rad
                             && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0016") //lab
+                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0046") //anestesi
+                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0039") //neonatus                            
                             //                            &&!tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString().equals("U0021") //fisio
                             && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0035") //farmasi
                             //                            &&!tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString().equals("U0045") //rehab
