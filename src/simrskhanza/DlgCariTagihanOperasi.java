@@ -1912,7 +1912,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         jLabel23.setBounds(0, 76, 70, 23);
 
         Tanggal1.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-04-2025" }));
+        Tanggal1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-04-2025" }));
         Tanggal1.setDisplayFormat("dd-MM-yyyy");
         Tanggal1.setName("Tanggal1"); // NOI18N
         Tanggal1.setOpaque(false);
@@ -1970,7 +1970,7 @@ public class DlgCariTagihanOperasi extends javax.swing.JDialog {
         jLabel24.setBounds(0, 43, 70, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-04-2025" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-04-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -3481,7 +3481,8 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
                 DikirimPA.getSelectedItem().toString(),Laporan.getText(),JenisPembedahan.getSelectedItem().toString(),Lama.getText(),Komplikasi.getText(),
                 Implan.getText(),NoImplan.getText(),Perdarahan.getText(),Transfusi.getText(),Valid.SetTgl(TanggalPA.getSelectedItem()+""),Tindakan.getText()
             });
-            JOptionPane.showMessageDialog(null,"Proses update selesai...!!!!");
+            Sequel.mengedit("operasi","no_rawat='"+TNoRw.getText()+"'","tgl_operasi='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem()+"'");
+            JOptionPane.showMessageDialog(null,"Data berhasil diupdate!");
             WindowLaporan.dispose();
             BtnCariActionPerformed(evt);
         }
