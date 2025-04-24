@@ -5489,7 +5489,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2025" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2025" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5536,7 +5536,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2025" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2025" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -5801,7 +5801,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         BtnEdit1.setText("Pasien Check In");
         BtnEdit1.setToolTipText("");
         BtnEdit1.setName("BtnEdit1"); // NOI18N
-        BtnEdit1.setPreferredSize(new java.awt.Dimension(130, 30));
+        BtnEdit1.setPreferredSize(new java.awt.Dimension(150, 30));
         BtnEdit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnEdit1ActionPerformed(evt);
@@ -5849,7 +5849,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5867,7 +5867,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6195,6 +6195,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 4).toString().equals("Belum Terbit")
                             && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0015") //rad
                             && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0016") //lab
+                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0046") //anestesi
+                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0039") //neonatus                            
                             //                            &&!tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString().equals("U0021") //fisio
                             && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0035") //farmasi
                             //                            &&!tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString().equals("U0045") //rehab
@@ -7026,6 +7028,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 } else if (i == 1) {
                     if (akses.getberi_obat() == true) {
                         MnPemberianObatActionPerformed(null);
+                    }
+                } else if (i == 5) {
+                    if (akses.getberi_obat() == true) {
+                        MnResepDOkterActionPerformed(null);
                     }
                 } else if (i == 2) {
                     //if(var.getbilling_ralan()==true){
@@ -8431,7 +8437,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     }
                 } else if (i == 1) {
                     if (akses.getberi_obat() == true) {
-                        MnPemberianObat1ActionPerformed(null);
+                        MnKamarInap1ActionPerformed(null);
                     }
                 } else if (i == 2) {
                     //if(var.getbilling_ralan()==true){

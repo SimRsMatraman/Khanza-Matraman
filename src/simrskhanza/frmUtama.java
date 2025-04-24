@@ -1686,6 +1686,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnLaboratoriumMB = new widget.ButtonBig();
         btnPermintaanFisio = new widget.ButtonBig();
         BtnAbsen = new widget.ButtonBig();
+        btnResepObatAntibiotik = new widget.ButtonBig();
         internalFrame1 = new widget.InternalFrame();
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1935,7 +1936,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20/03/2025" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21/04/2025" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7012,6 +7013,17 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
 
+        btnResepObatAntibiotik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_blog_465048.png"))); // NOI18N
+        btnResepObatAntibiotik.setText("Daftar Resep Antibiotik");
+        btnResepObatAntibiotik.setIconTextGap(0);
+        btnResepObatAntibiotik.setName("btnResepObatAntibiotik"); // NOI18N
+        btnResepObatAntibiotik.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnResepObatAntibiotik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResepObatAntibiotikActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("::[ Khanza SIMKES 2022 ]::");
         setBackground(new java.awt.Color(255, 254, 254));
@@ -7631,6 +7643,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnDataPenyerahanDarah.setEnabled(true);
                     btnDaftarPermintaanResep.setEnabled(true);
                     btnResepObatDepan.setEnabled(true);
+                    btnResepObatAntibiotik.setEnabled(true);
                     MnGantiPassword.setEnabled(false);
 //                    MnPengajuanCutiPegawai.setEnabled(false);
 
@@ -7697,6 +7710,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnDataPenyerahanDarah.setEnabled(akses.getutd_penyerahan_darah());
                     btnDaftarPermintaanResep.setEnabled(akses.getresep_dokter());
                     btnResepObatDepan.setEnabled(akses.getresep_obat());
+                    btnResepObatAntibiotik.setEnabled(akses.getresep_obat());
                     if(AKTIFKANTRACKSQL.equals("yes")){
                         Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");
                     }
@@ -7723,6 +7737,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnDataPenyerahanDarah.setEnabled(false);
                     btnDaftarPermintaanResep.setEnabled(false);
                     btnResepObatDepan.setEnabled(false);
+                    btnResepObatAntibiotik.setEnabled(false);
                     edAdmin.setText("");
                     edPwd.setText("");           
                      
@@ -10191,12 +10206,14 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         FlayMenu.removeAll();        
         FlayMenu.add(btnInputPenjualan);
         FlayMenu.add(btnDataPenjualan);
-        FlayMenu.add(btnDataPenyerahanDarah);
+//        FlayMenu.add(btnDataPenyerahanDarah);
+        FlayMenu.add(btnResepObatAntibiotik);
         FlayMenu.add(btnDaftarPermintaanResep);
         FlayMenu.add(btnResepObatDepan);
         btnInputPenjualan.setEnabled(akses.getpenjualan_obat());
         btnDataPenjualan.setEnabled(akses.getpenjualan_obat());
-        btnDataPenyerahanDarah.setEnabled(akses.getutd_penyerahan_darah());
+//        btnDataPenyerahanDarah.setEnabled(akses.getutd_penyerahan_darah());
+        btnResepObatAntibiotik.setEnabled(akses.getresep_obat());
         btnDaftarPermintaanResep.setEnabled(akses.getresep_dokter());
         btnResepObatDepan.setEnabled(akses.getresep_obat());
         FlayMenu.setVisible(true);       
@@ -13627,6 +13644,20 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnAbsenActionPerformed
+
+    private void btnResepObatAntibiotikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResepObatAntibiotikActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgResepObatAntibiotik resep=new DlgResepObatAntibiotik(this,false);
+        resep.tampil();
+        resep.emptTeks();
+        resep.isCek();
+        resep.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        resep.setLocationRelativeTo(PanelUtama);
+        resep.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnResepObatAntibiotikActionPerformed
 
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -20214,6 +20245,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig btnReklasifikasiRalan;
     private widget.ButtonBig btnReklasifikasiRanap;
     private widget.ButtonBig btnResepObat;
+    private widget.ButtonBig btnResepObatAntibiotik;
     private widget.ButtonBig btnResepObatDepan;
     private widget.ButtonBig btnResepPulang;
     private widget.ButtonBig btnResume;

@@ -434,7 +434,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                    "paket_operasi.dokter_anestesi,paket_operasi.asisten_anestesi,paket_operasi.asisten_anestesi2,paket_operasi.bidan,paket_operasi.bidan2,"+
                    "paket_operasi.bidan3,paket_operasi.perawat_luar,paket_operasi.alat,paket_operasi.sewa_ok,paket_operasi.akomodasi,paket_operasi.bagian_rs,"+
                    "paket_operasi.omloop,paket_operasi.omloop2,paket_operasi.omloop3,paket_operasi.omloop4,paket_operasi.omloop5,paket_operasi.sarpras,"+
-                   "paket_operasi.dokter_pjanak,paket_operasi.dokter_umum from paket_operasi where paket_operasi.status='1' order by paket_operasi.nm_perawatan ");
+                   "paket_operasi.dokter_pjanak,paket_operasi.dokter_umum from paket_operasi where paket_operasi.status='1' and kode_paket IN ('OK006','OK008','PK000026') order by paket_operasi.nm_perawatan ");
             try {
                 rs=pstindakan.executeQuery();
                 while(rs.next()){

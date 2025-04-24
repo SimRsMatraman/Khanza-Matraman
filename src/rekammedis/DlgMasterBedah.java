@@ -90,7 +90,7 @@ public final class DlgMasterBedah extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         
-        KdP.setDocument(new batasInput((byte)6).getKata(KdP));
+        KdP.setDocument(new batasInput((byte)15).getKata(KdP));
 //        NmP.setDocument(new batasInput((byte)30).getKata(NmP));
         NmP.setDocument(new batasInput((int)2000).getKata(NmP));
         TKeluhan.setDocument(new batasInput((int)2000).getKata(TKeluhan));
@@ -118,7 +118,7 @@ public final class DlgMasterBedah extends javax.swing.JDialog {
             });
         } 
         
-        ChkInput.setSelected(false);
+        ChkInput.setSelected(true);
         isForm();  
         
     }
@@ -646,6 +646,9 @@ public final class DlgMasterBedah extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
+        if(evt.getClickCount()==2){
+                dispose();
+            }
 }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
