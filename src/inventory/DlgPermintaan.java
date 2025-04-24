@@ -59,7 +59,7 @@ public class DlgPermintaan extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode response;
     private FileReader myObj;
-    private String qrystok = "", aktifkanbatch = "no", hppfarmasi = "",qrystokkosong="";
+    private String qrystok = "", aktifkanbatch = "no", hppfarmasi = "",qrystokkosong="", stoka ="";
     private double ttltotaljual = 0, totaljual = 0, jumlahjual = 0, ttltotalbeli = 0, totalbeli = 0, jumlahbeli = 0, jumlahbeli1 = 0, jumlahbeli2 = 0, jumlahbeli3 = 0, totalbeli1 = 0, totalbeli2 = 0, totalbeli3 = 0,
             ttltotalpesan = 0, totalpesan = 0, jumlahpesan = 0, jumlahutd, totalutd, ttltotalutd, jumlahkeluar, totalkeluar, ttltotalkeluar,
             ttltotalpiutang = 0, totalpiutang = 0, jumlahpiutang = 0, ttltotalretbeli = 0, totalretbeli = 0, jumlahretbeli = 0,
@@ -1395,7 +1395,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         rs2 = ps2.executeQuery();
                         if (rs2.next()) {
 
-                            jumlahbeli1 = rs2.getDouble(1);
+                            stoka = rs2.getString(1);
                         }
                     } catch (Exception e) {
                         System.out.println("Notifikasi Detail Beli : " + e);
@@ -1410,9 +1410,9 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         
                         tabMode.addRow(new Object[]{
                             "", rs.getString(1), rs.getString(2), rs.getString(3),
-                            rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(8), rs.getString(9), "", Valid.SetAngka(stok), rs.getString(7), ""
+                            rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(8), rs.getString(9), "", Valid.SetAngka(stok), Valid.SetAngka(stoka), ""
                         });
-                    iyem = iyem + "{\"KodeBarang\":\"" + rs.getString(1) + "\",\"NamaBarang\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"Satuan\":\"" + rs.getString(3) + "\",\"JenisObat\":\"" + rs.getString(4) + "\",\"Kategori\":\"" + rs.getString(5) + "\",\"Golongan\":\"" + rs.getString(6) + "\",\"Min. Permintaan\":\"" + rs.getString(8) + "\",\"Max.Permintaan\":\"" + rs.getString(9) + "\",\"Stok Bangsal\":\"" + Valid.SetAngka(stok) + "\",\"Stok Asal\":\"" + Valid.SetAngka(jumlahbeli1) + "\"},";
+                    iyem = iyem + "{\"KodeBarang\":\"" + rs.getString(1) + "\",\"NamaBarang\":\"" + rs.getString(2).replaceAll("\"", "") + "\",\"Satuan\":\"" + rs.getString(3) + "\",\"JenisObat\":\"" + rs.getString(4) + "\",\"Kategori\":\"" + rs.getString(5) + "\",\"Golongan\":\"" + rs.getString(6) + "\",\"Min. Permintaan\":\"" + rs.getString(8) + "\",\"Max.Permintaan\":\"" + rs.getString(9) + "\",\"Stok Bangsal\":\"" + Valid.SetAngka(stok) + "\",\"Stok Asal\":\"" + Valid.SetAngka(stoka) + "\"},";
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi Data Barang : " + e);
