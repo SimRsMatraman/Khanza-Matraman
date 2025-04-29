@@ -95,7 +95,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Permintaan","No.Rawat","Pasien","Permintaan","Jam","Sampel","Jam","Hasil","Jam",
             "Kode Dokter","Dokter Perujuk","Poli Registrasi","Informasi Tambahan","Diagnosis Klinis",
-            "Kode Bayar","Jenis Bayar","Tambahan"
+            "Kode Bayar","Jenis Bayar","Tambahan","Status Bayar"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -104,7 +104,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         tbLabRalan.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbLabRalan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 17; i++) {
+        for (i = 0; i < 18; i++) {
             TableColumn column = tbLabRalan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(90);
@@ -141,7 +141,9 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }else if(i==15){
                 column.setPreferredWidth(110);
             }else if(i==16){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(110);
+            }else if(i==17){
+                column.setPreferredWidth(110);
             }
         }
         tbLabRalan.setDefaultRenderer(Object.class, new WarnaTableLAB());
@@ -207,7 +209,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         
         tabMode3=new DefaultTableModel(null,new Object[]{
             "No.Permintaan","No.Rawat","Pasien","Permintaan","Jam","Sampel","Jam","Hasil","Jam","Kode Dokter",
-            "Dokter Perujuk","Kamar Terakhir","Informasi Tambahan","Diagnosis Klinis","Kode Bayar","Jenis Bayar"
+            "Dokter Perujuk","Kamar Terakhir","Informasi Tambahan","Diagnosis Klinis","Kode Bayar","Jenis Bayar","Tambahan","Status Bayar"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -216,7 +218,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         tbLabRanap.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbLabRanap.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 16; i++) {
+        for (i = 0; i < 18; i++) {
             TableColumn column = tbLabRanap.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(90);
@@ -251,6 +253,10 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else if(i==15){
+                column.setPreferredWidth(110);
+            }else if(i==16){
+                column.setPreferredWidth(110);
+            }else if(i==17){
                 column.setPreferredWidth(110);
             }
         }
@@ -1959,6 +1965,13 @@ private void tbLabRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
             getData();
         } catch (java.lang.NullPointerException e) {
         }
+        if(evt.getClickCount()==1){
+                if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 15).toString().equals("UMUM") && 
+                    tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 17).toString().equals("Belum Bayar")
+                            ) {
+                        JOptionPane.showMessageDialog(null, "Pasien belum melakukan pembayaran, mohon konfirmasi dengan petugas FO");
+                    }
+            }
     }
 }//GEN-LAST:event_tbLabRalanMouseClicked
 
@@ -2263,6 +2276,13 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 getData2();
             } catch (java.lang.NullPointerException e) {
             }
+//            if(evt.getClickCount()==1){
+//                if (tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 15).toString().equals("UMUM") && 
+//                    tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 17).toString().equals("Belum Bayar")
+//                            ) {
+//                        JOptionPane.showMessageDialog(null, "Pasien belum melakukan pembayaran, mohon konfirmasi dengan petugas FO");
+//                    }
+//            }
         }
     }//GEN-LAST:event_tbLabRanapMouseClicked
 
@@ -4319,7 +4339,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     "if(permintaan_lab.jam_permintaan='00:00:00','',permintaan_lab.jam_permintaan) as jam_permintaan,reg_periksa.kd_pj,penjab.png_jawab,"+
                     "if(permintaan_lab.tgl_sampel='0000-00-00','',permintaan_lab.tgl_sampel) as tgl_sampel,if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel,"+
                     "if(permintaan_lab.tgl_hasil='0000-00-00','',permintaan_lab.tgl_hasil) as tgl_hasil,if(permintaan_lab.jam_hasil='00:00:00','',permintaan_lab.jam_hasil) as jam_hasil,"+
-                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,poliklinik.nm_poli,permintaan_lab.informasi_tambahan,permintaan_lab.tambahan,permintaan_lab.diagnosa_klinis "+
+                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,poliklinik.nm_poli,permintaan_lab.informasi_tambahan,permintaan_lab.tambahan,permintaan_lab.diagnosa_klinis,reg_periksa.status_bayar "+
                     "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter "+
@@ -4354,7 +4374,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         rs.getString("tgl_sampel"),rs.getString("jam_sampel"),rs.getString("tgl_hasil"),
                         rs.getString("jam_hasil"),rs.getString("dokter_perujuk"),rs.getString("nm_dokter"),
                         rs.getString("nm_poli"),rs.getString("informasi_tambahan"),rs.getString("diagnosa_klinis"),
-                        rs.getString("kd_pj"),rs.getString("png_jawab"),rs.getString("tambahan")
+                        rs.getString("kd_pj"),rs.getString("png_jawab"),rs.getString("tambahan"),rs.getString("status_bayar")
                     });
                     ps2=koneksi.prepareStatement(
                             "select permintaan_pemeriksaan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan "+
@@ -4366,7 +4386,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             tabMode.addRow(new Object[]{
-                                "","",rs2.getString("nm_perawatan"),"","","","","","","","Nilai Rujukan L.D.","Nilai Rujukan L.A.","Nilai Rujukan P.D.","Nilai Rujukan P.A.","",""
+                                "","",rs2.getString("nm_perawatan"),"","","","","","","","Nilai Rujukan L.D.","Nilai Rujukan L.A.","Nilai Rujukan P.D.","Nilai Rujukan P.A.","","","",""
                             });
                             ps3=koneksi.prepareStatement(
                                     "select permintaan_detail_permintaan_lab.id_template,template_laboratorium.Pemeriksaan,"+
@@ -4380,7 +4400,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 rs3=ps3.executeQuery();
                                 while(rs3.next()){
                                     tabMode.addRow(new Object[]{
-                                        "","","  "+rs3.getString("Pemeriksaan"),rs3.getString("satuan"),"","","","","","",rs3.getString("nilai_rujukan_ld"),rs3.getString("nilai_rujukan_la"),rs3.getString("nilai_rujukan_pd"),rs3.getString("nilai_rujukan_pa"),"",""
+                                        "","","  "+rs3.getString("Pemeriksaan"),rs3.getString("satuan"),"","","","","","",rs3.getString("nilai_rujukan_ld"),rs3.getString("nilai_rujukan_la"),rs3.getString("nilai_rujukan_pd"),rs3.getString("nilai_rujukan_pa"),"","","",""
                                     });
                                 }
                             } catch (Exception e) {
@@ -4616,7 +4636,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     "if(permintaan_lab.jam_permintaan='00:00:00','',permintaan_lab.jam_permintaan) as jam_permintaan,reg_periksa.kd_pj,penjab.png_jawab,"+
                     "if(permintaan_lab.tgl_sampel='0000-00-00','',permintaan_lab.tgl_sampel) as tgl_sampel,if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel,"+
                     "if(permintaan_lab.tgl_hasil='0000-00-00','',permintaan_lab.tgl_hasil) as tgl_hasil,if(permintaan_lab.jam_hasil='00:00:00','',permintaan_lab.jam_hasil) as jam_hasil,"+
-                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
+                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis,permintaan_lab.tambahan,reg_periksa.status_bayar "+
                     "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter "+
@@ -4635,7 +4655,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     "if(permintaan_lab.jam_permintaan='00:00:00','',permintaan_lab.jam_permintaan) as jam_permintaan,reg_periksa.kd_pj,penjab.png_jawab,"+
                     "if(permintaan_lab.tgl_sampel='0000-00-00','',permintaan_lab.tgl_sampel) as tgl_sampel,if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel,"+
                     "if(permintaan_lab.tgl_hasil='0000-00-00','',permintaan_lab.tgl_hasil) as tgl_hasil,if(permintaan_lab.jam_hasil='00:00:00','',permintaan_lab.jam_hasil) as jam_hasil,"+
-                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
+                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis,permintaan_lab.tambahan,reg_periksa.status_bayar "+
                     "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter "+
@@ -4673,7 +4693,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         rs.getString("tgl_sampel"),rs.getString("jam_sampel"),rs.getString("tgl_hasil"),
                         rs.getString("jam_hasil"),rs.getString("dokter_perujuk"),rs.getString("nm_dokter"),
                         rs.getString("nm_bangsal"),rs.getString("informasi_tambahan"),rs.getString("diagnosa_klinis"),
-                        rs.getString("kd_pj"),rs.getString("png_jawab")
+                        rs.getString("kd_pj"),rs.getString("png_jawab"),rs.getString("tambahan"),rs.getString("status_bayar")
                     });
                     ps2=koneksi.prepareStatement(
                             "select permintaan_pemeriksaan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan "+
@@ -4685,7 +4705,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             tabMode3.addRow(new Object[]{
-                                "","",rs2.getString("nm_perawatan"),"","","","","","","","Nilai Rujukan L.D.","Nilai Rujukan L.A.","Nilai Rujukan P.D.","Nilai Rujukan P.A.","",""
+                                "","",rs2.getString("nm_perawatan"),"","","","","","","","Nilai Rujukan L.D.","Nilai Rujukan L.A.","Nilai Rujukan P.D.","Nilai Rujukan P.A.","","","",""
                             });
                             ps3=koneksi.prepareStatement(
                                     "select permintaan_detail_permintaan_lab.id_template,template_laboratorium.Pemeriksaan,"+
@@ -4699,7 +4719,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 rs3=ps3.executeQuery();
                                 while(rs3.next()){
                                     tabMode3.addRow(new Object[]{
-                                        "","","  "+rs3.getString("Pemeriksaan"),rs3.getString("satuan"),"","","","","","",rs3.getString("nilai_rujukan_ld"),rs3.getString("nilai_rujukan_la"),rs3.getString("nilai_rujukan_pd"),rs3.getString("nilai_rujukan_pa"),"",""
+                                        "","","  "+rs3.getString("Pemeriksaan"),rs3.getString("satuan"),"","","","","","",rs3.getString("nilai_rujukan_ld"),rs3.getString("nilai_rujukan_la"),rs3.getString("nilai_rujukan_pd"),rs3.getString("nilai_rujukan_pa"),"","","",""
                                     });
                                 }
                             } catch (Exception e) {
