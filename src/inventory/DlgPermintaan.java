@@ -1187,6 +1187,9 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }
 
     private void tampil() {
+        
+        kdgudangasal.setText("B0016");
+        nmgudangasal.setText("GUDANG");
         z=0;
         for(i=0;i<tbDokter.getRowCount();i++){
             if(!tbDokter.getValueAt(i,0).toString().equals("")){
