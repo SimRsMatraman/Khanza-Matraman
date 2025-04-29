@@ -573,7 +573,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2025 10:41:24" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2025 10:26:17" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -586,7 +586,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(TanggalPulang);
         TanggalPulang.setBounds(110, 32, 150, 23);
 
-        Cmbstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "No Alarm", "Cito" }));
+        Cmbstatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Cito", "Cito" }));
         Cmbstatus.setName("Cmbstatus"); // NOI18N
         Cmbstatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -599,7 +599,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(Cmbstatus);
-        Cmbstatus.setBounds(270, 30, 100, 23);
+        Cmbstatus.setBounds(270, 32, 100, 23);
 
         WindowAmbilSampel.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
@@ -680,7 +680,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2025" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-04-2025" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
