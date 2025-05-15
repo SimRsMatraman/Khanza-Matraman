@@ -183,6 +183,8 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnCetakSuratSehat = new javax.swing.JMenuItem();
         MnCetakSuratSehat1 = new javax.swing.JMenuItem();
+        MnCetakSuratSehatSign = new javax.swing.JMenuItem();
+        MnCetakSuratSKBN = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -217,7 +219,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         Bb = new widget.TextBox();
         jLabel14 = new widget.Label();
         jLabel15 = new widget.Label();
-        Keperluan = new widget.TextBox();
         jLabel17 = new widget.Label();
         jLabel18 = new widget.Label();
         Tensi = new widget.TextBox();
@@ -239,8 +240,9 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         jLabel30 = new widget.Label();
         jLabel31 = new widget.Label();
         jLabel23 = new widget.Label();
-        scrollPane4 = new widget.ScrollPane();
-        Catatan = new widget.TextArea();
+        Catatan = new widget.TextBox();
+        scrollPane5 = new widget.ScrollPane();
+        Keperluan = new widget.TextArea();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -249,7 +251,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         MnCetakSuratSehat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakSuratSehat.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakSuratSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSuratSehat.setText("Cetak Surat Sehat 1");
+        MnCetakSuratSehat.setText("Cetak Surat Sehat");
         MnCetakSuratSehat.setName("MnCetakSuratSehat"); // NOI18N
         MnCetakSuratSehat.setPreferredSize(new java.awt.Dimension(200, 26));
         MnCetakSuratSehat.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +265,8 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         MnCetakSuratSehat1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakSuratSehat1.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakSuratSehat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSuratSehat1.setText("Cetak Surat Sehat 2");
+        MnCetakSuratSehat1.setText("Cetak Surat Sehat (sesuai alamat)");
+        MnCetakSuratSehat1.setToolTipText("");
         MnCetakSuratSehat1.setName("MnCetakSuratSehat1"); // NOI18N
         MnCetakSuratSehat1.setPreferredSize(new java.awt.Dimension(200, 26));
         MnCetakSuratSehat1.addActionListener(new java.awt.event.ActionListener() {
@@ -273,11 +276,40 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnCetakSuratSehat1);
 
+        MnCetakSuratSehatSign.setBackground(new java.awt.Color(250, 250, 250));
+        MnCetakSuratSehatSign.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSuratSehatSign.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSuratSehatSign.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSuratSehatSign.setText("Cetak Surat Sehat (e-sign)");
+        MnCetakSuratSehatSign.setName("MnCetakSuratSehatSign"); // NOI18N
+        MnCetakSuratSehatSign.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnCetakSuratSehatSign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSuratSehatSignActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnCetakSuratSehatSign);
+
+        MnCetakSuratSKBN.setBackground(new java.awt.Color(250, 250, 250));
+        MnCetakSuratSKBN.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSuratSKBN.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSuratSKBN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSuratSKBN.setText("Surat SKBN");
+        MnCetakSuratSKBN.setToolTipText("");
+        MnCetakSuratSKBN.setName("MnCetakSuratSKBN"); // NOI18N
+        MnCetakSuratSKBN.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnCetakSuratSKBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSuratSKBNActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnCetakSuratSKBN);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Surat Keterangan Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Surat Keterangan Sehat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -451,7 +483,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-12-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-05-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -465,7 +497,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-12-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-05-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -530,7 +562,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         jLabel3.setText("Keperluan :");
         jLabel3.setName("jLabel3"); // NOI18N
         FormInput.add(jLabel3);
-        jLabel3.setBounds(950, 70, 60, 23);
+        jLabel3.setBounds(920, 40, 60, 23);
 
         NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
@@ -599,15 +631,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         FormInput.add(jLabel15);
         jLabel15.setBounds(350, 40, 20, 23);
 
-        Keperluan.setName("Keperluan"); // NOI18N
-        Keperluan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                KeperluanKeyPressed(evt);
-            }
-        });
-        FormInput.add(Keperluan);
-        Keperluan.setBounds(1020, 70, 210, 23);
-
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel17.setText("Cm");
         jLabel17.setName("jLabel17"); // NOI18N
@@ -671,7 +694,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         jLabel28.setText("Kesimpulan :");
         jLabel28.setName("jLabel28"); // NOI18N
         FormInput.add(jLabel28);
-        jLabel28.setBounds(760, 40, 60, 23);
+        jLabel28.setBounds(740, 40, 60, 23);
 
         CmbButaWarna.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Diperiksa", "Tidak", "Ya" }));
         CmbButaWarna.setName("CmbButaWarna"); // NOI18N
@@ -686,7 +709,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbButaWarna);
-        CmbButaWarna.setBounds(830, 70, 100, 23);
+        CmbButaWarna.setBounds(810, 70, 100, 23);
 
         CmbKesimpulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sehat", "Tidak Sehat" }));
         CmbKesimpulan.setName("CmbKesimpulan"); // NOI18N
@@ -696,10 +719,10 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbKesimpulan);
-        CmbKesimpulan.setBounds(830, 40, 100, 23);
+        CmbKesimpulan.setBounds(810, 40, 100, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-12-2023" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-05-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -766,35 +789,44 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         jLabel30.setText("Buta Warna :");
         jLabel30.setName("jLabel30"); // NOI18N
         FormInput.add(jLabel30);
-        jLabel30.setBounds(750, 70, 70, 23);
+        jLabel30.setBounds(730, 70, 70, 23);
 
         jLabel31.setText("Catatan :");
         jLabel31.setName("jLabel31"); // NOI18N
         FormInput.add(jLabel31);
-        jLabel31.setBounds(950, 10, 60, 23);
+        jLabel31.setBounds(740, 10, 60, 23);
 
         jLabel23.setText("Suhu :");
         jLabel23.setName("jLabel23"); // NOI18N
         FormInput.add(jLabel23);
         jLabel23.setBounds(0, 70, 75, 23);
 
-        scrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        scrollPane4.setName("scrollPane4"); // NOI18N
-
-        Catatan.setBorder(null);
-        Catatan.setColumns(20);
-        Catatan.setRows(5);
         Catatan.setName("Catatan"); // NOI18N
-        Catatan.setPreferredSize(new java.awt.Dimension(70, 70));
         Catatan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CatatanKeyPressed(evt);
             }
         });
-        scrollPane4.setViewportView(Catatan);
+        FormInput.add(Catatan);
+        Catatan.setBounds(810, 10, 400, 23);
 
-        FormInput.add(scrollPane4);
-        scrollPane4.setBounds(1020, 10, 220, 50);
+        scrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPane5.setName("scrollPane5"); // NOI18N
+
+        Keperluan.setBorder(null);
+        Keperluan.setColumns(20);
+        Keperluan.setRows(5);
+        Keperluan.setName("Keperluan"); // NOI18N
+        Keperluan.setPreferredSize(new java.awt.Dimension(70, 70));
+        Keperluan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeperluanKeyPressed(evt);
+            }
+        });
+        scrollPane5.setViewportView(Keperluan);
+
+        FormInput.add(scrollPane5);
+        scrollPane5.setBounds(990, 40, 220, 50);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1124,7 +1156,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         Valid.pindah(evt,TCari,Keperluan);
     }//GEN-LAST:event_TanggalSuratKeyPressed
 
-    private void MnCetakSuratSehat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSehat1ActionPerformed
+    private void MnCetakSuratSehatSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSehatSignActionPerformed
     if(TPasien.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
@@ -1142,17 +1174,17 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
                 finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodedokter);
                 param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+namadokter+"\nID "+(finger.equals("")?kodedokter:finger)+"\n"+Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));  
                 Valid.MyReportqry("rptSuratKeteranganSehat2.jasper","report","::[ Surat Keterangan Sehat ]::",
-                              " select surat_keterangan_sehat.no_surat,DATE_FORMAT(surat_keterangan_sehat.tanggalsurat,'%d-%m-%Y')as tanggalsurat,surat_keterangan_sehat.berat,surat_keterangan_sehat.tinggi,surat_keterangan_sehat.tensi,surat_keterangan_sehat.BMI,surat_keterangan_sehat.suhu, "+
-                              " surat_keterangan_sehat.butawarna,surat_keterangan_sehat.tesmata,surat_keterangan_sehat.keperluan,surat_keterangan_sehat.kesimpulan,surat_keterangan_sehat.catatan,dokter.nm_dokter,dokter.no_ijn_praktek,pasien.jk,DATE_FORMAT(pasien.tgl_lahir,'%d-%m-%Y')as tgl_lahir,reg_periksa.kd_dokter, " +
+                              " select surat_keterangan_sehat.no_surat,DATE_FORMAT(surat_keterangan_sehat.tanggalsurat,'%d-%m-%Y')as tanggalsurat,surat_keterangan_sehat.berat,surat_keterangan_sehat.tinggi,surat_keterangan_sehat.BMI,surat_keterangan_sehat.tensi,surat_keterangan_sehat.suhu, "+
+                              " surat_keterangan_sehat.butawarna,surat_keterangan_sehat.tesmata,surat_keterangan_sehat.keperluan,surat_keterangan_sehat.kesimpulan,surat_keterangan_sehat.catatan,dokter.nm_dokter,dokter.no_ijn_praktek,dokter.nip1,pasien.jk,reg_periksa.kd_dokter," +
                               " pasien.nm_pasien,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat" +
                               " from surat_keterangan_sehat inner join reg_periksa inner join pasien inner join dokter inner join kelurahan inner join kecamatan inner join kabupaten" +
                               " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter and pasien.kd_kel=kelurahan.kd_kel and "+
                               " pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab and reg_periksa.no_rawat=surat_keterangan_sehat.no_rawat "+
                               " where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
-                this.setCursor(Cursor.getDefaultCursor());  
+                this.setCursor(Cursor.getDefaultCursor()); 
        }
     //
-    }//GEN-LAST:event_MnCetakSuratSehat1ActionPerformed
+    }//GEN-LAST:event_MnCetakSuratSehatSignActionPerformed
 
     private void NoSuratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoSuratActionPerformed
         // TODO add your handling code here:
@@ -1178,10 +1210,6 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         Valid.pindah(evt,Suhu,Keperluan);
     }//GEN-LAST:event_CmbButaWarnaKeyPressed
 
-    private void KeperluanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeperluanKeyPressed
-        Valid.pindah(evt,CmbButaWarna,CmbKesimpulan);
-    }//GEN-LAST:event_KeperluanKeyPressed
-
     private void CmbKesimpulanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbKesimpulanKeyPressed
         Valid.pindah(evt,Keperluan,BtnSimpan);
     }//GEN-LAST:event_CmbKesimpulanKeyPressed
@@ -1206,9 +1234,64 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_CmbTesMataActionPerformed
 
+    private void MnCetakSuratSehat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSehat1ActionPerformed
+           if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());  
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                kodedokter=Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
+                namadokter=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter);
+                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodedokter);
+                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+namadokter+"\nID "+(finger.equals("")?kodedokter:finger)+"\n"+Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));  
+                Valid.MyReportqry("rptSuratKeteranganSehat3.jasper","report","::[ Surat Keterangan Sehat ]::",
+                              " select surat_keterangan_sehat.no_surat,DATE_FORMAT(surat_keterangan_sehat.tanggalsurat,'%d-%m-%Y')as tanggalsurat,surat_keterangan_sehat.berat,surat_keterangan_sehat.tinggi,surat_keterangan_sehat.BMI,surat_keterangan_sehat.tensi,surat_keterangan_sehat.suhu, "+
+                              " surat_keterangan_sehat.butawarna,surat_keterangan_sehat.tesmata,surat_keterangan_sehat.keperluan,surat_keterangan_sehat.kesimpulan,surat_keterangan_sehat.catatan,dokter.nm_dokter,dokter.no_ijn_praktek,dokter.nip1,pasien.jk,reg_periksa.kd_dokter," +
+                              " pasien.nm_pasien,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.alamat,concat(kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as nm_alamat" +
+                              " from surat_keterangan_sehat inner join reg_periksa inner join pasien inner join dokter inner join kelurahan inner join kecamatan inner join kabupaten" +
+                              " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter and pasien.kd_kel=kelurahan.kd_kel and "+
+                              " pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab and reg_periksa.no_rawat=surat_keterangan_sehat.no_rawat "+
+                              " where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
+                this.setCursor(Cursor.getDefaultCursor()); 
+       }
+    }//GEN-LAST:event_MnCetakSuratSehat1ActionPerformed
+
+    private void MnCetakSuratSKBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSKBNActionPerformed
+    if (TPasien.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            if (tbObat.getSelectedRow() != -1) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                SuratBebasNarkoba resume = new SuratBebasNarkoba(null, false);
+                kodedokter=Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
+                namadokter=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter);
+                resume.isCek();
+                resume.emptTeks();
+                resume.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                resume.setLocationRelativeTo(internalFrame1);
+                resume.setNoRm(TNoRw.getText(), TNoRM.getText(), TPasien.getText(), kodedokter, namadokter, DTPCari1.getDate(), DTPCari2.getDate());
+                resume.tampil();
+                resume.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnCetakSuratSKBNActionPerformed
+
     private void CatatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CatatanKeyPressed
-        // TODO add your handling code here:
+        Valid.pindah(evt,CmbKesimpulan,Keperluan);
     }//GEN-LAST:event_CatatanKeyPressed
+
+    private void KeperluanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeperluanKeyPressed
+        Valid.pindah(evt,CmbButaWarna,CmbKesimpulan);
+    }//GEN-LAST:event_KeperluanKeyPressed
 
     /**
     * @param args the command line arguments
@@ -1237,7 +1320,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
-    private widget.TextArea Catatan;
+    private widget.TextBox Catatan;
     private widget.CekBox ChkInput;
     private widget.ComboBox CmbButaWarna;
     private widget.ComboBox CmbKesimpulan;
@@ -1245,10 +1328,12 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.PanelBiasa FormInput;
-    private widget.TextBox Keperluan;
+    private widget.TextArea Keperluan;
     private widget.Label LCount;
+    private javax.swing.JMenuItem MnCetakSuratSKBN;
     private javax.swing.JMenuItem MnCetakSuratSehat;
     private javax.swing.JMenuItem MnCetakSuratSehat1;
+    private javax.swing.JMenuItem MnCetakSuratSehatSign;
     private widget.TextBox NoSurat;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;
@@ -1287,7 +1372,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
     private javax.swing.JPopupMenu jPopupMenu1;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private widget.ScrollPane scrollPane4;
+    private widget.ScrollPane scrollPane5;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
@@ -1444,6 +1529,13 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getsurat_keterangan_sehat());
         BtnHapus.setEnabled(akses.getsurat_keterangan_sehat());
         BtnEdit.setEnabled(akses.getsurat_keterangan_sehat());
+        
+        if (akses.getkode().equals("122650") || akses.getkode().equals("Admin Utama") ) {
+            MnCetakSuratSehatSign.setEnabled(true);
+        } else {
+            MnCetakSuratSehatSign.setVisible(false);
+            MnCetakSuratSehatSign.setEnabled(false);
+        }
     }
     
     private void isBMI(){
