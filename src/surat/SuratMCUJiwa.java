@@ -1129,13 +1129,13 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
     }
 
     public void emptTeks() {
-        TNoRw.setText("");
-        TNoRM.setText("");
-        TPasien.setText("");
+//        TNoRw.setText("");
+//        TNoRM.setText("");
+//        TPasien.setText("");
         NoSurat.setText("");        
         Keperluan.setText("");
         Catatan.setText("");
-        TanggalSurat.setDate(new Date());
+//        TanggalSurat.setDate(new Date());
         CmbKesimpulan.setSelectedItem("Tidak ditemukan");
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_mcu_jiwa.no_surat,3),signed)),0) from surat_mcu_jiwa where surat_mcu_jiwa.tanggalsurat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
                 "RSUD-MTR/MMPI/"+TanggalSurat.getSelectedItem().toString().substring(6,10)+"/"+TanggalSurat.getSelectedItem().toString().substring(3,5)+"/"+TanggalSurat.getSelectedItem().toString().substring(0,2)+"/",3,NoSurat);

@@ -177,8 +177,8 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnCetakSuratSKBN = new javax.swing.JMenuItem();
         MnCetakSuratSKBN1 = new javax.swing.JMenuItem();
-        MnCetakSuratSKBN2 = new javax.swing.JMenuItem();
         MnCetakSuratSKBNSign = new javax.swing.JMenuItem();
+        MnCetakSuratSKBN2 = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -265,21 +265,6 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnCetakSuratSKBN1);
 
-        MnCetakSuratSKBN2.setBackground(new java.awt.Color(250, 250, 250));
-        MnCetakSuratSKBN2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnCetakSuratSKBN2.setForeground(new java.awt.Color(50, 50, 50));
-        MnCetakSuratSKBN2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSuratSKBN2.setText("Cetak SKBN & Keperluan");
-        MnCetakSuratSKBN2.setToolTipText("");
-        MnCetakSuratSKBN2.setName("MnCetakSuratSKBN2"); // NOI18N
-        MnCetakSuratSKBN2.setPreferredSize(new java.awt.Dimension(140, 26));
-        MnCetakSuratSKBN2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakSuratSKBN2ActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnCetakSuratSKBN2);
-
         MnCetakSuratSKBNSign.setBackground(new java.awt.Color(250, 250, 250));
         MnCetakSuratSKBNSign.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakSuratSKBNSign.setForeground(new java.awt.Color(50, 50, 50));
@@ -294,6 +279,20 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnCetakSuratSKBNSign);
+
+        MnCetakSuratSKBN2.setBackground(new java.awt.Color(250, 250, 250));
+        MnCetakSuratSKBN2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSuratSKBN2.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSuratSKBN2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSuratSKBN2.setText("Cetak SKBN & Keperluan");
+        MnCetakSuratSKBN2.setToolTipText("");
+        MnCetakSuratSKBN2.setName("MnCetakSuratSKBN2"); // NOI18N
+        MnCetakSuratSKBN2.setPreferredSize(new java.awt.Dimension(140, 26));
+        MnCetakSuratSKBN2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSuratSKBN2ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -473,7 +472,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-05-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -487,7 +486,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-05-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -607,7 +606,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         jLabel18.setBounds(511, 40, 100, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2025" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-05-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -839,8 +838,6 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
             Valid.textKosong(KdDok,"Kode Dokter");
         }else if(TDokter.getText().trim().equals("")){
             Valid.textKosong(TDokter,"Dokter yang memeriksa");
-        }else if(Keperluan.getText().trim().equals("")){
-            Valid.textKosong(Keperluan,"Keperluan");
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
         }else{
@@ -910,8 +907,6 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
             Valid.textKosong(KdDok,"Kode Dokter");
         }else if(TDokter.getText().trim().equals("")){
             Valid.textKosong(TDokter,"Dokter yang memeriksa");
-        }else if(Keperluan.getText().trim().equals("")){
-            Valid.textKosong(Keperluan,"Keperluan");
         }else{    
             if(tbObat.getSelectedRow()!= -1){
                 if(Sequel.mengedittf("surat_skbn","no_surat=?","no_surat=?,no_rawat=?,tanggalsurat=?,kategori=?,kd_dokter=?,keperluan=?,opiat=?,ganja=?,amphetamin=?,methamphetamin=?,benzodiazepin=?,cocain=?",13,new String[]{
