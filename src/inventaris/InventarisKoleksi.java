@@ -709,7 +709,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         FormInput.add(btnBarang);
         btnBarang.setBounds(703, 40, 25, 23);
 
-        tgl_pengadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2022" }));
+        tgl_pengadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-03-2023" }));
         tgl_pengadaan.setDisplayFormat("dd-MM-yyyy");
         tgl_pengadaan.setName("tgl_pengadaan"); // NOI18N
         tgl_pengadaan.setOpaque(false);
@@ -824,6 +824,11 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
 
         id_ruang.setName("id_ruang"); // NOI18N
         id_ruang.setPreferredSize(new java.awt.Dimension(207, 23));
+        id_ruang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                id_ruangActionPerformed(evt);
+            }
+        });
         id_ruang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 id_ruangKeyPressed(evt);
@@ -1345,6 +1350,10 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
     private void BtnRefreshPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRefreshPhotoActionPerformed
         panggilPhoto();
     }//GEN-LAST:event_BtnRefreshPhotoActionPerformed
+
+    private void id_ruangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_ruangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_id_ruangActionPerformed
 
     /**
     * @param args the command line arguments

@@ -31,8 +31,8 @@ import javax.swing.table.TableColumn;
  *
  * @author dosen
  */
-public class InventarisKategori extends javax.swing.JDialog {
-    private DefaultTableModel tabMode;
+public class InventarisAsal extends javax.swing.JDialog {
+    private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -40,14 +40,14 @@ public class InventarisKategori extends javax.swing.JDialog {
     /** Creates new form DlgSpesialis
      * @param parent
      * @param modal */
-    public InventarisKategori(java.awt.Frame parent, boolean modal) {
+    public InventarisAsal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
         this.setLocation(10,10);
         setSize(459,539);
 
-        Object[] row={"ID Kode Barang","Nama Kode Barang"};
+        Object[] row={"ID Asal","Nama Asal Inventaris"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -140,7 +140,7 @@ public class InventarisKategori extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Master Kode Barang ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Asal Inventaris ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -344,12 +344,12 @@ public class InventarisKategori extends javax.swing.JDialog {
         panelGlass7.setPreferredSize(new java.awt.Dimension(44, 47));
         panelGlass7.setLayout(null);
 
-        jLabel3.setText("ID Kode Barang :");
+        jLabel3.setText("ID Asal :");
         jLabel3.setName("jLabel3"); // NOI18N
         panelGlass7.add(jLabel3);
-        jLabel3.setBounds(2, 12, 90, 23);
+        jLabel3.setBounds(2, 12, 72, 23);
 
-        jLabel4.setText("Nama Kode Barang :");
+        jLabel4.setText("Nama Asal :");
         jLabel4.setName("jLabel4"); // NOI18N
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(176, 12, 110, 23);
@@ -362,7 +362,7 @@ public class InventarisKategori extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(TKd);
-        TKd.setBounds(96, 12, 70, 23);
+        TKd.setBounds(78, 12, 90, 23);
 
         TNm.setName("TNm"); // NOI18N
         TNm.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -390,11 +390,11 @@ public class InventarisKategori extends javax.swing.JDialog {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TKd.getText().trim().equals("")){
-            Valid.textKosong(TKd,"ID Kategori");
+            Valid.textKosong(TKd,"ID asal");
         }else if(TNm.getText().trim().equals("")){
-            Valid.textKosong(TNm,"Nama Kategori");
+            Valid.textKosong(TNm,"Nama asal");
         }else{
-            Sequel.menyimpan("inventaris_kategori","'"+TKd.getText()+"','"+TNm.getText()+"'","ID Kategori");
+            Sequel.menyimpan("inventaris_asal","'"+TKd.getText()+"','"+TNm.getText()+"'","ID asal");
             tampil();
             emptTeks();
         }
@@ -419,7 +419,7 @@ public class InventarisKategori extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        Valid.hapusTable(tabMode,TKd,"inventaris_kategori","id_kategori");
+        Valid.hapusTable(tabMode,TKd,"inventaris_asal","id_asal");
         tampil();
         emptTeks();
 }//GEN-LAST:event_BtnHapusActionPerformed
@@ -434,11 +434,11 @@ public class InventarisKategori extends javax.swing.JDialog {
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TKd.getText().trim().equals("")){
-            Valid.textKosong(TKd,"ID Kategori");
+            Valid.textKosong(TKd,"ID asal");
         }else if(TNm.getText().trim().equals("")){
-            Valid.textKosong(TNm,"Nama Kategori");
+            Valid.textKosong(TNm,"Nama asal");
         }else{
-            Sequel.mengedit("inventaris_kategori","id_kategori=?","id_kategori=?,nama_kategori=?",3,new String[]{
+            Sequel.mengedit("inventaris_asal","id_asal=?","id_asal=?,nama_asal=?",3,new String[]{
                 TKd.getText(),TNm.getText(),tbSpesialis.getValueAt(tbSpesialis.getSelectedRow(),0).toString()
             });
             if(tabMode.getRowCount()!=0){tampil();}
@@ -477,8 +477,8 @@ public class InventarisKategori extends javax.swing.JDialog {
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        prosesCari("select * from inventaris_kategori where id_kategori like '%"+TCari.getText().trim()+"%' "+
-                "or nama_kategori like '%"+TCari.getText().trim()+"%' ");
+        prosesCari("select * from inventaris_asal where id_asal like '%"+TCari.getText().trim()+"%' "+
+                "or nama_asal like '%"+TCari.getText().trim()+"%' ");
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -495,11 +495,11 @@ public class InventarisKategori extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        prosesCari("select * from inventaris_kategori order by id_kategori");
+        prosesCari("select * from inventaris_asal order by id_asal");
 }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnCari, TKd);
@@ -511,7 +511,7 @@ public class InventarisKategori extends javax.swing.JDialog {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
-            }            
+            }
         }
 }//GEN-LAST:event_tbSpesialisMouseClicked
 
@@ -520,8 +520,7 @@ public class InventarisKategori extends javax.swing.JDialog {
             if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
-            }
-            
+            }            
         }
 }//GEN-LAST:event_tbSpesialisKeyPressed
 
@@ -540,7 +539,7 @@ public class InventarisKategori extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }            
+            }           
         }
     }//GEN-LAST:event_tbSpesialisKeyReleased
 
@@ -549,7 +548,7 @@ public class InventarisKategori extends javax.swing.JDialog {
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            InventarisKategori dialog = new InventarisKategori(new javax.swing.JFrame(), true);
+            InventarisAsal dialog = new InventarisAsal(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -586,7 +585,7 @@ public class InventarisKategori extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        String sql="select * from inventaris_kategori order by id_kategori";
+        String sql="select * from inventaris_asal order by id_asal";
         prosesCari(sql);
     }
 
@@ -609,7 +608,7 @@ public class InventarisKategori extends javax.swing.JDialog {
         TNm.setText("");
         TCari.setText("");
         TKd.requestFocus();
-        Valid.autoNomer(tabMode,"KB",3,TKd);
+        Valid.autoNomer(tabMode,"ASL",3,TKd);
         TKd.requestFocus();
     }
 
@@ -625,8 +624,8 @@ public class InventarisKategori extends javax.swing.JDialog {
     }
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getinventaris_kategori());
-        BtnHapus.setEnabled(akses.getinventaris_kategori());
-        BtnEdit.setEnabled(akses.getinventaris_kategori());
+       BtnSimpan.setEnabled(akses.getinventaris_jenis());
+       BtnHapus.setEnabled(akses.getinventaris_jenis());
+       BtnEdit.setEnabled(akses.getinventaris_jenis());
     }
 }
