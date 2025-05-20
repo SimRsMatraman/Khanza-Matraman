@@ -893,6 +893,8 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
             Valid.textKosong(Catatan,"Catatan");
        
         }else{
+            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_keterangan_sehat.no_surat,3),signed)),0) from surat_keterangan_sehat where surat_keterangan_sehat.tanggalsurat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
+                "SKD"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),3,NoSurat);
             if(Sequel.menyimpantf("surat_keterangan_sehat","?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat",13,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Bb.getText(),Tb.getText(),BMI.getText(),Tensi.getText(),Suhu.getText(),CmbButaWarna.getSelectedItem()+"",CmbTesMata.getSelectedItem()+"",
                     Keperluan.getText(),CmbKesimpulan.getSelectedItem()+"",Catatan.getText()
@@ -1430,10 +1432,10 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
     }
 
     public void emptTeks() {
-        TNoRw.setText("");
-        TNoRM.setText("");
-        TPasien.setText("");
-        NoSurat.setText("");
+//        TNoRw.setText("");
+//        TNoRM.setText("");
+//        TPasien.setText("");
+//        NoSurat.setText("");
         Bb.setText("");
         //if(Bb.getText().isEmpty()){
         //  Bb.setText(Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=?",TNoRw.getText()));  

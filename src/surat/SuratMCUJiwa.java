@@ -111,9 +111,23 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
                         tampil();
                     }
                 }
+            });          
+                        
+        }                
+        Keperluan.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                isSurat();
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                isSurat();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                isSurat();
+            }
             });
-            
-        }        
         ChkInput.setSelected(false);
         isForm();
     }
@@ -176,6 +190,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         scrollPane4 = new widget.ScrollPane();
         Keperluan = new widget.TextArea();
         jLabel32 = new widget.Label();
+        BtnSurat = new widget.Button();
         ChkInput = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
@@ -432,7 +447,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-05-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -446,7 +461,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-05-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -571,7 +586,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         CmbKesimpulan.setBounds(110, 130, 910, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2025" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-05-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -616,6 +631,24 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         jLabel32.setName("jLabel32"); // NOI18N
         FormInput.add(jLabel32);
         jLabel32.setBounds(10, 70, 90, 23);
+
+        BtnSurat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnSurat.setMnemonic('3');
+        BtnSurat.setToolTipText("Alt+3");
+        BtnSurat.setName("BtnSurat"); // NOI18N
+        BtnSurat.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnSurat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSuratActionPerformed(evt);
+            }
+        });
+        BtnSurat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnSuratKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnSurat);
+        BtnSurat.setBounds(800, 10, 28, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -667,9 +700,9 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         }else if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
         }else if(Keperluan.getText().trim().equals("")){
-            Valid.textKosong(Keperluan,"Keperluan Tes");
-       
+            Valid.textKosong(Keperluan,"Keperluan Tes");       
         }else{
+            BtnSuratActionPerformed(null);
             if(Sequel.menyimpantf("surat_mcu_jiwa","?,?,?,?,?,?","No.Surat",6,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Keperluan.getText(),CmbKesimpulan.getSelectedItem()+"",Catatan.getText()
                 })==true){
@@ -1014,6 +1047,16 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
        }
     }//GEN-LAST:event_MnCetakSuratSehatSignLengkapActionPerformed
 
+    private void BtnSuratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSuratActionPerformed
+Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_mcu_jiwa.no_surat,3),signed)),0) from surat_mcu_jiwa where surat_mcu_jiwa.tanggalsurat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
+                "RSUD-MTR/MMPI/"+TanggalSurat.getSelectedItem().toString().substring(6,10)+"/"+TanggalSurat.getSelectedItem().toString().substring(3,5)+"/"+TanggalSurat.getSelectedItem().toString().substring(0,2)+"/",3,NoSurat);
+    }//GEN-LAST:event_BtnSuratActionPerformed
+
+    private void BtnSuratKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSuratKeyPressed
+Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_mcu_jiwa.no_surat,3),signed)),0) from surat_mcu_jiwa where surat_mcu_jiwa.tanggalsurat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
+                "RSUD-MTR/MMPI/"+TanggalSurat.getSelectedItem().toString().substring(6,10)+"/"+TanggalSurat.getSelectedItem().toString().substring(3,5)+"/"+TanggalSurat.getSelectedItem().toString().substring(0,2)+"/",3,NoSurat);
+    }//GEN-LAST:event_BtnSuratKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1039,6 +1082,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.Button BtnSurat;
     private widget.TextArea Catatan;
     private widget.CekBox ChkInput;
     private widget.ComboBox CmbKesimpulan;
@@ -1158,6 +1202,13 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
 
     private void isRawat() {
          Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",TNoRM);
+         Sequel.cariIsi("select reg_periksa.tgl_registrasi from reg_periksa where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",TanggalSurat);  
+         isSurat();
+    }
+    
+    private void isSurat(){
+        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_mcu_jiwa.no_surat,3),signed)),0) from surat_mcu_jiwa where surat_mcu_jiwa.tanggalsurat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
+                "RSUD-MTR/MMPI/"+TanggalSurat.getSelectedItem().toString().substring(6,10)+"/"+TanggalSurat.getSelectedItem().toString().substring(3,5)+"/"+TanggalSurat.getSelectedItem().toString().substring(0,2)+"/",3,NoSurat);
     }
 
     private void isPsien() {
@@ -1168,7 +1219,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         DTPCari1.setDate(tgl1);
-        DTPCari2.setDate(tgl2);
+        DTPCari2.setDate(tgl2);        
         isRawat();
         isPsien(); 
         ChkInput.setSelected(true);
