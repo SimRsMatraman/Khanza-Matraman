@@ -102,21 +102,42 @@ public final class RMCariJumlahObatDosis extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        DTPCari1 = new widget.Tanggal();
+        jLabel15 = new widget.Label();
+        jLabel17 = new widget.Label();
+        DTPCari2 = new widget.Tanggal();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
         panelisi3 = new widget.panelisi();
         label9 = new widget.Label();
         TCari = new widget.TextBox();
-        jLabel15 = new widget.Label();
-        DTPCari1 = new widget.Tanggal();
-        jLabel17 = new widget.Label();
-        DTPCari2 = new widget.Tanggal();
         BtnCari = new widget.Button();
         BtnAll = new widget.Button();
         label10 = new widget.Label();
         LCount = new widget.Label();
         BtnKeluar = new widget.Button();
+
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-02-2024" }));
+        DTPCari1.setDisplayFormat("dd-MM-yyyy");
+        DTPCari1.setName("DTPCari1"); // NOI18N
+        DTPCari1.setOpaque(false);
+        DTPCari1.setPreferredSize(new java.awt.Dimension(95, 23));
+
+        jLabel15.setText("Periode :");
+        jLabel15.setName("jLabel15"); // NOI18N
+        jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
+
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("s.d.");
+        jLabel17.setName("jLabel17"); // NOI18N
+        jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
+
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-02-2024" }));
+        DTPCari2.setDisplayFormat("dd-MM-yyyy");
+        DTPCari2.setName("DTPCari2"); // NOI18N
+        DTPCari2.setOpaque(false);
+        DTPCari2.setPreferredSize(new java.awt.Dimension(95, 23));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -170,31 +191,6 @@ public final class RMCariJumlahObatDosis extends javax.swing.JDialog {
             }
         });
         panelisi3.add(TCari);
-
-        jLabel15.setText("Periode :");
-        jLabel15.setName("jLabel15"); // NOI18N
-        jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
-        panelisi3.add(jLabel15);
-
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-02-2024" }));
-        DTPCari1.setDisplayFormat("dd-MM-yyyy");
-        DTPCari1.setName("DTPCari1"); // NOI18N
-        DTPCari1.setOpaque(false);
-        DTPCari1.setPreferredSize(new java.awt.Dimension(95, 23));
-        panelisi3.add(DTPCari1);
-
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel17.setText("s.d.");
-        jLabel17.setName("jLabel17"); // NOI18N
-        jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
-        panelisi3.add(jLabel17);
-
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-02-2024" }));
-        DTPCari2.setDisplayFormat("dd-MM-yyyy");
-        DTPCari2.setName("DTPCari2"); // NOI18N
-        DTPCari2.setOpaque(false);
-        DTPCari2.setPreferredSize(new java.awt.Dimension(95, 23));
-        panelisi3.add(DTPCari2);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari.setMnemonic('1');
@@ -369,17 +365,13 @@ public final class RMCariJumlahObatDosis extends javax.swing.JDialog {
             ps=koneksi.prepareStatement(
                     "select resep_obat.tgl_peresepan,resep_obat.jam_peresepan,databarang.nama_brng,resep_dokter.aturan_pakai "+
                     "from resep_obat inner join resep_dokter on resep_dokter.no_resep=resep_obat.no_resep inner join databarang on databarang.kode_brng=resep_dokter.kode_brng where "+
-                    "resep_obat.no_rawat=? and resep_obat.tgl_peresepan between ? and ? and databarang.nama_brng like ? or "+
-                    "resep_obat.no_rawat=? and  resep_obat.tgl_peresepan between ? and ? and databarang.nama_brng like ? order by resep_obat.tgl_peresepan, resep_obat.jam_peresepan");
+                    "resep_obat.no_rawat=? and databarang.nama_brng like ? or "+
+                    "resep_obat.no_rawat=? and databarang.nama_brng like ? order by resep_obat.tgl_peresepan, resep_obat.jam_peresepan");
             try{
                 ps.setString(1,norawat);
-                ps.setString(2,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                ps.setString(3,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                ps.setString(2,"%"+TCari.getText().trim()+"%");
+                ps.setString(3,norawat);
                 ps.setString(4,"%"+TCari.getText().trim()+"%");
-                ps.setString(5,norawat);
-                ps.setString(6,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                ps.setString(7,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                ps.setString(8,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new String[] {
