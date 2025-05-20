@@ -29,7 +29,7 @@ public final class akses {
             obat=false,stok_opname_obat=false,stok_obat_pasien=false,pengadaan_obat=false,pemesanan_obat=false,penjualan_obat=false,piutang_obat=false,
             retur_ke_suplier=false,retur_dari_pembeli=false,retur_obat_ranap=false,retur_piutang_pasien=false,keuntungan_penjualan=false,keuntungan_beri_obat=false,
             sirkulasi_obat=false,ipsrs_barang=false,ipsrs_jenis_barang=false,ipsrs_pengadaan_barang=false,ipsrs_stok_keluar=false,ipsrs_rekap_pengadaan=false,ipsrs_rekap_stok_keluar=false,
-            ipsrs_pengeluaran_harian=false,inventaris_jenis=false,inventaris_kategori=false,inventaris_merk=false,inventaris_ruang=false,inventaris_produsen=false,
+            ipsrs_pengeluaran_harian=false,inventaris_jenis=false,inventaris_asal=false,inventaris_kondisi=false,inventaris_kategori=false,inventaris_merk=false,inventaris_ruang=false,inventaris_produsen=false,
             inventaris_koleksi=false,inventaris_inventaris=false,inventaris_sirkulasi=false,parkir_jenis=false,parkir_in=false,parkir_out=false,
             parkir_rekap_harian=false,parkir_rekap_bulanan=false,informasi_kamar=false,harian_tindakan_poli=false,obat_per_poli=false,obat_per_kamar=false,
             obat_per_dokter_ralan=false,obat_per_dokter_ranap=false,harian_dokter=false,bulanan_dokter=false,harian_paramedis=false,bulanan_paramedis=false,
@@ -292,6 +292,8 @@ public final class akses {
                         akses.ipsrs_pengeluaran_harian=true;
                         akses.ipsrs_jenis_barang=true;
                         akses.inventaris_jenis=true;
+                        akses.inventaris_asal=true;
+                        akses.inventaris_kondisi=true;
                         akses.inventaris_kategori=true;
                         akses.inventaris_merk=true;
                         akses.inventaris_ruang=true;
@@ -1284,6 +1286,8 @@ public final class akses {
                         akses.ipsrs_rekap_stok_keluar=rs2.getBoolean("ipsrs_rekap_stok_keluar");
                         akses.ipsrs_pengeluaran_harian=rs2.getBoolean("ipsrs_pengeluaran_harian");
                         akses.inventaris_jenis=rs2.getBoolean("inventaris_jenis");
+                        akses.inventaris_asal=rs2.getBoolean("inventaris_asal");
+                        akses.inventaris_kondisi=rs2.getBoolean("inventaris_kondisi");
                         akses.inventaris_kategori=rs2.getBoolean("inventaris_kategori");
                         akses.inventaris_merk=rs2.getBoolean("inventaris_merk");
                         akses.inventaris_ruang=rs2.getBoolean("inventaris_ruang");
@@ -2275,6 +2279,8 @@ public final class akses {
                         akses.ipsrs_pengeluaran_harian= false;
                         akses.ipsrs_jenis_barang=false;
                         akses.inventaris_jenis= false;
+                        akses.inventaris_asal= false;
+                        akses.inventaris_kondisi= false;
                         akses.inventaris_kategori= false;
                         akses.inventaris_merk= false;
                         akses.inventaris_ruang= false;
@@ -3288,6 +3294,8 @@ public final class akses {
         akses.ipsrs_pengeluaran_harian= false;
         akses.ipsrs_jenis_barang=false;
         akses.inventaris_jenis= false;
+        akses.inventaris_asal= false;
+        akses.inventaris_kondisi= false;
         akses.inventaris_kategori= false;
         akses.inventaris_merk= false;
         akses.inventaris_ruang= false;
@@ -4339,6 +4347,8 @@ public final class akses {
     public static boolean getipsrs_pengeluaran_harian(){return akses.ipsrs_pengeluaran_harian;} 
     public static boolean getipsrs_jenis_barang(){return akses.ipsrs_jenis_barang;} 
     public static boolean getinventaris_jenis(){return akses.inventaris_jenis;} 
+    public static boolean getinventaris_asal(){return akses.inventaris_asal;}
+    public static boolean getinventaris_kondisi(){return akses.inventaris_kondisi;} 
     public static boolean getinventaris_kategori(){return akses.inventaris_kategori;} 
     public static boolean getinventaris_merk(){return akses.inventaris_merk;} 
     public static boolean getinventaris_ruang(){return akses.inventaris_ruang;} 
