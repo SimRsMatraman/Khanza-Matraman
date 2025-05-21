@@ -723,6 +723,18 @@
                                 </Property>
                               </Properties>
                             </Component>
+                            <Component class="widget.CekBox" name="chkPemeriksaanRalan1">
+                              <Properties>
+                                <Property name="selected" type="boolean" value="true"/>
+                                <Property name="text" type="java.lang.String" value="Pemeriksaan Fisio dan Rehab Medik"/>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="name" type="java.lang.String" value="chkPemeriksaanRalan1" noResource="true"/>
+                                <Property name="opaque" type="boolean" value="false"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[245, 22]"/>
+                                </Property>
+                              </Properties>
+                            </Component>
                             <Component class="widget.CekBox" name="chkTriase">
                               <Properties>
                                 <Property name="selected" type="boolean" value="true"/>
@@ -1959,18 +1971,6 @@
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="chkSuratKeteranganSehatActionPerformed"/>
                               </Events>
-                            </Component>
-                            <Component class="widget.CekBox" name="chkPemeriksaanRalan1">
-                              <Properties>
-                                <Property name="selected" type="boolean" value="true"/>
-                                <Property name="text" type="java.lang.String" value="Pemeriksaan Ralan"/>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="name" type="java.lang.String" value="chkPemeriksaanRalan1" noResource="true"/>
-                                <Property name="opaque" type="boolean" value="false"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[245, 22]"/>
-                                </Property>
-                              </Properties>
                             </Component>
                           </SubComponents>
                         </Container>

@@ -271,9 +271,8 @@ public class DlgTemplateResep extends javax.swing.JDialog {
         jLabel25.setName("jLabel25"); // NOI18N
         panelisi1.add(jLabel25);
 
-        Jenis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pilih Jenis Resep", "Semua", "Umum", "Racikan" }));
+        Jenis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Umum", "Racikan" }));
         Jenis.setName("Jenis"); // NOI18N
-        Jenis.setOpaque(false);
         Jenis.setPreferredSize(new java.awt.Dimension(110, 28));
         Jenis.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

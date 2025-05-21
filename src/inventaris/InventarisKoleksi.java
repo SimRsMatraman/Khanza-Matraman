@@ -894,11 +894,6 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
 
         id_ruang.setName("id_ruang"); // NOI18N
         id_ruang.setPreferredSize(new java.awt.Dimension(207, 23));
-        id_ruang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_ruangActionPerformed(evt);
-            }
-        });
         id_ruang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 id_ruangKeyPressed(evt);
