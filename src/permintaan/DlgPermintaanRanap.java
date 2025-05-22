@@ -66,7 +66,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
 
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.Rawat","No.RM","Nama Pasien","J.K.","Umur","No.Telp","Cara Bayar","Asal Poli/Unit","Dokter Yang Memeriksa",
-                "Tanggal","Kamar Diminta","Diagnosa Awal","Kd DPJP","Nama DPJP","Rencana Rawat","Catatan"
+                "Tanggal","Kamar Diminta","Diagnosa Awal","Kd DPJP","Nama DPJP","Rencana Rawat","Alasan Masuk Ranap"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -119,6 +119,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         Catatan.setDocument(new batasInput((byte)50).getKata(Catatan));
         Diagnosa.setDocument(new batasInput((byte)50).getKata(Diagnosa));
+        Rencana_rawat.setDocument(new batasInput((byte)2).getKata(Rencana_rawat));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -352,7 +353,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Permintaan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Permintaan Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -589,7 +590,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(165, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -612,7 +613,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -680,7 +681,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         NmPasien.setBounds(288, 10, 330, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -733,7 +734,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         jLabel12.setText("( hari)");
         jLabel12.setName("jLabel12"); // NOI18N
         FormInput.add(jLabel12);
-        jLabel12.setBounds(650, 70, 30, 23);
+        jLabel12.setBounds(660, 70, 30, 23);
 
         Diagnosa.setHighlighter(null);
         Diagnosa.setName("Diagnosa"); // NOI18N
@@ -853,7 +854,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(Rencana_rawat);
-        Rencana_rawat.setBounds(620, 70, 30, 23);
+        Rencana_rawat.setBounds(620, 70, 40, 23);
 
         jLabel17.setText("Rencana rawat :");
         jLabel17.setName("jLabel17"); // NOI18N
@@ -1575,7 +1576,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         tabMode.addRow(new String[]{
                             rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("jk"),rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),
                             rs.getString("no_tlp"),rs.getString("png_jawab"),rs.getString("nm_poli"),rs.getString("nm_dokter"),rs.getString("tanggal"),rs.getString("kd_kamar"),
-                            rs.getString("diagnosa"),rs.getString("kd_dpjp"),rs.getString("dpjp"),rs.getString("catatan"),rs.getString("Rencana_rawat")
+                            rs.getString("diagnosa"),rs.getString("kd_dpjp"),rs.getString("dpjp"),rs.getString("Rencana_rawat"),rs.getString("catatan")
                         });
                     }
                 } catch (Exception e) {
@@ -1624,7 +1625,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         tabMode.addRow(new String[]{
                             rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("jk"),rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),
                             rs.getString("no_tlp"),rs.getString("png_jawab"),rs.getString("nm_poli"),rs.getString("nm_dokter"),rs.getString("tanggal"),rs.getString("kd_kamar"),
-                            rs.getString("diagnosa"),rs.getString("kd_dpjp"),rs.getString("dpjp"),rs.getString("catatan"),rs.getString("Rencana_rawat")
+                            rs.getString("diagnosa"),rs.getString("kd_dpjp"),rs.getString("dpjp"),rs.getString("Rencana_rawat"),rs.getString("catatan")
                         });
                     }
                 } catch (Exception e) {
@@ -1675,10 +1676,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Dokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             JnKamar.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             Diagnosa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            Catatan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            Catatan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
             KdDPJP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
             NmDPJP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
-            Rencana_rawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            Rencana_rawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
             Valid.SetTgl(DTPTgl,tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
         }
     }
