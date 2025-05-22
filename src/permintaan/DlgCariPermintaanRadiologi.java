@@ -1638,13 +1638,13 @@ private void tbRadiologiRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-            if(evt.getClickCount()==1){
-                if (tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(), 15).toString().equals("UMUM") && 
-                    tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(), 17).toString().equals("Belum Bayar")
-                            ) {
-                        JOptionPane.showMessageDialog(null, "Pasien belum melakukan pembayaran, mohon konfirmasi dengan petugas FO");
-                    }
-            }
+//            if(evt.getClickCount()==1){
+//                if (tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(), 15).toString().equals("UMUM") && 
+//                    tbRadiologiRalan.getValueAt(tbRadiologiRalan.getSelectedRow(), 17).toString().equals("Belum Bayar")
+//                            ) {
+//                        JOptionPane.showMessageDialog(null, "Pasien belum melakukan pembayaran, mohon konfirmasi dengan petugas FO");
+//                    }
+//            }
         }
 }//GEN-LAST:event_tbRadiologiRalanMouseClicked
 
@@ -1874,13 +1874,13 @@ private void tbRadiologiRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRS
                 getData2();
             } catch (java.lang.NullPointerException e) {
             }
-            if(evt.getClickCount()==1){
-                if (tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(), 15).toString().equals("UMUM") && 
-                    tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(), 17).toString().equals("Belum Bayar")
-                            ) {
-                        JOptionPane.showMessageDialog(null, "Pasien belum melakukan pembayaran, mohon konfirmasi dengan petugas FO");
-                    }
-            }
+//            if(evt.getClickCount()==1){
+//                if (tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(), 15).toString().equals("UMUM") && 
+//                    tbRadiologiRanap.getValueAt(tbRadiologiRanap.getSelectedRow(), 17).toString().equals("Belum Bayar")
+//                            ) {
+//                        JOptionPane.showMessageDialog(null, "Pasien belum melakukan pembayaran, mohon konfirmasi dengan petugas FO");
+//                    }
+//            }
         }
     }//GEN-LAST:event_tbRadiologiRanapMouseClicked
 

@@ -5190,7 +5190,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     "<td valign='middle' bgcolor='#FFFAF8' align='center' width='5%'>Tgl.Reg</td>"+
                     "<td valign='middle' bgcolor='#FFFAF8' align='center' width='8%'>No.Rawat</td>"+
                     "<td valign='middle' bgcolor='#FFFAF8' align='center' width='3%'>Status</td>"+
-                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='84%'>S.O.A.P.I.E</td>"+
+                    "<td valign='middle' bgcolor='#FFFAF8' align='center' width='84%'>S.O.A.P.I</td>"+
                 "</tr>"
             );     
             if(R1.isSelected()==true){
@@ -5283,6 +5283,62 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                         "<td align='left'>"+rs2.getString("penilaian").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                         "<td align='left'>"+rs2.getString("rtl").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                         "<td align='left'>"+rs2.getString("instruksi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                    "</tr>"
+                                 );
+                            } 
+                        }       
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
+                    } finally{
+                        if(rs2!=null){
+                            rs2.close();
+                        }
+                    }
+                    
+                    //Rehab Medik & Fisio
+                    try {
+                        rs2=koneksi.prepareStatement(
+                                "select pemeriksaan_ralan_rehab.tgl_perawatan,pemeriksaan_ralan_rehab.jam_rawat,pemeriksaan_ralan_rehab.kesadaran,pemeriksaan_ralan_rehab.anamnesa,pemeriksaan_ralan_rehab.pemeriksaanfisik,pemeriksaan_ralan_rehab.pemeriksaanpenunjang, "+
+                                        "pemeriksaan_ralan_rehab.anjuran,pemeriksaan_ralan_rehab.diagnosis,pemeriksaan_ralan_rehab.tatalaksana,pemeriksaan_ralan_rehab.evaluasi,pemeriksaan_ralan_rehab.suspek,pemeriksaan_ralan_rehab.ket_suspek,pemeriksaan_ralan_rehab.rpd,pemeriksaan_ralan_rehab.rpk,pemeriksaan_ralan_rehab.rpo, "+
+                                        "pemeriksaan_ralan_rehab.alergi,pemeriksaan_ralan_rehab.operasi,pemeriksaan_ralan_rehab.nik,pegawai.nama,pemeriksaan_ralan_rehab.instruksi from pemeriksaan_ralan_rehab inner join pegawai on pemeriksaan_ralan_rehab.nik=pegawai.nik where "+
+                                        "pemeriksaan_ralan_rehab.no_rawat='"+rs.getString("no_rawat")+"' order by pemeriksaan_ralan_rehab.tgl_perawatan,pemeriksaan_ralan_rehab.jam_rawat").executeQuery();
+                        if(rs2.next()){
+                            htmlContent.append(
+                                    "<tr class='isi'>"+
+                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='7%'>Tanggal</td>"+
+                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='13%'>Dokter/Paramedis</td>"+
+                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='14%'>Subjek</td>"+
+                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='13%'>Objek</td>"+
+                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='13%'>Asesmen</td>"+
+                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='14%'>Plan</td>"+
+                                        "<td valign='middle' bgcolor='#FFFFF8' align='center' width='14%'>Instruksi</td>"+
+                                    "</tr>");
+                            rs2.beforeFirst();
+                            while(rs2.next()){
+                                 htmlContent.append(                             
+                                    "<tr class='isi'>"+
+                                        "<td align='center'>"+rs2.getString("tgl_perawatan")+"<br>"+rs2.getString("jam_rawat")+"</td>"+
+                                        "<td align='center'>"+rs2.getString("nik")+"<br>"+rs2.getString("nama")+"</td>"+
+                                        "<td align='left'>"+rs2.getString("anamnesa").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                        "<td align='left'>"+rs2.getString("pemeriksaanfisik").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+
+                                        (rs2.getString("alergi").equals("")?"":"<br>Alergi : "+rs2.getString("alergi"))+
+                                        (rs2.getString("pemeriksaanpenunjang").equals("")?"":"<br>Pemeriksaan Penunjang : "+rs2.getString("pemeriksaanpenunjang"))+
+//                                        (rs2.getString("tensi").equals("")?"":"<br>Tensi : "+rs2.getString("tensi"))+
+//                                        (rs2.getString("nadi").equals("")?"":"<br>Nadi(/menit) : "+rs2.getString("nadi"))+
+//                                        (rs2.getString("respirasi").equals("")?"":"<br>Respirasi(/menit) : "+rs2.getString("respirasi"))+
+//                                        (rs2.getString("tinggi").equals("")?"":"<br>Tinggi(Cm) : "+rs2.getString("tinggi"))+
+//                                        (rs2.getString("berat").equals("")?"":"<br>Berat(Kg) : "+rs2.getString("berat"))+
+//                                        (rs2.getString("spo").equals("")?"":"<br>SpO2(%) : "+rs2.getString("spo"))+
+//                                        (rs2.getString("gcs").equals("")?"":"<br>GCS(E,V,M) : "+rs2.getString("gcs"))+
+                                        (rs2.getString("kesadaran").equals("")?"":"<br>Kesadaran : "+rs2.getString("kesadaran"))+
+                                        "</td>"+
+                                        "<td align='left'>Diagnosis : "+rs2.getString("diagnosis").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                        "<td align='left'>Anjuran : "+rs2.getString("anjuran").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+
+                                         (rs2.getString("tatalaksana").equals("")?"":"<br>Tatalaksana : "+rs2.getString("tatalaksana"))+
+                                        "</td>"+
+                                        "<td align='left'>"+rs2.getString("instruksi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+
+                                         
+                                        "</td>"+
                                     "</tr>"
                                  );
                             } 

@@ -7241,30 +7241,20 @@ private void MnDataRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         if (tbKasirRalan.getSelectedRow() != -1) {
             if (Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?", TNoRw.getText()) > 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            } 
-            else if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0045")) {
-                dlgrwjl2.isCek();
-                dlgrwjl2.emptTeks1();
-                dlgrwjl2.menuFisio();
-                dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                dlgrwjl2.setLocationRelativeTo(internalFrame1);
-                dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
-                dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
-                dlgrwjl2.setNoRm1(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-                dlgrwjl2.setVisible(true);
-            }
-            else if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0021")) {
-                dlgrwjl2.isCek();
-                dlgrwjl2.emptTeks1();
-                dlgrwjl2.menuFisio();
-                dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                dlgrwjl2.setLocationRelativeTo(internalFrame1);
-                dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
-                dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
-                dlgrwjl2.setNoRm1(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-                dlgrwjl2.setVisible(true);
-            }
+            }             
             else {
+                if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0021") || tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0045")) {
+                dlgrwjl2.isCek();
+                dlgrwjl2.emptTeks1();
+                dlgrwjl2.menuFisio();
+                dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                dlgrwjl2.setLocationRelativeTo(internalFrame1);
+                dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
+                dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
+                dlgrwjl2.setNoRm1(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
+                dlgrwjl2.setVisible(true);
+                }
+                else{
                 dlgrwjl2.isCek();
                 dlgrwjl2.emptTeks();
                 dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
@@ -7272,7 +7262,8 @@ private void MnDataRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                 dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
                 dlgrwjl2.setNoRm(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-                dlgrwjl2.setVisible(true);
+                dlgrwjl2.setVisible(true);  
+                }                
             }
         }
     }
@@ -12369,29 +12360,19 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             if (Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?", TNoRw.getText()) > 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
             } 
-            else if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0045")) {
-                dlgrwjl2.isCek();
-                dlgrwjl2.emptTeks1();
-                dlgrwjl2.menuFisio();
-                dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                dlgrwjl2.setLocationRelativeTo(internalFrame1);
-                dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
-                dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
-                dlgrwjl2.setNoRm1(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-                dlgrwjl2.setVisible(true);
-            }
-            else if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0021")) {
-                dlgrwjl2.isCek();
-                dlgrwjl2.emptTeks1();
-                dlgrwjl2.menuFisio();
-                dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                dlgrwjl2.setLocationRelativeTo(internalFrame1);
-                dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
-                dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
-                dlgrwjl2.setNoRm1(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-                dlgrwjl2.setVisible(true);
-            }
             else {
+                if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0021") || tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0045")) {
+                dlgrwjl2.isCek();
+                dlgrwjl2.emptTeks1();
+                dlgrwjl2.menuFisio();
+                dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                dlgrwjl2.setLocationRelativeTo(internalFrame1);
+                dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
+                dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
+                dlgrwjl2.setNoRm1(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
+                dlgrwjl2.setVisible(true);
+                }
+                else{
                 dlgrwjl2.isCek();
                 dlgrwjl2.emptTeks();
                 dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
@@ -12399,7 +12380,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                 dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
                 dlgrwjl2.setNoRm(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
-                dlgrwjl2.setVisible(true);
+                dlgrwjl2.setVisible(true);  
+                }                
             }
         }
     }

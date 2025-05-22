@@ -15605,6 +15605,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     public void emptTeks(){
         BtnBatalActionPerformed(null);
         TabRawat.setSelectedIndex(3);
+        jTabbedPane1.setSelectedIndex(0);
     }
     public void emptTeks1(){
         BtnBatalActionPerformed(null);
