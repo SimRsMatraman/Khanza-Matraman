@@ -55,7 +55,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
     private final Properties prop = new Properties();
     private PreparedStatement ps;
     private ResultSet rs;
-    private String namaruang="",kosong="";
+    private String namaruang="",kosong="",nilai_inven="";
     private StringBuilder htmlContent;
 
     /** Creates new form DlgJnsPerawatan
@@ -126,7 +126,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
 
         no_inventaris.setDocument(new batasInput((byte)30).getKata(no_inventaris));
         kode_barang.setDocument(new batasInput((byte)10).getKata(kode_barang));
-        harga.setDocument(new batasInput((byte)15).getOnlyAngka(harga));
+//        harga.setDocument(new batasInput((byte)15).getKata(harga));
         id_ruang.setDocument(new batasInput((byte)5).getKata(id_ruang));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
@@ -144,10 +144,14 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
                 if(barang.getTable().getSelectedRow()!= -1){    
                     kode_barang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
                     nama_barang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
-                    nm_produsen.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),3).toString());
-                    nm_merk.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),4).toString());
+                    nm_produsen.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),8).toString());
+                    nm_merk.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),13).toString());
                     nm_kategori.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),7).toString());
-                    nm_jenis.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),8).toString());
+                    nm_jenis.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),15).toString());
+                    asal_barang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),16).toString());
+                    harga.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),9).toString());
+                    status_barang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),17).toString());
+                    keterangan.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),19).toString());
                 }   
                 kode_barang.requestFocus();
             }
@@ -307,7 +311,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
     private InventarisBarang barang=new InventarisBarang(null,false); 
     private InventarisRuang ruang=new InventarisRuang(null,false);  
     private InventarisRuang asal=new InventarisRuang(null,false); 
-    private double nilai_inven=0;
+//    private  nilai_inven=0;
     private int pilihan=0;
 
     /** This method is called from within the constructor to
@@ -360,7 +364,6 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         nama_barang = new widget.TextBox();
         btnBarang = new widget.Button();
         jLabel18 = new widget.Label();
-        status_barang = new widget.ComboBox();
         label12 = new widget.Label();
         nm_kategori = new widget.TextBox();
         label13 = new widget.Label();
@@ -370,7 +373,6 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         label15 = new widget.Label();
         nm_produsen = new widget.TextBox();
         jLabel19 = new widget.Label();
-        asal_barang = new widget.ComboBox();
         jPanel1 = new javax.swing.JPanel();
         btnRuang = new widget.Button();
         nm_ruang = new widget.TextBox();
@@ -383,6 +385,8 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         scrollPane = new widget.ScrollPane();
         keterangan = new widget.TextArea();
         tgl_pengadaan = new widget.Tanggal();
+        asal_barang = new widget.TextBox();
+        status_barang = new widget.TextBox();
         ChkInput = new widget.CekBox();
         PanelAccor = new widget.PanelBiasa();
         ChkAccor = new widget.CekBox();
@@ -749,7 +753,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         label8.setText("Tgl.Pengadaan :");
         label8.setName("label8"); // NOI18N
         FormInput.add(label8);
-        label8.setBounds(277, 10, 90, 23);
+        label8.setBounds(220, 10, 90, 23);
 
         label9.setText("Merk :");
         label9.setName("label9"); // NOI18N
@@ -794,18 +798,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         jLabel18.setText("Status :");
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
-        jLabel18.setBounds(540, 10, 60, 23);
-
-        status_barang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ada", "Rusak", "Hilang", "Perbaikan", "Dipinjam", "-" }));
-        status_barang.setLightWeightPopupEnabled(false);
-        status_barang.setName("status_barang"); // NOI18N
-        status_barang.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                status_barangKeyPressed(evt);
-            }
-        });
-        FormInput.add(status_barang);
-        status_barang.setBounds(603, 10, 125, 23);
+        jLabel18.setBounds(420, 10, 60, 23);
 
         label12.setText("Kategori :");
         label12.setName("label12"); // NOI18N
@@ -850,23 +843,12 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         nm_produsen.setEditable(false);
         nm_produsen.setName("nm_produsen"); // NOI18N
         FormInput.add(nm_produsen);
-        nm_produsen.setBounds(275, 100, 140, 23);
+        nm_produsen.setBounds(280, 100, 140, 23);
 
-        jLabel19.setText("Asal :");
+        jLabel19.setText("Asal Master:");
         jLabel19.setName("jLabel19"); // NOI18N
         FormInput.add(jLabel19);
         jLabel19.setBounds(190, 130, 82, 23);
-
-        asal_barang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Beli", "Bantuan", "Hibah", "-" }));
-        asal_barang.setLightWeightPopupEnabled(false);
-        asal_barang.setName("asal_barang"); // NOI18N
-        asal_barang.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                asal_barangKeyPressed(evt);
-            }
-        });
-        FormInput.add(asal_barang);
-        asal_barang.setBounds(275, 130, 140, 23);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "Posisi Inventaris Di :", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         jPanel1.setName("jPanel1"); // NOI18N
@@ -894,11 +876,6 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
 
         id_ruang.setName("id_ruang"); // NOI18N
         id_ruang.setPreferredSize(new java.awt.Dimension(207, 23));
-        id_ruang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_ruangActionPerformed(evt);
-            }
-        });
         id_ruang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 id_ruangKeyPressed(evt);
@@ -969,7 +946,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         scrollPane.setBounds(740, 10, 240, 140);
 
         tgl_pengadaan.setForeground(new java.awt.Color(50, 70, 50));
-        tgl_pengadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-05-2025" }));
+        tgl_pengadaan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-05-2025" }));
         tgl_pengadaan.setDisplayFormat("dd-MM-yyyy");
         tgl_pengadaan.setName("tgl_pengadaan"); // NOI18N
         tgl_pengadaan.setOpaque(false);
@@ -979,7 +956,27 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
             }
         });
         FormInput.add(tgl_pengadaan);
-        tgl_pengadaan.setBounds(377, 10, 180, 23);
+        tgl_pengadaan.setBounds(320, 10, 90, 23);
+
+        asal_barang.setEditable(false);
+        asal_barang.setName("asal_barang"); // NOI18N
+        asal_barang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asal_barangActionPerformed(evt);
+            }
+        });
+        FormInput.add(asal_barang);
+        asal_barang.setBounds(280, 130, 140, 23);
+
+        status_barang.setEditable(false);
+        status_barang.setName("status_barang"); // NOI18N
+        status_barang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                status_barangActionPerformed(evt);
+            }
+        });
+        FormInput.add(status_barang);
+        status_barang.setBounds(490, 10, 210, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1099,8 +1096,8 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
             Valid.textKosong(id_ruang,"Ruangan");
         }else {
                 //menyimpan-------------------------------------------------
-                Sequel.menyimpan("inventaris","'"+no_inventaris.getText()+"','"+kode_barang.getText()+"','"+asal_barang.getSelectedItem()+"','"+Valid.SetTgl(tgl_pengadaan.getSelectedItem()+"")+
-                        "','"+harga.getText()+"','"+status_barang.getSelectedItem()+"','"+id_ruang.getText()+"','"+id_asal.getText()+"','"+keterangan.getText()+"'","No.Inventaris");
+                Sequel.menyimpan("inventaris","'"+no_inventaris.getText()+"','"+kode_barang.getText()+"','"+asal_barang.getText()+"','"+Valid.SetTgl(tgl_pengadaan.getSelectedItem()+"")+
+                        "','"+harga.getText()+"','"+status_barang.getText()+"','"+id_ruang.getText()+"','"+id_asal.getText()+"','"+keterangan.getText()+"'","No.Inventaris");
                 //----------------------------------------------------------
                 no_inventaris.requestFocus();
             tampil();
@@ -1154,8 +1151,8 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         }else {
                 //menyimpan-------------------------------------------------
                 Sequel.mengedit("inventaris","no_inventaris='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0)+"'",
-                        "no_inventaris='"+no_inventaris.getText()+"',kode_barang='"+kode_barang.getText()+"',asal_barang='"+asal_barang.getSelectedItem()+"',tgl_pengadaan='"+Valid.SetTgl(tgl_pengadaan.getSelectedItem()+"")+
-                        "',harga='"+harga.getText()+"',status_barang='"+status_barang.getSelectedItem()+"',id_ruang='"+id_ruang.getText()+"',id_asal='"+id_asal.getText()+"',keterangan='"+keterangan.getText()+"'");
+                        "no_inventaris='"+no_inventaris.getText()+"',kode_barang='"+kode_barang.getText()+"',asal_barang='"+asal_barang.getText()+"',tgl_pengadaan='"+Valid.SetTgl(tgl_pengadaan.getSelectedItem()+"")+
+                        "',harga='"+harga.getText()+"',status_barang='"+status_barang.getText()+"',id_ruang='"+id_ruang.getText()+"',id_asal='"+id_asal.getText()+"',keterangan='"+keterangan.getText()+"'");
                 //----------------------------------------------------------
                 no_inventaris.requestFocus();
             tampil();
@@ -1322,17 +1319,9 @@ private void btnRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     ruang.setVisible(true);
 }//GEN-LAST:event_btnRuangActionPerformed
 
-private void status_barangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_status_barangKeyPressed
-    Valid.pindah(evt,tgl_pengadaan,id_ruang);
-}//GEN-LAST:event_status_barangKeyPressed
-
 private void hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaKeyPressed
     Valid.pindah(evt,kode_barang,asal_barang);
 }//GEN-LAST:event_hargaKeyPressed
-
-private void asal_barangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_asal_barangKeyPressed
-    Valid.pindah(evt,harga,tgl_pengadaan);
-}//GEN-LAST:event_asal_barangKeyPressed
 
 private void no_boxKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_boxKeyPressed
     Valid.pindah(evt,no_rak,BtnSimpan);
@@ -1477,6 +1466,14 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
 
     }//GEN-LAST:event_tgl_pengadaanKeyPressed
 
+    private void asal_barangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asal_barangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_asal_barangActionPerformed
+
+    private void status_barangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_status_barangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_status_barangActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1516,7 +1513,7 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll4;
     private widget.TextBox TCari;
-    private widget.ComboBox asal_barang;
+    private widget.TextBox asal_barang;
     private widget.Button btnAmbilPhoto;
     private widget.Button btnAsal;
     private widget.Button btnBarang;
@@ -1564,7 +1561,7 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
     private javax.swing.JMenuItem ppBarcode2;
     private javax.swing.JMenuItem ppBarcode3;
     private widget.ScrollPane scrollPane;
-    private widget.ComboBox status_barang;
+    private widget.TextBox status_barang;
     private widget.Table tbJnsPerawatan;
     private widget.Tanggal tgl_pengadaan;
     // End of variables declaration//GEN-END:variables
@@ -1610,7 +1607,7 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
              Valid.tabelKosong(tabMode);
              try{            
                 rs=ps.executeQuery();
-                nilai_inven=0;
+//                nilai_inven=0;
                 while(rs.next()){
                      tabMode.addRow(new Object[]{rs.getString("no_inventaris"),
                                     rs.getString("kode_barang"),
@@ -1623,14 +1620,14 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
                                     rs.getString("nama_kategori"),
                                     rs.getString("nama_jenis"),
                                     rs.getString("asal_barang"),
-                                    Valid.SetAngka(rs.getDouble("harga")),
+                                    rs.getString("harga"),
                                     rs.getString("status_barang"),
                                     rs.getString("id_ruang"),
                                     rs.getString("nama_ruang"),
                                     rs.getString("id_asal"),
                                     rs.getString("nama_asal"),
                                     rs.getString("keterangan")});
-                     nilai_inven=nilai_inven+rs.getDouble("harga");
+                     nilai_inven=rs.getString("harga");
                 }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -1657,10 +1654,10 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
         nm_merk.setText("");
         nm_produsen.setText("");
         nm_ruang.setText("");
-        harga.setText("0");
-        asal_barang.setSelectedIndex(0);
+        harga.setText("");
+        asal_barang.setText("");
         tgl_pengadaan.setDate(new Date());
-        status_barang.setSelectedIndex(0);
+        status_barang.setText("");
         id_ruang.setText("");
         no_rak.setSelectedIndex(0);
         no_box.setSelectedIndex(0);
@@ -1685,9 +1682,9 @@ private void ppBarcodeBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {/
 //                tgl_pengadaan.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
                 nm_kategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
                 nm_jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
-                asal_barang.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
+                asal_barang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
                 harga.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
-                status_barang.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
+                status_barang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
                 id_ruang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString());
                 nm_ruang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
                 id_asal.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString());

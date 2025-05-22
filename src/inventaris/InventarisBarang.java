@@ -25,6 +25,7 @@ import java.awt.event.WindowListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -482,7 +483,6 @@ public final class InventarisBarang extends javax.swing.JDialog {
         label8 = new widget.Label();
         label10 = new widget.Label();
         label9 = new widget.Label();
-        thn_produksi = new widget.ComboBox();
         label19 = new widget.Label();
         kode_produsen = new widget.TextBox();
         nama_produsen = new widget.TextBox();
@@ -527,6 +527,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         label15 = new widget.Label();
         No_Izin = new widget.TextBox();
         btnRuang = new widget.Button();
+        thn_produksi = new widget.Tanggal();
         ChkInput = new widget.CekBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -793,12 +794,12 @@ public final class InventarisBarang extends javax.swing.JDialog {
             }
         });
         FormInput.add(jml_barang);
-        jml_barang.setBounds(700, 100, 40, 23);
+        jml_barang.setBounds(540, 160, 90, 23);
 
-        label7.setText("Tahun Produksi :");
+        label7.setText("Tanggal Produksi :");
         label7.setName("label7"); // NOI18N
         FormInput.add(label7);
-        label7.setBounds(450, 100, 90, 23);
+        label7.setBounds(470, 100, 90, 23);
 
         isbn.setName("isbn"); // NOI18N
         isbn.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -824,16 +825,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         label9.setText("Jml.Barang :");
         label9.setName("label9"); // NOI18N
         FormInput.add(label9);
-        label9.setBounds(630, 100, 70, 23);
-
-        thn_produksi.setName("thn_produksi"); // NOI18N
-        thn_produksi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                thn_produksiKeyPressed(evt);
-            }
-        });
-        FormInput.add(thn_produksi);
-        thn_produksi.setBounds(540, 100, 85, 23);
+        label9.setBounds(470, 160, 70, 23);
 
         label19.setText("Produsen :");
         label19.setName("label19"); // NOI18N
@@ -1224,6 +1216,19 @@ public final class InventarisBarang extends javax.swing.JDialog {
         FormInput.add(btnRuang);
         btnRuang.setBounds(1110, 160, 25, 23);
 
+        thn_produksi.setForeground(new java.awt.Color(50, 70, 50));
+        thn_produksi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-05-2025" }));
+        thn_produksi.setDisplayFormat("dd-MM-yyyy");
+        thn_produksi.setName("thn_produksi"); // NOI18N
+        thn_produksi.setOpaque(false);
+        thn_produksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                thn_produksiKeyPressed(evt);
+            }
+        });
+        FormInput.add(thn_produksi);
+        thn_produksi.setBounds(580, 100, 160, 23);
+
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -1296,7 +1301,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         }else {
                 //menyimpan-------------------------------------------------
                 Sequel.menyimpan("inventaris_barang","'"+kode_barang.getText()+"','"+nama_barang.getText()+"','"+No_BA.getText()+"','"+No_SP.getText()+"','"+No_Register.getText()+"','"+isbn.getText()+"','"+No_Izin.getText()+"','"
-                        +kode_produsen.getText()+"','"+Tipe.getText()+"','"+Harga.getText()+"','"+thn_produksi.getSelectedItem()+"','"+jml_barang.getText()+"','"+LifeTime.getText()+"','"+id_merk.getText()+"','"+id_kategori.getText()+"','"+
+                        +kode_produsen.getText()+"','"+Tipe.getText()+"','"+Harga.getText()+"','"+Valid.SetTgl(thn_produksi.getSelectedItem()+"")+"','"+jml_barang.getText()+"','"+LifeTime.getText()+"','"+id_merk.getText()+"','"+id_kategori.getText()+"','"+
                         id_jenis.getText()+"','"+id_asal.getText()+"','"+id_kondisi.getText()+"','"+id_ruang.getText()+"','"+Keterangan.getText()+"'","Kode Barang");
                 //----------------------------------------------------------
                 kode_barang.requestFocus();
@@ -1380,10 +1385,10 @@ public final class InventarisBarang extends javax.swing.JDialog {
                 //menyimpan-------------------------------------------------
                 Sequel.mengedit("inventaris_barang","kode_barang='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0) +"'",
                         "kode_barang='"+kode_barang.getText()+"',nama_barang='"+nama_barang.getText()+"',No_BA='"+No_BA.getText()+"',No_SP='"+No_SP.getText()+"',No_Register='"+No_Register.getText()+"',"
-                      + "isbn='"+isbn.getText()+"',No_Izin='"+No_Izin.getText()+"',kode_produsen='"+kode_produsen.getText()+"',type_brng='"+Tipe.getText()+"',Harga='"+Harga.getText()+"',thn_produksi='"+thn_produksi.getSelectedItem()+"',jml_barang='"+jml_barang.getText()+"',"
+                      + "isbn='"+isbn.getText()+"',No_Izin='"+No_Izin.getText()+"',kode_produsen='"+kode_produsen.getText()+"',type_brng='"+Tipe.getText()+"',Harga='"+Harga.getText()+"',thn_produksi='"+Valid.SetTgl(thn_produksi.getSelectedItem()+"")+"',jml_barang='"+jml_barang.getText()+"',"
                       + "id_merk='"+id_merk.getText()+"',id_kategori='"+id_kategori.getText()+"',id_jenis='"+id_jenis.getText()+"',asal_barang='"+id_asal.getText()+"',status_barang='"+id_kondisi.getText()+"',id_ruang='"+id_ruang.getText()+"',keterangan='"+Keterangan.getText()+"'");
                         
-////            Sequel.mengedit("inventaris_barang","kode_barang='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0) +"'",
+////            Sequel.mengedit("inventaris_barang","kode_barang='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0) +"'", tgl_pengadaan='"+Valid.SetTgl(tgl_pengadaan.getSelectedItem()+"")
 //                        "kode_barang='"+kode_barang.getText()+"',nama_barang='"+nama_barang.getText()+"',jml_barang='"+jml_barang.getText()+"',kode_produsen='"+
 //                        kode_produsen.getText()+"',id_merk='"+id_merk.getText()+"',thn_produksi='"+thn_produksi.getSelectedItem()+"',isbn='"+isbn.getText()+"',id_kategori='"+
 //                        id_kategori.getText()+"',id_jenis='"+id_jenis.getText()+"'");
@@ -1517,10 +1522,6 @@ private void jml_barangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 private void isbnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_isbnKeyPressed
         Valid.pindah(evt,id_merk,id_kategori);
 }//GEN-LAST:event_isbnKeyPressed
-
-private void thn_produksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thn_produksiKeyPressed
-    Valid.pindah(evt,jml_barang,kode_produsen);
-}//GEN-LAST:event_thn_produksiKeyPressed
 
 private void kode_produsenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_produsenKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -1741,6 +1742,10 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         // TODO add your handling code here:
     }//GEN-LAST:event_KeteranganActionPerformed
 
+    private void thn_produksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thn_produksiKeyPressed
+
+    }//GEN-LAST:event_thn_produksiKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1832,7 +1837,7 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
     private widget.Table tbJnsPerawatan;
-    private widget.ComboBox thn_produksi;
+    private widget.Tanggal thn_produksi;
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
@@ -1885,7 +1890,8 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                rs.getString("nama_produsen"),
                                rs.getString("type_brng"),
                                rs.getString("Harga"),
-                               rs.getString("thn_produksi").substring(0,4),
+//                               rs.getString("thn_produksi").substring(0,4),
+                               rs.getString("thn_produksi"),
                                rs.getString("jml_barang"),
                                rs.getString("Lifetime"),
                                rs.getString("nama_merk"),
@@ -1910,7 +1916,7 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         nama_produsen.setText("");
         id_merk.setText("");
         nm_merk.setText("");
-        thn_produksi.setSelectedIndex(0);
+        thn_produksi.setDate(new Date());
         isbn.setText("-");
         id_kategori.setText("");
         nm_kategori.setText("");
@@ -1961,7 +1967,6 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     kode_produsen.setText(rs.getString("kode_produsen"));
                     Tipe.setText(rs.getString("Type_brng"));
                     Harga.setText(rs.getString("Harga"));
-                    thn_produksi.setSelectedItem(rs.getString("thn_produksi"));
                     jml_barang.setText(rs.getString("jml_barang"));
                     LifeTime.setText(rs.getString("LifeTime"));
                     id_merk.setText(rs.getString("id_merk"));
@@ -1973,6 +1978,7 @@ private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     Keterangan.setText(rs.getString("Keterangan"));
                     }
                 nama_produsen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
+                Valid.SetTgl(thn_produksi,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
                 nm_merk.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
                 nm_kategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString());
                 nm_jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString());

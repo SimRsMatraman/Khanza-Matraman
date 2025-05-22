@@ -416,18 +416,18 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="700" y="100" width="40" height="23"/>
+                      <AbsoluteConstraints x="540" y="160" width="90" height="23"/>
                     </Constraint>
                   </Constraints>
                 </Component>
                 <Component class="widget.Label" name="label7">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Tahun Produksi :"/>
+                    <Property name="text" type="java.lang.String" value="Tanggal Produksi :"/>
                     <Property name="name" type="java.lang.String" value="label7" noResource="true"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="450" y="100" width="90" height="23"/>
+                      <AbsoluteConstraints x="470" y="100" width="90" height="23"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -475,23 +475,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="630" y="100" width="70" height="23"/>
-                    </Constraint>
-                  </Constraints>
-                </Component>
-                <Component class="widget.ComboBox" name="thn_produksi">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="0"/>
-                    </Property>
-                    <Property name="name" type="java.lang.String" value="thn_produksi" noResource="true"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="thn_produksiKeyPressed"/>
-                  </Events>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="540" y="100" width="85" height="23"/>
+                      <AbsoluteConstraints x="470" y="160" width="70" height="23"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -1153,6 +1137,29 @@
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="1110" y="160" width="25" height="23"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="widget.Tanggal" name="thn_produksi">
+                  <Properties>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="32" green="46" red="32" type="rgb"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="1">
+                        <StringItem index="0" value="20-05-2025"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
+                    <Property name="name" type="java.lang.String" value="thn_produksi" noResource="true"/>
+                    <Property name="opaque" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="thn_produksiKeyPressed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="580" y="100" width="160" height="23"/>
                     </Constraint>
                   </Constraints>
                 </Component>

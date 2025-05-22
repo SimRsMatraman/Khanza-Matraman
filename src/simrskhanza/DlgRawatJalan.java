@@ -1929,7 +1929,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnHasilPemeriksaanUSG1 = new widget.Button();
         BtnResume = new widget.Button();
         BtnKeseimbanganCairan = new widget.Button();
-        BtnCatatanObat1 = new widget.Button();
         BtnIC2 = new widget.Button();
         BtnEP13 = new widget.Button();
         BtnAPS2 = new widget.Button();
@@ -5301,7 +5300,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         MIgd.add(BtnResepObat1);
 
         BtnPORanap1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnPORanap1.setText("Daftar Pemberian Obat");
+        BtnPORanap1.setText("Catatan Pemberian Obat");
         BtnPORanap1.setFocusPainted(false);
         BtnPORanap1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnPORanap1.setGlassColor(new java.awt.Color(255, 255, 255));
@@ -5622,23 +5621,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MIgd.add(BtnKeseimbanganCairan);
-
-        BtnCatatanObat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnCatatanObat1.setText("Catatan Pemberian Obat");
-        BtnCatatanObat1.setFocusPainted(false);
-        BtnCatatanObat1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        BtnCatatanObat1.setGlassColor(new java.awt.Color(255, 255, 255));
-        BtnCatatanObat1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnCatatanObat1.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        BtnCatatanObat1.setName("BtnCatatanObat1"); // NOI18N
-        BtnCatatanObat1.setPreferredSize(new java.awt.Dimension(190, 23));
-        BtnCatatanObat1.setRoundRect(false);
-        BtnCatatanObat1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnCatatanObat1ActionPerformed(evt);
-            }
-        });
-        MIgd.add(BtnCatatanObat1);
 
         BtnIC2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnIC2.setText("Informed Cons");
@@ -11983,25 +11965,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_DTPCari1ActionPerformed
 
-    private void BtnCatatanObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCatatanObat1ActionPerformed
-        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
-            TCari.requestFocus();
-        } else {
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgCatatanPemberianObatRalan form = new DlgCatatanPemberianObatRalan(null, false);
-                form.isCek();
-                form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                form.setLocationRelativeTo(internalFrame1);
-                form.setVisible(true);
-                form.emptTeks();
-                form.setNoRm(TNoRw.getText(), "Rawat Jalan");
-                form.tampil();
-                form.tampil2();
-                this.setCursor(Cursor.getDefaultCursor());
-        }
-    }//GEN-LAST:event_BtnCatatanObat1ActionPerformed
-
     private void BtnPermintaanFisioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPermintaanFisioActionPerformed
     if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -12875,7 +12838,6 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnCatatanCekGDS;
     private widget.Button BtnCatatanKeperawatan;
     private widget.Button BtnCatatanObat;
-    private widget.Button BtnCatatanObat1;
     private widget.Button BtnCatatanObservasiIGD;
     private widget.Button BtnChecklistPostOperasi;
     private widget.Button BtnChecklistPreOperasi;
