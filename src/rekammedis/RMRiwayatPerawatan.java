@@ -259,7 +259,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
         });
         
-        ChkAccor.setSelected(false);
+        ChkAccor.setSelected(true);
         ChkAccor1.setSelected(false);
         isMenu();
         isMenu1();
@@ -320,6 +320,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkResumeRanap = new widget.CekBox();
         chkPemeriksaanRalan = new widget.CekBox();
         chkPemeriksaanRanap = new widget.CekBox();
+        chkPemeriksaanRalan1 = new widget.CekBox();
         chkTriase = new widget.CekBox();
         chkDiagnosaPenyakit = new widget.CekBox();
         chkProsedurTindakan = new widget.CekBox();
@@ -421,7 +422,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkTambahanBiaya = new widget.CekBox();
         chkPotonganBiaya = new widget.CekBox();
         chkSuratKeteranganSehat = new widget.CekBox();
-        chkPemeriksaanRalan1 = new widget.CekBox();
         internalFrame3 = new widget.InternalFrame();
         Scroll6 = new widget.ScrollPane();
         LoadHTMLRiwayatRadLab = new widget.editorpane();
@@ -811,6 +811,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkPemeriksaanRanap.setOpaque(false);
         chkPemeriksaanRanap.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkPemeriksaanRanap);
+
+        chkPemeriksaanRalan1.setSelected(true);
+        chkPemeriksaanRalan1.setText("Pemeriksaan Fisio dan Rehab Medik");
+        chkPemeriksaanRalan1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkPemeriksaanRalan1.setName("chkPemeriksaanRalan1"); // NOI18N
+        chkPemeriksaanRalan1.setOpaque(false);
+        chkPemeriksaanRalan1.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkPemeriksaanRalan1);
 
         chkTriase.setSelected(true);
         chkTriase.setText("Triase IGD/UGD");
@@ -1661,14 +1669,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         });
         FormMenu.add(chkSuratKeteranganSehat);
 
-        chkPemeriksaanRalan1.setSelected(true);
-        chkPemeriksaanRalan1.setText("Pemeriksaan Ralan");
-        chkPemeriksaanRalan1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        chkPemeriksaanRalan1.setName("chkPemeriksaanRalan1"); // NOI18N
-        chkPemeriksaanRalan1.setOpaque(false);
-        chkPemeriksaanRalan1.setPreferredSize(new java.awt.Dimension(245, 22));
-        FormMenu.add(chkPemeriksaanRalan1);
-
         ScrollMenu.setViewportView(FormMenu);
 
         PanelAccor.add(ScrollMenu, java.awt.BorderLayout.CENTER);
@@ -2253,6 +2253,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkChecklistKriteriaKeluarHCU.setSelected(true);
             chkChecklistKriteriaMasukICU.setSelected(true);
             chkChecklistKriteriaKeluarICU.setSelected(true);
+            chkKonsultasiMedik.setSelected(true);
         }else{
             chkTriase.setSelected(false);
             chkSkriningIGD.setSelected(false);
@@ -2365,7 +2366,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkChecklistKriteriaKeluarHCU.setSelected(false);
             chkChecklistKriteriaMasukICU.setSelected(false);
             chkChecklistKriteriaKeluarICU.setSelected(false);
-            
+            chkKonsultasiMedik.setSelected(false);
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 

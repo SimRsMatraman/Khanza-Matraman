@@ -13803,8 +13803,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         BtnEdit.setEnabled(akses.gettindakan_ralan());
         BtnPrint.setEnabled(akses.gettindakan_ralan());
         BtnTambahTindakan.setEnabled(akses.gettarif_ralan());    
-        BtnResepObat.setVisible(akses.getresep_dokter());
-        BtnCopyResep.setVisible(akses.getresep_dokter());
+//        BtnResepObat.setVisible(akses.getresep_dokter());
+//        BtnCopyResep.setVisible(akses.getresep_dokter());
         if(akses.getresep_dokter()==true){
             tinggi=tinggi+48;
         }
