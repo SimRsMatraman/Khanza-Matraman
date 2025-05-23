@@ -1008,8 +1008,14 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             Valid.textKosong(TCari,"Pasien");
 //        }else if(KdBangsal.getText().trim().equals("")||KdKamar.getText().trim().equals("")||NmBangsal.getText().trim().equals("")){
 //            Valid.textKosong(btnKamar,"Kamar/Bangsal");
+        }else if(KdDPJP.getText().trim().equals("")){
+            Valid.textKosong(KdDPJP,"Nama DPJP");
         }else if(Diagnosa.getText().trim().equals("")){
             Valid.textKosong(Diagnosa,"Diagnosa");
+        }else if(Rencana_rawat.getText().trim().equals("")){
+            Valid.textKosong(Rencana_rawat,"Rencana Rawat Inap");
+        }else if(Catatan.getText().trim().equals("")){
+            Valid.textKosong(Catatan,"Alasan Masuk");
         }else{
             if(Sequel.menyimpantf("permintaan_ranap","?,?,?,?,?,?,?","Pasien",7,new String[]{
                 NoRw.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),JnKamar.getSelectedItem()+"",Diagnosa.getText(),Catatan.getText(),KdDPJP.getText(),Rencana_rawat.getText()
