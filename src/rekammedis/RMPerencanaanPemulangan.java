@@ -2878,7 +2878,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                     TPasien.setText(rs.getString("nm_pasien"));
                     Jk.setText(rs.getString("jk"));
                     TglLahir.setText(rs.getString("tgl_lahir"));
-                    PenyuluhanLainnya.setText(rs.getString("asal"));
+//                    PenyuluhanLainnya.setText(rs.getString("asal"));
                     MasukDirawat.setText(rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg"));
                     DiagnosaMedis.setText(rs.getString("diagnosa_awal"));
                     DiagnosaMedis1.setText(rs.getString("diagnosa_akhir"));
