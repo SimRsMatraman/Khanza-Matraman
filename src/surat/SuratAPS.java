@@ -233,9 +233,8 @@ public final class SuratAPS extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCetakSuratSakit = new javax.swing.JMenuItem();
-        MnTtdGeneralConcent = new javax.swing.JMenuItem();
         MnSuratAPS = new javax.swing.JMenuItem();
+        MnTtdGeneralConcent = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -302,19 +301,19 @@ public final class SuratAPS extends javax.swing.JDialog {
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
-        MnCetakSuratSakit.setBackground(new java.awt.Color(250, 250, 250));
-        MnCetakSuratSakit.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnCetakSuratSakit.setForeground(new java.awt.Color(50, 50, 50));
-        MnCetakSuratSakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakSuratSakit.setText("Cetak Surat General Concent");
-        MnCetakSuratSakit.setName("MnCetakSuratSakit"); // NOI18N
-        MnCetakSuratSakit.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnCetakSuratSakit.addActionListener(new java.awt.event.ActionListener() {
+        MnSuratAPS.setBackground(new java.awt.Color(250, 250, 250));
+        MnSuratAPS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnSuratAPS.setForeground(new java.awt.Color(50, 50, 50));
+        MnSuratAPS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnSuratAPS.setText("Surat APS");
+        MnSuratAPS.setName("MnSuratAPS"); // NOI18N
+        MnSuratAPS.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnSuratAPS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakSuratSakitActionPerformed(evt);
+                MnSuratAPSActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(MnCetakSuratSakit);
+        jPopupMenu1.add(MnSuratAPS);
 
         MnTtdGeneralConcent.setBackground(new java.awt.Color(255, 255, 254));
         MnTtdGeneralConcent.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -329,20 +328,6 @@ public final class SuratAPS extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnTtdGeneralConcent);
-
-        MnSuratAPS.setBackground(new java.awt.Color(255, 255, 254));
-        MnSuratAPS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnSuratAPS.setForeground(new java.awt.Color(70, 70, 70));
-        MnSuratAPS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnSuratAPS.setText("Surat APS");
-        MnSuratAPS.setName("MnSuratAPS"); // NOI18N
-        MnSuratAPS.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnSuratAPS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnSuratAPSActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnSuratAPS);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -522,7 +507,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -536,7 +521,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -686,7 +671,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         jLabel13.setBounds(550, 70, 90, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2025" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -1225,7 +1210,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbObatKeyReleased
 
-    private void MnCetakSuratSakitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSakitActionPerformed
+    private void MnSuratAPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratAPSActionPerformed
         if(TPasien.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         }else{
@@ -1279,7 +1264,7 @@ public final class SuratAPS extends javax.swing.JDialog {
                                 "WHERE surat_aps.no_rawat='"+TNoRw.getText()+"' ",param);
                 this.setCursor(Cursor.getDefaultCursor());  
        }
-    }//GEN-LAST:event_MnCetakSuratSakitActionPerformed
+    }//GEN-LAST:event_MnSuratAPSActionPerformed
 
     private void KodeDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeDokterKeyPressed
         Valid.pindah(evt,TCari,Hubungan);
@@ -1406,62 +1391,6 @@ public final class SuratAPS extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_AlasanKeyPressed
 
-    private void MnSuratAPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSuratAPSActionPerformed
-        if(TPasien.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-        }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Map<String, Object> param = new HashMap<>();
-                param.put("nosakit",NoSurat.getText());
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());  
-                kodedokter=Sequel.cariIsi("select surat_aps.kd_dokter from surat_aps where surat_aps.no_rawat=?",TNoRw.getText());
-                namadokter=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter);
-                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodedokter);
-                param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+" Ditandatangani secara elektronik oleh dokter "+namadokter+" dengan ID "+(finger.equals("")?kodedokter:finger)+" "+Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));  
-                kodepetugas=Sequel.cariIsi("select surat_aps.nik from surat_aps where surat_aps.no_rawat=?",TNoRw.getText());
-                namapetugas=Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",kodepetugas);
-                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodepetugas);
-                param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+" Ditandatangani secara elektronik oleh petugas "+namapetugas+" dengan ID "+(finger.equals("")?kodepetugas:finger)+" "+Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));  
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-                Valid.MyReportqry("rptSuratAps.jasper","report","::[ Surat Pernyataan Pasien Pulang Atas Permintaan Sendiri (APS) ]::",
-                                "SELECT " +
-                                "pasien.nm_pasien, " +
-                                "pasien.umur, " +
-                                "pasien.no_ktp, " +
-                                "pasien.keluarga, " +
-                                "concat(pasien.alamat, ', ', c.nm_kel, ', ', d.nm_kec,', ', e.nm_kab,', ', f.nm_prop) as alamatps, " +
-                                "if(pasien.jk='L','Laki-laki','Perempuan') as kelamin, " +
-                                "surat_aps.Alasan, " +
-                                "surat_aps.Nama_kel, " +
-                                "surat_aps.Umur_kel, " +
-                                "surat_aps.Alamat, " +
-                                "a.nama as petugas, " +
-                                "b.nama as dokter, " +
-                                "surat_aps.tanggal_surat, " +
-                                "surat_aps.jam, " +
-                                "surat_aps.hubungan, " +
-                                "surat_aps.No_ktp as ktp, " +
-                                "surat_aps.JK, " +
-                                "surat_aps.tte " +
-                                "FROM surat_aps " +
-                                "INNER JOIN reg_periksa on reg_periksa.no_rawat=surat_aps.no_rawat " +
-                                "INNER JOIN pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis " +
-                                "INNER JOIN pegawai a ON a.nik=surat_aps.nik " +
-                                "INNER JOIN pegawai b on b.nik=surat_aps.kd_dokter " +
-                                "INNER JOIN kelurahan c on c.kd_kel=pasien.kd_kel " +
-                                "INNER JOIN kecamatan d on d.kd_kec=pasien.kd_kec " +
-                                "INNER JOIN kabupaten e on e.kd_kab=pasien.kd_kab " +
-                                "INNER JOIN propinsi f on f.kd_prop=pasien.kd_prop " +
-                                "WHERE surat_aps.no_rawat='"+TNoRw.getText()+"' ",param);
-                this.setCursor(Cursor.getDefaultCursor());  
-       }
-    }//GEN-LAST:event_MnSuratAPSActionPerformed
-
     /**
     * @param args the command line arguments
     */
@@ -1504,7 +1433,6 @@ public final class SuratAPS extends javax.swing.JDialog {
     private widget.TextBox KodeDokter1;
     private widget.Label LCount;
     private widget.editorpane LoadHTML;
-    private javax.swing.JMenuItem MnCetakSuratSakit;
     private javax.swing.JMenuItem MnSuratAPS;
     private javax.swing.JMenuItem MnTtdGeneralConcent;
     private widget.TextBox NamaDokter;
