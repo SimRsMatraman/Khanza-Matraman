@@ -17331,18 +17331,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             if(chkPerencanaanPemulangan.isSelected()==true){
                 try {
                     rs2=koneksi.prepareStatement(
-                            "select perencanaan_pemulangan.rencana_pulang,perencanaan_pemulangan.alasan_masuk,perencanaan_pemulangan.diagnosa_medis,perencanaan_pemulangan.pengaruh_ri_pasien_dan_keluarga,"+
-                            "perencanaan_pemulangan.keterangan_pengaruh_ri_pasien_dan_keluarga,perencanaan_pemulangan.pengaruh_ri_pekerjaan_sekolah,perencanaan_pemulangan.keterangan_pengaruh_ri_pekerjaan_sekolah,"+
-                            "perencanaan_pemulangan.pengaruh_ri_keuangan,perencanaan_pemulangan.keterangan_pengaruh_ri_keuangan,perencanaan_pemulangan.antisipasi_masalah_saat_pulang,"+
-                            "perencanaan_pemulangan.keterangan_antisipasi_masalah_saat_pulang,perencanaan_pemulangan.bantuan_diperlukan_dalam,perencanaan_pemulangan.keterangan_bantuan_diperlukan_dalam,"+
-                            "perencanaan_pemulangan.adakah_yang_membantu_keperluan,perencanaan_pemulangan.keterangan_adakah_yang_membantu_keperluan,perencanaan_pemulangan.pasien_tinggal_sendiri,"+
-                            "perencanaan_pemulangan.keterangan_pasien_tinggal_sendiri,perencanaan_pemulangan.pasien_menggunakan_peralatan_medis,perencanaan_pemulangan.keterangan_pasien_menggunakan_peralatan_medis,"+
-                            "perencanaan_pemulangan.pasien_memerlukan_alat_bantu,perencanaan_pemulangan.keterangan_pasien_memerlukan_alat_bantu,perencanaan_pemulangan.memerlukan_perawatan_khusus,"+
-                            "perencanaan_pemulangan.keterangan_memerlukan_perawatan_khusus,perencanaan_pemulangan.bermasalah_memenuhi_kebutuhan,perencanaan_pemulangan.keterangan_bermasalah_memenuhi_kebutuhan,"+
-                            "perencanaan_pemulangan.memiliki_nyeri_kronis,perencanaan_pemulangan.keterangan_memiliki_nyeri_kronis,perencanaan_pemulangan.memerlukan_edukasi_kesehatan,"+
-                            "perencanaan_pemulangan.keterangan_memerlukan_edukasi_kesehatan,perencanaan_pemulangan.memerlukan_keterampilkan_khusus,perencanaan_pemulangan.keterangan_memerlukan_keterampilkan_khusus,"+
-                            "perencanaan_pemulangan.nama_pasien_keluarga,perencanaan_pemulangan.nip,petugas.nama "+
-                            "from perencanaan_pemulangan inner join petugas on petugas.nip=perencanaan_pemulangan.nip where perencanaan_pemulangan.no_rawat='"+norawat+"'").executeQuery();
+                            "select a.*, b.nama from perencanaan_pemulangan a inner join petugas b on b.nip=a.nip where a.no_rawat='"+norawat+"'").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
                           "<tr class='isi'>"+ 
@@ -17367,94 +17356,125 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                               "<td width='50%' border='0'>Diagnosa Medis : "+rs2.getString("diagnosa_medis")+"</td>"+
                                               "<td width='50%' border='0'>Alasan Masuk / Dirawat : "+rs2.getString("alasan_masuk")+"</td>"+
                                           "</tr>"+
+                                          "<tr>"+
+                                              "<td width='50%' border='0'>Diagnosa Keluar : "+rs2.getString("diagnosa_keluar")+"</td>"+
+                                          "</tr>"+
                                        "</table>"+
                                     "</td>"+
                                  "</tr>"+
                                  "<tr>"+
                                     "<td valign='top'>"+
-                                       "PENGKAJIAN"+  
+                                       "KONDISI PULANG"+  
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>1. Pengaruh Rawat Inap Terhadap :</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>Pasien & Keluarga Pasien : "+rs2.getString("pengaruh_ri_pasien_dan_keluarga")+(rs2.getString("keterangan_pengaruh_ri_pasien_dan_keluarga").equals("")?"":", "+rs2.getString("keterangan_pengaruh_ri_pasien_dan_keluarga"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>Pekerjaan / Sekolah : "+rs2.getString("pengaruh_ri_pekerjaan_sekolah")+(rs2.getString("keterangan_pengaruh_ri_pekerjaan_sekolah").equals("")?"":", "+rs2.getString("keterangan_pengaruh_ri_pekerjaan_sekolah"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>Keuangan : "+rs2.getString("pengaruh_ri_keuangan")+(rs2.getString("keterangan_pengaruh_ri_keuangan").equals("")?"":", "+rs2.getString("keterangan_pengaruh_ri_keuangan"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>2. Antisipasi Terhadap Masalah Saat Pulang ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("antisipasi_masalah_saat_pulang")+(rs2.getString("keterangan_antisipasi_masalah_saat_pulang").equals("")?"":", "+rs2.getString("keterangan_antisipasi_masalah_saat_pulang"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>3. Bantuan Diperlukan Dalam Hal ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("bantuan_diperlukan_dalam")+(rs2.getString("keterangan_bantuan_diperlukan_dalam").equals("")?"":", "+rs2.getString("keterangan_bantuan_diperlukan_dalam"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>4. Adakah Yang Membantu Keperluan Di Atas ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("adakah_yang_membantu_keperluan")+(rs2.getString("keterangan_adakah_yang_membantu_keperluan").equals("")?"":", "+rs2.getString("keterangan_adakah_yang_membantu_keperluan"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>5. Apakah Pasien Tinggal Sendiri Setelah Keluar Dari Rumah Sakit ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("pasien_tinggal_sendiri")+(rs2.getString("keterangan_pasien_tinggal_sendiri").equals("")?"":", "+rs2.getString("keterangan_pasien_tinggal_sendiri"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>6. Apakah Pasien Menggunakan Peralatan Medis (Kateter, NGT, Oksigen, Dll) Di Rumah Setelah Keluar / Pulang ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("pasien_menggunakan_peralatan_medis")+(rs2.getString("keterangan_pasien_menggunakan_peralatan_medis").equals("")?"":", "+rs2.getString("keterangan_pasien_menggunakan_peralatan_medis"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>7. Apakah Pasien Memerlukan Alat Bantu (Tongkat, Kursi Roda, Walker, Dll) Setelah Keluar Keluar / Pulang ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("pasien_memerlukan_alat_bantu")+(rs2.getString("keterangan_pasien_memerlukan_alat_bantu").equals("")?"":", "+rs2.getString("keterangan_pasien_memerlukan_alat_bantu"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>8. Apakah Memerlukan Bantuan / Perawatan Khusus (Homecare, Home Visit) Di Rumah Setelah Keluar / Pulang ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("memerlukan_perawatan_khusus")+(rs2.getString("keterangan_memerlukan_perawatan_khusus").equals("")?"":", "+rs2.getString("keterangan_memerlukan_perawatan_khusus"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>9. Apakah Pasien Bermasalah Dalam Memenuhi Kebutuhan Pribadinya (Makan, Minum, BAK, BAB, Dll) Setelah Keluar / Pulang ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("bermasalah_memenuhi_kebutuhan")+(rs2.getString("keterangan_bermasalah_memenuhi_kebutuhan").equals("")?"":", "+rs2.getString("keterangan_bermasalah_memenuhi_kebutuhan"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>10. Apakah Pasien Memiliki Nyeri Kronis Dan Kelelahan Setelah Keluar / Pulang ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("memiliki_nyeri_kronis")+(rs2.getString("keterangan_memiliki_nyeri_kronis").equals("")?"":", "+rs2.getString("keterangan_memiliki_nyeri_kronis"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>11. Apakah Pasien & Keluarga Memerlukan Edukasi Kesehatan (Obatan-obatan, Efek Samping Obat, Nyeri Diit, Mencari Pertolongan, Follow Up, Dll) Setelah Keluar / Pulang ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("memerlukan_edukasi_kesehatan")+(rs2.getString("keterangan_memerlukan_edukasi_kesehatan").equals("")?"":", "+rs2.getString("keterangan_memerlukan_edukasi_kesehatan"))+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>12. Apakah Pasien Dan Keluarga Memerlukan Keterampilan Khusus (Perawatan Luka, Injeksi, Perawatan Bayi, Dll) Setelah Keluar / Pulang ?</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='100%' border='0' valign='top' style='margin-left: 10px'>"+rs2.getString("memerlukan_keterampilkan_khusus")+(rs2.getString("keterangan_memerlukan_keterampilkan_khusus").equals("")?"":", "+rs2.getString("keterangan_memerlukan_keterampilkan_khusus"))+"</td>"+
+                                              "<td width='100%' border='0' valign='top'>1. Kondisi Pulang ? : "+rs2.getString("kondisi_pulang")+"</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
                                  "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "MOBILISASI"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='100%' border='0' valign='top'>2. Mobilisasi ? : "+rs2.getString("mobilisasi")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "ALAT YANG TERPASANG SAAT PASIEN PULANG"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Oksigen : "+rs2.getString("oksigen")+"</td>"+
+                                                      "</tr>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Infus : "+rs2.getString("infus")+"</td>"+
+                                                      "</tr>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'>   - NGT : "+rs2.getString("ngt")+"</td>"+
+                                                      "</tr>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Kateter : "+rs2.getString("kateter")+"</td>"+
+                                                      "</tr>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Drain : "+rs2.getString("drain")+"</td>"+
+                                                      "</tr>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Tidak Ada : "+rs2.getString("tidakada")+"</td>"+
+                                                      "</tr>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Lainnya : "+rs2.getString("lainnya")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+//                                 "<tr>"+
+//                                    "<td valign='top'>"+
+//                                       "PENYULUHAN KESEHATAN YANG TELAH DIBERIKAN"+  
+//                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+//                                          "<tr>"+
+//                                              "<td width='30%' border='0'>Hand Hyigiene : "+rs2.getString("handhyigien")+"</td>"+
+//                                              "<td width='30%' border='0'>Perawatan NGT : "+rs2.getString("prw_ngt")+"</td>"+
+//                                              "<td width='40%' border='0'>Pengaturan Diet (makan/Minum) : "+rs2.getString("penyuluhan_diet")+"</td>"+
+//                                          "</tr>"+
+//                                          "<tr>"+
+//                                              "<td width='30%' border='0'>Evakuasi Kebakaran : "+rs2.getString("kebakaran")+"</td>"+
+//                                              "<td width='30%' border='0'>Perawatan Kateter : "+rs2.getString("prw_kateter")+"</td>"+
+//                                              "<td width='40%' border='0'>Perawatan Luka : "+rs2.getString("prw_luka")+"</td>"+
+//                                          "</tr>"+
+//                                          "<tr>"+
+//                                              "<td width='30%' border='0'>Penggunaan APAR : "+rs2.getString("apar")+"</td>"+
+//                                              "<td width='30%' border='0'>Infus : "+rs2.getString("prw_infus")+"</td>"+
+//                                              "<td width='40%' border='0'>Pemberian Obat : "+rs2.getString("pmb_obat")+"</td>"+
+//                                          "</tr>"+
+//                                          "<tr>"+
+//                                              "<td width='30%' border='0'>Bantuan Hidup Dasar : "+rs2.getString("bhd")+"</td>"+
+//                                              "<td width='30%' border='0'>Oksigen : "+rs2.getString("prw_oksigen")+"</td>"+
+//                                              "<td width='40%' border='0'>Lain - Lain : "+rs2.getString("penyuluhan_lain")+"</td>"+
+//                                          "</tr>"+
+//                                       "</table>"+
+//                                    "</td>"+
+//                                 "</tr>"+
+//                                 "<tr>"+
+//                                    "<td valign='top'>"+
+//                                       "DOKUMEN / HASIL PEMERIKSAAN PENUNJANG YANG DIBERIKAN SAAT PULANG"+  
+//                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+//                                                      "<tr>"+
+//                                                            "<td width='100%' border='0' valign='top'> - RO : "+rs2.getString("ro")+" - "+rs2.getString("ket_ro")+"</td>"+
+//                                                            "<td width='100%' border='0' valign='top'> - EKG : "+rs2.getString("ekg")+"</td>"+
+//                                                            "<td width='100%' border='0' valign='top'> - Surat Istirahat / Surat Sakit - "+rs2.getString("surat_sakit")+"</td>"+
+//                                                      "</tr>"+
+//                                                      "<tr>"+
+//                                                            "<td width='100%' border='0' valign='top'> - CT Scan : "+rs2.getString("ctscan")+" - "+rs2.getString("ket_ctscan")+"</td>"+
+//                                                            "<td width='100%' border='0' valign='top'> - LAB : "+rs2.getString("lab")+" - "+rs2.getString("ket_lab")+"</td>"+
+//                                                            "<td width='100%' border='0' valign='top'> - Surat Keterangan Dirawat : "+rs2.getString("surat_rawat")+"</td>"+
+//                                                      "</tr>"+
+//                                                      "<tr>"+
+//                                                            "<td width='100%' border='0' valign='top'> - USG : "+rs2.getString("usg")+" - "+rs2.getString("ket_usg")+"</td>"+
+//                                                            "<td width='100%' border='0' valign='top'> - Lain - Lain : "+rs2.getString("dokumen_lain")+" - "+rs2.getString("dokumen_lain")+"</td>"+
+//                                                            "<td width='100%' border='0' valign='top'> - Surat Lepas Rawat : "+rs2.getString("surat_lepas_rawat")+"</td>"+
+//                                                      "</tr>"+
+//                                       "</table>"+
+//                                    "</td>"+
+//                                 "</tr>"+
+//                                 "<tr>"+
+//                                    "<td valign='top'>"+
+//                                       "OBAT - OBATAN YANG DIBERIKAN SAATB PULANG"+  
+//                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+    
+//                                          "<tr>"+
+//                                               "<td width='100%' border='0'>"+rs2.getString("obat2an")+" </td>"+
+//                                          "</tr>"+        
+//                                          "<tr>"+
+//                                               "<td width='100%' border='0'>Diet : "+rs2.getString("diet")+" </td>"+
+//                                          "</tr>"+        
+//                                          "<tr>"+
+//                                               "<td width='100%' border='0'>Intruksi : "+rs2.getString("intruksi")+" </td>"+
+//                                          "</tr>"+
+//                                       "</table>"+
+//                                    "</td>"+
+//                                 "</tr>"+
                                  "<tr>"+
                                     "<td valign='top'>"+
                                        "DILAKUKAN KONFIRMASI KEPADA"+  
