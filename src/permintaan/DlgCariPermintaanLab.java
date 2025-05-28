@@ -1965,13 +1965,13 @@ private void tbLabRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
             getData();
         } catch (java.lang.NullPointerException e) {
         }
-//        if(evt.getClickCount()==1){
-//                if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 15).toString().equals("UMUM") && 
-//                    tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 17).toString().equals("Belum Bayar")
-//                            ) {
-//                        JOptionPane.showMessageDialog(null, "Pasien belum melakukan pembayaran, mohon konfirmasi dengan petugas FO");
-//                    }
-//        }
+        if(evt.getClickCount()==1){
+                if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 15).toString().equals("UMUM") && 
+                    tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 17).toString().equals("Belum Bayar")
+                            ) {
+                        JOptionPane.showMessageDialog(null, "Pasien Umum, konfirmasi pembayaran sebelum melanjutkan pemeriksaan!");
+                    }
+        }
     }
 }//GEN-LAST:event_tbLabRalanMouseClicked
 

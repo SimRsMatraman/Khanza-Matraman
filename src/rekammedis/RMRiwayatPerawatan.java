@@ -6570,17 +6570,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                              "<tr class='isi'>"+
                                 "<td valign='top' align='center'>"+w+"</td>"+
                                 "<td valign='top'>"+rs3.getString("tgl_retensi")+"</td>"+
-                                "<td valign='top' align='center'>"
-                            //    +"<div>"
-//                                + "<a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/medrec/"+rs3.getString("lokasi_pdf")+"'>"
-//                                + "<img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/medrec/"+rs3.getString("lokasi_pdf")+"' type='application/pdf' width='"+(TabRawat.getWidth()-1000)+"' height='"+(TabRawat.getWidth()-1000)+"'>"
-                                + "<object data='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/medrec/"+rs3.getString("lokasi_pdf")+"' width='"+(TabRawat.getWidth()-1000)+"' height='"+(TabRawat.getWidth()-1500)+"' type='application/pdf'>"+rs3.getString("lokasi_pdf")+"</object>"
-                                +"<object id='ifr2' width='80%' height='600'></object>"+
-                                 "<a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/medrec/"+rs3.getString("lokasi_pdf")+"' onClick='document.getElementById('ifr2').src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/medrec/"+rs3.getString("lokasi_pdf")+"';'>"
-                                + "</a>"
-                            //    +"</a>"
-                            //   +"</div>"
-                                +"</td>"+
+                                "<td valign='top'>"
+                                        + "<a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/medrec/"+rs3.getString("lokasi_pdf")+"'>"+rs3.getString("tgl_retensi")+"_"+rs3.getString("lokasi_pdf").replaceAll("pages/upload/","")+""
+                                        + "</a>"
+                                + "</td>"+        
                              "</tr>"); 
                         w++;
                     }
@@ -6606,7 +6599,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             LoadHTMLRetensi.setText("<html>"+htmlContent.toString()+"</html>");
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }
+        }        
     }
     
     private void tampilBerkas() {
@@ -23763,13 +23756,4 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
  *
  * @author
  */
-
-//public class ShowPdf {
-// public static void main(String[] args) throws Exception {
-// Process p =
-// Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/medrec/"+rs3.getString("lokasi_pdf")+"'");
-// p.waitFor();
-// System.out.println("Done.");
-// }
-//}    
 }
