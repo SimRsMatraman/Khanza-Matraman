@@ -17339,18 +17339,19 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
-                                       "YANG MELAKUKAN PENGKAJIAN"+  
+                                       "YANG MELAKUKAN PENGKAJIAN"+ 
+                                       "<br>"+
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
-                                              "<td width='50%' border='0'>Rencana Pulang : "+rs2.getString("rencana_pulang")+"</td>"+
-                                              "<td width='50%' border='0'>Perawat/Petugas : "+rs2.getString("nip")+" "+rs2.getString("nama")+"</td>"+
+                                              "<td width='50%' border='0'>Rencana Pulang : <b>"+rs2.getString("rencana_pulang")+"</b></td>"+
+                                              "<td width='50%' border='0'>Perawat/Petugas : <b>"+rs2.getString("nip")+" "+rs2.getString("nama")+"</b></td>"+
                                           "</tr>"+
                                           "<tr>"+
-                                              "<td width='50%' border='0'>Diagnosa Medis : "+rs2.getString("diagnosa_medis")+"</td>"+
-                                              "<td width='50%' border='0'>Alasan Masuk / Dirawat : "+rs2.getString("alasan_masuk")+"</td>"+
+                                              "<td width='50%' border='0'>Diagnosa Medis : <b>"+rs2.getString("diagnosa_medis")+"</b></td>"+
+                                              "<td width='50%' border='0'>Alasan Masuk / Dirawat : <b>"+rs2.getString("alasan_masuk")+"</b></td>"+
                                           "</tr>"+
                                           "<tr>"+
-                                              "<td width='50%' border='0'>Diagnosa Keluar : "+rs2.getString("diagnosa_keluar")+"</td>"+
+                                              "<td width='50%' border='0'>Diagnosa Keluar : <b>"+rs2.getString("diagnosa_keluar")+"</b></td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
@@ -17358,9 +17359,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                  "<tr>"+
                                     "<td valign='top'>"+
                                        "KONDISI PULANG"+  
+                                       "<br>"+
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>1. Kondisi Pulang ? : "+rs2.getString("kondisi_pulang")+"</td>"+
+                                              "<td width='100%' border='0' valign='top'>1. Kondisi Pulang ? : <b>"+rs2.getString("kondisi_pulang")+"</b></td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
@@ -17370,7 +17372,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                        "MOBILISASI"+  
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
-                                              "<td width='100%' border='0' valign='top'>2. Mobilisasi ? : "+rs2.getString("mobilisasi")+"</td>"+
+                                              "<td width='100%' border='0' valign='top'>2. Mobilisasi ? : <b>"+rs2.getString("mobilisasi")+"</b></td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
@@ -17378,102 +17380,107 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                  "<tr>"+
                                     "<td valign='top'>"+
                                        "ALAT YANG TERPASANG SAAT PASIEN PULANG"+  
+                                       "<br>"+
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                       "<tr>"+
-                                                            "<td width='100%' border='0' valign='top'>   - Oksigen : "+rs2.getString("oksigen")+"</td>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Oksigen : <b>"+rs2.getString("oksigen")+"</b></td>"+
                                                       "</tr>"+
                                                       "<tr>"+
-                                                            "<td width='100%' border='0' valign='top'>   - Infus : "+rs2.getString("infus")+"</td>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Infus : <b>"+rs2.getString("infus")+"</b></td>"+
                                                       "</tr>"+
                                                       "<tr>"+
-                                                            "<td width='100%' border='0' valign='top'>   - NGT : "+rs2.getString("ngt")+"</td>"+
+                                                            "<td width='100%' border='0' valign='top'>   - NGT : <b>"+rs2.getString("ngt")+"</b></td>"+
                                                       "</tr>"+
                                                       "<tr>"+
-                                                            "<td width='100%' border='0' valign='top'>   - Kateter : "+rs2.getString("kateter")+"</td>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Kateter : <b>"+rs2.getString("kateter")+"</b></td>"+
                                                       "</tr>"+
                                                       "<tr>"+
-                                                            "<td width='100%' border='0' valign='top'>   - Drain : "+rs2.getString("drain")+"</td>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Drain : <b>"+rs2.getString("drain")+"</b></td>"+
                                                       "</tr>"+
                                                       "<tr>"+
-                                                            "<td width='100%' border='0' valign='top'>   - Tidak Ada : "+rs2.getString("tidakada")+"</td>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Tidak Ada : <b>"+rs2.getString("tidakada")+"</b></td>"+
                                                       "</tr>"+
                                                       "<tr>"+
-                                                            "<td width='100%' border='0' valign='top'>   - Lainnya : "+rs2.getString("lainnya")+"</td>"+
+                                                            "<td width='100%' border='0' valign='top'>   - Lainnya : <b>"+rs2.getString("lainnya")+"</b></td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
                                  "</tr>"+
-//                                 "<tr>"+
-//                                    "<td valign='top'>"+
-//                                       "PENYULUHAN KESEHATAN YANG TELAH DIBERIKAN"+  
-//                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
-//                                          "<tr>"+
-//                                              "<td width='30%' border='0'>Hand Hyigiene : "+rs2.getString("handhyigien")+"</td>"+
-//                                              "<td width='30%' border='0'>Perawatan NGT : "+rs2.getString("prw_ngt")+"</td>"+
-//                                              "<td width='40%' border='0'>Pengaturan Diet (makan/Minum) : "+rs2.getString("penyuluhan_diet")+"</td>"+
-//                                          "</tr>"+
-//                                          "<tr>"+
-//                                              "<td width='30%' border='0'>Evakuasi Kebakaran : "+rs2.getString("kebakaran")+"</td>"+
-//                                              "<td width='30%' border='0'>Perawatan Kateter : "+rs2.getString("prw_kateter")+"</td>"+
-//                                              "<td width='40%' border='0'>Perawatan Luka : "+rs2.getString("prw_luka")+"</td>"+
-//                                          "</tr>"+
-//                                          "<tr>"+
-//                                              "<td width='30%' border='0'>Penggunaan APAR : "+rs2.getString("apar")+"</td>"+
-//                                              "<td width='30%' border='0'>Infus : "+rs2.getString("prw_infus")+"</td>"+
-//                                              "<td width='40%' border='0'>Pemberian Obat : "+rs2.getString("pmb_obat")+"</td>"+
-//                                          "</tr>"+
-//                                          "<tr>"+
-//                                              "<td width='30%' border='0'>Bantuan Hidup Dasar : "+rs2.getString("bhd")+"</td>"+
-//                                              "<td width='30%' border='0'>Oksigen : "+rs2.getString("prw_oksigen")+"</td>"+
-//                                              "<td width='40%' border='0'>Lain - Lain : "+rs2.getString("penyuluhan_lain")+"</td>"+
-//                                          "</tr>"+
-//                                       "</table>"+
-//                                    "</td>"+
-//                                 "</tr>"+
-//                                 "<tr>"+
-//                                    "<td valign='top'>"+
-//                                       "DOKUMEN / HASIL PEMERIKSAAN PENUNJANG YANG DIBERIKAN SAAT PULANG"+  
-//                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
-//                                                      "<tr>"+
-//                                                            "<td width='100%' border='0' valign='top'> - RO : "+rs2.getString("ro")+" - "+rs2.getString("ket_ro")+"</td>"+
-//                                                            "<td width='100%' border='0' valign='top'> - EKG : "+rs2.getString("ekg")+"</td>"+
-//                                                            "<td width='100%' border='0' valign='top'> - Surat Istirahat / Surat Sakit - "+rs2.getString("surat_sakit")+"</td>"+
-//                                                      "</tr>"+
-//                                                      "<tr>"+
-//                                                            "<td width='100%' border='0' valign='top'> - CT Scan : "+rs2.getString("ctscan")+" - "+rs2.getString("ket_ctscan")+"</td>"+
-//                                                            "<td width='100%' border='0' valign='top'> - LAB : "+rs2.getString("lab")+" - "+rs2.getString("ket_lab")+"</td>"+
-//                                                            "<td width='100%' border='0' valign='top'> - Surat Keterangan Dirawat : "+rs2.getString("surat_rawat")+"</td>"+
-//                                                      "</tr>"+
-//                                                      "<tr>"+
-//                                                            "<td width='100%' border='0' valign='top'> - USG : "+rs2.getString("usg")+" - "+rs2.getString("ket_usg")+"</td>"+
-//                                                            "<td width='100%' border='0' valign='top'> - Lain - Lain : "+rs2.getString("dokumen_lain")+" - "+rs2.getString("dokumen_lain")+"</td>"+
-//                                                            "<td width='100%' border='0' valign='top'> - Surat Lepas Rawat : "+rs2.getString("surat_lepas_rawat")+"</td>"+
-//                                                      "</tr>"+
-//                                       "</table>"+
-//                                    "</td>"+
-//                                 "</tr>"+
-//                                 "<tr>"+
-//                                    "<td valign='top'>"+
-//                                       "OBAT - OBATAN YANG DIBERIKAN SAATB PULANG"+  
-//                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+    
-//                                          "<tr>"+
-//                                               "<td width='100%' border='0'>"+rs2.getString("obat2an")+" </td>"+
-//                                          "</tr>"+        
-//                                          "<tr>"+
-//                                               "<td width='100%' border='0'>Diet : "+rs2.getString("diet")+" </td>"+
-//                                          "</tr>"+        
-//                                          "<tr>"+
-//                                               "<td width='100%' border='0'>Intruksi : "+rs2.getString("intruksi")+" </td>"+
-//                                          "</tr>"+
-//                                       "</table>"+
-//                                    "</td>"+
-//                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "PENYULUHAN KESEHATAN YANG TELAH DIBERIKAN"+  
+                                       "<br>"+
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                              "<td width='30%' border='0'>Hand Hyigiene : <b>"+rs2.getString("handhyigine")+"</b></td>"+
+                                              "<td width='30%' border='0'>Perawatan NGT : <b>"+rs2.getString("prw_ngt")+"</b></td>"+
+                                              "<td width='40%' border='0'>Pengaturan Diet (makan/Minum) : <b>"+rs2.getString("penyuluhan_diet")+"</b></td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='30%' border='0'>Evakuasi Kebakaran : <b>"+rs2.getString("kebakaran")+"</b></td>"+
+                                              "<td width='30%' border='0'>Perawatan Kateter : <b>"+rs2.getString("prw_kateter")+"</b></td>"+
+                                              "<td width='40%' border='0'>Perawatan Luka : <b>"+rs2.getString("prw_luka")+"</b></td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='30%' border='0'>Penggunaan APAR : <b>"+rs2.getString("apar")+"</b></td>"+
+                                              "<td width='30%' border='0'>Infus : <b>"+rs2.getString("prw_infus")+"</b></td>"+
+                                              "<td width='40%' border='0'>Pemberian Obat : <b>"+rs2.getString("pmb_obat")+"</b></td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td width='30%' border='0'>Bantuan Hidup Dasar : <b>"+rs2.getString("bhd")+"</b></td>"+
+                                              "<td width='30%' border='0'>Oksigen : <b>"+rs2.getString("prw_oksigen")+"</b></td>"+
+                                              "<td width='40%' border='0'>Lain - Lain : <b>"+rs2.getString("pnyuluhan_lain")+"</b></td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "DOKUMEN / HASIL PEMERIKSAAN PENUNJANG YANG DIBERIKAN SAAT PULANG"+  
+                                       "<br>"+
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'> - RO : <b>"+rs2.getString("ro")+"</b> - "+rs2.getString("ket_ro")+"</b></td>"+
+                                                            "<td width='100%' border='0' valign='top'> - EKG : <b>"+rs2.getString("ekg")+"</b></td>"+
+                                                            "<td width='100%' border='0' valign='top'> - Surat Istirahat / Surat Sakit - <b>"+rs2.getString("surat_sakit")+"</b></td>"+
+                                                      "</tr>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'> - CT Scan : <b>"+rs2.getString("ctscan")+"</b> - <b>"+rs2.getString("ket_ctscan")+"</b></td>"+
+                                                            "<td width='100%' border='0' valign='top'> - LAB : <b>"+rs2.getString("lab")+"</b> - <b>"+rs2.getString("ket_lab")+"</b></td>"+
+                                                            "<td width='100%' border='0' valign='top'> - Surat Keterangan Dirawat : <b>"+rs2.getString("surat_rawat")+"</b></td>"+
+                                                      "</tr>"+
+                                                      "<tr>"+
+                                                            "<td width='100%' border='0' valign='top'> - USG : <b>"+rs2.getString("usg")+"</b> - <b>"+rs2.getString("ket_usg")+"</b></td>"+
+                                                            "<td width='100%' border='0' valign='top'> - Lain - Lain : <b>"+rs2.getString("dokumen_lain")+"</b></td>"+
+                                                            "<td width='100%' border='0' valign='top'> - Surat Lepas Rawat : <b>"+rs2.getString("surat_lepas_rawat")+"</b></td>"+
+                                                      "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "OBAT - OBATAN YANG DIBERIKAN SAATB PULANG"+  
+                                       "<br>"+
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+    
+                                          "<tr>"+
+                                               "<td width='100%' border='0'><b>"+rs2.getString("obat_pulang")+"</b></td>"+
+                                          "</tr>"+        
+                                          "<tr>"+
+                                               "<td width='100%' border='0'>Diet : <b>"+rs2.getString("diet")+"</b> </td>"+
+                                          "</tr>"+        
+                                          "<tr>"+
+                                               "<td width='100%' border='0'>Intruksi : <b>"+rs2.getString("intruksi")+"</b> </td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
                                  "<tr>"+
                                     "<td valign='top'>"+
                                        "DILAKUKAN KONFIRMASI KEPADA"+  
+                                       "<br>"+
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
-                                              "<td width='100%' border='0'>Pasien/Keluarga : "+rs2.getString("nama_pasien_keluarga")+"</td>"+
+                                              "<td width='100%' border='0'>Pasien/Keluarga : <b>"+rs2.getString("nama_pasien_keluarga")+"</b></td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+

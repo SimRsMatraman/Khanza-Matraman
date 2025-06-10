@@ -101,7 +101,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="795" splitType="Stretch">
+		<band height="785" splitType="Stretch">
 			<textField>
 				<reportElement x="74" y="23" width="476" height="14" uuid="4f4b0512-d5d9-425c-81aa-e3f2be8f7ce8"/>
 				<textElement textAlignment="Left">
@@ -207,7 +207,7 @@
 				<textFieldExpression><![CDATA[$F{no_ktp}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame" onErrorType="Blank">
-				<reportElement x="0" y="0" width="70" height="70" uuid="142c268b-d926-4b16-8e4c-96100c96f48b"/>
+				<reportElement x="1" y="0" width="70" height="70" uuid="142c268b-d926-4b16-8e4c-96100c96f48b"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 			<line direction="BottomUp">
@@ -232,30 +232,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="50" y="533" width="121" height="21" uuid="31bf64a5-007c-4639-a04d-b5b8ead963d6"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Mengetahui,]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="308" y="488" width="94" height="16" uuid="4e2801d0-b0d7-4777-88ec-118bc52f451f"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{tanggal_surat}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="268" y="488" width="52" height="21" uuid="3486cdbf-ab14-4207-bc47-9117c73cbd1c"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Jakarta, ]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="78" y="219" width="7" height="21" uuid="5c36ddb7-2f81-4d85-a45f-b202dc6df4df"/>
 				<textElement>
@@ -343,102 +319,6 @@
 				<text><![CDATA[Kepulangan ini akan mengakibatkan saya untuk menanggung segala resiko yang terjadi di kemudian serta tidak akan mengadakan penggugatan terhadap pihak RSUD Matraman sesudahnya.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="402" y="488" width="40" height="21" uuid="b02a91c3-2696-4731-a263-fb5c4dc987fd"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Pukul]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="433" y="488" width="76" height="16" uuid="848a3797-6d3d-40ef-a1c9-1635911bfa37"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{jam}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="509" y="488" width="40" height="21" uuid="2062bb2a-4d99-49bf-a030-5859224eda84"/>
-				<textElement>
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[WIB]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="50" y="548" width="121" height="21" uuid="6cf57d66-812b-4cbd-b344-7f5f44120608"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Dokter yang merawat]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="50" y="630" width="121" height="16" uuid="d76ff41d-49b0-4bbe-9f7b-6462a4802611"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dokter}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="47" y="665" width="121" height="21" uuid="2baff4ea-ef3e-43dc-98b2-4483523b2289"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Perawat/Bidan ruangan]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="51" y="748" width="121" height="16" uuid="ed95c300-6f6d-41d4-bbb5-564e1b43021c"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{petugas}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="320" y="549" width="160" height="21" uuid="193ec6fd-d36a-4972-9619-138e9601b7b3"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Pasien / Penanggung Jawab]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="340" y="630" width="121" height="16" uuid="7bdeac7d-0c5d-4998-8535-c3e28bbb3ae8"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{nm_pasien}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="279" y="656" width="138" height="21" uuid="24b70d5b-bf46-4959-9f35-479a103b08f9"/>
-				<textElement textAlignment="Left">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Hubungan dengan pasien :]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="413" y="656" width="120" height="16" uuid="41d27913-5aba-409d-87af-0cba7e48f794"/>
-				<textElement textAlignment="Left">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{hubungan}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="20" y="636" width="178" height="21" uuid="7f79c163-f04d-4076-923a-2f0ac14d620e"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[(........................................................)]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="-1" y="80" width="554" height="21" uuid="91cf54c0-3b10-43a0-a6ef-6d2f2580a786"/>
 				<textElement textAlignment="Center">
 					<font fontName="Times New Roman" size="15" isBold="true"/>
@@ -453,22 +333,6 @@
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[SENDIRI (APS)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="22" y="755" width="178" height="21" uuid="a984e0fe-8136-4867-bae1-3d0ad6baf0e7"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[(........................................................)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="312" y="637" width="178" height="21" uuid="b532b748-8be6-41dd-9343-227fd6fdf6f7"/>
-				<textElement textAlignment="Center">
-					<font fontName="Times New Roman" size="12"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[(........................................................)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="78" y="301" width="7" height="21" uuid="7f438d1c-3c1a-4b92-984c-462cecb0275b"/>
@@ -580,22 +444,156 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Alasan}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="50" y="518" width="121" height="21" uuid="2669ceb2-9b4a-41aa-a1c1-e3c27ed49efc"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Mengetahui,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="308" y="488" width="94" height="16" uuid="6cd7130c-bdf2-491a-a9e1-ee1fede99a7c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal_surat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="268" y="488" width="52" height="21" uuid="6f1f189f-b5b5-4522-9823-293fde107a89"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Jakarta, ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="488" width="40" height="21" uuid="1153840e-6448-4a6f-abaf-5c6af50ab8c8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Pukul]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="433" y="488" width="76" height="16" uuid="fd32ea7b-9828-41e4-9fe1-d0333bfaf333"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jam}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="509" y="488" width="40" height="21" uuid="4209bacc-b353-47f2-9a79-bbc463c8818d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[WIB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="533" width="121" height="21" uuid="ee549a19-40ca-4059-9d7b-69932a33e5ee"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Dokter yang merawat]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="622" width="121" height="16" uuid="77a55323-edd7-4543-b14b-115b30fd3057"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dokter}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="47" y="670" width="121" height="21" uuid="a852d5a4-cbdb-4ed3-92bf-398b99516ad5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Perawat/Bidan ruangan]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="49" y="757" width="121" height="16" uuid="b6bc313c-c992-45e9-9c07-7aeb2d8bff63"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{petugas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="628" width="178" height="21" uuid="3fa22865-0c49-4cbb-996e-f685e4d84e0c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[(........................................................)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="764" width="178" height="21" uuid="eaf15918-96d9-410d-b60b-f7d9d014ebd4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[(........................................................)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="517" width="160" height="21" uuid="e0de3267-9b98-40a1-9ff8-4bbb2e71ae07"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Pasien / Penanggung Jawab]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="618" width="121" height="16" uuid="5d346008-bf9f-43cc-8da9-639411c3ecee"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_pasien}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="644" width="138" height="21" uuid="e24b8e03-cfb7-426e-be6c-b80d02994958"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Hubungan dengan pasien :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="413" y="644" width="120" height="16" uuid="da69e4bb-867f-44a4-840f-5c2d5677b221"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hubungan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="312" y="625" width="178" height="21" uuid="c31d2fb2-ad13-43ff-96db-e1d483557a8a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[(........................................................)]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="353" y="536" width="100" height="80" uuid="57ff8285-a62a-4fdc-a362-f162e6423fe6"/>
+				<imageExpression><![CDATA["http://100.10.1.4"+$F{tte}]]></imageExpression>
+			</image>
 			<componentElement>
-				<reportElement x="67" y="561" width="90" height="70" uuid="7c710fef-b1c9-41a2-b5b1-e4d883ecd714"/>
+				<reportElement x="63" y="551" width="97" height="72" uuid="10c7bf53-cb86-4a30-afec-edfe6e4eb376"/>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<jr:codeExpression><![CDATA[$P{finger}]]></jr:codeExpression>
 				</jr:QRCode>
 			</componentElement>
 			<componentElement>
-				<reportElement x="64" y="679" width="89" height="69" uuid="f5e13d88-6a2d-43f5-9b8d-0cfd46f5a1fb"/>
+				<reportElement x="60" y="687" width="96" height="71" uuid="09e1745c-9bcc-4dc2-9ce1-dfea6108e3f1"/>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<jr:codeExpression><![CDATA[$P{finger2}]]></jr:codeExpression>
-				</jr:QRCode>
-			</componentElement>
-			<componentElement>
-				<reportElement x="356" y="564" width="88" height="68" uuid="b0d6cd38-e860-4772-a2a4-294b9ab70b0f"/>
-				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<jr:codeExpression><![CDATA["https://rsudmatraman.jakarta.go.id"+$F{tte}]]></jr:codeExpression>
 				</jr:QRCode>
 			</componentElement>
 		</band>

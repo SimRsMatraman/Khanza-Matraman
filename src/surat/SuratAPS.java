@@ -52,7 +52,7 @@ public final class SuratAPS extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
-    private String tgl,finger="",kodedokter="",namadokter="",kodepetugas="",namapetugas="";
+    private String tgl,finger="",finger2="",kodedokter="",namadokter="",kodepetugas="",namapetugas="";
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     public  DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
     private SimpleDateFormat jamNow = new SimpleDateFormat("HH:mm:ss");
@@ -1229,7 +1229,7 @@ public final class SuratAPS extends javax.swing.JDialog {
                 param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+" Ditandatangani secara elektronik oleh dokter "+namadokter+" dengan ID "+(finger.equals("")?kodedokter:finger)+" "+Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));  
                 kodepetugas=Sequel.cariIsi("select surat_aps.nik from surat_aps where surat_aps.no_rawat=?",TNoRw.getText());
                 namapetugas=Sequel.cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",kodepetugas);
-                finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodepetugas);
+                finger2=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodepetugas);
                 param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+" Ditandatangani secara elektronik oleh petugas "+namapetugas+" dengan ID "+(finger.equals("")?kodepetugas:finger)+" "+Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));  
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
                 Valid.MyReportqry("rptSuratAps.jasper","report","::[ Surat Pernyataan Pasien Pulang Atas Permintaan Sendiri (APS) ]::",
