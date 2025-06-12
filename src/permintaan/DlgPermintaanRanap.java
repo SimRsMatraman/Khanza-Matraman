@@ -36,6 +36,7 @@ import simrskhanza.DlgKamarInap;
 import rekammedis.RMRiwayatPerawatan;
 import surat.SuratPersetujuanRawatInap;
 import kepegawaian.DlgCariDokter;
+import laporan.DlgDiagnosaPenyakit;
 
 /**
  *
@@ -46,14 +47,16 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private PreparedStatement ps;
+    private PreparedStatement ps, psdiagnosa;
     private ResultSet rs;
     private int i=0,nilai_detik,bookingbaru=0;
-    private String alarm="",nol_detik,detik,sql="",finger="";
+    private String alarm="",nol_detik,detik,sql="",finger="",key="";
     private DlgKamar kamar=new DlgKamar(null,false);
+    public  DlgDiagnosaPenyakit diagnosa1=new DlgDiagnosaPenyakit(null,false);
     private boolean aktif=false;
     private BackgroundMusic music;
     private DlgCariPenyakit penyakit=new DlgCariPenyakit(null,false);
+    public  DlgDiagnosaPenyakit diagnosa=new DlgDiagnosaPenyakit(null,false);
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     
 
@@ -229,11 +232,64 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
         
+        diagnosa1.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(akses.getform().equals("DlgPermintaanRanap")){
+                    try {
+                        key="";
+                        psdiagnosa=koneksi.prepareStatement("select kd_penyakit from diagnosa_pasien where no_rawat=? order by prioritas asc");
+                        try{
+                            psdiagnosa.setString(1,NoRw.getText());
+                            rs=psdiagnosa.executeQuery();                    
+                            while(rs.next()){
+//                                Diagnosa=rs.getString(1);
+                                Diagnosa.setText(rs.getString(1));
+                            }
+                        }catch(Exception ex){
+                            System.out.println("Notifikasi : "+ex);
+                        }finally{
+                            if(rs != null){
+                                rs.close();
+                            }
+                            if(psdiagnosa != null){
+                                psdiagnosa.close();
+                            }
+                        }
+                    } catch (Exception ex) {
+                        System.out.println(ex);
+                    }
+                }
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
         try {
             alarm=koneksiDB.ALARMPERMINTAANRANAP();
         } catch (Exception e) {
             alarm="no";
-        }
+        }   
+        
+//        try {
+//            if(Diagnosa.equals("Yes")){
+//                Diagnosa.setEditable(true); 
+//            }else{
+//                Diagnosa.setEditable(false); 
+//            }
+//        } catch (Exception e) {
+//            Diagnosa.setEditable(false);
+//        }
         
         ChkInput.setSelected(false);
         isForm();
@@ -313,6 +369,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         jLabel14 = new widget.Label();
         Rencana_rawat = new widget.TextBox();
         jLabel17 = new widget.Label();
+        btnDiagnosa1 = new widget.Button();
         PanelAccor = new widget.PanelBiasa();
         ChkAccor = new widget.CekBox();
         ScrollMenu = new widget.ScrollPane();
@@ -590,7 +647,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(165, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -613,7 +670,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -681,7 +738,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         NmPasien.setBounds(288, 10, 330, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -691,7 +748,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(DTPTgl);
-        DTPTgl.setBounds(680, 10, 90, 23);
+        DTPTgl.setBounds(680, 10, 170, 23);
 
         jLabel10.setText("Tanggal :");
         jLabel10.setName("jLabel10"); // NOI18N
@@ -734,7 +791,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         jLabel12.setText("( hari)");
         jLabel12.setName("jLabel12"); // NOI18N
         FormInput.add(jLabel12);
-        jLabel12.setBounds(660, 70, 30, 23);
+        jLabel12.setBounds(460, 70, 30, 23);
 
         Diagnosa.setHighlighter(null);
         Diagnosa.setName("Diagnosa"); // NOI18N
@@ -744,7 +801,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(Diagnosa);
-        Diagnosa.setBounds(370, 70, 140, 23);
+        Diagnosa.setBounds(580, 70, 230, 23);
 
         jLabel20.setText("Kamar :");
         jLabel20.setName("jLabel20"); // NOI18N
@@ -766,7 +823,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(btnDiagnosa);
-        btnDiagnosa.setBounds(510, 70, 28, 23);
+        btnDiagnosa.setBounds(820, 70, 28, 23);
 
         jLabel16.setText("DPJP Ranap :");
         jLabel16.setName("jLabel16"); // NOI18N
@@ -839,12 +896,12 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         scrollPane.setViewportView(Catatan);
 
         FormInput.add(scrollPane);
-        scrollPane.setBounds(230, 100, 510, 60);
+        scrollPane.setBounds(230, 100, 620, 60);
 
         jLabel14.setText("Diagnosa :");
         jLabel14.setName("jLabel14"); // NOI18N
         FormInput.add(jLabel14);
-        jLabel14.setBounds(310, 70, 60, 23);
+        jLabel14.setBounds(510, 70, 60, 23);
 
         Rencana_rawat.setHighlighter(null);
         Rencana_rawat.setName("Rencana_rawat"); // NOI18N
@@ -854,12 +911,29 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             }
         });
         FormInput.add(Rencana_rawat);
-        Rencana_rawat.setBounds(620, 70, 40, 23);
+        Rencana_rawat.setBounds(410, 70, 40, 23);
 
         jLabel17.setText("Rencana rawat :");
         jLabel17.setName("jLabel17"); // NOI18N
         FormInput.add(jLabel17);
-        jLabel17.setBounds(540, 70, 80, 23);
+        jLabel17.setBounds(320, 70, 80, 23);
+
+        btnDiagnosa1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnDiagnosa1.setMnemonic('3');
+        btnDiagnosa1.setToolTipText("Alt+3");
+        btnDiagnosa1.setName("btnDiagnosa1"); // NOI18N
+        btnDiagnosa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagnosa1ActionPerformed(evt);
+            }
+        });
+        btnDiagnosa1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDiagnosa1KeyPressed(evt);
+            }
+        });
+        FormInput.add(btnDiagnosa1);
+        btnDiagnosa1.setBounds(850, 70, 30, 23);
 
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
@@ -1459,6 +1533,25 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         // TODO add your handling code here:
     }//GEN-LAST:event_Rencana_rawatKeyPressed
 
+    private void btnDiagnosa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagnosa1ActionPerformed
+        if(NoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+            tbObat.requestFocus();
+        }else{
+            akses.setform("DlgKamarInap");
+            diagnosa1.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            diagnosa1.setLocationRelativeTo(internalFrame1);
+            diagnosa1.isCek();
+            diagnosa1.setNoRm(NoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"Ranap");
+            diagnosa1.panelDiagnosa1.tampil();
+            diagnosa1.setVisible(true);
+        }
+    }//GEN-LAST:event_btnDiagnosa1ActionPerformed
+
+    private void btnDiagnosa1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDiagnosa1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDiagnosa1KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1520,6 +1613,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.TextBox TCari;
     private widget.Button btnDPJP;
     private widget.Button btnDiagnosa;
+    private widget.Button btnDiagnosa1;
     private javax.swing.ButtonGroup buttonGroup1;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
@@ -1702,6 +1796,30 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         ChkInput.setSelected(true);
         aktif=false;
         isForm();
+        
+//        Menampilkan Diagnosa
+        try {
+            ps=koneksi.prepareStatement(
+                    "select kd_penyakit from diagnosa_pasien where no_rawat=? order by prioritas asc");
+            try {
+                ps.setString(1,NoRw.getText());
+                rs=ps.executeQuery();
+                if(rs.next()){
+                    Diagnosa.setText(rs.getString("kd_penyakit"));
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }
     }
     
     public void setNoRm(String norwt,String norm,String nama,String namadokter,String notelp) {
@@ -1716,6 +1834,30 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         ChkInput.setSelected(true);
         aktif=false;
         isForm();
+        
+//        Menampilkan Alasan Masuk
+        try {
+            ps=koneksi.prepareStatement(
+                    "select kd_penyakit from diagnosa_pasien where no_rawat=? order by prioritas asc");
+            try {
+                ps.setString(1,NoRw.getText());
+                rs=ps.executeQuery();
+                if(rs.next()){
+                    Diagnosa.setText(rs.getString("kd_penyakit"));
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }
     }
     
     private void isForm(){
@@ -1791,4 +1933,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }
     
+    public void setDiagnosaAwal(String diagnosa) {
+        Diagnosa.setText(diagnosa);
+    }
 }

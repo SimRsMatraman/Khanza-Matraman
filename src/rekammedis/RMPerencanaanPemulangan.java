@@ -647,7 +647,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         jLabel11.setBounds(770, 10, 30, 23);
 
         RencanaPemulangan.setForeground(new java.awt.Color(50, 70, 50));
-        RencanaPemulangan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
+        RencanaPemulangan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2025" }));
         RencanaPemulangan.setDisplayFormat("dd-MM-yyyy");
         RencanaPemulangan.setName("RencanaPemulangan"); // NOI18N
         RencanaPemulangan.setOpaque(false);
@@ -820,7 +820,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(jLabel49);
         jLabel49.setBounds(30, 160, 210, 20);
 
-        Mobilisasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jalan", "Tongkat", "Kursi Roda", "Brankar" }));
+        Mobilisasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Jalan", "Tongkat", "Kursi Roda", "Brankar", "Digendong" }));
         Mobilisasi.setName("Mobilisasi"); // NOI18N
         Mobilisasi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1579,7 +1579,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1593,7 +1593,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2737,7 +2737,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         RencanaPemulangan.setDate(new Date());
 //        DiagnosaMedis.setText("");
 //        DiagnosaMedis1.setText("");
-        AlasanMasuk.setText("");
+//        AlasanMasuk.setText("");
         
         KondisiPulang.setSelectedItem("Sembuh");
         Mobilisasi.setSelectedItem("Jalan");
@@ -2859,6 +2859,8 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
     }
 
     private void isRawat() {
+        
+//        MenampilkanData Kamar Inap
         try {
             ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rkm_medis,pasien.nm_pasien, if(pasien.jk='L','LAKI-LAKI','PEREMPUAN') as jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi,reg_periksa.jam_reg, "+
@@ -2882,6 +2884,30 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                     MasukDirawat.setText(rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg"));
                     DiagnosaMedis.setText(rs.getString("diagnosa_awal"));
                     DiagnosaMedis1.setText(rs.getString("diagnosa_akhir"));
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }
+        
+//        Menampilkan Alasan Masuk
+        try {
+            ps=koneksi.prepareStatement(
+                    "select * from permintaan_ranap where no_rawat=?");
+            try {
+                ps.setString(1,TNoRw.getText());
+                rs=ps.executeQuery();
+                if(rs.next()){
+                    AlasanMasuk.setText(rs.getString("catatan"));
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
