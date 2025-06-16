@@ -4117,16 +4117,16 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
 //        ppBerkasDigital.setEnabled(akses.getberkas_digital_perawatan());   
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_surat,4),signed)),0) from pemberian_obat_ranap where tanggal='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
                 "PORI"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),4,NoSurat); 
-        if(akses.getjml2()>=1){
-            KodeDokter.setEditable(false);
-            BtnDokter.setEnabled(false);
-            KodeDokter.setText(akses.getkode());
-            Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter,KodeDokter.getText());
-//            if(NmPetugas.getText().equals("")){
-//                KdPetugas.setText("");
-//                JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
-//            }
-        }            
+//        if(akses.getjml2()>=1){
+//            KodeDokter.setEditable(false);
+//            BtnDokter.setEnabled(false);
+//            KodeDokter.setText(akses.getkode());
+//            Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter,KodeDokter.getText());
+////            if(NmPetugas.getText().equals("")){
+////                KdPetugas.setText("");
+////                JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
+////            }
+//        }            
     }
     
     private void panggilPhoto() {
