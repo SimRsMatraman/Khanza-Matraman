@@ -1835,7 +1835,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         aktif=false;
         isForm();
         
-//        Menampilkan Alasan Masuk
+//        Menampilkan Diagnosa
         try {
             ps=koneksi.prepareStatement(
                     "select kd_penyakit from diagnosa_pasien where no_rawat=? order by prioritas asc");

@@ -2785,8 +2785,8 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         
         Diet.setText("");
         Intruksi.setText("");
-        KdPetugas.setText("");
-        NmPetugas.setText("");
+//        KdPetugas.setText("");
+//        NmPetugas.setText("");
         SaksiKeluarga.setText("");
         TabRawat.setSelectedIndex(0);
 //        DiagnosaMedis.requestFocus();
@@ -3029,7 +3029,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.getperencanaan_pemulangan());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
-            BtnDokter.setEnabled(false);
+//            BtnDokter.setEnabled(true);
             KdPetugas.setText(akses.getkode());
             NmPetugas.setText(petugas.tampil3(KdPetugas.getText()));
             if(NmPetugas.getText().equals("")){
