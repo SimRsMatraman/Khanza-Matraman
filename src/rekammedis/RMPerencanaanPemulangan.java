@@ -64,7 +64,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             "Mobilisasi","Oksigen","Infus","NGT","Kateter","Drain","Tidak Ada","Lainnya","Hand Hyigyne","Evakuasi Kebakaran","Penggunaan APAR",
             "BHD","Pew. NGT","Pew. Kateter","Pew. Infus","Pew. Oksigen","Penyuluhan Diet","Pew. Luka","Pmb. Obat","Penyuluhan Lain","RO",
             "Ket. RO","CTScan","Ket. CTScan","USG","Ket. USG","EKG","LAB","Ket. LAB","Dok. Lain","Surat Sakit",
-            "Surat Rawat","Lepas Rawat","Obat Pulang","Diet","Intruksi","Pasien/Keluarga","NIP","Nama Petugas"
+            "Surat Rawat","Lepas Rawat","Obat Pulang","Diet","Intruksi","Pasien/Keluarga","NIP","Nama Petugas","ACC APS"
         }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -73,7 +73,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 50; i++) {
+        for (i = 0; i < 51; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -175,6 +175,8 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                 column.setPreferredWidth(100);
             }else if(i==49){
                 column.setPreferredWidth(100);
+            }else if(i==50){
+                column.setPreferredWidth(60);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -257,7 +259,10 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
         
+        
         HTMLEditorKit kit = new HTMLEditorKit();
+        LoadHTML.setEditable(true);
+        LoadHTML.setEditorKit(kit);
         LoadHTML2.setEditable(true);
         LoadHTML2.setEditorKit(kit);
         StyleSheet styleSheet = kit.getStyleSheet();
@@ -273,6 +278,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
         );
         Document doc = kit.createDefaultDocument();
+        LoadHTML.setDocument(doc);
         LoadHTML2.setDocument(doc);
     }
 
@@ -406,6 +412,13 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         Diet = new widget.TextBox();
         Intruksi = new widget.TextBox();
         jSeparator19 = new javax.swing.JSeparator();
+        FormPhoto1 = new widget.PanelBiasa();
+        FormPass2 = new widget.PanelBiasa();
+        BtnRefreshPhoto = new widget.Button();
+        Scroll4 = new widget.ScrollPane();
+        LoadHTML = new widget.editorpane();
+        jLabel12 = new widget.Label();
+        Acc_APS = new widget.TextBox();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -647,7 +660,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         jLabel11.setBounds(770, 10, 30, 23);
 
         RencanaPemulangan.setForeground(new java.awt.Color(50, 70, 50));
-        RencanaPemulangan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2025" }));
+        RencanaPemulangan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-06-2025" }));
         RencanaPemulangan.setDisplayFormat("dd-MM-yyyy");
         RencanaPemulangan.setName("RencanaPemulangan"); // NOI18N
         RencanaPemulangan.setOpaque(false);
@@ -1539,6 +1552,62 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(jSeparator19);
         jSeparator19.setBounds(10, 691, 940, 160);
 
+        FormPhoto1.setBackground(new java.awt.Color(255, 255, 255));
+        FormPhoto1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "TTE Pasien : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        FormPhoto1.setName("FormPhoto1"); // NOI18N
+        FormPhoto1.setPreferredSize(new java.awt.Dimension(115, 73));
+        FormPhoto1.setLayout(new java.awt.BorderLayout());
+
+        FormPass2.setBackground(new java.awt.Color(255, 255, 255));
+        FormPass2.setBorder(null);
+        FormPass2.setName("FormPass2"); // NOI18N
+        FormPass2.setPreferredSize(new java.awt.Dimension(115, 40));
+
+        BtnRefreshPhoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnRefreshPhoto.setMnemonic('U');
+        BtnRefreshPhoto.setText("Refresh");
+        BtnRefreshPhoto.setToolTipText("Alt+U");
+        BtnRefreshPhoto.setName("BtnRefreshPhoto"); // NOI18N
+        BtnRefreshPhoto.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnRefreshPhoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRefreshPhotoActionPerformed(evt);
+            }
+        });
+        FormPass2.add(BtnRefreshPhoto);
+
+        FormPhoto1.add(FormPass2, java.awt.BorderLayout.PAGE_END);
+
+        Scroll4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Scroll4.setName("Scroll4"); // NOI18N
+        Scroll4.setOpaque(true);
+        Scroll4.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        LoadHTML.setBorder(null);
+        LoadHTML.setName("LoadHTML"); // NOI18N
+        Scroll4.setViewportView(LoadHTML);
+
+        FormPhoto1.add(Scroll4, java.awt.BorderLayout.CENTER);
+
+        FormInput.add(FormPhoto1);
+        FormPhoto1.setBounds(980, 10, 370, 350);
+
+        jLabel12.setText("ACC APS :");
+        jLabel12.setName("jLabel12"); // NOI18N
+        FormInput.add(jLabel12);
+        jLabel12.setBounds(990, 360, 60, 23);
+
+        Acc_APS.setEditable(false);
+        Acc_APS.setHighlighter(null);
+        Acc_APS.setName("Acc_APS"); // NOI18N
+        Acc_APS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Acc_APSKeyPressed(evt);
+            }
+        });
+        FormInput.add(Acc_APS);
+        Acc_APS.setBounds(1060, 360, 120, 23);
+
         scrollInput.setViewportView(FormInput);
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -1579,7 +1648,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-06-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1593,7 +1662,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-06-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-06-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1742,12 +1811,12 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         }else if(SaksiKeluarga.getText().trim().equals("")){
             Valid.textKosong(SaksiKeluarga,"Pasien/Keluarga");
         }else{
-            if(Sequel.menyimpantf("perencanaan_pemulangan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Pernyataan",44,new String[]{
+            if(Sequel.menyimpantf("perencanaan_pemulangan","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Pernyataan",46,new String[]{
                     TNoRw.getText(),Valid.SetTgl(RencanaPemulangan.getSelectedItem()+""),AlasanMasuk.getText(),DiagnosaMedis.getText(),SaksiKeluarga.getText(),KdPetugas.getText(),KondisiPulang.getSelectedItem().toString(),Mobilisasi.getSelectedItem().toString(),
                     (Oksigen.isSelected() ? "true" : ""),(Infus.isSelected() ? "true" : ""),(NGT.isSelected() ? "true" : ""),(Kateter.isSelected() ? "true" : ""),(Drain.isSelected() ? "true" : ""),(TidakAda.isSelected() ? "true" : ""),AlatLainnya.getText(),(HandHyigine.isSelected() ? "true" : ""),(EvakuasiKebakaran.isSelected() ? "true" : ""),(PenggunaanAPAR.isSelected() ? "true" : ""),(BantuanHidupDasar.isSelected() ? "true" : ""),
                     (PerawatanNGT.isSelected() ? "true" : ""),(PerawatanKateter.isSelected() ? "true" : ""),(PerawatanInfus.isSelected() ? "true" : ""),(PerawatanOksigen.isSelected() ? "true" : ""),(PengaturanDiet.isSelected() ? "true" : ""),PerawatanLuka.getText(),(PemberianObat.isSelected() ? "true" : ""),PenyuluhanLainnya.getText(),(Ro.isSelected() ? "true" : ""),
                     KeteranganRo.getText(),(CTScan.isSelected() ? "true" : ""),KeteranganCTScan.getText(),(USG.isSelected() ? "true" : ""),KeteranganUSG.getText(),(EKG.isSelected() ? "true" : ""),(Lab.isSelected() ? "true" : ""),KeteranganLab.getText(),KeteranganLainnya.getText(),(SuratSakit.isSelected() ? "true" : ""),(SuratRawat.isSelected() ? "true" : ""),(SuratLepasRawat.isSelected() ? "true" : ""),
-                    Obat2an.getText(),Diet.getText(),Intruksi.getText(),DiagnosaMedis1.getText()
+                    Obat2an.getText(),Diet.getText(),Intruksi.getText(),DiagnosaMedis1.getText(),"-",""
                     
                 })==true){
                 tampil();
@@ -2500,6 +2569,14 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
 //        }
     }//GEN-LAST:event_Obat2anKeyPressed
 
+    private void BtnRefreshPhotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRefreshPhotoActionPerformed
+        panggilPhoto1();
+    }//GEN-LAST:event_BtnRefreshPhotoActionPerformed
+
+    private void Acc_APSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Acc_APSKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Acc_APSKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -2517,6 +2594,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.TextBox Acc_APS;
     private widget.TextBox AlasanMasuk;
     private widget.TextBox AlatLainnya;
     private widget.CekBox BantuanHidupDasar;
@@ -2529,6 +2607,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnObat;
     private widget.Button BtnPrint;
+    private widget.Button BtnRefreshPhoto;
     private widget.Button BtnRefreshPhoto1;
     private widget.Button BtnSimpan;
     private widget.CekBox CTScan;
@@ -2542,8 +2621,10 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
     private widget.CekBox EKG;
     private widget.CekBox EvakuasiKebakaran;
     private widget.PanelBiasa FormInput;
+    private widget.PanelBiasa FormPass2;
     private widget.PanelBiasa FormPass3;
     private widget.PanelBiasa FormPhoto;
+    private widget.PanelBiasa FormPhoto1;
     private widget.CekBox HandHyigine;
     private widget.CekBox Infus;
     private widget.TextBox Intruksi;
@@ -2558,6 +2639,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
     private widget.ComboBox KondisiPulang;
     private widget.Label LCount;
     private widget.CekBox Lab;
+    private widget.editorpane LoadHTML;
     private widget.editorpane LoadHTML2;
     private widget.TextBox MasukDirawat;
     private widget.ComboBox Mobilisasi;
@@ -2579,6 +2661,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
     private widget.CekBox Ro;
     private widget.TextBox SaksiKeluarga;
     private widget.ScrollPane Scroll;
+    private widget.ScrollPane Scroll4;
     private widget.ScrollPane Scroll5;
     private widget.CekBox SuratLepasRawat;
     private widget.CekBox SuratRawat;
@@ -2616,6 +2699,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
     private widget.Label jLabel117;
     private widget.Label jLabel118;
     private widget.Label jLabel119;
+    private widget.Label jLabel12;
     private widget.Label jLabel120;
     private widget.Label jLabel121;
     private widget.Label jLabel122;
@@ -2713,7 +2797,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                         rs.getString("lab"),rs.getString("ket_lab"),rs.getString("dokumen_lain"),
                         rs.getString("surat_sakit"),rs.getString("surat_rawat"),rs.getString("surat_lepas_rawat"),
                         rs.getString("obat_pulang"),rs.getString("diet"),rs.getString("intruksi"),
-                        rs.getString("nama_pasien_keluarga"),rs.getString("nip"),rs.getString("nama")             
+                        rs.getString("nama_pasien_keluarga"),rs.getString("nip"),rs.getString("nama"),rs.getString("acc_aps")           
                     });
                 }
             } catch (Exception e) {
@@ -2853,6 +2937,10 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             SaksiKeluarga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),47).toString());
             KdPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),48).toString());
             NmPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),49).toString());
+            
+            
+            Acc_APS.setText(tbObat.getValueAt(tbObat.getSelectedRow(),50).toString());
+            panggilPhoto1();
             
             
        }
@@ -3119,4 +3207,38 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             }
         }
     }
+    
+    private void panggilPhoto1() {
+//        if(FormPhotoPass.isVisible()==true){
+            try {
+                ps=koneksi.prepareStatement("select perencanaan_pemulangan.tte from perencanaan_pemulangan where perencanaan_pemulangan.no_rawat=?");
+                try {
+                    ps.setString(1,TNoRw.getText());
+                    rs=ps.executeQuery();
+                    if(rs.next()){
+                        if(rs.getString("tte").equals("")||rs.getString("tte").equals("-")){
+                            LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
+                        }else{
+                            LoadHTML.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+rs.getString("tte")+"' alt='photo' width='300' height='280'/></center></body></html>");
+                        }  
+//                        PasswordPasien.setText(rs.getString("password"));
+                    }else{
+                        LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
+//                        PasswordPasien.setText("");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : "+e);
+                } finally{
+                    if(rs!=null){
+                        rs.close();
+                    }
+                    if(ps!=null){
+                        ps.close();
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            } 
+        }
+//    }
 }
