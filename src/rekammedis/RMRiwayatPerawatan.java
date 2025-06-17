@@ -11081,8 +11081,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                         "asesmen_medis_igd.bb,asesmen_medis_igd.tb,asesmen_medis_igd.kepala,asesmen_medis_igd.mata,asesmen_medis_igd.gigi,asesmen_medis_igd.tht,asesmen_medis_igd.thoraks, "+
                                         "asesmen_medis_igd.jantung,asesmen_medis_igd.paru,asesmen_medis_igd.abdomen,asesmen_medis_igd.ekstremitas,asesmen_medis_igd.genital,asesmen_medis_igd.kulit, "+
                                         "asesmen_medis_igd.ket_fisik,asesmen_medis_igd.ket_lokalis,asesmen_medis_igd.lab,asesmen_medis_igd.rad,asesmen_medis_igd.penunjang,asesmen_medis_igd.diagnosis, "+
-                                        "asesmen_medis_igd.tata,asesmen_medis_igd.edukasi,dokter.nm_dokter "+
-                                        "from asesmen_medis_igd inner join dokter on asesmen_medis_igd.kd_dokter=dokter.kd_dokter where asesmen_medis_igd.no_rawat='"+norawat+"' order by asesmen_medis_igd.tanggal,asesmen_medis_igd.jam").executeQuery();
+                                        "asesmen_medis_igd.tata,asesmen_medis_igd.edukasi,dokter.nm_dokter,ifnull(asesmen_medis_igd_image_marking.url_image,'') as url_image "+
+                                        "from asesmen_medis_igd inner join dokter on asesmen_medis_igd.kd_dokter=dokter.kd_dokter left join asesmen_medis_igd_image_marking on asesmen_medis_igd_image_marking.no_rawat=asesmen_medis_igd.no_rawat where asesmen_medis_igd.no_rawat='"+norawat+"' order by asesmen_medis_igd.tanggal,asesmen_medis_igd.jam").executeQuery();
 //                            "select penilaian_medis_igd.tanggal,penilaian_medis_igd.kd_dokter,penilaian_medis_igd.anamnesis,penilaian_medis_igd.hubungan,penilaian_medis_igd.keluhan_utama,penilaian_medis_igd.rps,"+
 //                            "penilaian_medis_igd.rpk,penilaian_medis_igd.rpd,penilaian_medis_igd.rpo,penilaian_medis_igd.alergi,penilaian_medis_igd.keadaan,penilaian_medis_igd.gcs,penilaian_medis_igd.kesadaran,"+
 //                            "penilaian_medis_igd.td,penilaian_medis_igd.nadi,penilaian_medis_igd.rr,penilaian_medis_igd.suhu,penilaian_medis_igd.spo,penilaian_medis_igd.bb,penilaian_medis_igd.tb,penilaian_medis_igd.kepala,"+
@@ -11226,7 +11226,21 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                        "</table>"+
                                     "</td>"+
                                  "</tr>");
+                            if(rs2.getString("url_image")!=""){
+                            htmlContent.append(
+                            "<tr>"+
+                                    "<td valign='top'>"+
+                                       "VIII. FOTO LOKALIS"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                         "<tr>"+                         
+                                                  "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+rs2.getString("url_image")+"'><img alt='Marker Lokalis' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+rs2.getString("url_image")+"' width='450' height='450'/></a></td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                            "</tr>");
+                            }
                         }
+                        
                         htmlContent.append(
                               "</table>"+
                             "</td>"+
@@ -11239,6 +11253,35 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         rs2.close();
                     }
                 }
+//                try{
+//                            rs2=koneksi.prepareStatement(
+//                                 "select url_image from asesmen_medis_igd_image_marking where no_rawat='"+norawat+"'").executeQuery();
+//                            if(rs2.next()){                                    
+//                                htmlContent.append(  
+//                                  "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+//                                    "<tr><td valign='top' colspan='3'>MARKING LOKALIS</td></tr>"+  
+//                                    "<tr align='center'>"+
+//                                      "<td valign='top' width='81%' bgcolor='#FFFAF8'>Foto Lokalis</td>"+
+//                                    "</tr>");
+//                                rs2.beforeFirst();
+//                                w=1;
+//                                while(rs2.next()){
+//                                    htmlContent.append(
+//                                         "<tr>"+
+//                                           "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+rs2.getString("url_image")+"'><img alt='Marker Lokalis' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+rs2.getString("url_image")+"' width='350' height='350'/></a></td>"+
+//                                         "</tr>"); 
+//                                    w++;
+//                                }
+//                                htmlContent.append(
+//                                  "</table>");
+//                            }                                
+//                        } catch (Exception e) {
+//                            System.out.println("Notifikasi : "+e);
+//                        } finally{
+//                            if(rs2!=null){
+//                                rs2.close();
+//                            }
+//                        }                            
             }
         } catch (Exception e) {
             System.out.println("Notif Assessment Medis IGD : "+e);

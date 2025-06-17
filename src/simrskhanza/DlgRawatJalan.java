@@ -8018,7 +8018,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 tabModePemeriksaan.removeRow(i);
                                 i--;
                             }else{
-                                if(akses.getkode().equals(tbPemeriksaan.getValueAt(i,23).toString())){
+                                if(akses.getkode().equals(tbPemeriksaan.getValueAt(i,25).toString())){
                                     Sequel.queryu("delete from pemeriksaan_ralan where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
                                             "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
                                             "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
