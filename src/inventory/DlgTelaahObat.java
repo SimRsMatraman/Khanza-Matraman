@@ -1357,7 +1357,11 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
                TNoRw.getText(),KodeDokter.getText(),KdPetugas.getText(),TLP.getText(),Status.getText(),resep,identitas,obat,campuran,jumlah,dosis,
                rute,tidak1,tidak2,tidak3,benar1,benar2,benar3,benar4,benar5,tanggalNow.format(new Date()),jamNow.format(new Date()),
                "-","-",""
-                })==true){
+                })==true);
+             Sequel.queryu2tf("update resep_obat set jam_penyerahan=?, tgl_penyerahan=? WHERE no_resep=?",3,new String[]{
+                jamNow.format(new Date()),tanggalNow.format(new Date()),TNoResep.getText(),
+            });
+            {
                     tampil();
                     emptTeks();
             }
