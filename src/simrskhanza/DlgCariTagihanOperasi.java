@@ -3482,6 +3482,8 @@ private void MnHapusObatOperasiActionPerformed(java.awt.event.ActionEvent evt) {
                 Implan.getText(),NoImplan.getText(),Perdarahan.getText(),Transfusi.getText(),Valid.SetTgl(TanggalPA.getSelectedItem()+""),Tindakan.getText()
             });
             Sequel.mengedit("operasi","no_rawat='"+TNoRw.getText()+"'","tgl_operasi='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem()+"'");
+            Sequel.queryu("update booking_operasi SET status ='Selesai' WHERE no_rawat ='"+TNoRw.getText()+"'");
+            System.out.println("update booking_operasi SET status ='Selesai' WHERE no_rawat ='"+TNoRw.getText()+"'");
             JOptionPane.showMessageDialog(null,"Data berhasil diupdate!");
             WindowLaporan.dispose();
             BtnCariActionPerformed(evt);
