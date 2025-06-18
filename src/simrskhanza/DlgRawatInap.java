@@ -5609,19 +5609,18 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             if(akses.getkode().equals("Admin Utama")){
                                 Sequel.queryu("delete from pemeriksaan_ranap where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
                                         "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
+                                        "' and nik='"+tbPemeriksaan.getValueAt(i,19).toString()+
                                         "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
                                 tabModePemeriksaan.removeRow(i);
                                 i--;
                             }else{
-                                if(akses.getkode().equals(tbPemeriksaan.getValueAt(i,22).toString())){
-                                    JOptionPane.showMessageDialog(null,"Hanya bisa dihapus admin");
-//                                    Sequel.queryu("delete from pemeriksaan_ranap where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
-//                                            "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
-//                                            "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
-//                                    tabModePemeriksaan.removeRow(i);
-//                                    i--;
-                                }else{
-                                    JOptionPane.showMessageDialog(null,"Hanya bisa dihapus admin");
+                                if(akses.getkode().equals(tbPemeriksaan.getValueAt(i,19).toString())){
+                                    Sequel.queryu("delete from pemeriksaan_ranap where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
+                                            "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
+                                            "' and nik='"+tbPemeriksaan.getValueAt(i,19).toString()+
+                                            "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
+                                    tabModePemeriksaan.removeRow(i);
+                                    i--;
                                 }
                             }
                         }
@@ -6511,6 +6510,7 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                 if(akses.getkode().equals(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),19).toString())){
                                     if(Sequel.mengedittf("pemeriksaan_ranap","no_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1)+
                                 "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4)+
+                                "' and nik='"+KodeDokter.getText()+          
                                 "' and jam_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5)+"'",
                                 "no_rawat='"+TNoRw.getText()+"',suhu_tubuh='"+TSuhu.getText()+"',tensi='"+TTensi.getText()+"',"+
                                 "keluhan='"+TKeluhan.getText()+"',pemeriksaan='"+TPemeriksaan.getText()+"',"+
@@ -10020,7 +10020,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             cmbMnt.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(3,5));
             cmbDtk.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(6,8));
             Valid.SetTgl(DTPTgl,tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString());
-            if(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),19).toString().equals(akses.getkode()))
+            if(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),19).toString().equals(akses.getkode())||akses.getkode().equals("Admin Utama"))
             {
                BtnHapus.setEnabled(true); 
                BtnEdit.setEnabled(true); 

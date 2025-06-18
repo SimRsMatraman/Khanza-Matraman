@@ -8006,14 +8006,14 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                 }   break;
             case 3:
                 if(tabModePemeriksaan.getRowCount()==0){
-                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+                    JOptionPane.showMessageDialog(null,"Maaf, silahkan centang data yang mau dihapus...!!!!");
                     TNoRw.requestFocus();
                 }else{
                     for(i=0;i<tbPemeriksaan.getRowCount();i++){
                         if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
                             if(akses.getkode().equals("Admin Utama")){
                                 Sequel.queryu("delete from pemeriksaan_ralan where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
-                                        "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
+                                        "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+                                        
                                         "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
                                 tabModePemeriksaan.removeRow(i);
                                 i--;
@@ -8021,11 +8021,10 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 if(akses.getkode().equals(tbPemeriksaan.getValueAt(i,25).toString())){
                                     Sequel.queryu("delete from pemeriksaan_ralan where no_rawat='"+tbPemeriksaan.getValueAt(i,1).toString()+
                                             "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(i,4).toString()+
+                                            "' and nik='"+tbPemeriksaan.getValueAt(i,25).toString()+
                                             "' and jam_rawat='"+tbPemeriksaan.getValueAt(i,5).toString()+"' ");
                                     tabModePemeriksaan.removeRow(i);
                                     i--;
-                                }else{
-                                    JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh dokter/petugas yang bersangkutan..!!");
                                 }
                             }
                         }
@@ -8712,6 +8711,7 @@ private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                 if(akses.getkode().equals(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),25).toString())){
                                     if(Sequel.mengedittf("pemeriksaan_ralan","no_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1)+
                                 "' and tgl_perawatan='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4)+
+                                "' and nik='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),25)+     
                                 "' and jam_rawat='"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5)+"'",
                                 "no_rawat='"+TNoRw.getText()+"',suhu_tubuh='"+TSuhu.getText()+"',tensi='"+TTensi.getText()+"',"+
                                 "keluhan='"+TKeluhan.getText()+"',pemeriksaan='"+TPemeriksaan.getText()+"',"+
@@ -14372,34 +14372,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }
 
     private void getDataPemeriksaan() {
-//        if(tbPemeriksaan.getSelectedRow()!= -1){
-//            TNoRw.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1).toString());
-//            TNoRM.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),2).toString());
-//            TPasien.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),3).toString());             
-//            TSuhu.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),6).toString()); 
-//            TTensi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),7).toString()); 
-//            TNadi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),8).toString()); 
-//            TRespirasi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),9).toString()); 
-//            TTinggi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),10).toString()); 
-//            TBerat.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),11).toString());  
-//            SpO2.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),12).toString()); 
-//            TGCS.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),13).toString());   
-//            cmbKesadaran.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),14).toString()); 
-//            TKeluhan.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),15).toString()); 
-//            TPemeriksaan.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),16).toString()); 
-//            TAlergi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),17).toString()); 
-//            LingkarPerut.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),18).toString()); 
-//            TindakLanjut.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),19).toString()); 
-//            TPenilaian.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),20).toString()); 
-//            TInstruksi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),21).toString()); 
-//            TEvaluasi.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),22).toString()); 
-//            cmbJam.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(0,2));
-//            cmbMnt.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(3,5));
-//            cmbDtk.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(6,8));
-//            Valid.SetTgl(DTPTgl,tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString());
-//        }
-
-              if(tbPemeriksaan.getSelectedRow()!= -1){
+            if(tbPemeriksaan.getSelectedRow()!= -1){
             TNoRw.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1).toString());
             TNoRM.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),2).toString());
             TPasien.setText(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),3).toString());             
@@ -14429,7 +14402,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             cmbMnt.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(3,5));
             cmbDtk.setSelectedItem(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString().substring(6,8));
             Valid.SetTgl(DTPTgl,tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString());
-            if(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),25).toString().equals(akses.getkode()))
+            
+            if(tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),25).toString().equals(akses.getkode())||akses.getkode().equals("Admin Utama"))
             {
                BtnHapus.setEnabled(true); 
                BtnEdit.setEnabled(true); 
