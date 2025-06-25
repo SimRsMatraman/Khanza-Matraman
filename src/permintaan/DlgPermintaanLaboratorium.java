@@ -2603,6 +2603,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                             "0000-00-00","00:00:00","0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
                             InformasiTambahan.getText(),DiagnosisKlinis.getText(),Cmbstatus.getSelectedItem()+"".replaceAll("Tidak Cito","Cito")
                         })==true){
+                        Sequel.queryutf2("insert into permintaan_lab_order values ('"+TNoPermintaanPK.getText()+"',current_time(),current_date(),current_date())");
                         for(i=0;i<tbTarifPK.getRowCount();i++){ 
                             if(tbTarifPK.getValueAt(i,0).toString().equals("true")){
                                 Sequel.menyimpan2("permintaan_pemeriksaan_lab","?,?,?","pemeriksaan lab",3,new String[]{
