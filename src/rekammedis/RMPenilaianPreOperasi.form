@@ -549,7 +549,7 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="17-03-2023 09:20:52"/>
+                                <StringItem index="0" value="19-06-2025 10:00:48"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -557,18 +557,19 @@
                             <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
                           <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TglAsuhanActionPerformed"/>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TglAsuhanKeyPressed"/>
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="594" y="40" width="130" height="23"/>
+                              <AbsoluteConstraints x="600" y="40" width="130" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
                         <Component class="widget.Label" name="jLabel109">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="I. Ringkasan Klinik :"/>
+                            <Property name="text" type="java.lang.String" value="I. Anamnesa :"/>
                             <Property name="name" type="java.lang.String" value="jLabel109" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -594,7 +595,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="widget.TextArea" name="RingkasanKlinik">
+                            <Component class="widget.TextArea" name="Anamnesa">
                               <Properties>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -603,10 +604,10 @@
                                 </Property>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
-                                <Property name="name" type="java.lang.String" value="RingkasanKlinik" noResource="true"/>
+                                <Property name="name" type="java.lang.String" value="Anamnesa" noResource="true"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RingkasanKlinikKeyPressed"/>
+                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="AnamnesaKeyPressed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -683,7 +684,7 @@
                         <Component class="widget.Label" name="jLabel111">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="III. Pemeriksaan Diagnostik :"/>
+                            <Property name="text" type="java.lang.String" value="III. Pemeriksaan Penunjang :"/>
                             <Property name="name" type="java.lang.String" value="jLabel111" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -732,7 +733,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="widget.TextArea" name="PemeriksaanDiagnostik">
+                            <Component class="widget.TextArea" name="DataPenunjang">
                               <Properties>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -741,10 +742,10 @@
                                 </Property>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
-                                <Property name="name" type="java.lang.String" value="PemeriksaanDiagnostik" noResource="true"/>
+                                <Property name="name" type="java.lang.String" value="DataPenunjang" noResource="true"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PemeriksaanDiagnostikKeyPressed"/>
+                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DataPenunjangKeyPressed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -890,12 +891,12 @@
                         <Component class="widget.Label" name="jLabel114">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="VI. Hal-hal Yang Perlu Dipersiapkan :"/>
+                            <Property name="text" type="java.lang.String" value="VII. Alat-alat / Keperluan Khusus :"/>
                             <Property name="name" type="java.lang.String" value="jLabel114" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="10" y="520" width="190" height="23"/>
+                              <AbsoluteConstraints x="10" y="560" width="190" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -933,13 +934,13 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="44" y="540" width="680" height="63"/>
+                              <AbsoluteConstraints x="50" y="580" width="680" height="63"/>
                             </Constraint>
                           </Constraints>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="widget.TextArea" name="HalYangDipersiapkan">
+                            <Component class="widget.TextArea" name="Alatalat">
                               <Properties>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -948,10 +949,10 @@
                                 </Property>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
-                                <Property name="name" type="java.lang.String" value="HalYangDipersiapkan" noResource="true"/>
+                                <Property name="name" type="java.lang.String" value="Alatalat" noResource="true"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="HalYangDipersiapkanKeyPressed"/>
+                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="AlatalatKeyPressed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -959,35 +960,12 @@
                         <Component class="widget.Label" name="jLabel115">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="VII. Terapi Pre Operasi :"/>
+                            <Property name="text" type="java.lang.String" value="VIII. Lain-lain yang perlu diperhatikan :"/>
                             <Property name="name" type="java.lang.String" value="jLabel115" noResource="true"/>
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="10" y="610" width="190" height="23"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
-                        <Component class="javax.swing.JSeparator" name="jSeparator7">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
-                            </Property>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
-                            </Property>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                                <LineBorder>
-                                  <Color PropertyName="color" blue="ea" green="f4" red="ef" type="rgb"/>
-                                </LineBorder>
-                              </Border>
-                            </Property>
-                            <Property name="name" type="java.lang.String" value="jSeparator7" noResource="true"/>
-                          </Properties>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="610" width="750" height="1"/>
+                              <AbsoluteConstraints x="10" y="660" width="200" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1002,13 +980,13 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="44" y="630" width="680" height="63"/>
+                              <AbsoluteConstraints x="50" y="680" width="680" height="63"/>
                             </Constraint>
                           </Constraints>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="widget.TextArea" name="TerapiPreOp">
+                            <Component class="widget.TextArea" name="Lainlain">
                               <Properties>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -1017,14 +995,326 @@
                                 </Property>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
-                                <Property name="name" type="java.lang.String" value="TerapiPreOp" noResource="true"/>
+                                <Property name="name" type="java.lang.String" value="Lainlain" noResource="true"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TerapiPreOpKeyPressed"/>
+                                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LainlainKeyPressed"/>
                               </Events>
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="widget.Label" name="jLabel116">
+                          <Properties>
+                            <Property name="horizontalAlignment" type="int" value="2"/>
+                            <Property name="text" type="java.lang.String" value="VI. Hari / Tanggal Jadwal Operasi :"/>
+                            <Property name="name" type="java.lang.String" value="jLabel116" noResource="true"/>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="10" y="520" width="190" height="23"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="javax.swing.JSeparator" name="jSeparator8">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
+                            </Property>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                <LineBorder>
+                                  <Color PropertyName="color" blue="ea" green="f4" red="ef" type="rgb"/>
+                                </LineBorder>
+                              </Border>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="jSeparator8" noResource="true"/>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="0" y="650" width="750" height="10"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="javax.swing.JSeparator" name="jSeparator9">
+                          <Properties>
+                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ea" green="f4" red="ef" type="rgb"/>
+                            </Property>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                <LineBorder>
+                                  <Color PropertyName="color" blue="ea" green="f4" red="ef" type="rgb"/>
+                                </LineBorder>
+                              </Border>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="jSeparator9" noResource="true"/>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="0" y="550" width="750" height="10"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="widget.Label" name="jLabel20">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Jam :"/>
+                            <Property name="name" type="java.lang.String" value="jLabel20" noResource="true"/>
+                          </Properties>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="290" y="520" width="40" height="23"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="widget.Tanggal" name="TglOperasi">
+                          <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="32" green="46" red="32" type="rgb"/>
+                            </Property>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="19-06-2025"/>
+                              </StringArray>
+                            </Property>
+                            <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
+                            <Property name="name" type="java.lang.String" value="TglOperasi" noResource="true"/>
+                            <Property name="opaque" type="boolean" value="false"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TglOperasiActionPerformed"/>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TglOperasiKeyPressed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="190" y="520" width="90" height="23"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="widget.ComboBox" name="cmbJam">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="24">
+                                <StringItem index="0" value="00"/>
+                                <StringItem index="1" value="01"/>
+                                <StringItem index="2" value="02"/>
+                                <StringItem index="3" value="03"/>
+                                <StringItem index="4" value="04"/>
+                                <StringItem index="5" value="05"/>
+                                <StringItem index="6" value="06"/>
+                                <StringItem index="7" value="07"/>
+                                <StringItem index="8" value="08"/>
+                                <StringItem index="9" value="09"/>
+                                <StringItem index="10" value="10"/>
+                                <StringItem index="11" value="11"/>
+                                <StringItem index="12" value="12"/>
+                                <StringItem index="13" value="13"/>
+                                <StringItem index="14" value="14"/>
+                                <StringItem index="15" value="15"/>
+                                <StringItem index="16" value="16"/>
+                                <StringItem index="17" value="17"/>
+                                <StringItem index="18" value="18"/>
+                                <StringItem index="19" value="19"/>
+                                <StringItem index="20" value="20"/>
+                                <StringItem index="21" value="21"/>
+                                <StringItem index="22" value="22"/>
+                                <StringItem index="23" value="23"/>
+                              </StringArray>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="cmbJam" noResource="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cmbJamKeyPressed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="330" y="520" width="70" height="23"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="widget.ComboBox" name="cmbMnt">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="60">
+                                <StringItem index="0" value="00"/>
+                                <StringItem index="1" value="01"/>
+                                <StringItem index="2" value="02"/>
+                                <StringItem index="3" value="03"/>
+                                <StringItem index="4" value="04"/>
+                                <StringItem index="5" value="05"/>
+                                <StringItem index="6" value="06"/>
+                                <StringItem index="7" value="07"/>
+                                <StringItem index="8" value="08"/>
+                                <StringItem index="9" value="09"/>
+                                <StringItem index="10" value="10"/>
+                                <StringItem index="11" value="11"/>
+                                <StringItem index="12" value="12"/>
+                                <StringItem index="13" value="13"/>
+                                <StringItem index="14" value="14"/>
+                                <StringItem index="15" value="15"/>
+                                <StringItem index="16" value="16"/>
+                                <StringItem index="17" value="17"/>
+                                <StringItem index="18" value="18"/>
+                                <StringItem index="19" value="19"/>
+                                <StringItem index="20" value="20"/>
+                                <StringItem index="21" value="21"/>
+                                <StringItem index="22" value="22"/>
+                                <StringItem index="23" value="23"/>
+                                <StringItem index="24" value="24"/>
+                                <StringItem index="25" value="25"/>
+                                <StringItem index="26" value="26"/>
+                                <StringItem index="27" value="27"/>
+                                <StringItem index="28" value="28"/>
+                                <StringItem index="29" value="29"/>
+                                <StringItem index="30" value="30"/>
+                                <StringItem index="31" value="31"/>
+                                <StringItem index="32" value="32"/>
+                                <StringItem index="33" value="33"/>
+                                <StringItem index="34" value="34"/>
+                                <StringItem index="35" value="35"/>
+                                <StringItem index="36" value="36"/>
+                                <StringItem index="37" value="37"/>
+                                <StringItem index="38" value="38"/>
+                                <StringItem index="39" value="39"/>
+                                <StringItem index="40" value="40"/>
+                                <StringItem index="41" value="41"/>
+                                <StringItem index="42" value="42"/>
+                                <StringItem index="43" value="43"/>
+                                <StringItem index="44" value="44"/>
+                                <StringItem index="45" value="45"/>
+                                <StringItem index="46" value="46"/>
+                                <StringItem index="47" value="47"/>
+                                <StringItem index="48" value="48"/>
+                                <StringItem index="49" value="49"/>
+                                <StringItem index="50" value="50"/>
+                                <StringItem index="51" value="51"/>
+                                <StringItem index="52" value="52"/>
+                                <StringItem index="53" value="53"/>
+                                <StringItem index="54" value="54"/>
+                                <StringItem index="55" value="55"/>
+                                <StringItem index="56" value="56"/>
+                                <StringItem index="57" value="57"/>
+                                <StringItem index="58" value="58"/>
+                                <StringItem index="59" value="59"/>
+                              </StringArray>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="cmbMnt" noResource="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cmbMntKeyPressed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="390" y="520" width="-1" height="23"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="widget.ComboBox" name="cmbDtk">
+                          <Properties>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="60">
+                                <StringItem index="0" value="00"/>
+                                <StringItem index="1" value="01"/>
+                                <StringItem index="2" value="02"/>
+                                <StringItem index="3" value="03"/>
+                                <StringItem index="4" value="04"/>
+                                <StringItem index="5" value="05"/>
+                                <StringItem index="6" value="06"/>
+                                <StringItem index="7" value="07"/>
+                                <StringItem index="8" value="08"/>
+                                <StringItem index="9" value="09"/>
+                                <StringItem index="10" value="10"/>
+                                <StringItem index="11" value="11"/>
+                                <StringItem index="12" value="12"/>
+                                <StringItem index="13" value="13"/>
+                                <StringItem index="14" value="14"/>
+                                <StringItem index="15" value="15"/>
+                                <StringItem index="16" value="16"/>
+                                <StringItem index="17" value="17"/>
+                                <StringItem index="18" value="18"/>
+                                <StringItem index="19" value="19"/>
+                                <StringItem index="20" value="20"/>
+                                <StringItem index="21" value="21"/>
+                                <StringItem index="22" value="22"/>
+                                <StringItem index="23" value="23"/>
+                                <StringItem index="24" value="24"/>
+                                <StringItem index="25" value="25"/>
+                                <StringItem index="26" value="26"/>
+                                <StringItem index="27" value="27"/>
+                                <StringItem index="28" value="28"/>
+                                <StringItem index="29" value="29"/>
+                                <StringItem index="30" value="30"/>
+                                <StringItem index="31" value="31"/>
+                                <StringItem index="32" value="32"/>
+                                <StringItem index="33" value="33"/>
+                                <StringItem index="34" value="34"/>
+                                <StringItem index="35" value="35"/>
+                                <StringItem index="36" value="36"/>
+                                <StringItem index="37" value="37"/>
+                                <StringItem index="38" value="38"/>
+                                <StringItem index="39" value="39"/>
+                                <StringItem index="40" value="40"/>
+                                <StringItem index="41" value="41"/>
+                                <StringItem index="42" value="42"/>
+                                <StringItem index="43" value="43"/>
+                                <StringItem index="44" value="44"/>
+                                <StringItem index="45" value="45"/>
+                                <StringItem index="46" value="46"/>
+                                <StringItem index="47" value="47"/>
+                                <StringItem index="48" value="48"/>
+                                <StringItem index="49" value="49"/>
+                                <StringItem index="50" value="50"/>
+                                <StringItem index="51" value="51"/>
+                                <StringItem index="52" value="52"/>
+                                <StringItem index="53" value="53"/>
+                                <StringItem index="54" value="54"/>
+                                <StringItem index="55" value="55"/>
+                                <StringItem index="56" value="56"/>
+                                <StringItem index="57" value="57"/>
+                                <StringItem index="58" value="58"/>
+                                <StringItem index="59" value="59"/>
+                              </StringArray>
+                            </Property>
+                            <Property name="name" type="java.lang.String" value="cmbDtk" noResource="true"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cmbDtkKeyPressed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="450" y="520" width="70" height="23"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
+                        <Component class="widget.CekBox" name="ChkJln">
+                          <Properties>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="null"/>
+                            </Property>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
+                            <Property name="horizontalAlignment" type="int" value="0"/>
+                            <Property name="horizontalTextPosition" type="int" value="0"/>
+                            <Property name="name" type="java.lang.String" value="ChkJln" noResource="true"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[22, 23]"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChkJlnActionPerformed"/>
+                          </Events>
+                          <Constraints>
+                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                              <AbsoluteConstraints x="520" y="520" width="20" height="20"/>
+                            </Constraint>
+                          </Constraints>
+                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -1116,7 +1406,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="17-03-2023"/>
+                            <StringItem index="0" value="19-06-2025"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1144,7 +1434,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="17-03-2023"/>
+                            <StringItem index="0" value="19-06-2025"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>

@@ -1958,8 +1958,10 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalMedisBedah = new widget.Button();
         BtnAwalKeperawatan2 = new widget.Button();
         BtnSignInSebelumAnestesi = new widget.Button();
+        BtnRMPenilaianPreOperasi = new widget.Button();
         BtnIC7 = new widget.Button();
         BtnEP8 = new widget.Button();
+        BtnIC15 = new widget.Button();
         MTht = new widget.PanelBiasa();
         BtnAwalMedisTHT = new widget.Button();
         BtnAwalKeperawatan3 = new widget.Button();
@@ -2200,7 +2202,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-05-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2219,7 +2221,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-05-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4637,7 +4639,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-05-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -6070,6 +6072,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         MBedah.add(BtnSignInSebelumAnestesi);
 
+        BtnRMPenilaianPreOperasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnRMPenilaianPreOperasi.setText("Penilaian Pre Operasi");
+        BtnRMPenilaianPreOperasi.setFocusPainted(false);
+        BtnRMPenilaianPreOperasi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnRMPenilaianPreOperasi.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnRMPenilaianPreOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnRMPenilaianPreOperasi.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnRMPenilaianPreOperasi.setName("BtnRMPenilaianPreOperasi"); // NOI18N
+        BtnRMPenilaianPreOperasi.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnRMPenilaianPreOperasi.setRoundRect(false);
+        BtnRMPenilaianPreOperasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRMPenilaianPreOperasiActionPerformed(evt);
+            }
+        });
+        MBedah.add(BtnRMPenilaianPreOperasi);
+
         BtnIC7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnIC7.setText("Informed Cons");
         BtnIC7.setFocusPainted(false);
@@ -6103,6 +6122,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MBedah.add(BtnEP8);
+
+        BtnIC15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnIC15.setText("Informed Cons");
+        BtnIC15.setFocusPainted(false);
+        BtnIC15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnIC15.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnIC15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnIC15.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnIC15.setName("BtnIC15"); // NOI18N
+        BtnIC15.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnIC15.setRoundRect(false);
+        BtnIC15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnIC15ActionPerformed(evt);
+            }
+        });
+        MBedah.add(BtnIC15);
 
         jTabbedPane1.addTab("Bedah", MBedah);
 
@@ -12791,6 +12827,27 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnPORanap1ActionPerformed
 
+    private void BtnRMPenilaianPreOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRMPenilaianPreOperasiActionPerformed
+       if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPenilaianPreOperasi form=new RMPenilaianPreOperasi(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnRMPenilaianPreOperasiActionPerformed
+
+    private void BtnIC15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC15ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnIC15ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -12893,6 +12950,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnIC12;
     private widget.Button BtnIC13;
     private widget.Button BtnIC14;
+    private widget.Button BtnIC15;
     private widget.Button BtnIC2;
     private widget.Button BtnIC3;
     private widget.Button BtnIC4;
@@ -12943,6 +13001,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnPermintaanRanap;
     private widget.Button BtnPrint;
     private widget.Button BtnProsedurKFR;
+    private widget.Button BtnRMPenilaianPreOperasi;
     private widget.Button BtnRekonsiliasiObat;
     private widget.Button BtnResepLuar;
     private widget.Button BtnResepObat;
