@@ -7248,8 +7248,23 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
     public void emptTeks() {
         TanggalOperasi.setDate(new Date());
         TanggalPengkajian.setDate(new Date());
-        MembukaMata.setSelectedIndex(0);
-        TabRawat.setSelectedIndex(0);
+        TanggalPengkajianIntra.setDate(new Date());
+        WaktuMasuk.setDate(new Date());
+        WaktuKeluar.setDate(new Date());
+        AnastesiMulai.setDate(new Date());
+        AnastesiKeluar.setDate(new Date());
+        OperasiMulai.setDate(new Date());
+        OperasiSelesai.setDate(new Date());
+        JamMulaiTor.setDate(new Date());
+        JamSelesaiTor.setDate(new Date());
+        JamMulaiDarah.setDate(new Date());
+        JamSelesaiDarah.setDate(new Date());
+        JamMulaiDarah1.setDate(new Date());
+        JamSelesaiDarah1.setDate(new Date());
+        JamPengkajianPost.setDate(new Date());
+        JamPengkajianGlow.setDate(new Date());
+        
+            TabRawat.setSelectedIndex(0);
             KdPetugasOperator.setText("");
             NmPetugasOperator.setText("");
             KdPetugasAnastesi.setText("");
