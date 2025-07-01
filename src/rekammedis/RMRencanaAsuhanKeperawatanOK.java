@@ -7972,7 +7972,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
 
          if(ResponMotor.getSelectedItem().equals("Tanpa Respon")){
             SkalaResponMotor.setText("1");
-        }else if(MembukaMata.getSelectedItem().equals("Ekstensi")){
+        }else if(ResponMotor.getSelectedItem().equals("Ekstensi")){
             SkalaResponMotor.setText("2");
         }else if(ResponMotor.getSelectedItem().equals("Flexi Abnormal")){
             SkalaResponMotor.setText("3");
