@@ -1611,7 +1611,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(Distensil);
-        Distensil.setBounds(950, 180, 70, 20);
+        Distensil.setBounds(950, 180, 100, 20);
 
         Muntah.setBackground(new java.awt.Color(255, 255, 255));
         Muntah.setText("Muntah");
@@ -4110,7 +4110,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(DistensilPost);
-        DistensilPost.setBounds(950, 1440, 70, 20);
+        DistensilPost.setBounds(950, 1440, 120, 20);
 
         MuntahPost.setBackground(new java.awt.Color(255, 255, 255));
         MuntahPost.setText("Muntah");
@@ -5083,7 +5083,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Nama Pasien");
         }else if(NmPetugasOperator.getText().trim().equals("")){
-            Valid.textKosong(BtnDokterOperator,"Petugas Yang Menyerahkan");
+            Valid.textKosong(BtnDokterOperator,"Dokter Operator");
         }else if(NmPetugasAnastesi.getText().trim().equals("")){
             Valid.textKosong(BtnDokterOperator,"Petugas Yang Menerima");
         }else{
@@ -5093,7 +5093,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
                 simpanpost();
                 simpanglow();
             }else {
-                if(akses.getkode().equals(KdPetugasAnastesi.getText())||akses.getkode().equals(KdPetugasOperator.getText())){
+                if(akses.getkode().equals(KdPetugasAnastesi.getText())||akses.getkode().equals(KdPetugasOperator.getText())||akses.getkode().equals(KdPetugas.getText())){
                     simpanpre();
                 simpanintra();
                 simpanpost();
@@ -5128,7 +5128,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else {
-                if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString())){
+                if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Harus salah satu petugas sesuai user login..!!");
@@ -5163,8 +5163,11 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
                     gantipost();
                     gantiglow();
                 }else {
-                    if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString())){
-//                        ganti();
+                    if(akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString())||akses.getkode().equals(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString())){
+                    gantipre();
+                    gantiintra();
+                    gantipost();
+                    gantiglow();
                     }else{
                         JOptionPane.showMessageDialog(null,"Harus salah satu petugas sesuai user login..!!");
                     }
@@ -7251,8 +7254,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             NmPetugasOperator.setText("");
             KdPetugasAnastesi.setText("");
             NmPetugasAnastesi.setText("");
-            KdPetugas.setText("");
-            NmPetugas.setText("");
             
 //            PRE
             OtotBantuNafas.setSelected(false);
@@ -7822,9 +7823,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
                 PLanjutkan.getText(),KdPetugas.getText(),
                 tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
-               tampil();
-               emptTeks();
-               TabRawat.setSelectedIndex(1);
         }
     }
 
@@ -7851,9 +7849,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
 //                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
                 TNoRw.getText()
             })==true){
-               tampil();
-               emptTeks();
-               TabRawat.setSelectedIndex(1);
         }
     }
 
@@ -7878,9 +7873,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
 //                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
                 TNoRw.getText()
             })==true){
-               tampil();
-               emptTeks();
-               TabRawat.setSelectedIndex(1);
         }
     }
 
@@ -7910,7 +7902,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
                 S.getText(),O.getText(),TD.getText(),N.getText(),R.getText(),(ATercapai.isSelected() ? "true" : ""),(ATercapaiSebagian.isSelected() ? "true" : ""),(ABelumTercapai.isSelected() ? "true" : ""),(P.isSelected() ? "true" : ""),(PPertahankan.isSelected() ? "true" : ""),
                 PLanjutkan.getText(),KdPetugas.getText()
             })==true){
-                emptTeks();
         }
     }
     
@@ -7927,7 +7918,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
                 SIntra.getText(),OIntra.getText(),TDIntra.getText(),NIntra.getText(),RIntra.getText(),(ATercapaiIntra.isSelected() ? "true" : ""),(ATercapaiSebagianIntra.isSelected() ? "true" : ""),(ABelumTercapaiIntra.isSelected() ? "true" : ""),(PIntra.isSelected() ? "true" : ""),(PPertahankanIntra.isSelected() ? "true" : ""),
                 PLanjutkanIntra.getText(),KdPetugas.getText()
             })==true){
-                emptTeks();
         }
     }
     
@@ -7943,7 +7933,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
                 (TerapiOksigen.isSelected() ? "true" : ""),(SerahTerimaPost.isSelected() ? "true" : ""),(BerikanPasienPadaKeluargaPost.isSelected() ? "true" : ""),(SignOut.isSelected() ? "true" : ""),PerencanaanLainnyaPost.getText(),SPost.getText(),OPost.getText(),TDPost.getText(),NPost.getText(),RPost.getText(),
                 (ATercapaiPost.isSelected() ? "true" : ""),(ATercapaiSebagianPost.isSelected() ? "true" : ""),(ABelumTercapaiPost.isSelected() ? "true" : ""),(PPost.isSelected() ? "true" : ""),(PPertahankanPost.isSelected() ? "true" : ""),PLanjutkanPost.getText(),KdPetugas.getText()
             })==true){
-                emptTeks();
         }
     }
     
@@ -7954,6 +7943,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
                 SkalaRespon.getText(),KdPetugas.getText()
             })==true){
                 emptTeks();
+               TabRawat.setSelectedIndex(1);
         }
     }
     
