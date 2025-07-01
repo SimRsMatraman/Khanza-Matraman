@@ -219,7 +219,7 @@ public class DlgWhatsapp extends javax.swing.JDialog {
             "\"reply_message_id\": \"\""+          
             "}";
             requestEntity = new HttpEntity(requestJson,headers);
-            URL =  "http://100.10.3.5:4000/send/message";
+            URL =  "https://wa-api.rsudmatraman.my.id/send/message";
 //            URL =  "http://100.10.3.5:3000/api/sendText";
             System.out.println("URL : "+URL+"");
             System.out.println("Request JSON : "+requestJson);
