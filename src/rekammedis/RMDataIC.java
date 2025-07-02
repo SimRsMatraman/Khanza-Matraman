@@ -1035,7 +1035,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-06-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1049,7 +1049,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-06-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1348,7 +1348,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         jLabel13.setBounds(630, 40, 90, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-06-2025" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -1824,7 +1824,7 @@ public final class RMDataIC extends javax.swing.JDialog {
             if(Sequel.menyimpantf("surat_ic_rajal","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat",25,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),jamNow.format(new Date()),KodeDokter.getText(),KodeDokter1.getText(),KodeDokter2.getText(),
                     "-",DiagnosaKerja.getText(),DiagnosaBanding.getText(),KondisiPasien.getText(),TindakanKedokteran.getText(),TataCara.getSelectedItem().toString(),
-                    Tujuan.getText(),Komplikasi.getText(),Prognosis.getSelectedItem().toString(),Alternatif.getText(),Kemungkinan.getText(),Kemungkinan1.getText(),"-","","","","-",""
+                    Tujuan.getText(),Komplikasi.getText(),Prognosis.getSelectedItem().toString(),Alternatif.getText(),Kemungkinan.getText(),Kemungkinan1.getText(),"-","-","-","-","-",""
                 })==true){
                     tampil();
                     emptTeks();
@@ -1914,7 +1914,7 @@ public final class RMDataIC extends javax.swing.JDialog {
                         Status.getText(),DiagnosaKerja.getText(),DiagnosaBanding.getText(),KondisiPasien.getText(),TindakanKedokteran.getText(),TataCara.getSelectedItem().toString(),
                         Tujuan.getText(),KondisiPasien.getText(),Komplikasi.getText(),Prognosis.getSelectedItem().toString(),Alternatif.getText(),Kemungkinan.getText(),Kemungkinan1.getText(),Hubungan.getText(),Alamat.getText(),Umur.getText(),Alamat.getText(),accic.getText(),
 //                        tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()
-//                        NoSurat.getText()
+                        NoSurat.getText()
                     })==true){
                        tampil();
                        emptTeks();
@@ -2119,27 +2119,27 @@ public final class RMDataIC extends javax.swing.JDialog {
     }//GEN-LAST:event_DiagnosaKerjaKeyPressed
 
     private void MnLaporanResumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanResumeActionPerformed
-        if(tbObat.getSelectedRow()>-1){
-            Map<String, Object> param = new HashMap<>();    
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select logo from setting")); 
-            param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
-            param.put("nosurat",tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            param.put("finger",Sequel.cariIsi("select sha1(sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString())); 
-//            if(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString().equals("Ralan")){
-//                param.put("ruang",Sequel.cariIsi("select poliklinik.nm_poli from poliklinik inner join reg_periksa on reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
-//                param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_registrasi, '%d-%m-%Y') from reg_periksa where no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
-//            }else{
-//                param.put("ruang",Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar inner join kamar_inap on bangsal.kd_bangsal=kamar.kd_bangsal and kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
-//                param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_keluar, '%d-%m-%Y') from kamar_inap where no_rawat=? order by tgl_keluar desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
-//            }
-            Valid.MyReport("rptLaporanICRajal.jasper","report","::[ Informed Consent Rawat Jalan ]::",param);
-        }
+//        if(tbObat.getSelectedRow()>-1){
+//            Map<String, Object> param = new HashMap<>();    
+//            param.put("namars",akses.getnamars());
+//            param.put("alamatrs",akses.getalamatrs());
+//            param.put("kotars",akses.getkabupatenrs());
+//            param.put("propinsirs",akses.getpropinsirs());
+//            param.put("kontakrs",akses.getkontakrs());
+//            param.put("emailrs",akses.getemailrs());   
+//            param.put("logo",Sequel.cariGambar("select logo from setting")); 
+//            param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+//            param.put("nosurat",tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+//            param.put("finger",Sequel.cariIsi("select sha1(sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString())); 
+////            if(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString().equals("Ralan")){
+////                param.put("ruang",Sequel.cariIsi("select poliklinik.nm_poli from poliklinik inner join reg_periksa on reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+////                param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_registrasi, '%d-%m-%Y') from reg_periksa where no_rawat=?",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+////            }else{
+////                param.put("ruang",Sequel.cariIsi("select nm_bangsal from bangsal inner join kamar inner join kamar_inap on bangsal.kd_bangsal=kamar.kd_bangsal and kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat=? order by tgl_masuk desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+////                param.put("tanggalkeluar",Sequel.cariIsi("select DATE_FORMAT(tgl_keluar, '%d-%m-%Y') from kamar_inap where no_rawat=? order by tgl_keluar desc limit 1 ",tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()));
+////            }
+//            Valid.MyReport("rptLaporanICRajal.jasper","report","::[ Informed Consent Rawat Jalan ]::",param);
+//        }
     }//GEN-LAST:event_MnLaporanResumeActionPerformed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
