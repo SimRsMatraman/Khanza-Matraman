@@ -3278,7 +3278,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass12.add(BtnLaporanBedah);
-        BtnLaporanBedah.setBounds(830, 140, 230, 30);
+        BtnLaporanBedah.setBounds(830, 170, 230, 30);
 
         Refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
         Refresh.setMnemonic('2');
