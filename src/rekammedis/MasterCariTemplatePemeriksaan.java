@@ -1895,6 +1895,6 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
     //
     
     public void isCek(){        
-        BtnTambah.setEnabled(akses.gettemplate_pemeriksaan());
+//        BtnTambah.setEnabled(akses.gettemplate_pemeriksaan());
     }
 }

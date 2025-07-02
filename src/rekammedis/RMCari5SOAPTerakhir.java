@@ -46,7 +46,7 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"Tanggal","Jam","Subjek","Objek","Asesmen","Plan","Instruksi","Evaluasi"};
+        Object[] row={"Tanggal","Jam","Subjek","Objek","Asesmen","Plan","Instruksi","Dokter/Petugas"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -57,21 +57,21 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         for (z= 0; z < 8; z++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(z);
             if(z==0){
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(75);
             }else if(z==1){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(55);
             }else if(z==2){
-                column.setPreferredWidth(220);
+                column.setPreferredWidth(200);
             }else if(z==3){
                 column.setPreferredWidth(220);
             }else if(z==4){
                 column.setPreferredWidth(220);
             }else if(z==5){
-                column.setPreferredWidth(220);
+                column.setPreferredWidth(300);
             }else if(z==6){
-                column.setPreferredWidth(220);
+                column.setPreferredWidth(100);
             }else if(z==7){
-                column.setPreferredWidth(220);
+                column.setPreferredWidth(125);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable4());
@@ -111,6 +111,8 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
     private void initComponents() {
 
         internalFrame1 = new widget.InternalFrame();
+        panelGlass9 = new widget.panelisi();
+        jLabel22 = new widget.Label();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
         panelisi3 = new widget.panelisi();
@@ -133,15 +135,36 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Riwayat 5 SOAPIE Terakhir ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Riwayat 5 SOAPI Terakhir ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+
+        panelGlass9.setName("panelGlass9"); // NOI18N
+        panelGlass9.setPreferredSize(new java.awt.Dimension(44, 44));
+        panelGlass9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Panduan : Klik 2x pada row untuk salin SOAP");
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel22.setName("jLabel22"); // NOI18N
+        panelGlass9.add(jLabel22);
+
+        internalFrame1.add(panelGlass9, java.awt.BorderLayout.PAGE_START);
 
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        tbKamar.setAutoCreateRowSorter(true);
+        tbKamar.setCellSelectionEnabled(true);
         tbKamar.setName("tbKamar"); // NOI18N
-        tbKamar.setRowHeight(85);
+        tbKamar.setRowHeight(100);
+        tbKamar.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbKamar.getTableHeader().setReorderingAllowed(false);
+        tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbKamarMouseClicked(evt);
+            }
+        });
         tbKamar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbKamarKeyPressed(evt);
@@ -227,9 +250,10 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('4');
+        BtnKeluar.setText(" Keluar");
         BtnKeluar.setToolTipText("Alt+4");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
-        BtnKeluar.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnKeluar.setPreferredSize(new java.awt.Dimension(80, 23));
         BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKeluarActionPerformed(evt);
@@ -301,6 +325,14 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbKamarKeyPressed
 
+    private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
+        if(tabMode.getRowCount()!=0){
+            if(evt.getClickCount()==2){
+                    dispose();
+            }
+        }       
+    }//GEN-LAST:event_tbKamarMouseClicked
+
     /**
     * @param args the command line arguments
     */
@@ -327,8 +359,10 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
     private widget.TextBox TCari;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel18;
+    private widget.Label jLabel22;
     private widget.Label label10;
     private widget.Label label9;
+    private widget.panelisi panelGlass9;
     private widget.panelisi panelisi3;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
@@ -339,16 +373,15 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
             try{
                 ps=koneksi.prepareStatement(
                         "select pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,pemeriksaan_ralan.keluhan,pemeriksaan_ralan.pemeriksaan,"+
-                        "pemeriksaan_ralan.penilaian,pemeriksaan_ralan.rtl,pemeriksaan_ralan.instruksi,pemeriksaan_ralan.evaluasi "+
-                        "from pemeriksaan_ralan inner join reg_periksa on pemeriksaan_ralan.no_rawat=reg_periksa.no_rawat where "+
-                        "reg_periksa.no_rkm_medis=? and pemeriksaan_ralan.nip=? and "+
+                        "pemeriksaan_ralan.penilaian,pemeriksaan_ralan.rtl,pemeriksaan_ralan.instruksi, pegawai.nama "+
+                        "from pemeriksaan_ralan inner join reg_periksa on pemeriksaan_ralan.no_rawat=reg_periksa.no_rawat inner join pegawai on pegawai.nik=pemeriksaan_ralan.nik where "+
+                        "reg_periksa.no_rkm_medis=? and "+
                         "(pemeriksaan_ralan.keluhan like ? or pemeriksaan_ralan.pemeriksaan like ?) "+
-                        "order by pemeriksaan_ralan.tgl_perawatan desc,pemeriksaan_ralan.jam_rawat desc limit 5");
+                        "order by pemeriksaan_ralan.tgl_perawatan desc,pemeriksaan_ralan.jam_rawat desc limit 10");
                 try{
                     ps.setString(1,norm);
-                    ps.setString(2,nip);
+                    ps.setString(2,"%"+TCari.getText().trim()+"%");
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
-                    ps.setString(4,"%"+TCari.getText().trim()+"%");
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode.addRow(new String[] {
@@ -373,16 +406,15 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
             try{
                 ps=koneksi.prepareStatement(
                         "select pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.keluhan,pemeriksaan_ranap.pemeriksaan,"+
-                        "pemeriksaan_ranap.penilaian,pemeriksaan_ranap.rtl,pemeriksaan_ranap.instruksi,pemeriksaan_ranap.evaluasi "+
-                        "from pemeriksaan_ranap inner join reg_periksa on pemeriksaan_ranap.no_rawat=reg_periksa.no_rawat where "+
-                        "reg_periksa.no_rkm_medis=? and pemeriksaan_ranap.nip=? and "+
+                        "pemeriksaan_ranap.penilaian,pemeriksaan_ranap.rtl,pemeriksaan_ranap.instruksi, pegawai.nama "+
+                        "from pemeriksaan_ranap inner join reg_periksa on pemeriksaan_ranap.no_rawat=reg_periksa.no_rawat inner join pegawai on pegawai.nik=pemeriksaan_ranap.nik where "+
+                        "reg_periksa.no_rkm_medis=? and "+
                         "(pemeriksaan_ranap.keluhan like ? or pemeriksaan_ranap.pemeriksaan like ?) "+
-                        "order by pemeriksaan_ranap.tgl_perawatan desc,pemeriksaan_ranap.jam_rawat desc limit 5");
+                        "order by pemeriksaan_ranap.tgl_perawatan desc,pemeriksaan_ranap.jam_rawat desc limit 10");
                 try{
                     ps.setString(1,norm);
-                    ps.setString(2,nip);
+                    ps.setString(2,"%"+TCari.getText().trim()+"%");
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
-                    ps.setString(4,"%"+TCari.getText().trim()+"%");
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode.addRow(new String[] {
@@ -414,6 +446,12 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
     public void setNoRM(String norm,String nip,String status){
         this.norm=norm;
         this.nip=nip;
+        Status.setSelectedItem(status);
+        tampil();
+    }
+    
+    public void setNoRm(String norm,String status){
+        this.norm=norm;
         Status.setSelectedItem(status);
         tampil();
     }

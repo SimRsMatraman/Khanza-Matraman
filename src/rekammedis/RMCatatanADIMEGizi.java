@@ -183,8 +183,10 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnCatatanADIME = new javax.swing.JMenuItem();
-        JK = new widget.TextBox();
         Umur = new widget.TextBox();
+        scrollPane6 = new widget.ScrollPane();
+        Instruksi = new widget.TextArea();
+        jLabel31 = new widget.Label();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -240,9 +242,18 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         jLabel26 = new widget.Label();
         scrollPane5 = new widget.ScrollPane();
         Intervensi = new widget.TextArea();
-        jLabel31 = new widget.Label();
-        scrollPane6 = new widget.ScrollPane();
-        Instruksi = new widget.TextArea();
+        jLabel12 = new widget.Label();
+        BB = new widget.TextBox();
+        jLabel13 = new widget.Label();
+        TBPB = new widget.TextBox();
+        jLabel27 = new widget.Label();
+        Usia = new widget.TextBox();
+        jLabel32 = new widget.Label();
+        jLabel33 = new widget.Label();
+        Diagnosa = new widget.TextBox();
+        jLabel17 = new widget.Label();
+        jLabel20 = new widget.Label();
+        JK = new widget.TextBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -260,11 +271,25 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnCatatanADIME);
 
-        JK.setHighlighter(null);
-        JK.setName("JK"); // NOI18N
-
         Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
+
+        scrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPane6.setName("scrollPane6"); // NOI18N
+
+        Instruksi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Instruksi.setColumns(20);
+        Instruksi.setRows(5);
+        Instruksi.setName("Instruksi"); // NOI18N
+        Instruksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                InstruksiKeyPressed(evt);
+            }
+        });
+        scrollPane6.setViewportView(Instruksi);
+
+        jLabel31.setText("Instruksi :");
+        jLabel31.setName("jLabel31"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -436,7 +461,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-06-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-06-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -450,7 +475,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-06-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-06-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -512,7 +537,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         PanelInput.setToolTipText("");
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 306));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 366));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -569,10 +594,10 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             }
         });
         FormInput.add(TPasien);
-        TPasien.setBounds(336, 10, 450, 23);
+        TPasien.setBounds(336, 10, 370, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-06-2023" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-06-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -582,7 +607,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             }
         });
         FormInput.add(Tanggal);
-        Tanggal.setBounds(79, 40, 90, 23);
+        Tanggal.setBounds(79, 43, 90, 23);
 
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
@@ -595,11 +620,11 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         FormInput.add(TNoRM);
         TNoRM.setBounds(222, 10, 112, 23);
 
-        jLabel16.setText("Tanggal :");
+        jLabel16.setText("Diagnosa :");
         jLabel16.setName("jLabel16"); // NOI18N
         jLabel16.setVerifyInputWhenFocusTarget(false);
         FormInput.add(jLabel16);
-        jLabel16.setBounds(0, 40, 75, 23);
+        jLabel16.setBounds(0, 80, 75, 23);
 
         Jam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         Jam.setName("Jam"); // NOI18N
@@ -609,7 +634,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             }
         });
         FormInput.add(Jam);
-        Jam.setBounds(173, 40, 62, 23);
+        Jam.setBounds(173, 43, 62, 23);
 
         Menit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         Menit.setName("Menit"); // NOI18N
@@ -619,7 +644,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             }
         });
         FormInput.add(Menit);
-        Menit.setBounds(238, 40, 62, 23);
+        Menit.setBounds(238, 43, 62, 23);
 
         Detik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         Detik.setName("Detik"); // NOI18N
@@ -629,7 +654,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             }
         });
         FormInput.add(Detik);
-        Detik.setBounds(303, 40, 62, 23);
+        Detik.setBounds(303, 43, 62, 23);
 
         ChkKejadian.setBorder(null);
         ChkKejadian.setSelected(true);
@@ -638,12 +663,12 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         ChkKejadian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         ChkKejadian.setName("ChkKejadian"); // NOI18N
         FormInput.add(ChkKejadian);
-        ChkKejadian.setBounds(368, 40, 23, 23);
+        ChkKejadian.setBounds(368, 43, 23, 23);
 
         jLabel18.setText("Petugas :");
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
-        jLabel18.setBounds(400, 40, 70, 23);
+        jLabel18.setBounds(400, 43, 70, 23);
 
         KdPetugas.setEditable(false);
         KdPetugas.setHighlighter(null);
@@ -654,12 +679,12 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             }
         });
         FormInput.add(KdPetugas);
-        KdPetugas.setBounds(474, 40, 94, 23);
+        KdPetugas.setBounds(474, 43, 94, 23);
 
         NmPetugas.setEditable(false);
         NmPetugas.setName("NmPetugas"); // NOI18N
         FormInput.add(NmPetugas);
-        NmPetugas.setBounds(570, 40, 184, 23);
+        NmPetugas.setBounds(570, 43, 184, 23);
 
         btnPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPetugas.setMnemonic('2');
@@ -676,17 +701,17 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             }
         });
         FormInput.add(btnPetugas);
-        btnPetugas.setBounds(758, 40, 28, 23);
+        btnPetugas.setBounds(758, 43, 28, 23);
 
         jLabel24.setText("Asesmen :");
         jLabel24.setName("jLabel24"); // NOI18N
         FormInput.add(jLabel24);
-        jLabel24.setBounds(0, 70, 75, 23);
+        jLabel24.setBounds(0, 120, 75, 23);
 
         jLabel29.setText("Monitoring :");
         jLabel29.setName("jLabel29"); // NOI18N
         FormInput.add(jLabel29);
-        jLabel29.setBounds(400, 70, 70, 23);
+        jLabel29.setBounds(400, 120, 70, 23);
 
         scrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane1.setName("scrollPane1"); // NOI18N
@@ -703,7 +728,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         scrollPane1.setViewportView(Asesmen);
 
         FormInput.add(scrollPane1);
-        scrollPane1.setBounds(79, 70, 312, 63);
+        scrollPane1.setBounds(80, 120, 312, 63);
 
         scrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane2.setName("scrollPane2"); // NOI18N
@@ -720,12 +745,12 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         scrollPane2.setViewportView(Monitoring);
 
         FormInput.add(scrollPane2);
-        scrollPane2.setBounds(474, 70, 312, 63);
+        scrollPane2.setBounds(480, 120, 312, 63);
 
         jLabel25.setText("Diagnosis :");
         jLabel25.setName("jLabel25"); // NOI18N
         FormInput.add(jLabel25);
-        jLabel25.setBounds(0, 140, 75, 23);
+        jLabel25.setBounds(0, 190, 75, 23);
 
         scrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane3.setName("scrollPane3"); // NOI18N
@@ -742,12 +767,12 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         scrollPane3.setViewportView(Diagnosis);
 
         FormInput.add(scrollPane3);
-        scrollPane3.setBounds(79, 140, 312, 63);
+        scrollPane3.setBounds(80, 190, 312, 63);
 
         jLabel30.setText("Evaluasi :");
         jLabel30.setName("jLabel30"); // NOI18N
         FormInput.add(jLabel30);
-        jLabel30.setBounds(400, 140, 70, 23);
+        jLabel30.setBounds(400, 190, 70, 23);
 
         scrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane4.setName("scrollPane4"); // NOI18N
@@ -764,12 +789,12 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         scrollPane4.setViewportView(Evaluasi);
 
         FormInput.add(scrollPane4);
-        scrollPane4.setBounds(474, 140, 312, 63);
+        scrollPane4.setBounds(480, 190, 312, 63);
 
         jLabel26.setText("Intervensi :");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
-        jLabel26.setBounds(0, 210, 75, 23);
+        jLabel26.setBounds(0, 260, 75, 23);
 
         scrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane5.setName("scrollPane5"); // NOI18N
@@ -786,29 +811,91 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         scrollPane5.setViewportView(Intervensi);
 
         FormInput.add(scrollPane5);
-        scrollPane5.setBounds(79, 210, 312, 63);
+        scrollPane5.setBounds(80, 260, 312, 63);
 
-        jLabel31.setText("Instruksi :");
-        jLabel31.setName("jLabel31"); // NOI18N
-        FormInput.add(jLabel31);
-        jLabel31.setBounds(400, 210, 70, 23);
+        jLabel12.setText("BB :");
+        jLabel12.setName("jLabel12"); // NOI18N
+        FormInput.add(jLabel12);
+        jLabel12.setBounds(350, 80, 75, 23);
 
-        scrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        scrollPane6.setName("scrollPane6"); // NOI18N
-
-        Instruksi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        Instruksi.setColumns(20);
-        Instruksi.setRows(5);
-        Instruksi.setName("Instruksi"); // NOI18N
-        Instruksi.addKeyListener(new java.awt.event.KeyAdapter() {
+        BB.setFocusTraversalPolicyProvider(true);
+        BB.setName("BB"); // NOI18N
+        BB.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                InstruksiKeyPressed(evt);
+                BBKeyPressed(evt);
             }
         });
-        scrollPane6.setViewportView(Instruksi);
+        FormInput.add(BB);
+        BB.setBounds(430, 80, 45, 23);
 
-        FormInput.add(scrollPane6);
-        scrollPane6.setBounds(474, 210, 312, 63);
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("Kg");
+        jLabel13.setName("jLabel13"); // NOI18N
+        FormInput.add(jLabel13);
+        jLabel13.setBounds(480, 80, 30, 23);
+
+        TBPB.setFocusTraversalPolicyProvider(true);
+        TBPB.setName("TBPB"); // NOI18N
+        TBPB.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TBPBKeyPressed(evt);
+            }
+        });
+        FormInput.add(TBPB);
+        TBPB.setBounds(560, 80, 45, 23);
+
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel27.setText("Cm");
+        jLabel27.setName("jLabel27"); // NOI18N
+        FormInput.add(jLabel27);
+        jLabel27.setBounds(610, 80, 30, 23);
+
+        Usia.setFocusTraversalPolicyProvider(true);
+        Usia.setName("Usia"); // NOI18N
+        Usia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                UsiaKeyPressed(evt);
+            }
+        });
+        FormInput.add(Usia);
+        Usia.setBounds(685, 80, 60, 23);
+
+        jLabel32.setText("Usia :");
+        jLabel32.setName("jLabel32"); // NOI18N
+        FormInput.add(jLabel32);
+        jLabel32.setBounds(640, 80, 42, 23);
+
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel33.setText("Bulan");
+        jLabel33.setName("jLabel33"); // NOI18N
+        FormInput.add(jLabel33);
+        jLabel33.setBounds(750, 80, 40, 23);
+
+        Diagnosa.setHighlighter(null);
+        Diagnosa.setName("Diagnosa"); // NOI18N
+        Diagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DiagnosaKeyPressed(evt);
+            }
+        });
+        FormInput.add(Diagnosa);
+        Diagnosa.setBounds(80, 80, 300, 23);
+
+        jLabel17.setText("Tanggal :");
+        jLabel17.setName("jLabel17"); // NOI18N
+        jLabel17.setVerifyInputWhenFocusTarget(false);
+        FormInput.add(jLabel17);
+        jLabel17.setBounds(0, 43, 75, 23);
+
+        jLabel20.setText("TB/PB :");
+        jLabel20.setName("jLabel20"); // NOI18N
+        FormInput.add(jLabel20);
+        jLabel20.setBounds(507, 80, 50, 23);
+
+        JK.setHighlighter(null);
+        JK.setName("JK"); // NOI18N
+        FormInput.add(JK);
+        JK.setBounds(710, 10, 70, 24);
 
         scrollInput.setViewportView(FormInput);
 
@@ -1139,6 +1226,22 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         Valid.pindah2(evt,Evaluasi,BtnSimpan);
     }//GEN-LAST:event_InstruksiKeyPressed
 
+    private void BBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BBKeyPressed
+        Valid.pindah(evt,btnPetugas,TBPB);
+    }//GEN-LAST:event_BBKeyPressed
+
+    private void TBPBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBPBKeyPressed
+        Valid.pindah(evt,BB,Usia);
+    }//GEN-LAST:event_TBPBKeyPressed
+
+    private void UsiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UsiaKeyPressed
+        Valid.pindah(evt,TBPB,Asesmen);
+    }//GEN-LAST:event_UsiaKeyPressed
+
+    private void DiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosaKeyPressed
+        Valid.pindah(evt,btnPetugas,BB);
+    }//GEN-LAST:event_DiagnosaKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1157,6 +1260,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.TextArea Asesmen;
+    private widget.TextBox BB;
     private widget.Button BtnAll;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
@@ -1170,6 +1274,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.ComboBox Detik;
+    private widget.TextBox Diagnosa;
     private widget.TextArea Diagnosis;
     private widget.TextArea Evaluasi;
     private widget.PanelBiasa FormInput;
@@ -1185,24 +1290,33 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;
+    private widget.TextBox TBPB;
     private widget.TextBox TCari;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
     private widget.Tanggal Tanggal;
     private widget.TextBox Umur;
+    private widget.TextBox Usia;
     private widget.Button btnPetugas;
     private widget.InternalFrame internalFrame1;
+    private widget.Label jLabel12;
+    private widget.Label jLabel13;
     private widget.Label jLabel16;
+    private widget.Label jLabel17;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
+    private widget.Label jLabel20;
     private widget.Label jLabel21;
     private widget.Label jLabel24;
     private widget.Label jLabel25;
     private widget.Label jLabel26;
+    private widget.Label jLabel27;
     private widget.Label jLabel29;
     private widget.Label jLabel30;
     private widget.Label jLabel31;
+    private widget.Label jLabel32;
+    private widget.Label jLabel33;
     private widget.Label jLabel4;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
@@ -1304,6 +1418,10 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         Monitoring.setText("");
         Evaluasi.setText("");
         Instruksi.setText("");
+        Diagnosa.setText("");
+        BB.setText("");
+        TBPB.setText("");
+        Usia.setText("");
         Tanggal.setDate(new Date());
         Asesmen.requestFocus();
     } 
@@ -1372,7 +1490,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         if(ChkInput.isSelected()==true){
             if(internalFrame1.getHeight()>478){
                 ChkInput.setVisible(false);
-                PanelInput.setPreferredSize(new Dimension(WIDTH,306));
+                PanelInput.setPreferredSize(new Dimension(WIDTH,366));
                 FormInput.setVisible(true);      
                 ChkInput.setVisible(true);
             }else{
