@@ -4593,7 +4593,9 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         BtnCetakHasilLab.setEnabled(akses.getpermintaan_lab());
         BtnHasil.setEnabled(akses.getperiksa_lab());
         BtnSampel.setEnabled(akses.getperiksa_lab());
+        BtnSampel.setEnabled(akses.getperiksa_lab());
         BtnHapus.setEnabled(akses.getpermintaan_lab());
+        BtnEditTgl.setEnabled(akses.getpermintaan_lab());
         BtnPrint.setEnabled(akses.getpermintaan_lab());
         BtnKirimLica.setEnabled(akses.getpermintaan_lab());
         BtnAmbilLica.setEnabled(akses.getperiksa_lab());
