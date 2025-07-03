@@ -157,6 +157,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import permintaan.DlgPermintaanRanap;
 import rekammedis.GdsIgd;
+import rekammedis.RMCatatanADIMEGizi;
 import rekammedis.RMRujukanFisio;
 import rekammedis.RMDataCatatanKeperawatanRalan;
 import surat.SuratAPS;
@@ -2021,6 +2022,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnSkriningGiziLanjut = new widget.Button();
         BtnIC11 = new widget.Button();
         BtnEP4 = new widget.Button();
+        BtnAdimeGizi = new widget.Button();
         MFisio = new widget.PanelBiasa();
         BtnRiwayat2 = new widget.Button();
         BtnResepObat2 = new widget.Button();
@@ -6601,6 +6603,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MGizi.add(BtnEP4);
+
+        BtnAdimeGizi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAdimeGizi.setText("ADIME Gizi");
+        BtnAdimeGizi.setFocusPainted(false);
+        BtnAdimeGizi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAdimeGizi.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAdimeGizi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAdimeGizi.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAdimeGizi.setName("BtnAdimeGizi"); // NOI18N
+        BtnAdimeGizi.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAdimeGizi.setRoundRect(false);
+        BtnAdimeGizi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAdimeGiziActionPerformed(evt);
+            }
+        });
+        MGizi.add(BtnAdimeGizi);
 
         jTabbedPane1.addTab("Gizi", MGizi);
 
@@ -12348,7 +12367,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12365,7 +12384,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12382,7 +12401,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12399,7 +12418,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12416,7 +12435,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12433,7 +12452,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12450,7 +12469,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12467,7 +12486,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12484,7 +12503,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12501,7 +12520,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12518,7 +12537,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12535,7 +12554,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12552,7 +12571,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12569,7 +12588,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12586,7 +12605,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataIC ic=new RMDataIC(null,false);
             ic.isCek();
-            ic.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
             ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ic.tampil();
@@ -12603,7 +12622,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12620,7 +12639,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12637,7 +12656,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12654,7 +12673,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12671,7 +12690,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12688,7 +12707,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12705,7 +12724,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12722,7 +12741,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12739,7 +12758,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12756,7 +12775,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12773,7 +12792,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12790,7 +12809,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12807,7 +12826,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12824,7 +12843,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12841,7 +12860,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMDataEdukasi ep=new RMDataEdukasi(null,false);
             ep.isCek();
-            ep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            ep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ep.setLocationRelativeTo(internalFrame1);
             ep.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             ep.tampil();
@@ -12858,7 +12877,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             SuratAPS aps=new SuratAPS(null,false);
             aps.isCek();
-            aps.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            aps.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             aps.setLocationRelativeTo(internalFrame1);
             aps.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());
             aps.tampil();
@@ -12875,7 +12894,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             SuratAPS aps=new SuratAPS(null,false);
             aps.isCek();
-            aps.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            aps.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             aps.setLocationRelativeTo(internalFrame1);
             aps.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());
             aps.tampil();
@@ -12892,7 +12911,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             SuratAPS aps=new SuratAPS(null,false);
             aps.isCek();
-            aps.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            aps.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             aps.setLocationRelativeTo(internalFrame1);
             aps.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());
             aps.tampil();
@@ -12995,7 +13014,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPemberianObatRalan form=new RMPemberianObatRalan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -13013,7 +13032,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             RMPemberianObatRalan form=new RMPemberianObatRalan(null,false);
             form.isCek();
-            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);
             form.emptTeks();
@@ -13173,6 +13192,24 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_BMIKeyPressed
 
+    private void BtnAdimeGiziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdimeGiziActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMCatatanADIMEGizi form=new RMCatatanADIMEGizi(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAdimeGiziActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -13199,6 +13236,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnAPS2;
     private widget.Button BtnAPS3;
     private widget.Button BtnAPS4;
+    private widget.Button BtnAdimeGizi;
     private widget.Button BtnAll;
     private widget.Button BtnAsuhanGizi;
     private widget.Button BtnAwalFisioterapi;
