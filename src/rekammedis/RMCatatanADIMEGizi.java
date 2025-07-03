@@ -64,7 +64,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         setSize(628,674);
 
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Rawat","No.R.M.","Nama Pasien","Umur","JK","Tanggal","Asesmen","Diagnosis","Intervensi","Monitoring","Evaluasi","Instruksi","NIP","Petugas"
+            "No.Rawat","No.R.M.","Nama Pasien","Umur","JK","Tanggal","Asesmen","Diagnosis","Intervensi","Monitoring","Evaluasi","Instruksi","NIP","Petugas","TB","BB","Usia"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -74,7 +74,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 14; i++) {
+        for (i = 0; i < 17; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -89,21 +89,27 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             }else if(i==5){
                 column.setPreferredWidth(120);
             }else if(i==6){
-                column.setPreferredWidth(230);
+                column.setPreferredWidth(130);
             }else if(i==7){
-                column.setPreferredWidth(230);
+                column.setPreferredWidth(130);
             }else if(i==8){
-                column.setPreferredWidth(230);
+                column.setPreferredWidth(130);
             }else if(i==9){
-                column.setPreferredWidth(230);
+                column.setPreferredWidth(130);
             }else if(i==10){
-                column.setPreferredWidth(230);
+                column.setPreferredWidth(130);
             }else if(i==11){
                 column.setPreferredWidth(230);
             }else if(i==12){
-                column.setPreferredWidth(80);
+                column.setPreferredWidth(70);
             }else if(i==13){
                 column.setPreferredWidth(150);
+            }else if(i==14){
+                column.setPreferredWidth(50);
+            }else if(i==15){
+                column.setPreferredWidth(50);
+            }else if(i==16){
+                column.setPreferredWidth(50);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -117,6 +123,9 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         Evaluasi.setDocument(new batasInput((int)1000).getKata(Evaluasi));
         Instruksi.setDocument(new batasInput((int)1000).getKata(Instruksi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        TB.setDocument(new batasInput((byte)5).getKata(TB));
+        BB.setDocument(new batasInput((byte)5).getKata(BB));
+        Usia.setDocument(new batasInput((byte)3).getKata(Usia));
         
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -245,7 +254,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         jLabel12 = new widget.Label();
         BB = new widget.TextBox();
         jLabel13 = new widget.Label();
-        TBPB = new widget.TextBox();
+        TB = new widget.TextBox();
         jLabel27 = new widget.Label();
         Usia = new widget.TextBox();
         jLabel32 = new widget.Label();
@@ -834,15 +843,15 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(480, 80, 30, 23);
 
-        TBPB.setFocusTraversalPolicyProvider(true);
-        TBPB.setName("TBPB"); // NOI18N
-        TBPB.addKeyListener(new java.awt.event.KeyAdapter() {
+        TB.setFocusTraversalPolicyProvider(true);
+        TB.setName("TB"); // NOI18N
+        TB.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                TBPBKeyPressed(evt);
+                TBKeyPressed(evt);
             }
         });
-        FormInput.add(TBPB);
-        TBPB.setBounds(560, 80, 45, 23);
+        FormInput.add(TB);
+        TB.setBounds(560, 80, 45, 23);
 
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel27.setText("Cm");
@@ -930,12 +939,12 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         }else if(Monitoring.getText().trim().equals("")){
             Valid.textKosong(Monitoring,"Evaluasi");
         }else{
-            if(Sequel.menyimpantf("catatan_adime_gizi","?,?,?,?,?,?,?,?,?","Data",9,new String[]{
-                TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),Asesmen.getText(),Diagnosis.getText(),Intervensi.getText(),Monitoring.getText(),Evaluasi.getText(),Instruksi.getText(),KdPetugas.getText()
+            if(Sequel.menyimpantf("catatan_adime_gizi","?,?,?,?,?,?,?,?,?,?,?,?","Data",12,new String[]{
+                TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),Asesmen.getText(),Diagnosis.getText(),Intervensi.getText(),Monitoring.getText(),Evaluasi.getText(),Instruksi.getText(),KdPetugas.getText(),TB.getText(),BB.getText(),Usia.getText()
             })==true){
                 tabMode.addRow(new String[]{
                     TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Umur.getText(),JK.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-                    Asesmen.getText(),Diagnosis.getText(),Intervensi.getText(),Monitoring.getText(),Evaluasi.getText(),Instruksi.getText(),KdPetugas.getText(),NmPetugas.getText()
+                    Asesmen.getText(),Diagnosis.getText(),Intervensi.getText(),Monitoring.getText(),Evaluasi.getText(),Instruksi.getText(),KdPetugas.getText(),NmPetugas.getText(),TB.getText(),BB.getText(),Usia.getText()
                 });
                 LCount.setText(""+tabMode.getRowCount());
                 emptTeks();
@@ -968,7 +977,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 hapus();
             }else{
-                if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString())){
+                if(KdPetugas.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString())){
                     hapus();
                 }else{
                     JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh petugas yang bersangkutan..!!");
@@ -1227,15 +1236,15 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
     }//GEN-LAST:event_InstruksiKeyPressed
 
     private void BBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BBKeyPressed
-        Valid.pindah(evt,btnPetugas,TBPB);
+        Valid.pindah(evt,btnPetugas,TB);
     }//GEN-LAST:event_BBKeyPressed
 
-    private void TBPBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBPBKeyPressed
+    private void TBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TBKeyPressed
         Valid.pindah(evt,BB,Usia);
-    }//GEN-LAST:event_TBPBKeyPressed
+    }//GEN-LAST:event_TBKeyPressed
 
     private void UsiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UsiaKeyPressed
-        Valid.pindah(evt,TBPB,Asesmen);
+        Valid.pindah(evt,TB,Asesmen);
     }//GEN-LAST:event_UsiaKeyPressed
 
     private void DiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosaKeyPressed
@@ -1290,7 +1299,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.ScrollPane Scroll;
-    private widget.TextBox TBPB;
+    private widget.TextBox TB;
     private widget.TextBox TCari;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
@@ -1342,7 +1351,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                     "pasien.jk,catatan_adime_gizi.tanggal,catatan_adime_gizi.asesmen,catatan_adime_gizi.diagnosis,"+
                     "catatan_adime_gizi.intervensi,catatan_adime_gizi.monitoring,catatan_adime_gizi.evaluasi,catatan_adime_gizi.instruksi,"+
-                    "catatan_adime_gizi.nip,petugas.nama "+
+                    "catatan_adime_gizi.nip,petugas.nama,catatan_adime_gizi.tb,catatan_adime_gizi.bb,catatan_adime_gizi.usia "+
                     "from catatan_adime_gizi inner join reg_periksa on catatan_adime_gizi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join petugas on catatan_adime_gizi.nip=petugas.nip where "+
@@ -1352,7 +1361,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                     "pasien.jk,catatan_adime_gizi.tanggal,catatan_adime_gizi.asesmen,catatan_adime_gizi.diagnosis,"+
                     "catatan_adime_gizi.intervensi,catatan_adime_gizi.monitoring,catatan_adime_gizi.evaluasi,catatan_adime_gizi.instruksi,"+
-                    "catatan_adime_gizi.nip,petugas.nama "+
+                    "catatan_adime_gizi.nip,petugas.nama,catatan_adime_gizi.tb,catatan_adime_gizi.bb,catatan_adime_gizi.usia "+
                     "from catatan_adime_gizi inner join reg_periksa on catatan_adime_gizi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join petugas on catatan_adime_gizi.nip=petugas.nip where "+
@@ -1392,7 +1401,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
                         rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),rs.getString("jk"),
                         rs.getString("tanggal"),rs.getString("asesmen"),rs.getString("diagnosis"),
                         rs.getString("intervensi"),rs.getString("monitoring"),rs.getString("evaluasi"),
-                        rs.getString("instruksi"),rs.getString("nip"),rs.getString("nama")
+                        rs.getString("instruksi"),rs.getString("nip"),rs.getString("nama"),rs.getString("tb"),rs.getString("bb"),rs.getString("usia")
                     });
                 }
             } catch (Exception e) {
@@ -1420,7 +1429,7 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         Instruksi.setText("");
         Diagnosa.setText("");
         BB.setText("");
-        TBPB.setText("");
+        TB.setText("");
         Usia.setText("");
         Tanggal.setDate(new Date());
         Asesmen.requestFocus();
@@ -1443,6 +1452,9 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             Monitoring.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             Evaluasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             Instruksi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            TB.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            BB.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            Usia.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
         }
     }
 
@@ -1475,6 +1487,20 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
+        if(Sequel.cariInteger("select count(no_rawat) from penilaian_awal_keperawatan_ralan where no_rawat='"+TNoRw.getText()+"' ")>0){
+            //Keperawatan Ralan
+            BB.setText(Sequel.cariIsi("select bb from penilaian_awal_keperawatan_ralan where no_rawat=? order by bb desc",TNoRw.getText()));
+            TB.setText(Sequel.cariIsi("select tb from penilaian_awal_keperawatan_ralan where no_rawat=? order by tb desc",TNoRw.getText()));
+        }else if(Sequel.cariInteger("select count(no_rawat) from penilaian_awal_keperawatan_ralan_bayi where no_rawat='"+TNoRw.getText()+"' ")>0){
+             //Menampilkan Keperawatan Ralan Bayi
+            BB.setText(Sequel.cariIsi("select bb from penilaian_awal_keperawatan_ralan_bayi where no_rawat=? order by bb desc",TNoRw.getText()));
+            TB.setText(Sequel.cariIsi("select tb from penilaian_awal_keperawatan_ralan_bayi where no_rawat=? order by tb desc",TNoRw.getText()));
+        }else if(Sequel.cariInteger("select count(no_rawat) from pemeriksaan_ralan where no_rawat='"+TNoRw.getText()+"' ")>0){
+            //Menampilkan ttv pemeriksaan
+            BB.setText(Sequel.cariIsi("select berat from pemeriksaan_ralan where no_rawat=? order by berat desc",TNoRw.getText()));
+            TB.setText(Sequel.cariIsi("select tinggi from pemeriksaan_ralan where no_rawat=? order by tinggi desc",TNoRw.getText()));
+        }
+        Usia.setText(Sequel.cariIsi("select TIMESTAMPDIFF(month,tgl_lahir,CURRENT_DATE) as usia from pasien where no_rkm_medis=?",TNoRM.getText()));
     }
     
     public void setNoRm(String norwt, Date tgl2) {
@@ -1578,10 +1604,9 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
     }
 
     private void ganti() {
-        if(Sequel.mengedittf("catatan_adime_gizi","tanggal=? and no_rawat=?","no_rawat=?,tanggal=?,asesmen=?,diagnosis=?,intervensi=?,monitoring=?,evaluasi=?,instruksi=?,nip=?",11,new String[]{
+        if(Sequel.mengedittf("catatan_adime_gizi","tanggal=? and no_rawat=?","no_rawat=?,tanggal=?,asesmen=?,diagnosis=?,intervensi=?,monitoring=?,evaluasi=?,instruksi=?,nip=?,tb=?,bb=?,usia=?",14,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),Asesmen.getText(),Diagnosis.getText(),
-            Intervensi.getText(),Monitoring.getText(),Evaluasi.getText(),Instruksi.getText(),KdPetugas.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            Intervensi.getText(),Monitoring.getText(),Evaluasi.getText(),Instruksi.getText(),KdPetugas.getText(),TB.getText(),BB.getText(),Usia.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
             tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
             tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
@@ -1597,6 +1622,9 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
             tbObat.setValueAt(Instruksi.getText(),tbObat.getSelectedRow(),11);
             tbObat.setValueAt(KdPetugas.getText(),tbObat.getSelectedRow(),12);
             tbObat.setValueAt(NmPetugas.getText(),tbObat.getSelectedRow(),13);
+            tbObat.setValueAt(TB.getText(),tbObat.getSelectedRow(),14);
+            tbObat.setValueAt(BB.getText(),tbObat.getSelectedRow(),15);
+            tbObat.setValueAt(Usia.getText(),tbObat.getSelectedRow(),16);
             emptTeks();
         }
     }

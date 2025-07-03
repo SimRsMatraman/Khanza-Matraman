@@ -277,18 +277,19 @@ public class PanelDiagnosa extends widget.panelisi {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnStatusBaru = new javax.swing.JMenuItem();
         MnStatusLama = new javax.swing.JMenuItem();
+        btnTambahPenyakit = new widget.Button();
+        btnTambahProsedur = new widget.Button();
+        ScrollInput1 = new widget.ScrollPane();
         TabRawat = new javax.swing.JTabbedPane();
         ScrollInput = new widget.ScrollPane();
         FormData = new widget.PanelBiasa();
         jLabel13 = new widget.Label();
         Diagnosa = new widget.TextBox();
         BtnCariPenyakit = new widget.Button();
-        btnTambahPenyakit = new widget.Button();
         Scroll1 = new widget.ScrollPane();
         tbDiagnosa = new widget.Table();
         jLabel15 = new widget.Label();
         Prosedur = new widget.TextBox();
-        btnTambahProsedur = new widget.Button();
         BtnCariProsedur = new widget.Button();
         Scroll2 = new widget.ScrollPane();
         tbProsedur = new widget.Table();
@@ -328,11 +329,34 @@ public class PanelDiagnosa extends widget.panelisi {
         });
         jPopupMenu1.add(MnStatusLama);
 
+        btnTambahPenyakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
+        btnTambahPenyakit.setMnemonic('2');
+        btnTambahPenyakit.setToolTipText("Alt+2");
+        btnTambahPenyakit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahPenyakitActionPerformed(evt);
+            }
+        });
+
+        btnTambahProsedur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
+        btnTambahProsedur.setMnemonic('2');
+        btnTambahProsedur.setToolTipText("Alt+2");
+        btnTambahProsedur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahProsedurActionPerformed(evt);
+            }
+        });
+
         setLayout(new java.awt.BorderLayout(1, 1));
+
+        ScrollInput1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        ScrollInput1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        ScrollInput1.setOpaque(true);
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 253));
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        TabRawat.setPreferredSize(new java.awt.Dimension(867, 800));
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabRawatMouseClicked(evt);
@@ -371,27 +395,18 @@ public class PanelDiagnosa extends widget.panelisi {
         FormData.add(BtnCariPenyakit);
         BtnCariPenyakit.setBounds(761, 10, 28, 23);
 
-        btnTambahPenyakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
-        btnTambahPenyakit.setMnemonic('2');
-        btnTambahPenyakit.setToolTipText("Alt+2");
-        btnTambahPenyakit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTambahPenyakitActionPerformed(evt);
-            }
-        });
-        FormData.add(btnTambahPenyakit);
-        btnTambahPenyakit.setBounds(792, 10, 28, 23);
-
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setOpaque(true);
+
+        tbDiagnosa.getTableHeader().setReorderingAllowed(false);
         Scroll1.setViewportView(tbDiagnosa);
 
         FormData.add(Scroll1);
-        Scroll1.setBounds(11, 36, 810, 165);
+        Scroll1.setBounds(11, 36, 940, 280);
 
         jLabel15.setText("Prosedur :");
         FormData.add(jLabel15);
-        jLabel15.setBounds(0, 211, 68, 23);
+        jLabel15.setBounds(0, 330, 68, 23);
 
         Prosedur.setHighlighter(null);
         Prosedur.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -400,18 +415,7 @@ public class PanelDiagnosa extends widget.panelisi {
             }
         });
         FormData.add(Prosedur);
-        Prosedur.setBounds(71, 211, 687, 23);
-
-        btnTambahProsedur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
-        btnTambahProsedur.setMnemonic('2');
-        btnTambahProsedur.setToolTipText("Alt+2");
-        btnTambahProsedur.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTambahProsedurActionPerformed(evt);
-            }
-        });
-        FormData.add(btnTambahProsedur);
-        btnTambahProsedur.setBounds(792, 211, 28, 23);
+        Prosedur.setBounds(70, 330, 687, 23);
 
         BtnCariProsedur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCariProsedur.setMnemonic('1');
@@ -423,16 +427,17 @@ public class PanelDiagnosa extends widget.panelisi {
             }
         });
         FormData.add(BtnCariProsedur);
-        BtnCariProsedur.setBounds(761, 211, 28, 23);
+        BtnCariProsedur.setBounds(760, 330, 28, 23);
 
         Scroll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll2.setOpaque(true);
 
         tbProsedur.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbProsedur.getTableHeader().setReorderingAllowed(false);
         Scroll2.setViewportView(tbProsedur);
 
         FormData.add(Scroll2);
-        Scroll2.setBounds(11, 237, 810, 165);
+        Scroll2.setBounds(10, 360, 940, 300);
 
         ScrollInput.setViewportView(FormData);
 
@@ -466,7 +471,9 @@ public class PanelDiagnosa extends widget.panelisi {
 
         TabRawat.addTab("Data Prosedur", internalFrame3);
 
-        add(TabRawat, java.awt.BorderLayout.CENTER);
+        ScrollInput1.setViewportView(TabRawat);
+
+        add(ScrollInput1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void DiagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosaKeyPressed
@@ -563,6 +570,7 @@ public class PanelDiagnosa extends widget.panelisi {
     private widget.ScrollPane Scroll2;
     private widget.ScrollPane Scroll3;
     public widget.ScrollPane ScrollInput;
+    public widget.ScrollPane ScrollInput1;
     public javax.swing.JTabbedPane TabRawat;
     public widget.Button btnTambahPenyakit;
     public widget.Button btnTambahProsedur;
@@ -992,6 +1000,8 @@ public class PanelDiagnosa extends widget.panelisi {
         if(TabRawat.getSelectedIndex()==0){
             tampildiagnosa();
             tampilprosedure();
+            BtnCariPenyakitActionPerformed(null);
+            BtnCariProsedurActionPerformed(null);
         }else if(TabRawat.getSelectedIndex()==1){
             tampil();
         }else if(TabRawat.getSelectedIndex()==2){

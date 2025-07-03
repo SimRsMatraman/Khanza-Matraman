@@ -2655,6 +2655,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         TabRawat.setSelectedIndex(3);
     }
     
+    public void BerkasDigital(){
+        TabRawat.setSelectedIndex(5);
+    }
+    
     public void bukaRiwayat(){
         TabRawat.setSelectedIndex(2);
     }

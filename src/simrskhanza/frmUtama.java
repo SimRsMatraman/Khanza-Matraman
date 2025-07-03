@@ -1848,7 +1848,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.setResizable(false);
 
         panelMenu.setBackground(new java.awt.Color(255, 253, 253));
-        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(223, 233, 213)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
+        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(223, 233, 213)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         panelMenu.setName("panelMenu"); // NOI18N
         panelMenu.setPreferredSize(new java.awt.Dimension(2412, 3653));
         panelMenu.setWarnaAtas(new java.awt.Color(255, 252, 252));
@@ -1940,7 +1940,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14/05/2025" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03/07/2025" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7054,6 +7054,7 @@ public class frmUtama extends javax.swing.JFrame {
         setTitle("::[ Khanza SIMKES 2022 ]::");
         setBackground(new java.awt.Color(255, 254, 254));
         setIconImages(null);
+        setPreferredSize(new java.awt.Dimension(1280, 800));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentMoved(java.awt.event.ComponentEvent evt) {
                 formComponentMoved(evt);
@@ -7577,6 +7578,9 @@ public class frmUtama extends javax.swing.JFrame {
         MenuBar.add(jMenu4);
 
         setJMenuBar(MenuBar);
+
+        getAccessibleContext().setAccessibleName("::[ Khanza SIMKES 2025 ]::");
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

@@ -270,7 +270,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="02-07-2025"/>
+                        <StringItem index="0" value="03-07-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -301,7 +301,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="02-07-2025"/>
+                        <StringItem index="0" value="03-07-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -420,9 +420,9 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="widget.ScrollPane" name="ScrollMenu1">
+        <Container class="widget.ScrollPane" name="FormUtama">
           <Properties>
-            <Property name="name" type="java.lang.String" value="ScrollMenu1" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="FormUtama" noResource="true"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Constraints>
@@ -1215,7 +1215,7 @@
                             <Property name="name" type="java.lang.String" value="PanelInput" noResource="true"/>
                             <Property name="opaque" type="boolean" value="false"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[192, 500]"/>
+                              <Dimension value="[192, 440]"/>
                             </Property>
                           </Properties>
                           <Constraints>
@@ -1293,7 +1293,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="0" y="20" width="100" height="23"/>
+                                      <AbsoluteConstraints x="0" y="10" width="100" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1309,7 +1309,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="110" y="20" width="60" height="23"/>
+                                      <AbsoluteConstraints x="110" y="10" width="60" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1320,7 +1320,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="190" y="20" width="50" height="23"/>
+                                      <AbsoluteConstraints x="190" y="10" width="50" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1337,7 +1337,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="250" y="20" width="80" height="23"/>
+                                      <AbsoluteConstraints x="250" y="10" width="80" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1348,7 +1348,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="180" y="60" width="60" height="23"/>
+                                      <AbsoluteConstraints x="180" y="42" width="60" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1362,7 +1362,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="250" y="60" width="80" height="23"/>
+                                      <AbsoluteConstraints x="250" y="42" width="80" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1376,7 +1376,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="420" y="20" width="60" height="23"/>
+                                      <AbsoluteConstraints x="420" y="10" width="60" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1387,7 +1387,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="330" y="20" width="79" height="23"/>
+                                      <AbsoluteConstraints x="330" y="10" width="79" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1421,7 +1421,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="740" y="60" width="60" height="23"/>
+                                      <AbsoluteConstraints x="960" y="10" width="60" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1432,7 +1432,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="680" y="60" width="50" height="23"/>
+                                      <AbsoluteConstraints x="900" y="10" width="50" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1448,7 +1448,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="110" y="60" width="60" height="23"/>
+                                      <AbsoluteConstraints x="110" y="42" width="60" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1459,7 +1459,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="0" y="60" width="100" height="23"/>
+                                      <AbsoluteConstraints x="0" y="42" width="100" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1475,7 +1475,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="440" y="130" width="360" height="23"/>
+                                      <AbsoluteConstraints x="440" y="110" width="330" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1486,7 +1486,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="490" y="20" width="97" height="23"/>
+                                      <AbsoluteConstraints x="490" y="10" width="97" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1502,7 +1502,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="600" y="20" width="60" height="23"/>
+                                      <AbsoluteConstraints x="600" y="10" width="60" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1513,7 +1513,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="340" y="60" width="70" height="23"/>
+                                      <AbsoluteConstraints x="340" y="42" width="70" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1527,7 +1527,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="420" y="60" width="60" height="23"/>
+                                      <AbsoluteConstraints x="420" y="42" width="60" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1545,7 +1545,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="5" y="220" width="360" height="120"/>
+                                      <AbsoluteConstraints x="10" y="200" width="360" height="100"/>
                                     </Constraint>
                                   </Constraints>
 
@@ -1582,7 +1582,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="405" y="220" width="360" height="120"/>
+                                      <AbsoluteConstraints x="410" y="200" width="360" height="100"/>
                                     </Constraint>
                                   </Constraints>
 
@@ -1619,7 +1619,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="5" y="350" width="360" height="120"/>
+                                      <AbsoluteConstraints x="10" y="310" width="360" height="100"/>
                                     </Constraint>
                                   </Constraints>
 
@@ -1656,7 +1656,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="405" y="350" width="360" height="120"/>
+                                      <AbsoluteConstraints x="410" y="310" width="360" height="100"/>
                                     </Constraint>
                                   </Constraints>
 
@@ -1693,7 +1693,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="600" y="60" width="60" height="23"/>
+                                      <AbsoluteConstraints x="560" y="40" width="60" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1704,7 +1704,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="520" y="60" width="70" height="23"/>
+                                      <AbsoluteConstraints x="495" y="40" width="60" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1720,7 +1720,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="50" y="100" width="320" height="23"/>
+                                      <AbsoluteConstraints x="50" y="80" width="320" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1737,7 +1737,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="50" y="130" width="320" height="23"/>
+                                      <AbsoluteConstraints x="50" y="110" width="320" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1754,7 +1754,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="440" y="100" width="360" height="23"/>
+                                      <AbsoluteConstraints x="440" y="80" width="330" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1765,7 +1765,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="0" y="100" width="40" height="23"/>
+                                      <AbsoluteConstraints x="0" y="80" width="40" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1776,7 +1776,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="0" y="130" width="40" height="23"/>
+                                      <AbsoluteConstraints x="0" y="110" width="40" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1787,7 +1787,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="390" y="100" width="40" height="20"/>
+                                      <AbsoluteConstraints x="390" y="80" width="40" height="20"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1798,7 +1798,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="650" y="20" width="80" height="23"/>
+                                      <AbsoluteConstraints x="650" y="10" width="80" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1824,7 +1824,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="740" y="20" width="140" height="23"/>
+                                      <AbsoluteConstraints x="740" y="10" width="140" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1845,7 +1845,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="370" y="230" width="-1" height="-1"/>
+                                      <AbsoluteConstraints x="370" y="210" width="-1" height="-1"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1866,7 +1866,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="770" y="230" width="-1" height="-1"/>
+                                      <AbsoluteConstraints x="770" y="210" width="-1" height="-1"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1887,7 +1887,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="770" y="360" width="-1" height="-1"/>
+                                      <AbsoluteConstraints x="770" y="320" width="-1" height="-1"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1910,11 +1910,11 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="980" y="100" width="80" height="23"/>
+                                      <AbsoluteConstraints x="980" y="77" width="80" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
-                                <Component class="widget.Button" name="BtnRiwayatLabRad">
+                                <Component class="widget.Button" name="BtnRiwayatPasien">
                                   <Properties>
                                     <Property name="mnemonic" type="int" value="82"/>
                                     <Property name="text" type="java.lang.String" value="  Riwayat Pasien"/>
@@ -1925,19 +1925,19 @@
                                     <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="66" green="33" red="ff" type="rgb"/>
                                     </Property>
-                                    <Property name="name" type="java.lang.String" value="BtnRiwayatLabRad" noResource="true"/>
+                                    <Property name="name" type="java.lang.String" value="BtnRiwayatPasien" noResource="true"/>
                                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                                       <Dimension value="[160, 30]"/>
                                     </Property>
                                     <Property name="roundRect" type="boolean" value="false"/>
                                   </Properties>
                                   <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnRiwayatLabRadActionPerformed"/>
-                                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnRiwayatLabRadKeyPressed"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnRiwayatPasienActionPerformed"/>
+                                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnRiwayatPasienKeyPressed"/>
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="10" y="170" width="170" height="30"/>
+                                      <AbsoluteConstraints x="10" y="150" width="170" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -1955,7 +1955,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="830" y="220" width="280" height="60"/>
+                                      <AbsoluteConstraints x="830" y="190" width="280" height="60"/>
                                     </Constraint>
                                   </Constraints>
 
@@ -1997,7 +1997,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="910" y="100" width="70" height="23"/>
+                                      <AbsoluteConstraints x="910" y="77" width="70" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2018,7 +2018,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="370" y="360" width="-1" height="-1"/>
+                                      <AbsoluteConstraints x="370" y="320" width="-1" height="-1"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2041,7 +2041,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="830" y="360" width="130" height="30"/>
+                                      <AbsoluteConstraints x="830" y="330" width="130" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2052,7 +2052,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="390" y="130" width="40" height="23"/>
+                                      <AbsoluteConstraints x="390" y="110" width="40" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2064,6 +2064,7 @@
                                     <Property name="mnemonic" type="int" value="75"/>
                                     <Property name="text" type="java.lang.String" value=" PEWS"/>
                                     <Property name="toolTipText" type="java.lang.String" value=""/>
+                                    <Property name="horizontalAlignment" type="int" value="2"/>
                                     <Property name="name" type="java.lang.String" value="BtnEWS1" noResource="true"/>
                                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                                       <Dimension value="[160, 30]"/>
@@ -2075,7 +2076,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="830" y="100" width="70" height="23"/>
+                                      <AbsoluteConstraints x="830" y="77" width="80" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2093,7 +2094,7 @@
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="830" y="280" width="280" height="60"/>
+                                      <AbsoluteConstraints x="830" y="250" width="280" height="60"/>
                                     </Constraint>
                                   </Constraints>
 
@@ -2132,7 +2133,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="830" y="60" width="230" height="23"/>
+                                      <AbsoluteConstraints x="830" y="42" width="230" height="23"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2159,7 +2160,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="190" y="170" width="170" height="30"/>
+                                      <AbsoluteConstraints x="200" y="150" width="170" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2182,7 +2183,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="830" y="170" width="230" height="30"/>
+                                      <AbsoluteConstraints x="830" y="150" width="230" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2203,7 +2204,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="370" y="390" width="-1" height="-1"/>
+                                      <AbsoluteConstraints x="370" y="350" width="-1" height="-1"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2224,7 +2225,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="770" y="390" width="-1" height="-1"/>
+                                      <AbsoluteConstraints x="770" y="350" width="-1" height="-1"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2250,7 +2251,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="410" y="170" width="170" height="30"/>
+                                      <AbsoluteConstraints x="410" y="150" width="170" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2276,7 +2277,65 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="590" y="170" width="170" height="30"/>
+                                      <AbsoluteConstraints x="600" y="150" width="170" height="30"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                                <Component class="widget.Button" name="BtnRiwayatPenunjang">
+                                  <Properties>
+                                    <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                      <Image iconType="3" name="/picture/kanan.png"/>
+                                    </Property>
+                                    <Property name="mnemonic" type="int" value="52"/>
+                                    <Property name="text" type="java.lang.String" value="   Riwayat Radiologi &amp; Lab"/>
+                                    <Property name="toolTipText" type="java.lang.String" value="Template pemeriksaan"/>
+                                    <Property name="horizontalAlignment" type="int" value="2"/>
+                                    <Property name="name" type="java.lang.String" value="BtnRiwayatPenunjang" noResource="true"/>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnRiwayatPenunjangActionPerformed"/>
+                                  </Events>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="830" y="115" width="230" height="23"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                                <Component class="widget.Label" name="jLabel29">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="BMI :"/>
+                                    <Property name="name" type="java.lang.String" value="jLabel29" noResource="true"/>
+                                  </Properties>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="630" y="40" width="30" height="20"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                                <Component class="widget.TextBox" name="BMI">
+                                  <Properties>
+                                    <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
+                                    <Property name="name" type="java.lang.String" value="BMI" noResource="true"/>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BMIActionPerformed"/>
+                                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BMIKeyPressed"/>
+                                  </Events>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="670" y="40" width="60" height="23"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                                <Component class="widget.Label" name="jLabel54">
+                                  <Properties>
+                                    <Property name="horizontalAlignment" type="int" value="2"/>
+                                    <Property name="text" type="java.lang.String" value="Kg/m&#xb2;"/>
+                                    <Property name="name" type="java.lang.String" value="jLabel54" noResource="true"/>
+                                  </Properties>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="740" y="40" width="30" height="20"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -4917,7 +4976,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="02-07-2025"/>
+                    <StringItem index="0" value="03-07-2025"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -5231,15 +5290,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="widget.PanelBiasa" name="PanelAccor">
+        <Container class="widget.PanelBiasa" name="PanelKiri">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[300, 700]"/>
-            </Property>
-            <Property name="name" type="java.lang.String" value="PanelAccor" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="PanelKiri" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[300, 53]"/>
             </Property>
@@ -5322,6 +5378,7 @@
                   </Properties>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+                    <Property name="alignment" type="int" value="0"/>
                     <Property name="horizontalGap" type="int" value="1"/>
                     <Property name="verticalGap" type="int" value="1"/>
                   </Layout>
@@ -5335,7 +5392,7 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="jTabbedPane1" noResource="true"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[280, 1000]"/>
+                          <Dimension value="[300, 800]"/>
                         </Property>
                       </Properties>
 
@@ -5362,10 +5419,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnRiwayat">
                               <Properties>
@@ -5421,6 +5475,33 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnResepObatActionPerformed"/>
                               </Events>
                             </Component>
+                            <Component class="widget.Button" name="BtnResepLuar">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Input Resep Luar"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnResepLuar" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnResepLuarActionPerformed"/>
+                              </Events>
+                            </Component>
                             <Component class="widget.Button" name="BtnCopyResep">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -5474,141 +5555,6 @@
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTmpResepActionPerformed"/>
                                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnTmpResepKeyPressed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnResepLuar">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Resep Luar"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnResepLuar" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnResepLuarActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnPORanap">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Catatan Pemberian Obat"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnPORanap" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPORanapActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnObatBhp">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Data Obat &amp; BHP"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnObatBhp" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnObatBhpActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnBerkasDigital">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Berkas Digital"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnBerkasDigital" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBerkasDigitalActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnInformasiObat">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Informasi Obat"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnInformasiObat" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnInformasiObatActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="widget.Button" name="BtnPermintaanLab">
@@ -5773,12 +5719,39 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnResumeRajalActionPerformed"/>
                               </Events>
                             </Component>
+                            <Component class="widget.Button" name="BtnBerkasDigital">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Berkas Digital"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnBerkasDigital" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBerkasDigitalActionPerformed"/>
+                              </Events>
+                            </Component>
                             <Component class="widget.Button" name="BtnSKDP">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/picture/item.png"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Surat Kontrol"/>
+                                <Property name="text" type="java.lang.String" value="Surat Kontrol BPJS"/>
                                 <Property name="focusPainted" type="boolean" value="false"/>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Tahoma" size="11" style="0"/>
@@ -5881,87 +5854,6 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCatatanActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="widget.Button" name="BtnHasilEKG">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Hasil EKG"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnHasilEKG" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnHasilEKGActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnMedicalCheckUp">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Medical Check Up"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnMedicalCheckUp" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnMedicalCheckUpActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnIEMR">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Riwayat Antar Faskes"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnIEMR" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnIEMRActionPerformed"/>
-                              </Events>
-                            </Component>
                             <Component class="widget.Button" name="BtnPermintaanKonsultasiMedik">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -5987,33 +5879,6 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPermintaanKonsultasiMedikActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="widget.Button" name="BtnCatatanObat">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Catatan Pemberian Obat"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnCatatanObat" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCatatanObatActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="widget.Button" name="BtnIC1">
@@ -6097,6 +5962,62 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAPS4ActionPerformed"/>
                               </Events>
                             </Component>
+                            <Component class="widget.Button" name="SKS">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="MCU - Surat Sehat"/>
+                                <Property name="toolTipText" type="java.lang.String" value=""/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="SKS" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SKSActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="widget.Button" name="SKJ">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="MCU - Surat Jiwa/Rohani"/>
+                                <Property name="toolTipText" type="java.lang.String" value=""/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="SKJ" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SKJActionPerformed"/>
+                              </Events>
+                            </Component>
                           </SubComponents>
                         </Container>
                         <Container class="widget.PanelBiasa" name="MIgd">
@@ -6120,10 +6041,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnRiwayat1">
                               <Properties>
@@ -6796,10 +6714,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalMedisPenyakitDalam">
                               <Properties>
@@ -6932,10 +6847,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalKeperawatan5">
                               <Properties>
@@ -6989,6 +6901,33 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAwalMedis2ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="widget.Button" name="BtnAwalMedisNeurologi">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Awal Medis Neurologi"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnAwalMedisNeurologi" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAwalMedisNeurologiActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="widget.Button" name="BtnIC4">
@@ -7068,10 +7007,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalKeperawatanKandungan">
                               <Properties>
@@ -7231,10 +7167,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalKeperawatanAnak">
                               <Properties>
@@ -7394,10 +7327,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalMedisBedah">
                               <Properties>
@@ -7611,10 +7541,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalMedisTHT">
                               <Properties>
@@ -7747,10 +7674,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalMedisMata">
                               <Properties>
@@ -7883,10 +7807,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalMedis1">
                               <Properties>
@@ -8047,10 +7968,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAsuhanGizi">
                               <Properties>
@@ -8291,10 +8209,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnRiwayat2">
                               <Properties>
@@ -8589,10 +8504,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalKeperawatanGeriatri">
                               <Properties>
@@ -8752,10 +8664,7 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
                             <Component class="widget.Button" name="BtnAwalKeperawatanPsikiatri">
                               <Properties>
@@ -8838,6 +8747,33 @@
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPenilaianPsikologActionPerformed"/>
                               </Events>
                             </Component>
+                            <Component class="widget.Button" name="BtnCatatan1">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Catatan Pasien"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnCatatan1" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCatatan1ActionPerformed"/>
+                              </Events>
+                            </Component>
                             <Component class="widget.Button" name="BtnIC14">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -8894,7 +8830,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="widget.PanelBiasa" name="Mall">
+                        <Container class="widget.PanelBiasa" name="Lainnya">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -8902,7 +8838,7 @@
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
                             </Property>
-                            <Property name="name" type="java.lang.String" value="Mall" noResource="true"/>
+                            <Property name="name" type="java.lang.String" value="Lainnya" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="[150, 483]"/>
                             </Property>
@@ -8915,38 +8851,8 @@
                             </Constraint>
                           </Constraints>
 
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
-                            <Property name="horizontalGap" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="1"/>
-                          </Layout>
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
                           <SubComponents>
-                            <Component class="widget.Button" name="BtnAwalMedisNeurologi">
-                              <Properties>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/picture/item.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Awal Medis Neurologi"/>
-                                <Property name="focusPainted" type="boolean" value="false"/>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="11" style="0"/>
-                                </Property>
-                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                                </Property>
-                                <Property name="horizontalAlignment" type="int" value="2"/>
-                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                                  <Insets value="[1, 1, 1, 1]"/>
-                                </Property>
-                                <Property name="name" type="java.lang.String" value="BtnAwalMedisNeurologi" noResource="true"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[190, 23]"/>
-                                </Property>
-                                <Property name="roundRect" type="boolean" value="false"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAwalMedisNeurologiActionPerformed"/>
-                              </Events>
-                            </Component>
                             <Component class="widget.Button" name="BtnAwalMedisOrthopedi">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9566,6 +9472,195 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAPS3ActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="widget.Button" name="BtnHasilEKG">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Hasil EKG"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnHasilEKG" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnHasilEKGActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="widget.Button" name="BtnCatatanObat">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Catatan Pemberian Obat"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnCatatanObat" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnCatatanObatActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="widget.Button" name="BtnPORanap">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Catatan Pemberian Obat"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnPORanap" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPORanapActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="widget.Button" name="BtnInformasiObat">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Informasi Obat"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnInformasiObat" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnInformasiObatActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="widget.Button" name="BtnIEMR">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Riwayat Antar Faskes"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnIEMR" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnIEMRActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="widget.Button" name="BtnObatBhp">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Data Obat &amp; BHP"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnObatBhp" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnObatBhpActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="widget.Button" name="BtnMedicalCheckUp">
+                              <Properties>
+                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                  <Image iconType="3" name="/picture/item.png"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Medical Check Up"/>
+                                <Property name="focusPainted" type="boolean" value="false"/>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="11" style="0"/>
+                                </Property>
+                                <Property name="glassColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                                </Property>
+                                <Property name="horizontalAlignment" type="int" value="2"/>
+                                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                                  <Insets value="[1, 1, 1, 1]"/>
+                                </Property>
+                                <Property name="name" type="java.lang.String" value="BtnMedicalCheckUp" noResource="true"/>
+                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                                  <Dimension value="[190, 23]"/>
+                                </Property>
+                                <Property name="roundRect" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnMedicalCheckUpActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
