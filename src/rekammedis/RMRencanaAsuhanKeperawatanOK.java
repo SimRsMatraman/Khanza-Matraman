@@ -36,6 +36,7 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
+import kepegawaian.DlgCariDokter;
 
 
 /**
@@ -50,8 +51,8 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0,pilihan=0;
-    private DlgCariPetugas petugasO=new DlgCariPetugas(null,false);
-    private DlgCariPetugas petugasA=new DlgCariPetugas(null,false);
+    private DlgCariDokter petugasO=new DlgCariDokter(null,false);
+    private DlgCariDokter petugasA=new DlgCariDokter(null,false);
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private StringBuilder htmlContent;
     
@@ -915,7 +916,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         jLabel11.setBounds(760, 10, 30, 23);
 
         TanggalOperasi.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalOperasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025 15:32:57" }));
+        TanggalOperasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:36" }));
         TanggalOperasi.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalOperasi.setName("TanggalOperasi"); // NOI18N
         TanggalOperasi.setOpaque(false);
@@ -928,7 +929,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         TanggalOperasi.setBounds(90, 40, 130, 23);
 
         TanggalPengkajian.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPengkajian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025 15:32:57" }));
+        TanggalPengkajian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         TanggalPengkajian.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPengkajian.setName("TanggalPengkajian"); // NOI18N
         TanggalPengkajian.setOpaque(false);
@@ -1085,7 +1086,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         FormInput.add(label20);
         label20.setBounds(30, 210, 120, 20);
 
-        PengembanganDadaR.setBackground(null);
         PengembanganDadaR.setText("R");
         PengembanganDadaR.setName("PengembanganDadaR"); // NOI18N
         PengembanganDadaR.addActionListener(new java.awt.event.ActionListener() {
@@ -1096,7 +1096,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         FormInput.add(PengembanganDadaR);
         PengembanganDadaR.setBounds(30, 230, 40, 20);
 
-        PengembanganDadaL.setBackground(null);
         PengembanganDadaL.setText("L");
         PengembanganDadaL.setName("PengembanganDadaL"); // NOI18N
         PengembanganDadaL.addActionListener(new java.awt.event.ActionListener() {
@@ -1422,7 +1421,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PenggunaanKateter);
-        PenggunaanKateter.setBounds(500, 190, 150, 20);
+        PenggunaanKateter.setBounds(500, 190, 150, 23);
 
         label48.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label48.setText("Produksi Urine :");
@@ -1476,7 +1475,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(Deltrium);
-        Deltrium.setBounds(730, 190, 120, 20);
+        Deltrium.setBounds(730, 190, 120, 23);
 
         Stuper.setBackground(new java.awt.Color(255, 255, 255));
         Stuper.setText("Stuper");
@@ -1704,7 +1703,6 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         FormInput.add(label46);
         label46.setBounds(880, 360, 60, 20);
 
-        jSeparator.setBackground(null);
         jSeparator.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 3));
         jSeparator.setName("jSeparator"); // NOI18N
@@ -1818,7 +1816,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(Nyeri);
-        Nyeri.setBounds(30, 600, 80, 20);
+        Nyeri.setBounds(30, 600, 80, 23);
 
         Kecemasan.setBackground(new java.awt.Color(255, 255, 255));
         Kecemasan.setText("Kecemasan");
@@ -2169,7 +2167,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         label63.setBounds(20, 670, 90, 20);
 
         TanggalPengkajianIntra.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPengkajianIntra.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 14:50:31" }));
+        TanggalPengkajianIntra.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         TanggalPengkajianIntra.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPengkajianIntra.setName("TanggalPengkajianIntra"); // NOI18N
         TanggalPengkajianIntra.setOpaque(false);
@@ -2276,7 +2274,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         AnastesiRegional.setBounds(150, 850, 110, 20);
 
         AnastesiMulai.setForeground(new java.awt.Color(50, 70, 50));
-        AnastesiMulai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:02:12" }));
+        AnastesiMulai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         AnastesiMulai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         AnastesiMulai.setName("AnastesiMulai"); // NOI18N
         AnastesiMulai.setOpaque(false);
@@ -2289,7 +2287,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         AnastesiMulai.setBounds(120, 750, 130, 20);
 
         AnastesiKeluar.setForeground(new java.awt.Color(50, 70, 50));
-        AnastesiKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:03:19" }));
+        AnastesiKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         AnastesiKeluar.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         AnastesiKeluar.setName("AnastesiKeluar"); // NOI18N
         AnastesiKeluar.setOpaque(false);
@@ -2302,7 +2300,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         AnastesiKeluar.setBounds(120, 770, 130, 20);
 
         OperasiMulai.setForeground(new java.awt.Color(50, 70, 50));
-        OperasiMulai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:03:19" }));
+        OperasiMulai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         OperasiMulai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         OperasiMulai.setName("OperasiMulai"); // NOI18N
         OperasiMulai.setOpaque(false);
@@ -2315,7 +2313,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         OperasiMulai.setBounds(120, 790, 130, 20);
 
         OperasiSelesai.setForeground(new java.awt.Color(50, 70, 50));
-        OperasiSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:03:21" }));
+        OperasiSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         OperasiSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         OperasiSelesai.setName("OperasiSelesai"); // NOI18N
         OperasiSelesai.setOpaque(false);
@@ -2328,7 +2326,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         OperasiSelesai.setBounds(120, 810, 130, 20);
 
         WaktuMasuk.setForeground(new java.awt.Color(50, 70, 50));
-        WaktuMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:03:22" }));
+        WaktuMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         WaktuMasuk.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         WaktuMasuk.setName("WaktuMasuk"); // NOI18N
         WaktuMasuk.setOpaque(false);
@@ -2341,7 +2339,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         WaktuMasuk.setBounds(120, 710, 130, 20);
 
         WaktuKeluar.setForeground(new java.awt.Color(50, 70, 50));
-        WaktuKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:03:26" }));
+        WaktuKeluar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         WaktuKeluar.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         WaktuKeluar.setName("WaktuKeluar"); // NOI18N
         WaktuKeluar.setOpaque(false);
@@ -2408,7 +2406,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         label75.setName("label75"); // NOI18N
         label75.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label75);
-        label75.setBounds(280, 760, 100, 20);
+        label75.setBounds(280, 760, 110, 20);
 
         PersiapanKulitOleh.setFocusTraversalPolicyProvider(true);
         PersiapanKulitOleh.setName("PersiapanKulitOleh"); // NOI18N
@@ -2423,7 +2421,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PersiapanKulitOleh);
-        PersiapanKulitOleh.setBounds(380, 760, 150, 23);
+        PersiapanKulitOleh.setBounds(390, 760, 150, 20);
 
         label76.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label76.setText("Klasifikasi luka");
@@ -2470,7 +2468,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PosisiLiteral);
-        PosisiLiteral.setBounds(360, 860, 130, 20);
+        PosisiLiteral.setBounds(360, 860, 130, 23);
 
         PosisiSupin.setBackground(new java.awt.Color(255, 255, 255));
         PosisiSupin.setText("Supine");
@@ -2481,7 +2479,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PosisiSupin);
-        PosisiSupin.setBounds(280, 860, 70, 20);
+        PosisiSupin.setBounds(280, 860, 70, 23);
 
         PosisiUthotomi.setBackground(new java.awt.Color(255, 255, 255));
         PosisiUthotomi.setText("Uthomi");
@@ -2659,7 +2657,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         label87.setBounds(610, 790, 70, 20);
 
         JamMulaiTor.setForeground(new java.awt.Color(50, 70, 50));
-        JamMulaiTor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:40:22" }));
+        JamMulaiTor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         JamMulaiTor.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         JamMulaiTor.setName("JamMulaiTor"); // NOI18N
         JamMulaiTor.setOpaque(false);
@@ -2672,7 +2670,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         JamMulaiTor.setBounds(680, 770, 130, 20);
 
         JamSelesaiTor.setForeground(new java.awt.Color(50, 70, 50));
-        JamSelesaiTor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:40:36" }));
+        JamSelesaiTor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         JamSelesaiTor.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         JamSelesaiTor.setName("JamSelesaiTor"); // NOI18N
         JamSelesaiTor.setOpaque(false);
@@ -2682,7 +2680,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(JamSelesaiTor);
-        JamSelesaiTor.setBounds(680, 790, 130, 22);
+        JamSelesaiTor.setBounds(680, 790, 130, 18);
 
         PemasangTor.setFocusTraversalPolicyProvider(true);
         PemasangTor.setName("PemasangTor"); // NOI18N
@@ -2798,7 +2796,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         label95.setBounds(600, 990, 40, 20);
 
         JamMulaiDarah.setForeground(new java.awt.Color(50, 70, 50));
-        JamMulaiDarah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:44:36" }));
+        JamMulaiDarah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         JamMulaiDarah.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         JamMulaiDarah.setName("JamMulaiDarah"); // NOI18N
         JamMulaiDarah.setOpaque(false);
@@ -2811,7 +2809,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         JamMulaiDarah.setBounds(640, 970, 130, 20);
 
         JamMulaiDarah1.setForeground(new java.awt.Color(50, 70, 50));
-        JamMulaiDarah1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:44:36" }));
+        JamMulaiDarah1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         JamMulaiDarah1.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         JamMulaiDarah1.setName("JamMulaiDarah1"); // NOI18N
         JamMulaiDarah1.setOpaque(false);
@@ -2821,7 +2819,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(JamMulaiDarah1);
-        JamMulaiDarah1.setBounds(640, 990, 130, 22);
+        JamMulaiDarah1.setBounds(640, 990, 130, 18);
 
         label96.setText("Selesai :");
         label96.setName("label96"); // NOI18N
@@ -2830,7 +2828,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         label96.setBounds(780, 970, 40, 20);
 
         JamSelesaiDarah.setForeground(new java.awt.Color(50, 70, 50));
-        JamSelesaiDarah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:45:55" }));
+        JamSelesaiDarah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         JamSelesaiDarah.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         JamSelesaiDarah.setName("JamSelesaiDarah"); // NOI18N
         JamSelesaiDarah.setOpaque(false);
@@ -2843,7 +2841,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         JamSelesaiDarah.setBounds(820, 970, 130, 20);
 
         JamSelesaiDarah1.setForeground(new java.awt.Color(50, 70, 50));
-        JamSelesaiDarah1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-06-2025 15:45:55" }));
+        JamSelesaiDarah1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         JamSelesaiDarah1.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         JamSelesaiDarah1.setName("JamSelesaiDarah1"); // NOI18N
         JamSelesaiDarah1.setOpaque(false);
@@ -2853,7 +2851,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(JamSelesaiDarah1);
-        JamSelesaiDarah1.setBounds(820, 990, 130, 22);
+        JamSelesaiDarah1.setBounds(820, 990, 130, 18);
 
         label97.setText("Selesai :");
         label97.setName("label97"); // NOI18N
@@ -2899,7 +2897,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(Kultur);
-        Kultur.setBounds(980, 720, 70, 20);
+        Kultur.setBounds(980, 720, 70, 23);
 
         label99.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label99.setText("4. Kandung kemih");
@@ -2986,7 +2984,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(NangisIntra);
-        NangisIntra.setBounds(1000, 880, 80, 20);
+        NangisIntra.setBounds(1000, 880, 80, 23);
 
         TenangIntra.setBackground(new java.awt.Color(255, 255, 255));
         TenangIntra.setText("Tenang");
@@ -2997,7 +2995,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(TenangIntra);
-        TenangIntra.setBounds(910, 880, 80, 20);
+        TenangIntra.setBounds(910, 880, 80, 23);
 
         GelisahIntra.setBackground(new java.awt.Color(255, 255, 255));
         GelisahIntra.setText("Gelisah");
@@ -3008,7 +3006,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(GelisahIntra);
-        GelisahIntra.setBounds(910, 900, 130, 20);
+        GelisahIntra.setBounds(910, 900, 130, 23);
 
         label104.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label104.setText("Lain-lain :");
@@ -3184,7 +3182,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(AlatLinen);
-        AlatLinen.setBounds(270, 1130, 330, 20);
+        AlatLinen.setBounds(270, 1130, 330, 23);
 
         Elektromedis.setBackground(new java.awt.Color(255, 255, 255));
         Elektromedis.setText("Siapkan peralatan elektromedis");
@@ -3206,7 +3204,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PosisiPasien);
-        PosisiPasien.setBounds(270, 1170, 330, 20);
+        PosisiPasien.setBounds(270, 1170, 330, 23);
 
         PersiapanOP.setBackground(new java.awt.Color(255, 255, 255));
         PersiapanOP.setText("Lakukan persiapan sebelum operasi (cuci tangan,");
@@ -3417,7 +3415,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(ABelumTercapaiIntra);
-        ABelumTercapaiIntra.setBounds(890, 1280, 150, 20);
+        ABelumTercapaiIntra.setBounds(890, 1280, 150, 23);
 
         ATercapaiSebagianIntra.setBackground(new java.awt.Color(255, 255, 255));
         ATercapaiSebagianIntra.setText("Tercapai sebagian");
@@ -3428,7 +3426,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(ATercapaiSebagianIntra);
-        ATercapaiSebagianIntra.setBounds(730, 1280, 140, 20);
+        ATercapaiSebagianIntra.setBounds(730, 1280, 140, 23);
 
         ATercapaiIntra.setBackground(new java.awt.Color(255, 255, 255));
         ATercapaiIntra.setText("Tercapai");
@@ -3439,7 +3437,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(ATercapaiIntra);
-        ATercapaiIntra.setBounds(630, 1280, 90, 20);
+        ATercapaiIntra.setBounds(630, 1280, 90, 23);
 
         label114.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label114.setText("A :");
@@ -3464,7 +3462,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PIntra);
-        PIntra.setBounds(630, 1310, 50, 20);
+        PIntra.setBounds(630, 1310, 50, 23);
 
         PPertahankanIntra.setBackground(new java.awt.Color(255, 255, 255));
         PPertahankanIntra.setText("Pertahankan");
@@ -3475,7 +3473,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PPertahankanIntra);
-        PPertahankanIntra.setBounds(680, 1310, 110, 20);
+        PPertahankanIntra.setBounds(680, 1310, 110, 23);
 
         label116.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label116.setText("Lanjutkan");
@@ -3513,7 +3511,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         label117.setBounds(10, 1340, 1100, 30);
 
         JamPengkajianPost.setForeground(new java.awt.Color(50, 70, 50));
-        JamPengkajianPost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2025 11:43:53" }));
+        JamPengkajianPost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         JamPengkajianPost.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         JamPengkajianPost.setName("JamPengkajianPost"); // NOI18N
         JamPengkajianPost.setOpaque(false);
@@ -3523,7 +3521,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(JamPengkajianPost);
-        JamPengkajianPost.setBounds(150, 1360, 130, 22);
+        JamPengkajianPost.setBounds(150, 1360, 130, 18);
 
         label118.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label118.setText("PENGKAJIAN");
@@ -3555,7 +3553,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(OtotBantuNafasPost);
-        OtotBantuNafasPost.setBounds(30, 1410, 120, 20);
+        OtotBantuNafasPost.setBounds(30, 1410, 120, 23);
 
         DeformitasPost.setBackground(new java.awt.Color(255, 255, 255));
         DeformitasPost.setText("Deformitas");
@@ -3566,7 +3564,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(DeformitasPost);
-        DeformitasPost.setBounds(30, 1430, 120, 20);
+        DeformitasPost.setBounds(30, 1430, 120, 23);
 
         EmpisemaPost.setBackground(new java.awt.Color(255, 255, 255));
         EmpisemaPost.setText("Empisema");
@@ -3577,7 +3575,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(EmpisemaPost);
-        EmpisemaPost.setBounds(30, 1450, 120, 20);
+        EmpisemaPost.setBounds(30, 1450, 120, 23);
 
         label121.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label121.setText("Pengembangan Dada");
@@ -3594,7 +3592,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PengembanganDadaRPost);
-        PengembanganDadaRPost.setBounds(30, 1490, 40, 20);
+        PengembanganDadaRPost.setBounds(30, 1490, 40, 23);
 
         PengembanganDadaLPost.setText("L");
         PengembanganDadaLPost.setName("PengembanganDadaLPost"); // NOI18N
@@ -3604,7 +3602,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PengembanganDadaLPost);
-        PengembanganDadaLPost.setBounds(80, 1490, 50, 20);
+        PengembanganDadaLPost.setBounds(80, 1490, 50, 23);
 
         label122.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label122.setText("SpO2 :");
@@ -3663,7 +3661,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(NormalPost);
-        NormalPost.setBounds(160, 1410, 70, 20);
+        NormalPost.setBounds(160, 1410, 70, 23);
 
         label126.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label126.setText("2. Darah");
@@ -3688,7 +3686,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(Capillary1Post);
-        Capillary1Post.setBounds(250, 1430, 90, 20);
+        Capillary1Post.setBounds(250, 1430, 90, 23);
 
         Capillary2Post.setBackground(new java.awt.Color(255, 255, 255));
         Capillary2Post.setText("> 2 Detik");
@@ -3699,7 +3697,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(Capillary2Post);
-        Capillary2Post.setBounds(250, 1450, 90, 20);
+        Capillary2Post.setBounds(250, 1450, 90, 23);
 
         label128.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label128.setText("ST/CT :");
@@ -3746,7 +3744,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PendarahanPost);
-        PendarahanPost.setBounds(250, 1510, 110, 20);
+        PendarahanPost.setBounds(250, 1510, 110, 23);
 
         TensiPost.setFocusTraversalPolicyProvider(true);
         TensiPost.setName("TensiPost"); // NOI18N
@@ -3844,7 +3842,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(KulitDinginPost);
-        KulitDinginPost.setBounds(340, 1450, 80, 20);
+        KulitDinginPost.setBounds(340, 1450, 80, 23);
 
         KulitLainnyaPost.setBackground(new java.awt.Color(255, 255, 255));
         KulitLainnyaPost.setText("Lainnya");
@@ -3855,7 +3853,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(KulitLainnyaPost);
-        KulitLainnyaPost.setBounds(340, 1470, 80, 20);
+        KulitLainnyaPost.setBounds(340, 1470, 80, 23);
 
         KulitHangatPost.setBackground(new java.awt.Color(255, 255, 255));
         KulitHangatPost.setText("Hangat");
@@ -3866,7 +3864,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(KulitHangatPost);
-        KulitHangatPost.setBounds(340, 1430, 80, 20);
+        KulitHangatPost.setBounds(340, 1430, 80, 23);
 
         label137.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label137.setText("3. Skala Nyeri :");
@@ -3921,7 +3919,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PenggunaanKateterPost);
-        PenggunaanKateterPost.setBounds(500, 1450, 150, 20);
+        PenggunaanKateterPost.setBounds(500, 1450, 150, 23);
 
         label139.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label139.setText("Produksi Urine :");
@@ -3975,7 +3973,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(DeltriumPost);
-        DeltriumPost.setBounds(730, 1450, 120, 20);
+        DeltriumPost.setBounds(730, 1450, 120, 23);
 
         StuperPost.setBackground(new java.awt.Color(255, 255, 255));
         StuperPost.setText("Stuper");
@@ -3986,7 +3984,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(StuperPost);
-        StuperPost.setBounds(730, 1470, 120, 20);
+        StuperPost.setBounds(730, 1470, 120, 23);
 
         ApatisPost.setBackground(new java.awt.Color(255, 255, 255));
         ApatisPost.setText("Apatis");
@@ -3997,7 +3995,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(ApatisPost);
-        ApatisPost.setBounds(730, 1490, 120, 20);
+        ApatisPost.setBounds(730, 1490, 120, 23);
 
         KomaPost.setBackground(new java.awt.Color(255, 255, 255));
         KomaPost.setText("Koma");
@@ -4008,7 +4006,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(KomaPost);
-        KomaPost.setBounds(730, 1510, 120, 20);
+        KomaPost.setBounds(730, 1510, 120, 23);
 
         ComposMentisPost.setBackground(new java.awt.Color(255, 255, 255));
         ComposMentisPost.setText("Compos mentis");
@@ -4019,7 +4017,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(ComposMentisPost);
-        ComposMentisPost.setBounds(730, 1430, 120, 20);
+        ComposMentisPost.setBounds(730, 1430, 120, 23);
 
         label143.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label143.setText("6. Abdomen");
@@ -4066,7 +4064,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(MualPost);
-        MualPost.setBounds(880, 1460, 70, 20);
+        MualPost.setBounds(880, 1460, 70, 23);
 
         CideraKulitPost.setBackground(new java.awt.Color(255, 255, 255));
         CideraKulitPost.setText("Cidera kulit POST OP");
@@ -4077,7 +4075,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(CideraKulitPost);
-        CideraKulitPost.setBounds(880, 1500, 200, 20);
+        CideraKulitPost.setBounds(880, 1500, 200, 23);
 
         YaPost.setBackground(new java.awt.Color(255, 255, 255));
         YaPost.setText("Ya");
@@ -4088,7 +4086,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(YaPost);
-        YaPost.setBounds(960, 1570, 60, 20);
+        YaPost.setBounds(960, 1570, 60, 23);
 
         TidakPost.setBackground(new java.awt.Color(255, 255, 255));
         TidakPost.setText("Tidak");
@@ -4099,7 +4097,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(TidakPost);
-        TidakPost.setBounds(1020, 1570, 80, 20);
+        TidakPost.setBounds(1020, 1570, 80, 23);
 
         DistensilPost.setBackground(new java.awt.Color(255, 255, 255));
         DistensilPost.setText("Distensil");
@@ -4110,7 +4108,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(DistensilPost);
-        DistensilPost.setBounds(950, 1440, 120, 20);
+        DistensilPost.setBounds(950, 1440, 120, 23);
 
         MuntahPost.setBackground(new java.awt.Color(255, 255, 255));
         MuntahPost.setText("Muntah");
@@ -4121,7 +4119,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(MuntahPost);
-        MuntahPost.setBounds(950, 1460, 80, 20);
+        MuntahPost.setBounds(950, 1460, 80, 23);
 
         DrainPost.setBackground(new java.awt.Color(255, 255, 255));
         DrainPost.setText("Drain");
@@ -4132,7 +4130,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(DrainPost);
-        DrainPost.setBounds(880, 1570, 80, 20);
+        DrainPost.setBounds(880, 1570, 80, 23);
 
         PuasaPost.setBackground(new java.awt.Color(255, 255, 255));
         PuasaPost.setText("Puasa");
@@ -4143,7 +4141,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(PuasaPost);
-        PuasaPost.setBounds(880, 1440, 70, 20);
+        PuasaPost.setBounds(880, 1440, 70, 23);
 
         label146.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label146.setText("7. Kulit");
@@ -4334,7 +4332,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(ResikoCideraPost);
-        ResikoCideraPost.setBounds(30, 1780, 270, 20);
+        ResikoCideraPost.setBounds(30, 1780, 270, 23);
 
         RestiPendarahanPost.setBackground(new java.awt.Color(255, 255, 255));
         RestiPendarahanPost.setText("Resti pendarahan / Pendarahan");
@@ -4483,7 +4481,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             }
         });
         FormInput.add(BerikanPasienPadaKeluargaPost);
-        BerikanPasienPadaKeluargaPost.setBounds(350, 1870, 220, 20);
+        BerikanPasienPadaKeluargaPost.setBounds(350, 1870, 220, 23);
 
         SignOut.setBackground(new java.awt.Color(255, 255, 255));
         SignOut.setText("Lakukan Sign Out");
@@ -4782,7 +4780,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         label169.setBounds(20, 2070, 1100, 30);
 
         JamPengkajianGlow.setForeground(new java.awt.Color(50, 70, 50));
-        JamPengkajianGlow.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-06-2025 15:08:14" }));
+        JamPengkajianGlow.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025 16:12:37" }));
         JamPengkajianGlow.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         JamPengkajianGlow.setName("JamPengkajianGlow"); // NOI18N
         JamPengkajianGlow.setOpaque(false);
@@ -5005,7 +5003,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5019,7 +5017,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -7276,39 +7274,39 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             Empisema.setSelected(false);
             PengembanganDadaR.setSelected(false);
             PengembanganDadaL.setSelected(false);
-            RR.setText("");
-            Spo2.setText("");
+            RR.setText("-");
+            Spo2.setText("-");
             Normal.setSelected(false);
             Capillary1.setSelected(false);
             Capillary2.setSelected(false);
-            Ket_Pendarahan.setText("");
+            Ket_Pendarahan.setText("-");
             Pendarahan.setSelected(false);
-            Tensi.setText("");
-            Nd.setText("");
-            Suhu.setText("");
+            Tensi.setText("-");
+            Nd.setText("-");
+            Suhu.setText("-");
             KulitHangat.setSelected(false);
             KulitDingin.setSelected(false);
             KulitLainnya.setSelected(false);
-            SkalaNyeri.setText("");
+            SkalaNyeri.setText("-");
             PenggunaanKateter.setSelected(false);
-            ProduksiUrine.setText("");
-            KemihLainnyaPre.setText("");
+            ProduksiUrine.setText("-");
+            KemihLainnyaPre.setText("-");
             ComposMentis.setSelected(false);
             Deltrium.setSelected(false);
             Stuper.setSelected(false);
             Apatis.setSelected(false);
             Koma.setSelected(false);
-            Bb.setText("");
+            Bb.setText("-");
             Puasa.setSelected(false);
             Mual.setSelected(false);
             Distensil.setSelected(false);
             Muntah.setSelected(false);
             PatahTulang.setSelected(false);
-            Regio.setText("");
+            Regio.setText("-");
             Tenang.setSelected(false);
             Nangis.setSelected(false);
             Gelisah.setSelected(false);
-            MentalLainnya.setText("");
+            MentalLainnya.setText("-");
             
             Kecemasan.setSelected(false);
             PertukaranGas.setSelected(false);
@@ -7320,61 +7318,62 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             DefisiPengetahuan.setSelected(false);
             PotensialInfeksi.setSelected(false);
             Nyeri.setSelected(false);
-            DiagnosaLainnya.setText("");
+            DiagnosaLainnya.setText("-");
             LakukanInteraksiSosial.setSelected(false);
             KelengkapanDokumenPraOperasi.setSelected(false);
             LakukanOrientasi.setSelected(false);
             TTV.setSelected(false);
             SignIn.setSelected(false);
-            PerencanaanLainnya.setText("");
-            S.setText("");
-            O.setText("");
-            TD.setText("");
-            N.setText("");
-            R.setText("");
+            PerencanaanLainnya.setText("-");
+            S.setText("-");
+            O.setText("-");
+            TD.setText("-");
+            N.setText("-");
+            R.setText("-");
             ATercapai.setSelected(false);
             ATercapaiSebagian.setSelected(false);
             ABelumTercapai.setSelected(false);
             P.setSelected(false);
             PPertahankan.setSelected(false);
-            PLanjutkan.setText("");
+            PLanjutkan.setText("-");
             
             
 //            INTRA
             AnastesiUmum.setSelected(false);
             AnastesiBlok.setSelected(false);
             AnastesiRegional.setSelected(false);
-            Asa.setText("");
+            Asa.setText("-");
             KulitPreOPUtuh.setSelected(false);
-            PersiapanKulit.setText("");
+            PersiapanKulit.setText("-");
+            PersiapanKulitOleh.setText("-");
             LukaBersih.setSelected(false);
             LukaKotor.setSelected(false);
             LukaTerkontaminasi.setSelected(false);
             PosisiSupin.setSelected(false);
             PosisiUthotomi.setSelected(false);
             PosisiLiteral.setSelected(false);
-            PosisiLainnya.setText("");
-            PemasangElek.setText("");
-            LetakGround.setText("");
-            Coagulant.setText("");
-            Cutting.setText("");
+            PosisiLainnya.setText("-");
+            PemasangElek.setText("-");
+            LetakGround.setText("-");
+            Coagulant.setText("-");
+            Cutting.setText("-");
             MesinSuction.setSelected(false);
             BlanketWarmer.setSelected(false);
-            PemasangTor.setText("");
+            PemasangTor.setText("-");
             Graft.setSelected(false);
-            Lokasi.setText("");
-            PendarahanIntraOP.setText("");
+            Lokasi.setText("-");
+            PendarahanIntraOP.setText("-");
             ProdukDarah.setSelected(false);
             Rutin.setSelected(false);
             PotongBeku.setSelected(false);
             Kultur.setSelected(false);
             PenggunaanKateterIntra.setSelected(false);
-            ProduksiUrineIntra.setText("");
-            KemihLainnyaIntra.setText("");
+            ProduksiUrineIntra.setText("-");
+            KemihLainnyaIntra.setText("-");
             TenangIntra.setSelected(false);
             GelisahIntra.setSelected(false);
             NangisIntra.setSelected(false);
-            MentalLainnyaIntra.setText("");
+            MentalLainnyaIntra.setText("-");
             
             ResikoInfeksi.setSelected(false);
             ResikoCidera.setSelected(false);
@@ -7383,7 +7382,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             IntegritasKulitIntra.setSelected(false);
             TidakEfektifPolaNafasIntra.setSelected(false);
             ResikoSyok.setSelected(false);
-            DiagnosaLainnyaIntra.setText("");
+            DiagnosaLainnyaIntra.setText("-");
             SiapkanOK.setSelected(false);
             SiapkanSelimut.setSelected(false);
             SiapkanPasienDimejaOP.setSelected(false);
@@ -7394,18 +7393,18 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             PersiapanOP.setSelected(false);
             PersiapanKulit.setSelected(false);
             TimeOut.setSelected(false);
-            PerencanaanLainnyaIntra.setText("");
-            SIntra.setText("");
-            OIntra.setText("");
-            TDIntra.setText("");
-            NIntra.setText("");
-            RIntra.setText("");
+            PerencanaanLainnyaIntra.setText("-");
+            SIntra.setText("-");
+            OIntra.setText("-");
+            TDIntra.setText("-");
+            NIntra.setText("-");
+            RIntra.setText("-");
             ATercapaiIntra.setSelected(false);
             ATercapaiSebagianIntra.setSelected(false);
             ABelumTercapaiIntra.setSelected(false);
             PIntra.setSelected(false);
             PPertahankanIntra.setSelected(false);
-            PLanjutkanIntra.setText("");
+            PLanjutkanIntra.setText("-");
             
             
 //            POST
@@ -7414,42 +7413,43 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             EmpisemaPost.setSelected(false);
             PengembanganDadaRPost.setSelected(false);
             PengembanganDadaLPost.setSelected(false);
-            RRPost.setText("");
-            Spo2Post.setText("");
+            RRPost.setText("-");
+            Spo2Post.setText("-");
             NormalPost.setSelected(false);
             Capillary1Post.setSelected(false);
             Capillary2Post.setSelected(false);
-            Ket_PendarahanPost.setText("");
+            Ket_PendarahanPost.setText("-");
             PendarahanPost.setSelected(false);
-            TensiPost.setText("");
-            NdPost.setText("");
-            SuhuPost.setText("");
+            TensiPost.setText("-");
+            NdPost.setText("-");
+            SuhuPost.setText("-");
             KulitHangatPost.setSelected(false);
             KulitDinginPost.setSelected(false);
             KulitLainnyaPost.setSelected(false);
-            SkalaNyeriPost.setText("");
+            SkalaNyeriPost.setText("-");
             PenggunaanKateterPost.setSelected(false);
-            ProduksiUrinePost.setText("");
-            KemihLainnyaPost.setText("");
+            ProduksiUrinePost.setText("-");
+            KemihLainnyaPost.setText("-");
             ComposMentisPost.setSelected(false);
             DeltriumPost.setSelected(false);
             StuperPost.setSelected(false);
             ApatisPost.setSelected(false);
             KomaPost.setSelected(false);
-            BbPost.setText("");
+            GCSPost.setText("-");
+            BbPost.setText("-");
             PuasaPost.setSelected(false);
             MualPost.setSelected(false);
             DistensilPost.setSelected(false);
             MuntahPost.setSelected(false);
             CideraKulitPost.setSelected(false);
-            JenisBalutanPost.setText("");
+            JenisBalutanPost.setText("-");
             DrainPost.setSelected(false);
             YaPost.setSelected(false);
             TidakPost.setSelected(false);
-            ProduksiDrainPost.setText("");
+            ProduksiDrainPost.setText("-");
             PemasanganAlatPost.setSelected(false);
-            LokasiPost.setText("");
-            JenisPost.setText("");
+            LokasiPost.setText("-");
+            JenisPost.setText("-");
             
             RestiNyeriPost.setSelected(false);
             RestiInefektifPost.setSelected(false);
@@ -7461,7 +7461,7 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             MobilitasFisikPost.setSelected(false);
             PotensiInfeksi.setSelected(false);
             PerluasanInfeksiPost.setSelected(false);
-            DiagnosaLainnyaPost.setText("");
+            DiagnosaLainnyaPost.setText("-");
             TTVPost.setSelected(false);
             PosisiNyamanPost.setSelected(false);
             SelimutHangatPost.setSelected(false);
@@ -7469,18 +7469,18 @@ public final class RMRencanaAsuhanKeperawatanOK extends javax.swing.JDialog {
             SerahTerimaPost.setSelected(false);
             BerikanPasienPadaKeluargaPost.setSelected(false);
             SignOut.setSelected(false);
-            PerencanaanLainnyaPost.setText(""); 
-            SPost.setText("");
-            OPost.setText("");
-            TDPost.setText("");
-            NPost.setText("");
-            RPost.setText("");
+            PerencanaanLainnyaPost.setText("-"); 
+            SPost.setText("-");
+            OPost.setText("-");
+            TDPost.setText("-");
+            NPost.setText("-");
+            RPost.setText("-");
             ATercapaiPost.setSelected(false);
             ATercapaiSebagianPost.setSelected(false);
             ABelumTercapaiPost.setSelected(false);
             PPost.setSelected(false);
             PPertahankanPost.setSelected(false);
-            PLanjutkanPost.setText("");
+            PLanjutkanPost.setText("-");
             
             
 //            GLASSGOW COMA SCALE
