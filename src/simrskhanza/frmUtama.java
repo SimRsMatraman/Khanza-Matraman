@@ -1007,11 +1007,11 @@ public class frmUtama extends javax.swing.JFrame {
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
     private final DlgKasirRalan kasirralan=new DlgKasirRalan(this,false);
-//    private final DlgReg reg=new DlgReg(this,false);
+    private final DlgReg reg=new DlgReg(this,false);
 //    private final DlgKamarInap kamarinap=new DlgKamarInap(this,false);
 //    private static DlgKasirRalan kasirralan;
     private static DlgKamarInap kamarinap;
-    private static DlgReg reg;
+//    private static DlgReg reg;
     private final INACBGHybrid inacbgklaim=new INACBGHybrid(this,false);
     private final INACBGCariCoderNIK cariNIK=new INACBGCariCoderNIK(this,false);
     private static frmUtama myInstance;
@@ -1190,7 +1190,7 @@ public class frmUtama extends javax.swing.JFrame {
     }
     
     public void loadClassReg(){
-        reg=new DlgReg(null,false);
+//        reg=new DlgReg(null,false);
         this.loadReg="load";
     }
      
