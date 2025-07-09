@@ -1824,7 +1824,7 @@ public final class RMDataIC extends javax.swing.JDialog {
             if(Sequel.menyimpantf("surat_ic_rajal","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat",25,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),jamNow.format(new Date()),KodeDokter.getText(),KodeDokter1.getText(),KodeDokter2.getText(),
                     "-",DiagnosaKerja.getText(),DiagnosaBanding.getText(),KondisiPasien.getText(),TindakanKedokteran.getText(),TataCara.getSelectedItem().toString(),
-                    Tujuan.getText(),Komplikasi.getText(),Prognosis.getSelectedItem().toString(),Alternatif.getText(),Kemungkinan.getText(),Kemungkinan1.getText(),"-","-","-","-","-",""
+                    Tujuan.getText(),Komplikasi.getText(),Prognosis.getSelectedItem().toString(),Alternatif.getText(),Kemungkinan.getText(),Kemungkinan1.getText(),"-","","","","-",""
                 })==true){
                     tampil();
                     emptTeks();
