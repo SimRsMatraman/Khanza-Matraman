@@ -59,7 +59,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
  *
  * @author perpustakaan
  */
-public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
+public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private String username="",urlImage="";
@@ -74,7 +74,7 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
     /** Creates new form DlgPemberianObat
      * @param parent
      * @param modal */
-    public DlgMarkingImageAssMedisIGD(java.awt.Frame parent, boolean modal) {
+    public DlgMarkingOperasiAlternatif (java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         final Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -109,7 +109,7 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Marking Lokalis Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Marking Lokalis Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(70, 70, 70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -142,8 +142,9 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
 
         PanelWall.setBackground(new java.awt.Color(29, 29, 29));
         PanelWall.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_STRECT);
-        PanelWall.setPreferredSize(new java.awt.Dimension(878, 556));
+        PanelWall.setPreferredSize(new java.awt.Dimension(950, 850));
         PanelWall.setRound(false);
+        PanelWall.setToolTipText("");
         PanelWall.setWarna(new java.awt.Color(110, 110, 110));
         PanelWall.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -249,7 +250,7 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
         try {
             r = new Robot();
         } catch (AWTException ex) {
-            Logger.getLogger(DlgMarkingImageAssMedisIGD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DlgMarkingOperasiAlternatif.class.getName()).log(Level.SEVERE, null, ex);
         }
         Rectangle capture = 
             new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
@@ -258,7 +259,7 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
         // Siapkan nama file
         String rawat = TNoRawat.getText().replaceAll("/", "");
         String folderPath = "tmpImageFreehand";
-        String fileName = "assMdsIGD" + rawat + ".png";
+        String fileName = "opAlternatif" + rawat + ".png";
         File outputFile = new File(folderPath + File.separator + fileName);
 
         // Cek dan buat folder jika belum ada
@@ -270,23 +271,22 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
                 return; // hentikan proses simpan agar tidak error lagi
             }
         }
-
         try {
             ImageIO.write(Image, "png", outputFile);
         } catch (IOException ex) {
             Logger.getLogger(DlgMarkingImageAssMedisIGD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        uploadImage("assMdsIGD"+TNoRawat.getText().replaceAll("/", "")+".png","assesmentmedisigd/imagemarking");
+        uploadImage("opAlternatif"+TNoRawat.getText().replaceAll("/", "")+".png","penandalokasioperasimetodealternatif/imagemarking");
         
-        if(Sequel.cariInteger("select count(no_rawat) as jumlah from asesmen_medis_igd_image_marking where no_rawat='"+TNoRawat.getText()+"'")>0){
-            if(Sequel.mengedittf("asesmen_medis_igd_image_marking","no_rawat=?","tanggal=?,jam=?,url_image=?",4,new String[]{
-                   tanggalNow.format(new Date()),jamNow.format(new Date()),"assesmentmedisigd/imagemarking/assMdsIGD"+TNoRawat.getText().replaceAll("/", "")+".png",TNoRawat.getText()
+        if(Sequel.cariInteger("select count(no_rawat) as jumlah from marking_operasi_alternatif where no_rawat='"+TNoRawat.getText()+"'")>0){
+            if(Sequel.mengedittf("marking_operasi_alternatif","no_rawat=?","tanggal=?,jam=?,url_image=?",4,new String[]{
+                   tanggalNow.format(new Date()),jamNow.format(new Date()),"penandalokasioperasimetodealternatif/imagemarking/opAlternatif"+TNoRawat.getText().replaceAll("/", "")+".png",TNoRawat.getText()
                      })==true){
                 
             }
         }else{
-         if(Sequel.menyimpantf("asesmen_medis_igd_image_marking","?,?,?,?","No.Rawat",4,new String[]{
-                    TNoRawat.getText(),tanggalNow.format(new Date()),jamNow.format(new Date()),"assesmentmedisigd/imagemarking/assMdsIGD"+TNoRawat.getText().replaceAll("/", "")+".png"
+         if(Sequel.menyimpantf("marking_operasi_alternatif","?,?,?,?","No.Rawat",4,new String[]{
+                    TNoRawat.getText(),tanggalNow.format(new Date()),jamNow.format(new Date()),"penandalokasioperasimetodealternatif/imagemarking/opAlternatif"+TNoRawat.getText().replaceAll("/", "")+".png"
                 })==true){
 //                    JOptionPane.showMessageDialog(null,"Data berhasil disimpan.");
 //                    emptTeks();
@@ -339,7 +339,7 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnHapus1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapus1ActionPerformed
-        imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/semua2.png");
+        imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/operasi.png");
     }//GEN-LAST:event_BtnHapus1ActionPerformed
 
     private void BtnHapus1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapus1KeyPressed
@@ -351,7 +351,7 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgMarkingImageAssMedisIGD dialog = new DlgMarkingImageAssMedisIGD(new javax.swing.JFrame(), true);
+            DlgMarkingOperasiAlternatif dialog = new DlgMarkingOperasiAlternatif(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -384,9 +384,9 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
     public void setNoRw(String norw) {
        
         TNoRawat.setText(norw); 
-        urlImage=Sequel.cariIsi("select url_image from asesmen_medis_igd_image_marking where no_rawat='"+norw+"' ");
+        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where no_rawat='"+norw+"' ");
         if(urlImage.toString().equals(null)||urlImage.toString().equals("")){
-           imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/semua2.png");
+           imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/operasi.png");
        }else{
              imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+urlImage.trim()+"");
        }    
@@ -399,8 +399,8 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
        
         
     }
-void uploadImage(String FileName,String docpath){
-    try{
+    void uploadImage(String FileName,String docpath){
+        try{
         File file =new File("tmpImageFreehand/"+FileName);
         byte[] data = new byte[(int) file.length()];
         data = FileUtils.readFileToByteArray(file);
@@ -418,7 +418,8 @@ void uploadImage(String FileName,String docpath){
             System.out.println("Upload error"+e);
         }
     }
-void deleteFile(){
+    
+    void deleteFile(){
        File file = new File("tmpImageFreehand");      
         String[] myFiles;    
         if (file.isDirectory()) {
@@ -428,14 +429,24 @@ void deleteFile(){
                 myFile.delete();
             }
         }
-   }
-void imageAssesment(String url){  
-    try {
-            BufferedImage img = ImageIO.read(new URL(url.trim()));
-            PanelWall.setBackgroundImage(new javax.swing.ImageIcon(img));
+    }
+    
+    void imageAssesment(String url) {  
+        if (url == null || url.trim().isEmpty()) {
+            System.err.println("URL gambar kosong atau null");
+            return;
         }
-        catch(IOException ex) {
 
+        try {
+            BufferedImage img = ImageIO.read(new URL(url.trim()));
+            if (img != null) {
+                PanelWall.setBackgroundImage(new javax.swing.ImageIcon(img));
+            } else {
+                System.err.println("Gambar tidak berhasil dimuat dari URL: " + url);
+            }
+        } catch (IOException ex) {
+            System.err.println("Gagal membaca gambar dari URL: " + url);
+            ex.printStackTrace();
         }
     }
 
