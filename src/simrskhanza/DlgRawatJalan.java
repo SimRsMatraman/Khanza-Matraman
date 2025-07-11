@@ -160,6 +160,7 @@ import rekammedis.GdsIgd;
 import rekammedis.RMCatatanADIMEGizi;
 import rekammedis.RMRujukanFisio;
 import rekammedis.RMDataCatatanKeperawatanRalan;
+import rekammedis.RMMarkingOperasiAlternatif;
 import surat.SuratAPS;
 import rekammedis.RMPemberianObatRalan;
 import surat.SuratKeteranganSehat;
@@ -1997,6 +1998,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnIC7 = new widget.Button();
         BtnEP8 = new widget.Button();
         BtnIC15 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif = new widget.Button();
         MTht = new widget.PanelBiasa();
         BtnAwalMedisTHT = new widget.Button();
         BtnAwalKeperawatan3 = new widget.Button();
@@ -6213,6 +6215,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MBedah.add(BtnIC15);
+
+        BtnPenandaLokasiOperasiAlternatif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif.setName("BtnPenandaLokasiOperasiAlternatif"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatifActionPerformed(evt);
+            }
+        });
+        MBedah.add(BtnPenandaLokasiOperasiAlternatif);
 
         jTabbedPane1.addTab("Bedah", MBedah);
 
@@ -13210,6 +13229,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }        // TODO add your handling code here:
     }//GEN-LAST:event_BtnAdimeGiziActionPerformed
 
+    private void BtnPenandaLokasiOperasiAlternatifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatifActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMMarkingOperasiAlternatif form=new RMMarkingOperasiAlternatif(null,false);
+                form.isCek();
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatifActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -13341,6 +13377,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnPORanap1;
     private widget.Button BtnPemantauanPEWSAnak;
     private widget.Button BtnPemantauanPEWSDewasa;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif;
     private widget.Button BtnPenilaianKorbanKekerasan;
     private widget.Button BtnPenilaianLanjutanRisikoJatuhAnak;
     private widget.Button BtnPenilaianLanjutanRisikoJatuhDewasa;

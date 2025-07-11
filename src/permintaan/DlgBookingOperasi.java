@@ -36,6 +36,7 @@ import rekammedis.RMSignOutSebelumMenutupLuka;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
 import rekammedis.RMRencanaAsuhanKeperawatanOK;
+import rekammedis.RMMarkingOperasiAlternatif;
 import setting.DlgCariRuangOperasi;
 import simrskhanza.DlgTagihanOperasi;
 
@@ -318,6 +319,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         BtnObatBhp = new widget.Button();
         BtnTransferAntarRuang = new widget.Button();
         BtnRencanaAsuhanKeperawatanOK = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif = new widget.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -556,7 +558,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -579,7 +581,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -607,7 +609,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2023" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -630,7 +632,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2023" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -713,7 +715,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         TPasien.setBounds(195, 10, 208, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-03-2023" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1187,6 +1189,23 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnRencanaAsuhanKeperawatanOK);
+
+        BtnPenandaLokasiOperasiAlternatif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif.setName("BtnPenandaLokasiOperasiAlternatif"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatifActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnPenandaLokasiOperasiAlternatif);
 
         ScrollMenu.setViewportView(FormMenu);
 
@@ -1913,6 +1932,27 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_BtnRencanaAsuhanKeperawatanOKActionPerformed
 
+    private void BtnPenandaLokasiOperasiAlternatifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatifActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else{            
+            if(tbObat.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMMarkingOperasiAlternatif form=new RMMarkingOperasiAlternatif(null,false);
+                form.isCek();
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }else{
+                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data...!!!!");
+            }
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatifActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1942,6 +1982,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnObatBhp;
     private widget.Button BtnOperasi;
     private widget.Button BtnOperator;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif;
     private widget.Button BtnPermintaanLab;
     private widget.Button BtnPreAnastesi;
     private widget.Button BtnPreOperasi;

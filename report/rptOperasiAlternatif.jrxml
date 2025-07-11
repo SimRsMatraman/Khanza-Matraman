@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ca8e316-5e4c-4bbe-bad5-394bd0979269">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="372"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="emailrs" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="petugas" class="java.lang.String"/>
+	<parameter name="finger" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+					ttd_marking_operasi_alternatif.*, 
+					pasien.nm_pasien, 
+					pasien.tgl_lahir, 
+					pasien.jk, 
+					pasien.no_rkm_medis, 
+					pegawai.nama,
+					CASE 
+					    WHEN ruang_ok.nm_ruang_ok IS NOT NULL THEN ruang_ok.nm_ruang_ok
+					    WHEN bangsal.nm_bangsal IS NOT NULL THEN bangsal.nm_bangsal
+					    ELSE poliklinik.nm_poli
+					END AS nama_ruangan,
+					marking_operasi_alternatif.url_image
+					FROM ttd_marking_operasi_alternatif 
+					INNER JOIN reg_periksa ON reg_periksa.no_rawat = ttd_marking_operasi_alternatif.no_rawat 
+					LEFT JOIN kamar_inap ON kamar_inap.no_rawat = reg_periksa.no_rawat  
+					LEFT JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis 
+					LEFT JOIN pegawai ON pegawai.nik = ttd_marking_operasi_alternatif.nik 
+					LEFT JOIN ruang_ok ON ruang_ok.kd_ruang_ok = ttd_marking_operasi_alternatif.kd_ruangan
+					LEFT JOIN poliklinik ON poliklinik.kd_poli = ttd_marking_operasi_alternatif.kd_ruangan
+					LEFT JOIN bangsal ON bangsal.kd_bangsal = ttd_marking_operasi_alternatif.kd_ruangan
+					LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar 
+					LEFT JOIN marking_operasi_alternatif ON ttd_marking_operasi_alternatif.no_rawat = marking_operasi_alternatif.no_rawat]]>
+	</queryString>
+	<field name="no_rawat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_pasien" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl_lahir" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jk" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_rkm_medis" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_kel" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="umur_kel" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alamat_kel" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jns_op" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_ruangan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hubungan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jam" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ttd" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="url_image" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="789" splitType="Stretch">
+			<textField>
+				<reportElement x="74" y="32" width="236" height="14" uuid="4f4b0512-d5d9-425c-81aa-e3f2be8f7ce8"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{alamatrs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="4" width="242" height="37" uuid="ab67cac9-bb53-4524-8731-e604b8f62411"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="50" width="240" height="17" uuid="e50338a0-4f98-4456-aea0-a1472af7a2cf"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{kontakrs}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="20" width="60" height="21" uuid="9d9b41dc-7946-48d7-a3e9-b06c778ec3ec"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="21" width="7" height="21" uuid="bde61269-cb09-49e5-898e-d6907bb79e0b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="381" y="21" width="170" height="21" uuid="5af2717e-7ccb-42de-bdb8-9cac568d2214"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_pasien}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="36" width="60" height="21" uuid="a92a8167-175f-4854-9bdc-501c53cced0f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tgl Lahir]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="36" width="7" height="21" uuid="19ccf099-5140-473f-8ba2-af43a8a200c8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="492" y="36" width="52" height="21" uuid="211b5cbd-075a-440c-b4f6-310568f4b727"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jk}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="1" y="0" width="70" height="70" uuid="142c268b-d926-4b16-8e4c-96100c96f48b"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<line direction="BottomUp">
+				<reportElement x="-1" y="72" width="555" height="1" uuid="0c2ad32c-da6e-473a-b249-d13e51c24fa7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="381" y="36" width="110" height="21" uuid="cd034c99-6e06-4431-af3a-2282d0113046"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tgl_lahir}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="44" width="240" height="12" uuid="74394004-1023-4b3d-905f-83a3eb1ec641"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="341" y="654" width="121" height="21" uuid="a852d5a4-cbdb-4ed3-92bf-398b99516ad5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Dokter]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="734" width="121" height="16" uuid="b6bc313c-c992-45e9-9c07-7aeb2d8bff63"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="311" y="741" width="178" height="21" uuid="eaf15918-96d9-410d-b60b-f7d9d014ebd4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[(........................................................)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="654" width="160" height="21" uuid="e0de3267-9b98-40a1-9ff8-4bbb2e71ae07"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nama Pasien/Keluarga]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="74" y="737" width="121" height="16" uuid="5d346008-bf9f-43cc-8da9-639411c3ecee"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_kel}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="763" width="138" height="21" uuid="e24b8e03-cfb7-426e-be6c-b80d02994958"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Hubungan dengan pasien :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="763" width="120" height="16" uuid="da69e4bb-867f-44a4-840f-5c2d5677b221"/>
+				<textElement textAlignment="Left">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hubungan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="46" y="744" width="178" height="21" uuid="c31d2fb2-ad13-43ff-96db-e1d483557a8a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[(........................................................)]]></text>
+			</staticText>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="95" y="670" width="77" height="67" uuid="57ff8285-a62a-4fdc-a362-f162e6423fe6"/>
+				<imageExpression><![CDATA["http://100.10.1.4"+$F{ttd}]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="1" y="116" width="553" height="537" uuid="7728891b-a4b1-4db5-9048-2010f7b5ea55"/>
+				<imageExpression><![CDATA["http://100.10.1.4/webapps/imagefreehand/"+$F{url_image}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="375" y="6" width="7" height="21" uuid="94b57f65-24aa-47dd-b9c1-7e422507023e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="381" y="6" width="170" height="21" uuid="0869e162-15e6-43a1-a1b8-156d34c2eb02"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="320" y="6" width="60" height="21" uuid="c02bd1ff-a016-4c3a-b850-4ff7dc8a2190"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. RM]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="-1" y="76" width="555" height="1" uuid="619251c8-abd3-4b8c-afd6-e2da122d5a14">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="6" y="621" width="534" height="21" uuid="2669ceb2-9b4a-41aa-a1c1-e3c27ed49efc"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Saya menyatakan bahwa lokasi operasi yang telah ditetapkan pada diagram adalah benar.]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="0" y="118" width="555" height="1" uuid="78c74ebe-972b-463c-892b-221fcfbcf4ec">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="1" y="618" width="552" height="1" uuid="388d08b1-dfbc-4d54-9ece-f65f075f8c3f"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="84" y="74" width="7" height="21" uuid="a02177e7-5f0f-46d0-96b5-309adb399670"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="75" width="79" height="21" uuid="f2a060e1-e509-4389-b8e5-b92400b01aea"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ruangan]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="93" y="75" width="209" height="21" uuid="934f6d78-9100-47a2-abdc-32cfb19f65d9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_ruangan}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="84" y="94" width="7" height="21" uuid="5c36ddb7-2f81-4d85-a45f-b202dc6df4df"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="95" width="79" height="21" uuid="f4c7f200-1346-42fe-9844-39e1fdf7a99b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Jenis Operasi]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="93" y="96" width="289" height="20" uuid="9c1a7230-d3e1-45f6-8f24-0435dbc04041"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jns_op}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="79" width="85" height="16" uuid="83000ddb-6fa7-4e52-ab13-d8c3b33a97ea"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="79" width="76" height="16" uuid="ae797508-c2c3-432d-ae67-2af6d66daf37"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jam}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="302" y="75" width="49" height="21" uuid="ab0066eb-8d85-407c-84d0-487ed4d752e8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tanggal :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="75" width="40" height="21" uuid="9455c6f5-ac00-49a0-a709-30f5dcdc6997"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Jam  :]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="-1" y="76" width="1" height="708" uuid="d5155140-40fe-48d4-8383-849bbace0cbd">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="-1" y="784" width="555" height="1" uuid="ab928180-b381-4466-9bea-6b93b3b9b883">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="-1" y="-1" width="555" height="1" uuid="d3d2b3de-75c0-4509-9e01-0fabed8adf6c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="-1" y="0" width="1" height="72" uuid="16fbaa83-184c-460a-85fc-8abffcd73f08">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="315" y="-1" width="1" height="72" uuid="3dbd81ca-89b6-45ae-9dcc-c2b749b3fb6e">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<line direction="BottomUp">
+				<reportElement x="554" y="0" width="1" height="72" uuid="cdf7813a-90bb-498f-bdef-79cb49ce40e2">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="322" y="52" width="218" height="17" uuid="902388de-7cb5-43b8-a43f-5f08cbdd0e30"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="7" isItalic="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[(Tempelkan stiker pasien jika tersedia)]]></text>
+			</staticText>
+			<line direction="BottomUp">
+				<reportElement x="0" y="96" width="555" height="1" uuid="4ac608d1-bca2-49aa-b216-5660918a8fa2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+			<image scaleImage="FillFrame" onErrorType="Icon">
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" mode="Transparent" x="360" y="220" width="194" height="360" uuid="4cdaf5b5-80ef-4128-bccd-a34e08f69282"/>
+				<imageExpression><![CDATA["http://100.10.1.4/webapps/images/RumahSehat-plus.png"]]></imageExpression>
+			</image>
+			<line direction="BottomUp">
+				<reportElement x="554" y="76" width="1" height="708" uuid="39bbf80f-bfa2-481e-b224-8345ffaa26b1">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="6"/>
+	</summary>
+</jasperReport>
