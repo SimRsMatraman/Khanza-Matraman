@@ -180,6 +180,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         MnCetakSuratSKBN6Var = new javax.swing.JMenuItem();
         MnCetakSuratSKBN2 = new javax.swing.JMenuItem();
         MnCetakSuratSKBNSign = new javax.swing.JMenuItem();
+        BtnPrint = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -189,7 +190,6 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
         BtnEdit = new widget.Button();
-        BtnPrint = new widget.Button();
         BtnAll = new widget.Button();
         BtnKeluar = new widget.Button();
         panelGlass9 = new widget.panelisi();
@@ -309,6 +309,23 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
             }
         });
 
+        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setMnemonic('T');
+        BtnPrint.setText("Cetak");
+        BtnPrint.setToolTipText("Alt+T");
+        BtnPrint.setName("BtnPrint"); // NOI18N
+        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrintActionPerformed(evt);
+            }
+        });
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnPrintKeyPressed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -421,24 +438,6 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         });
         panelGlass8.add(BtnEdit);
 
-        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
-        BtnPrint.setText("Cetak");
-        BtnPrint.setToolTipText("Alt+T");
-        BtnPrint.setName("BtnPrint"); // NOI18N
-        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPrintActionPerformed(evt);
-            }
-        });
-        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnPrintKeyPressed(evt);
-            }
-        });
-        panelGlass8.add(BtnPrint);
-
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
         BtnAll.setMnemonic('M');
         BtnAll.setText("Semua");
@@ -487,7 +486,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -501,7 +500,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -621,7 +620,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         jLabel18.setBounds(511, 40, 100, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2025" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -1467,8 +1466,13 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         KdDok.setText(kodedokter);
         TDokter.setText(namadokter);
         ChkInput.setSelected(true);
+        if(Sequel.cariInteger("select count(no_rawat) from surat_keterangan_sehat where no_rawat='"+TNoRw.getText()+"' ")>0){
+            Keperluan.setText(Sequel.cariIsi("select keperluan from surat_keterangan_sehat where no_rawat=?",TNoRw.getText()));
+        }else if(Sequel.cariInteger("select count(no_rawat) from surat_mcu_jiwa where no_rawat='"+TNoRw.getText()+"' ")>0){
+            Keperluan.setText(Sequel.cariIsi("select keperluan from surat_mcu_jiwa where no_rawat=?",TNoRw.getText()));
+        }
         isForm();
-        autoSKBN();
+        autoSKBN();        
     }
     
     public void setNoRm(String norwt,Date tgl1, Date tgl2) {
@@ -1477,10 +1481,15 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
         ChkInput.setSelected(true);
+        if(Sequel.cariInteger("select count(no_rawat) from surat_keterangan_sehat where no_rawat='"+TNoRw.getText()+"' ")>0){
+            Keperluan.setText(Sequel.cariIsi("select keperluan from surat_keterangan_sehat where no_rawat=?",TNoRw.getText()));
+        }else if(Sequel.cariInteger("select count(no_rawat) from surat_mcu_jiwa where no_rawat='"+TNoRw.getText()+"' ")>0){
+            Keperluan.setText(Sequel.cariIsi("select keperluan from surat_mcu_jiwa where no_rawat=?",TNoRw.getText()));
+        }
         isRawat();
         isPsien(); 
         isForm();
-        autoSKBN();
+        autoSKBN();        
     }
     
     private void isRawat() {
