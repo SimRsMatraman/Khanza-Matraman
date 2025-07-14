@@ -50,6 +50,14 @@ import javax.imageio.ImageIO;
 import setting.DlgCariRuangOperasi;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariPoli;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
 
 
 /**
@@ -1039,14 +1047,54 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
             if(Sequel.queryu2tf("delete from ttd_marking_operasi_alternatif where no_rawat=?",1,new String[]{
                 tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
+            }
+        }
+        
+        if(tbObat.getSelectedRow()>-1){
+            String noRawat = tbObat.getValueAt(tbObat.getSelectedRow(),0).toString();
+
+            // Ambil nama file image dari DB sebelum dihapus
+            String urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif WHERE no_rawat=?", noRawat);
+
+            // Proses hapus dari DB
+            if(Sequel.queryu2tf("delete from marking_operasi_alternatif where no_rawat=?", 1, new String[]{ noRawat }) == true){
+                // Proses hapus file gambar
+                if(!urlImage.equals("")){
+                    try {
+                        String imageDeleteUrl = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/delete_image.php";
+
+                        URL url = new URL(imageDeleteUrl);
+                        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+                        httpCon.setRequestMethod("POST");
+                        httpCon.setDoOutput(true);
+                        httpCon.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+                        String postData = "filename=" + URLEncoder.encode(urlImage.trim(), "UTF-8");
+                        OutputStream os = httpCon.getOutputStream();
+                        os.write(postData.getBytes());
+                        os.flush();
+                        os.close();
+
+                        int responseCode = httpCon.getResponseCode();
+                        if (responseCode == HttpURLConnection.HTTP_OK) {
+                            System.out.println("File berhasil dihapus dari server.");
+                        } else {
+                            System.out.println("Gagal menghapus file dari server. Code: " + responseCode);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error saat menghapus file: " + e.toString());
+                    }
+                }
+
                 tampil();
                 emptTeks();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }              
+        }
+             
             
 }//GEN-LAST:event_BtnHapusActionPerformed
 
