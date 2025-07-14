@@ -16,15 +16,11 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,22 +37,21 @@ import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 import freehand.DlgMarkingOperasiAlternatif;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import javax.imageio.ImageIO;
 import setting.DlgCariRuangOperasi;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariPoli;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
+import javax.swing.JLabel;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.net.URL;
+import java.io.IOException;
+
 
 
 
@@ -88,6 +83,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
     private JPopupMenu popupMenu;
     private JMenuItem menuLihatData;
     private JMenuItem menuHapusData;
+    private JLabel labelGambar = new JLabel();
     
     /** Creates new form DlgRujuk
      * @param parent
@@ -1706,15 +1702,42 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
        tampil();
     }
     
-    void imageAssesment(String url){
+//    void imageAssesment(String url){
+//        try {
+//            BufferedImage img = ImageIO.read(new URL(url.trim()));
+//            PanelWall.setBackgroundImage(new javax.swing.ImageIcon(img));
+//        }
+//        catch(IOException ex) {
+//
+//        }
+//    }
+    
+    public void imageAssesment(String imagePath) {
         try {
-            BufferedImage img = ImageIO.read(new URL(url.trim()));
-            PanelWall.setBackgroundImage(new javax.swing.ImageIcon(img));
-        }
-        catch(IOException ex) {
+            if (imagePath != null && !imagePath.trim().isEmpty()) {
+                // Membaca gambar dari URL
+                BufferedImage img = ImageIO.read(new URL(imagePath.trim()));
 
+                // Set ke PanelWall (pastikan PanelWall bukan null)
+                PanelWall.setBackgroundImage(new ImageIcon(img));
+
+                // Tampilkan juga ke labelGambar
+                ImageIcon icon = new ImageIcon(img);
+                labelGambar.setIcon(icon);
+                labelGambar.setToolTipText("✔ Gambar berhasil dimuat.");
+            } else {
+                System.err.println("⛔ imagePath kosong/null: " + imagePath);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("⛔ Gagal membaca gambar dari URL: " + imagePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("⛔ Terjadi error lain saat memuat gambar.");
         }
     }
+
+
     
         private void panggilPhoto() {
 //        if(FormPhotoPass.isVisible()==true){
