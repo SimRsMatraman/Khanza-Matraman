@@ -514,7 +514,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Riwayat/Rincian Tindakan/Terapi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Riwayat/Rincian Tindakan/Terapi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1285,6 +1285,11 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkChecklistPreOperasi.setName("chkChecklistPreOperasi"); // NOI18N
         chkChecklistPreOperasi.setOpaque(false);
         chkChecklistPreOperasi.setPreferredSize(new java.awt.Dimension(245, 22));
+        chkChecklistPreOperasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkChecklistPreOperasiActionPerformed(evt);
+            }
+        });
         FormMenu.add(chkChecklistPreOperasi);
 
         chkSignInSebelumAnestesi.setSelected(true);
@@ -2427,6 +2432,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private void listDokMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listDokMouseClicked
     
     }//GEN-LAST:event_listDokMouseClicked
+
+    private void chkChecklistPreOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkChecklistPreOperasiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkChecklistPreOperasiActionPerformed
 
     /**
     * @param args the command line arguments
@@ -15924,12 +15933,12 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             "checklist_pre_operasi.keterangan_pemeriksaan_penunjang_usg,checklist_pre_operasi.pemeriksaan_penunjang_ctscan,"+
                             "checklist_pre_operasi.keterangan_pemeriksaan_penunjang_ctscan,checklist_pre_operasi.pemeriksaan_penunjang_mri,"+
                             "checklist_pre_operasi.keterangan_pemeriksaan_penunjang_mri,checklist_pre_operasi.persiapan_darah,checklist_pre_operasi.keterangan_persiapan_darah,"+
-                            "checklist_pre_operasi.perlengkapan_khusus,checklist_pre_operasi.nip_petugas_ruangan,petugasruangan.nama as petugasruangan,"+
-                            "checklist_pre_operasi.nip_perawat_ok,petugasok.nama as petugasok "+
+                            "checklist_pre_operasi.perlengkapan_khusus,checklist_pre_operasi.nip_petugas_ruangan,petugasruangan.nama as petugasruangan "+
+//                            "checklist_pre_operasi.nip_perawat_ok,petugasok.nama as petugasok "+
                             "from checklist_pre_operasi inner join dokter as dokterbedah on dokterbedah.kd_dokter=checklist_pre_operasi.kd_dokter_bedah "+
                             "inner join dokter as dokteranestesi on dokteranestesi.kd_dokter=checklist_pre_operasi.kd_dokter_anestesi "+
                             "inner join petugas as petugasruangan on petugasruangan.nip=checklist_pre_operasi.nip_petugas_ruangan "+
-                            "inner join petugas as petugasok on petugasok.nip=checklist_pre_operasi.nip_perawat_ok "+
+//                            "inner join petugas as petugasok on petugasok.nip=checklist_pre_operasi.nip_perawat_ok "+
                             "where checklist_pre_operasi.no_rawat='"+norawat+"' order by checklist_pre_operasi.tanggal").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
@@ -15949,7 +15958,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
                                               "<td width='50%' border='0'>Petugas Ruangan : "+rs2.getString("nip_petugas_ruangan")+" "+rs2.getString("petugasruangan")+"</td>"+
-                                              "<td width='50%' border='0'>Perawat Kamar Operasi : "+rs2.getString("nip_perawat_ok")+" "+rs2.getString("petugasok")+"</td>"+
+//                                              "<td width='50%' border='0'>Perawat Kamar Operasi : "+rs2.getString("nip_perawat_ok")+" "+rs2.getString("petugasok")+"</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
@@ -16522,7 +16531,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     rs2=koneksi.prepareStatement(
                             "select penilaian_pre_operasi.tanggal,penilaian_pre_operasi.kd_dokter,penilaian_pre_operasi.ringkasan_klinik,penilaian_pre_operasi.pemeriksaan_fisik,"+
                             "penilaian_pre_operasi.pemeriksaan_diagnostik,penilaian_pre_operasi.diagnosa_pre_operasi,penilaian_pre_operasi.rencana_tindakan_bedah,"+
-                            "penilaian_pre_operasi.hal_hal_yang_perludi_persiapkan,penilaian_pre_operasi.terapi_pre_operasi,dokter.nm_dokter "+
+                            "penilaian_pre_operasi.Tgl_Operasi,penilaian_pre_operasi.jam_Operasi,penilaian_pre_operasi.Alatalat,penilaian_pre_operasi.Lainlain,dokter.nm_dokter "+
                             "from penilaian_pre_operasi inner join dokter on penilaian_pre_operasi.kd_dokter=dokter.kd_dokter "+
                             "where penilaian_pre_operasi.no_rawat='"+norawat+"' order by penilaian_pre_operasi.tanggal").executeQuery();
                     if(rs2.next()){
@@ -16600,20 +16609,40 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                  "</tr>"+
                                  "<tr>"+
                                     "<td valign='top'>"+
-                                       "VI. HAL-HAL YANG PERLU DIPERSIAPKAN"+  
+                                       "VI. Tanggal Operasi"+  
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
-                                              "<td width='100%' border='0'>"+rs2.getString("hal_hal_yang_perludi_persiapkan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                              "<td width='100%' border='0'>"+rs2.getString("Tgl_Operasi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
                                  "</tr>"+
                                  "<tr>"+
                                     "<td valign='top'>"+
-                                       "VII. TERAPI PRE OPERASI"+  
+                                       " Jam Operasi"+  
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
-                                               "<td width='100%' border='0'>"+rs2.getString("terapi_pre_operasi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                              "<td width='100%' border='0'>"+rs2.getString("jam_Operasi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                 "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "VII. Alat-Alat / Keperluan Khusus"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                               "<td width='100%' border='0'>"+rs2.getString("Alatalat").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                          "</tr>"+
+                                       "</table>"+
+                                    "</td>"+
+                                    "</tr>"+
+                                 "<tr>"+
+                                    "<td valign='top'>"+
+                                       "VIII. Lain-Lain Yang Perlu Diperhatikan"+  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                          "<tr>"+
+                                               "<td width='100%' border='0'>"+rs2.getString("Lainlain").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+

@@ -549,7 +549,7 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="17-03-2023 09:20:33"/>
+                                <StringItem index="0" value="15-07-2025 13:14:00"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -586,7 +586,7 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="17-03-2023 09:20:33"/>
+                                <StringItem index="0" value="15-07-2025 13:14:01"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -683,6 +683,9 @@
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
                             <Property name="text" type="java.lang.String" value="I. Asesmen Fisik :"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
                             <Property name="name" type="java.lang.String" value="jLabel109" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1270,7 +1273,10 @@
                         <Component class="widget.Label" name="jLabel110">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="II. Riwayat Penyakit :"/>
+                            <Property name="text" type="java.lang.String" value="II. Riwayat Medis :"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
                             <Property name="name" type="java.lang.String" value="jLabel110" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1561,7 +1567,10 @@
                         <Component class="widget.Label" name="jLabel111">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="2"/>
-                            <Property name="text" type="java.lang.String" value="III. Riwayat Medis :"/>
+                            <Property name="text" type="java.lang.String" value="III. Riwayat Penyakit :"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="11" style="1"/>
+                            </Property>
                             <Property name="name" type="java.lang.String" value="jLabel111" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1770,7 +1779,7 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="17-03-2023 09:20:33"/>
+                                <StringItem index="0" value="15-07-2025 13:14:01"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -1961,7 +1970,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="17-03-2023"/>
+                            <StringItem index="0" value="15-07-2025"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1989,7 +1998,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="17-03-2023"/>
+                            <StringItem index="0" value="15-07-2025"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>

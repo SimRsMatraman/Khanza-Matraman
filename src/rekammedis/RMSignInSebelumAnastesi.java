@@ -526,7 +526,7 @@ public final class RMSignInSebelumAnastesi extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-01-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -540,7 +540,7 @@ public final class RMSignInSebelumAnastesi extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-01-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -689,7 +689,7 @@ public final class RMSignInSebelumAnastesi extends javax.swing.JDialog {
         TglLahir.setBounds(689, 10, 100, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-01-2023 07:26:12" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2023 09:22:21" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -871,7 +871,7 @@ public final class RMSignInSebelumAnastesi extends javax.swing.JDialog {
         JalurIVLine.setBounds(634, 180, 155, 23);
 
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel26.setText("Perawat Kamar Operasi");
+        jLabel26.setText("Petugas Kamar Operasi");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
         jLabel26.setBounds(21, 280, 130, 23);
@@ -1747,15 +1747,15 @@ public final class RMSignInSebelumAnastesi extends javax.swing.JDialog {
         KodeDokterAnestesi.setText("");
         NamaDokterAnestesi.setText("");
         Identitas.setSelectedIndex(0);
-        Alergi.setText("");
+        Alergi.setText("-");
         AreaOperasi.setSelectedIndex(0);
         ResikoAspirasi.setSelectedIndex(0);
-        AntisipasiResikoAspirasi.setText("");
+        AntisipasiResikoAspirasi.setText("-");
         ResikoKehilanganDarah.setSelectedIndex(0);
-        JalurIVLine.setText("");
-        RencanaAntisipasiKehilanganDarah.setText("");
+        JalurIVLine.setText("-");
+        RencanaAntisipasiKehilanganDarah.setText("-");
         KesiapanAlatAnes.setSelectedIndex(0);
-        RencanaAntisipasiKesiapanAlat.setText("");
+        RencanaAntisipasiKesiapanAlat.setText("-");
         Tanggal.setDate(new Date());
         SNCN.requestFocus();
     } 
