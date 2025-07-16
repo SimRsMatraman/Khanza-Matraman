@@ -375,7 +375,6 @@ public final class RMChecklistPreOperasi extends javax.swing.JDialog {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
-        jLabel27 = new widget.Label();
         jLabel66 = new widget.Label();
         Lab = new widget.ComboBox();
         KeteranganLab = new widget.TextBox();
@@ -725,10 +724,10 @@ public final class RMChecklistPreOperasi extends javax.swing.JDialog {
         jLabel16.setBounds(0, 40, 75, 23);
 
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel18.setText("Petugas OK");
+        jLabel18.setText("Petugas Ruangan :");
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
-        jLabel18.setBounds(44, 330, 80, 23);
+        jLabel18.setBounds(20, 330, 100, 23);
 
         KdPetugasRuangan.setEditable(false);
         KdPetugasRuangan.setHighlighter(null);
@@ -769,7 +768,7 @@ public final class RMChecklistPreOperasi extends javax.swing.JDialog {
         TglLahir.setBounds(689, 10, 100, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-07-2025 09:27:06" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-07-2025 10:14:13" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1182,11 +1181,6 @@ public final class RMChecklistPreOperasi extends javax.swing.JDialog {
         jSeparator4.setName("jSeparator4"); // NOI18N
         FormInput.add(jSeparator4);
         jSeparator4.setBounds(0, 320, 810, 1);
-
-        jLabel27.setText(":");
-        jLabel27.setName("jLabel27"); // NOI18N
-        FormInput.add(jLabel27);
-        jLabel27.setBounds(3, 330, 110, 23);
 
         jLabel66.setText("MRI :");
         jLabel66.setName("jLabel66"); // NOI18N
@@ -1826,7 +1820,6 @@ public final class RMChecklistPreOperasi extends javax.swing.JDialog {
     private widget.Label jLabel23;
     private widget.Label jLabel24;
     private widget.Label jLabel25;
-    private widget.Label jLabel27;
     private widget.Label jLabel4;
     private widget.Label jLabel5;
     private widget.Label jLabel50;
