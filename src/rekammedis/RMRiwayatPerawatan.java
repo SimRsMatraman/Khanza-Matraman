@@ -422,6 +422,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkTambahanBiaya = new widget.CekBox();
         chkPotonganBiaya = new widget.CekBox();
         chkSuratKeteranganSehat = new widget.CekBox();
+        chkEdukasiDarah = new widget.CekBox();
+        chkOperasiAlternatif = new widget.CekBox();
         internalFrame3 = new widget.InternalFrame();
         Scroll6 = new widget.ScrollPane();
         LoadHTMLRiwayatRadLab = new widget.editorpane();
@@ -514,7 +516,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Riwayat/Rincian Tindakan/Terapi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Riwayat/Rincian Tindakan/Terapi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1674,6 +1676,34 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         });
         FormMenu.add(chkSuratKeteranganSehat);
 
+        chkEdukasiDarah.setSelected(true);
+        chkEdukasiDarah.setText("Edukasi Pemberian Darah & Produk Darah");
+        chkEdukasiDarah.setToolTipText("");
+        chkEdukasiDarah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkEdukasiDarah.setName("chkEdukasiDarah"); // NOI18N
+        chkEdukasiDarah.setOpaque(false);
+        chkEdukasiDarah.setPreferredSize(new java.awt.Dimension(245, 22));
+        chkEdukasiDarah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkEdukasiDarahActionPerformed(evt);
+            }
+        });
+        FormMenu.add(chkEdukasiDarah);
+
+        chkOperasiAlternatif.setSelected(true);
+        chkOperasiAlternatif.setText("Penanda Lokasi Operasi Metode Alternatif");
+        chkOperasiAlternatif.setToolTipText("");
+        chkOperasiAlternatif.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkOperasiAlternatif.setName("chkOperasiAlternatif"); // NOI18N
+        chkOperasiAlternatif.setOpaque(false);
+        chkOperasiAlternatif.setPreferredSize(new java.awt.Dimension(245, 22));
+        chkOperasiAlternatif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkOperasiAlternatifActionPerformed(evt);
+            }
+        });
+        FormMenu.add(chkOperasiAlternatif);
+
         ScrollMenu.setViewportView(FormMenu);
 
         PanelAccor.add(ScrollMenu, java.awt.BorderLayout.CENTER);
@@ -2259,6 +2289,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkChecklistKriteriaMasukICU.setSelected(true);
             chkChecklistKriteriaKeluarICU.setSelected(true);
             chkKonsultasiMedik.setSelected(true);
+            chkEdukasiDarah.setSelected(true);
+            chkOperasiAlternatif.setSelected(true);
         }else{
             chkTriase.setSelected(false);
             chkSkriningIGD.setSelected(false);
@@ -2372,6 +2404,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkChecklistKriteriaMasukICU.setSelected(false);
             chkChecklistKriteriaKeluarICU.setSelected(false);
             chkKonsultasiMedik.setSelected(false);
+            chkEdukasiDarah.setSelected(false);
+            chkOperasiAlternatif.setSelected(false);
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 
@@ -2436,6 +2470,14 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private void chkChecklistPreOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkChecklistPreOperasiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chkChecklistPreOperasiActionPerformed
+
+    private void chkEdukasiDarahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEdukasiDarahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkEdukasiDarahActionPerformed
+
+    private void chkOperasiAlternatifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkOperasiAlternatifActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkOperasiAlternatifActionPerformed
 
     /**
     * @param args the command line arguments
@@ -2561,6 +2603,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkChecklistPostOperasi;
     private widget.CekBox chkChecklistPreOperasi;
     private widget.CekBox chkDiagnosaPenyakit;
+    private widget.CekBox chkEdukasiDarah;
     private widget.CekBox chkEdukasiPasienTerintegrasiRawatJalan;
     private widget.CekBox chkHasilPemeriksaanUSG;
     private widget.CekBox chkHemodialisa;
@@ -2569,6 +2612,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkKonsultasiMedik;
     private widget.CekBox chkMonitoringGizi;
     private widget.CekBox chkMonitoringReaksiTranfusi;
+    private widget.CekBox chkOperasiAlternatif;
     private widget.CekBox chkOperasiVK;
     private widget.CekBox chkPelayananInformasiObat;
     private widget.CekBox chkPemantauanPEWSAnak;
@@ -12275,6 +12319,139 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     System.out.println("Notifikasi : "+e);
                 } finally{
                     if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+
+            if(chkEdukasiDarah.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                            "select * "+
+                            "from edukasi_darah "+
+                            "where edukasi_darah.no_rawat='"+norawat+"'").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+ 
+                            "<td valign='top' width='2%'></td>"+        
+                            "<td valign='top' width='18%'>Edukasi Pemberian Darah & Produk Darah</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                 "<tr align='center'><td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td><td valign='top' width='10%' bgcolor='#FFFAF8'>Status</td><td valign='top' width='25%' bgcolor='#FFFAF8'>Nama Penanggung Jawab</td><td valign='top' width='10%' bgcolor='#FFFAF8'>Hubungan</td><td valign='top' width='25%' bgcolor='#FFFAF8'>Nama Saksi 1</td><td valign='top' width='25%' bgcolor='#FFFAF8'>Nama Saksi 2</td></tr>"
+                        );
+                        rs2.beforeFirst();
+                        w=1;
+                        while(rs2.next()){
+                            htmlContent.append("<tr><td valign='top' align='center'>"+w+"</td><td valign='top'>"+rs2.getString("status")+"</td><td valign='top'>"+rs2.getString("pj")+"</td><td valign='top'>"+rs2.getString("hubungan")+"</td><td valign='top'>"+rs2.getString("nm_saksi")+"</td><td valign='top'>"+rs2.getString("nm_saksi1")+"</td></tr>");                                        
+                            w++;
+                        }
+                        htmlContent.append(
+                              "</table>"+
+                            "</td>"+
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+
+            if(chkOperasiAlternatif.isSelected()==true){
+                try {
+                    rs2 = koneksi.prepareStatement(
+                        "SELECT ttd_marking_operasi_alternatif.*, " +
+                        "marking_operasi_alternatif.url_image, pegawai.nama, " +
+                        "CASE " +
+                        "WHEN ruang_ok.nm_ruang_ok IS NOT NULL THEN ruang_ok.nm_ruang_ok " +
+                        "WHEN bangsal.nm_bangsal IS NOT NULL THEN bangsal.nm_bangsal " +
+                        "ELSE poliklinik.nm_poli END AS nama_ruangan " +
+                        "FROM marking_operasi_alternatif " +
+                        "INNER JOIN ttd_marking_operasi_alternatif ON ttd_marking_operasi_alternatif.no_rawat=marking_operasi_alternatif.no_rawat " +
+                        "LEFT JOIN kamar_inap ON kamar_inap.no_rawat = ttd_marking_operasi_alternatif.no_rawat "+
+                        "LEFT JOIN pegawai ON pegawai.nik = ttd_marking_operasi_alternatif.nik " +
+                        "LEFT JOIN ruang_ok ON ruang_ok.kd_ruang_ok = ttd_marking_operasi_alternatif.kd_ruangan " +
+                        "LEFT JOIN poliklinik ON poliklinik.kd_poli = ttd_marking_operasi_alternatif.kd_ruangan " +
+                        "LEFT JOIN bangsal ON bangsal.kd_bangsal = ttd_marking_operasi_alternatif.kd_ruangan " +
+                        "LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar " +
+                        "WHERE ttd_marking_operasi_alternatif.no_rawat='"+norawat+"'"
+                    ).executeQuery();
+
+                    ArrayList<String[]> dataTabel = new ArrayList<>();
+                    ArrayList<String> gambarList = new ArrayList<>();
+
+                    while(rs2.next()){
+                        dataTabel.add(new String[]{
+                            rs2.getString("nama"),
+                            rs2.getString("nama_ruangan"),
+                            rs2.getString("jns_op"),
+                            rs2.getString("tanggal"),
+                            rs2.getString("nama_kel")
+                        });
+                        gambarList.add(rs2.getString("url_image"));
+                    }
+
+                    if(!dataTabel.isEmpty()){
+                        htmlContent.append(
+                            "<tr class='isi'>" + 
+                              "<td valign='top' width='2%'></td>" +        
+                              "<td valign='top' width='18%'>Penanda Lokasi Operasi Metode Alternatif</td>" +
+                              "<td valign='top' width='1%' align='center'>:</td>" +
+                              "<td valign='top' width='79%'>" +
+                                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                                  "<tr align='center'>" +
+                                    "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>" +
+                                    "<td valign='top' width='25%' bgcolor='#FFFAF8'>Dokter</td>" +
+                                    "<td valign='top' width='25%' bgcolor='#FFFAF8'>Ruangan</td>" +
+                                    "<td valign='top' width='10%' bgcolor='#FFFAF8'>Jenis Operasi</td>" +
+                                    "<td valign='top' width='10%' bgcolor='#FFFAF8'>Tanggal</td>" +
+                                    "<td valign='top' width='25%' bgcolor='#FFFAF8'>Nama Penanggung Jawab</td>" +
+                                  "</tr>"
+                        );
+                        int w=1;
+                        for(String[] row : dataTabel){
+                            htmlContent.append("<tr>" +
+                                "<td valign='top' align='center'>" + w + "</td>" +
+                                "<td valign='top'>" + row[0] + "</td>" +
+                                "<td valign='top'>" + row[1] + "</td>" +
+                                "<td valign='top'>" + row[2] + "</td>" +
+                                "<td valign='top'>" + row[3] + "</td>" +
+                                "<td valign='top'>" + row[4] + "</td>" +
+                              "</tr>");
+                            w++;
+                        }
+                        htmlContent.append("</table></td></tr>");
+                    }
+
+                    if(!gambarList.isEmpty()){
+                        htmlContent.append(
+                            "<tr class='isi'>" + 
+                              "<td valign='top' width='2%'></td>" +        
+//                              "<td valign='top' width='18%'></td>" +
+//                              "<td valign='top' width='1%' align='center'></td>" +
+                              "<td valign='top' width='79%'>" +
+                                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                                  "<tr align='center'>" +
+                                    "<td valign='top' width='100%' bgcolor='#FFFAF8'>Gambar Lokasi</td>" +
+                                  "</tr>"
+                        );
+                        int i=1;
+                        for(String url : gambarList){
+                            htmlContent.append("<tr>" +
+                                                "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+ url +"'><img alt='Gambar Lokasi' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+ "/imagefreehand/" + url +"' width='450' height='450'/></a></td>"+
+                                              "</tr>");
+                            i++;
+                        }
+                        htmlContent.append("</table></td></tr>");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally {
+                    if(rs2 != null){
                         rs2.close();
                     }
                 }

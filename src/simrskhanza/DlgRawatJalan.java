@@ -94,6 +94,7 @@ import rekammedis.RMPenilaianAwalKeperawatanMata;
 import rekammedis.RMPenilaianAwalKeperawatanRalanPsikiatri;
 import rekammedis.RMPenilaianAwalKeperawatanRalanGeriatri;
 import rekammedis.AsesmenAwalMedisIGD;
+import rekammedis.RMEdukasiDarah;
 import rekammedis.RMDataCatatanKeseimbanganCairan;
 import rekammedis.RMPenilaianAwalMedisRalanAnak;
 import rekammedis.RMPenilaianAwalMedisRalanBedah;
@@ -1999,6 +2000,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnEP8 = new widget.Button();
         BtnIC15 = new widget.Button();
         BtnPenandaLokasiOperasiAlternatif = new widget.Button();
+        BtnEdukasiDarah = new widget.Button();
         MTht = new widget.PanelBiasa();
         BtnAwalMedisTHT = new widget.Button();
         BtnAwalKeperawatan3 = new widget.Button();
@@ -2247,7 +2249,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2266,7 +2268,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4790,7 +4792,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-07-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -6232,6 +6234,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MBedah.add(BtnPenandaLokasiOperasiAlternatif);
+
+        BtnEdukasiDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnEdukasiDarah.setText("Edukasi Pemberian Darah & Produk Darah");
+        BtnEdukasiDarah.setFocusPainted(false);
+        BtnEdukasiDarah.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnEdukasiDarah.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnEdukasiDarah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnEdukasiDarah.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnEdukasiDarah.setName("BtnEdukasiDarah"); // NOI18N
+        BtnEdukasiDarah.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnEdukasiDarah.setRoundRect(false);
+        BtnEdukasiDarah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEdukasiDarahActionPerformed(evt);
+            }
+        });
+        MBedah.add(BtnEdukasiDarah);
 
         jTabbedPane1.addTab("Bedah", MBedah);
 
@@ -13246,6 +13265,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatifActionPerformed
 
+    private void BtnEdukasiDarahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEdukasiDarahActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMEdukasiDarah form=new RMEdukasiDarah(null,false);
+                form.isCek();
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnEdukasiDarahActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -13338,6 +13374,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnEWS;
     private widget.Button BtnEWS1;
     private widget.Button BtnEdit;
+    private widget.Button BtnEdukasiDarah;
     private widget.Button BtnEdukasiPasienKeluarga;
     private widget.Button BtnHapus;
     private widget.Button BtnHasilEKG;
