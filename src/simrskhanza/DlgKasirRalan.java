@@ -879,6 +879,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnHapusStokObatRanap = new javax.swing.JMenuItem();
         MnHapusSemua = new javax.swing.JMenuItem();
         jSeparator13 = new javax.swing.JPopupMenu.Separator();
+        MnKonfirmasi = new javax.swing.JMenu();
+        MnWA = new javax.swing.JMenuItem();
         TNoRw = new widget.TextBox();
         WindowObatBhp = new javax.swing.JDialog();
         internalFrame2 = new widget.InternalFrame();
@@ -4467,6 +4469,34 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jSeparator13.setName("jSeparator13"); // NOI18N
         jSeparator13.setPreferredSize(new java.awt.Dimension(200, 1));
         jPopupMenu1.add(jSeparator13);
+
+        MnKonfirmasi.setBackground(new java.awt.Color(250, 255, 245));
+        MnKonfirmasi.setForeground(new java.awt.Color(50, 50, 50));
+        MnKonfirmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKonfirmasi.setText("Konfirmasi Pasien");
+        MnKonfirmasi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKonfirmasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnKonfirmasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnKonfirmasi.setName("MnKonfirmasi"); // NOI18N
+        MnKonfirmasi.setPreferredSize(new java.awt.Dimension(260, 26));
+
+        MnWA.setBackground(new java.awt.Color(255, 255, 254));
+        MnWA.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnWA.setForeground(new java.awt.Color(50, 50, 50));
+        MnWA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnWA.setText("Kirim WA");
+        MnWA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnWA.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnWA.setName("MnWA"); // NOI18N
+        MnWA.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnWA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnWAActionPerformed(evt);
+            }
+        });
+        MnKonfirmasi.add(MnWA);
+
+        jPopupMenu1.add(MnKonfirmasi);
 
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
@@ -12584,6 +12614,25 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }        // TODO add your handling code here:
     }//GEN-LAST:event_ppADIMEBtnPrintActionPerformed
 
+    private void MnWAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnWAActionPerformed
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
+            TNoRw.requestFocus();
+        }else if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            String nama=tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString();
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgWhatsapp whatsapp=new DlgWhatsapp(null,false);
+            whatsapp.setNoRm(TNoRMCari.getText(),nama);
+            whatsapp.setSize(720,330);
+            whatsapp.setLocationRelativeTo(internalFrame1);
+            whatsapp.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_MnWAActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -12719,6 +12768,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem MnJadwalOperasi1;
     private javax.swing.JMenuItem MnKamarInap;
     private javax.swing.JMenuItem MnKamarInap1;
+    private javax.swing.JMenu MnKonfirmasi;
     private javax.swing.JMenuItem MnKonselingFarmasi;
     private javax.swing.JMenuItem MnLembarRalan;
     private javax.swing.JMenuItem MnMeninggal;
@@ -12872,6 +12922,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem MnUrutTanggalAsc2;
     private javax.swing.JMenuItem MnUrutTanggalDesc;
     private javax.swing.JMenuItem MnUrutTanggalDesc2;
+    private javax.swing.JMenuItem MnWA;
     private widget.TextBox NomorSurat;
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;

@@ -202,25 +202,18 @@ public class DlgWhatsapp extends javax.swing.JDialog {
             encodedBytes = Base64.encodeBase64(auth.getBytes());
             authEncrypt= new String(encodedBytes);
             String no_hp=TTelf.getText();
-            String pesan=TCatatan.getText().replaceAll("(\r\n|\r|\n|\n\r)",". ");
+            String pesan=TCatatan.getText().replaceAll("(\r\n|\r|\n|\n\r)","\\\\n");
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("Authorization", "Basic "+authEncrypt);
             requestJson ="{" +
-//            "\"chatId\": \""+no_hp+"\","+ 
-//            "\"reply_to\": null,"+    
-//            "\"text\": \""+pesan+"\","+        
-//            "\"linkPreview\": true,"+ 
-//            "\"session\": \"default\""+          
-//            "}";
             "\"phone\": \""+no_hp+"\","+ 
             "\"message\": \""+pesan+"\","+  
             "\"reply_message_id\": \"\""+          
             "}";
             requestEntity = new HttpEntity(requestJson,headers);
             URL =  "https://wa-api.rsudmatraman.my.id/send/message";
-//            URL =  "http://100.10.3.5:3000/api/sendText";
             System.out.println("URL : "+URL+"");
             System.out.println("Request JSON : "+requestJson);
             requestJson=api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody();
@@ -290,14 +283,13 @@ public class DlgWhatsapp extends javax.swing.JDialog {
     
 
     private void isPsien() {
-//        Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRM.getText());
         Sequel.cariIsi("select CONCAT(REPLACE(LEFT(pasien.no_tlp,2),'08','628'),SUBSTRING(no_tlp,3,CHAR_LENGTH(no_tlp))) as no_tlp from pasien where pasien.no_rkm_medis=? ",TTelf,TNoRM.getText());
-        TCatatan.setText("Yth Bp/Ibu/Sdr "+TPasien.getText()+". ........");
+        TCatatan.setText("Yth Bp/Ibu/Sdr "+TPasien.getText()+"...");
     }
 
     public void setNoRm(String norm, String nama) {
         TNoRM.setText(norm);  
-        TPasien.setText(nama);
+        TPasien.setText(Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis=?", TNoRM.getText()));
         isPsien();         
     }
     
