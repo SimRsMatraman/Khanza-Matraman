@@ -75,11 +75,11 @@ public class DlgWhatsapp extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TPasien = new widget.TextBox();
+        TNoRM = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         FormInput = new widget.PanelBiasa();
         jLabel3 = new widget.Label();
-        TNoRM = new widget.TextBox();
-        TPasien = new widget.TextBox();
         TTelf = new widget.TextBox();
         jLabel9 = new widget.Label();
         Scroll3 = new widget.ScrollPane();
@@ -87,6 +87,15 @@ public class DlgWhatsapp extends javax.swing.JDialog {
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
         BtnKeluar = new widget.Button();
+
+        TPasien.setEditable(false);
+        TPasien.setHighlighter(null);
+        TPasien.setName("TPasien"); // NOI18N
+        TPasien.setPreferredSize(new java.awt.Dimension(25, 28));
+
+        TNoRM.setEditable(false);
+        TNoRM.setHighlighter(null);
+        TNoRM.setName("TNoRM"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -105,29 +114,16 @@ public class DlgWhatsapp extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(865, 137));
         FormInput.setLayout(null);
 
-        jLabel3.setText("Data Pasien :");
+        jLabel3.setText("Nomor WA :");
         jLabel3.setName("jLabel3"); // NOI18N
         FormInput.add(jLabel3);
         jLabel3.setBounds(0, 10, 80, 23);
-
-        TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
-        TNoRM.setName("TNoRM"); // NOI18N
-        FormInput.add(TNoRM);
-        TNoRM.setBounds(90, 10, 110, 23);
-
-        TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
-        TPasien.setName("TPasien"); // NOI18N
-        TPasien.setPreferredSize(new java.awt.Dimension(25, 28));
-        FormInput.add(TPasien);
-        TPasien.setBounds(202, 10, 290, 23);
 
         TTelf.setHighlighter(null);
         TTelf.setName("TTelf"); // NOI18N
         TTelf.setPreferredSize(new java.awt.Dimension(25, 28));
         FormInput.add(TTelf);
-        TTelf.setBounds(492, 10, 140, 23);
+        TTelf.setBounds(90, 10, 540, 23);
 
         jLabel9.setText("Pesan :");
         jLabel9.setName("jLabel9"); // NOI18N
@@ -284,7 +280,7 @@ public class DlgWhatsapp extends javax.swing.JDialog {
 
     private void isPsien() {
         Sequel.cariIsi("select CONCAT(REPLACE(LEFT(pasien.no_tlp,2),'08','628'),SUBSTRING(no_tlp,3,CHAR_LENGTH(no_tlp))) as no_tlp from pasien where pasien.no_rkm_medis=? ",TTelf,TNoRM.getText());
-        TCatatan.setText("Yth Bp/Ibu/Sdr "+TPasien.getText()+"...");
+        TCatatan.setText("Yang terhormat "+TPasien.getText()+" dengan nomor rekam medik "+TNoRM.getText()+".\n...");
     }
 
     public void setNoRm(String norm, String nama) {
