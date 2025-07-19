@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ceae92a-cfca-43f1-b5f8-f00247e75237">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
@@ -203,7 +203,7 @@
 				<text><![CDATA[BEBAS DARI NAPZA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="18" y="681" width="372" height="14" uuid="69c8cfdd-a1d9-4b5d-9113-72e18bd3ca72"/>
+				<reportElement x="18" y="692" width="372" height="14" uuid="69c8cfdd-a1d9-4b5d-9113-72e18bd3ca72"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="10" isItalic="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -269,7 +269,7 @@
 				<textFieldExpression><![CDATA["No Surat : "+$F{no_surat}.replace( "SKBN", "RSUD-MTR/SKBN/" )]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement x="217" y="513" width="318" height="23" uuid="c17d2bc5-b7dc-4241-98d9-7eb2675c53eb"/>
+				<reportElement x="217" y="524" width="318" height="23" uuid="c17d2bc5-b7dc-4241-98d9-7eb2675c53eb"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -277,7 +277,7 @@
 				<textFieldExpression><![CDATA["Jakarta, "+$F{tanggalsurat}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="217" y="529" width="318" height="22" uuid="10b9796e-93a8-4c14-b4c7-22179f084654"/>
+				<reportElement x="217" y="540" width="318" height="22" uuid="10b9796e-93a8-4c14-b4c7-22179f084654"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" size="12"/>
 					<paragraph lineSpacing="Single"/>
@@ -302,7 +302,7 @@
 					<font fontName="Arial" size="12" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nm_pasien}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[PROPER($F{nm_pasien})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="245" width="83" height="15" uuid="48f4c287-d33e-4c25-a00c-3877119f62f8">
@@ -331,7 +331,7 @@
 					<font fontName="Arial" size="12"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[PROPER($F{alamat}).replace("Iii","III").replace("Ii","II").replace("Rt/rw","RT/RW")+", "+PROPER($F{nm_alamat})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{alamat}+", "+$F{nm_alamat}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="211" width="83" height="15" uuid="c6aa4430-c926-45bd-bf44-ab7d420219c0">
@@ -407,7 +407,7 @@
 				<textFieldExpression><![CDATA[$F{jk}.equals("L")? "Laki - Laki":"Perempuan"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="3" y="473" width="543" height="34" uuid="7ba9dbb9-ec74-4592-b43b-d058f55c7fee"/>
+				<reportElement x="3" y="473" width="543" height="47" uuid="7ba9dbb9-ec74-4592-b43b-d058f55c7fee"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="12"/>
 					<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
@@ -415,21 +415,21 @@
 				<textFieldExpression><![CDATA["Demikian surat keterangan ini dibuat dengan sebenar-benarnya untuk dapat digunakan untuk keperluan"+IF($F{keperluan}.isEmpty(),"."," "+$F{keperluan}+".")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="217" y="610" width="318" height="19" uuid="3ca78267-c7a2-496a-a1a6-37f8df3038a5"/>
+				<reportElement x="217" y="621" width="318" height="19" uuid="3ca78267-c7a2-496a-a1a6-37f8df3038a5"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["dr. Yuris Mahadi"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="260" y="632" width="275" height="15" uuid="cd632aa8-3863-45c1-948f-c24f3f1a9a0e"/>
+				<reportElement x="260" y="643" width="275" height="15" uuid="cd632aa8-3863-45c1-948f-c24f3f1a9a0e"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["16/B.15A/31.75.01.1006.40.SPU-1/4/-1.779.3/e/2022"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="216" y="632" width="34" height="15" uuid="b4afc294-01e0-4eb4-bd45-ccde8f8167df"/>
+				<reportElement x="216" y="643" width="34" height="15" uuid="b4afc294-01e0-4eb4-bd45-ccde8f8167df"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -437,7 +437,7 @@
 				<text><![CDATA[SIP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="251" y="633" width="8" height="15" uuid="738e315f-9854-4e19-b71d-aca04c72d844"/>
+				<reportElement x="251" y="644" width="8" height="15" uuid="738e315f-9854-4e19-b71d-aca04c72d844"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Arial" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -445,7 +445,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="216" y="647" width="34" height="13" uuid="1fb7f2aa-653c-494c-b3b2-fd78546490f2"/>
+				<reportElement x="216" y="658" width="34" height="13" uuid="1fb7f2aa-653c-494c-b3b2-fd78546490f2"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -453,7 +453,7 @@
 				<text><![CDATA[NIP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="251" y="648" width="8" height="13" uuid="3cbeafc6-861c-4ec9-b67f-996034541257"/>
+				<reportElement x="251" y="659" width="8" height="13" uuid="3cbeafc6-861c-4ec9-b67f-996034541257"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Arial" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -461,7 +461,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="260" y="647" width="275" height="13" uuid="fda9f0e6-350f-4f0b-84ed-59d4659b72f9"/>
+				<reportElement x="260" y="658" width="275" height="13" uuid="fda9f0e6-350f-4f0b-84ed-59d4659b72f9"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 				</textElement>
