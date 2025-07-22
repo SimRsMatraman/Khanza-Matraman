@@ -49,6 +49,11 @@ import javax.swing.text.html.StyleSheet;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import simrskhanza.DlgCariPasien;
+import java.util.List;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.sql.ResultSetMetaData;
 
 /**
  *
@@ -422,6 +427,9 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkTambahanBiaya = new widget.CekBox();
         chkPotonganBiaya = new widget.CekBox();
         chkSuratKeteranganSehat = new widget.CekBox();
+        chkAsuhanKepOK = new widget.CekBox();
+        chkEdukasiDarah = new widget.CekBox();
+        chkOperasiAlternatif = new widget.CekBox();
         internalFrame3 = new widget.InternalFrame();
         Scroll6 = new widget.ScrollPane();
         LoadHTMLRiwayatRadLab = new widget.editorpane();
@@ -514,7 +522,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Riwayat/Rincian Tindakan/Terapi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Riwayat/Rincian Tindakan/Terapi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1674,6 +1682,48 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         });
         FormMenu.add(chkSuratKeteranganSehat);
 
+        chkAsuhanKepOK.setSelected(true);
+        chkAsuhanKepOK.setText("Remcana Asuhan Keperawatan OK");
+        chkAsuhanKepOK.setToolTipText("");
+        chkAsuhanKepOK.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkAsuhanKepOK.setName("chkAsuhanKepOK"); // NOI18N
+        chkAsuhanKepOK.setOpaque(false);
+        chkAsuhanKepOK.setPreferredSize(new java.awt.Dimension(245, 22));
+        chkAsuhanKepOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAsuhanKepOKActionPerformed(evt);
+            }
+        });
+        FormMenu.add(chkAsuhanKepOK);
+
+        chkEdukasiDarah.setSelected(true);
+        chkEdukasiDarah.setText("Edukasi Pemberian Darah & Produk Darah");
+        chkEdukasiDarah.setToolTipText("");
+        chkEdukasiDarah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkEdukasiDarah.setName("chkEdukasiDarah"); // NOI18N
+        chkEdukasiDarah.setOpaque(false);
+        chkEdukasiDarah.setPreferredSize(new java.awt.Dimension(245, 22));
+        chkEdukasiDarah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkEdukasiDarahActionPerformed(evt);
+            }
+        });
+        FormMenu.add(chkEdukasiDarah);
+
+        chkOperasiAlternatif.setSelected(true);
+        chkOperasiAlternatif.setText("Penanda Lokasi Operasi Metode Alternatif");
+        chkOperasiAlternatif.setToolTipText("");
+        chkOperasiAlternatif.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkOperasiAlternatif.setName("chkOperasiAlternatif"); // NOI18N
+        chkOperasiAlternatif.setOpaque(false);
+        chkOperasiAlternatif.setPreferredSize(new java.awt.Dimension(245, 22));
+        chkOperasiAlternatif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkOperasiAlternatifActionPerformed(evt);
+            }
+        });
+        FormMenu.add(chkOperasiAlternatif);
+
         ScrollMenu.setViewportView(FormMenu);
 
         PanelAccor.add(ScrollMenu, java.awt.BorderLayout.CENTER);
@@ -2259,6 +2309,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkChecklistKriteriaMasukICU.setSelected(true);
             chkChecklistKriteriaKeluarICU.setSelected(true);
             chkKonsultasiMedik.setSelected(true);
+            chkEdukasiDarah.setSelected(true);
+            chkOperasiAlternatif.setSelected(true);
+            chkAsuhanKepOK.setSelected(true);
         }else{
             chkTriase.setSelected(false);
             chkSkriningIGD.setSelected(false);
@@ -2372,6 +2425,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkChecklistKriteriaMasukICU.setSelected(false);
             chkChecklistKriteriaKeluarICU.setSelected(false);
             chkKonsultasiMedik.setSelected(false);
+            chkEdukasiDarah.setSelected(false);
+            chkOperasiAlternatif.setSelected(false);
+            chkAsuhanKepOK.setSelected(false);
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 
@@ -2436,6 +2492,18 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private void chkChecklistPreOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkChecklistPreOperasiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_chkChecklistPreOperasiActionPerformed
+
+    private void chkEdukasiDarahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkEdukasiDarahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkEdukasiDarahActionPerformed
+
+    private void chkOperasiAlternatifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkOperasiAlternatifActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkOperasiAlternatifActionPerformed
+
+    private void chkAsuhanKepOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAsuhanKepOKActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chkAsuhanKepOKActionPerformed
 
     /**
     * @param args the command line arguments
@@ -2510,6 +2578,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private javax.swing.ButtonGroup buttonGroup1;
     private widget.CekBox chkAsuhanFisioterapi;
     private widget.CekBox chkAsuhanGizi;
+    private widget.CekBox chkAsuhanKepOK;
     private widget.CekBox chkAsuhanKeperawatanIGD;
     private widget.CekBox chkAsuhanKeperawatanKebIGD;
     private widget.CekBox chkAsuhanKeperawatanRalan;
@@ -2561,6 +2630,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkChecklistPostOperasi;
     private widget.CekBox chkChecklistPreOperasi;
     private widget.CekBox chkDiagnosaPenyakit;
+    private widget.CekBox chkEdukasiDarah;
     private widget.CekBox chkEdukasiPasienTerintegrasiRawatJalan;
     private widget.CekBox chkHasilPemeriksaanUSG;
     private widget.CekBox chkHemodialisa;
@@ -2569,6 +2639,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkKonsultasiMedik;
     private widget.CekBox chkMonitoringGizi;
     private widget.CekBox chkMonitoringReaksiTranfusi;
+    private widget.CekBox chkOperasiAlternatif;
     private widget.CekBox chkOperasiVK;
     private widget.CekBox chkPelayananInformasiObat;
     private widget.CekBox chkPemantauanPEWSAnak;
@@ -12275,6 +12346,651 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     System.out.println("Notifikasi : "+e);
                 } finally{
                     if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+            
+            if(chkAsuhanKepOK.isSelected()==true){
+                try {
+                    rs2 = koneksi.prepareStatement(
+                        "SELECT " +
+                            "pasien.no_rkm_medis, pasien.nm_pasien, pasien.tgl_lahir, pasien.jk, " +
+                            "rencana_asuhan_keperawatan_operasi_pre.*, " +
+                            "rencana_asuhan_keperawatan_operasi_intra.*, " +
+                            "rencana_asuhan_keperawatan_operasi_post.*, " +
+                            "rencana_asuhan_keperawatan_operasi_glassgow.*, " +
+                            "a.nama as operator, " +
+                            "b.nama as anastesi, " +
+                            "c.nama as petugas " +
+                        "FROM reg_periksa " +
+                        "LEFT JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis " +
+                        "LEFT JOIN rencana_asuhan_keperawatan_operasi_pre ON reg_periksa.no_rawat = rencana_asuhan_keperawatan_operasi_pre.no_rawat " +
+                        "LEFT JOIN rencana_asuhan_keperawatan_operasi_intra ON rencana_asuhan_keperawatan_operasi_intra.no_rawat = rencana_asuhan_keperawatan_operasi_pre.no_rawat " +
+                        "LEFT JOIN rencana_asuhan_keperawatan_operasi_post ON rencana_asuhan_keperawatan_operasi_post.no_rawat = rencana_asuhan_keperawatan_operasi_intra.no_rawat " +
+                        "LEFT JOIN rencana_asuhan_keperawatan_operasi_glassgow ON rencana_asuhan_keperawatan_operasi_glassgow.no_rawat = rencana_asuhan_keperawatan_operasi_post.no_rawat " +
+                        "INNER JOIN pegawai a ON a.nik = rencana_asuhan_keperawatan_operasi_pre.kd_dr_operator " +
+                        "INNER JOIN pegawai b ON b.nik = rencana_asuhan_keperawatan_operasi_pre.kd_dr_anastesi " +
+                        "INNER JOIN pegawai c ON c.nik = rencana_asuhan_keperawatan_operasi_pre.kd_petugas " +
+                        "WHERE rencana_asuhan_keperawatan_operasi_pre.no_rawat = '"+norawat+"'"
+                    ).executeQuery();
+
+                    List<Map<String, Object>> dataOp = new ArrayList<>();
+
+                    ResultSetMetaData meta = rs2.getMetaData();
+                    while (rs2.next()) {
+                        Map<String, Object> row = new HashMap<>();
+                        for (int i = 1; i <= meta.getColumnCount(); i++) {
+                            row.put(meta.getColumnName(i), rs2.getObject(i));
+                        }
+                        dataOp.add(row);
+                    }
+
+                    if (!dataOp.isEmpty()) {
+                        htmlContent.append(
+                            "<tr class='isi'>" + 
+                                "<td valign='top' width='2%'></td>" +        
+                                "<td valign='top' width='18%'>Rencana Asuhan Keperawatan OK</td>" +
+                                "<td valign='top' width='1%' align='center'>:</td>" +
+                                "<td valign='top' width='79%'>" +
+                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                                        "<tr align='center'>" +
+                                            "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>" +
+                                            "<td valign='top' width='10%' bgcolor='#FFFAF8'>Tanggal</td>" +
+                                            "<td valign='top' width='43%' bgcolor='#FFFAF8'>Petugas Operator</td>" +
+                                            "<td valign='top' width='43%' bgcolor='#FFFAF8'>Petugas Anastesi</td>" +
+                                        "</tr>"
+                        );
+
+                        int w = 1;
+                        for (Map<String, Object> row : dataOp) {
+                            htmlContent.append(
+                                "<tr>" +
+                                    "<td valign='top' align='center'>" + w + "</td>" +
+                                    "<td valign='top'>" + row.get("tanggal_masuk") + "</td>" +
+                                    "<td valign='top'>" + row.get("operator") + "</td>" +
+                                    "<td valign='top'>" + row.get("anastesi") + "</td>" +
+                                "</tr>"
+                            );
+                            w++;
+                        }
+
+                        htmlContent.append(
+                                    "</table>" +
+                                "</td>" +
+                            "</tr>"
+                        );
+
+                        // PRE OPERATIF SECTION
+                        htmlContent.append(
+                            "<tr class='isi'>" + 
+                                "<td valign='top' width='2%'></td>" +        
+                                "<td valign='top' width='18%'></td>" +
+                                "<td valign='top' width='0%' align='center'></td>" +
+                                "<td valign='top' width='78%'>" +
+                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                                        "<tr align='center'>" +
+                                            "<td colspan='5' bgcolor='#FFFAF8'><b>PRE OPERATIF</b></td>" +
+                                        "</tr>"
+                        );
+
+                        for (Map<String, Object> row : dataOp) {
+                            
+                            htmlContent.append(
+                                "<tr>" +
+                                    "<td valign='top' width='20%'>" +
+                                        "<b>1. Pernafasan</b><br><br>" +
+                                        " Otot Bantu Nafas " +("true".equalsIgnoreCase(String.valueOf(row.get("otot_bantu_nafas"))) ? "✔" : "") + "<br>" +
+                                        " Deformitas " +("true".equalsIgnoreCase(String.valueOf(row.get("deformitas"))) ? "✔" : "") + "<br>" +
+                                        " Empisema " +("true".equalsIgnoreCase(String.valueOf(row.get("empisema"))) ? "✔" : "") + "<br>" +
+                                        " Normal " +("true".equalsIgnoreCase(String.valueOf(row.get("normal"))) ? "✔" : "") + "<br><br>" +
+
+                                        "<b>Pengembangan Dada :</b><br>" +
+                                        " R " +("true".equalsIgnoreCase(String.valueOf(row.get("pengembangan_dada_r"))) ? "✔" : "") + "<br>"+
+                                        " L " +("true".equalsIgnoreCase(String.valueOf(row.get("pengembangan_dada_l"))) ? "✔" : "") + "<br><br>" +
+
+                                        "RR : " + (row.get("rr") != null ? row.get("rr") : "-") + " x/m<br>" +
+                                        "SpO2 : " + (row.get("spo2") != null ? row.get("spo2") : "-") + " %<br>" +
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='20%'>" +
+                                        "<b>2. Darah </b><br><br>" +
+                                        "<b>Capillary Refill :</b><br>" +
+                                        " < 2 Detik " +("true".equalsIgnoreCase(String.valueOf(row.get("capilary1"))) ? "✔" : "") + "<br>" +
+                                        " > 2 Detik " +("true".equalsIgnoreCase(String.valueOf(row.get("capilary2"))) ? "✔" : "") + "<br><br>" +
+                                        
+                                        "<b>ST/CT: </b><br>" +
+                                        ("true".equalsIgnoreCase(String.valueOf(row.get("perdarahan"))) ? "✔" : "") +
+                                        "Perdarahan : " + (row.get("ket_perdarahan") != null ? row.get("ket_perdarahan") : "-") + " cc <br>" +
+                                        "Tensi : " + (row.get("tensi") != null ? row.get("tensi") : "-") + " mmhg<br>" +
+                                        "Nd : " + (row.get("nd") != null ? row.get("nd") : "-") + " K/mmt<br>" +
+                                        "Suhu : " + (row.get("suhu") != null ? row.get("suhu") : "-") + " C<br><br>" +
+                                                
+                                        "<b>Kulit : </b><br>" +
+                                        " Hangat " +("true".equalsIgnoreCase(String.valueOf(row.get("kulit_hangat"))) ? "✔" : "") + "<br>" +
+                                        " Dingin " +("true".equalsIgnoreCase(String.valueOf(row.get("kulit_dingin"))) ? "✔" : "") + "<br>" +
+                                        " Lainnya " +("true".equalsIgnoreCase(String.valueOf(row.get("kulit_lainnya"))) ? "✔" : "") + "<br>" +
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='20%'>" +
+                                        "<b>3. Skala Nyeri : " + (row.get("skala_nyeri") != null ? row.get("skala_nyeri") : "-")+ "</b><br><br>"+
+                                        "<b>4. Kandung Kemih </b><br>" +
+                                        " Penggunaan Kateter" +("true".equalsIgnoreCase(String.valueOf(row.get("penggunaan_kateter"))) ? "✔" : "") + "<br><br>" +
+                                        "Produksi Urine : " + (row.get("produksi_urine") != null ? row.get("produksi_urine") : "-")+ "<br><br>"+
+                                        "Lain - lain : " + (row.get("kemih_lainnya_pre") != null ? row.get("kemih_lainnya_pre") : "-") + " x/m<br>" +
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='20%'>" +
+                                        "<b>5. Otak </b><br><br>"+
+                                        "<b>Kesadaran </b><br>" +
+                                        " Compos mentis "+("true".equalsIgnoreCase(String.valueOf(row.get("compos_mentis"))) ? "✔" : "") + "<br>" +
+                                        " Deltrium " +("true".equalsIgnoreCase(String.valueOf(row.get("deltrium"))) ? "✔" : "") + "<br>" +
+                                        " Stuper" +("true".equalsIgnoreCase(String.valueOf(row.get("stuper"))) ? "✔" : "") + "<br>" +
+                                        " Apatis" +("true".equalsIgnoreCase(String.valueOf(row.get("apatis"))) ? "✔" : "") + "<br>" +
+                                        " Koma" +("true".equalsIgnoreCase(String.valueOf(row.get("koma"))) ? "✔" : "") + "<br>" +
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='20%'> "+
+                                        "<b>6. Abdomen</b><br><br> "+
+                                        "BB :" + (row.get("bb") != null ? row.get("bb") : "-")+ "<br><br>"+
+                                        " Puasa " +("true".equalsIgnoreCase(String.valueOf(row.get("puasa"))) ? "✔" : "") + "<br>" +
+                                        " Mual " +("true".equalsIgnoreCase(String.valueOf(row.get("mual"))) ? "✔" : "") + "<br>" +
+                                        " Distensil" +("true".equalsIgnoreCase(String.valueOf(row.get("distensil"))) ? "✔" : "") + "<br>" +
+                                        " Muntah" +("true".equalsIgnoreCase(String.valueOf(row.get("muntah"))) ? "✔" : "") + "<br><br>" +
+                                        "<b>7. Tulang</b><br><br> "+
+                                        " Patah Tulang " +("true".equalsIgnoreCase(String.valueOf(row.get("patah_tulang"))) ? "✔" : "") + "<br>" +
+                                        "Regio :" + (row.get("regio") != null ? row.get("regio") : "-")+ "<br><br>"+
+                                        "<b>8. Mental</b><br><br> "+
+                                        " Tenang " +("true".equalsIgnoreCase(String.valueOf(row.get("tenang"))) ? "✔" : "") + "<br>" +
+                                        " Nangis " +("true".equalsIgnoreCase(String.valueOf(row.get("nangis"))) ? "✔" : "") + "<br>" +
+                                        " Gelisah " +("true".equalsIgnoreCase(String.valueOf(row.get("gelisah"))) ? "✔" : "") + "<br>" +
+                                        "Lain - lain :" + (row.get("mental_lainnya") != null ? row.get("mental_lainnya") : "-")+ "<br><br>"+
+                                    "</td>" +
+                                "</tr>"
+                            );
+                            
+                            htmlContent.append(
+                                "<tr class='isi'>" + 
+                                    "<td valign='top' colspan='5'>" + // 5 kolom digabung
+                                        "<table width='100%' border='0' cellpadding='3' cellspacing='0'>" +
+                                            "<tr>" +
+                                                "<td valign='top' width='33.3%'>" +
+                                                    "<b>Diagnosa Keperawatan</b><br><br>" +
+                                                    " Kecemasan " + ("true".equalsIgnoreCase(String.valueOf(row.get("kecemasan"))) ? "✔" : "") + "<br>" +
+                                                    " Gangguan pertukaran gas " + ("true".equalsIgnoreCase(String.valueOf(row.get("pertukaran_gas"))) ? "✔" : "") + "<br>" +
+                                                    " Gangguan mobilitas fisik " + ("true".equalsIgnoreCase(String.valueOf(row.get("mobilitas_fisik"))) ? "✔" : "") + "<br>" +
+                                                    " Gangguan integritas kulit " + ("true".equalsIgnoreCase(String.valueOf(row.get("integritas_kulit"))) ? "✔" : "") + "<br>" +
+                                                    " Gangguan komunikasi verbal " + ("true".equalsIgnoreCase(String.valueOf(row.get("komunikasi_verbal"))) ? "✔" : "") + "<br>" +
+                                                    " Tidak efektif pola nafas " + ("true".equalsIgnoreCase(String.valueOf(row.get("tidak_efektif_pola_nafas"))) ? "✔" : "") + "<br>" +
+                                                    " Tidak efektif kuping individu " + ("true".equalsIgnoreCase(String.valueOf(row.get("tidak_efektif_kuping_individual"))) ? "✔" : "") + "<br>" +
+                                                    " Defisi pengetahuan " + ("true".equalsIgnoreCase(String.valueOf(row.get("defisi_pengetahuan"))) ? "✔" : "") + "<br>" +
+                                                    " Potensial infeksi " + ("true".equalsIgnoreCase(String.valueOf(row.get("potensial_infeksi"))) ? "✔" : "") + "<br>" +
+                                                    " Nyeri " + ("true".equalsIgnoreCase(String.valueOf(row.get("nyeri"))) ? "✔" : "") + "<br>" +
+                                                    "Lainnya :" + (row.get("diagnosa_lainnya") != null ? row.get("diagnosa_lainnya") : "-")+ "<br><br>"+
+                                                "</td>" +
+                                                "<td valign='top' width='33.3%'>" +
+                                                    "<b>Perencanaan/Implementasi</b><br><br>" +
+                                                    " Lakukan interaksi sosial " + ("true".equalsIgnoreCase(String.valueOf(row.get("ineraksi_sosial"))) ? "✔" : "") + "<br>" +
+                                                    " Cek kelengkapan dokumen pra operasi " + ("true".equalsIgnoreCase(String.valueOf(row.get("dokumen_pra_operasi"))) ? "✔" : "") + "<br>" +
+                                                    " Lakukan orientasi " + ("true".equalsIgnoreCase(String.valueOf(row.get("orientasi"))) ? "✔" : "") + "<br><br>" +
+                                                    "Pre orientasi dan penken<br>" +
+                                                    " Observasi TTV dari keadaan umum pasien " + ("true".equalsIgnoreCase(String.valueOf(row.get("ttv"))) ? "✔" : "") + "<br>" +
+                                                    " Lakukan Sign in " + ("true".equalsIgnoreCase(String.valueOf(row.get("sign_in"))) ? "✔" : "") + "<br>" +
+                                                    "Lainnya :" + (row.get("perencanaan_lainnya") != null ? row.get("perencanaan_lainnya") : "-")+ "<br><br>"+
+                                                "</td>" +
+                                                "<td valign='top' width='33.3%'>" +
+                                                    " <b>Evaluasi</b><br><br>" +
+                                                    " Subject :" + (row.get("s") != null ? row.get("s") : "-")+ "<br>"+
+                                                    " Object :" + (row.get("o") != null ? row.get("o") : "-")+ "<br><br>"+
+                                                    " TD :" + (row.get("td") != null ? row.get("td") : "-")+ "<br>"+
+                                                    " N :" + (row.get("n") != null ? row.get("n") : "-")+ "<br>"+
+                                                    " R :" + (row.get("r") != null ? row.get("r") : "-")+ "<br><br>"+
+                                                    " <b>A :</b><br>" +
+                                                    " Tercapai " + ("true".equalsIgnoreCase(String.valueOf(row.get("a_tercapai"))) ? "✔" : "") + "<br>" +
+                                                    " Tercapai Sebagian " + ("true".equalsIgnoreCase(String.valueOf(row.get("a_tercapai_sebagian"))) ? "✔" : "") + "<br>" +
+                                                    " Belum Tercapai " + ("true".equalsIgnoreCase(String.valueOf(row.get("a_belum"))) ? "✔" : "") + "<br><br>" +
+                                                    " <b>P :</b><br>" +
+                                                    " - " + ("true".equalsIgnoreCase(String.valueOf(row.get("p"))) ? "✔" : "") + "<br>" +
+                                                    " Pertahankan " + ("true".equalsIgnoreCase(String.valueOf(row.get("p_pertahankan"))) ? "✔" : "") + "<br>" +
+                                                    " Lanjutkan :" + (row.get("p_lanjutkan") != null ? row.get("p_lanjutkan") : "-")+ "<br><br>"+
+                                                    "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</td>" +
+                                "</tr>"
+                            );
+                        }
+
+                        htmlContent.append(
+                                    "</table>" +
+                                "</td>" +
+                            "</tr>"
+                        );
+                        
+                        // INTRA OPERATIF SECTION
+                        htmlContent.append(
+                            "<tr class='isi'>" +
+                                "<td valign='top' width='2%'></td>" +
+                                "<td valign='top' width='18%'></td>" +
+                                "<td valign='top' width='0%' align='center'></td>" +
+                                "<td valign='top' width='78%'>" +
+                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                                        "<tr align='center'>" +
+                                            "<td colspan='4' bgcolor='#FFFAF8'><b>INTRA OPERATIF</b></td>" +
+                                        "</tr>"
+                        );
+
+                        for (Map<String, Object> row : dataOp) {
+                            htmlContent.append(
+                                "<tr>" +
+                                    "<td valign='top' width='25%'>" +
+                                        " Waktu Masuk OK : " + (row.get("waktu_masuk") != null ? row.get("waktu_masuk") : "-") + "<br>" +
+                                        " Waktu Keluar OK : " + (row.get("waktu_keluar") != null ? row.get("waktu_keluar") : "-") + "<br>" +
+                                        " Anastesi Mulai Jam : " + (row.get("anastesi_mulai") != null ? row.get("anastesi_mulai") : "-") + "<br>" +
+                                        " Anastesi Keluar Jam : " + (row.get("anastesi_selesai") != null ? row.get("anastesi_selesai") : "-") + "<br>" +
+                                        " Operasi Mulain Jam : " + (row.get("operasi_mulai") != null ? row.get("operasi_mulai") : "-") + "<br>" +
+                                        " Operasi Mulain Jam : " + (row.get("operasi_selesai") != null ? row.get("operasi_selesai") : "-") + "<br><br>" +
+                                        "<b>Jenis Anastesi :</b><br>" +
+                                        " Umum " + ("true".equalsIgnoreCase(String.valueOf(row.get("anastesi_umum"))) ? "✔" : "") + "<br>" +
+                                        " Blok " + ("true".equalsIgnoreCase(String.valueOf(row.get("anastesi_blok"))) ? "✔" : "") + "<br>" +
+                                        " Regional " + ("true".equalsIgnoreCase(String.valueOf(row.get("anastesi_regional"))) ? "✔" : "") + "<br><br>" +
+                                        " ASA : " + (row.get("asa") != null ? row.get("asa") : "-") + "<br>" +
+                                    "</td>" +
+
+                                    "<td valign='top' width='25%'>" +
+                                        " <b>1. Persiapan</b><br><br>" +
+                                        " <b>Persiapan Kulit</b><br>" +
+                                        " Kulit PRE Op Utuh " + ("true".equalsIgnoreCase(String.valueOf(row.get("kulit_pre_op_utuh"))) ? "✔" : "") + "<br>" +
+                                        " Persiapan Kulit oleh : " + (row.get("persiapan_kulit_oleh") != null ? row.get("persiapan_kulit_oleh") : "-") + "<br><br>" +
+                                        " <b>Klasifikasi Luka</b><br>" +
+                                        " Bersih " + ("true".equalsIgnoreCase(String.valueOf(row.get("luka_bersih"))) ? "✔" : "") + "<br>" +
+                                        " Terkontaminasi " + ("true".equalsIgnoreCase(String.valueOf(row.get("luka_terkontaminasi"))) ? "✔" : "") + "<br>" +
+                                        " Kotor " + ("true".equalsIgnoreCase(String.valueOf(row.get("luka_kotor"))) ? "✔" : "") + "<br><br>" +
+                                        " <b>Posisi</b><br>" +
+                                        " Supine " + ("true".equalsIgnoreCase(String.valueOf(row.get("posisi_supin"))) ? "✔" : "") + "<br>" +
+                                        " Uthomi " + ("true".equalsIgnoreCase(String.valueOf(row.get("posisi_uthotomi"))) ? "✔" : "") + "<br>" +
+                                        " Lateral kn/kl " + ("true".equalsIgnoreCase(String.valueOf(row.get("posisi_lateral"))) ? "✔" : "") + "<br>" +
+                                        " Lain - Lain : " + (row.get("posisi_lainnya") != null ? row.get("posisi_lainnya") : "-") + "<br><br>" +
+                                        " <b>Electrocouter </b><br>" +
+                                        " Pemasang : " + (row.get("pemasang_elek") != null ? row.get("pemasang_elek") : "-") + "<br>" +
+                                        " Letak Ground : " + (row.get("letak_ground") != null ? row.get("letak_ground") : "-") + "<br><br>" +
+                                        " Coagulant : " + (row.get("coagulant") != null ? row.get("coagulant") : "-") + "<br>" +
+                                        " Cutting : " + (row.get("cutting") != null ? row.get("cutting") : "-") + "l<br>" +
+                                    "</td>" +
+
+                                    "<td valign='top' width='25%'>" +
+                                        " Mesin Suction " + ("true".equalsIgnoreCase(String.valueOf(row.get("mesin_suction"))) ? "✔" : "") + "<br>" +
+                                        " Blanket Warmer " + ("true".equalsIgnoreCase(String.valueOf(row.get("blanket_warmer"))) ? "✔" : "") + "<br><br>" +
+                                        " <b>Torniquet </b><br>" +
+                                        " Jam Mulai : " + (row.get("jam_mulai_tor") != null ? row.get("jam_mulai_tor") : "-") + "<br>" +
+                                        " Jam Selesai : " + (row.get("jam_selesai_tor") != null ? row.get("jam_selesai_tor") : "-") + "<br>" +
+                                        " Pemasang : " + (row.get("pemasang_tor") != null ? row.get("pemasang_tor") : "-") + "<br>" +
+                                        " Pemasangan Graft " + ("true".equalsIgnoreCase(String.valueOf(row.get("graft"))) ? "✔" : "") + "<br>" +
+                                        " Lokasi : " + (row.get("lokasi") != null ? row.get("lokasi") : "-") + "<br><br>" +
+                                        " <b>2. Darah</b><br><br>" +
+                                        " Pendarahan Intra OP : " + (row.get("pendarahan_intra_op") != null ? row.get("pendarahan_intra_op") : "-") + " cc<br>" +
+                                        " Produk Darah " + ("true".equalsIgnoreCase(String.valueOf(row.get("produk_darah"))) ? "✔" : "") + "<br>" +
+                                        " Mulai : " + (row.get("jam_mulai_darah") != null ? row.get("jam_mulai_darah") : "-") +"" + "" + "Selesai : " + (row.get("jam_selesai_darah") != null ? row.get("jam_selesai_darah") : "-") + "<br>" +
+                                        " Mulai : " + (row.get("jam_mulai_darah1") != null ? row.get("jam_mulai_darah1") : "-") +"" + "" + "Selesai : " + (row.get("jam_selesai_darah1") != null ? row.get("jam_selesai_darah1") : "-") + "<br>" +
+                                        " </td>" +
+
+                                    "<td valign='top' width='25%'>" +
+                                        "<b>3. Spesimen</b><br><br>" +
+                                        " Rutin " + ("true".equalsIgnoreCase(String.valueOf(row.get("rutin"))) ? "✔" : "") + "<br>" +
+                                        " Potong Beku " + ("true".equalsIgnoreCase(String.valueOf(row.get("potong_beku"))) ? "✔" : "") + "<br>" +
+                                        " Kultur " + ("true".equalsIgnoreCase(String.valueOf(row.get("kultur"))) ? "✔" : "") + "<br>" +
+                                        " <b>4. Kandung Kemih</b><br><br>" +
+                                        " Penggunaan Kateter " + ("true".equalsIgnoreCase(String.valueOf(row.get("penggunaan_kateter_intra"))) ? "✔" : "") + "<br>" +
+                                        " Produksi Urine : " + (row.get("produksi_urine_intra") != null ? row.get("produksi_urine_intra") : "-") + " cc<br>" +
+                                        " Lain - Lain : " + (row.get("kemih_lainnya_intra") != null ? row.get("kemih_lainnya_intra") : "-") + "<br>" +
+                                        " <b>5. Status Mental</b><br><br>" +
+                                        " Tenang " + ("true".equalsIgnoreCase(String.valueOf(row.get("tenang_intra"))) ? "✔" : "") + "<br>" +
+                                        " Gelisah " + ("true".equalsIgnoreCase(String.valueOf(row.get("gelisah_intra"))) ? "✔" : "") + "<br>" +
+                                        " Nangis " + ("true".equalsIgnoreCase(String.valueOf(row.get("nangis_intra"))) ? "✔" : "") + "<br>" +
+                                        " Lain - Lain : " + (row.get("mental_lainnya_intra") != null ? row.get("mental_lainnya_intra") : "-") + "<br>" +
+                                    "</td>" +
+                                "</tr>"
+                            );
+                            
+                            htmlContent.append(
+                                "<tr class='isi'>" + 
+                                    "<td valign='top' colspan='4'>" + // 5 kolom digabung
+                                        "<table width='100%' border='0' cellpadding='3' cellspacing='0'>" +
+                                            "<tr>" +
+                                                "<td valign='top' width='33.3%'>" +
+                                                    "<b>Diagnosa Keperawatan </b><br><br>" +
+                                                    " Resiko Infeksi " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_infeksi"))) ? "✔" : "") + "<br>" +
+                                                    " Resiko Cidera " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_cidera"))) ? "✔" : "") + "<br>" +
+                                                    " Resiko Hipotermi " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_hipotermi"))) ? "✔" : "") + "<br>" +
+                                                    " Kecemasan " + ("true".equalsIgnoreCase(String.valueOf(row.get("kecemasan_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Gangguan Integrasi Kulit " + ("true".equalsIgnoreCase(String.valueOf(row.get("integritas_kulit_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Tidak efektif pola nafas " + ("true".equalsIgnoreCase(String.valueOf(row.get("tidak_efektif_pola_nafas_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Resiko Syok Hypovolemic " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_syok"))) ? "✔" : "") + "<br>" +
+                                                    (row.get("diagnosa_lainnya_intra") != null ? row.get("diagnosa_lainnya_intra") : "-")+ "<br><br>"+
+                                                "</td>" +
+                                                "<td valign='top' width='33.3%'>" +
+                                                    "<b>Perencanaan/Implementasi</b><br><br>" +
+                                                    " Siapkan Kamar Operasi " + ("true".equalsIgnoreCase(String.valueOf(row.get("siapkan_ok"))) ? "✔" : "") + "<br>" +
+                                                    " Seiapkan Selimut Hangat " + ("true".equalsIgnoreCase(String.valueOf(row.get("siapkan_slimut"))) ? "✔" : "") + "<br>" +
+                                                    " Siapkan Pasien Dimeja Operasi " + ("true".equalsIgnoreCase(String.valueOf(row.get("siapkan_pasien_dimeja_op"))) ? "✔" : "") + "<br>" +
+                                                    " Observasi TTV " + ("true".equalsIgnoreCase(String.valueOf(row.get("observasi_ttv_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Siapkan Alat dan Linen " + ("true".equalsIgnoreCase(String.valueOf(row.get("alat_linen"))) ? "✔" : "") + "<br>" +
+                                                    " Siapkan Peralatan Elektromedis " + ("true".equalsIgnoreCase(String.valueOf(row.get("elektromedis"))) ? "✔" : "") + "<br>" +
+                                                    " Posisikan Pasien Sesuai dengan Jenis Operasi " + ("true".equalsIgnoreCase(String.valueOf(row.get("posisi_pasien"))) ? "✔" : "") + "<br>" +
+                                                    " Lakukan Persiapan Sebelum Operasi (Cuci Tangan, Memakai Jas Operasi dan Sarung Tangan) " + ("true".equalsIgnoreCase(String.valueOf(row.get("persiapan_op"))) ? "✔" : "") + "<br>" +
+                                                    " Persiapan Kulit " + ("true".equalsIgnoreCase(String.valueOf(row.get("persiapan_kulit"))) ? "✔" : "") + "<br>" +
+                                                    " Lakukan Time Out " + ("true".equalsIgnoreCase(String.valueOf(row.get("time_out"))) ? "✔" : "") + "<br>" +
+                                                    (row.get("perencanaan_lainnya_intra") != null ? row.get("perencanaan_lainnya_intra") : "-")+ "<br><br>"+
+                                                "</td>" +
+                                                "<td valign='top' width='33.3%'>" +
+                                                    "<b>Evaluasi</b><br><br>" +
+                                                    " Subject :" + (row.get("s") != null ? row.get("s_intra") : "-")+ "<br>"+
+                                                    " Object :" + (row.get("o") != null ? row.get("o_intra") : "-")+ "<br><br>"+
+                                                    " TD :" + (row.get("td") != null ? row.get("td_intra") : "-")+ "<br>"+
+                                                    " N :" + (row.get("n") != null ? row.get("n_intra") : "-")+ "<br>"+
+                                                    " R :" + (row.get("r") != null ? row.get("r_intra") : "-")+ "<br><br>"+
+                                                    " <b>A :</b><br>" +
+                                                    " Tercapai " + ("true".equalsIgnoreCase(String.valueOf(row.get("a_tercapai_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Tercapai Sebagian " + ("true".equalsIgnoreCase(String.valueOf(row.get("a_tercapai_sebagian_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Belum Tercapai " + ("true".equalsIgnoreCase(String.valueOf(row.get("a_belum_intra"))) ? "✔" : "") + "<br><br>" +
+                                                    " <b>P :</b><br>" +
+                                                    " - " + ("true".equalsIgnoreCase(String.valueOf(row.get("p_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Pertahankan " + ("true".equalsIgnoreCase(String.valueOf(row.get("p_pertahankan_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Lanjutkan :" + (row.get("p_lanjutkan") != null ? row.get("p_lanjutkan_intra") : "-")+ "<br><br>"+
+                                                    "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</td>" +
+                                "</tr>"
+                            );
+                        }
+
+                        htmlContent.append("</table></td></tr>");
+                        
+                        // POST OPERATIF SECTION
+                        htmlContent.append(
+                            "<tr class='isi'>" +
+                                "<td valign='top' width='2%'></td>" +
+                                "<td valign='top' width='18%'></td>" +
+                                "<td valign='top' width='0%' align='center'></td>" +
+                                "<td valign='top' width='78%'>" +
+                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                                        "<tr align='center'>" +
+                                            "<td colspan='5' bgcolor='#FFFAF8'><b>POST OPERATIF</b></td>" +
+                                        "</tr>"
+                        );
+
+                        for (Map<String, Object> row : dataOp) {
+                            
+                            htmlContent.append(
+                                "<tr>" +
+                                    "<td valign='top' width='20%'>" +
+                                        " <b>1. Pernafasan</b><br><br>" +
+                                        " Otot Bantu Nafas " +("true".equalsIgnoreCase(String.valueOf(row.get("otot_bantu_nafas_post"))) ? "✔" : "") + "<br>" +
+                                        " Deformitas " +("true".equalsIgnoreCase(String.valueOf(row.get("deformitas_post"))) ? "✔" : "") + "<br>" +
+                                        " Empisema " +("true".equalsIgnoreCase(String.valueOf(row.get("empisema_post"))) ? "✔" : "") + "<br>" +
+                                        " Normal " +("true".equalsIgnoreCase(String.valueOf(row.get("normal_post"))) ? "✔" : "") + "<br><br>" +
+
+                                        " <b>Pengembangan Dada :</b><br>" +
+                                        " R " +("true".equalsIgnoreCase(String.valueOf(row.get("pengembangan_dada_r_post"))) ? "✔" : "") + "<br>"+
+                                        " L " +("true".equalsIgnoreCase(String.valueOf(row.get("pengembangan_dada_l_post"))) ? "✔" : "") + "<br><br>" +
+
+                                        " RR : " + (row.get("rr_post") != null ? row.get("rr_post") : "-") + " x/m<br>" +
+                                        " SpO2 : " + (row.get("spo2_post") != null ? row.get("spo2_post") : "-") + " %<br>" +
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='20%'>" +
+                                        " <b>2. Darah </b><br><br>" +
+                                        " <b>Capillary Refill :</b><br>" +
+                                        " < 2 Detik " +("true".equalsIgnoreCase(String.valueOf(row.get("capilary1_post"))) ? "✔" : "") + "<br>" +
+                                        " > 2 Detik " +("true".equalsIgnoreCase(String.valueOf(row.get("capilary2_post"))) ? "✔" : "") + "<br><br>" +
+                                        
+                                        " <b>ST/CT: </b><br>" +
+                                        ("true".equalsIgnoreCase(String.valueOf(row.get("perdarahan_post"))) ? "✔" : "") +
+                                        " Perdarahan : " + (row.get("ket_perdarahan_post") != null ? row.get("ket_perdarahan_post") : "-") + " cc <br>" +
+                                        " Tensi : " + (row.get("tensi_post") != null ? row.get("tensi_post") : "-") + " mmhg<br>" +
+                                        " Nd : " + (row.get("nd_post") != null ? row.get("nd_post") : "-") + " K/mmt<br>" +
+                                        " Suhu : " + (row.get("suhu_post") != null ? row.get("suhu_post") : "-") + " C<br><br>" +
+                                                
+                                        " <b>Kulit : </b><br>" +
+                                        " Hangat " +("true".equalsIgnoreCase(String.valueOf(row.get("kulit_hangat_post"))) ? "✔" : "") + "<br>" +
+                                        " Dingin " +("true".equalsIgnoreCase(String.valueOf(row.get("kulit_dingin_post"))) ? "✔" : "") + "<br>" +
+                                        " Lainnya " +("true".equalsIgnoreCase(String.valueOf(row.get("kulit_lainnya_post"))) ? "✔" : "") + "<br>" +
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='20%'>" +
+                                        " <b>3. Skala Nyeri : " + (row.get("skala_nyeri_post") != null ? row.get("skala_nyeri_post") : "-")+ "</b><br><br>"+
+                                        " <b>4. Kandung Kemih </b><br>" +
+                                        " Penggunaan Kateter" +("true".equalsIgnoreCase(String.valueOf(row.get("penggunaan_kateter_post"))) ? "✔" : "") + "<br>" +
+                                        " Produksi Urine : " + (row.get("produksi_urine_post") != null ? row.get("produksi_urine_post") : "-")+ "<br>"+
+                                        " Lain - lain : " + (row.get("kemih_lainnya_pre_post") != null ? row.get("kemih_lainnya_pre_post") : "-") + " x/m<br>" +
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='20%'>" +
+                                        " <b>5. Otak </b><br><br>"+
+                                        " <b>Kesadaran </b><br>" +
+                                        " Compos mentis "+("true".equalsIgnoreCase(String.valueOf(row.get("compos_mentis_post"))) ? "✔" : "") + "<br>" +
+                                        " Deltrium " +("true".equalsIgnoreCase(String.valueOf(row.get("deltrium_post"))) ? "✔" : "") + "<br>" +
+                                        " Stuper" +("true".equalsIgnoreCase(String.valueOf(row.get("stuper_post"))) ? "✔" : "") + "<br>" +
+                                        " Apatis" +("true".equalsIgnoreCase(String.valueOf(row.get("apatis_post"))) ? "✔" : "") + "<br>" +
+                                        " Koma" +("true".equalsIgnoreCase(String.valueOf(row.get("koma_post"))) ? "✔" : "") + "<br>" +
+                                        " <b>GCS : <b>" + (row.get("gcs_post") != null ? row.get("gcs_post") : "-")+ "<br>"+
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='20%'> "+
+                                        " <b>6. Abdomen</b><br><br> "+
+                                        " BB :" + (row.get("bb") != null ? row.get("bb_post") : "-")+ " kg<br><br>"+
+                                        " Puasa " +("true".equalsIgnoreCase(String.valueOf(row.get("puasa_post"))) ? "✔" : "") + "<br>" +
+                                        " Mual " +("true".equalsIgnoreCase(String.valueOf(row.get("mual_post"))) ? "✔" : "") + "<br>" +
+                                        " Distensil" +("true".equalsIgnoreCase(String.valueOf(row.get("distensil_post"))) ? "✔" : "") + "<br>" +
+                                        " Muntah" +("true".equalsIgnoreCase(String.valueOf(row.get("muntah_post"))) ? "✔" : "") + "<br><br>" +
+                                        " <b>7. Kulit</b><br><br> "+
+                                        " Cidera Kulit POST OP " +("true".equalsIgnoreCase(String.valueOf(row.get("cidera_kulit_post"))) ? "✔" : "") + "<br>" +
+                                        " Jenis Balutan :" + (row.get("jenis_balutan_post") != null ? row.get("jenis_balutan_post") : "-")+ "<br><br>"+
+                                        " <b>8. Lain - Lain</b><br><br> "+
+                                        " Drain " +("true".equalsIgnoreCase(String.valueOf(row.get("drain_post"))) ? "✔" : "") + "<br>" +
+                                        " Ya " +("true".equalsIgnoreCase(String.valueOf(row.get("ya_post"))) ? "✔" : "") + "<br>" +
+                                        " Tidak " +("true".equalsIgnoreCase(String.valueOf(row.get("tidak_post"))) ? "✔" : "") + "<br>" +
+                                        " Produksi Drain : " + (row.get("produksi_drain_post") != null ? row.get("produksi_drain_post") : "-")+ "<br>"+
+                                        " Pemasangan Alat " +("true".equalsIgnoreCase(String.valueOf(row.get("Pemasangan_alat_post"))) ? "✔" : "") + "<br>" +
+                                        " Lokasi :  " + (row.get("lokasi_post") != null ? row.get("lokasi_post") : "-")+ "<br>"+
+                                        " Jenis : " + (row.get("jenis_post") != null ? row.get("jenis_post") : "-") + "<br>" +
+                                    "</td>" +
+                                "</tr>"
+                            );
+                            
+                            htmlContent.append(
+                                "<tr class='isi'>" + 
+                                    "<td valign='top' colspan='5'>" + // 5 kolom digabung
+                                        "<table width='100%' border='0' cellpadding='3' cellspacing='0'>" +
+                                            "<tr>" +
+                                                "<td valign='top' width='33.3%'>" +
+                                                    "<b>Diagnosa Keperawatan </b><br><br>" +
+                                                    " Resti Nyeri / Nyeri " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_infeksi"))) ? "✔" : "") + "<br>" +
+                                                    " Resti Infektif Bersihan Jalan Nafas " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_cidera"))) ? "✔" : "") + "<br>" +
+                                                    " Resti Hipotermi " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_hipotermi"))) ? "✔" : "") + "<br>" +
+                                                    " Resiko Cidera " + ("true".equalsIgnoreCase(String.valueOf(row.get("kecemasan_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Resti Pendarahan " + ("true".equalsIgnoreCase(String.valueOf(row.get("integritas_kulit_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Kerusakan Integritas Kulit / Jaringan " + ("true".equalsIgnoreCase(String.valueOf(row.get("tidak_efektif_pola_nafas_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Hambatan Mobilitas Fisik " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_syok"))) ? "✔" : "") + "<br>" +
+                                                    " Resti / Potensi Infeksi " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_syok"))) ? "✔" : "") + "<br>" +
+                                                    " Resti Infeksi / Perluasan Infeksi " + ("true".equalsIgnoreCase(String.valueOf(row.get("resiko_syok"))) ? "✔" : "") + "<br>" +
+                                                    (row.get("diagnosa_lainnya_intra") != null ? row.get("diagnosa_lainnya_intra") : "-")+ "<br><br>"+
+                                                "</td>" +
+                                                "<td valign='top' width='33.3%'>" +
+                                                    "<b>Perencanaan/Implementasi</b><br><br>" +
+                                                    " Observasi TTV " + ("true".equalsIgnoreCase(String.valueOf(row.get("siapkan_ok"))) ? "✔" : "") + "<br>" +
+                                                    " Berikan Posisi yang Nyaman " + ("true".equalsIgnoreCase(String.valueOf(row.get("siapkan_slimut"))) ? "✔" : "") + "<br>" +
+                                                    " Berikan Selimut Hangat " + ("true".equalsIgnoreCase(String.valueOf(row.get("siapkan_pasien_dimeja_op"))) ? "✔" : "") + "<br>" +
+                                                    " Berikan Terapi Oksigen " + ("true".equalsIgnoreCase(String.valueOf(row.get("observasi_ttv_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Lakukan Serah Terima dengan Penata Anastesi dan Atau Perawat (PACU) " + ("true".equalsIgnoreCase(String.valueOf(row.get("alat_linen"))) ? "✔" : "") + "<br>" +
+                                                    " Berikan Pasien pada Keluarga " + ("true".equalsIgnoreCase(String.valueOf(row.get("elektromedis"))) ? "✔" : "") + "<br>" +
+                                                    " Lakukan Sign Out " + ("true".equalsIgnoreCase(String.valueOf(row.get("posisi_pasien"))) ? "✔" : "") + "<br>" +
+                                                    (row.get("perencanaan_lainnya_intra") != null ? row.get("perencanaan_lainnya_intra") : "-")+ "<br><br>"+
+                                                "</td>" +
+                                                "<td valign='top' width='33.3%'>" +
+                                                    "<b>Evaluasi</b><br><br>" +
+                                                    " Subject :" + (row.get("s") != null ? row.get("s_intra") : "-")+ "<br>"+
+                                                    " Object :" + (row.get("o") != null ? row.get("o_intra") : "-")+ "<br><br>"+
+                                                    " TD :" + (row.get("td") != null ? row.get("td_intra") : "-")+ "<br>"+
+                                                    " N :" + (row.get("n") != null ? row.get("n_intra") : "-")+ "<br>"+
+                                                    " R :" + (row.get("r") != null ? row.get("r_intra") : "-")+ "<br><br>"+
+                                                    " <b>A :</b><br>" +
+                                                    " Tercapai " + ("true".equalsIgnoreCase(String.valueOf(row.get("a_tercapai_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Tercapai Sebagian " + ("true".equalsIgnoreCase(String.valueOf(row.get("a_tercapai_sebagian_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Belum Tercapai " + ("true".equalsIgnoreCase(String.valueOf(row.get("a_belum_intra"))) ? "✔" : "") + "<br><br>" +
+                                                    " <b>P :</b><br>" +
+                                                    " - " + ("true".equalsIgnoreCase(String.valueOf(row.get("p_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Pertahankan " + ("true".equalsIgnoreCase(String.valueOf(row.get("p_pertahankan_intra"))) ? "✔" : "") + "<br>" +
+                                                    " Lanjutkan :" + (row.get("p_lanjutkan") != null ? row.get("p_lanjutkan_intra") : "-")+ "<br><br>"+
+                                                    "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</td>" +
+                                "</tr>"
+                            );
+                        }
+
+                        htmlContent.append("</table></td></tr>");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : " + e);
+                } finally {
+                    if (rs2 != null) {
+                        rs2.close();
+                    }
+                }
+            }
+
+            if(chkEdukasiDarah.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                            "select * "+
+                            "from edukasi_darah "+
+                            "where edukasi_darah.no_rawat='"+norawat+"'").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+ 
+                            "<td valign='top' width='2%'></td>"+        
+                            "<td valign='top' width='18%'>Edukasi Pemberian Darah & Produk Darah</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                 "<tr align='center'><td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td><td valign='top' width='10%' bgcolor='#FFFAF8'>Status</td><td valign='top' width='25%' bgcolor='#FFFAF8'>Nama Penanggung Jawab</td><td valign='top' width='10%' bgcolor='#FFFAF8'>Hubungan</td><td valign='top' width='25%' bgcolor='#FFFAF8'>Nama Saksi 1</td><td valign='top' width='25%' bgcolor='#FFFAF8'>Nama Saksi 2</td></tr>"
+                        );
+                        rs2.beforeFirst();
+                        w=1;
+                        while(rs2.next()){
+                            htmlContent.append("<tr><td valign='top' align='center'>"+w+"</td><td valign='top'>"+rs2.getString("status")+"</td><td valign='top'>"+rs2.getString("pj")+"</td><td valign='top'>"+rs2.getString("hubungan")+"</td><td valign='top'>"+rs2.getString("nm_saksi")+"</td><td valign='top'>"+rs2.getString("nm_saksi1")+"</td></tr>");                                        
+                            w++;
+                        }
+                        htmlContent.append(
+                              "</table>"+
+                            "</td>"+
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+
+            if(chkOperasiAlternatif.isSelected()==true){
+                try {
+                    rs2 = koneksi.prepareStatement(
+                        "SELECT ttd_marking_operasi_alternatif.*, " +
+                        "marking_operasi_alternatif.url_image, pegawai.nama, " +
+                        "CASE " +
+                        "WHEN ruang_ok.nm_ruang_ok IS NOT NULL THEN ruang_ok.nm_ruang_ok " +
+                        "WHEN bangsal.nm_bangsal IS NOT NULL THEN bangsal.nm_bangsal " +
+                        "ELSE poliklinik.nm_poli END AS nama_ruangan " +
+                        "FROM marking_operasi_alternatif " +
+                        "INNER JOIN ttd_marking_operasi_alternatif ON ttd_marking_operasi_alternatif.no_rawat=marking_operasi_alternatif.no_rawat " +
+                        "LEFT JOIN kamar_inap ON kamar_inap.no_rawat = ttd_marking_operasi_alternatif.no_rawat "+
+                        "LEFT JOIN pegawai ON pegawai.nik = ttd_marking_operasi_alternatif.nik " +
+                        "LEFT JOIN ruang_ok ON ruang_ok.kd_ruang_ok = ttd_marking_operasi_alternatif.kd_ruangan " +
+                        "LEFT JOIN poliklinik ON poliklinik.kd_poli = ttd_marking_operasi_alternatif.kd_ruangan " +
+                        "LEFT JOIN bangsal ON bangsal.kd_bangsal = ttd_marking_operasi_alternatif.kd_ruangan " +
+                        "LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar " +
+                        "WHERE ttd_marking_operasi_alternatif.no_rawat='"+norawat+"'"
+                    ).executeQuery();
+
+                    ArrayList<String[]> dataTabel = new ArrayList<>();
+                    ArrayList<String> gambarList = new ArrayList<>();
+
+                    while(rs2.next()){
+                        dataTabel.add(new String[]{
+                            rs2.getString("nama"),
+                            rs2.getString("nama_ruangan"),
+                            rs2.getString("jns_op"),
+                            rs2.getString("tanggal"),
+                            rs2.getString("nama_kel")
+                        });
+                        gambarList.add(rs2.getString("url_image"));
+                    }
+
+                    if(!dataTabel.isEmpty()){
+                        htmlContent.append(
+                            "<tr class='isi'>" + 
+                              "<td valign='top' width='2%'></td>" +        
+                              "<td valign='top' width='18%'>Penanda Lokasi Operasi Metode Alternatif</td>" +
+                              "<td valign='top' width='1%' align='center'>:</td>" +
+                              "<td valign='top' width='79%'>" +
+                                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                                  "<tr align='center'>" +
+                                    "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>" +
+                                    "<td valign='top' width='25%' bgcolor='#FFFAF8'>Dokter</td>" +
+                                    "<td valign='top' width='25%' bgcolor='#FFFAF8'>Ruangan</td>" +
+                                    "<td valign='top' width='10%' bgcolor='#FFFAF8'>Jenis Operasi</td>" +
+                                    "<td valign='top' width='10%' bgcolor='#FFFAF8'>Tanggal</td>" +
+                                    "<td valign='top' width='25%' bgcolor='#FFFAF8'>Nama Penanggung Jawab</td>" +
+                                  "</tr>"
+                        );
+                        int w=1;
+                        for(String[] row : dataTabel){
+                            htmlContent.append("<tr>" +
+                                "<td valign='top' align='center'>" + w + "</td>" +
+                                "<td valign='top'>" + row[0] + "</td>" +
+                                "<td valign='top'>" + row[1] + "</td>" +
+                                "<td valign='top'>" + row[2] + "</td>" +
+                                "<td valign='top'>" + row[3] + "</td>" +
+                                "<td valign='top'>" + row[4] + "</td>" +
+                              "</tr>");
+                            w++;
+                        }
+                        htmlContent.append("</table></td></tr>");
+                    }
+
+                    if(!gambarList.isEmpty()){
+                        htmlContent.append(
+                            "<tr class='isi'>" + 
+                              "<td valign='top' width='2%'></td>" +        
+                              "<td valign='top' width='18%'></td>" +
+                              "<td valign='top' width='1%' align='center'></td>" +
+                              "<td valign='top' width='79%'>" +
+                                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                                  "<tr align='center'>" +
+                                    "<td valign='top' width='100%' bgcolor='#FFFAF8'>Gambar Lokasi</td>" +
+                                  "</tr>"
+                        );
+                        int i=1;
+                        for(String url : gambarList){
+                            htmlContent.append("<tr>" +
+                                                "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+ url +"'><img alt='Gambar Lokasi' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+ "/imagefreehand/" + url +"' width='450' height='450'/></a></td>"+
+                                              "</tr>");
+                            i++;
+                        }
+                        htmlContent.append("</table></td></tr>");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally {
+                    if(rs2 != null){
                         rs2.close();
                     }
                 }
