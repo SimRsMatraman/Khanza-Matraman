@@ -27,6 +27,7 @@ import kepegawaian.DlgCariDokter;
 import keuangan.DlgCariDaftarOperasi;
 import rekammedis.RMChecklistPostOperasi;
 import rekammedis.RMChecklistPreOperasi;
+import rekammedis.RMEdukasiDarah;
 import rekammedis.RMPenilaianPreAnastesi;
 import rekammedis.RMPenilaianPreOperasi;
 import simrskhanza.DlgKamarInap;
@@ -320,6 +321,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         BtnTransferAntarRuang = new widget.Button();
         BtnRencanaAsuhanKeperawatanOK = new widget.Button();
         BtnPenandaLokasiOperasiAlternatif = new widget.Button();
+        BtnEdukasiDarah = new widget.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -558,7 +560,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -581,7 +583,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -609,7 +611,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-07-2025" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -632,7 +634,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(30, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-07-2025" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -715,7 +717,7 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
         TPasien.setBounds(195, 10, 208, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-07-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1206,6 +1208,23 @@ public class DlgBookingOperasi extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnPenandaLokasiOperasiAlternatif);
+
+        BtnEdukasiDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnEdukasiDarah.setText("Edukasi Pemberian Darah & Produk Darah");
+        BtnEdukasiDarah.setFocusPainted(false);
+        BtnEdukasiDarah.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnEdukasiDarah.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnEdukasiDarah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnEdukasiDarah.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnEdukasiDarah.setName("BtnEdukasiDarah"); // NOI18N
+        BtnEdukasiDarah.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnEdukasiDarah.setRoundRect(false);
+        BtnEdukasiDarah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEdukasiDarahActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnEdukasiDarah);
 
         ScrollMenu.setViewportView(FormMenu);
 
@@ -1953,6 +1972,23 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatifActionPerformed
 
+    private void BtnEdukasiDarahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEdukasiDarahActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMEdukasiDarah form=new RMEdukasiDarah(null,false);
+                form.isCek();
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnEdukasiDarahActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1976,6 +2012,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnChecklistPostOperasi;
     private widget.Button BtnChecklistPreOperasi;
     private widget.Button BtnEdit;
+    private widget.Button BtnEdukasiDarah;
     private widget.Button BtnHapus;
     private widget.Button BtnKamarInap;
     private widget.Button BtnKeluar;

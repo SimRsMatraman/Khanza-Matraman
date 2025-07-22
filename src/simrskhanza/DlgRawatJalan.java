@@ -161,6 +161,7 @@ import rekammedis.RMCatatanADIMEGizi;
 import rekammedis.RMRujukanFisio;
 import rekammedis.RMDataCatatanKeperawatanRalan;
 import rekammedis.RMDataMakanSehat;
+import rekammedis.RMEdukasiDarah;
 import rekammedis.RMMarkingOperasiAlternatif;
 import surat.SuratAPS;
 import rekammedis.RMPemberianObatRalan;
@@ -1998,6 +1999,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnIC7 = new widget.Button();
         BtnEP8 = new widget.Button();
         BtnPenandaLokasiOperasiAlternatif = new widget.Button();
+        BtnEdukasiDarah = new widget.Button();
         MTht = new widget.PanelBiasa();
         BtnAwalMedisTHT = new widget.Button();
         BtnAwalKeperawatan3 = new widget.Button();
@@ -6198,6 +6200,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MBedah.add(BtnPenandaLokasiOperasiAlternatif);
+
+        BtnEdukasiDarah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnEdukasiDarah.setText("Edukasi Pemberian Darah & Produk Darah");
+        BtnEdukasiDarah.setFocusPainted(false);
+        BtnEdukasiDarah.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnEdukasiDarah.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnEdukasiDarah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnEdukasiDarah.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnEdukasiDarah.setName("BtnEdukasiDarah"); // NOI18N
+        BtnEdukasiDarah.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnEdukasiDarah.setRoundRect(false);
+        BtnEdukasiDarah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEdukasiDarahActionPerformed(evt);
+            }
+        });
+        MBedah.add(BtnEdukasiDarah);
 
         jTabbedPane1.addTab("Bedah", MBedah);
 
@@ -13336,6 +13355,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnEWS;
     private widget.Button BtnEWS1;
     private widget.Button BtnEdit;
+    private widget.Button BtnEdukasiDarah;
     private widget.Button BtnEdukasiPasienKeluarga;
     private widget.Button BtnHapus;
     private widget.Button BtnHasilEKG;
