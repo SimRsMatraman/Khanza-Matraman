@@ -127,6 +127,7 @@ import rekammedis.RMTransferPasienAntarRuang;
 import rekammedis.RMUjiFungsiKFR;
 import rekammedis.RMDataResumePasienRajal;
 import rekammedis.RMCatatanADIMEGizi;
+import rekammedis.RMDataMakanSehat;
 import surat.SuratBebasNarkoba;
 import surat.SuratBebasTato;
 import surat.SuratButaWarna;
@@ -742,6 +743,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         ppAsuhanGizi = new javax.swing.JMenuItem();
         ppMonitoringAsuhanGizi = new javax.swing.JMenuItem();
         ppADIME = new javax.swing.JMenuItem();
+        ppMakanSehat = new javax.swing.JMenuItem();
         MnObatRalan = new javax.swing.JMenu();
         MnResepDOkter = new javax.swing.JMenuItem();
         MnNoResep = new javax.swing.JMenuItem();
@@ -2335,6 +2337,22 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         });
         MnGizi.add(ppADIME);
+
+        ppMakanSehat.setBackground(new java.awt.Color(255, 255, 254));
+        ppMakanSehat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppMakanSehat.setForeground(new java.awt.Color(50, 50, 50));
+        ppMakanSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppMakanSehat.setText("Makan Sehat");
+        ppMakanSehat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppMakanSehat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppMakanSehat.setName("ppMakanSehat"); // NOI18N
+        ppMakanSehat.setPreferredSize(new java.awt.Dimension(210, 26));
+        ppMakanSehat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppMakanSehatBtnPrintActionPerformed(evt);
+            }
+        });
+        MnGizi.add(ppMakanSehat);
 
         jPopupMenu1.add(MnGizi);
 
@@ -5507,7 +5525,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-07-2025" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-07-2025" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5554,7 +5572,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-07-2025" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-07-2025" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -5867,7 +5885,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-07-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5885,7 +5903,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-07-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -7272,6 +7290,17 @@ private void MnDataRalanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                 dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
                 dlgrwjl2.setNoRm1(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
+                dlgrwjl2.setVisible(true);
+                }
+                if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0036")) {
+                dlgrwjl2.isCek();
+                dlgrwjl2.rawatjl_dr();
+                dlgrwjl2.menuGizi();
+                dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                dlgrwjl2.setLocationRelativeTo(internalFrame1);
+                dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
+                dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
+                dlgrwjl2.setNoRmGizi(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
                 dlgrwjl2.setVisible(true);
                 }
                 else{
@@ -12392,6 +12421,17 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                 dlgrwjl2.setNoRm1(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
                 dlgrwjl2.setVisible(true);
                 }
+                if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0036")) {
+                dlgrwjl2.isCek();
+                dlgrwjl2.rawatjl_dr();
+                dlgrwjl2.menuGizi();
+                dlgrwjl2.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                dlgrwjl2.setLocationRelativeTo(internalFrame1);
+                dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
+                dlgrwjl2.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
+                dlgrwjl2.setNoRmGizi(TNoRw.getText(), DTPCari1.getDate(), DTPCari2.getDate());
+                dlgrwjl2.setVisible(true);
+                }
                 else{
                 dlgrwjl2.isCek();
                 dlgrwjl2.emptTeks();
@@ -12583,6 +12623,48 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_ppADIMEBtnPrintActionPerformed
+
+    private void MnWAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnWAActionPerformed
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
+            TNoRw.requestFocus();
+        }else if(TPasienCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            String nama=tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),3).toString();
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgWhatsapp whatsapp=new DlgWhatsapp(null,false);
+            whatsapp.setNoRm(TNoRMCari.getText(),nama);
+            whatsapp.setSize(720,330);
+            whatsapp.setLocationRelativeTo(internalFrame1);
+            whatsapp.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_MnWAActionPerformed
+
+    private void ppMakanSehatBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppMakanSehatBtnPrintActionPerformed
+        if (tabModekasir.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        } else if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        } else {
+            if (tbKasirRalan.getSelectedRow() != -1) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMDataMakanSehat form = new RMDataMakanSehat(null, false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_ppMakanSehatBtnPrintActionPerformed
 
     /**
      * @param args the command line arguments
@@ -12959,6 +13041,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem ppHasilRad;
     private javax.swing.JMenuItem ppIKP;
     private javax.swing.JMenuItem ppIKP1;
+    private javax.swing.JMenuItem ppMakanSehat;
     private javax.swing.JMenuItem ppMonitoringAsuhanGizi;
     private javax.swing.JMenuItem ppPasienCorona;
     private javax.swing.JMenuItem ppPerawatanCorona;

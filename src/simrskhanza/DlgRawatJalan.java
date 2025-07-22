@@ -160,6 +160,7 @@ import rekammedis.GdsIgd;
 import rekammedis.RMCatatanADIMEGizi;
 import rekammedis.RMRujukanFisio;
 import rekammedis.RMDataCatatanKeperawatanRalan;
+import rekammedis.RMDataMakanSehat;
 import rekammedis.RMMarkingOperasiAlternatif;
 import surat.SuratAPS;
 import rekammedis.RMPemberianObatRalan;
@@ -2023,6 +2024,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnIC11 = new widget.Button();
         BtnEP4 = new widget.Button();
         BtnAdimeGizi = new widget.Button();
+        BtnMakanSehat = new widget.Button();
         MFisio = new widget.PanelBiasa();
         BtnRiwayat2 = new widget.Button();
         BtnResepObat2 = new widget.Button();
@@ -2245,7 +2247,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2264,7 +2266,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4788,7 +4790,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -6603,6 +6605,24 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MGizi.add(BtnAdimeGizi);
+
+        BtnMakanSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnMakanSehat.setText("Makan Sehat");
+        BtnMakanSehat.setToolTipText("");
+        BtnMakanSehat.setFocusPainted(false);
+        BtnMakanSehat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnMakanSehat.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnMakanSehat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnMakanSehat.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnMakanSehat.setName("BtnMakanSehat"); // NOI18N
+        BtnMakanSehat.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnMakanSehat.setRoundRect(false);
+        BtnMakanSehat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMakanSehatActionPerformed(evt);
+            }
+        });
+        MGizi.add(BtnMakanSehat);
 
         jTabbedPane1.addTab("Gizi", MGizi);
 
@@ -13189,6 +13209,41 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatifActionPerformed
 
+    private void BtnEdukasiDarahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEdukasiDarahActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMEdukasiDarah form=new RMEdukasiDarah(null,false);
+                form.isCek();
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnEdukasiDarahActionPerformed
+
+    private void BtnMakanSehatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMakanSehatActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMDataMakanSehat form=new RMDataMakanSehat(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            form.tampil();
+            this.setCursor(Cursor.getDefaultCursor());
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnMakanSehatActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -13310,6 +13365,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnKeseimbanganCairan;
     private widget.Button BtnKonselingFarmasi;
     private widget.Button BtnLaporanBedah;
+    private widget.Button BtnMakanSehat;
     private widget.Button BtnMedicalCheckUp;
     private widget.Button BtnMonitoringAsuhanGizi;
     private widget.Button BtnMonitoringReaksiTranfusi;
@@ -14164,6 +14220,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         ChkInput4.setSelected(true);
         isForm5();
         TabRawatMouseClicked(null);
+    }
+    
+    public void setNoRmGizi(String norwt,Date tgl1,Date tgl2) {
+        TabRawatMouseClicked(null);
+        TNoRw.setText(norwt);
+        DTPCari1.setDate(tgl1);
+        DTPCari2.setDate(tgl2);
+        isRawat();
+        isPsien();  
+        KdDok.setText(Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",norwt));
+        TDokter.setText(dokter.tampil3(KdDok.getText()));
+        KdDok2.setText(KdDok.getText());
+        KdDok3.setText(KdDok.getText());
+        TDokter2.setText(TDokter.getText()); 
+        TDokter3.setText(TDokter.getText());        
+        TCari.setText("makan");
+        BtnCariActionPerformed(null);
     }
     
     private void isForm(){
@@ -16017,6 +16090,22 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     public void emptTeks1(){
         BtnBatalActionPerformed(null);
         TabRawat.setSelectedIndex(4);
+    }
+    public void rawatjl_dr(){
+        BtnBatalActionPerformed(null);
+        TabRawat.setSelectedIndex(0);
+    }
+    public void rawatjl_pr(){
+        BtnBatalActionPerformed(null);
+        TabRawat.setSelectedIndex(1);
+    }
+    public void rawatjl_drpr(){
+        BtnBatalActionPerformed(null);
+        TabRawat.setSelectedIndex(2);
+    }
+    public void menuGizi(){
+        BtnBatalActionPerformed(null);
+        jTabbedPane1.setSelectedIndex(10);
     }
     public void menuIGD(){
         BtnBatalActionPerformed(null);
