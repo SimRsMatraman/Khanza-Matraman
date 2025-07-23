@@ -1665,6 +1665,8 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
+        KdPetugas.setText(akses.getkode());
+        Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", NmPetugas,KdPetugas.getText());
         Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+norwt+"'", DTPCari1);
         DTPCari2.setDate(tgl2);   
         urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where no_rawat='"+norwt+"' ");
@@ -1687,7 +1689,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
 //        BtnTambahMasalah.setEnabled(akses.getmaster_masalah_keperawatan());  
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
-            BtnDokter.setEnabled(false);
+//            BtnDokter.setEnabled(false);
             KdPetugas.setText(akses.getkode());
             Sequel.cariIsi("select nm_dokter from dokter where kd_dokter=?", NmPetugas,KdPetugas.getText());
             if(NmPetugas.getText().equals("")){
