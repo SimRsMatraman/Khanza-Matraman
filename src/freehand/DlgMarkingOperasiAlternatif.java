@@ -26,9 +26,6 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import inventory.DlgCariKonversi;
-//import farmasi.DlgCariObat;
-//import farmasi.DlgCariObat2;
-//import farmasi.DlgCariObat3;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -54,6 +51,7 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import java.awt.BasicStroke;
 
 /**
  *
@@ -77,6 +75,8 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     public DlgMarkingOperasiAlternatif (java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+   
+
         final Toolkit toolkit = Toolkit.getDefaultToolkit();
         final Dimension screenSize = toolkit.getScreenSize();
         setSize(screenSize.width,screenSize.height);
@@ -152,6 +152,9 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
             }
         });
         PanelWall.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelWallMouseClicked(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 PanelWallMouseReleased(evt);
             }
@@ -346,6 +349,10 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnHapus1KeyPressed
 
+    private void PanelWallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelWallMouseClicked
+        gambarLingkaran(evt.getX(), evt.getY());
+    }//GEN-LAST:event_PanelWallMouseClicked
+
     /**
     * @param args the command line arguments
     */
@@ -448,6 +455,14 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
             System.err.println("Gagal membaca gambar dari URL: " + url);
             ex.printStackTrace();
         }
+    }
+    
+    private void gambarLingkaran(int x, int y) {
+        Graphics2D g2 = (Graphics2D) PanelWall.getGraphics();
+        g2.setColor(Color.RED); // Warna lingkaran
+        int radius = 50; // Ukuran diperbesar ke diameter 30px
+        g2.setStroke(new BasicStroke(6)); // (opsional) garis lebih tebal
+        g2.drawOval(x - radius / 2, y - radius / 2, radius, radius);
     }
 
 }

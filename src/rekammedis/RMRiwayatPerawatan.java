@@ -12852,6 +12852,43 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         }
 
                         htmlContent.append("</table></td></tr>");
+                        
+                        // GLASS GOW OPERATIF SECTION
+                        htmlContent.append(
+                            "<tr class='isi'>" +
+                                "<td valign='top' width='2%'></td>" +
+                                "<td valign='top' width='18%'></td>" +
+                                "<td valign='top' width='0%' align='center'></td>" +
+                                "<td valign='top' width='78%'>" +
+                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                                        "<tr align='center'>" +
+                                            "<td colspan='3' bgcolor='#FFFAF8'><b>GLASSGOW COMA SCALE</b></td>" +
+                                        "</tr>"
+                        );
+
+                        for (Map<String, Object> row : dataOp) {
+                            
+                            htmlContent.append(
+                                "<tr>" +
+                                    "<td valign='top' width='33,3%'>" +
+                                        " <b>1. Membuka Mata</b><br><br>" +
+                                        (row.get("membuka_mata") != null ? row.get("membuka_mata") : "-") + " - " + (row.get("scale_membuka_mata") != null ? row.get("scale_membuka_mata") : "-") +
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='33,3%'>" +
+                                        " <b>2. Respon Motor </b><br><br>" +
+                                        (row.get("respon_motor") != null ? row.get("respon_motor") : "-") + " - " + (row.get("scale_respon_motor") != null ? row.get("scale_respon_motor") : "-") +
+                                    "</td>" +
+                                                
+                                    "<td valign='top' width='33,3%'>" +
+                                        " <b>3. Respon</b><br><br>"+
+                                        (row.get("respon") != null ? row.get("respon") : "-") + " - " +(row.get("scale_respon") != null ? row.get("scale_respon") : "-") +
+                                    "</td>" +  
+                                "</tr>"
+                            );  
+                        }
+
+                        htmlContent.append("</table></td></tr>");
                     }
 
                 } catch (Exception e) {
