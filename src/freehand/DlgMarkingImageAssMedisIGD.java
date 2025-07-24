@@ -54,6 +54,7 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import java.awt.BasicStroke;
 
 /**
  *
@@ -109,7 +110,7 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Marking Lokalis Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70, 70, 70))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Marking Lokalis Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(70, 70, 70))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -151,6 +152,9 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
             }
         });
         PanelWall.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelWallMouseClicked(evt);
+            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 PanelWallMouseReleased(evt);
             }
@@ -346,6 +350,10 @@ public class DlgMarkingImageAssMedisIGD extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnHapus1KeyPressed
 
+    private void PanelWallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelWallMouseClicked
+        gambarLingkaran(evt.getX(), evt.getY());
+    }//GEN-LAST:event_PanelWallMouseClicked
+
     /**
     * @param args the command line arguments
     */
@@ -437,6 +445,14 @@ void imageAssesment(String url){
         catch(IOException ex) {
 
         }
+    }
+    
+    private void gambarLingkaran(int x, int y) {
+        Graphics2D g2 = (Graphics2D) PanelWall.getGraphics();
+        g2.setColor(Color.RED); // Warna lingkaran
+        int radius = 50; // Ukuran diperbesar ke diameter 30px
+        g2.setStroke(new BasicStroke(6)); // (opsional) garis lebih tebal
+        g2.drawOval(x - radius / 2, y - radius / 2, radius, radius);
     }
 
 }
