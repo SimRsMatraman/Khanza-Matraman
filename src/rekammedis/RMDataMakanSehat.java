@@ -782,7 +782,7 @@ public final class RMDataMakanSehat extends javax.swing.JDialog {
 
         BtnDokter3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter3.setMnemonic('2');
-        BtnDokter3.setText("   Template Laporan");
+        BtnDokter3.setText("   Template Diet");
         BtnDokter3.setToolTipText("Alt+2");
         BtnDokter3.setName("BtnDokter3"); // NOI18N
         BtnDokter3.setPreferredSize(new java.awt.Dimension(28, 23));

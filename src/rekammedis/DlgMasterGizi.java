@@ -492,7 +492,7 @@ public final class DlgMasterGizi extends javax.swing.JDialog {
         FormInput.add(label37);
         label37.setBounds(0, 10, 90, 23);
 
-        label38.setText("Makan Siang :");
+        label38.setText("Makan :");
         label38.setName("label38"); // NOI18N
         label38.setPreferredSize(new java.awt.Dimension(35, 23));
         FormInput.add(label38);
