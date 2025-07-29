@@ -46,7 +46,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="::[ Catatan Untuk Pasien ]::">
+            <TitledBorder title="::[ Input Nomor SITB ]::">
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
                   <Color PropertyName="color" blue="eb" green="f5" red="f0" type="rgb"/>
@@ -138,7 +138,7 @@
             </Component>
             <Component class="widget.Label" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Catatan :"/>
+                <Property name="text" type="java.lang.String" value="No. SITB :"/>
                 <Property name="name" type="java.lang.String" value="jLabel9" noResource="true"/>
               </Properties>
               <Constraints>
