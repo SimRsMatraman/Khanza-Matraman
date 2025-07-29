@@ -1796,8 +1796,8 @@ public final class RMDataIC extends javax.swing.JDialog {
             Valid.textKosong(BtnDokter,"Dokter Pelaksana Tindakan");
         }else if(KodeDokter1.getText().equals("")||NamaDokter1.getText().equals("")){
             Valid.textKosong(BtnDokter1,"Pemberi Informasi");
-        }else if(KodeDokter2.getText().equals("")||NamaDokter1.getText().equals("")){
-            Valid.textKosong(BtnDokter2,"Saksi 1/Perawat");
+//        }else if(KodeDokter2.getText().equals("")||NamaDokter1.getText().equals("")){
+//            Valid.textKosong(BtnDokter2,"Saksi 1/Perawat");
         }else if(DiagnosaKerja.getText().equals("")){
             Valid.textKosong(DiagnosaKerja,"DiagnosaKerja");
         }else if(DiagnosaBanding.getText().equals("")){
@@ -2599,6 +2599,8 @@ public final class RMDataIC extends javax.swing.JDialog {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+norwt+"'", DTPCari1);
+        Sequel.cariIsi("SELECT petugas.nip from pemeriksaan_ralan inner join petugas on petugas.nip=pemeriksaan_ralan.nik WHERE pemeriksaan_ralan.no_rawat='"+norwt+"'", KodeDokter2);
+        Sequel.cariIsi("SELECT petugas.nama from pemeriksaan_ralan INNER JOIN petugas on petugas.nip=pemeriksaan_ralan.nik WHERE pemeriksaan_ralan.no_rawat='"+norwt+"'", NamaDokter2);
         DTPCari2.setDate(tgl2);    
         isRawat();
         isPsien();              
@@ -2725,6 +2727,11 @@ public final class RMDataIC extends javax.swing.JDialog {
             BtnDokter1.setEnabled(false);
             KodeDokter1.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter1,KodeDokter1.getText());
+            KodeDokter.setEditable(false);
+            BtnDokter.setEnabled(false);
+            KodeDokter.setText(akses.getkode());
+            Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter,KodeDokter.getText());
+            
 //            if(NmPetugas.getText().equals("")){
 //                KdPetugas.setText("");
 //                JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
