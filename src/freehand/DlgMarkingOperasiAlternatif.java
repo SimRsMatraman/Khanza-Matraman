@@ -52,6 +52,13 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import java.awt.BasicStroke;
+import java.util.List;
+import java.util.ArrayList;
+import java.awt.Point;
+import java.awt.Graphics2D;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.AlphaComposite;
 
 /**
  *
@@ -69,6 +76,9 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     private BufferedImage img;
     private SimpleDateFormat tanggalNow = new SimpleDateFormat("yyyy-MM-dd");
     private SimpleDateFormat jamNow = new SimpleDateFormat("HH:mm:ss");
+    private List<Point> titik = new ArrayList<>();
+    private int radius = 50;
+    private List<Lingkaran> lingkaranList = new ArrayList<>();
     /** Creates new form DlgPemberianObat
      * @param parent
      * @param modal */
@@ -78,11 +88,11 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
    
 
         final Toolkit toolkit = Toolkit.getDefaultToolkit();
-        final Dimension screenSize = toolkit.getScreenSize();
-        setSize(screenSize.width,screenSize.height);
+//        final Dimension screenSize = toolkit.getScreenSize();
+//        setSize(screenSize.width,screenSize.height);
         setResizable(false);
         this.setLocation(0,0);
-//        setSize(885,674); 
+        setSize(780,1000);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -142,7 +152,8 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
 
         PanelWall.setBackground(new java.awt.Color(29, 29, 29));
         PanelWall.setBackgroundImageType(usu.widget.constan.BackgroundConstan.BACKGROUND_IMAGE_STRECT);
-        PanelWall.setPreferredSize(new java.awt.Dimension(950, 850));
+        PanelWall.setMaximumSize(new java.awt.Dimension(800, 1000));
+        PanelWall.setPreferredSize(new java.awt.Dimension(730, 900));
         PanelWall.setRound(false);
         PanelWall.setToolTipText("");
         PanelWall.setWarna(new java.awt.Color(110, 110, 110));
@@ -350,7 +361,24 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapus1KeyPressed
 
     private void PanelWallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelWallMouseClicked
-        gambarLingkaran(evt.getX(), evt.getY());
+//        gambarLingkaran(evt.getX(), evt.getY());
+        Point p = evt.getPoint();
+        boolean diperbesar = false;
+
+        for (Lingkaran l : lingkaranList) {
+            if (l.titik.distance(p) < l.radius) {
+                l.radius += 10; // Perbesar
+                gambarLingkaran(l.titik.x, l.titik.y, l.radius); // Gambar ulang
+                diperbesar = true;
+                break;
+            }
+        }
+
+        if (!diperbesar) {
+            Lingkaran lBaru = new Lingkaran(p, 50); // radius default
+            lingkaranList.add(lBaru);
+            gambarLingkaran(p.x, p.y, 50);
+        }
     }//GEN-LAST:event_PanelWallMouseClicked
 
     /**
@@ -457,12 +485,31 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
         }
     }
     
-    private void gambarLingkaran(int x, int y) {
+    private void gambarLingkaran(int x, int y, int radius) {
         Graphics2D g2 = (Graphics2D) PanelWall.getGraphics();
-        g2.setColor(Color.RED); // Warna lingkaran
-        int radius = 50; // Ukuran diperbesar ke diameter 30px
-        g2.setStroke(new BasicStroke(6)); // (opsional) garis lebih tebal
+
+        g2.setComposite(java.awt.AlphaComposite.getInstance(java.awt.AlphaComposite.SRC_OVER, 0.6f)); // transparan
+        g2.setColor(Color.RED);
+        g2.setStroke(new BasicStroke(6));
         g2.drawOval(x - radius / 2, y - radius / 2, radius, radius);
     }
+    
+    private class Lingkaran {
+        Point titik;
+        int radius;
+
+        Lingkaran(Point titik, int radius) {
+            this.titik = titik;
+            this.radius = radius;
+        }
+    }
+    
+//    private void gambarLingkaran(int x, int y) {
+//        Graphics2D g2 = (Graphics2D) PanelWall.getGraphics();
+//        g2.setColor(Color.RED); // Warna lingkaran
+//        int radius = 50; // Ukuran diperbesar ke diameter 30px
+//        g2.setStroke(new BasicStroke(6)); // (opsional) garis lebih tebal
+//        g2.drawOval(x - radius / 2, y - radius / 2, radius, radius);
+//    }
 
 }

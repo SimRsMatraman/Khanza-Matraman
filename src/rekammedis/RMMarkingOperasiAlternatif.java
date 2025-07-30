@@ -1237,29 +1237,48 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
     }//GEN-LAST:event_TPasienActionPerformed
 
     private void BtnEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEdit1ActionPerformed
-        DlgMarkingOperasiAlternatif form=new DlgMarkingOperasiAlternatif(null,false);
+        DlgMarkingOperasiAlternatif form = new DlgMarkingOperasiAlternatif(null, false);
         form.setNoRw(TNoRw.getText());
         form.setVisible(true);
+
         form.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
+
             @Override
             public void windowClosing(WindowEvent e) {}
+
             @Override
             public void windowClosed(WindowEvent e) {
-                urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where no_rawat='"+TNoRw.getText()+"' ");
-                imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+urlImage+"");
+                // Ambil url gambar dari database
+                urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif WHERE no_rawat='" + TNoRw.getText() + "'");
+
+                // Cek apakah hasilnya kosong/null
+                if (urlImage == null || urlImage.trim().isEmpty()) {
+                    // Gambar default jika tidak ditemukan di DB
+                    urlImage = "masterimage/operasi.png";
+                }
+
+                // Bangun URL lengkapnya
+                String fullUrl = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" +
+                                 koneksiDB.HYBRIDWEB() + "/imagefreehand/" + urlImage;
+
+                // Panggil fungsi untuk menampilkan gambar
+                imageAssesment(fullUrl);
             }
+
             @Override
             public void windowIconified(WindowEvent e) {}
+
             @Override
             public void windowDeiconified(WindowEvent e) {}
+
             @Override
             public void windowActivated(WindowEvent e) {}
+
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-
     }//GEN-LAST:event_BtnEdit1ActionPerformed
 
     private void BtnEdit1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEdit1KeyPressed
