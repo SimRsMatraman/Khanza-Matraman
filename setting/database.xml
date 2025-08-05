@@ -146,7 +146,7 @@
     <entry key="URLAPIINHEALTH">http://development.inhealth.co.id/pelkesws2</entry>
     <entry key="TOKENINHEALTH">l4nh5eVYrLAER/I2A4b3Tw==</entry>
        
-    <entry key="URLDUKCAPILJAKARTA">http://kependudukan.jakarta.go.id/wsrs/xml.jsp</entry>
+    <entry key="URLDUKCAPILJAKARTA">https://kependudukancapil.jakarta.go.id/wsrs/xml.jsp</entry>
     <entry key="USERDUKCAPILJAKARTA">eYTbZ3SMrmsvkl4t8u0zrA==</entry>
     <entry key="PASSDUKCAPILJAKARTA">iDrX7PhhkIwMup7YcS2RFg==</entry>
     <entry key="VAR1DUKCAPILJAKARTA">RSIABK</entry>

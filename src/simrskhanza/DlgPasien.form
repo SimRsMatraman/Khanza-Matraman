@@ -2718,7 +2718,7 @@
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="18-10-2023"/>
+                                <StringItem index="0" value="05-08-2025"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -2937,7 +2937,7 @@
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="18-10-2023"/>
+                                <StringItem index="0" value="05-08-2025"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -3128,6 +3128,7 @@
                         </Component>
                         <Component class="widget.TextBox" name="Kabupaten">
                           <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
                             <Property name="text" type="java.lang.String" value="KABUPATEN"/>
                             <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                               <ComponentRef name="null"/>
@@ -3359,6 +3360,7 @@
                         </Component>
                         <Component class="widget.TextBox" name="KabupatenPj">
                           <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
                             <Property name="text" type="java.lang.String" value="KABUPATEN"/>
                             <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                               <ComponentRef name="null"/>
@@ -4058,6 +4060,7 @@
                         </Component>
                         <Component class="widget.TextBox" name="Propinsi">
                           <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
                             <Property name="text" type="java.lang.String" value="PROPINSI"/>
                             <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                               <ComponentRef name="null"/>
@@ -4077,6 +4080,7 @@
                         </Component>
                         <Component class="widget.TextBox" name="PropinsiPj">
                           <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
                             <Property name="text" type="java.lang.String" value="PROPINSI"/>
                             <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
                               <ComponentRef name="null"/>
@@ -4182,7 +4186,7 @@
                         </Component>
                         <Component class="widget.Label" name="jLabel40">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="NIP/NRP :"/>
+                            <Property name="text" type="java.lang.String" value="NIP/NRP/KK :"/>
                             <Property name="name" type="java.lang.String" value="jLabel40" noResource="true"/>
                           </Properties>
                           <Constraints>

@@ -1999,7 +1999,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
         DTPLahir.setEditable(false);
         DTPLahir.setForeground(new java.awt.Color(50, 70, 50));
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2023" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2023" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -2416,7 +2416,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanPasien.add(TNo);
         TNo.setBounds(107, 25, 160, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2023" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2023" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -2842,7 +2842,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanPasien.add(BtnPerusahaan);
         BtnPerusahaan.setBounds(880, 265, 28, 23);
 
-        jLabel44.setText("NIP/NRP :");
+        jLabel44.setText("NIP/NRP/KK :");
         jLabel44.setName("jLabel44"); // NOI18N
         FormKelengkapanPasien.add(jLabel44);
         jLabel44.setBounds(690, 295, 84, 23);
@@ -3215,7 +3215,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel23);
         jLabel23.setBounds(295, 355, 54, 23);
 
-        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2023 05:22:28" }));
+        TanggalSEP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2023 09:43:09" }));
         TanggalSEP.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalSEP.setName("TanggalSEP"); // NOI18N
         TanggalSEP.setOpaque(false);
@@ -3234,7 +3234,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         FormKelengkapanSEP.add(jLabel30);
         jLabel30.setBounds(341, 325, 50, 23);
 
-        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2023" }));
+        TanggalRujuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2023" }));
         TanggalRujuk.setDisplayFormat("dd-MM-yyyy");
         TanggalRujuk.setName("TanggalRujuk"); // NOI18N
         TanggalRujuk.setOpaque(false);
@@ -3460,7 +3460,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
             }
         });
         FormKelengkapanSEP.add(LakaLantas);
-        LakaLantas.setBounds(589, 25, 107, 23);
+        LakaLantas.setBounds(589, 25, 108, 23);
 
         jLabel5.setText("No. Reg. :");
         jLabel5.setName("jLabel5"); // NOI18N
@@ -3618,7 +3618,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         jLabel47.setBounds(724, 25, 90, 23);
 
         TanggalKKL.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2023" }));
+        TanggalKKL.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2023" }));
         TanggalKKL.setDisplayFormat("dd-MM-yyyy");
         TanggalKKL.setEnabled(false);
         TanggalKKL.setName("TanggalKKL"); // NOI18N

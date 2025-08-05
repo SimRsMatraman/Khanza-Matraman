@@ -2677,7 +2677,7 @@ public class DlgPasien extends javax.swing.JDialog {
         DlgDemografi.setUndecorated(true);
         DlgDemografi.setResizable(false);
 
-        internalFrame3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Demografi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 50))); // NOI18N
+        internalFrame3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Demografi Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 70, 50))); // NOI18N
         internalFrame3.setName("internalFrame3"); // NOI18N
         internalFrame3.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -2876,7 +2876,7 @@ public class DlgPasien extends javax.swing.JDialog {
         WindowGabungRM.setUndecorated(true);
         WindowGabungRM.setResizable(false);
 
-        internalFrame8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Gabungkan Ke Nomor RM ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Gabungkan Ke Nomor RM ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame8.setName("internalFrame8"); // NOI18N
         internalFrame8.setLayout(null);
 
@@ -3022,7 +3022,7 @@ public class DlgPasien extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -3332,7 +3332,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(4, 102, 95, 23);
 
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-10-2023" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -3464,7 +3464,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(TKtp);
         TKtp.setBounds(743, 132, 130, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-10-2023" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2025" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -3586,6 +3586,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(Kecamatan);
         Kecamatan.setBounds(690, 192, 152, 23);
 
+        Kabupaten.setEditable(false);
         Kabupaten.setText("KABUPATEN");
         Kabupaten.setHighlighter(null);
         Kabupaten.setName("Kabupaten"); // NOI18N
@@ -3753,6 +3754,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnKecamatanPj);
         BtnKecamatanPj.setBounds(845, 282, 28, 23);
 
+        KabupatenPj.setEditable(false);
         KabupatenPj.setText("KABUPATEN");
         KabupatenPj.setHighlighter(null);
         KabupatenPj.setName("KabupatenPj"); // NOI18N
@@ -4192,6 +4194,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(BtnPropinsi);
         BtnPropinsi.setBounds(845, 222, 28, 23);
 
+        Propinsi.setEditable(false);
         Propinsi.setText("PROPINSI");
         Propinsi.setHighlighter(null);
         Propinsi.setName("Propinsi"); // NOI18N
@@ -4213,6 +4216,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(Propinsi);
         Propinsi.setBounds(690, 222, 152, 23);
 
+        PropinsiPj.setEditable(false);
         PropinsiPj.setText("PROPINSI");
         PropinsiPj.setHighlighter(null);
         PropinsiPj.setName("PropinsiPj"); // NOI18N
@@ -4288,7 +4292,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(EMail);
         EMail.setBounds(712, 72, 161, 23);
 
-        jLabel40.setText("NIP/NRP :");
+        jLabel40.setText("NIP/NRP/KK :");
         jLabel40.setName("jLabel40"); // NOI18N
         FormInput.add(jLabel40);
         jLabel40.setBounds(679, 342, 70, 23);
@@ -4492,7 +4496,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormPhotoPass.setLayout(new java.awt.GridLayout(2, 0));
 
         FormPhoto.setBackground(new java.awt.Color(255, 255, 255));
-        FormPhoto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), " Photo Pasien : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        FormPhoto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), " Photo Pasien : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         FormPhoto.setName("FormPhoto"); // NOI18N
         FormPhoto.setPreferredSize(new java.awt.Dimension(115, 73));
         FormPhoto.setLayout(new java.awt.BorderLayout());
@@ -4545,7 +4549,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormPhotoPass.add(FormPhoto);
 
         FormPass.setBackground(new java.awt.Color(255, 255, 255));
-        FormPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), " Password EPasien : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        FormPass.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), " Password EPasien : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         FormPass.setName("FormPass"); // NOI18N
         FormPass.setPreferredSize(new java.awt.Dimension(115, 73));
         FormPass.setLayout(new java.awt.BorderLayout());

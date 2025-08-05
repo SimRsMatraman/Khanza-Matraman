@@ -664,6 +664,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         ppRiwayatLabRad = new javax.swing.JMenuItem();
         ppHasilLab = new javax.swing.JMenuItem();
         ppHasilRad = new javax.swing.JMenuItem();
+        DataPasien = new javax.swing.JMenuItem();
         MnDataRM = new javax.swing.JMenu();
         MnRMRawatJalan = new javax.swing.JMenu();
         MnPenilaianAwalKeperawatanRalan = new javax.swing.JMenuItem();
@@ -1116,6 +1117,22 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         });
         MnRiwayat.add(ppHasilRad);
+
+        DataPasien.setBackground(new java.awt.Color(255, 255, 254));
+        DataPasien.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        DataPasien.setForeground(new java.awt.Color(50, 50, 50));
+        DataPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        DataPasien.setText("Informasi Pasien");
+        DataPasien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        DataPasien.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        DataPasien.setName("DataPasien"); // NOI18N
+        DataPasien.setPreferredSize(new java.awt.Dimension(200, 26));
+        DataPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DataPasienBtnPrintActionPerformed(evt);
+            }
+        });
+        MnRiwayat.add(DataPasien);
 
         jPopupMenu1.add(MnRiwayat);
 
@@ -5542,7 +5559,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2025" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-08-2025" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5589,7 +5606,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2025" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-08-2025" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -5902,7 +5919,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-08-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5920,7 +5937,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-08-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -12703,6 +12720,26 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }        // TODO add your handling code here:
     }//GEN-LAST:event_inputSITBBtnPrintActionPerformed
 
+    private void DataPasienBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataPasienBtnPrintActionPerformed
+        if (tabModekasir.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data pasien sudah habis...!!!!");
+            TCari.requestFocus();
+        } else if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            if (tbKasirRalan.getSelectedRow() != -1) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgDataPasien catatan = new DlgDataPasien(null, true);
+                catatan.setNoRm(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 2).toString(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 12).toString());
+                catatan.setSize(800, 330);
+                catatan.setLocationRelativeTo(internalFrame1);
+                catatan.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }   // TODO add your handling code here:
+    }//GEN-LAST:event_DataPasienBtnPrintActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -12752,6 +12789,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private widget.TextBox CrPtg;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
+    private javax.swing.JMenuItem DataPasien;
     private javax.swing.JDialog DlgCatatan;
     private javax.swing.JDialog DlgSakit;
     private javax.swing.JDialog DlgSakit2;

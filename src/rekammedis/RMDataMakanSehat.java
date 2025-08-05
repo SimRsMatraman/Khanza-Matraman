@@ -1094,6 +1094,8 @@ public final class RMDataMakanSehat extends javax.swing.JDialog {
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
+            param.put("norawat", TNoRw.getText());
+            param.put("labeltgl", tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelMakan.jasper","report","::[ Label Makan ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
@@ -1102,7 +1104,7 @@ public final class RMDataMakanSehat extends javax.swing.JDialog {
                     "from makan_sehat_pegawai inner join reg_periksa on makan_sehat_pegawai.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join petugas on makan_sehat_pegawai.nip=petugas.nip where "+
-                    "makan_sehat_pegawai.no_rawat='"+TNoRw.getText()+"'",param);
+                    "makan_sehat_pegawai.no_rawat='"+TNoRw.getText()+"' and makan_sehat_pegawai.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()+"'",param);
         }      
     }//GEN-LAST:event_LabelMakanActionPerformed
 
