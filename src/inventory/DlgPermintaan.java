@@ -781,7 +781,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 Sequel.AutoComitFalse();
                 sukses = true;
                 if (Sequel.menyimpantf2("permintaan_medis", "?,?,?,?,?,?", "No.Permintaan", 6, new String[]{
-                    NoPermintaan.getText(), kdgudangasal.getText(), kdptg.getText(), Valid.SetTgl(Tanggal.getSelectedItem() + ""), "Baru", kdgudangTujuan.getText()
+                    NoPermintaan.getText(), kdgudangTujuan.getText(), kdptg.getText(), Valid.SetTgl(Tanggal.getSelectedItem() + ""), "Baru", kdgudangasal.getText()
                 }) == true) {
                     jml = tbDokter.getRowCount();
                     for (i = 0; i < jml; i++) {
