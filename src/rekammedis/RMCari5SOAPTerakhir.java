@@ -46,7 +46,7 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"Tanggal","Jam","Subjek","Objek","Asesmen","Plan","Instruksi","Dokter/Petugas"};
+        Object[] row={"Tanggal","Jam","TTV","Subjek","Objek","Asesmen","Plan","Instruksi","Dokter/Petugas"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -63,14 +63,16 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
             }else if(z==2){
                 column.setPreferredWidth(200);
             }else if(z==3){
-                column.setPreferredWidth(220);
+                column.setPreferredWidth(200);
             }else if(z==4){
                 column.setPreferredWidth(220);
             }else if(z==5){
-                column.setPreferredWidth(300);
+                column.setPreferredWidth(220);
             }else if(z==6){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(300);
             }else if(z==7){
+                column.setPreferredWidth(100);
+            }else if(z==8){
                 column.setPreferredWidth(125);
             }
         }
@@ -372,8 +374,7 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         if(Status.getSelectedIndex()==0){
             try{
                 ps=koneksi.prepareStatement(
-                        "select pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,pemeriksaan_ralan.keluhan,pemeriksaan_ralan.pemeriksaan,"+
-                        "pemeriksaan_ralan.penilaian,pemeriksaan_ralan.rtl,pemeriksaan_ralan.instruksi, pegawai.nama "+
+                        "select pemeriksaan_ralan.*,pegawai.nama "+
                         "from pemeriksaan_ralan inner join reg_periksa on pemeriksaan_ralan.no_rawat=reg_periksa.no_rawat inner join pegawai on pegawai.nik=pemeriksaan_ralan.nik where "+
                         "reg_periksa.no_rkm_medis=? and "+
                         "(pemeriksaan_ralan.keluhan like ? or pemeriksaan_ralan.pemeriksaan like ?) "+
@@ -385,8 +386,18 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode.addRow(new String[] {
-                            rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
-                            rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)
+                            rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),
+                            (rs.getString("suhu_tubuh").equals("")?"":"Suhu(C) : "+rs.getString("suhu_tubuh"))+
+                            (rs.getString("tensi").equals("")?"":"\nTensi : "+rs.getString("tensi"))+
+                            (rs.getString("nadi").equals("")?"":"\nNadi(/menit) : "+rs.getString("nadi"))+
+                            (rs.getString("respirasi").equals("")?"":"\nRespirasi(/menit) : "+rs.getString("respirasi"))+
+                            (rs.getString("tinggi").equals("")?"":"\nTinggi(Cm) : "+rs.getString("tinggi"))+
+                            (rs.getString("berat").equals("")?"":"\nBerat(Kg) : "+rs.getString("berat"))+
+                            (rs.getString("spo").equals("")?"":"\nSpO2(%) : "+rs.getString("spo"))+
+                            (rs.getString("gcs").equals("")?"":"\nGCS(E,V,M) : "+rs.getString("gcs"))+
+                            (rs.getString("kesadaran").equals("")?"":"\nKesadaran : "+rs.getString("kesadaran")),
+                            rs.getString("keluhan"),rs.getString("pemeriksaan"),
+                            rs.getString("penilaian"),rs.getString("rtl"),rs.getString("instruksi"),rs.getString("nama")
                         });
                     }
                 }catch(Exception ex){
@@ -405,8 +416,7 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
         }else{
             try{
                 ps=koneksi.prepareStatement(
-                        "select pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.keluhan,pemeriksaan_ranap.pemeriksaan,"+
-                        "pemeriksaan_ranap.penilaian,pemeriksaan_ranap.rtl,pemeriksaan_ranap.instruksi, pegawai.nama "+
+                        "select pemeriksaan_ranap.*,pegawai.nama "+
                         "from pemeriksaan_ranap inner join reg_periksa on pemeriksaan_ranap.no_rawat=reg_periksa.no_rawat inner join pegawai on pegawai.nik=pemeriksaan_ranap.nik where "+
                         "reg_periksa.no_rkm_medis=? and "+
                         "(pemeriksaan_ranap.keluhan like ? or pemeriksaan_ranap.pemeriksaan like ?) "+
@@ -418,8 +428,18 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode.addRow(new String[] {
-                            rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
-                            rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)
+                            rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),
+                            (rs.getString("suhu_tubuh").equals("")?"":"Suhu(C) : "+rs.getString("suhu_tubuh"))+
+                            (rs.getString("tensi").equals("")?"":"\nTensi : "+rs.getString("tensi"))+
+                            (rs.getString("nadi").equals("")?"":"\nNadi(/menit) : "+rs.getString("nadi"))+
+                            (rs.getString("respirasi").equals("")?"":"\nRespirasi(/menit) : "+rs.getString("respirasi"))+
+                            (rs.getString("tinggi").equals("")?"":"\nTinggi(Cm) : "+rs.getString("tinggi"))+
+                            (rs.getString("berat").equals("")?"":"\nBerat(Kg) : "+rs.getString("berat"))+
+                            (rs.getString("spo").equals("")?"":"\nSpO2(%) : "+rs.getString("spo"))+
+                            (rs.getString("gcs").equals("")?"":"\nGCS(E,V,M) : "+rs.getString("gcs"))+
+                            (rs.getString("kesadaran").equals("")?"":"\nKesadaran : "+rs.getString("kesadaran")),
+                            rs.getString("keluhan"),rs.getString("pemeriksaan"),
+                            rs.getString("penilaian"),rs.getString("rtl"),rs.getString("instruksi"),rs.getString("nama")
                         });
                     }
                 }catch(Exception ex){

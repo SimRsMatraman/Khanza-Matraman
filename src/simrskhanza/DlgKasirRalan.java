@@ -1122,7 +1122,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         DataPasien.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DataPasien.setForeground(new java.awt.Color(50, 50, 50));
         DataPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        DataPasien.setText("Informasi Pasien");
+        DataPasien.setText("Identitas Pasien");
         DataPasien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         DataPasien.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         DataPasien.setName("DataPasien"); // NOI18N
