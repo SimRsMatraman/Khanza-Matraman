@@ -1055,10 +1055,10 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
             String noRawat = tbObat.getValueAt(tbObat.getSelectedRow(),0).toString();
 
             // Ambil nama file image dari DB sebelum dihapus
-            String urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif_dummy WHERE no_rawat=?", noRawat);
+            String urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif WHERE no_rawat=?", noRawat);
 
             // Proses hapus dari DB
-            if(Sequel.queryu2tf("delete from marking_operasi_alternatif_dummy where no_rawat=?", 1, new String[]{ noRawat }) == true){
+            if(Sequel.queryu2tf("delete from marking_operasi_alternatif where no_rawat=?", 1, new String[]{ noRawat }) == true){
                 // Proses hapus file gambar
                 if(!urlImage.equals("")){
                     try {
@@ -1257,7 +1257,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 tampilkanGambarOperasi();
 //                // Ambil url gambar dari database
-//                urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif_dummy WHERE no_rawat='" + TNoRw.getText() + "'");
+//                urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif WHERE no_rawat='" + TNoRw.getText() + "'");
 //
 //                // Cek apakah hasilnya kosong/null
 //                if (urlImage == null || urlImage.trim().isEmpty()) {
@@ -1555,7 +1555,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
             KdRuangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             NmRuangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             JenisOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-//            urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif_dummy where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' ");
+//            urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' ");
 //            imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+urlImage+"");
             panggilPhoto();
         }
@@ -1817,7 +1817,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
                                 "    WHEN bangsal.nm_bangsal IS NOT NULL THEN bangsal.nm_bangsal "+
                                 "    ELSE poliklinik.nm_poli "+
                                 "END AS nama_ruangan, "+
-                                "marking_operasi_alternatif_dummy.url_image "+
+                                "marking_operasi_alternatif.url_image "+
                                 "FROM ttd_marking_operasi_alternatif "+
                                 "INNER JOIN reg_periksa ON reg_periksa.no_rawat = ttd_marking_operasi_alternatif.no_rawat "+
                                 "LEFT JOIN kamar_inap ON kamar_inap.no_rawat = reg_periksa.no_rawat  "+
@@ -1827,7 +1827,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
                                 "LEFT JOIN poliklinik ON poliklinik.kd_poli = ttd_marking_operasi_alternatif.kd_ruangan "+
                                 "LEFT JOIN bangsal ON bangsal.kd_bangsal = ttd_marking_operasi_alternatif.kd_ruangan "+
                                 "LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar "+
-                                "LEFT JOIN marking_operasi_alternatif_dummy ON ttd_marking_operasi_alternatif.no_rawat = marking_operasi_alternatif_dummy.no_rawat "+
+                                "LEFT JOIN marking_operasi_alternatif ON ttd_marking_operasi_alternatif.no_rawat = marking_operasi_alternatif.no_rawat "+
                                 "WHERE ttd_marking_operasi_alternatif.no_rawat='"+TNoRw.getText()+"' ",param);
                 this.setCursor(Cursor.getDefaultCursor());  
        }
@@ -1842,7 +1842,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
 
         try {
             PreparedStatement ps = koneksi.prepareStatement(
-                "SELECT url_image FROM marking_operasi_alternatif_dummy WHERE no_rawat = ?"
+                "SELECT url_image FROM marking_operasi_alternatif WHERE no_rawat = ?"
             );
             ps.setString(1, TNoRw.getText());
             ResultSet rs = ps.executeQuery();

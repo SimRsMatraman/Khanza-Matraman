@@ -998,7 +998,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     public void setNoRw(String norw) {
        
         TNoRawat.setText(norw); 
-        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif_dummy where posisi='Form Default' and no_rawat='"+norw+"' ");
+        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where posisi='Form Default' and no_rawat='"+norw+"' ");
         if(urlImage.toString().equals(null)||urlImage.toString().equals("")){
            imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/operasi.png");
        }else{
@@ -1007,7 +1007,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     }
     
     public void tampil() {
-        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif_dummy where posisi='Tarso' and no_rawat='"+TNoRawat.getText()+"' ");
+        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where posisi='Tarso' and no_rawat='"+TNoRawat.getText()+"' ");
         if(urlImage.toString().equals(null)||urlImage.toString().equals("")){
            imageAssesment1("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/Badan.png");
        }else{
@@ -1016,7 +1016,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     }
     
     public void tampil1() {
-        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif_dummy where posisi='Head & Neck' and no_rawat='"+TNoRawat.getText()+"' ");
+        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where posisi='Head & Neck' and no_rawat='"+TNoRawat.getText()+"' ");
         if(urlImage.toString().equals(null)||urlImage.toString().equals("")){
            imageAssesment2("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/Kepala.png");
        }else{
@@ -1025,7 +1025,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     }
     
     public void tampil2() { 
-        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif_dummy where posisi='Chest & Heart' and no_rawat='"+TNoRawat.getText()+"' ");
+        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where posisi='Chest & Heart' and no_rawat='"+TNoRawat.getText()+"' ");
         if(urlImage.toString().equals(null)||urlImage.toString().equals("")){
            imageAssesment3("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/Organ.png");
        }else{
@@ -1034,7 +1034,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     }
     
     public void tampil3() {
-        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif_dummy where posisi='Genitourinary' and no_rawat='"+TNoRawat.getText()+"' ");
+        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where posisi='Genitourinary' and no_rawat='"+TNoRawat.getText()+"' ");
         if(urlImage.toString().equals(null)||urlImage.toString().equals("")){
            imageAssesment4("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/Alat.png");
        }else{
@@ -1043,7 +1043,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     }
     
     public void tampil4() {
-        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif_dummy where posisi='Bones or Joints 1' and no_rawat='"+TNoRawat.getText()+"' ");
+        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where posisi='Bones or Joints 1' and no_rawat='"+TNoRawat.getText()+"' ");
         if(urlImage.toString().equals(null)||urlImage.toString().equals("")){
            imageAssesment5("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/Tulang.png");
        }else{
@@ -1052,7 +1052,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
     }
     
     public void tampil5() {
-        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif_dummy where posisi='Bones or Joints 2' and no_rawat='"+TNoRawat.getText()+"' ");
+        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where posisi='Bones or Joints 2' and no_rawat='"+TNoRawat.getText()+"' ");
         if(urlImage.toString().equals(null)||urlImage.toString().equals("")){
            imageAssesment6("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/Tulang1.png");
        }else{
@@ -1328,10 +1328,10 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
             boolean success;
             // Simpan atau update ke database berdasarkan no_rawat + posisi
             if (Sequel.cariInteger(
-                    "SELECT COUNT(*) FROM marking_operasi_alternatif_dummy " +
+                    "SELECT COUNT(*) FROM marking_operasi_alternatif " +
                     "WHERE no_rawat='" + TNoRawat.getText() + "' AND posisi='" + posisi + "'") > 0) {
 
-                success = Sequel.mengedittf("marking_operasi_alternatif_dummy",
+                success = Sequel.mengedittf("marking_operasi_alternatif",
                         "no_rawat=? AND posisi=?",
                         "tanggal=?, jam=?, url_image=?",
                         5, new String[]{
@@ -1342,7 +1342,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
                             posisi
                         });
             } else {
-                success = Sequel.menyimpantf("marking_operasi_alternatif_dummy",
+                success = Sequel.menyimpantf("marking_operasi_alternatif",
                         "?,?,?,?,?",
                         "No.Rawat",
                         5, new String[]{
@@ -1379,7 +1379,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
 
             // Ambil nama file dari DB
             String urlImage = Sequel.cariIsi(
-                "SELECT url_image FROM marking_operasi_alternatif_dummy " +
+                "SELECT url_image FROM marking_operasi_alternatif " +
                 "WHERE no_rawat='" + TNoRawat.getText() + "' AND posisi='" + posisi + "'"
             );
 
@@ -1399,7 +1399,7 @@ public class DlgMarkingOperasiAlternatif extends javax.swing.JDialog {
 
             // Hapus dari database
             boolean success = Sequel.queryu2tf(
-                "DELETE FROM marking_operasi_alternatif_dummy " +
+                "DELETE FROM marking_operasi_alternatif " +
                 "WHERE no_rawat=? AND posisi=?",
                 2, new String[]{ TNoRawat.getText(), posisi }
             );
