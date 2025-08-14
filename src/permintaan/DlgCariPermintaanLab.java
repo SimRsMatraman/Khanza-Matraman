@@ -577,7 +577,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025 14:07:17" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-08-2025 13:28:12" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -684,7 +684,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-05-2025" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-08-2025" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -1086,12 +1086,12 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         });
         panelisi1.add(BtnBatalSampel);
 
-        BtnHasil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
+        BtnHasil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         BtnHasil.setMnemonic('I');
-        BtnHasil.setText("Hasil");
+        BtnHasil.setText("Ambil Hasil");
         BtnHasil.setToolTipText("Alt+I");
         BtnHasil.setName("BtnHasil"); // NOI18N
-        BtnHasil.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnHasil.setPreferredSize(new java.awt.Dimension(150, 30));
         BtnHasil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnHasilActionPerformed(evt);
@@ -1268,6 +1268,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbLabRalan.setAutoCreateRowSorter(true);
         tbLabRalan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1280,6 +1281,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         ));
         tbLabRalan.setName("tbLabRalan"); // NOI18N
+        tbLabRalan.getTableHeader().setReorderingAllowed(false);
         tbLabRalan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbLabRalanMouseClicked(evt);
@@ -1406,6 +1408,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         scrollPane3.setName("scrollPane3"); // NOI18N
         scrollPane3.setOpaque(true);
 
+        tbLabRanap.setAutoCreateRowSorter(true);
         tbLabRanap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -1418,6 +1421,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         ));
         tbLabRanap.setName("tbLabRanap"); // NOI18N
+        tbLabRanap.getTableHeader().setReorderingAllowed(false);
         tbLabRanap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbLabRanapMouseClicked(evt);

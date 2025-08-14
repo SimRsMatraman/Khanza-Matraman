@@ -136,7 +136,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             }else if(i==4){
                 column.setPreferredWidth(130);
             }else if(i==5){
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(250);
             }else if(i==6){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);                
@@ -485,6 +485,9 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari2 = new widget.Button();
+        jLabel8 = new widget.Label();
+        ONO = new widget.TextBox();
+        BtnCari3 = new widget.Button();
 
         Penjab.setEditable(false);
         Penjab.setFocusTraversalPolicyProvider(true);
@@ -802,7 +805,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         NmPtg.setBounds(546, 42, 249, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-10-2022" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-08-2025" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1003,7 +1006,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         panelGlass11.add(jLabel6);
 
         TCari.setName("TCari"); // NOI18N
-        TCari.setPreferredSize(new java.awt.Dimension(678, 23));
+        TCari.setPreferredSize(new java.awt.Dimension(278, 23));
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
@@ -1027,6 +1030,34 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             }
         });
         panelGlass11.add(BtnCari2);
+
+        jLabel8.setText("No Order Sysmex :");
+        jLabel8.setName("jLabel8"); // NOI18N
+        jLabel8.setPreferredSize(new java.awt.Dimension(110, 23));
+        panelGlass11.add(jLabel8);
+
+        ONO.setHighlighter(null);
+        ONO.setName("ONO"); // NOI18N
+        ONO.setPreferredSize(new java.awt.Dimension(144, 24));
+        panelGlass11.add(ONO);
+
+        BtnCari3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
+        BtnCari3.setMnemonic('T');
+        BtnCari3.setText("Tarik Hasil");
+        BtnCari3.setToolTipText("Tarik hasil dari sysmex");
+        BtnCari3.setName("BtnCari3"); // NOI18N
+        BtnCari3.setPreferredSize(new java.awt.Dimension(129, 23));
+        BtnCari3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCari3ActionPerformed(evt);
+            }
+        });
+        BtnCari3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCari3KeyPressed(evt);
+            }
+        });
+        panelGlass11.add(BtnCari3);
 
         PanelCariUtama.add(panelGlass11, java.awt.BorderLayout.PAGE_START);
 
@@ -1501,6 +1532,22 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         tbTarifMouseClicked(evt);
     }//GEN-LAST:event_rbDewasaMouseClicked
 
+    private void BtnCari3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari3ActionPerformed
+    if (Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where permintaan_detail_permintaan_lab.noorder=?", noorder.trim()) > 0) {
+            tampilSysmex(noorder);
+           }else{
+            tampilSysmexNoDetail(noorder);
+        }
+    }//GEN-LAST:event_BtnCari3ActionPerformed
+
+    private void BtnCari3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari3KeyPressed
+    if (Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where permintaan_detail_permintaan_lab.noorder=?", noorder.trim()) > 0) {
+            tampilSysmex(noorder);
+           }else{
+            tampilSysmexNoDetail(noorder);
+        }
+    }//GEN-LAST:event_BtnCari3KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1523,6 +1570,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnCari;
     private widget.Button BtnCari1;
     private widget.Button BtnCari2;
+    private widget.Button BtnCari3;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnNota;
@@ -1541,6 +1589,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.TextBox NmDokterPj;
     private widget.TextBox NmPerujuk;
     private widget.TextBox NmPtg;
+    private widget.TextBox ONO;
     private javax.swing.JPanel PanelCariUtama;
     private widget.PanelBiasa PanelInput;
     private widget.TextBox Pemeriksaan;
@@ -1569,6 +1618,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel3;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
+    private widget.Label jLabel8;
     private widget.Label jLabel9;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass8;
@@ -2018,7 +2068,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         rstampil=pstampil.executeQuery();
                         while(rstampil.next()){
                             System.out.println("ID Detail Laborat RS : "+rstampil.getString("id_template")+" "+rstampil.getString("Pemeriksaan"));
-                            pstindakan=koneksisysmex.prepareStatement("select resdt.ORDER_TESTID,resdt.DATA_TYP,resdt.RESULT_VALUE,resdt.RESULT_FT,resdt.UNIT,resdt.FLAG,resdt.REF_RANGE,test_mapping.TM_TI_CODE,resdt.TEST_COMMENT from resdt inner join test_mapping on test_mapping.TM_TI_CODE=resdt.TEST_CD where resdt.ONO=? and test_mapping.TM_HIS_CODE=?");
+                            pstindakan=koneksisysmex.prepareStatement("select resdt.ORDER_TESTID,resdt.DATA_TYP,resdt.RESULT_VALUE,resdt.RESULT_FT,resdt.UNIT,resdt.FLAG,resdt.REF_RANGE,test_mapping.TM_TI_CODE,resdt.TEST_COMMENT,CASE WHEN resdt.REF_RANGE = 'MRR' THEN '' ELSE resdt.TEST_COMMENT END AS NOTE from resdt inner join test_mapping on test_mapping.TM_TI_CODE=resdt.TEST_CD where resdt.ONO=? and test_mapping.TM_HIS_CODE=?");
                             try {
                                 pstindakan.setString(1,order);
                                 pstindakan.setString(2,rstampil.getString("id_template"));
@@ -2031,7 +2081,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                             true,"   "+rstampil.getString("Pemeriksaan"),rstindakan.getString("RESULT_FT"),
                                                  rstindakan.getString("UNIT"),
                                                  rstindakan.getString("REF_RANGE").replaceAll("MRR",rstindakan.getString("TEST_COMMENT")),
-                                                 rstindakan.getString("FLAG").replaceAll("LL","L").replaceAll("HH","H"),
+                                                 rstindakan.getString("FLAG").replaceAll("LL","L").replaceAll("HH","H")+(rstindakan.getString("NOTE").equals("")?"":", "+rstindakan.getString("NOTE")),
                                                  rstampil.getString("id_template"),
                                                  rstampil.getDouble("biaya_item"),
                                                  rstampil.getDouble("bagian_rs"),
@@ -2047,7 +2097,102 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                             true,"   "+rstampil.getString("Pemeriksaan"),rstindakan.getString("RESULT_VALUE"),
                                                  rstindakan.getString("UNIT"),
                                                  rstindakan.getString("REF_RANGE").replaceAll("MRR",rstindakan.getString("TEST_COMMENT")),
-                                                 rstindakan.getString("FLAG").replaceAll("LL","L").replaceAll("HH","H"),
+                                                 rstindakan.getString("FLAG").replaceAll("LL","L").replaceAll("HH","H")+(rstindakan.getString("NOTE").equals("")?"":", "+rstindakan.getString("NOTE")),
+                                                 rstampil.getString("id_template"),
+                                                 rstampil.getDouble("biaya_item"),
+                                                 rstampil.getDouble("bagian_rs"),
+                                                 rstampil.getDouble("bhp"),
+                                                 rstampil.getDouble("bagian_perujuk"),
+                                                 rstampil.getDouble("bagian_dokter"),
+                                                 rstampil.getDouble("bagian_laborat"),
+                                                 rstampil.getDouble("kso"),
+                                                 rstampil.getDouble("menejemen")
+                                        });
+                                    }   
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif : "+e);
+                            } finally{
+                                if(rstindakan!=null){
+                                    rstindakan.close();
+                                }
+                                if(pstindakan!=null){
+                                    pstindakan.close();
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
+                    } finally{
+                        if(rstampil!=null){
+                            rstampil.close();
+                        }
+                        if(pstampil!=null){
+                            pstampil.close();
+                        }
+                    }                      
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error Detail : "+e);
+        }
+        
+    }
+    
+    private void tampilSysmexNoDetail(String order) { 
+        try {
+            koneksisysmex=koneksiDBSysmex.condb();
+            Valid.tabelKosong(tabMode);
+            
+            for(i2=0;i2<tbTarif.getRowCount();i2++){ 
+                if(tbTarif.getValueAt(i2,0).toString().equals("true")){
+                    System.out.println("Pemeriksaan Laborat : "+tbTarif.getValueAt(i2,1).toString()+" "+tbTarif.getValueAt(i2,2).toString());
+                    tabMode.addRow(new Object[]{true,tbTarif.getValueAt(i2,2).toString(),"","","","","",0,0,0,0,0,0,0,0});
+                    pstampil=koneksi.prepareStatement(
+                            "select template_laboratorium.id_template, template_laboratorium.Pemeriksaan, "+
+                            "template_laboratorium.satuan, template_laboratorium.nilai_rujukan_ld,"+
+                            "template_laboratorium.biaya_item,template_laboratorium.bagian_rs,"+
+                            "template_laboratorium.bhp,template_laboratorium.bagian_perujuk,"+
+                            "template_laboratorium.bagian_dokter,template_laboratorium.bagian_laborat,"+
+                            "template_laboratorium.kso,template_laboratorium.menejemen "+
+                            "from template_laboratorium "+
+                            "where template_laboratorium.kd_jenis_prw=? order by urut");
+                    try {
+                        pstampil.setString(1,tbTarif.getValueAt(i2,1).toString());
+                        System.out.println("Query : "+tbTarif.getValueAt(i2,1).toString()+" "+TCari.getText().trim());
+                        rstampil=pstampil.executeQuery();
+                        while(rstampil.next()){
+                            System.out.println("ID Detail Laborat RS : "+rstampil.getString("id_template")+" "+rstampil.getString("Pemeriksaan"));
+                            pstindakan=koneksisysmex.prepareStatement("select resdt.ORDER_TESTID,resdt.DATA_TYP,resdt.RESULT_VALUE,resdt.RESULT_FT,resdt.UNIT,resdt.FLAG,resdt.REF_RANGE,test_mapping.TM_TI_CODE,resdt.TEST_COMMENT,CASE WHEN resdt.REF_RANGE = 'MRR' THEN '' ELSE resdt.TEST_COMMENT END AS NOTE  from resdt inner join test_mapping on test_mapping.TM_TI_CODE=resdt.TEST_CD where resdt.ONO=? and test_mapping.TM_HIS_CODE=?");
+                            try {
+                                pstindakan.setString(1,order);
+                                pstindakan.setString(2,rstampil.getString("id_template"));
+                                rstindakan=pstindakan.executeQuery();
+//                                System.out.println("Menjalankan Query : select resdt.ORDER_TESTID,resdt.DATA_TYP,resdt.RESULT_VALUE,resdt.RESULT_FT,resdt.UNIT,resdt.FLAG,resdt.REF_RANGE from resdt where resdt.ONO='"+order+"' and resdt.TEST_NM='"+rstampil.getString("Pemeriksaan")+"'");
+                                if(rstindakan.next()){
+                                    System.out.println("ID Detail Laborat Sysmex Yang Ditemukan : "+rstampil.getString("id_template")+" "+rstindakan.getString("TM_TI_CODE"));
+                                    if(rstindakan.getString("DATA_TYP").equals("FT")){
+                                        tabMode.addRow(new Object[]{
+                                            true,"   "+rstampil.getString("Pemeriksaan"),rstindakan.getString("RESULT_FT"),
+                                                 rstindakan.getString("UNIT"),
+                                                 rstindakan.getString("REF_RANGE").replaceAll("MRR",rstindakan.getString("TEST_COMMENT")),
+                                                 rstindakan.getString("FLAG").replaceAll("LL","L").replaceAll("HH","H")+(rstindakan.getString("NOTE").equals("")?"":", "+rstindakan.getString("NOTE")),
+                                                 rstampil.getString("id_template"),
+                                                 rstampil.getDouble("biaya_item"),
+                                                 rstampil.getDouble("bagian_rs"),
+                                                 rstampil.getDouble("bhp"),
+                                                 rstampil.getDouble("bagian_perujuk"),
+                                                 rstampil.getDouble("bagian_dokter"),
+                                                 rstampil.getDouble("bagian_laborat"),
+                                                 rstampil.getDouble("kso"),
+                                                 rstampil.getDouble("menejemen")
+                                        });
+                                    }else{
+                                        tabMode.addRow(new Object[]{
+                                            true,"   "+rstampil.getString("Pemeriksaan"),rstindakan.getString("RESULT_VALUE"),
+                                                 rstindakan.getString("UNIT"),
+                                                 rstindakan.getString("REF_RANGE").replaceAll("MRR",rstindakan.getString("TEST_COMMENT")),
+                                                 rstindakan.getString("FLAG").replaceAll("LL","L").replaceAll("HH","H")+(rstindakan.getString("NOTE").equals("")?"":", "+rstindakan.getString("NOTE")),
                                                  rstampil.getString("id_template"),
                                                  rstampil.getDouble("biaya_item"),
                                                  rstampil.getDouble("bagian_rs"),
@@ -2878,6 +3023,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     
     public void setOrderSysmex(String order,String norawat,String posisi){
         noorder=order;
+        ONO.setText(order);
         TNoRw.setText(norawat);
         this.status=posisi;
         isRawat();
@@ -2904,7 +3050,11 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
         isPsien();
         tampiltarif(order);
-        tampilSysmex(order);
+        if (Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where permintaan_detail_permintaan_lab.noorder=?", noorder.trim()) > 0) {
+            tampilSysmex(order);
+           }else{
+            tampilSysmexNoDetail(order);
+        }        
     }
     
     public void setOrderELIMS(String order,String norawat,String posisi){
