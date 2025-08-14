@@ -51,6 +51,11 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.net.URL;
 import java.io.IOException;
+import javax.swing.*;
+import java.awt.*;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 
@@ -125,7 +130,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
             }
         });
 
-        imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/operasi.png");
+//        imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/operasi.png");
         
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","Tanggal Lahir","J.K.","Tanggal","Jam","NIP","Nama Dokter","Kode","Nama Ruangan","Jenis Operasi"
@@ -1050,10 +1055,10 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
             String noRawat = tbObat.getValueAt(tbObat.getSelectedRow(),0).toString();
 
             // Ambil nama file image dari DB sebelum dihapus
-            String urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif WHERE no_rawat=?", noRawat);
+            String urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif_dummy WHERE no_rawat=?", noRawat);
 
             // Proses hapus dari DB
-            if(Sequel.queryu2tf("delete from marking_operasi_alternatif where no_rawat=?", 1, new String[]{ noRawat }) == true){
+            if(Sequel.queryu2tf("delete from marking_operasi_alternatif_dummy where no_rawat=?", 1, new String[]{ noRawat }) == true){
                 // Proses hapus file gambar
                 if(!urlImage.equals("")){
                     try {
@@ -1250,21 +1255,22 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
 
             @Override
             public void windowClosed(WindowEvent e) {
-                // Ambil url gambar dari database
-                urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif WHERE no_rawat='" + TNoRw.getText() + "'");
-
-                // Cek apakah hasilnya kosong/null
-                if (urlImage == null || urlImage.trim().isEmpty()) {
-                    // Gambar default jika tidak ditemukan di DB
-                    urlImage = "masterimage/operasi.png";
-                }
-
-                // Bangun URL lengkapnya
-                String fullUrl = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" +
-                                 koneksiDB.HYBRIDWEB() + "/imagefreehand/" + urlImage;
-
-                // Panggil fungsi untuk menampilkan gambar
-                imageAssesment(fullUrl);
+                tampilkanGambarOperasi();
+//                // Ambil url gambar dari database
+//                urlImage = Sequel.cariIsi("SELECT url_image FROM marking_operasi_alternatif_dummy WHERE no_rawat='" + TNoRw.getText() + "'");
+//
+//                // Cek apakah hasilnya kosong/null
+//                if (urlImage == null || urlImage.trim().isEmpty()) {
+//                    // Gambar default jika tidak ditemukan di DB
+//                    urlImage = "masterimage/operasi.png";
+//                }
+//
+//                // Bangun URL lengkapnya
+//                String fullUrl = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" +
+//                                 koneksiDB.HYBRIDWEB() + "/imagefreehand/" + urlImage;
+//
+//                // Panggil fungsi untuk menampilkan gambar
+//                imageAssesment(fullUrl);
             }
 
             @Override
@@ -1530,7 +1536,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
         Detik.setSelectedItem("00"); 
         DTPTgl.setDate(new Date());
         DTPTgl.requestFocus();
-        imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/operasi.png");
+//        imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/operasi.png");
     } 
 
     private void getData() {
@@ -1549,8 +1555,8 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
             KdRuangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             NmRuangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             JenisOperasi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
-            urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' ");
-            imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+urlImage+"");
+//            urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif_dummy where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' ");
+//            imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+urlImage+"");
             panggilPhoto();
         }
     }
@@ -1691,16 +1697,11 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
             KdPetugas.setText("");
         }
         Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+norwt+"'", DTPCari1);
-        DTPCari2.setDate(tgl2);   
-        urlImage=Sequel.cariIsi("select url_image from marking_operasi_alternatif where no_rawat='"+norwt+"' ");
-        if(urlImage.toString().equals(null)||urlImage.toString().equals("")){
-           imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/masterimage/operasi.png");
-       }else{
-             imageAssesment("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/imagefreehand/"+urlImage.trim()+"");
-       }  
+        DTPCari2.setDate(tgl2);
         isRawat(); 
         isPsien();
         panggilPhoto();
+        tampilkanGambarOperasi();
     }
     
     
@@ -1726,16 +1727,6 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
        TabRawat.setSelectedIndex(1);
        tampil();
     }
-    
-//    void imageAssesment(String url){
-//        try {
-//            BufferedImage img = ImageIO.read(new URL(url.trim()));
-//            PanelWall.setBackgroundImage(new javax.swing.ImageIcon(img));
-//        }
-//        catch(IOException ex) {
-//
-//        }
-//    }
     
     public void imageAssesment(String imagePath) {
         try {
@@ -1826,7 +1817,7 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
                                 "    WHEN bangsal.nm_bangsal IS NOT NULL THEN bangsal.nm_bangsal "+
                                 "    ELSE poliklinik.nm_poli "+
                                 "END AS nama_ruangan, "+
-                                "marking_operasi_alternatif.url_image "+
+                                "marking_operasi_alternatif_dummy.url_image "+
                                 "FROM ttd_marking_operasi_alternatif "+
                                 "INNER JOIN reg_periksa ON reg_periksa.no_rawat = ttd_marking_operasi_alternatif.no_rawat "+
                                 "LEFT JOIN kamar_inap ON kamar_inap.no_rawat = reg_periksa.no_rawat  "+
@@ -1836,9 +1827,77 @@ public final class RMMarkingOperasiAlternatif extends javax.swing.JDialog {
                                 "LEFT JOIN poliklinik ON poliklinik.kd_poli = ttd_marking_operasi_alternatif.kd_ruangan "+
                                 "LEFT JOIN bangsal ON bangsal.kd_bangsal = ttd_marking_operasi_alternatif.kd_ruangan "+
                                 "LEFT JOIN kamar ON kamar.kd_kamar = kamar_inap.kd_kamar "+
-                                "LEFT JOIN marking_operasi_alternatif ON ttd_marking_operasi_alternatif.no_rawat = marking_operasi_alternatif.no_rawat "+
+                                "LEFT JOIN marking_operasi_alternatif_dummy ON ttd_marking_operasi_alternatif.no_rawat = marking_operasi_alternatif_dummy.no_rawat "+
                                 "WHERE ttd_marking_operasi_alternatif.no_rawat='"+TNoRw.getText()+"' ",param);
                 this.setCursor(Cursor.getDefaultCursor());  
        }
     }
+
+    public void tampilkanGambarOperasi() {
+        int formWidth = PanelWall.getWidth();
+        int formHeight = PanelWall.getHeight();
+
+        PanelWall.removeAll();
+        PanelWall.setBackground(Color.WHITE);
+
+        try {
+            PreparedStatement ps = koneksi.prepareStatement(
+                "SELECT url_image FROM marking_operasi_alternatif_dummy WHERE no_rawat = ?"
+            );
+            ps.setString(1, TNoRw.getText());
+            ResultSet rs = ps.executeQuery();
+
+            java.util.List<String> daftarGambar = new java.util.ArrayList<>();
+            while (rs.next()) {
+                String urlImage = rs.getString("url_image");
+                if (urlImage != null && !urlImage.trim().isEmpty()) {
+                    daftarGambar.add(
+                        "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" +
+                        koneksiDB.HYBRIDWEB() + "/imagefreehand/" + urlImage.trim()
+                    );
+                } else {
+                    daftarGambar.add(
+                        "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" +
+                        koneksiDB.HYBRIDWEB() + "/imagefreehand/masterimage/operasi.png"
+                    );
+                }
+            }
+            rs.close();
+            ps.close();
+
+            int jumlahGambar = daftarGambar.size();
+            if (jumlahGambar == 0) {
+                JLabel kosong = new JLabel("Tidak ada gambar marking ditemukan", SwingConstants.CENTER);
+                kosong.setFont(new Font("Arial", Font.PLAIN, 14));
+                PanelWall.setLayout(new BorderLayout());
+                PanelWall.add(kosong, BorderLayout.CENTER);
+            } else {
+                int kolom = (jumlahGambar == 1) ? 1 : (int) Math.ceil(Math.sqrt(jumlahGambar));
+                int baris = (int) Math.ceil((double) jumlahGambar / kolom);
+                PanelWall.setLayout(new GridLayout(baris, kolom, 5, 5));
+
+                int imgWidth = formWidth / kolom;
+                int imgHeight = formHeight / baris;
+
+                for (String url : daftarGambar) {
+                    try {
+                        ImageIcon icon = new ImageIcon(new java.net.URL(url));
+                        Image img = icon.getImage().getScaledInstance(imgWidth, imgHeight, Image.SCALE_SMOOTH);
+                        JLabel label = new JLabel(new ImageIcon(img));
+                        label.setHorizontalAlignment(SwingConstants.CENTER);
+                        PanelWall.add(label);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+
+            PanelWall.revalidate();
+            PanelWall.repaint();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
