@@ -16140,4 +16140,9 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             BMI.setText(Valid.SetAngka(Valid.SetAngka(TBerat.getText())/((Valid.SetAngka(TTinggi.getText())/100)*(Valid.SetAngka(TTinggi.getText())/100)))+"");
         }
     }
+    
+    
+//    
+//    
+//    
 }
