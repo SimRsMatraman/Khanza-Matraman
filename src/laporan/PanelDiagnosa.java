@@ -398,6 +398,7 @@ public class PanelDiagnosa extends widget.panelisi {
         Scroll1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll1.setOpaque(true);
 
+        tbDiagnosa.setAutoCreateRowSorter(true);
         tbDiagnosa.getTableHeader().setReorderingAllowed(false);
         Scroll1.setViewportView(tbDiagnosa);
 
@@ -432,6 +433,7 @@ public class PanelDiagnosa extends widget.panelisi {
         Scroll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll2.setOpaque(true);
 
+        tbProsedur.setAutoCreateRowSorter(true);
         tbProsedur.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbProsedur.getTableHeader().setReorderingAllowed(false);
         Scroll2.setViewportView(tbProsedur);
