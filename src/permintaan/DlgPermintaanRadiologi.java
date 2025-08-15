@@ -56,7 +56,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
-    private PreparedStatement psset_tarif,pspemeriksaan;
+    private PreparedStatement psset_tarif,pspemeriksaan,pspemeriksaan2,pspemeriksaan3,pspemeriksaan4;
     private ResultSet rs,rsset_tarif;
     private boolean[] pilih; 
     private String[] kode,nama;
@@ -1127,7 +1127,11 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             response = root.path("permintaanradiologi");
             if(cara_bayar_radiologi.equals("Yes")&&kelas_radiologi.equals("No")){
                 pspemeriksaan=koneksi.prepareStatement(
-                  "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.kd_pj,jns_perawatan_radiologi.kelas from jns_perawatan_radiologi where jns_perawatan_radiologi.status='1' order by jns_perawatan_radiologi.kd_jenis_prw");
+                  "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.kd_pj,jns_perawatan_radiologi.kelas "
+                          + "from jns_perawatan_radiologi where "
+                          + "jns_perawatan_radiologi.status='1' and (jns_perawatan_radiologi.kd_pj=? or jns_perawatan_radiologi.kd_pj='-') and jns_perawatan_radiologi.kd_jenis_prw like ? or "
+                          + "jns_perawatan_radiologi.status='1' and (jns_perawatan_radiologi.kd_pj=? or jns_perawatan_radiologi.kd_pj='-') and jns_perawatan_radiologi.nm_perawatan like ? "
+                          + "order by jns_perawatan_radiologi.kd_jenis_prw");
 //                if(response.isArray()){
 //                    for(JsonNode list:response){
 //                        if((list.path("KodePJ").asText().equals(Penjab.getText())||list.path("KodePJ").asText().equals("-"))&&(list.path("KodePeriksa").asText().toLowerCase().contains(TCariPeriksa.getText().toLowerCase())||list.path("NamaPemeriksaan").asText().toLowerCase().contains(TCariPeriksa.getText().toLowerCase()))){
@@ -1138,8 +1142,12 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 //                    }
 //                }
             }else if(cara_bayar_radiologi.equals("No")&&kelas_radiologi.equals("No")){
-                pspemeriksaan=koneksi.prepareStatement(
-                  "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.kd_pj,jns_perawatan_radiologi.kelas from jns_perawatan_radiologi where jns_perawatan_radiologi.status='1' order by jns_perawatan_radiologi.kd_jenis_prw");
+                pspemeriksaan2=koneksi.prepareStatement(
+                  "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.kd_pj,jns_perawatan_radiologi.kelas "
+                          + "from jns_perawatan_radiologi where "
+                          + "jns_perawatan_radiologi.status='1' and jns_perawatan_radiologi.kd_jenis_prw like ? or "
+                          + "jns_perawatan_radiologi.status='1' and jns_perawatan_radiologi.nm_perawatan like ? "
+                          + "order by jns_perawatan_radiologi.kd_jenis_prw");
 //                if(response.isArray()){
 //                    for(JsonNode list:response){
 //                        if(list.path("KodePeriksa").asText().toLowerCase().contains(TCariPeriksa.getText().toLowerCase())||list.path("NamaPemeriksaan").asText().toLowerCase().contains(TCariPeriksa.getText().toLowerCase())){
@@ -1150,8 +1158,12 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 //                    }
 //                }
             }else if(cara_bayar_radiologi.equals("Yes")&&kelas_radiologi.equals("Yes")){
-                pspemeriksaan=koneksi.prepareStatement(
-                  "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.kd_pj,jns_perawatan_radiologi.kelas from jns_perawatan_radiologi where jns_perawatan_radiologi.status='1' order by jns_perawatan_radiologi.kd_jenis_prw");
+                pspemeriksaan3=koneksi.prepareStatement(
+                  "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.kd_pj,jns_perawatan_radiologi.kelas "
+                          + "from jns_perawatan_radiologi where "
+                          + "and jns_perawatan_radiologi.status='1' and (jns_perawatan_radiologi.kd_pj=? or jns_perawatan_radiologi.kd_pj='-') and (jns_perawatan_radiologi.kelas=? or jns_perawatan_radiologi.kelas='-') and jns_perawatan_radiologi.kd_jenis_prw like ? or "
+                          + "and jns_perawatan_radiologi.status='1' and (jns_perawatan_radiologi.kd_pj=? or jns_perawatan_radiologi.kd_pj='-') and (jns_perawatan_radiologi.kelas=? or jns_perawatan_radiologi.kelas='-') and jns_perawatan_radiologi.nm_perawatan like ? "
+                          + "order by jns_perawatan_radiologi.kd_jenis_prw");
 //                if(response.isArray()){
 //                    for(JsonNode list:response){
 //                        if((list.path("Kelas").asText().equals(kelas.trim())||list.path("Kelas").asText().equals("-"))&&(list.path("KodePJ").asText().equals(Penjab.getText())||list.path("KodePJ").asText().equals("-"))&&(list.path("KodePeriksa").asText().toLowerCase().contains(TCariPeriksa.getText().toLowerCase())||list.path("NamaPemeriksaan").asText().toLowerCase().contains(TCariPeriksa.getText().toLowerCase()))){
@@ -1162,8 +1174,12 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 //                    }
 //                }
             }else if(cara_bayar_radiologi.equals("No")&&kelas_radiologi.equals("Yes")){
-                pspemeriksaan=koneksi.prepareStatement(
-                  "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.kd_pj,jns_perawatan_radiologi.kelas from jns_perawatan_radiologi where jns_perawatan_radiologi.status='1' order by jns_perawatan_radiologi.kd_jenis_prw");
+                pspemeriksaan4=koneksi.prepareStatement(
+                  "select jns_perawatan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,jns_perawatan_radiologi.kd_pj,jns_perawatan_radiologi.kelas "
+                          + "from jns_perawatan_radiologi where "
+                          + "and jns_perawatan_radiologi.status='1' and (jns_perawatan_radiologi.kelas=? or jns_perawatan_radiologi.kelas='-') and jns_perawatan_radiologi.kd_jenis_prw like ? or "
+                          + "and jns_perawatan_radiologi.status='1' and (jns_perawatan_radiologi.kelas=? or jns_perawatan_radiologi.kelas='-') and jns_perawatan_radiologi.nm_perawatan like ? "
+                          + "order by jns_perawatan_radiologi.kd_jenis_prw");
 //                if(response.isArray()){
 //                    for(JsonNode list:response){
 //                        if((list.path("Kelas").asText().equals(kelas.trim())||list.path("Kelas").asText().equals("-"))&&(list.path("KodePeriksa").asText().toLowerCase().contains(TCariPeriksa.getText().toLowerCase())||list.path("NamaPemeriksaan").asText().toLowerCase().contains(TCariPeriksa.getText().toLowerCase()))){
@@ -1176,17 +1192,33 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             }
             try {
                 if(cara_bayar_radiologi.equals("Yes")&&kelas_radiologi.equals("No")){
+                    pspemeriksaan.setString(1,Penjab.getText().trim());
+                    pspemeriksaan.setString(2,"%"+TCariPeriksa.getText().trim()+"%");
+                    pspemeriksaan.setString(3,Penjab.getText().trim());
+                    pspemeriksaan.setString(4,"%"+TCariPeriksa.getText().trim()+"%");
                     rs=pspemeriksaan.executeQuery();
                 }else if(cara_bayar_radiologi.equals("No")&&kelas_radiologi.equals("No")){
-                    rs=pspemeriksaan.executeQuery();
+                    pspemeriksaan2.setString(1,"%"+TCariPeriksa.getText().trim()+"%");
+                    pspemeriksaan2.setString(2,"%"+TCariPeriksa.getText().trim()+"%");
+                    rs=pspemeriksaan2.executeQuery();
                 }else if(cara_bayar_radiologi.equals("Yes")&&kelas_radiologi.equals("Yes")){
-                    rs=pspemeriksaan.executeQuery();
+                    pspemeriksaan3.setString(1,Penjab.getText().trim());
+                    pspemeriksaan3.setString(2,kelas.trim());
+                    pspemeriksaan3.setString(3,"%"+TCariPeriksa.getText().trim()+"%");
+                    pspemeriksaan3.setString(4,Penjab.getText().trim());
+                    pspemeriksaan3.setString(5,kelas.trim());
+                    pspemeriksaan3.setString(6,"%"+TCariPeriksa.getText().trim()+"%");
+                    rs=pspemeriksaan3.executeQuery();
                 }else if(cara_bayar_radiologi.equals("No")&&kelas_radiologi.equals("Yes")){
-                    rs=pspemeriksaan.executeQuery();
+                    pspemeriksaan4.setString(1,kelas.trim());
+                    pspemeriksaan4.setString(2,"%"+TCariPeriksa.getText().trim()+"%");
+                    pspemeriksaan4.setString(3,kelas.trim());                
+                    pspemeriksaan4.setString(4,"%"+TCariPeriksa.getText().trim()+"%");
+                    rs=pspemeriksaan4.executeQuery();
                 } 
                             
                 while(rs.next()){                
-                    tabMode.addRow(new Object[]{false,rs.getString(1),"   "+rs.getString(2),rs.getString(4)});
+                    tabMode.addRow(new Object[]{false,rs.getString(1),"   "+rs.getString(2)});
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1197,14 +1229,14 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 if(pspemeriksaan!=null){
                     pspemeriksaan.close();
                 }
-                if(pspemeriksaan!=null){
-                    pspemeriksaan.close();
+                if(pspemeriksaan2!=null){
+                    pspemeriksaan2.close();
                 }
-                if(pspemeriksaan!=null){
-                    pspemeriksaan.close();
+                if(pspemeriksaan3!=null){
+                    pspemeriksaan3.close();
                 }
-                if(pspemeriksaan!=null){
-                    pspemeriksaan.close();
+                if(pspemeriksaan4!=null){
+                    pspemeriksaan4.close();
                 }
             }
             myObj.close(); 
