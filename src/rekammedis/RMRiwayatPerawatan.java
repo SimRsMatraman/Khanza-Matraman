@@ -4164,15 +4164,16 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             if(rs4.next()){
                                 htmlContent.append(  
                                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                    "<tr><td valign='top' colspan='5'>Pemeriksaan Laboratorium PK & MB</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+            
+                                    "<tr><td valign='top' colspan='8'>Pemeriksaan Laboratorium PK & MB</td></tr>"+            
                                     "<tr align='center'>"+
                                       "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>"+
-                                      "<td valign='top' width='15%' bgcolor='#FFFAF8'>Tanggal</td>"+
+                                      "<td valign='top' width='8%' bgcolor='#FFFAF8'>Tanggal</td>"+
                                       "<td valign='top' width='10%' bgcolor='#FFFAF8'>Kode</td>"+
                                       "<td valign='top' width='26%' bgcolor='#FFFAF8'>Nama Pemeriksaan</td>"+
                                       "<td valign='top' width='18%' bgcolor='#FFFAF8'>Dokter PJ</td>"+
                                       "<td valign='top' width='17%' bgcolor='#FFFAF8'>Petugas</td>"+
-                                      "<td valign='top' width='10%' bgcolor='#FFFAF8'>Biaya</td>"+
+                                      "<td valign='top' width='8%' bgcolor='#FFFAF8'></td>"+    
+                                      "<td valign='top' width='7%' bgcolor='#FFFAF8'>Biaya</td>"+
                                     "</tr>");
                                 rs4.beforeFirst();
                                 w=1;
@@ -4196,6 +4197,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                        "<td valign='top'>"+rs2.getString("nm_perawatan")+"</td>"+
                                                        "<td valign='top'>"+rs2.getString("nm_dokter")+"</td>"+
                                                        "<td valign='top'>"+rs2.getString("nama")+"</td>"+
+                                                       "<td valign='top'></td>"+        
                                                        "<td valign='top' align='right'>"+Valid.SetAngka(rs2.getDouble("biaya"))+"</td>"+
                                                     "</tr>"
                                                ); 
@@ -4208,6 +4210,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                         "<td valign='top'>"+rs2.getString("nm_perawatan")+"</td>"+
                                                         "<td valign='top'>"+rs2.getString("nm_dokter")+"</td>"+
                                                         "<td valign='top'>"+rs2.getString("nama")+"</td>"+
+                                                        "<td valign='top'></td>"+        
                                                         "<td valign='top' align='right'>"+Valid.SetAngka(rs2.getDouble("biaya"))+"</td>"+
                                                      "</tr>"
                                                 ); 
@@ -4219,7 +4222,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                 rs3=koneksi.prepareStatement(
                                                     "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,"+
                                                     "template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
-                                                    "detail_periksa_lab.keterangan from detail_periksa_lab inner join "+
+                                                    "detail_periksa_lab.keterangan,LEFT(keterangan,1) as flag from detail_periksa_lab inner join "+
                                                     "template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                                     "where detail_periksa_lab.no_rawat='"+rs.getString("no_rawat")+"' and "+
                                                     "detail_periksa_lab.kd_jenis_prw='"+rs2.getString("kd_jenis_prw")+"' and "+
@@ -4234,18 +4237,32 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                            "<td valign='top' align='center' bgcolor='#FFFAF8'>Detail Pemeriksaan</td>"+
                                                            "<td valign='top' align='center' bgcolor='#FFFAF8'>Hasil</td>"+
                                                            "<td valign='top' align='center' bgcolor='#FFFAF8'>Nilai Rujukan</td>"+
+                                                           "<td valign='top' align='center' bgcolor='#FFFAF8'>Flag/Note</td>"+     
                                                            "<td valign='top' align='right'></td>"+
                                                         "</tr>");
                                                     rs3.beforeFirst();
                                                     while(rs3.next()){
+                                                        String warna;
+                                                        if("*".equalsIgnoreCase(rs3.getString("flag"))){
+                                                            warna=">";
+                                                        }else if("L".equalsIgnoreCase(rs3.getString("flag"))){
+                                                            warna="style='color:blue;'>";
+                                                        }else if("H".equalsIgnoreCase(rs3.getString("flag"))){
+                                                            warna="style='color:red;'>";
+                                                        }else if("*".equalsIgnoreCase(rs3.getString("flag"))){
+                                                            warna=">";
+                                                        }else {
+                                                            warna=">";
+                                                        }
                                                                 htmlContent.append(
                                                                     "<tr>"+
                                                                        "<td valign='top' align='center'></td>"+
                                                                        "<td valign='top'></td>"+
                                                                        "<td valign='top'></td>"+
                                                                        "<td valign='top'>"+rs3.getString("Pemeriksaan")+"</td>"+
-                                                                       "<td valign='top'>"+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
+                                                                       "<td valign='top' "+warna+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
                                                                        "<td valign='top'>"+rs3.getString("nilai_rujukan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
+                                                                       "<td valign='top'>"+rs3.getString("keterangan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+        
                                                                        "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_item"))+"</td>"+
                                                                     "</tr>"); 
                                                         biayaperawatan=biayaperawatan+rs3.getDouble("biaya_item");
@@ -5924,7 +5941,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             if(rs4.next()){
                                 htmlContent.append(  
                                   "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='3px' class='tbl_form'>"+
-                                    "<tr><td valign='top' colspan='5'>Pemeriksaan Laboratorium PK & MB</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+            
+                                    "<tr><td valign='top' colspan='7'>Pemeriksaan Laboratorium PK & MB</td></tr>"+            
                                     "<tr align='center'>"+
                                       "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>"+
                                       "<td valign='top' width='25%' bgcolor='#FFFAF8'>Tanggal</td>"+
@@ -5932,6 +5949,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                       "<td valign='top' width='40%' bgcolor='#FFFAF8'>Nama Pemeriksaan</td>"+
                                       "<td valign='top' width='40%' bgcolor='#FFFAF8'>Dokter PJ</td>"+
                                       "<td valign='top' width='30%' bgcolor='#FFFAF8'>Petugas</td>"+
+                                      "<td valign='top' width='30%' bgcolor='#FFFAF8'></td>"+
                                     "</tr>");
                                 rs4.beforeFirst();
                                 w=1;
@@ -5955,6 +5973,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                        "<td valign='top'>"+rs2.getString("nm_perawatan")+"</td>"+
                                                        "<td valign='top'>"+rs2.getString("nm_dokter")+"</td>"+
                                                        "<td valign='top'>"+rs2.getString("nama")+"</td>"+
+                                                       "<td valign='top'></td>"+        
                                                     "</tr>"
                                                ); 
                                             }else{
@@ -5966,6 +5985,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                         "<td valign='top'>"+rs2.getString("nm_perawatan")+"</td>"+
                                                         "<td valign='top'>"+rs2.getString("nm_dokter")+"</td>"+
                                                         "<td valign='top'>"+rs2.getString("nama")+"</td>"+
+                                                        "<td valign='top'></td>"+       
                                                      "</tr>"
                                                 ); 
                                             }
@@ -5976,7 +5996,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                 rs3=koneksi.prepareStatement(
                                                     "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,"+
                                                     "template_laboratorium.satuan,detail_periksa_lab.nilai_rujukan,detail_periksa_lab.biaya_item,"+
-                                                    "detail_periksa_lab.keterangan from detail_periksa_lab inner join "+
+                                                    "detail_periksa_lab.keterangan,LEFT(keterangan,1) as flag from detail_periksa_lab inner join "+
                                                     "template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template "+
                                                     "where detail_periksa_lab.no_rawat='"+rs.getString("no_rawat")+"' and "+
                                                     "detail_periksa_lab.kd_jenis_prw='"+rs2.getString("kd_jenis_prw")+"' and "+
@@ -5991,21 +6011,32 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                                            "<td valign='top' align='center' bgcolor='#FFFAF8'>Detail Pemeriksaan</td>"+
                                                            "<td valign='top' align='center' bgcolor='#FFFAF8'>Hasil</td>"+
                                                            "<td valign='top' align='center' bgcolor='#FFFAF8'>Nilai Rujukan</td>"+
-                                                           "<td valign='top' align='right'></td>"+
+                                                           "<td valign='top' align='center' bgcolor='#FFFAF8'>Flag/Note</td>"+
                                                         "</tr>");
                                                     rs3.beforeFirst();
                                                     while(rs3.next()){
+                                                        String warna;
+                                                        if("*".equalsIgnoreCase(rs3.getString("flag"))){
+                                                            warna=">";
+                                                        }else if("L".equalsIgnoreCase(rs3.getString("flag"))){
+                                                            warna="style='color:blue;'>";
+                                                        }else if("H".equalsIgnoreCase(rs3.getString("flag"))){
+                                                            warna="style='color:red;'>";
+                                                        }else if("*".equalsIgnoreCase(rs3.getString("flag"))){
+                                                            warna=">";
+                                                        }else {
+                                                            warna=">";
+                                                        }
                                                         htmlContent.append(
                                                             "<tr>"+
                                                                "<td valign='top' align='center'></td>"+
                                                                "<td valign='top'></td>"+
                                                                "<td valign='top'></td>"+
                                                                "<td valign='top'>"+rs3.getString("Pemeriksaan")+"</td>"+
-                                                               "<td valign='top'>"+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
+                                                               "<td valign='top'"+warna+rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+" "+rs3.getString("satuan")+"</td>"+
                                                                "<td valign='top'>"+rs3.getString("nilai_rujukan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-//                                                               "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_item"))+"</td>"+
+                                                               "<td valign='top'>"+rs3.getString("keterangan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
                                                             "</tr>"); 
-                                                        //biayaperawatan=biayaperawatan+rs3.getDouble("biaya_item");
                                                     }                                               
                                                 }
                                             } catch (Exception e) {
