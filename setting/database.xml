@@ -132,16 +132,16 @@
     <entry key="IDCORONA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASSCORONA">l4nh5eVYrLAER/I2A4b3Tw==</entry>
 
-    <entry key="CLIENTIDSATUSEHAT">P7r+UhotZ+TD5Gxvo9z+Cu4XctfONdHedFnPb884a1CrfF5lGde278HU+KTDASyaq6I5ld16yNBlpNOVH/2iyQ==</entry>
-    <entry key="SECRETKEYSATUSEHAT">p2//pZik2fKNprNhYWGsj0v7PvaJrwNawRYseD1hOCCEwZiCIsqVgxFXXpXXAVg0HWBfjK7ZOh1uNT/vVtXbsjgxLVO4Pk02U5xt8isHLmE=</entry>
+    <entry key="CLIENTIDSATUSEHAT">s9ZqEyZ5TyvuNKqQ1eCDEFrrnU0AtseDytqrpyQ3rrfzpo3DY3dzEMFPKzw5CcQRi9S8RT1w6uujSH/t6s7/vw==</entry>
+    <entry key="SECRETKEYSATUSEHAT">72uqq/V0P0uhVBBxeUVuC+KWkB/mdnZ9u4DDAJvibk4terz2/xA8ftqlUYIiiy2u2ecbT19fk+Ms2MawItnppOdBcd1C2NrEivSQwUdGGbo=</entry>
     <entry key="URLAUTHSATUSEHAT">https://api-satusehat.kemkes.go.id/oauth2/v1</entry> 
     <entry key="URLFHIRSATUSEHAT">https://api-satusehat.kemkes.go.id/fhir-r4/v1</entry>
-    <entry key="IDSATUSEHAT">gaBNwBHeS3L0v0VbJMiSXw==</entry>
-    <entry key="KELURAHANSATUSEHAT">3175101006</entry>
-    <entry key="KECAMATANSATUSEHAT">317510</entry>
+    <entry key="IDSATUSEHAT">PfHWKygG2PPntmVgjWv/CA==</entry>
+    <entry key="KELURAHANSATUSEHAT">3175011005</entry>
+    <entry key="KECAMATANSATUSEHAT">317501</entry>
     <entry key="KABUPATENSATUSEHAT">3175</entry>
     <entry key="PROPINSISATUSEHAT">31</entry>
-    <entry key="KODEPOSSATUSEHAT">13840</entry>
+    <entry key="KODEPOSSATUSEHAT">13120</entry>
 
     <entry key="URLAPIINHEALTH">http://development.inhealth.co.id/pelkesws2</entry>
     <entry key="TOKENINHEALTH">l4nh5eVYrLAER/I2A4b3Tw==</entry>

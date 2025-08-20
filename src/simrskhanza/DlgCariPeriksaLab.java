@@ -60,7 +60,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
     DateFormat formattanggal = new SimpleDateFormat("yyyy-MM-dd");
     DateFormat formatJam = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
-    private String diagnosa="",saran="",kesan="",sarankesan="",gambaran="",hasilmalaria="",Suspen_Piutang_Laborat_Ranap="",Laborat_Ranap="",Beban_Jasa_Medik_Dokter_Laborat_Ranap="",Utang_Jasa_Medik_Dokter_Laborat_Ranap="",
+    private String norawat="",noorder="",diagnosa="",saran="",kesan="",sarankesan="",gambaran="",hasilmalaria="",Suspen_Piutang_Laborat_Ranap="",Laborat_Ranap="",Beban_Jasa_Medik_Dokter_Laborat_Ranap="",Utang_Jasa_Medik_Dokter_Laborat_Ranap="",
             Beban_Jasa_Medik_Petugas_Laborat_Ranap="",Utang_Jasa_Medik_Petugas_Laborat_Ranap="",Beban_Kso_Laborat_Ranap="",Utang_Kso_Laborat_Ranap="",
             HPP_Persediaan_Laborat_Rawat_inap="",Persediaan_BHP_Laborat_Rawat_Inap="",Beban_Jasa_Sarana_Laborat_Ranap="",Utang_Jasa_Sarana_Laborat_Ranap="",
             Beban_Jasa_Perujuk_Laborat_Ranap="",Utang_Jasa_Perujuk_Laborat_Ranap="",Beban_Jasa_Menejemen_Laborat_Ranap="",Utang_Jasa_Menejemen_Laborat_Ranap="",
@@ -346,6 +346,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnPDFLab = new javax.swing.JMenu();
         MnCetakHasilLab_ = new javax.swing.JMenuItem();
         MnCetakHasilLab_GDT = new javax.swing.JMenuItem();
+        MnCetakHasilHCLAB = new javax.swing.JMenuItem();
         MnCetakBebasNarkoba = new javax.swing.JMenuItem();
         MnCetakNota = new javax.swing.JMenuItem();
         MnUbah = new javax.swing.JMenuItem();
@@ -511,6 +512,20 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             }
         });
         MnPDFLab.add(MnCetakHasilLab_GDT);
+
+        MnCetakHasilHCLAB.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakHasilHCLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakHasilHCLAB.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakHasilHCLAB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakHasilHCLAB.setText("Model HCLAB");
+        MnCetakHasilHCLAB.setName("MnCetakHasilHCLAB"); // NOI18N
+        MnCetakHasilHCLAB.setPreferredSize(new java.awt.Dimension(100, 26));
+        MnCetakHasilHCLAB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakHasilHCLABActionPerformed(evt);
+            }
+        });
+        MnPDFLab.add(MnCetakHasilHCLAB);
 
         jPopupMenu1.add(MnPDFLab);
 
@@ -2898,6 +2913,21 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnCetakHasilLab_GDTActionPerformed
 
+    private void MnCetakHasilHCLABActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakHasilHCLABActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        }else if(Kd2.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Gagal mencetak. Pilih dulu data yang mau dicetak.\nKlik No.Rawat pada table untuk memilih...!!!!");
+        }else if(!(Kd2.getText().trim().equals(""))){
+            norawat=tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString();
+            noorder=Sequel.cariIsi("select a.noorder from permintaan_lab a join periksa_lab b on b.no_rawat=a.no_rawat and a.tgl_hasil=b.tgl_periksa and a.jam_hasil=b.jam where a.no_rawat=? group by a.noorder",norawat);
+            Valid.panggilUrl2("https://rsudmatraman.my.id/upload/dokumen/"+noorder+".pdf");
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_MnCetakHasilHCLABActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2932,6 +2962,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.TextArea Kesan;
     private widget.editorpane LoadHTML1;
     private javax.swing.JMenuItem MnCetakBebasNarkoba;
+    private javax.swing.JMenuItem MnCetakHasilHCLAB;
     private javax.swing.JMenuItem MnCetakHasilLab;
     private javax.swing.JMenuItem MnCetakHasilLabGDT;
     private javax.swing.JMenuItem MnCetakHasilLabMalaria;
