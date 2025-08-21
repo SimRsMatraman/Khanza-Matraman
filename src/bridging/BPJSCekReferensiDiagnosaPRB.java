@@ -373,4 +373,10 @@ public final class BPJSCekReferensiDiagnosaPRB extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
+
+    void buka() {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        tampil(Poli.getText());
+        this.setCursor(Cursor.getDefaultCursor());
+    }
 }

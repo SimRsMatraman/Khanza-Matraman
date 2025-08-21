@@ -1059,6 +1059,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         diagnosa.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         diagnosa.setLocationRelativeTo(internalFrame1);        
         diagnosa.setVisible(true);
+        diagnosa.buka();
     }//GEN-LAST:event_btnProgramPRBActionPerformed
 
     private void btnProgramPRBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnProgramPRBKeyPressed

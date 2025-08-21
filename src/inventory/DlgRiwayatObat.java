@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
-public class DlgCopyResep extends javax.swing.JDialog {
+public class DlgRiwayatObat extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -32,7 +32,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     /** Creates new form 
      * @param parent
      * @param modal */
-    public DlgCopyResep(java.awt.Frame parent, boolean modal) {
+    public DlgRiwayatObat(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
@@ -92,6 +92,8 @@ public class DlgCopyResep extends javax.swing.JDialog {
     private void initComponents() {
 
         BtnHapus = new widget.Button();
+        BtnTambah = new widget.Button();
+        BtnEdit = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         panelisi1 = new widget.panelisi();
         ChkTanggal = new widget.CekBox();
@@ -102,8 +104,6 @@ public class DlgCopyResep extends javax.swing.JDialog {
         listDok = new javax.swing.JComboBox<>();
         BtnCari = new widget.Button();
         jLabel7 = new widget.Label();
-        BtnTambah = new widget.Button();
-        BtnEdit = new widget.Button();
         BtnKeluar = new widget.Button();
         scrollPane1 = new widget.ScrollPane();
         tbPemisahan = new widget.Table();
@@ -122,6 +122,40 @@ public class DlgCopyResep extends javax.swing.JDialog {
         BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnHapusKeyPressed(evt);
+            }
+        });
+
+        BtnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editcopy.png"))); // NOI18N
+        BtnTambah.setMnemonic('S');
+        BtnTambah.setText("Copy Resep");
+        BtnTambah.setToolTipText("Alt+S");
+        BtnTambah.setName("BtnTambah"); // NOI18N
+        BtnTambah.setPreferredSize(new java.awt.Dimension(150, 30));
+        BtnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTambahActionPerformed(evt);
+            }
+        });
+        BtnTambah.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnTambahKeyPressed(evt);
+            }
+        });
+
+        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
+        BtnEdit.setMnemonic('U');
+        BtnEdit.setText("Ubah Resep");
+        BtnEdit.setToolTipText("Alt+U");
+        BtnEdit.setName("BtnEdit"); // NOI18N
+        BtnEdit.setPreferredSize(new java.awt.Dimension(120, 30));
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnEditKeyPressed(evt);
             }
         });
 
@@ -151,7 +185,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         panelisi1.add(ChkTanggal);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-05-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-08-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -165,7 +199,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
         panelisi1.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-05-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-08-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -208,42 +242,6 @@ public class DlgCopyResep extends javax.swing.JDialog {
         jLabel7.setName("jLabel7"); // NOI18N
         jLabel7.setPreferredSize(new java.awt.Dimension(20, 23));
         panelisi1.add(jLabel7);
-
-        BtnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/editcopy.png"))); // NOI18N
-        BtnTambah.setMnemonic('S');
-        BtnTambah.setText("Copy Resep");
-        BtnTambah.setToolTipText("Alt+S");
-        BtnTambah.setName("BtnTambah"); // NOI18N
-        BtnTambah.setPreferredSize(new java.awt.Dimension(150, 30));
-        BtnTambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnTambahActionPerformed(evt);
-            }
-        });
-        BtnTambah.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnTambahKeyPressed(evt);
-            }
-        });
-        panelisi1.add(BtnTambah);
-
-        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('U');
-        BtnEdit.setText("Ubah Resep");
-        BtnEdit.setToolTipText("Alt+U");
-        BtnEdit.setName("BtnEdit"); // NOI18N
-        BtnEdit.setPreferredSize(new java.awt.Dimension(120, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEditActionPerformed(evt);
-            }
-        });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnEditKeyPressed(evt);
-            }
-        });
-        panelisi1.add(BtnEdit);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -363,92 +361,92 @@ public class DlgCopyResep extends javax.swing.JDialog {
                     jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",kode_pj);
                 }
                 if(jmlparsial>0){
-//                    if (kodepoli.equals("U0024") && (!prb.equals("")) && Integer.parseInt(jumlahrujuk) > 2) {
-//                        int reply = JOptionPane.showConfirmDialog(rootPane,"Maaf, Pasien dengan "+prb+", dan tercatat sudah kunjungan ke "+jumlahrujuk+" dengan no rujukan yang sama, silahkan PRB kan pasien","Konfirmasi",JOptionPane.YES_NO_OPTION);
-//                        if (reply == JOptionPane.YES_OPTION) {
-//                            try {
-//                                ps = koneksi.prepareStatement("select bridging_sep.no_sep,bridging_sep.no_kartu,bridging_sep.kddpjp,bridging_sep.nmdpdjp,"
-//                                        + "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,pasien.email "
-//                                        + "from bridging_sep inner join pasien on bridging_sep.nomr=pasien.no_rkm_medis "
-//                                        + "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "
-//                                        + "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "
-//                                        + "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab where bridging_sep.no_rawat=?");
-//                                try {
-//                                    ps.setString(1, norawat);
-//                                    rs = ps.executeQuery();
-//                                    if (rs.next()) {
-//                                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//                                        BPJSProgramPRB form = new BPJSProgramPRB(null, false);
-//                                        form.setNoRm(norawat, rs.getString("no_sep"), rs.getString("no_kartu"), norm, Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?",norm), rs.getString("alamat"), rs.getString("email"), rs.getString("kddpjp"), rs.getString("nmdpdjp"));
-//                                        form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-//                                        form.setLocationRelativeTo(internalFrame1);
-//                                        form.setVisible(true);
-//                                        this.setCursor(Cursor.getDefaultCursor());
-//                                    } else {
-//                                        JOptionPane.showMessageDialog(null, "Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
-//                                    }
-//                                } catch (Exception e) {
-//                                    System.out.println("Notif : " + e);
-//                                } finally {
-//                                    if (rs != null) {
-//                                        rs.close();
-//                                    }
-//                                    if (ps != null) {
-//                                        ps.close();
-//                                    }
-//                                }
-//                            } catch (Exception e) {
-//                                System.out.println("Notif : " + e);
-//                            }
-//                        }                       
-//                    }else{                        
+                    if (kodepoli.equals("U0024") && (!prb.equals("")) && Integer.parseInt(jumlahrujuk) > 2) {
+                        int reply = JOptionPane.showConfirmDialog(rootPane,"Maaf, Pasien dengan "+prb+", dan tercatat sudah kunjungan ke "+jumlahrujuk+" dengan no rujukan yang sama, silahkan PRB kan pasien","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                        if (reply == JOptionPane.YES_OPTION) {
+                            try {
+                                ps = koneksi.prepareStatement("select bridging_sep.no_sep,bridging_sep.no_kartu,bridging_sep.kddpjp,bridging_sep.nmdpdjp,"
+                                        + "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,pasien.email "
+                                        + "from bridging_sep inner join pasien on bridging_sep.nomr=pasien.no_rkm_medis "
+                                        + "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "
+                                        + "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "
+                                        + "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab where bridging_sep.no_rawat=?");
+                                try {
+                                    ps.setString(1, norawat);
+                                    rs = ps.executeQuery();
+                                    if (rs.next()) {
+                                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                        BPJSProgramPRB form = new BPJSProgramPRB(null, false);
+                                        form.setNoRm(norawat, rs.getString("no_sep"), rs.getString("no_kartu"), norm, Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?",norm), rs.getString("alamat"), rs.getString("email"), rs.getString("kddpjp"), rs.getString("nmdpdjp"));
+                                        form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                                        form.setLocationRelativeTo(internalFrame1);
+                                        form.setVisible(true);
+                                        this.setCursor(Cursor.getDefaultCursor());
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Notif : " + e);
+                                } finally {
+                                    if (rs != null) {
+                                        rs.close();
+                                    }
+                                    if (ps != null) {
+                                        ps.close();
+                                    }
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif : " + e);
+                            }
+                        }                       
+                    }else{                        
                         panggilform();
-//                    }                    
+                    }                    
                 }else{
                     if(Sequel.cariRegistrasi(norawat)>0){
                         JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi ..!!");
                     }else{ 
-//                        if (kodepoli.equals("U0024") && (!prb.equals("")) && Integer.parseInt(jumlahrujuk) > 2) {
-//                        int reply = JOptionPane.showConfirmDialog(rootPane,"Maaf, Pasien dengan "+prb+", dan tercatat sudah kunjungan ke "+jumlahrujuk+" dengan no rujukan yang sama, silahkan PRB kan pasien","Konfirmasi",JOptionPane.YES_NO_OPTION);
-//                            if (reply == JOptionPane.YES_OPTION) {
-//                                try {
-//                                    ps = koneksi.prepareStatement("select bridging_sep.no_sep,bridging_sep.no_kartu,bridging_sep.kddpjp,bridging_sep.nmdpdjp,"
-//                                            + "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,pasien.email "
-//                                            + "from bridging_sep inner join pasien on bridging_sep.nomr=pasien.no_rkm_medis "
-//                                            + "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "
-//                                            + "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "
-//                                            + "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab where bridging_sep.no_rawat=?");
-//                                    try {
-//                                        ps.setString(1, norawat);
-//                                        rs = ps.executeQuery();
-//                                        if (rs.next()) {
-//                                            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//                                            BPJSProgramPRB form = new BPJSProgramPRB(null, false);
-//                                            form.setNoRm(norawat, rs.getString("no_sep"), rs.getString("no_kartu"), norm, Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?",norm), rs.getString("alamat"), rs.getString("email"), rs.getString("kddpjp"), rs.getString("nmdpdjp"));
-//                                            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-//                                            form.setLocationRelativeTo(internalFrame1);
-//                                            form.setVisible(true);
-//                                            this.setCursor(Cursor.getDefaultCursor());
-//                                        } else {
-//                                            JOptionPane.showMessageDialog(null, "Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
-//                                        }
-//                                    } catch (Exception e) {
-//                                        System.out.println("Notif : " + e);
-//                                    } finally {
-//                                        if (rs != null) {
-//                                            rs.close();
-//                                        }
-//                                        if (ps != null) {
-//                                            ps.close();
-//                                        }
-//                                    }
-//                                } catch (Exception e) {
-//                                    System.out.println("Notif : " + e);
-//                                }
-//                            }                       
-//                        }else{                        
+                        if (kodepoli.equals("U0024") && (!prb.equals("")) && Integer.parseInt(jumlahrujuk) > 2) {
+                        int reply = JOptionPane.showConfirmDialog(rootPane,"Maaf, Pasien dengan "+prb+", dan tercatat sudah kunjungan ke "+jumlahrujuk+" dengan no rujukan yang sama, silahkan PRB kan pasien","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                            if (reply == JOptionPane.YES_OPTION) {
+                                try {
+                                    ps = koneksi.prepareStatement("select bridging_sep.no_sep,bridging_sep.no_kartu,bridging_sep.kddpjp,bridging_sep.nmdpdjp,"
+                                            + "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,pasien.email "
+                                            + "from bridging_sep inner join pasien on bridging_sep.nomr=pasien.no_rkm_medis "
+                                            + "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "
+                                            + "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "
+                                            + "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab where bridging_sep.no_rawat=?");
+                                    try {
+                                        ps.setString(1, norawat);
+                                        rs = ps.executeQuery();
+                                        if (rs.next()) {
+                                            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                            BPJSProgramPRB form = new BPJSProgramPRB(null, false);
+                                            form.setNoRm(norawat, rs.getString("no_sep"), rs.getString("no_kartu"), norm, Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?",norm), rs.getString("alamat"), rs.getString("email"), rs.getString("kddpjp"), rs.getString("nmdpdjp"));
+                                            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                                            form.setLocationRelativeTo(internalFrame1);
+                                            form.setVisible(true);
+                                            this.setCursor(Cursor.getDefaultCursor());
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println("Notif : " + e);
+                                    } finally {
+                                        if (rs != null) {
+                                            rs.close();
+                                        }
+                                        if (ps != null) {
+                                            ps.close();
+                                        }
+                                    }
+                                } catch (Exception e) {
+                                    System.out.println("Notif : " + e);
+                                }
+                            }                       
+                        }else{                        
                             panggilform();
-//                        }                             
+                        }                             
                     }
                 }                
             }
@@ -543,7 +541,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgCopyResep dialog = new DlgCopyResep(new javax.swing.JFrame(), true);
+            DlgRiwayatObat dialog = new DlgRiwayatObat(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {

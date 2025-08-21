@@ -18,6 +18,7 @@ import bridging.AkunRekeningBankPapua;
 import rekammedis.RMRiwayatPerawatan;
 import setting.DlgPenelusuranLogin;
 import inventory.DlgObatPenyakit;
+import inventory.DlgPemberianObatFDC;
 import setting.DlgRunTeks;
 import laporan.DlgSirkulasiBerkas;
 import permintaan.DlgCariPermintaanLab;
@@ -992,6 +993,7 @@ import digitalsignature.DlgListLogTte;
 import digitalsignature.DlgManagementSignatureUser;
 import integration.DataInstansiTerintegrasi;
 import antrian.MapingAntrianDokter;
+import inventory.DlgPemberianObatFDC;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.logging.Level;
@@ -1691,6 +1693,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanFisio = new widget.ButtonBig();
         BtnAbsen = new widget.ButtonBig();
         btnResepObatAntibiotik = new widget.ButtonBig();
+        btnResepObatFDC = new widget.ButtonBig();
         internalFrame1 = new widget.InternalFrame();
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1940,7 +1943,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03/07/2025" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21/08/2025" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7050,6 +7053,17 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
 
+        btnResepObatFDC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/iconfinder_cmyk-04_906567.png"))); // NOI18N
+        btnResepObatFDC.setText("Daftar Obat FDC");
+        btnResepObatFDC.setIconTextGap(0);
+        btnResepObatFDC.setName("btnResepObatFDC"); // NOI18N
+        btnResepObatFDC.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnResepObatFDC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResepObatFDCActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("::[ Khanza SIMKES 2022 ]::");
         setBackground(new java.awt.Color(255, 254, 254));
@@ -7674,6 +7688,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnDaftarPermintaanResep.setEnabled(true);
                     btnResepObatDepan.setEnabled(true);
                     btnResepObatAntibiotik.setEnabled(true);
+                    btnResepObatFDC.setEnabled(true);
                     MnGantiPassword.setEnabled(false);
 //                    MnPengajuanCutiPegawai.setEnabled(false);
 
@@ -7741,6 +7756,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnDaftarPermintaanResep.setEnabled(akses.getresep_dokter());
                     btnResepObatDepan.setEnabled(akses.getresep_obat());
                     btnResepObatAntibiotik.setEnabled(akses.getresep_obat());
+                    btnResepObatFDC.setEnabled(akses.getresep_obat());
                     if(AKTIFKANTRACKSQL.equals("yes")){
                         Sequel.menyimpan("tracker","'"+edAdmin.getText()+"',current_date(),current_time()","Login");
                     }
@@ -7768,6 +7784,7 @@ public class frmUtama extends javax.swing.JFrame {
                     btnDaftarPermintaanResep.setEnabled(false);
                     btnResepObatDepan.setEnabled(false);
                     btnResepObatAntibiotik.setEnabled(false);
+                    btnResepObatFDC.setEnabled(false);
                     edAdmin.setText("");
                     edPwd.setText("");           
                      
@@ -10234,15 +10251,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private void BtnToolJualObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolJualObatActionPerformed
         isTutup();
         FlayMenu.removeAll();        
-        FlayMenu.add(btnInputPenjualan);
-        FlayMenu.add(btnDataPenjualan);
+//        FlayMenu.add(btnInputPenjualan);
+//        FlayMenu.add(btnDataPenjualan);
 //        FlayMenu.add(btnDataPenyerahanDarah);
+        FlayMenu.add(btnResepObatFDC);
         FlayMenu.add(btnResepObatAntibiotik);
         FlayMenu.add(btnDaftarPermintaanResep);
         FlayMenu.add(btnResepObatDepan);
-        btnInputPenjualan.setEnabled(akses.getpenjualan_obat());
-        btnDataPenjualan.setEnabled(akses.getpenjualan_obat());
+//        btnInputPenjualan.setEnabled(akses.getpenjualan_obat());
+//        btnDataPenjualan.setEnabled(akses.getpenjualan_obat());
 //        btnDataPenyerahanDarah.setEnabled(akses.getutd_penyerahan_darah());
+        btnResepObatFDC.setEnabled(akses.getresep_obat());
         btnResepObatAntibiotik.setEnabled(akses.getresep_obat());
         btnDaftarPermintaanResep.setEnabled(akses.getresep_dokter());
         btnResepObatDepan.setEnabled(akses.getresep_obat());
@@ -13714,6 +13733,19 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnKondisiInventarisActionPerformed
+
+    private void btnResepObatFDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResepObatFDCActionPerformed
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgPemberianObatFDC resep=new DlgPemberianObatFDC(this,false);
+        resep.buka();
+        resep.tampilPO();
+        resep.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        resep.setLocationRelativeTo(PanelUtama);
+        resep.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResepObatFDCActionPerformed
 
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -20305,6 +20337,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig btnResepObat;
     private widget.ButtonBig btnResepObatAntibiotik;
     private widget.ButtonBig btnResepObatDepan;
+    private widget.ButtonBig btnResepObatFDC;
     private widget.ButtonBig btnResepPulang;
     private widget.ButtonBig btnResume;
     private widget.ButtonBig btnRetensiRM;

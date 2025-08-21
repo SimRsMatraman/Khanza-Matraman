@@ -341,20 +341,20 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         MnCetakLab = new javax.swing.JMenu();
         MnCetakHasilLab = new javax.swing.JMenuItem();
-        MnCetakHasilLabGDT = new javax.swing.JMenuItem();
         MnCetakHasilLabMalaria = new javax.swing.JMenuItem();
         MnPDFLab = new javax.swing.JMenu();
         MnCetakHasilLab_ = new javax.swing.JMenuItem();
-        MnCetakHasilLab_GDT = new javax.swing.JMenuItem();
         MnCetakHasilHCLAB = new javax.swing.JMenuItem();
         MnCetakBebasNarkoba = new javax.swing.JMenuItem();
-        MnCetakNota = new javax.swing.JMenuItem();
         MnUbah = new javax.swing.JMenuItem();
         MnUbah1 = new javax.swing.JMenuItem();
         MnSaranKesan = new javax.swing.JMenuItem();
         MnMalaria = new javax.swing.JMenuItem();
         MnCetakSuratCovid = new javax.swing.JMenuItem();
-        ppBerkasDigital = new javax.swing.JMenuItem();
+        MnWhatsapp = new javax.swing.JMenu();
+        MnLogin = new javax.swing.JMenuItem();
+        MnKirimChat = new javax.swing.JMenuItem();
+        MnKirimPDF = new javax.swing.JMenuItem();
         WindowSaran = new javax.swing.JDialog();
         internalFrame6 = new widget.InternalFrame();
         panelGlass6 = new widget.panelisi();
@@ -382,6 +382,10 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         Scroll7 = new widget.ScrollPane();
         HasilMalaria = new widget.TextArea();
         MnDarahTepi = new javax.swing.JMenuItem();
+        MnCetakHasilLab_GDT = new javax.swing.JMenuItem();
+        MnCetakHasilLabGDT = new javax.swing.JMenuItem();
+        MnCetakNota = new javax.swing.JMenuItem();
+        ppBerkasDigital = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelisi3 = new widget.panelisi();
         label15 = new widget.Label();
@@ -434,7 +438,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakHasilLab.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakHasilLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakHasilLab.setText("Model 1");
+        MnCetakHasilLab.setText("Model Khanza");
         MnCetakHasilLab.setName("MnCetakHasilLab"); // NOI18N
         MnCetakHasilLab.setPreferredSize(new java.awt.Dimension(100, 26));
         MnCetakHasilLab.addActionListener(new java.awt.event.ActionListener() {
@@ -443,20 +447,6 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             }
         });
         MnCetakLab.add(MnCetakHasilLab);
-
-        MnCetakHasilLabGDT.setBackground(new java.awt.Color(255, 255, 254));
-        MnCetakHasilLabGDT.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnCetakHasilLabGDT.setForeground(new java.awt.Color(50, 50, 50));
-        MnCetakHasilLabGDT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakHasilLabGDT.setText("Model GDT");
-        MnCetakHasilLabGDT.setName("MnCetakHasilLabGDT"); // NOI18N
-        MnCetakHasilLabGDT.setPreferredSize(new java.awt.Dimension(100, 26));
-        MnCetakHasilLabGDT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakHasilLabGDTActionPerformed(evt);
-            }
-        });
-        MnCetakLab.add(MnCetakHasilLabGDT);
 
         MnCetakHasilLabMalaria.setBackground(new java.awt.Color(255, 255, 254));
         MnCetakHasilLabMalaria.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -488,7 +478,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnCetakHasilLab_.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnCetakHasilLab_.setForeground(new java.awt.Color(50, 50, 50));
         MnCetakHasilLab_.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakHasilLab_.setText("Model 1");
+        MnCetakHasilLab_.setText("Model Khanza");
         MnCetakHasilLab_.setName("MnCetakHasilLab_"); // NOI18N
         MnCetakHasilLab_.setPreferredSize(new java.awt.Dimension(100, 26));
         MnCetakHasilLab_.addActionListener(new java.awt.event.ActionListener() {
@@ -497,21 +487,6 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             }
         });
         MnPDFLab.add(MnCetakHasilLab_);
-
-        MnCetakHasilLab_GDT.setBackground(new java.awt.Color(255, 255, 254));
-        MnCetakHasilLab_GDT.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnCetakHasilLab_GDT.setForeground(new java.awt.Color(50, 50, 50));
-        MnCetakHasilLab_GDT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakHasilLab_GDT.setText("Model GDT");
-        MnCetakHasilLab_GDT.setToolTipText("");
-        MnCetakHasilLab_GDT.setName("MnCetakHasilLab_GDT"); // NOI18N
-        MnCetakHasilLab_GDT.setPreferredSize(new java.awt.Dimension(100, 26));
-        MnCetakHasilLab_GDT.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakHasilLab_GDTActionPerformed(evt);
-            }
-        });
-        MnPDFLab.add(MnCetakHasilLab_GDT);
 
         MnCetakHasilHCLAB.setBackground(new java.awt.Color(255, 255, 254));
         MnCetakHasilHCLAB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -544,20 +519,6 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnCetakBebasNarkoba);
-
-        MnCetakNota.setBackground(new java.awt.Color(255, 255, 254));
-        MnCetakNota.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnCetakNota.setForeground(new java.awt.Color(50, 50, 50));
-        MnCetakNota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCetakNota.setText("Cetak Nota Lab");
-        MnCetakNota.setName("MnCetakNota"); // NOI18N
-        MnCetakNota.setPreferredSize(new java.awt.Dimension(190, 26));
-        MnCetakNota.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCetakNotaActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnCetakNota);
 
         MnUbah.setBackground(new java.awt.Color(255, 255, 254));
         MnUbah.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -632,21 +593,64 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         });
         jPopupMenu1.add(MnCetakSuratCovid);
 
-        ppBerkasDigital.setBackground(new java.awt.Color(255, 255, 254));
-        ppBerkasDigital.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppBerkasDigital.setForeground(new java.awt.Color(50, 50, 50));
-        ppBerkasDigital.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppBerkasDigital.setText("Berkas Digital Perawatan");
-        ppBerkasDigital.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppBerkasDigital.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppBerkasDigital.setName("ppBerkasDigital"); // NOI18N
-        ppBerkasDigital.setPreferredSize(new java.awt.Dimension(190, 26));
-        ppBerkasDigital.addActionListener(new java.awt.event.ActionListener() {
+        MnWhatsapp.setBackground(new java.awt.Color(250, 255, 245));
+        MnWhatsapp.setForeground(new java.awt.Color(50, 50, 50));
+        MnWhatsapp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnWhatsapp.setText("Kirim Whatsapp");
+        MnWhatsapp.setToolTipText("");
+        MnWhatsapp.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnWhatsapp.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnWhatsapp.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnWhatsapp.setName("MnWhatsapp"); // NOI18N
+        MnWhatsapp.setPreferredSize(new java.awt.Dimension(190, 26));
+
+        MnLogin.setBackground(new java.awt.Color(255, 255, 254));
+        MnLogin.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnLogin.setForeground(new java.awt.Color(50, 50, 50));
+        MnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnLogin.setText("Login Whatsapp");
+        MnLogin.setToolTipText("");
+        MnLogin.setEnabled(false);
+        MnLogin.setName("MnLogin"); // NOI18N
+        MnLogin.setPreferredSize(new java.awt.Dimension(120, 26));
+        MnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppBerkasDigitalBtnPrintActionPerformed(evt);
+                MnLoginActionPerformed(evt);
             }
         });
-        jPopupMenu1.add(ppBerkasDigital);
+        MnWhatsapp.add(MnLogin);
+
+        MnKirimChat.setBackground(new java.awt.Color(255, 255, 254));
+        MnKirimChat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKirimChat.setForeground(new java.awt.Color(50, 50, 50));
+        MnKirimChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKirimChat.setText("Kirim Chat");
+        MnKirimChat.setEnabled(false);
+        MnKirimChat.setName("MnKirimChat"); // NOI18N
+        MnKirimChat.setPreferredSize(new java.awt.Dimension(120, 26));
+        MnKirimChat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKirimChatActionPerformed(evt);
+            }
+        });
+        MnWhatsapp.add(MnKirimChat);
+
+        MnKirimPDF.setBackground(new java.awt.Color(255, 255, 254));
+        MnKirimPDF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKirimPDF.setForeground(new java.awt.Color(50, 50, 50));
+        MnKirimPDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKirimPDF.setText("Kirim Hasil PDF");
+        MnKirimPDF.setEnabled(false);
+        MnKirimPDF.setName("MnKirimPDF"); // NOI18N
+        MnKirimPDF.setPreferredSize(new java.awt.Dimension(120, 26));
+        MnKirimPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKirimPDFActionPerformed(evt);
+            }
+        });
+        MnWhatsapp.add(MnKirimPDF);
+
+        jPopupMenu1.add(MnWhatsapp);
 
         WindowSaran.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowSaran.setName("WindowSaran"); // NOI18N
@@ -876,6 +880,61 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnDarahTepi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnDarahTepiActionPerformed(evt);
+            }
+        });
+
+        MnCetakHasilLab_GDT.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakHasilLab_GDT.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakHasilLab_GDT.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakHasilLab_GDT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakHasilLab_GDT.setText("Model GDT");
+        MnCetakHasilLab_GDT.setToolTipText("");
+        MnCetakHasilLab_GDT.setName("MnCetakHasilLab_GDT"); // NOI18N
+        MnCetakHasilLab_GDT.setPreferredSize(new java.awt.Dimension(100, 26));
+        MnCetakHasilLab_GDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakHasilLab_GDTActionPerformed(evt);
+            }
+        });
+
+        MnCetakHasilLabGDT.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakHasilLabGDT.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakHasilLabGDT.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakHasilLabGDT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakHasilLabGDT.setText("Model GDT");
+        MnCetakHasilLabGDT.setName("MnCetakHasilLabGDT"); // NOI18N
+        MnCetakHasilLabGDT.setPreferredSize(new java.awt.Dimension(100, 26));
+        MnCetakHasilLabGDT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakHasilLabGDTActionPerformed(evt);
+            }
+        });
+
+        MnCetakNota.setBackground(new java.awt.Color(255, 255, 254));
+        MnCetakNota.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakNota.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakNota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakNota.setText("Cetak Nota Lab");
+        MnCetakNota.setName("MnCetakNota"); // NOI18N
+        MnCetakNota.setPreferredSize(new java.awt.Dimension(190, 26));
+        MnCetakNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakNotaActionPerformed(evt);
+            }
+        });
+
+        ppBerkasDigital.setBackground(new java.awt.Color(255, 255, 254));
+        ppBerkasDigital.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppBerkasDigital.setForeground(new java.awt.Color(50, 50, 50));
+        ppBerkasDigital.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppBerkasDigital.setText("Berkas Digital Perawatan");
+        ppBerkasDigital.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppBerkasDigital.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppBerkasDigital.setName("ppBerkasDigital"); // NOI18N
+        ppBerkasDigital.setPreferredSize(new java.awt.Dimension(190, 26));
+        ppBerkasDigital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppBerkasDigitalBtnPrintActionPerformed(evt);
             }
         });
 
@@ -2928,6 +2987,18 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnCetakHasilHCLABActionPerformed
 
+    private void MnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnLoginActionPerformed
+
+    private void MnKirimChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKirimChatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnKirimChatActionPerformed
+
+    private void MnKirimPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKirimPDFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnKirimPDFActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2972,11 +3043,15 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private javax.swing.JMenuItem MnCetakNota;
     private javax.swing.JMenuItem MnCetakSuratCovid;
     private javax.swing.JMenuItem MnDarahTepi;
+    private javax.swing.JMenuItem MnKirimChat;
+    private javax.swing.JMenuItem MnKirimPDF;
+    private javax.swing.JMenuItem MnLogin;
     private javax.swing.JMenuItem MnMalaria;
     private javax.swing.JMenu MnPDFLab;
     private javax.swing.JMenuItem MnSaranKesan;
     private javax.swing.JMenuItem MnUbah;
     private javax.swing.JMenuItem MnUbah1;
+    private javax.swing.JMenu MnWhatsapp;
     private widget.TextBox NoRawat;
     private widget.TextArea Saran;
     private widget.ScrollPane Scroll;
@@ -3586,6 +3661,9 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 //        MnCetakHasilLab.setEnabled(akses.getperiksa_lab());
         MnCetakNota.setEnabled(akses.getperiksa_lab());
         MnUbah.setEnabled(akses.getperiksa_lab());
+        MnUbah1.setEnabled(akses.getperiksa_lab());
+        MnSaranKesan.setEnabled(akses.getperiksa_lab());
+        MnMalaria.setEnabled(akses.getperiksa_lab());
         BtnHapus.setEnabled(akses.getperiksa_lab());
         BtnPrint.setEnabled(akses.getperiksa_lab());
         MnCetakSuratCovid.setEnabled(akses.getsurat_keterangan_covid());

@@ -405,14 +405,14 @@
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["dr. Yuris Mahadi"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nm_dokter}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="260" y="662" width="275" height="15" uuid="07b5cb6c-2408-418d-9e8f-3f8abb549191"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["16/B.15A/31.75.01.1006.40.SPU-1/4/-1.779.3/e/2022"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{no_ijn_praktek}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="8" y="110" width="536" height="21" uuid="dd00215d-3028-45e4-a97b-e0d2ae6ed3bc"/>
@@ -595,7 +595,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA["196101131988011001"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nip1}]]></textFieldExpression>
 			</textField>
 			<image scaleImage="FillFrame" onErrorType="Blank">
 				<reportElement x="4" y="4" width="75" height="69" uuid="c9dda8f0-4b2d-4bd7-ad8d-a7a010d46230"/>
