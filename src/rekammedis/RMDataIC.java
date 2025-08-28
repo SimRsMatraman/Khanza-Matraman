@@ -55,7 +55,8 @@ public final class RMDataIC extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;   
+    private String jenisRawat = "ralan";
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     public  DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
     private SimpleDateFormat jamNow = new SimpleDateFormat("HH:mm:ss");
@@ -847,6 +848,8 @@ public final class RMDataIC extends javax.swing.JDialog {
         Nama = new widget.TextBox();
         Umur = new widget.TextBox();
         jLabel40 = new widget.Label();
+        jLabel16 = new widget.Label();
+        JenisRawat = new widget.TextBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -868,7 +871,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Informed Consent Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Informed Consent ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -1035,7 +1038,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1049,7 +1052,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1348,7 +1351,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         jLabel13.setBounds(630, 40, 90, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-06-2025" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-08-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -1434,7 +1437,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         jLabel22.setText("(Tipe Sedasi/Anestesi. Uraian Singkat Prosedur Dan Tahapan Yang Penting)");
         jLabel22.setName("jLabel22"); // NOI18N
         FormInput.add(jLabel22);
-        jLabel22.setBounds(190, 400, 367, 23);
+        jLabel22.setBounds(190, 400, 362, 23);
 
         TataCara.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Sedasi", "Non Sedasi" }));
         TataCara.setName("TataCara"); // NOI18N
@@ -1765,6 +1768,22 @@ public final class RMDataIC extends javax.swing.JDialog {
         FormInput.add(jLabel40);
         jLabel40.setBounds(810, 180, 150, 23);
 
+        jLabel16.setText("Jns. Rawat :");
+        jLabel16.setName("jLabel16"); // NOI18N
+        FormInput.add(jLabel16);
+        jLabel16.setBounds(1040, 10, 80, 23);
+
+        JenisRawat.setEditable(false);
+        JenisRawat.setHighlighter(null);
+        JenisRawat.setName("JenisRawat"); // NOI18N
+        JenisRawat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JenisRawatKeyPressed(evt);
+            }
+        });
+        FormInput.add(JenisRawat);
+        JenisRawat.setBounds(1120, 10, 130, 23);
+
         scrollInput.setViewportView(FormInput);
 
         PanelInput.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -1790,14 +1809,12 @@ public final class RMDataIC extends javax.swing.JDialog {
 }//GEN-LAST:event_TPasienKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if(TNoRw.getText().equals("")||TNoRM.getText().equals("")||TPasien.getText().equals("")){
-            Valid.textKosong(TNoRw,"Pasien");
+        if(TNoRw.getText().equals("")||TNoRM.getText().equals("")||TPasien.getText().equals("")){ 
+        Valid.textKosong(TNoRw,"Pasien");
         }else if(KodeDokter.getText().equals("")||NamaDokter.getText().equals("")){
             Valid.textKosong(BtnDokter,"Dokter Pelaksana Tindakan");
         }else if(KodeDokter1.getText().equals("")||NamaDokter1.getText().equals("")){
             Valid.textKosong(BtnDokter1,"Pemberi Informasi");
-//        }else if(KodeDokter2.getText().equals("")||NamaDokter1.getText().equals("")){
-//            Valid.textKosong(BtnDokter2,"Saksi 1/Perawat");
         }else if(DiagnosaKerja.getText().equals("")){
             Valid.textKosong(DiagnosaKerja,"DiagnosaKerja");
         }else if(DiagnosaBanding.getText().equals("")){
@@ -1805,7 +1822,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         }else if(KondisiPasien.getText().equals("")){
             Valid.textKosong(KondisiPasien,"KondisiPasien");
         }else if(TindakanKedokteran.getText().equals("")){
-            Valid.textKosong(TindakanKedokteran,"TindkanKedokteran");
+            Valid.textKosong(TindakanKedokteran,"TindakanKedokteran");
         }else if(TataCara.getSelectedItem().equals("")){
             Valid.textKosong(TataCara,"TataCara");
         }else if(Tujuan.getText().equals("")){
@@ -1821,13 +1838,31 @@ public final class RMDataIC extends javax.swing.JDialog {
         }else if(Kemungkinan1.getText().equals("")){
             Valid.textKosong(Kemungkinan1,"Kemungkinan1");
         }else{
-            if(Sequel.menyimpantf("surat_ic_rajal","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat",25,new String[]{
-                    NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),jamNow.format(new Date()),KodeDokter.getText(),KodeDokter1.getText(),KodeDokter2.getText(),
-                    "-",DiagnosaKerja.getText(),DiagnosaBanding.getText(),KondisiPasien.getText(),TindakanKedokteran.getText(),TataCara.getSelectedItem().toString(),
-                    Tujuan.getText(),Komplikasi.getText(),Prognosis.getSelectedItem().toString(),Alternatif.getText(),Kemungkinan.getText(),Kemungkinan1.getText(),"-","","","","-",""
+            String jenis = JenisRawat.getText();
+            String tabelTujuan = "";
+
+            if(jenis.equalsIgnoreCase("Rawat Jalan / IGD")){
+                tabelTujuan = "surat_ic_rajal";
+            }else if(jenis.equalsIgnoreCase("Rawat Inap")){
+                tabelTujuan = "surat_ic_ranap";
+            }
+
+            if(!tabelTujuan.equals("")){
+                if(Sequel.menyimpantf(tabelTujuan,
+                        "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+                        "No.Surat",25,new String[]{
+                        NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),jamNow.format(new Date()),
+                        KodeDokter.getText(),KodeDokter1.getText(),KodeDokter2.getText(),"-",DiagnosaKerja.getText(),
+                        DiagnosaBanding.getText(),KondisiPasien.getText(),TindakanKedokteran.getText(),
+                        TataCara.getSelectedItem().toString(),Tujuan.getText(),Komplikasi.getText(),
+                        Prognosis.getSelectedItem().toString(),Alternatif.getText(),Kemungkinan.getText(),
+                        Kemungkinan1.getText(),"-","","","","-",""
                 })==true){
                     tampil();
                     emptTeks();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Jenis Rawat tidak dikenali. Harus Rawat Jalan / IGD atau Rawat Inap.");
             }
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1854,18 +1889,30 @@ public final class RMDataIC extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
-            if(Sequel.queryu2tf("delete from surat_ic_rajal where no_surat=?",1,new String[]{
-                tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()
-            })==true){
-                tampil();
-                emptTeks();
+            String jenis = JenisRawat.getText();
+            String tabelTujuan = "";
+
+            if(jenis.equalsIgnoreCase("Rawat Jalan / IGD")){
+                tabelTujuan = "surat_ic_rajal";
+            }else if(jenis.equalsIgnoreCase("Rawat Inap")){
+                tabelTujuan = "surat_ic_ranap";
+            }
+
+            if(!tabelTujuan.equals("")){
+                if(Sequel.queryu2tf("delete from "+tabelTujuan+" where no_surat=?",1,new String[]{
+                    tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()
+                })==true){
+                    tampil();
+                    emptTeks();
+                }else{
+                    JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
+                }
             }else{
-                JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
+                JOptionPane.showMessageDialog(null,"Jenis Rawat tidak dikenali. Harus Rawat Jalan / IGD atau Rawat Inap.");
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }            
-            
+        }         
 }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1883,7 +1930,7 @@ public final class RMDataIC extends javax.swing.JDialog {
             Valid.textKosong(BtnDokter,"Dokter Pelaksana Tindakan");
         }else if(KodeDokter1.getText().equals("")||NamaDokter1.getText().equals("")){
             Valid.textKosong(BtnDokter1,"Pemberi Informasi");
-        }else if(KodeDokter2.getText().equals("")||NamaDokter1.getText().equals("")){
+        }else if(KodeDokter2.getText().equals("")||NamaDokter2.getText().equals("")){
             Valid.textKosong(BtnDokter2,"Saksi 1/Perawat");
         }else if(DiagnosaKerja.getText().equals("")){
             Valid.textKosong(DiagnosaKerja,"DiagnosaKerja");
@@ -1909,15 +1956,33 @@ public final class RMDataIC extends javax.swing.JDialog {
             Valid.textKosong(Kemungkinan1,"Kemungkinan1");
         }else{
             if(tbObat.getSelectedRow()>-1){
-                if(Sequel.mengedittf("surat_ic_rajal","no_surat=?","no_surat=?,no_rawat=?,tanggal_surat=?,jam=?,kd_dokter=?,nik=?,nik1=?,status_ic=?,DiagnosaKerja=?,DiagnosaBanding=?,KondisiPasien=?,TindakanKedokteran=?,TataCara=?,Tujuan=?,Komplikasi=?,Prognosis=?,Alternatif=?,Kemungkinan=?,Kemungkinan1=?,hubungan=?,Nama=?,Umur=?,Alamat=?,acc_ic=?",25,new String[]{
-                        NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),jamNow.format(new Date()),KodeDokter.getText(),KodeDokter1.getText(),KodeDokter2.getText(),
-                        Status.getText(),DiagnosaKerja.getText(),DiagnosaBanding.getText(),KondisiPasien.getText(),TindakanKedokteran.getText(),TataCara.getSelectedItem().toString(),
-                        Tujuan.getText(),KondisiPasien.getText(),Komplikasi.getText(),Prognosis.getSelectedItem().toString(),Alternatif.getText(),Kemungkinan.getText(),Kemungkinan1.getText(),Hubungan.getText(),Alamat.getText(),Umur.getText(),Alamat.getText(),accic.getText(),
-//                        tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()
-                        NoSurat.getText()
-                    })==true){
-                       tampil();
-                       emptTeks();
+                String jenis = JenisRawat.getText();
+                String tabelTujuan = "";
+
+                if(jenis.equalsIgnoreCase("Rawat Jalan / IGD")){
+                    tabelTujuan = "surat_ic_rajal";
+                }else if(jenis.equalsIgnoreCase("Rawat Inap")){
+                    tabelTujuan = "surat_ic_ranap";
+                }
+
+                if(!tabelTujuan.equals("")){
+                    if(Sequel.mengedittf(tabelTujuan,"no_surat=?",
+                            "no_surat=?,no_rawat=?,tanggal_surat=?,jam=?,kd_dokter=?,nik=?,nik1=?,status_ic=?,DiagnosaKerja=?,DiagnosaBanding=?,KondisiPasien=?,TindakanKedokteran=?,TataCara=?,Tujuan=?,Komplikasi=?,Prognosis=?,Alternatif=?,Kemungkinan=?,Kemungkinan1=?,hubungan=?,Nama=?,Umur=?,Alamat=?,acc_ic=?",
+                            25,new String[]{
+                                NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),jamNow.format(new Date()),
+                                KodeDokter.getText(),KodeDokter1.getText(),KodeDokter2.getText(),
+                                Status.getText(),DiagnosaKerja.getText(),DiagnosaBanding.getText(),KondisiPasien.getText(),TindakanKedokteran.getText(),
+                                TataCara.getSelectedItem().toString(),Tujuan.getText(),Komplikasi.getText(),
+                                Prognosis.getSelectedItem().toString(),Alternatif.getText(),Kemungkinan.getText(),Kemungkinan1.getText(),
+                                Hubungan.getText(),Nama.getText(),Umur.getText(),Alamat.getText(),accic.getText(),
+                                // WHERE condition
+                                tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()
+                            })==true){
+                        tampil();
+                        emptTeks();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Jenis Rawat tidak dikenali. Harus Rawat Jalan / IGD atau Rawat Inap.");
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
@@ -2271,7 +2336,7 @@ public final class RMDataIC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnRefreshPhotoActionPerformed
 
     private void TanggalSuratItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalSuratItemStateChanged
-        autoNumberX(TanggalSurat.getSelectedItem()+"");
+//        autoNumberX(TanggalSurat.getSelectedItem()+"");
     }//GEN-LAST:event_TanggalSuratItemStateChanged
 
     private void AlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatKeyPressed
@@ -2293,6 +2358,10 @@ public final class RMDataIC extends javax.swing.JDialog {
     private void UmurKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UmurKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_UmurKeyPressed
+
+    private void JenisRawatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JenisRawatKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JenisRawatKeyPressed
 
     /**
     * @param args the command line arguments
@@ -2335,6 +2404,7 @@ public final class RMDataIC extends javax.swing.JDialog {
     private widget.PanelBiasa FormPass2;
     private widget.PanelBiasa FormPhoto;
     private widget.TextBox Hubungan;
+    private widget.TextBox JenisRawat;
     private widget.TextArea Kemungkinan;
     private widget.TextArea Kemungkinan1;
     private widget.TextBox KodeDokter;
@@ -2371,6 +2441,7 @@ public final class RMDataIC extends javax.swing.JDialog {
     private widget.Label jLabel13;
     private widget.Label jLabel14;
     private widget.Label jLabel15;
+    private widget.Label jLabel16;
     private widget.Label jLabel18;
     private widget.Label jLabel19;
     private widget.Label jLabel20;
@@ -2416,85 +2487,64 @@ public final class RMDataIC extends javax.swing.JDialog {
 
     public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{
+        try {
+            String tableIC = jenisRawat.equalsIgnoreCase("ralan") ? "surat_ic_rajal" : "surat_ic_ranap";
+
             if(TCari.getText().equals("")){
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.tgl_registrasi,reg_periksa.no_rawat,reg_periksa.status_lanjut,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
-                    "surat_ic_rajal.no_surat,surat_ic_rajal.tanggal_surat,surat_ic_rajal.jam,surat_ic_rajal.kd_dokter,dokter.nm_dokter, " +
-                    "surat_ic_rajal.nik,surat_ic_rajal.nik,nama1.nama as nama1,surat_ic_rajal.nik1,nama2.nama as nama2,surat_ic_rajal.status_ic, "+
-                    "surat_ic_rajal.diagnosaKerja,surat_ic_rajal.DiagnosaBanding,surat_ic_rajal.TindakanKedokteran,surat_ic_rajal.TataCara,surat_ic_rajal.Tujuan,  "+
-                    "surat_ic_rajal.KondisiPasien,surat_ic_rajal.Komplikasi,surat_ic_rajal.Prognosis,surat_ic_rajal.Alternatif,surat_ic_rajal.Kemungkinan,  "+
-                    "surat_ic_rajal.Kemungkinan1,surat_ic_rajal.hubungan,surat_ic_rajal.Nama,surat_ic_rajal.Umur,surat_ic_rajal.Alamat,surat_ic_rajal.acc_ic,surat_ic_rajal.tte from surat_ic_rajal inner join reg_periksa on surat_ic_rajal.no_rawat=reg_periksa.no_rawat  "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on surat_ic_rajal.kd_dokter=dokter.kd_dokter "+
-                    "inner join pegawai as nama1 on surat_ic_rajal.nik=nama1.nik "+
-                    "inner join pegawai as nama2 on surat_ic_rajal.nik1=nama2.nik "+
-                    "where surat_ic_rajal.tanggal_surat between ? and ? order by surat_ic_rajal.tanggal_surat");
-            }else{
+                    tableIC+".no_surat,"+tableIC+".tanggal_surat,"+tableIC+".jam,"+tableIC+".kd_dokter,dokter.nm_dokter, " +
+                    tableIC+".nik,"+tableIC+".nik,nama1.nama as nama1,"+tableIC+".nik1,nama2.nama as nama2,"+tableIC+".status_ic, "+
+                    tableIC+".diagnosaKerja,"+tableIC+".DiagnosaBanding,"+tableIC+".TindakanKedokteran,"+tableIC+".TataCara,"+tableIC+".Tujuan,  "+
+                    tableIC+".KondisiPasien,"+tableIC+".Komplikasi,"+tableIC+".Prognosis,"+tableIC+".Alternatif,"+tableIC+".Kemungkinan,  "+
+                    tableIC+".Kemungkinan1,"+tableIC+".hubungan,"+tableIC+".Nama,"+tableIC+".Umur,"+tableIC+".Alamat,"+tableIC+".acc_ic,"+tableIC+".tte "+
+                    "from "+tableIC+" inner join reg_periksa on "+tableIC+".no_rawat=reg_periksa.no_rawat  "+
+                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                    "inner join dokter on "+tableIC+".kd_dokter=dokter.kd_dokter "+
+                    "inner join pegawai as nama1 on "+tableIC+".nik=nama1.nik "+
+                    "inner join pegawai as nama2 on "+tableIC+".nik1=nama2.nik "+
+                    "where "+tableIC+".tanggal_surat between ? and ? order by "+tableIC+".tanggal_surat");
+            } else {
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.tgl_registrasi,reg_periksa.no_rawat,reg_periksa.status_lanjut,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
-                    "surat_ic_rajal.no_surat,surat_ic_rajal.tanggal_surat,surat_ic_rajal.jam,surat_ic_rajal.kd_dokter,dokter.nm_dokter, " +
-                    "surat_ic_rajal.nik,surat_ic_rajal.nik,nama1.nama as nama1,surat_ic_rajal.nik1,nama2.nama as nama2,surat_ic_rajal.status_ic, "+
-                    "surat_ic_rajal.diagnosaKerja,surat_ic_rajal.DiagnosaBanding,surat_ic_rajal.TindakanKedokteran,surat_ic_rajal.TataCara,surat_ic_rajal.Tujuan,  "+
-                    "surat_ic_rajal.KondisiPasien,surat_ic_rajal.Komplikasi,surat_ic_rajal.Prognosis,surat_ic_rajal.Alternatif,surat_ic_rajal.Kemungkinan,  "+
-                    "surat_ic_rajal.Kemungkinan1,surat_ic_rajal.hubungan,surat_ic_rajal.Nama,surat_ic_rajal.Umur,surat_ic_rajal.Alamat,surat_ic_rajal.acc_ic,surat_ic_rajal.tte from surat_ic_rajal inner join reg_periksa on surat_ic_rajal.no_rawat=reg_periksa.no_rawat  "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on surat_ic_rajal.kd_dokter=dokter.kd_dokter "+
-                    "inner join pegawai as nama1 on surat_ic_rajal.nik=nama1.nik "+
-                    "inner join pegawai as nama2 on surat_ic_rajal.nik1=nama2.nik "+
-                    "where surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.status_ic like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.DiagnosaBanding like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.no_surat like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and pasien.nm_pasien like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.kd_dokter like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and dokter.nm_dokter like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.nik like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.nik1 like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.TataCara like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.Alternatif like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.DiagnosaKerja like ? or "+
-                    "surat_ic_rajal.tanggal_surat between ? and ? and surat_ic_rajal.no_rawat like ? "+
-                    "order by surat_ic_rajal.tanggal_surat");
+                    tableIC+".no_surat,"+tableIC+".tanggal_surat,"+tableIC+".jam,"+tableIC+".kd_dokter,dokter.nm_dokter, " +
+                    tableIC+".nik,"+tableIC+".nik,nama1.nama as nama1,"+tableIC+".nik1,nama2.nama as nama2,"+tableIC+".status_ic, "+
+                    tableIC+".diagnosaKerja,"+tableIC+".DiagnosaBanding,"+tableIC+".TindakanKedokteran,"+tableIC+".TataCara,"+tableIC+".Tujuan,  "+
+                    tableIC+".KondisiPasien,"+tableIC+".Komplikasi,"+tableIC+".Prognosis,"+tableIC+".Alternatif,"+tableIC+".Kemungkinan,  "+
+                    tableIC+".Kemungkinan1,"+tableIC+".hubungan,"+tableIC+".Nama,"+tableIC+".Umur,"+tableIC+".Alamat,"+tableIC+".acc_ic,"+tableIC+".tte "+
+                    "from "+tableIC+" inner join reg_periksa on "+tableIC+".no_rawat=reg_periksa.no_rawat  "+
+                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                    "inner join dokter on "+tableIC+".kd_dokter=dokter.kd_dokter "+
+                    "inner join pegawai as nama1 on "+tableIC+".nik=nama1.nik "+
+                    "inner join pegawai as nama2 on "+tableIC+".nik1=nama2.nik "+
+                    "where "+tableIC+".tanggal_surat between ? and ? and ("+tableIC+".status_ic like ? or "+
+                    tableIC+".DiagnosaBanding like ? or "+tableIC+".no_surat like ? or "+
+                    "pasien.nm_pasien like ? or "+tableIC+".kd_dokter like ? or "+
+                    "dokter.nm_dokter like ? or "+tableIC+".nik like ? or "+
+                    tableIC+".nik1 like ? or "+tableIC+".TataCara like ? or "+
+                    tableIC+".Alternatif like ? or "+tableIC+".DiagnosaKerja like ? or "+
+                    tableIC+".no_rawat like ?) "+
+                    "order by "+tableIC+".tanggal_surat");
             }
             try {
                 if(TCari.getText().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                     ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                 }else{
-                    ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(3,"%"+TCari.getText()+"%");
-                    ps.setString(4,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(5,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(6,"%"+TCari.getText()+"%");
-                    ps.setString(7,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(8,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(9,"%"+TCari.getText()+"%");
-                    ps.setString(10,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(11,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(12,"%"+TCari.getText()+"%");
-                    ps.setString(13,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(14,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(15,"%"+TCari.getText()+"%");
-                    ps.setString(16,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(17,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(18,"%"+TCari.getText()+"%");
-                    ps.setString(19,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(20,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(21,"%"+TCari.getText()+"%");
-                    ps.setString(22,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(23,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(24,"%"+TCari.getText()+"%");
-                    ps.setString(25,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(26,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(27,"%"+TCari.getText()+"%");
-                    ps.setString(28,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(29,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(30,"%"+TCari.getText()+"%");
-                    ps.setString(31,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(32,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(33,"%"+TCari.getText()+"%");
-                    ps.setString(34,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                    ps.setString(35,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    ps.setString(36,"%"+TCari.getText()+"%");
+                    ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+                    ps.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+                    ps.setString(3, "%"+TCari.getText()+"%");
+                    ps.setString(4, "%"+TCari.getText()+"%");
+                    ps.setString(5, "%"+TCari.getText()+"%");
+                    ps.setString(6, "%"+TCari.getText()+"%");
+                    ps.setString(7, "%"+TCari.getText()+"%");
+                    ps.setString(8, "%"+TCari.getText()+"%");
+                    ps.setString(9, "%"+TCari.getText()+"%");
+                    ps.setString(10, "%"+TCari.getText()+"%");
+                    ps.setString(11, "%"+TCari.getText()+"%");
+                    ps.setString(12, "%"+TCari.getText()+"%");
+                    ps.setString(13, "%"+TCari.getText()+"%");
+                    ps.setString(14, "%"+TCari.getText()+"%");
                 }   
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -2541,16 +2591,55 @@ public final class RMDataIC extends javax.swing.JDialog {
         Umur.setText("");
         accic.setText("");
         Status.setText("");
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_surat,4),signed)),0) from surat_ic_rajal where tanggal_surat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
-                "ICRJ"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),4,NoSurat);
-//        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_surat,3),signed)),0) from surat_ic_rajal where tanggal_surat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
-//                "ICRJ"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),3,NoSurat); 
-        NoSurat.requestFocus();
+        String jenis = JenisRawat.getText();
+        String prefix = "";
+        String tabelTujuan = "";
+
+        if(jenis.equalsIgnoreCase("Rawat Jalan / IGD")){
+            prefix = "ICRJ";
+            tabelTujuan = "surat_ic_rajal";
+        }else if(jenis.equalsIgnoreCase("Rawat Inap")){
+            prefix = "ICRI";
+            tabelTujuan = "surat_ic_ranap";
+        }
+
+        if(!tabelTujuan.equals("")){
+            Valid.autoNomer3(
+                "select ifnull(MAX(CONVERT(RIGHT(no_surat,4),signed)),0) from "+tabelTujuan+" where tanggal_surat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
+                prefix + TanggalSurat.getSelectedItem().toString().substring(6,10) + 
+                         TanggalSurat.getSelectedItem().toString().substring(3,5) + 
+                         TanggalSurat.getSelectedItem().toString().substring(0,2),
+                4, NoSurat
+            );
+            NoSurat.requestFocus();
+        }
     } 
     
-    private void autoNumberX(String tglPilih) {
-    Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_surat,4),signed)),0) from surat_ic_rajal where tanggal_surat='"+Valid.SetTgl(tglPilih+"")+"' ",
-                "ICRJ"+Valid.SetTgl(tglPilih+"").replaceAll("-", ""),4,NoSurat);
+    private void autoNumberX(String tglPilih, String jenis) {
+        String prefix;
+        String tableIC = "surat_ic_rajal"; // ⬅️ sesuai permintaan, selalu surat_ic_rajal
+
+        if ("ralan".equalsIgnoreCase(jenis)) {
+            prefix = "ICRJ";
+        } else if ("ranap".equalsIgnoreCase(jenis)) {
+            prefix = "ICRI";
+        } else {
+            // fallback default
+            prefix = "ICRJ";
+        }
+
+        String tgl = TanggalSurat.getSelectedItem().toString();
+        String nomorPrefix = prefix 
+                + tgl.substring(6,10)  // tahun
+                + tgl.substring(3,5)   // bulan
+                + tgl.substring(0,2);  // hari
+
+        Valid.autoNomer3(
+            "SELECT IFNULL(MAX(CONVERT(RIGHT(no_surat,4),SIGNED)),0) "
+            + "FROM " + tableIC + " "
+            + "WHERE tanggal_surat='" + Valid.SetTgl(tgl+"") + "'",
+            nomorPrefix, 4, NoSurat
+        );
     }
 
     private void getData() {
@@ -2582,7 +2671,7 @@ public final class RMDataIC extends javax.swing.JDialog {
             Nama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
             Umur.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
             Alamat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            accic.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
+            accic.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
             panggilPhoto();
         }
     }
@@ -2595,7 +2684,7 @@ public final class RMDataIC extends javax.swing.JDialog {
         Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis='"+TNoRM.getText()+"' ",TPasien);
     }
     
-    public void setNoRm(String norwt, Date tgl2) {
+    public void setNoRm(String norwt, Date tgl2, String jenis) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+norwt+"'", DTPCari1);
@@ -2606,97 +2695,11 @@ public final class RMDataIC extends javax.swing.JDialog {
         isPsien();              
         ChkInput.setSelected(true);
         isForm();
-//        Kondisi.requestFocus();
-//        try {
-//            ps=koneksi.prepareStatement(
-//                    "select diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit,diagnosa_pasien.prioritas "+
-//                    "from diagnosa_pasien inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit "+
-//                    "where diagnosa_pasien.no_rawat=? order by diagnosa_pasien.prioritas ");
-//            try {
-//                ps.setString(1,norwt);
-//                rs=ps.executeQuery();
-//                while(rs.next()){
-//                    if(rs.getInt("prioritas")==1){
-//                        KodeDiagnosaUtama.setText(rs.getString("kd_penyakit"));
-//                        DiagnosaUtama.setText(rs.getString("nm_penyakit"));
-//                    }
-//                    
-//                    if(rs.getInt("prioritas")==2){
-//                        KodeDiagnosaSekunder1.setText(rs.getString("kd_penyakit"));
-//                        DiagnosaSekunder1.setText(rs.getString("nm_penyakit"));
-//                    }
-//                    
-//                    if(rs.getInt("prioritas")==3){
-//                        KodeDiagnosaSekunder2.setText(rs.getString("kd_penyakit"));
-//                        DiagnosaSekunder2.setText(rs.getString("nm_penyakit"));
-//                    }
-//                    
-//                    if(rs.getInt("prioritas")==4){
-//                        KodeDiagnosaSekunder3.setText(rs.getString("kd_penyakit"));
-//                        DiagnosaSekunder3.setText(rs.getString("nm_penyakit"));
-//                    }
-//                    
-//                    if(rs.getInt("prioritas")==5){
-//                        KodeDiagnosaSekunder4.setText(rs.getString("kd_penyakit"));
-//                        DiagnosaSekunder4.setText(rs.getString("nm_penyakit"));
-//                    }
-//                }
-//            } catch (Exception e) {
-//                System.out.println("Notif : "+e);
-//            } finally{
-//                if(rs!=null){
-//                    rs.close();
-//                }
-//                if(ps!=null){
-//                    ps.close();
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Notif : "+e);
-//        } 
-//        
-//        try {
-//            ps=koneksi.prepareStatement(
-//                    "select prosedur_pasien.kode,icd9.deskripsi_panjang, prosedur_pasien.prioritas "+
-//                    "from prosedur_pasien inner join icd9 on prosedur_pasien.kode=icd9.kode "+
-//                    "where prosedur_pasien.no_rawat=? order by prosedur_pasien.prioritas ");
-//            try {
-//                ps.setString(1,norwt);
-//                rs=ps.executeQuery();
-//                while(rs.next()){
-//                    if(rs.getInt("prioritas")==1){
-//                        KodeProsedurUtama.setText(rs.getString("kode"));
-//                        ProsedurUtama.setText(rs.getString("deskripsi_panjang"));
-//                    }
-//                    
-//                    if(rs.getInt("prioritas")==2){
-//                        KodeProsedurSekunder1.setText(rs.getString("kode"));
-//                        ProsedurSekunder1.setText(rs.getString("deskripsi_panjang"));
-//                    }
-//                    
-//                    if(rs.getInt("prioritas")==3){
-//                        KodeProsedurSekunder2.setText(rs.getString("kode"));
-//                        ProsedurSekunder2.setText(rs.getString("deskripsi_panjang"));
-//                    }
-//                    
-//                    if(rs.getInt("prioritas")==4){
-//                        KodeProsedurSekunder3.setText(rs.getString("kode"));
-//                        ProsedurSekunder3.setText(rs.getString("deskripsi_panjang"));
-//                    }
-//                }
-//            } catch (Exception e) {
-//                System.out.println("Notif : "+e);
-//            } finally{
-//                if(rs!=null){
-//                    rs.close();
-//                }
-//                if(ps!=null){
-//                    ps.close();
-//                }
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Notif : "+e);
-//        } 
+
+        // Simpan jenis rawat agar bisa dipakai di tampil()
+        autoNumberX(Valid.SetTgl(tgl2+""), jenis);
+        this.JenisRawat.setText(jenis.equalsIgnoreCase("ralan") ? "Rawat Jalan / IGD" : "Rawat Inap");
+        this.jenisRawat = jenis; // variabel global (String jenisRawat) di RMDataIC
     }
     
     private void isForm(){
@@ -2718,10 +2721,34 @@ public final class RMDataIC extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getdata_resume_pasien());
         BtnEdit.setEnabled(akses.getdata_resume_pasien());
         BtnPrint.setEnabled(akses.getdata_resume_pasien()); 
-//        MnInputDiagnosa.setEnabled(akses.getdiagnosa_pasien());   
-//        ppBerkasDigital.setEnabled(akses.getberkas_digital_perawatan());   
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_surat,4),signed)),0) from surat_ic_rajal where tanggal_surat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
-                "ICRJ"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),4,NoSurat); 
+        
+        String jenis = JenisRawat.getText().toLowerCase();
+        String tableIC, prefix;
+
+        if (jenis.contains("Rawat Jalan / IGD")) {
+            tableIC = "surat_ic_rajal";
+            prefix = "ICRJ";
+        } else if (jenis.contains("Rawat Inap")) {
+            tableIC = "surat_ic_ranap";
+            prefix = "ICRI";
+        } else {
+            // default jika tidak sesuai
+            tableIC = "surat_ic_rajal";
+            prefix = "ICRJ";
+        }
+
+        String tgl = TanggalSurat.getSelectedItem().toString();
+        String nomorPrefix = prefix 
+                + tgl.substring(6,10)  // tahun
+                + tgl.substring(3,5)   // bulan
+                + tgl.substring(0,2);  // hari
+
+        Valid.autoNomer3(
+            "SELECT IFNULL(MAX(CONVERT(RIGHT(no_surat,4),SIGNED)),0) "
+            + "FROM " + tableIC + " "
+            + "WHERE tanggal_surat='" + Valid.SetTgl(tgl+"") + "'",
+            nomorPrefix, 4, NoSurat
+        );
         if(akses.getjml2()>=1){
             KodeDokter1.setEditable(false);
             BtnDokter1.setEnabled(false);
@@ -2731,46 +2758,51 @@ public final class RMDataIC extends javax.swing.JDialog {
             BtnDokter.setEnabled(false);
             KodeDokter.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter,KodeDokter.getText());
-            
-//            if(NmPetugas.getText().equals("")){
-//                KdPetugas.setText("");
-//                JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
-//            }
+
         }            
     }
     
     private void panggilPhoto() {
-//        if(FormPhotoPass.isVisible()==true){
-            try {
-                ps=koneksi.prepareStatement("select surat_ic_rajal.tte from surat_ic_rajal where surat_ic_rajal.no_surat=?");
-                try {
-                    ps.setString(1,NoSurat.getText());
-                    rs=ps.executeQuery();
-                    if(rs.next()){
-                        if(rs.getString("tte").equals("")||rs.getString("tte").equals("-")){
-                            LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
-                        }else{
-                            LoadHTML.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+rs.getString("tte")+"' alt='photo' width='300' height='280'/></center></body></html>");
-                        }  
-//                        PasswordPasien.setText(rs.getString("password"));
-                    }else{
-                        LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
-//                        PasswordPasien.setText("");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(ps!=null){
-                        ps.close();
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } 
+        String tableIC;
+        if ("ralan".equalsIgnoreCase(jenisRawat)) {
+            tableIC = "surat_ic_rajal";
+        } else if ("ranap".equalsIgnoreCase(jenisRawat)) {
+            tableIC = "surat_ic_ranap";
+        } else {
+            tableIC = "surat_ic_rajal"; // default
         }
 
-    
+        try {
+            ps = koneksi.prepareStatement(
+                "SELECT tte FROM " + tableIC + " WHERE no_surat=?"
+            );
+            ps.setString(1, NoSurat.getText());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String tte = rs.getString("tte");
+                if (tte == null || tte.equals("") || tte.equals("-")) {
+                    LoadHTML.setText("<html><body><center><br><br>"
+                        + "<font face='tahoma' size='2' color='#434343'>Kosong</font>"
+                        + "</center></body></html>");
+                } else {
+                    LoadHTML.setText("<html><body><center>"
+                        + "<img src='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + tte 
+                        + "' alt='photo' width='300' height='280'/>"
+                        + "</center></body></html>");
+                }
+            } else {
+                LoadHTML.setText("<html><body><center><br><br>"
+                    + "<font face='tahoma' size='2' color='#434343'>Kosong</font>"
+                    + "</center></body></html>");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (Exception e) {}
+        }
+    }
+  
 }

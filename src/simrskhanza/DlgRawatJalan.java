@@ -12527,7 +12527,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12544,7 +12544,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12561,7 +12561,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12578,7 +12578,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12595,7 +12595,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ralan"
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12612,7 +12612,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12629,7 +12629,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12646,7 +12646,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12663,7 +12663,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12680,7 +12680,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12697,7 +12697,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12714,7 +12714,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12731,7 +12731,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12748,7 +12748,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -12765,7 +12765,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ic.isCek();
             ic.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
             ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
             ic.tampil();
             ic.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
