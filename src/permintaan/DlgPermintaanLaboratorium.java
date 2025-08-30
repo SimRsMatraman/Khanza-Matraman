@@ -1965,10 +1965,12 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
         if(tabMode2.getRowCount()!=0){
-            try {
-                Valid.tabelKosong(tabMode);
-                tampil();
-            } catch (java.lang.NullPointerException e) {
+            if(tabMode.getRowCount()==0){
+                try {
+                    Valid.tabelKosong(tabMode);
+                    tampil();
+                } catch (java.lang.NullPointerException e) {
+                }
             }
         }
     }//GEN-LAST:event_BtnCari2ActionPerformed
@@ -1977,12 +1979,14 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         autoNomor1a();
         autoNomor2a();
         autoNomor3a();
+        BtnCari2ActionPerformed(null);
     }//GEN-LAST:event_BtnCari4ActionPerformed
 
     private void BtnCari4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari4KeyPressed
         autoNomor1a();
         autoNomor2a();
         autoNomor3a();
+        BtnCari2ActionPerformed(null);
     }//GEN-LAST:event_BtnCari4KeyPressed
 
     /**
@@ -2151,19 +2155,8 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             
             for(i2=0;i2<tbTarifPK.getRowCount();i2++){ 
                 if(tbTarifPK.getValueAt(i2,0).toString().equals("true")){
-//                    pstampil1=koneksi.prepareStatement("select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa,template_laboratorium.biaya_item from template_laboratorium where urut ='0' and template_laboratorium.kd_jenis_prw=? and template_laboratorium.Pemeriksaan like ? order by template_laboratorium.urut");
-//                    try {
-//                        pstampil1.setString(1,tbTarifPK.getValueAt(i2,1).toString());
-//                        pstampil1.setString(2,"%"+TCari.getText().trim()+"%");
-//                        rstampil1=pstampil1.executeQuery();
-//                        while(rstampil1.next()){
-                            tabMode.addRow(new Object[]{false,tbTarifPK.getValueAt(i2,2).toString(),"","","",0}); 
-//                        }
-//                    }
-//                    catch (Exception e) {
-//                        System.out.println("Notifikasi : "+e);
-//                    } 
-                    
+                    tabMode.addRow(new Object[]{false,tbTarifPK.getValueAt(i2,2).toString(),"","","",0}); 
+
                     pstampil=koneksi.prepareStatement("select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa,template_laboratorium.biaya_item from template_laboratorium where template_laboratorium.kd_jenis_prw=? and template_laboratorium.Pemeriksaan like ? order by template_laboratorium.urut");
                     try {
                         pstampil.setString(1,tbTarifPK.getValueAt(i2,1).toString());
