@@ -1352,11 +1352,11 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
                 benar5="Ya";
             }
             
-            if(Sequel.menyimpantf("telaah_resep_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Resep",28,new String[]{
+            if(Sequel.menyimpantf("telaah_resep_obat","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Resep",30,new String[]{
                TNoResep.getText(),TglRw.getText(),JamRw.getText(),
                TNoRw.getText(),KodeDokter.getText(),KdPetugas.getText(),TLP.getText(),Status.getText(),resep,identitas,obat,campuran,jumlah,dosis,
                rute,tidak1,tidak2,tidak3,benar1,benar2,benar3,benar4,benar5,tanggalNow.format(new Date()),jamNow.format(new Date()),
-               "-","-",""
+               "-","-","","",""
                 })==true);
              Sequel.queryu2tf("update resep_obat set jam_penyerahan=?, tgl_penyerahan=? WHERE no_resep=?",3,new String[]{
                 jamNow.format(new Date()),tanggalNow.format(new Date()),TNoResep.getText(),
