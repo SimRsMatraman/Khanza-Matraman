@@ -2810,6 +2810,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }
     
     public void isCek(){
+        MnWA.setVisible(akses.getperiksa_radiologi());
         MnCetakNota.setEnabled(akses.getperiksa_radiologi());
         BtnHapus.setEnabled(akses.getperiksa_radiologi());
         MnUbahDokterPetugas.setEnabled(akses.getperiksa_radiologi());

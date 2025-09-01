@@ -45,8 +45,6 @@ import laporan.DlgBerkasRawat;
 import surat.SuratBebasNarkoba;
 import surat.SuratKeteranganCovid;
 import whatsapp.WhatsAppSendLAB;
-import whatsapp.WhatsAppSendMaster;
-import whatsapp.WhatsAppLoginLAB;
 
 public class DlgCariPeriksaLab extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2;
