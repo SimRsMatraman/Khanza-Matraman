@@ -1,38 +1,39 @@
 package whatsapp;
 
 import fungsi.koneksiDB;
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.util.Duration;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URI;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Base64;
 
-/**
- * Satu file gabungan:
- * - UI & layout persis seperti SendFileAppLink lama (Type, Phone, Message, File URL/Path, Preview, Send).
- * - Hanya dua mode: "Send File" dan "Send Message".
- * - Pakai toast, loading state, normalisasi & validasi nomor, endpoint dari koneksiDB.
- */
 public class WhatsAppSendLAB extends Application {
 
-    // ===== Konfigurasi (dioverride dari koneksiDB pada constructor) =====
+    // ===== Konfigurasi (dioverride oleh koneksiDB di constructor) =====
     private static String AUTH_USER = "simrs";
     private static String AUTH_PASS = "RotiBakar69";
     private static String BASE_URL  = "http://100.10.1.5:3000";
@@ -41,22 +42,48 @@ public class WhatsAppSendLAB extends Application {
     private String ENDPOINT_FILE;
     private String ENDPOINT_CHAT;
     private String ENDPOINT_RECONN;
+    private String ENDPOINT_LOGIN;
+    private String ENDPOINT_DEVICES;
+    private String ENDPOINT_LOGOUT;
 
-    // ===== State UI =====
+    // ===== Root & Sidebar =====
     private Stage stage;
-    private StackPane rootStack;
-    private VBox toastLayer;
-    private Button sendButton;
-    private CheckBox cbCloseAfterSuccess;
+    private BorderPane root;
+    private VBox sideBar;
+    private Button tabLoginBtn, tabSendBtn;
+    private StackPane contentStack;
+    private Pane loginPane, sendPane;
 
-    // Prefill (optional)
+    // ===== Toast Layer (per pane) =====
+    private VBox toastLayerLogin;
+    private VBox toastLayerSend;
+    private static final int TOAST_MS = 3000;
+
+    // ======= LOGIN PANE =======
+    private Label statusLabel;
+    private ImageView qrImage;
+    private ProgressBar qrProgressBar;
+    private Button refreshBtn, reconnectBtn, logoutBtn;
+    private VBox loginCard;
+    private Timeline qrTimeline;
+
+    // ======= SEND PANE =======
+    private CheckBox cbCloseAfterSuccess;
+    private ComboBox<String> typeCombo;
+    private TextField phoneField;
+    private Label normalizedPreview;
+    private TextArea captionArea;
+    private TextArea messageArea;
+    private Label fileUrlLabel;
+    private TextField fileUrlField;
+    private Button previewBtn;
+    private Button sendButton;
+
+    // ===== Prefill (opsional) untuk SEND =====
     private String prefillPhone;
     private String prefillFileUrl;
     private String prefillTanggal;
     private String prefillNama;
-
-    // Konstanta
-    private static final int TOAST_MS = 3000;
 
     public WhatsAppSendLAB() {
         super();
@@ -67,12 +94,15 @@ public class WhatsAppSendLAB extends Application {
         } catch (Exception e) {
             System.out.println("Notif koneksiDB: " + e.getMessage());
         }
-        ENDPOINT_FILE   = BASE_URL + "/send/file";
-        ENDPOINT_CHAT   = BASE_URL + "/send/message";
-        ENDPOINT_RECONN = BASE_URL + "/app/reconnect";
+        ENDPOINT_FILE    = BASE_URL + "/send/file";
+        ENDPOINT_CHAT    = BASE_URL + "/send/message";
+        ENDPOINT_RECONN  = BASE_URL + "/app/reconnect";
+        ENDPOINT_LOGIN   = BASE_URL + "/app/login";
+        ENDPOINT_DEVICES = BASE_URL + "/app/devices";
+        ENDPOINT_LOGOUT  = BASE_URL + "/app/logout";
     }
 
-    // API untuk prefill dari luar
+    // Prefill untuk SEND (opsional)
     public void setPrefillData(String tanggal, String nama, String phone, String fileUrl) {
         this.prefillPhone   = phone;
         this.prefillFileUrl = fileUrl;
@@ -83,43 +113,282 @@ public class WhatsAppSendLAB extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
-        primaryStage.setTitle("Send File or Message");
+        stage.setTitle("WhatsApp RSUD Matraman");
 
-        // Checkbox tutup otomatis setelah sukses kirim
+        // ===== Root lebih dulu =====
+        root = new BorderPane();
+
+        // ===== Sidebar (2 tab kiri) =====
+        sideBar = new VBox(8);
+        sideBar.setPadding(new Insets(12));
+        sideBar.setPrefWidth(140);
+        sideBar.setStyle("-fx-background-color:#0f172a;");
+
+        tabLoginBtn = new Button("Login");
+        tabSendBtn  = new Button("Kirim WA");
+        for (Button b : new Button[]{tabLoginBtn, tabSendBtn}) {
+            b.setMaxWidth(Double.MAX_VALUE);
+            b.setStyle(
+                "-fx-background-color:#1e293b; -fx-text-fill:white; -fx-font-weight:bold; " +
+                "-fx-background-radius:10; -fx-padding:10 12;"
+            );
+        }
+        tabLoginBtn.setOnAction(e -> showLoginPane());
+        tabSendBtn.setOnAction(e -> showSendPane());
+        sideBar.getChildren().addAll(tabLoginBtn, tabSendBtn);
+        root.setLeft(sideBar);
+
+        // ===== Content stack =====
+        contentStack = new StackPane();
+        contentStack.setStyle("-fx-background-color:#f8fafc;");
+        root.setCenter(contentStack);
+
+        // ===== Init PANE: LOGIN & SEND =====
+        initLoginPane();
+        initSendPane();
+
+        // Default: ke LOGIN lalu pindah ke Kirim (opsional)
+        contentStack.getChildren().addAll(loginPane, sendPane);
+        setOnly(loginPane, true);
+        setOnly(sendPane, false);
+        styleActiveTab(tabLoginBtn, tabSendBtn);
+        showSendPane();
+
+        // Scene
+        Scene scene = new Scene(root, 920, 600);
+        stage.setScene(scene);
+        stage.show();
+
+        // Mulai aksi awal
+        reconnectLogin();
+        refreshQR();
+    }
+
+    /* ----------------------
+       PANE: LOGIN (kiri)
+       ---------------------- */
+    private void initLoginPane() {
+        statusLabel = new Label("Please scan to connect");
+
+        qrImage = new ImageView();
+        qrImage.setFitWidth(250);
+        qrImage.setFitHeight(250);
+
+        qrProgressBar = new ProgressBar(1.0);
+        qrProgressBar.setPrefWidth(250);
+        qrProgressBar.setStyle("-fx-accent: #22c55e;"); // hijau awal
+
+        refreshBtn = new Button("Refresh QR Code");
+        refreshBtn.setOnAction(e -> refreshQR());
+
+        reconnectBtn = new Button("Reconnect");
+        reconnectBtn.setVisible(true);
+        reconnectBtn.setOnAction(e -> reconnectLogin());
+
+        logoutBtn = new Button("Logout");
+        logoutBtn.setVisible(false);
+        logoutBtn.setStyle("-fx-background-color:#dc2626; -fx-text-fill:white;");
+        logoutBtn.setOnAction(e -> logout());
+
+        loginCard = new VBox(15, statusLabel, qrImage, qrProgressBar, refreshBtn, reconnectBtn, logoutBtn);
+        loginCard.setAlignment(Pos.CENTER);
+        loginCard.setStyle("-fx-padding: 20; -fx-background-color: white; -fx-background-radius: 15;");
+        loginCard.setEffect(new DropShadow(10, Color.GRAY));
+
+        // ==== TOAST LAYER untuk LOGIN (kanan-atas card) ====
+        toastLayerLogin = new VBox(6);
+        toastLayerLogin.setMouseTransparent(true);
+        toastLayerLogin.setFillWidth(false);
+        toastLayerLogin.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        StackPane.setAlignment(toastLayerLogin, Pos.TOP_RIGHT);
+        StackPane.setMargin(toastLayerLogin, new Insets(12, 12, 0, 0));
+
+        // Tumpuk card + toast
+        StackPane loginStack = new StackPane(loginCard);
+        loginStack.getChildren().add(toastLayerLogin);
+
+        VBox wrapper = new VBox(loginStack);
+        wrapper.setAlignment(Pos.CENTER);
+        wrapper.setPadding(new Insets(20));
+
+        loginPane = wrapper;
+    }
+
+    private void reconnectLogin() {
+        runAsync(() -> {
+            try {
+                getJsonFromUrl(ENDPOINT_RECONN); // trigger reconnect
+            } catch (Exception e) {
+                Platform.runLater(() -> updateLoginStatus("Error reconnect: " + e.getMessage()));
+            }
+        });
+    }
+
+    private void refreshQR() {
+        if (qrTimeline != null) qrTimeline.stop();
+
+        runAsync(() -> {
+            try {
+                JSONObject data = getJsonFromUrl(ENDPOINT_LOGIN);
+
+                if (data.has("code") && "ALREADY_LOGGED_IN".equals(data.getString("code"))) {
+                    Platform.runLater(() -> {
+                        updateLoginStatus("⚠️ Anda sudah login");
+                        qrImage.setImage(null);
+                        qrProgressBar.setVisible(false);
+                        qrProgressBar.setStyle("-fx-accent: #22c55e;");
+                        refreshBtn.setVisible(false);
+                        logoutBtn.setVisible(true);
+                        reconnectBtn.setVisible(true);
+                        getDevices();
+                    });
+                    return;
+                }
+
+                if (data.has("code") && "SUCCESS".equals(data.getString("code"))) {
+                    JSONObject results = data.getJSONObject("results");
+                    String qrLink = results.optString("qr_link", "");
+                    int duration = results.optInt("qr_duration", 20);
+
+                    Platform.runLater(() -> {
+                        if (!qrLink.isEmpty()) {
+                            qrImage.setImage(new Image(qrLink, true));
+                            fadeInQR();
+                        } else {
+                            qrImage.setImage(null);
+                        }
+                        qrProgressBar.setVisible(true);
+                        qrProgressBar.setProgress(1.0);
+                        qrProgressBar.setStyle("-fx-accent:#22c55e;");
+                        refreshBtn.setVisible(true);
+                        logoutBtn.setVisible(false);
+                        reconnectBtn.setVisible(true);
+
+                        qrTimeline = new Timeline(
+                                new KeyFrame(Duration.ZERO, e -> qrProgressBar.setProgress(1.0)),
+                                new KeyFrame(Duration.seconds(duration), e -> refreshQR())
+                        );
+                        qrTimeline.setCycleCount(1);
+
+                        qrTimeline.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
+                            double progress = 1.0 - newTime.toSeconds() / duration;
+                            qrProgressBar.setProgress(progress);
+                            if (progress > 0.5)        qrProgressBar.setStyle("-fx-accent:#22c55e;");
+                            else if (progress > 0.25)  qrProgressBar.setStyle("-fx-accent:#facc15;");
+                            else                       qrProgressBar.setStyle("-fx-accent:#dc2626;");
+                        });
+
+                        qrTimeline.play();
+                    });
+                } else {
+                    Platform.runLater(() -> {
+                        try { updateLoginStatus("Error: " + data.getString("message")); }
+                        catch (JSONException ex) { updateLoginStatus("Error refresh QR"); }
+                    });
+                }
+            } catch (Exception e) {
+                Platform.runLater(() -> updateLoginStatus("Error fetching QR: " + e.getMessage()));
+            }
+        });
+    }
+
+    private void getDevices() {
+        runAsync(() -> {
+            try {
+                JSONObject data = getJsonFromUrl(ENDPOINT_DEVICES);
+                if ("SUCCESS".equals(data.optString("code"))) {
+                    JSONArray devices = data.optJSONArray("results");
+                    if (devices != null && devices.length() > 0) {
+                        JSONObject device = devices.getJSONObject(0);
+                        String name = device.optString("name", "-");
+                        String dev  = device.optString("device", "-");
+                        Platform.runLater(() -> {
+                            qrImage.setImage(null);
+                            qrProgressBar.setProgress(0);
+                            updateLoginStatus("✅ Anda sudah login\nName: " + name + "\nDevice: " + dev);
+                        });
+                    }
+                }
+            } catch (Exception e) {
+                Platform.runLater(() -> updateLoginStatus("Error getDevices: " + e.getMessage()));
+            }
+        });
+    }
+
+    private void logout() {
+        runAsync(() -> {
+            try {
+                JSONObject data = getJsonFromUrl(ENDPOINT_LOGOUT);
+                if ("SUCCESS".equals(data.optString("code"))) {
+                    Platform.runLater(() -> {
+                        updateLoginStatus("Logout berhasil!");
+                        qrImage.setImage(null);
+                        qrProgressBar.setVisible(false);
+                        qrProgressBar.setStyle("-fx-accent:#22c55e;");
+                        refreshBtn.setVisible(true);
+                        logoutBtn.setVisible(false);
+                        reconnectBtn.setVisible(true);
+                        refreshQR();
+
+                        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                        pause.setOnFinished(e -> updateLoginStatus("Please scan to connect"));
+                        pause.play();
+                    });
+                } else {
+                    Platform.runLater(() -> updateLoginStatus("Gagal logout"));
+                }
+            } catch (Exception e) {
+                Platform.runLater(() -> updateLoginStatus("Error logout: " + e.getMessage()));
+            }
+        });
+    }
+
+    private void fadeInQR() {
+        FadeTransition ft = new FadeTransition(Duration.millis(500), qrImage);
+        ft.setFromValue(0);
+        ft.setToValue(1);
+        ft.play();
+    }
+
+    private void updateLoginStatus(String text) {
+        if (statusLabel != null) statusLabel.setText(text);
+    }
+
+    /* ----------------------
+       PANE: SEND (kanan)
+       ---------------------- */
+    private void initSendPane() {
         cbCloseAfterSuccess = new CheckBox("Tutup setelah berhasil kirim");
         cbCloseAfterSuccess.setSelected(true);
 
-        // === Komponen sesuai layout lama ===
-        ComboBox<String> typeCombo = new ComboBox<>();
+        typeCombo = new ComboBox<>();
         typeCombo.getItems().addAll("Send File", "Send Message");
         typeCombo.setValue("Send File");
 
-        TextField phoneField = new TextField();
+        phoneField = new TextField();
         phoneField.setPromptText("Phone");
 
-        // Label info normalisasi
-        Label normalizedPreview = new Label("Nomor akan dikirim sebagai: -");
+        normalizedPreview = new Label("Nomor akan dikirim sebagai: -");
         normalizedPreview.setStyle("-fx-text-fill: #6b7280; -fx-font-size: 11px;");
         phoneField.textProperty().addListener((obs, o, n) -> {
-            // ijinkan angka saja pada input
             if (!n.matches("\\d*")) phoneField.setText(n.replaceAll("[^\\d]", ""));
             String normalized = normalizePhone(phoneField.getText());
             normalizedPreview.setText("Nomor akan dikirim sebagai: " + (normalized.isEmpty() ? "-" : normalized));
         });
 
-        TextArea captionArea = new TextArea();
+        captionArea = new TextArea();
         captionArea.setPromptText("Pesan (optional)");
 
-        TextArea messageArea = new TextArea();
+        messageArea = new TextArea();
         messageArea.setPromptText("Type your message here");
-        messageArea.setVisible(false);   // default tidak tampil karena default "Send File"
+        messageArea.setVisible(false);
         messageArea.setManaged(false);
 
-        Label fileUrlLabel = new Label("File URL / Path");
-        TextField fileUrlField = new TextField();
+        fileUrlLabel = new Label("File URL / Path");
+        fileUrlField = new TextField();
         fileUrlField.setPromptText("Enter file URL or local path");
 
-        Button previewBtn = new Button("Preview File");
+        previewBtn = new Button("Preview File");
         previewBtn.setOnAction(e -> {
             String fileUrl = fileUrlField.getText();
             if (fileUrl != null && !fileUrl.isEmpty()) {
@@ -131,7 +400,7 @@ public class WhatsAppSendLAB extends Application {
         sendButton.setOnAction(e -> {
             String rawPhone = phoneField.getText();
             if (rawPhone == null || rawPhone.isEmpty()) {
-                showToast("Phone number is required!", true, false);
+                showToast("Nomor handphone wajib diisi!", true, false);
                 return;
             }
             String phone = normalizePhone(rawPhone);
@@ -140,25 +409,25 @@ public class WhatsAppSendLAB extends Application {
                 return;
             }
 
-            boolean isFile = typeCombo.getValue().equals("Send File");
+            boolean isFile = "Send File".equals(typeCombo.getValue());
             setLoading(true);
 
             if (isFile) {
                 String fileUrl = fileUrlField.getText();
                 if (fileUrl == null || fileUrl.isEmpty()) {
                     setLoading(false);
-                    showToast("Phone and file URL are required!", true, false);
+                    showToast("Nomor handphone and file URL wajib diisi!", true, false);
                     return;
                 }
                 runAsync(() -> {
                     try { sendFileFromUrl(phone, captionArea.getText(), fileUrl); }
                     finally { setLoading(false); }
                 });
-            } else { // Send Message
+            } else {
                 String message = messageArea.getText();
                 if (message == null || message.isEmpty()) {
                     setLoading(false);
-                    showToast("Message is required!", true, false);
+                    showToast("Message wajib diisi!", true, false);
                     return;
                 }
                 runAsync(() -> {
@@ -168,33 +437,21 @@ public class WhatsAppSendLAB extends Application {
             }
         });
 
-        // Root lama
         VBox contentRoot = new VBox(10,
-        cbCloseAfterSuccess,
-        new Label("Type"), typeCombo,
-        new Label("Phone"), phoneField,
-        normalizedPreview,
-        new Label("Message"), captionArea, messageArea,
-        fileUrlLabel, fileUrlField,
-        previewBtn,
-        sendButton
+            cbCloseAfterSuccess,
+            new Label("Type"), typeCombo,
+            new Label("Phone"), phoneField,
+            normalizedPreview,
+            new Label("Message"), captionArea, messageArea,
+            fileUrlLabel, fileUrlField,
+            previewBtn,
+            sendButton
         );
-
         contentRoot.setPadding(new Insets(15));
 
-        // Toast layer
-        rootStack = new StackPane(contentRoot);
-        toastLayer = new VBox(6);
-        toastLayer.setMouseTransparent(true);
-        toastLayer.setPadding(new Insets(0, 12, 12, 0));
-        StackPane.setAlignment(toastLayer, Pos.BOTTOM_RIGHT);
-        rootStack.getChildren().add(toastLayer);
-
-        // Listener untuk ganti layout saat combo berubah (sesuai versi lama)
+        // Toggle file/chat
         typeCombo.setOnAction(e -> {
-            boolean isFile = typeCombo.getValue().equals("Send File");
-
-            // Show/hide captionArea (untuk file) dan kontrol preview
+            boolean isFile = "Send File".equals(typeCombo.getValue());
             captionArea.setVisible(isFile);
             captionArea.setManaged(isFile);
             fileUrlField.setVisible(isFile);
@@ -204,7 +461,6 @@ public class WhatsAppSendLAB extends Application {
             fileUrlLabel.setVisible(isFile);
             fileUrlLabel.setManaged(isFile);
 
-            // Show/hide messageArea (untuk chat)
             messageArea.setVisible(!isFile);
             messageArea.setManaged(!isFile);
 
@@ -212,49 +468,84 @@ public class WhatsAppSendLAB extends Application {
             else captionArea.clear();
         });
 
-        // Prefill
-        if (prefillPhone != null)    phoneField.setText(prefillPhone);
-        if (prefillFileUrl != null)  fileUrlField.setText(prefillFileUrl);
+        // Prefill (jika ada)
+        if (prefillPhone != null)   phoneField.setText(prefillPhone);
+        if (prefillFileUrl != null) fileUrlField.setText(prefillFileUrl);
         if (prefillNama != null) {
             captionArea.setText(
                 "Yth Bp/Ibu/Sdr " + prefillNama + ".\n" +
-                "Berikut kami kirimkan hasil pemeriksaan laboratorium anda pada tanggal " + (prefillTanggal != null ? prefillTanggal : "-") + ".\n\n" +
+                "Berikut kami kirimkan hasil pemeriksaan laboratorium anda pada tanggal " +
+                (prefillTanggal != null ? prefillTanggal : "-") + ".\n\n" +
                 "Pesan ini dikirim secara elektronik, mohon unduh PDF dalam 24 jam setelah anda menerima pesan ini.\n" +
                 "Terima kasih."
             );
         }
 
-        // Scene
-        Scene scene = new Scene(rootStack, 620, 500);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        // ==== TOAST LAYER untuk SEND (kanan-atas area konten) ====
+        toastLayerSend = new VBox(6);
+        toastLayerSend.setMouseTransparent(true);
+        toastLayerSend.setFillWidth(false);
+        toastLayerSend.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        StackPane.setAlignment(toastLayerSend, Pos.TOP_RIGHT);
+        StackPane.setMargin(toastLayerSend, new Insets(12, 12, 0, 0));
 
-        // Reconnect saat form dibuka (tidak blocking)
-        reconnect();
+        // Tumpuk konten + toast
+        StackPane wrapper = new StackPane(contentRoot);
+        wrapper.getChildren().add(toastLayerSend);
+        wrapper.setPadding(new Insets(20));
+        sendPane = wrapper;
+    }
+
+    private void showLoginPane() {
+        if (qrTimeline != null) qrTimeline.stop();
+        setOnly(loginPane, true);
+        setOnly(sendPane, false);
+        styleActiveTab(tabLoginBtn, tabSendBtn);
+        refreshQR(); // opsional
+    }
+
+    private void showSendPane() {
+        if (qrTimeline != null) qrTimeline.stop();
+        setOnly(sendPane, true);
+        setOnly(loginPane, false);
+        styleActiveTab(tabSendBtn, tabLoginBtn);
+    }
+
+    private void setOnly(Pane p, boolean on) {
+        p.setVisible(on);
+        p.setManaged(on);
+        if (on) p.toFront();
+    }
+
+    private void styleActiveTab(Button active, Button inactive) {
+        active.setStyle("-fx-background-color:#22c55e; -fx-text-fill:white; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 12;");
+        inactive.setStyle("-fx-background-color:#1e293b; -fx-text-fill:white; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 12;");
     }
 
     /* =======================
        ------- NETWORK -------
        ======================= */
 
-    private void reconnect() {
-        runAsync(() -> {
-            HttpURLConnection conn = null;
-            try {
-                conn = (HttpURLConnection) new URL(ENDPOINT_RECONN).openConnection();
-                conn.setRequestMethod("GET");
-                setBasicAuth(conn, AUTH_USER, AUTH_PASS);
-                conn.setConnectTimeout(15000);
-                conn.setReadTimeout(60000);
-                int code = conn.getResponseCode();
-                String body = readBody(conn, code);
-                System.out.println("Reconnect (" + code + "): " + body);
-            } catch (Exception ex) {
-                System.err.println("Reconnect failed: " + ex.getMessage());
-            } finally {
-                if (conn != null) conn.disconnect();
+    private JSONObject getJsonFromUrl(String urlStr) throws Exception {
+        URL url = new URL(urlStr);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        setBasicAuth(con, AUTH_USER, AUTH_PASS);
+        con.setConnectTimeout(15000);
+        con.setReadTimeout(60000);
+
+        int status = con.getResponseCode();
+        InputStream in = (status >= 200 && status < 300) ? con.getInputStream() : con.getErrorStream();
+
+        StringBuilder response = new StringBuilder();
+        if (in != null) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+                String line;
+                while ((line = br.readLine()) != null) response.append(line);
             }
-        });
+        }
+        con.disconnect();
+        return new JSONObject(response.toString());
     }
 
     /** POST /send/message — JSON */
@@ -292,26 +583,23 @@ public class WhatsAppSendLAB extends Application {
         }
     }
 
-    /** POST /send/file — multipart/form-data, ambil file dari URL (atau path lokal) sebagai stream. */
+    /** POST /send/file — multipart/form-data (stream dari URL atau path lokal). */
     private void sendFileFromUrl(String phone, String caption, String fileUrlStr) {
         final String boundary = "===" + System.currentTimeMillis() + "===";
         final String LF = "\r\n";
         HttpURLConnection connection = null;
 
         try {
-            // Siapkan sumber stream
             InputStream fileStream;
             String fileName;
             String contentType = "application/octet-stream";
 
-            // Coba treat sebagai URL dahulu
             try {
                 URL src = new URL(fileUrlStr);
                 fileStream = src.openStream();
                 fileName = new File(src.getPath()).getName();
                 if (fileName.toLowerCase().endsWith(".pdf")) contentType = "application/pdf";
             } catch (Exception notUrl) {
-                // Jika bukan URL, treat sebagai path lokal
                 File f = new File(fileUrlStr);
                 if (!f.exists() || !f.isFile()) {
                     showToast("File tidak ditemukan: " + fileUrlStr, true, false);
@@ -325,7 +613,6 @@ public class WhatsAppSendLAB extends Application {
                 if (fileName.toLowerCase().endsWith(".pdf")) contentType = "application/pdf";
             }
 
-            // Koneksi ke endpoint
             URL url = new URL(ENDPOINT_FILE);
             connection = (HttpURLConnection) url.openConnection();
             connection.setUseCaches(false);
@@ -344,7 +631,6 @@ public class WhatsAppSendLAB extends Application {
                 addFormField(writer, boundary, "phone", phone, LF);
                 addFormField(writer, boundary, "caption", caption, LF);
 
-                // File part
                 writer.append("--").append(boundary).append(LF);
                 writer.append("Content-Disposition: form-data; name=\"file\"; filename=\"")
                       .append(fileName).append("\"").append(LF);
@@ -353,26 +639,22 @@ public class WhatsAppSendLAB extends Application {
 
                 byte[] buffer = new byte[8192];
                 int read;
-                while ((read = in.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, read);
-                }
+                while ((read = in.read(buffer)) != -1) outputStream.write(buffer, 0, read);
                 outputStream.flush();
 
                 writer.append(LF).flush();
                 writer.append("--").append(boundary).append("--").append(LF).flush();
             }
 
-            // Respons
             int status = connection.getResponseCode();
             String responseBody = readBody(connection, status);
 
             if (status == HttpURLConnection.HTTP_OK) {
-                showToast("Pesan WhatsApp berhasil dikirim", false, false);
+                showToast("Pesan WhatsApp berhasil dikirim", false, cbCloseAfterSuccess.isSelected());
             } else {
                 String msg = extractMessageFromJson(responseBody);
                 showToast("Response (" + status + "): " + (msg != null ? msg : responseBody), true, false);
             }
-
         } catch (Exception ex) {
             showToast("Error: " + ex.getMessage(), true, false);
         } finally {
@@ -384,8 +666,30 @@ public class WhatsAppSendLAB extends Application {
        -------- HELPERS ------
        ======================= */
 
+    // Escape sederhana JSON (untuk body POST)
+    private static String jsonEscape(String s) {
+        if (s == null) return "";
+        StringBuilder sb = new StringBuilder(s.length() + 16);
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            switch (c) {
+                case '\\': sb.append("\\\\"); break;
+                case '"':  sb.append("\\\""); break;
+                case '\b': sb.append("\\b");  break;
+                case '\f': sb.append("\\f");  break;
+                case '\n': sb.append("\\n");  break;
+                case '\r': sb.append("\\r");  break;
+                case '\t': sb.append("\\t");  break;
+                default:
+                    if (c < 0x20) sb.append(String.format("\\u%04x", (int) c));
+                    else sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
     private static void runAsync(Runnable r) {
-        Thread t = new Thread(r, "send-wa-thread");
+        Thread t = new Thread(r, "wa-suite-thread");
         t.setDaemon(true);
         t.start();
     }
@@ -418,7 +722,7 @@ public class WhatsAppSendLAB extends Application {
         writer.flush();
     }
 
-    /** Ambil field "message" dari JSON error body; jika tidak ada, kembalikan null. */
+    /** Ambil field "message" dari JSON error body; jika tidak ada, null. */
     private static String extractMessageFromJson(String body) {
         try {
             if (body == null) return null;
@@ -437,7 +741,7 @@ public class WhatsAppSendLAB extends Application {
         }
     }
 
-    /** Toast pojok kanan bawah (auto-close 3 detik). */
+    /** Toast kanan–atas card/tab aktif (auto-close 3 detik). */
     private void showToast(String message, boolean isError, boolean closeAfter) {
         Platform.runLater(() -> {
             Label lbl = new Label(message);
@@ -453,7 +757,10 @@ public class WhatsAppSendLAB extends Application {
                 "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.2, 0, 2);"
             );
 
-            toastLayer.getChildren().add(box);
+            // pilih layer sesuai tab aktif
+            VBox layer = (sendPane != null && sendPane.isVisible()) ? toastLayerSend : toastLayerLogin;
+            if (layer == null) return;
+            layer.getChildren().add(box);
 
             FadeTransition fadeIn = new FadeTransition(Duration.millis(150), box);
             fadeIn.setFromValue(0.0);
@@ -464,22 +771,27 @@ public class WhatsAppSendLAB extends Application {
             FadeTransition fadeOut = new FadeTransition(Duration.millis(220), box);
             fadeOut.setFromValue(1.0);
             fadeOut.setToValue(0.0);
-            fadeOut.setOnFinished(e -> {
-                toastLayer.getChildren().remove(box);
-                if (closeAfter && stage != null) stage.close();
-            });
+            fadeOut.setOnFinished(e -> layer.getChildren().remove(box));
 
             fadeIn.setOnFinished(e -> stay.play());
             stay.setOnFinished(e -> fadeOut.play());
             fadeIn.play();
+
+            if (closeAfter && stage != null) {
+                PauseTransition closeLater = new PauseTransition(Duration.millis(TOAST_MS + 240));
+                closeLater.setOnFinished(ev -> stage.close());
+                closeLater.play();
+            }
         });
     }
 
-    /** Ubah tombol Send -> loading ON/OFF (disable + teks). */
+    /** Loading state tombol Send. */
     private void setLoading(boolean loading) {
         Platform.runLater(() -> {
-            sendButton.setDisable(loading);
-            sendButton.setText(loading ? "Sending..." : "Send");
+            if (sendButton != null) {
+                sendButton.setDisable(loading);
+                sendButton.setText(loading ? "Sending..." : "Send");
+            }
         });
     }
 
@@ -498,37 +810,14 @@ public class WhatsAppSendLAB extends Application {
         return msisdn != null && msisdn.matches("^62\\d{8,13}$");
     }
 
-    // Escape sederhana JSON
-    private static String jsonEscape(String s) {
-        if (s == null) return "";
-        StringBuilder sb = new StringBuilder(s.length() + 16);
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            switch (c) {
-                case '\\': sb.append("\\\\"); break;
-                case '"':  sb.append("\\\""); break;
-                case '\b': sb.append("\\b");  break;
-                case '\f': sb.append("\\f");  break;
-                case '\n': sb.append("\\n");  break;
-                case '\r': sb.append("\\r");  break;
-                case '\t': sb.append("\\t");  break;
-                default:
-                    if (c < 0x20) sb.append(String.format("\\u%04x", (int)c));
-                    else sb.append(c);
-            }
-        }
-        return sb.toString();
-    }
-
     /* =======================
        ----- PREVIEWER -------
        ======================= */
 
-    /** Inner static class untuk preview (gabungan dari FilePreviewer lama). */
+    /** Previewer sederhana (gambar & PDF) */
     private static class FilePreviewer {
         static void showPreview(String fileUrl) {
             try {
-                // Gambar yang didukung
                 if (fileUrl.matches("(?i).*\\.(png|jpg|jpeg|gif|bmp|webp)$")) {
                     Stage previewStage = new Stage();
                     previewStage.setTitle("File Preview");
@@ -542,13 +831,11 @@ public class WhatsAppSendLAB extends Application {
                     previewStage.show();
                     return;
                 }
-                // PDF → buka di browser default
                 if (fileUrl.matches("(?i).*\\.(pdf)$")) {
                     try {
                         java.awt.Desktop.getDesktop().browse(new URI(fileUrl));
                         return;
                     } catch (Exception openEx) {
-                        // fallback kecil
                         Stage previewStage = new Stage();
                         WebView fallback = new WebView();
                         fallback.getEngine().loadContent("<h3>Could not open PDF in browser</h3>");
@@ -557,7 +844,6 @@ public class WhatsAppSendLAB extends Application {
                         return;
                     }
                 }
-                // Tipe lain → HTML sederhana
                 Stage previewStage = new Stage();
                 WebView webView = new WebView();
                 webView.getEngine().loadContent(
@@ -567,10 +853,7 @@ public class WhatsAppSendLAB extends Application {
                 previewStage.setScene(new Scene(webView, 600, 200));
                 previewStage.show();
             } catch (Exception ex) {
-                Platform.runLater(() -> {
-                    Alert a = new Alert(Alert.AlertType.ERROR, "Preview error: " + ex.getMessage());
-                    a.show();
-                });
+                Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, "Preview error: " + ex.getMessage()).show());
             }
         }
     }

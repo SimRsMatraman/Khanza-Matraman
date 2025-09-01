@@ -26,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -40,6 +42,7 @@ import laporan.DlgBerkasRawat;
 import rekammedis.MasterCariTemplateHasilRadiologi;
 import rekammedis.RMRiwayatPerawatan;
 import surat.SuratKeteranganCovid;
+import whatsapp.WhatsAppSendRAD;
 
 
 public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
@@ -69,7 +72,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             Beban_Jasa_Medik_Petugas_Radiologi_Ralan="",Utang_Jasa_Medik_Petugas_Radiologi_Ralan="",Beban_Kso_Radiologi_Ralan="",Utang_Kso_Radiologi_Ralan="",
             HPP_Persediaan_Radiologi_Rawat_Jalan="",Persediaan_BHP_Radiologi_Rawat_Jalan="",Beban_Jasa_Sarana_Radiologi_Ralan="",Utang_Jasa_Sarana_Radiologi_Ralan="",
             Beban_Jasa_Perujuk_Radiologi_Ralan="",Utang_Jasa_Perujuk_Radiologi_Ralan="",Beban_Jasa_Menejemen_Radiologi_Ralan="",Utang_Jasa_Menejemen_Radiologi_Ralan="",
-            tgl_hasil="",jam_hasil="",tgl_periksa="",kosong="",Series="",StudyInstanceUID="";
+            tgl_hasil="",jam_hasil="",tgl_periksa="",kosong="",Series="",StudyInstanceUID="",norawat="",nomr="",nama="",telp="";
     private SimpleDateFormat tanggalNow = new SimpleDateFormat("yyyy-MM-dd");
 //    private SimpleDateFormat tanggalNow = new SimpleDateFormat("dd-MM-yyyy");
     private SimpleDateFormat jamNow = new SimpleDateFormat("HH:mm:ss");
@@ -410,6 +413,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
         Kd2 = new widget.TextBox();
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        MnWA = new javax.swing.JMenuItem();
         MnCetakNota = new javax.swing.JMenuItem();
         MnUbahDokterPetugas = new javax.swing.JMenuItem();
         ppRiwayat = new javax.swing.JMenuItem();
@@ -507,6 +511,22 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        MnWA.setBackground(new java.awt.Color(255, 255, 254));
+        MnWA.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnWA.setForeground(new java.awt.Color(50, 50, 50));
+        MnWA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnWA.setText("Kirim WhatsApp");
+        MnWA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnWA.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnWA.setName("MnWA"); // NOI18N
+        MnWA.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnWA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnWAActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnWA);
 
         MnCetakNota.setBackground(new java.awt.Color(255, 255, 254));
         MnCetakNota.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2469,6 +2489,33 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }
     }//GEN-LAST:event_btnDicom1ActionPerformed
 
+    private void MnWAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnWAActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        }else if(Kd2.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Klik No.Rawat pada table untuk memilih data!");
+        }else if(!(Kd2.getText().trim().equals(""))){
+            norawat=Kd2.getText();
+            nomr=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+norawat+"'");
+            nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+nomr+"'");
+            telp=Sequel.cariIsi("select no_tlp from pasien where pasien.no_rkm_medis='"+nomr+"'");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Platform.runLater(() -> {
+                try {
+                    WhatsAppSendRAD app = new WhatsAppSendRAD();
+                    app.setPrefillData(nama,telp);
+                    app.start(new Stage());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_MnWAActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2518,6 +2565,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private javax.swing.JMenuItem MnCetakNota;
     private javax.swing.JMenuItem MnUbahDokterPetugas;
     private javax.swing.JMenuItem MnViewDicom;
+    private javax.swing.JMenuItem MnWA;
     private widget.TextBox NmDokterPj;
     private widget.TextBox NmPerujuk;
     private widget.TextBox NmPtgUbah;

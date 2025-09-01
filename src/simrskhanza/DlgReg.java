@@ -192,10 +192,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import integration_orthanc.DicomViewerHybridSplitRad;
 import java.net.URL;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import whatsapp.WhatsAppSendREG;
 /**
  *
  * @author dosen
@@ -221,7 +224,7 @@ public final class DlgReg extends javax.swing.JDialog {
             URUTNOREG="",status="Baru",cariNik="",cariNIK="",order="reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc",orderinternal="rujukan_internal_poli.tanggal,rujukan_internal_poli.jam desc",
             alamatperujuk="-",aktifjadwal="",IPPRINTERTRACER="",umur="0",sttsumur="Th",
             validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi"),
-            validasicatatan=Sequel.cariIsi("select set_validasi_catatan.tampilkan_catatan from set_validasi_catatan"),norawatdipilih="",normdipilih="",variabel="";
+            validasicatatan=Sequel.cariIsi("select set_validasi_catatan.tampilkan_catatan from set_validasi_catatan"),norawatdipilih="",normdipilih="",variabel="",norawat="",nomr="",nama="",telp="";
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     private DicomViewerHybridSplitRad dicomViewer=new DicomViewerHybridSplitRad(null,false);
     private HttpHeaders headers;
@@ -1166,7 +1169,6 @@ public final class DlgReg extends javax.swing.JDialog {
         MnUrutRegAsc1 = new javax.swing.JMenuItem();
         MnUrutRMDesc = new javax.swing.JMenuItem();
         MnUrutRMAsc = new javax.swing.JMenuItem();
-        MnKonfirmasi = new javax.swing.JMenu();
         MnWA = new javax.swing.JMenuItem();
         MnHapusData = new javax.swing.JMenu();
         MnHapusTagihanOperasi = new javax.swing.JMenuItem();
@@ -4416,21 +4418,11 @@ public final class DlgReg extends javax.swing.JDialog {
 
         jPopupMenu1.add(MnUrut);
 
-        MnKonfirmasi.setBackground(new java.awt.Color(250, 255, 245));
-        MnKonfirmasi.setForeground(new java.awt.Color(50, 50, 50));
-        MnKonfirmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnKonfirmasi.setText("Konfirmasi Pasien");
-        MnKonfirmasi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnKonfirmasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnKonfirmasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnKonfirmasi.setName("MnKonfirmasi"); // NOI18N
-        MnKonfirmasi.setPreferredSize(new java.awt.Dimension(260, 26));
-
         MnWA.setBackground(new java.awt.Color(255, 255, 254));
         MnWA.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnWA.setForeground(new java.awt.Color(50, 50, 50));
         MnWA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnWA.setText("Kirim WA");
+        MnWA.setText("Kirim WhatsApp");
         MnWA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnWA.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnWA.setName("MnWA"); // NOI18N
@@ -4440,9 +4432,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 MnWAActionPerformed(evt);
             }
         });
-        MnKonfirmasi.add(MnWA);
-
-        jPopupMenu1.add(MnKonfirmasi);
+        jPopupMenu1.add(MnWA);
 
         MnHapusData.setBackground(new java.awt.Color(255, 255, 254));
         MnHapusData.setForeground(new java.awt.Color(50, 50, 50));
@@ -6558,7 +6548,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-03-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6571,7 +6561,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-03-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6739,7 +6729,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-03-2025" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -14640,22 +14630,30 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     }//GEN-LAST:event_MnResepUlangActionPerformed
 
     private void MnWAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnWAActionPerformed
-        if(tabMode.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
-            TNoRw.requestFocus();
-        }else if(TPasien.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
-            TCari.requestFocus();
-        }else{
-            String nama=tbPetugas.getValueAt(tbPetugas.getSelectedRow(),8).toString();
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            DlgWhatsapp whatsapp=new DlgWhatsapp(null,false);
-            whatsapp.setNoRm(TNoRM.getText(),nama);
-            whatsapp.setSize(720,330);
-            whatsapp.setLocationRelativeTo(internalFrame1);
-            whatsapp.setVisible(true);
-            this.setCursor(Cursor.getDefaultCursor());
-        }      
+     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            if(tabMode.getRowCount()==0){
+                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+                TCari.requestFocus();
+            }else if(Kd2.getText().trim().equals("")){
+                JOptionPane.showMessageDialog(null,"Maaf, Klik No.Rawat pada table untuk memilih data!");
+            }else if(!(Kd2.getText().trim().equals(""))){
+                norawat=TNoRw.getText();
+                nomr=TNoRM.getText();
+                nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+nomr+"'");
+                telp=Sequel.cariIsi("select no_tlp from pasien where pasien.no_rkm_medis='"+nomr+"'");
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Platform.runLater(() -> {
+                    try {
+                        WhatsAppSendREG app = new WhatsAppSendREG();
+                        app.setPrefillData(nama,telp);
+                        app.start(new Stage());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnWAActionPerformed
 
     /**
@@ -14800,7 +14798,6 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem MnJadwalOperasi1;
     private javax.swing.JMenuItem MnKamarInap;
     private javax.swing.JMenuItem MnKamarInap1;
-    private javax.swing.JMenu MnKonfirmasi;
     private javax.swing.JMenuItem MnKonselingFarmasi;
     private javax.swing.JMenu MnLabel;
     private javax.swing.JMenuItem MnLabelTracker;
@@ -15638,6 +15635,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         MnPenilaianTambahanPerilakuKekerasan.setEnabled(akses.getpenilaian_tambahan_perilaku_kekerasan());
         MnPenilaianTambahanMelarikanDiri.setEnabled(akses.getpenilaian_tambahan_beresiko_melarikan_diri());
         MnPersetujuanPenundaanPelayanan.setEnabled(akses.getpersetujuan_penundaan_pelayanan());
+        MnWA.setVisible(akses.getregistrasi());
     }
     
     private void isNumber(){         

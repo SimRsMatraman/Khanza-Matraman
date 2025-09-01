@@ -30,12 +30,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Base64;
 
-public class WhatsAppSendMaster extends Application {
+public class WhatsAppSendREG extends Application {
 
     // ===== Konfigurasi (akan dioverride di constructor) =====
     private static String AUTH_USER = "simrs";
     private static String AUTH_PASS = "RotiBakar69";
-    private static String BASE_URL  = "http://100.10.1.5:3000";
+    private static String BASE_URL  = "http://100.10.1.5:3100";
 
     // Endpoint (bukan static final agar ikut BASE_URL terbaru)
     private String ENDPOINT_FILE;
@@ -83,12 +83,12 @@ public class WhatsAppSendMaster extends Application {
     private static final long MAX_BYTES_5MB = 5L * 1024 * 1024;
     private static final int  TOAST_MS = 3000;
 
-    public WhatsAppSendMaster() {
+    public WhatsAppSendREG() {
         super();
         try {
             AUTH_USER = koneksiDB.APIWA_USER();
             AUTH_PASS = koneksiDB.APIWA_PASS();
-            BASE_URL  = koneksiDB.APIWA_LAB();
+            BASE_URL  = koneksiDB.APIWA_FO();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
@@ -101,7 +101,6 @@ public class WhatsAppSendMaster extends Application {
         ENDPOINT_LOGOUT  = BASE_URL + "/app/logout";
     }
     
-    // Prefill untuk SEND (opsional)
     public void setPrefillData(String nama, String phone) {
         this.prefillPhone   = phone;
         this.prefillNama    = nama;
@@ -625,12 +624,8 @@ public class WhatsAppSendMaster extends Application {
         // Prefill (jika ada)
         if (prefillPhone != null)   phoneField.setText(prefillPhone);
         if (prefillNama != null) {
-            captionArea.setText(
-                "Yth Bp/Ibu/Sdr " + prefillNama + ".\n\n\n\n" +
-                "Terima kasih."
-            );
             messageArea.setText(
-                "Yth Bp/Ibu/Sdr " + prefillNama + ".\n\n\n\n" +
+                "Yth Bp/Ibu/Sdr " + prefillNama + ".\n\n...\n\n" +
                 "Terima kasih."
             );
         }

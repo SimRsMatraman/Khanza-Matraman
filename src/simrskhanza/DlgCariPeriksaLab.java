@@ -359,8 +359,6 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnMalaria = new javax.swing.JMenuItem();
         MnSaranKesan = new javax.swing.JMenuItem();
         MnCetakSuratCovid = new javax.swing.JMenuItem();
-        MnLogin = new javax.swing.JMenuItem();
-        MnKirimWAUpload = new javax.swing.JMenuItem();
         WindowSaran = new javax.swing.JDialog();
         internalFrame6 = new widget.InternalFrame();
         panelGlass6 = new widget.panelisi();
@@ -437,7 +435,6 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         MnPDFLab.setForeground(new java.awt.Color(50, 50, 50));
         MnPDFLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         MnPDFLab.setText("Cetak Hasil Lab");
-        MnPDFLab.setActionCommand("Cetak Hasil Lab");
         MnPDFLab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnPDFLab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnPDFLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -590,35 +587,6 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             }
         });
         jPopupMenu1.add(MnCetakSuratCovid);
-
-        MnLogin.setBackground(new java.awt.Color(255, 255, 254));
-        MnLogin.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnLogin.setForeground(new java.awt.Color(50, 50, 50));
-        MnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnLogin.setText("Login WhatsApp");
-        MnLogin.setToolTipText("");
-        MnLogin.setName("MnLogin"); // NOI18N
-        MnLogin.setPreferredSize(new java.awt.Dimension(120, 26));
-        MnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnLoginActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnLogin);
-
-        MnKirimWAUpload.setBackground(new java.awt.Color(255, 255, 254));
-        MnKirimWAUpload.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnKirimWAUpload.setForeground(new java.awt.Color(50, 50, 50));
-        MnKirimWAUpload.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnKirimWAUpload.setText("Kirim WhatsApp");
-        MnKirimWAUpload.setName("MnKirimWAUpload"); // NOI18N
-        MnKirimWAUpload.setPreferredSize(new java.awt.Dimension(120, 26));
-        MnKirimWAUpload.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnKirimWAUploadActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(MnKirimWAUpload);
 
         WindowSaran.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowSaran.setName("WindowSaran"); // NOI18N
@@ -2989,18 +2957,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnCetakHasilHCLABActionPerformed
 
-    private void MnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLoginActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Platform.runLater(() -> {
-                    try {
-                        new WhatsAppLoginLAB().start(new Stage());
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                });
-        this.setCursor(Cursor.getDefaultCursor());
-    }//GEN-LAST:event_MnLoginActionPerformed
-
     private void MnKirimWAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKirimWAActionPerformed
      this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if(tabMode.getRowCount()==0){
@@ -3013,7 +2969,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 tanggal=(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+" pukul "+tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
                 nomr=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+norawat+"'");
                 nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+nomr+"'");
-                telp=Sequel.cariIsi("select CONCAT(REPLACE(LEFT(pasien.no_tlp,2),'08','628'),SUBSTRING(no_tlp,3,CHAR_LENGTH(no_tlp))) as no_tlp from pasien where pasien.no_rkm_medis='"+nomr+"'");
+                telp=Sequel.cariIsi("select no_tlp from pasien where pasien.no_rkm_medis='"+nomr+"'");
                 noorder=Sequel.cariIsi("select a.noorder from permintaan_lab a join periksa_lab b on b.no_rawat=a.no_rawat and a.tgl_hasil=b.tgl_periksa and a.jam_hasil=b.jam where a.no_rawat='"+norawat+"' and a.tgl_hasil='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' and a.jam_hasil='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()+"' group by a.noorder");
                 link="https://rsudmatraman.my.id/upload/dokumen/"+noorder+".pdf";
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -3030,33 +2986,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnKirimWAActionPerformed
-
-    private void MnKirimWAUploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKirimWAUploadActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if(tabMode.getRowCount()==0){
-                JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-                TCari.requestFocus();
-            }else if(Kd2.getText().trim().equals("")){
-                JOptionPane.showMessageDialog(null,"Maaf, Klik No.Rawat pada table untuk memilih data!");
-            }else if(!(Kd2.getText().trim().equals(""))){
-                norawat=tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString();
-                nomr=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+norawat+"'");
-                nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+nomr+"'");
-                telp=Sequel.cariIsi("select CONCAT(REPLACE(LEFT(pasien.no_tlp,2),'08','628'),SUBSTRING(no_tlp,3,CHAR_LENGTH(no_tlp))) as no_tlp from pasien where pasien.no_rkm_medis='"+nomr+"'");
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Platform.runLater(() -> {
-                    try {
-                        WhatsAppSendMaster app = new WhatsAppSendMaster();
-                        app.setPrefillData(nama,telp);
-                        app.start(new Stage());
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-                });
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        this.setCursor(Cursor.getDefaultCursor());
-    }//GEN-LAST:event_MnKirimWAUploadActionPerformed
 
     /**
     * @param args the command line arguments
@@ -3103,8 +3032,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private javax.swing.JMenuItem MnCetakSuratCovid;
     private javax.swing.JMenuItem MnDarahTepi;
     private javax.swing.JMenuItem MnKirimWA;
-    private javax.swing.JMenuItem MnKirimWAUpload;
-    private javax.swing.JMenuItem MnLogin;
     private javax.swing.JMenuItem MnMalaria;
     private javax.swing.JMenu MnPDFLab;
     private javax.swing.JMenuItem MnSaranKesan;
@@ -3732,7 +3659,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         ppBerkasDigital.setVisible(akses.getberkas_digital_perawatan());  
         
         MnKirimWA.setVisible(akses.getperiksa_lab());
-        MnLogin.setVisible(akses.getperiksa_lab());
     }
     
     public void setPasien(String pasien){

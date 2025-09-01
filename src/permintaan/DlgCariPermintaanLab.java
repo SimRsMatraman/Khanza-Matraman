@@ -52,6 +52,7 @@ import kepegawaian.DlgCariDokter;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariPoli;
 import simrskhanza.DlgPeriksaLaboratorium;
+import whatsapp.WhatsAppSendLAB;
 
 public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2,tabMode3,tabMode4;
@@ -79,7 +80,8 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode response;
     private String pilihan="",alarm="",formalarm="",nol_detik,detik,tglsampel="",tglhasil="",norm="",kamar="",namakamar="",la="",ld="",pa="",pd="",InformasiTambahan,DiagnosaKlinis,
-                    NoPermintaan="",NoRawat="",Pasien="",Permintaan="",JamPermintaan="",Sampel="",JamSampel="",Hasil="",JamHasil="",KodeDokter="",DokterPerujuk="",Ruang="",json="",finger="";
+                    NoPermintaan="",NoRawat="",Pasien="",Permintaan="",JamPermintaan="",Sampel="",JamSampel="",Hasil="",JamHasil="",KodeDokter="",DokterPerujuk="",Ruang="",json="",finger="",
+                    norawat="",nama="",tanggal="",telp="",link="",nomr="",noorder="";
     private boolean sukses=true;
     
     /** Creates new form DlgProgramStudi
@@ -477,6 +479,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         BtnAmbilVanslab = new widget.Button();
         BtnKirimLica = new widget.Button();
         BtnAmbilLica = new widget.Button();
+        Kd2 = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -536,6 +539,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         BtnBarcodePermintaan2 = new widget.Button();
         BtnKirimSysmex = new widget.Button();
         BtnAmbilSysmex = new widget.Button();
+        BtnKirimWA = new widget.Button();
 
         WindowAmbilSampel.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowAmbilSampel.setName("WindowAmbilSampel"); // NOI18N
@@ -577,7 +581,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-08-2025 13:28:12" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025 13:18:22" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -684,7 +688,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-08-2025" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -929,6 +933,19 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         BtnAmbilLica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAmbilLicaActionPerformed(evt);
+            }
+        });
+
+        Kd2.setName("Kd2"); // NOI18N
+        Kd2.setPreferredSize(new java.awt.Dimension(318, 23));
+        Kd2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Kd2ActionPerformed(evt);
+            }
+        });
+        Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Kd2KeyPressed(evt);
             }
         });
 
@@ -1589,6 +1606,23 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnAmbilSysmex);
+
+        BtnKirimWA.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimWA.setText("Kirim WhatsApp");
+        BtnKirimWA.setFocusPainted(false);
+        BtnKirimWA.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimWA.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimWA.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimWA.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimWA.setName("BtnKirimWA"); // NOI18N
+        BtnKirimWA.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKirimWA.setRoundRect(false);
+        BtnKirimWA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimWAActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnKirimWA);
 
         ScrollMenu.setViewportView(FormMenu);
 
@@ -4231,6 +4265,83 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnBatalSampelKeyPressed
 
+    private void BtnKirimWAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimWAActionPerformed
+        if(TabPilihRawat.getSelectedIndex()==0){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                if(tabMode.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+                    TCari.requestFocus();
+                }else if(Kd2.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null,"Maaf, Klik No.Rawat pada table untuk memilih data!");
+                }else if(!(Kd2.getText().trim().equals(""))){
+                    norawat=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),1).toString();
+                    tanggal=(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),7).toString()+" pukul "+tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),8).toString());
+                    nomr=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+norawat+"'");
+                    nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+nomr+"'");
+                    telp=Sequel.cariIsi("select no_tlp from pasien where pasien.no_rkm_medis='"+nomr+"'");
+                    noorder=Sequel.cariIsi("select a.noorder from permintaan_lab a join periksa_lab b on b.no_rawat=a.no_rawat and a.tgl_hasil=b.tgl_periksa and a.jam_hasil=b.jam where a.no_rawat='"+norawat+"' and a.tgl_hasil='"+tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),7).toString()+"' and a.jam_hasil='"+tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),8).toString()+"' group by a.noorder");
+                    if (noorder != null && !noorder.trim().isEmpty()) {
+                        link = "https://rsudmatraman.my.id/upload/dokumen/" + noorder + ".pdf";
+                    } else {
+                        link = null;
+                    }
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    Platform.runLater(() -> {
+                        try {
+                            WhatsAppSendLAB app = new WhatsAppSendLAB();
+                            app.setPrefillData(tanggal,nama,telp,link);
+                            app.start(new Stage());
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                    this.setCursor(Cursor.getDefaultCursor());
+                }
+            this.setCursor(Cursor.getDefaultCursor());
+        }else if(TabPilihRawat.getSelectedIndex()==1){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                if(tabMode.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+                    TCari.requestFocus();
+                }else if(Kd2.getText().trim().equals("")){
+                    JOptionPane.showMessageDialog(null,"Maaf, Klik No.Rawat pada table untuk memilih data!");
+                }else if(!(Kd2.getText().trim().equals(""))){
+                    norawat=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),1).toString();
+                    tanggal=(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),7).toString()+" pukul "+tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),8).toString());
+                    nomr=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+norawat+"'");
+                    nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+nomr+"'");
+                    telp=Sequel.cariIsi("select no_tlp from pasien where pasien.no_rkm_medis='"+nomr+"'");
+                    noorder=Sequel.cariIsi("select a.noorder from permintaan_lab a join periksa_lab b on b.no_rawat=a.no_rawat and a.tgl_hasil=b.tgl_periksa and a.jam_hasil=b.jam where a.no_rawat='"+norawat+"' and a.tgl_hasil='"+tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),7).toString()+"' and a.jam_hasil='"+tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),8).toString()+"' group by a.noorder");
+                    if (noorder != null && !noorder.trim().isEmpty()) {
+                        link = "https://rsudmatraman.my.id/upload/dokumen/" + noorder + ".pdf";
+                    } else {
+                        link = null;
+                    }
+                    
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    Platform.runLater(() -> {
+                        try {
+                            WhatsAppSendLAB app = new WhatsAppSendLAB();
+                            app.setPrefillData(tanggal,nama,telp,link);
+                            app.start(new Stage());
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                    this.setCursor(Cursor.getDefaultCursor());
+                }
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnKirimWAActionPerformed
+
+    private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Kd2KeyPressed
+
+    private void Kd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kd2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Kd2ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -4276,6 +4387,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.Button BtnKirimLica;
     private widget.Button BtnKirimSysmex;
     private widget.Button BtnKirimVansLab;
+    private widget.Button BtnKirimWA;
     private widget.Button BtnPrint;
     private widget.Button BtnSampel;
     private widget.Button BtnSeek3;
@@ -4291,6 +4403,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.TextBox CrPoli;
     private widget.PanelBiasa FormMenu;
     private widget.TextBox Kamar;
+    private widget.TextBox Kd2;
     private widget.Label LCount;
     private widget.PanelBiasa PanelAccor;
     private widget.ScrollPane ScrollMenu;
@@ -4542,6 +4655,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     
     private void getData() {
         if(tbLabRalan.getSelectedRow()!= -1){
+            Kd2.setText(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),1).toString());
             NoPermintaan=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),0).toString();
             NoRawat=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),1).toString();
             Pasien=tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(),2).toString();
@@ -4561,6 +4675,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     
     private void getData2() {
         if(tbLabRanap.getSelectedRow()!= -1){
+            Kd2.setText(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),1).toString());
             NoPermintaan=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),0).toString();
             NoRawat=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),1).toString();
             Pasien=tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(),2).toString();
@@ -4609,6 +4724,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         BtnAmbilLISTeras.setEnabled(akses.getperiksa_lab());
         BtnKirimLISMADQLAB.setEnabled(akses.getpermintaan_lab());
         BtnAmbilLISMADQLAB.setEnabled(akses.getperiksa_lab());
+        BtnKirimWA.setVisible(akses.getperiksa_lab());
     }
     
     public void setPasien(String pasien){
