@@ -44,8 +44,8 @@ import javax.swing.text.html.StyleSheet;
 import laporan.DlgBerkasRawat;
 import surat.SuratBebasNarkoba;
 import surat.SuratKeteranganCovid;
-import whatsapp.SendFileAppLink;
-import whatsapp.SendFileAppUpload;
+import whatsapp.WhatsAppSendLAB;
+import whatsapp.WhatsAppSendMaster;
 import whatsapp.WhatsAppLoginLAB;
 
 public class DlgCariPeriksaLab extends javax.swing.JDialog {
@@ -3019,7 +3019,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 Platform.runLater(() -> {
                     try {
-                        SendFileAppLink app = new SendFileAppLink();
+                        WhatsAppSendLAB app = new WhatsAppSendLAB();
                         app.setPrefillData(tanggal,nama,telp,link);
                         app.start(new Stage());
                     } catch (Exception ex) {
@@ -3046,7 +3046,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 Platform.runLater(() -> {
                     try {
-                        SendFileAppUpload app = new SendFileAppUpload();
+                        WhatsAppSendMaster app = new WhatsAppSendMaster();
                         app.setPrefillData(nama,telp);
                         app.start(new Stage());
                     } catch (Exception ex) {

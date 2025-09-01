@@ -205,4 +205,16 @@
     <entry key="PORTORTHANC">gie5pRePkRsFe+dOh84P4A==</entry>
     <entry key="USERORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>
     <entry key="PASSORTHANC">V9bi0P2HgAq8Nn8lUyS6/A==</entry>
+
+    <entry key="APIWA_USER">simrs</entry>
+    <entry key="APIWA_PASS">RotiBakar69</entry>
+    <entry key="APIWA_LAB">http://100.10.1.5:3000</entry>
+    <entry key="APIWA_RAD"></entry>
+    <entry key="APIWA_POLI">http://100.10.1.5:4000</entry>
+    <entry key="APIWA_FO"></entry>
+    <entry key="APIWA_IGD"></entry>
+    <entry key="APIWA_APOTEK"></entry>
+    <entry key="APIWA_RANAPDEW"></entry>
+    <entry key="APIWA_RANAPANAK"></entry>
+    <entry key="APIWA_RANAPVK"></entry>
 </properties>

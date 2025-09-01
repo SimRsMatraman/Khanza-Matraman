@@ -1436,4 +1436,114 @@ public class koneksiDB {
         }
         return var;
     }
+    
+    public static String APIWA_USER(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_USER");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_PASS(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_PASS");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_LAB(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_LAB");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_RAD(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_RAD");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_POLI(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_POLI");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_FO(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_FO");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_IGD(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_IGD");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_APOTEK(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_APOTEK");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_RANAPDEW(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_RANAPDEW");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_RANAPANAK(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_RANAPANAK");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWA_RANAPVK(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWA_RANAPVK");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
 }    
