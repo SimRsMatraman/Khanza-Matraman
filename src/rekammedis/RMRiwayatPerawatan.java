@@ -13291,40 +13291,58 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 
                         int w = 1;
                         for (Map<String, Object> row : dataTabel) {
-                            htmlContent.append(
-                                "<tr>"+
-                                "<td valign='top' align='center'>"+w+"</td>"+
-                                "<td valign='top'>"+safe(row, "tanggal_surat")+" "+safe(row, "jam")+"</td>"+
-                                "<td valign='top' align='center'>"+safe(row, "jenis_surat")+"</td>"+
-                                "<td valign='top'>"+safe(row, "nm_dokter")+"</td>"+
-                                "<td valign='top'>"+safe(row, "nama_petugas")+" ("+safe(row, "nik")+")"+"</td>"+
-                                "<td valign='top'>"+safe(row, "nama_saksi")+" ("+safe(row, "nik1")+")"+"</td>"+
-                                "<td valign='top' align='center'><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+ safe(row, "tte") +"'><img alt='Gambar TTE' src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/" + safe(row, "tte") +"' width='220' height='220'/></a><br><center>"+ safe(row, "Nama") +"</center></td>"+
-                                "</tr>"
-                            );
+                        // ambil nilai field tte dan nama
+                        String tteFile = safe(row, "tte");
+                        String namaTtd = safe(row, "Nama");
 
-                            appendRow(htmlContent, row, "no_surat", "No Surat");
-                            appendRow(htmlContent, row, "tanggal_surat", "Tanggal Surat");
-                            appendRow(htmlContent, row, "status_ic", "Status IC");
-                            appendRow(htmlContent, row, "hubungan", "Hubungan Dgn Pasien");
-                            appendRow(htmlContent, row, "acc_ic", "Acc IC");
-                            appendRow(htmlContent, row, "Nama", "Nama Yang Bertanda Tangan");
-                            appendRow(htmlContent, row, "Umur", "Umur");
-                            appendRow(htmlContent, row, "Alamat", "Alamat");
-                            appendRow(htmlContent, row, "DiagnosaKerja", "Diagnosa Kerja");
-                            appendRow(htmlContent, row, "DiagnosaBanding", "Diagnosa Banding");
-                            appendRow(htmlContent, row, "KondisiPasien", "Kondisi Pasien");
-                            appendRow(htmlContent, row, "TindakanKedokteran", "Tindakan Kedokteran");
-                            appendRow(htmlContent, row, "TataCara", "Tata Cara");
-                            appendRow(htmlContent, row, "Tujuan", "Tujuan & Resiko");
-                            appendRow(htmlContent, row, "Komplikasi", "Komplikasi & Resiko Tindakan");
-                            appendRow(htmlContent, row, "Prognosis", "Prognosis");
-                            appendRow(htmlContent, row, "Alternatif", "Alternatif Penggunaan Obat & Resiko");
-                            appendRow(htmlContent, row, "Kemungkinan", "Kemungkinan Hasil Yang Tidak Terduga");
-                            appendRow(htmlContent, row, "Kemungkinan1", "Kemungkinan Hasil Bila Tidak Dilakukan Tindakan");
+                        // default isi cell TTE kosong
+                        String tteHtml = "";
 
-                            w++;
+                        // jika ada file TTE, tampilkan gambar
+                        if(tteFile != null && !tteFile.trim().isEmpty()){
+                            tteHtml = "<a href='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + tteFile + "'>" +
+                                      "<img alt='Gambar TTE' src='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + tteFile + "' width='220' height='220'/></a>";
                         }
+
+                        // jika ada nama, tampilkan di bawah (meskipun tanpa gambar)
+                        if(namaTtd != null && !namaTtd.trim().isEmpty()){
+                            tteHtml += "<br><center>" + namaTtd + "</center>";
+                        }
+
+                        htmlContent.append(
+                            "<tr>"+
+                            "<td valign='top' align='center'>"+w+"</td>"+
+                            "<td valign='top'>"+safe(row, "tanggal_surat")+" "+safe(row, "jam")+"</td>"+
+                            "<td valign='top' align='center'>"+safe(row, "jenis_surat")+"</td>"+
+                            "<td valign='top'>"+safe(row, "nm_dokter")+"</td>"+
+                            "<td valign='top'>"+safe(row, "nama_petugas")+" ("+safe(row, "nik")+")"+"</td>"+
+                            "<td valign='top'>"+safe(row, "nama_saksi")+" ("+safe(row, "nik1")+")"+"</td>"+
+                            "<td valign='top' align='center'>"+tteHtml+"</td>"+
+                            "</tr>"
+                        );
+
+                        appendRow(htmlContent, row, "no_surat", "No Surat");
+                        appendRow(htmlContent, row, "tanggal_surat", "Tanggal Surat");
+                        appendRow(htmlContent, row, "status_ic", "Status IC");
+                        appendRow(htmlContent, row, "hubungan", "Hubungan Dgn Pasien");
+                        appendRow(htmlContent, row, "acc_ic", "Acc IC");
+                        appendRow(htmlContent, row, "Nama", "Nama Yang Bertanda Tangan");
+                        appendRow(htmlContent, row, "Umur", "Umur");
+                        appendRow(htmlContent, row, "Alamat", "Alamat");
+                        appendRow(htmlContent, row, "DiagnosaKerja", "Diagnosa Kerja");
+                        appendRow(htmlContent, row, "DiagnosaBanding", "Diagnosa Banding");
+                        appendRow(htmlContent, row, "KondisiPasien", "Kondisi Pasien");
+                        appendRow(htmlContent, row, "TindakanKedokteran", "Tindakan Kedokteran");
+                        appendRow(htmlContent, row, "TataCara", "Tata Cara");
+                        appendRow(htmlContent, row, "Tujuan", "Tujuan & Resiko");
+                        appendRow(htmlContent, row, "Komplikasi", "Komplikasi & Resiko Tindakan");
+                        appendRow(htmlContent, row, "Prognosis", "Prognosis");
+                        appendRow(htmlContent, row, "Alternatif", "Alternatif Penggunaan Obat & Resiko");
+                        appendRow(htmlContent, row, "Kemungkinan", "Kemungkinan Hasil Yang Tidak Terduga");
+                        appendRow(htmlContent, row, "Kemungkinan1", "Kemungkinan Hasil Bila Tidak Dilakukan Tindakan");
+
+                        w++;
+                    }
                         htmlContent.append("</table></td></tr>");
                     }
                 } catch (Exception e) {
