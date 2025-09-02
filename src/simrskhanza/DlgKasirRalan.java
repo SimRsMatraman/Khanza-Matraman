@@ -13549,6 +13549,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnPenilaianTambahanPerilakuKekerasan.setEnabled(akses.getpenilaian_tambahan_perilaku_kekerasan());
         MnPenilaianTambahanMelarikanDiri.setEnabled(akses.getpenilaian_tambahan_beresiko_melarikan_diri());
         MnPersetujuanPenundaanPelayanan.setEnabled(akses.getpersetujuan_penundaan_pelayanan());
+        BtnSuratKontrol.setVisible(akses.getbpjs_surat_kontrol());
 
         if (akses.getkode().equals("Admin Utama")) {
             MnHapusData.setEnabled(true);

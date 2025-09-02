@@ -1943,7 +1943,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21/08/2025" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02/09/2025" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7626,7 +7626,7 @@ public class frmUtama extends javax.swing.JFrame {
             case "Log Out":
                 BtnToolReg.setEnabled(false);
                 BtnToolKamnap.setEnabled(false);
-                BtnToolFisio.setEnabled(false);
+                BtnToolFisio.setVisible(false);
                 BtnToolKasir.setEnabled(false);
                 btnToolIGD.setEnabled(false);
                 MnGantiPassword.setEnabled(false);
@@ -7670,6 +7670,7 @@ public class frmUtama extends javax.swing.JFrame {
                     BtnMenu.setEnabled(true);
                     BtnToolReg.setEnabled(true);
                     BtnToolKamnap.setEnabled(true);
+                    BtnToolFisio.setVisible(true);
                     BtnToolFisio.setEnabled(true);
                     BtnToolKasir.setEnabled(true); 
                     btnToolIGD.setEnabled(true);
@@ -7729,8 +7730,10 @@ public class frmUtama extends javax.swing.JFrame {
                     }
                     
                     if((akses.getkasir_ralan()==true)){
+                        BtnToolFisio.setVisible(true);
                         BtnToolFisio.setEnabled(true);
                     }else{
+                        BtnToolFisio.setVisible(akses.getkasir_ralan());
                         BtnToolFisio.setEnabled(akses.getkasir_ralan());
                     }
                     
@@ -7764,7 +7767,7 @@ public class frmUtama extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"Maaf, Gagal login. ID User atau password ada yang salah ...!");
                     BtnToolReg.setEnabled(false);
                     BtnToolKamnap.setEnabled(false);
-                    BtnToolFisio.setEnabled(false);
+                    BtnToolFisio.setVisible(false);
                     BtnToolKasir.setEnabled(false);
                     MnGantiPassword.setEnabled(false);  
 //                    MnPengajuanCutiPegawai.setEnabled(false);
