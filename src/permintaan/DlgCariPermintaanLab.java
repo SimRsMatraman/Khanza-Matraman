@@ -493,8 +493,8 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         panelisi1 = new widget.panelisi();
         BtnHapus = new widget.Button();
         BtnSampel = new widget.Button();
-        BtnBatalSampel = new widget.Button();
         BtnHasil = new widget.Button();
+        BtnBatalSampel = new widget.Button();
         BtnEditTgl = new widget.Button();
         BtnAll = new widget.Button();
         BtnPrint = new widget.Button();
@@ -581,7 +581,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025 13:18:22" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-09-2025 12:00:07" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -688,7 +688,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-09-2025" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -1085,24 +1085,6 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         });
         panelisi1.add(BtnSampel);
 
-        BtnBatalSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnBatalSampel.setMnemonic('B');
-        BtnBatalSampel.setText("Batal Sampel");
-        BtnBatalSampel.setToolTipText("Alt+B");
-        BtnBatalSampel.setName("BtnBatalSampel"); // NOI18N
-        BtnBatalSampel.setPreferredSize(new java.awt.Dimension(120, 30));
-        BtnBatalSampel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBatalSampelActionPerformed(evt);
-            }
-        });
-        BtnBatalSampel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnBatalSampelKeyPressed(evt);
-            }
-        });
-        panelisi1.add(BtnBatalSampel);
-
         BtnHasil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         BtnHasil.setMnemonic('I');
         BtnHasil.setText("Ambil Hasil");
@@ -1120,6 +1102,24 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         panelisi1.add(BtnHasil);
+
+        BtnBatalSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnBatalSampel.setMnemonic('B');
+        BtnBatalSampel.setText("Batal Sampel");
+        BtnBatalSampel.setToolTipText("Alt+B");
+        BtnBatalSampel.setName("BtnBatalSampel"); // NOI18N
+        BtnBatalSampel.setPreferredSize(new java.awt.Dimension(120, 30));
+        BtnBatalSampel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBatalSampelActionPerformed(evt);
+            }
+        });
+        BtnBatalSampel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnBatalSampelKeyPressed(evt);
+            }
+        });
+        panelisi1.add(BtnBatalSampel);
 
         BtnEditTgl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
         BtnEditTgl.setMnemonic('G');
@@ -4223,19 +4223,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 
     private void BtnBatalSampelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalSampelActionPerformed
         if(TabPilihRawat.getSelectedIndex()==0){
-            if(!NoRawat.equals("")){
-//                    try {
-//                        koneksisysmex.prepareStatement(
-//                                        "update into lis_order_detail values('0',now(),'NW','"+rs.getString("no_rkm_medis")+"','"+rs.getString("nm_pasien")+"',"+
-//                                        "'"+rs.getString("alamat")+"','"+rs.getString("nm_kel")+"','"+rs.getString("nm_kec")+"','"+rs.getString("nm_kab")+"',"+
-//                                        "'OP','"+rs.getString("tgl_lahir")+"','"+rs.getString("jk")+"','"+rs.getString("noorder")+"','"+rs.getString("tgl_permintaan")+" "+rs.getString("jam_permintaan")+"',"+
-//                                        "'"+rs.getString("kd_poli")+"^"+rs.getString("nm_poli")+"','"+rs.getString("dokter_perujuk")+"^"+rs.getString("nm_dokter")+"',"+
-//                                        "'"+rs.getString("kd_poli")+"','"+pilihan+"','"+rs.getString("diagnosa_klinis")+"','"+rs.getString("no_rawat")+"',"+
-//                                        "'"+Permintaan+"','0')").executeUpdate();
-//                    }
-//                    catch (Exception e) {
-//                        System.out.println("Notif : "+e);
-//                    }
+            if(Hasil.equals("")||!NoRawat.equals("")){
                     if(Sequel.mengedittf("permintaan_lab","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
                         "0000-00-00", "00:00:00",tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString(),
                     })==true){
@@ -4245,9 +4233,12 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         tbLabRalan.setValueAt("",tbLabRalan.getSelectedRow(),5);
                         tbLabRalan.setValueAt("",tbLabRalan.getSelectedRow(),6);
                     }
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan hasil");
             } 
         }else if(TabPilihRawat.getSelectedIndex()==1){
-            if(!NoRawat.equals("")){
+            if(Hasil.equals("")||!NoRawat.equals("")){
                 if(Sequel.mengedittf("permintaan_lab","noorder=?","tgl_sampel=?,jam_sampel=?",3,new String[]{
                         "0000-00-00", "00:00:00",tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString(),
                     })==true){
@@ -4257,7 +4248,10 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         tbLabRanap.setValueAt("",tbLabRanap.getSelectedRow(),5);
                         tbLabRanap.setValueAt("",tbLabRanap.getSelectedRow(),6);
                     }
-            } 
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"Maaf, Sudah dilakukan pengambilan hasil");
+            }
         }
     }//GEN-LAST:event_BtnBatalSampelActionPerformed
 
@@ -4711,8 +4705,11 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     public void isCek(){
         BtnCetakHasilLab.setEnabled(akses.getpermintaan_lab());
         BtnHasil.setEnabled(akses.getperiksa_lab());
+        BtnHasil.setVisible(akses.getperiksa_lab());
         BtnSampel.setEnabled(akses.getperiksa_lab());
-        BtnSampel.setEnabled(akses.getperiksa_lab());
+        BtnSampel.setVisible(akses.getperiksa_lab());
+        BtnBatalSampel.setEnabled(akses.getperiksa_lab());
+        BtnBatalSampel.setVisible(akses.getperiksa_lab());
         BtnHapus.setEnabled(akses.getpermintaan_lab());
         BtnEditTgl.setEnabled(akses.getpermintaan_lab());
         BtnPrint.setEnabled(akses.getpermintaan_lab());
@@ -4725,6 +4722,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         BtnKirimLISMADQLAB.setEnabled(akses.getpermintaan_lab());
         BtnAmbilLISMADQLAB.setEnabled(akses.getperiksa_lab());
         BtnKirimWA.setVisible(akses.getperiksa_lab());
+        BtnKirimWA.setEnabled(akses.getperiksa_lab());
     }
     
     public void setPasien(String pasien){
