@@ -434,7 +434,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="19-05-2025"/>
+                        <StringItem index="0" value="12-09-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -462,7 +462,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="19-05-2025"/>
+                        <StringItem index="0" value="12-09-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -666,10 +666,11 @@
                 <Component class="widget.ComboBox" name="CmbKesimpulan">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="3">
-                        <StringItem index="0" value="Tidak ada gejala gangguan jiwa (psikopatologi)."/>
-                        <StringItem index="1" value="Tidak ada gejala gangguan jiwa (psikopatologi). Namun, dalam situasi tekanan, dirinya perlu berupaya lebih untuk mengatasi permasalahannya."/>
-                        <StringItem index="2" value="Tidak ada gejala gangguan jiwa (psikopatologi). Namun, dari hasil tes MMPI didapatkan gambaran hasil tes tidak terbaca dan tidak dapat diinterpretasi."/>
+                      <StringArray count="4">
+                        <StringItem index="0" value="Tidak ditemukan adanya gejala gangguan jiwa (psikopatologi) bermakna yang mengganggu fungsi dan aktivitas sehari-hari."/>
+                        <StringItem index="1" value="Tidak ditemukan adanya gejala gangguan jiwa (psikopatologi) bermakna yang mengganggu fungsi dan aktivitas sehari-hari. Namun, dalam kondisi tekanan, dirinya perlu berupaya lebih dalam menyelesaikan masalahnya."/>
+                        <StringItem index="2" value="Tidak ditemukan adanya gejala gangguan jiwa (psikopatologi) bermakna yang mengganggu fungsi dan aktivitas sehari-hari. Namun, dalam kondisi tekanan, dirinya perlu berupaya lebih dalam menyelesaikan masalahnya. Disarankan untuk konsultasi lanjutan untuk mendukung pengembangan diri subjek."/>
+                        <StringItem index="3" value="Tidak ditemukan adanya gejala gangguan jiwa (psikopatologi) bermakna yang mengganggu fungsi dan aktivitas sehari-hari. Namun dari hasil tes MMPI didapatkan gambaran hasil tes tidak terbaca dan tidak dapat diinterpretasi."/>
                       </StringArray>
                     </Property>
                     <Property name="name" type="java.lang.String" value="CmbKesimpulan" noResource="true"/>
@@ -690,7 +691,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="19-05-2025"/>
+                        <StringItem index="0" value="12-09-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -732,7 +733,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="110" y="70" width="350" height="50"/>
+                      <AbsoluteConstraints x="110" y="70" width="910" height="50"/>
                     </Constraint>
                   </Constraints>
 

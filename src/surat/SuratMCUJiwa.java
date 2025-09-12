@@ -29,8 +29,6 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import simrskhanza.DlgCariPeriksaLab;
-import simrskhanza.DlgCariPeriksaRadiologi;
 
 
 /**
@@ -127,15 +125,39 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
             public void changedUpdate(DocumentEvent e) {
                 isSurat();
             }
-            });
+        });
+        // === Opsi A: Jadikan ComboBox freetext (editable) ===
+        CmbKesimpulan.setEditable(true);
+        CmbKesimpulan.setToolTipText("Pilih template atau ketik manual");
+        CmbKesimpulan.setSelectedItem(""); // default kosong
+
         ChkInput.setSelected(false);
         isForm();
-    }
+        }
+
+        /** Helper: ambil teks kesimpulan yang terlihat (pilihan atau yang diketik) */
+        private String getKesimpulanText() {
+            Object item = CmbKesimpulan.isEditable()
+                    ? CmbKesimpulan.getEditor().getItem()
+                    : CmbKesimpulan.getSelectedItem();
+            return item == null ? "" : item.toString().trim();
+        }
+
+        /** Helper opsional: tambahkan teks baru ke model jika belum ada */
+        private void addKesimpulanIfNew(String value){
+            if(value == null) return;
+            String v = value.trim();
+            if(v.isEmpty()) return;
+            javax.swing.ComboBoxModel model = CmbKesimpulan.getModel();
+            if(model instanceof javax.swing.DefaultComboBoxModel){
+                javax.swing.DefaultComboBoxModel m = (javax.swing.DefaultComboBoxModel) model;
+                if(m.getIndexOf(v) == -1){
+                    m.addElement(v);
+                }
+            }
+        }
         
         
-
-    
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -447,7 +469,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-05-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -461,7 +483,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-05-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -575,7 +597,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         FormInput.add(jLabel28);
         jLabel28.setBounds(10, 130, 90, 23);
 
-        CmbKesimpulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak ada gejala gangguan jiwa (psikopatologi).", "Tidak ada gejala gangguan jiwa (psikopatologi). Namun, dalam situasi tekanan, dirinya perlu berupaya lebih untuk mengatasi permasalahannya.", "Tidak ada gejala gangguan jiwa (psikopatologi). Namun, dari hasil tes MMPI didapatkan gambaran hasil tes tidak terbaca dan tidak dapat diinterpretasi." }));
+        CmbKesimpulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak ditemukan adanya gejala gangguan jiwa (psikopatologi) bermakna yang mengganggu fungsi dan aktivitas sehari-hari.", "Tidak ditemukan adanya gejala gangguan jiwa (psikopatologi) bermakna yang mengganggu fungsi dan aktivitas sehari-hari. Namun, dalam kondisi tekanan, dirinya perlu berupaya lebih dalam menyelesaikan masalahnya.", "Tidak ditemukan adanya gejala gangguan jiwa (psikopatologi) bermakna yang mengganggu fungsi dan aktivitas sehari-hari. Namun, dalam kondisi tekanan, dirinya perlu berupaya lebih dalam menyelesaikan masalahnya. Disarankan untuk konsultasi lanjutan untuk mendukung pengembangan diri subjek.", "Tidak ditemukan adanya gejala gangguan jiwa (psikopatologi) bermakna yang mengganggu fungsi dan aktivitas sehari-hari. Namun dari hasil tes MMPI didapatkan gambaran hasil tes tidak terbaca dan tidak dapat diinterpretasi." }));
         CmbKesimpulan.setName("CmbKesimpulan"); // NOI18N
         CmbKesimpulan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -586,7 +608,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         CmbKesimpulan.setBounds(110, 130, 910, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-05-2025" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -625,7 +647,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         scrollPane4.setViewportView(Keperluan);
 
         FormInput.add(scrollPane4);
-        scrollPane4.setBounds(110, 70, 350, 50);
+        scrollPane4.setBounds(110, 70, 910, 50);
 
         jLabel32.setText("Keperluan Tes :");
         jLabel32.setName("jLabel32"); // NOI18N
@@ -702,14 +724,20 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
         }else if(Keperluan.getText().trim().equals("")){
             Valid.textKosong(Keperluan,"Keperluan Tes");       
         }else{
+            String kes = getKesimpulanText();
+            if(kes.isEmpty()){
+                Valid.textKosong(CmbKesimpulan,"Kesimpulan");
+                return;
+            }
             BtnSuratActionPerformed(null);
             if(Sequel.menyimpantf("surat_mcu_jiwa","?,?,?,?,?,?","No.Surat",6,new String[]{
-                    NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Keperluan.getText(),CmbKesimpulan.getSelectedItem()+"",Catatan.getText()
+                    NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Keperluan.getText(),kes,Catatan.getText()
                 })==true){
                 tabMode.addRow(new String[]{
-                    NoSurat.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Keperluan.getText(),CmbKesimpulan.getSelectedItem().toString(),Catatan.getText()
+                    NoSurat.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Keperluan.getText(),kes,Catatan.getText()
                 });
                 LCount.setText(""+tabMode.getRowCount());
+                addKesimpulanIfNew(kes);
                 emptTeks();
             }
         }
@@ -763,8 +791,13 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
             Valid.textKosong(Keperluan,"Keperluan");
         }else{    
             if(tbObat.getSelectedRow()!= -1){
+                String kes = getKesimpulanText();
+                if(kes.isEmpty()){
+                    Valid.textKosong(CmbKesimpulan,"Kesimpulan");
+                    return;
+                }
                 if(Sequel.mengedittf("surat_mcu_jiwa","no_surat=?","no_surat=?,no_rawat=?,tanggalsurat=?,keperluan=?,kesimpulan=?,catatan=?",7,new String[]{
-                    NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Keperluan.getText(),CmbKesimpulan.getSelectedItem().toString(),Catatan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                    NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Keperluan.getText(),kes,Catatan.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
                 })==true){
                     tbObat.setValueAt(NoSurat.getText(),tbObat.getSelectedRow(),0);
                     tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),1);
@@ -772,8 +805,9 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
                     tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),3);
                     tbObat.setValueAt(Valid.SetTgl(TanggalSurat.getSelectedItem()+""),tbObat.getSelectedRow(),4);
                     tbObat.setValueAt(Keperluan.getText(),tbObat.getSelectedRow(),5);
-                    tbObat.setValueAt(CmbKesimpulan.getSelectedItem().toString(),tbObat.getSelectedRow(),6);
+                    tbObat.setValueAt(kes,tbObat.getSelectedRow(),6);
                     tbObat.setValueAt(Catatan.getText(),tbObat.getSelectedRow(),7);
+                    addKesimpulanIfNew(kes);
                     emptTeks();
                 }
             }
@@ -923,7 +957,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
                 param.put("nosurat", NoSurat.getText());
                 param.put("keperluan", Keperluan.getText());
                 param.put("catatan", Catatan.getText());
-                param.put("kesimpulan", CmbKesimpulan.getSelectedItem().toString());
+                param.put("kesimpulan", getKesimpulanText());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
                 kodedokter=Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
                 namadokter=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter);
@@ -982,7 +1016,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
                 param.put("nosurat", NoSurat.getText());
                 param.put("keperluan", Keperluan.getText());
                 param.put("catatan", Catatan.getText());
-                param.put("kesimpulan", CmbKesimpulan.getSelectedItem().toString());
+                param.put("kesimpulan", getKesimpulanText());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
                 kodedokter=Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
                 namadokter=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter);
@@ -1009,7 +1043,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
                 param.put("nosurat", NoSurat.getText());
                 param.put("keperluan", Keperluan.getText());
                 param.put("catatan", Catatan.getText());
-                param.put("kesimpulan", CmbKesimpulan.getSelectedItem().toString());
+                param.put("kesimpulan", getKesimpulanText());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
                 kodedokter=Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
                 namadokter=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter);
@@ -1036,7 +1070,7 @@ public final class SuratMCUJiwa extends javax.swing.JDialog {
                 param.put("nosurat", NoSurat.getText());
                 param.put("keperluan", Keperluan.getText());
                 param.put("catatan", Catatan.getText());
-                param.put("kesimpulan", CmbKesimpulan.getSelectedItem().toString());
+                param.put("kesimpulan", getKesimpulanText());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
                 kodedokter=Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
                 namadokter=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter);
@@ -1180,7 +1214,7 @@ Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_mcu_jiwa.no_surat,3),sig
         Keperluan.setText("");
         Catatan.setText("");
 //        TanggalSurat.setDate(new Date());
-        CmbKesimpulan.setSelectedItem("Tidak ditemukan");
+        CmbKesimpulan.setSelectedItem("");
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_mcu_jiwa.no_surat,3),signed)),0) from surat_mcu_jiwa where surat_mcu_jiwa.tanggalsurat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
                 "RSUD-MTR/MMPI/"+TanggalSurat.getSelectedItem().toString().substring(6,10)+"/"+TanggalSurat.getSelectedItem().toString().substring(3,5)+"/"+TanggalSurat.getSelectedItem().toString().substring(0,2)+"/",3,NoSurat);
         NoSurat.requestFocus();
@@ -1262,8 +1296,6 @@ Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_mcu_jiwa.no_surat,3),sig
             MnCetakSuratSehatSignDimas.setEnabled(false);
         }
     }
-    //
-    
 }
 
 
