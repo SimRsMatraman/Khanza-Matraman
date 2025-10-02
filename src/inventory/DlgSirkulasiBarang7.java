@@ -646,19 +646,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         lokasi="";
         prosesCari();
         this.setCursor(Cursor.getDefaultCursor());
-        
+
+        if(tabMode == null){
+            JOptionPane.showMessageDialog(null,"Table model belum diinisialisasi!");
+            return;
+        }
+
         if(tabMode.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda tampilkan...!!!!");
+            JOptionPane.showMessageDialog(null,
+                "Maaf, data sudah habis. Tidak ada data yang bisa anda tampilkan...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){
+        }else{
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
             for(int i=0;i<row;i++){  
                 Sequel.menyimpan("temporary","'"+i+"',?,?,?,?,?,?,?,?,?,?,?,?,'','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'",12,new String[]{
-                    tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
-                    tabMode.getValueAt(i,3).toString(),tabMode.getValueAt(i,4).toString(),tabMode.getValueAt(i,5).toString(),
-                    tabMode.getValueAt(i,6).toString(),tabMode.getValueAt(i,7).toString(),tabMode.getValueAt(i,8).toString(),
-                    tabMode.getValueAt(i,9).toString(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,11).toString()
+                    String.valueOf(tabMode.getValueAt(i,0)),
+                    String.valueOf(tabMode.getValueAt(i,1)),
+                    String.valueOf(tabMode.getValueAt(i,2)),
+                    String.valueOf(tabMode.getValueAt(i,3)),
+                    String.valueOf(tabMode.getValueAt(i,4)),
+                    String.valueOf(tabMode.getValueAt(i,5)),
+                    String.valueOf(tabMode.getValueAt(i,6)),
+                    String.valueOf(tabMode.getValueAt(i,7)),
+                    String.valueOf(tabMode.getValueAt(i,8)),
+                    String.valueOf(tabMode.getValueAt(i,9)),
+                    String.valueOf(tabMode.getValueAt(i,10)),
+                    String.valueOf(tabMode.getValueAt(i,11))
                 }); 
             }
         }
