@@ -1502,4 +1502,11 @@ public final class validasi {
     public static int milliToDay(long milli) {
         return (int) ((double) milli / (1000 * 24 * 60 * 60));
     }
+    
+    public static String SetAngkaPlain(double angka){
+        java.text.DecimalFormat df = new java.text.DecimalFormat("#");
+        df.setMaximumFractionDigits(0); // hilangkan desimal
+        df.setGroupingUsed(false);      // hilangkan pemisah ribuan
+        return df.format(angka);
+    }
 }

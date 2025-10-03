@@ -1009,12 +1009,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     
                     if((aset>0)||(jumlahbeli>0)||(jumlahbeli1>0)||(jumlahbeli1>0)||(jumlahbeli3>0)||(totalbeli>0)||(totalbeli1>0)||(totalbeli2>0)||(totalbeli3>0)){
                         tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),
-                                   rs.getString(3),Valid.SetAngka(stok),
-                                   Valid.SetAngka(jumlahbeli),Valid.SetAngka(totalbeli),
-                                   Valid.SetAngka(jumlahbeli1),Valid.SetAngka(totalbeli1),
-                                   Valid.SetAngka(jumlahbeli2),Valid.SetAngka(totalbeli2),
-                                   Valid.SetAngka(jumlahbeli3),Valid.SetAngka(totalbeli3)
-                                   }); 
+                            rs.getString(3),
+                            Valid.SetAngkaPlain(stok),
+                            Valid.SetAngkaPlain(jumlahbeli), Valid.SetAngkaPlain(totalbeli),
+                            Valid.SetAngkaPlain(jumlahbeli1), Valid.SetAngkaPlain(totalbeli1),
+                            Valid.SetAngkaPlain(jumlahbeli2), Valid.SetAngkaPlain(totalbeli2),
+                            Valid.SetAngkaPlain(jumlahbeli3), Valid.SetAngkaPlain(totalbeli3)
+                        });
                         ttlaset=ttlaset+aset;
                         ttltotalbeli=ttltotalbeli+jumlahbeli;
                         ttltotalpesan=ttltotalpesan+totalbeli;
@@ -1030,12 +1031,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }   
                 tabMode.addRow(new Object[]{"","","","","","","","","","",""}); 
                 tabMode.addRow(new Object[]{
-                    "<>>","Total :","",Valid.SetAngka(ttlaset),
-                    Valid.SetAngka(ttltotalbeli),Valid.SetAngka(ttltotalpesan),
-                    Valid.SetAngka(ttltotaljual),Valid.SetAngka(ttltotalpasien),
-                    Valid.SetAngka(ttltotalpiutang),Valid.SetAngka(ttltotalretbeli),
-                    Valid.SetAngka(ttltotalretjual),Valid.SetAngka(ttltotalretpiut)
-                }); 
+                    "<>>","Total :","",
+                    Valid.SetAngkaPlain(ttlaset),
+                    Valid.SetAngkaPlain(ttltotalbeli), Valid.SetAngkaPlain(ttltotalpesan),
+                    Valid.SetAngkaPlain(ttltotaljual), Valid.SetAngkaPlain(ttltotalpasien),
+                    Valid.SetAngkaPlain(ttltotalpiutang), Valid.SetAngkaPlain(ttltotalretbeli),
+                    Valid.SetAngkaPlain(ttltotalretjual), Valid.SetAngkaPlain(ttltotalretpiut)
+                });
             } catch (Exception e) {
                 System.out.println("Notifikasi Data Barang : "+e);
             } finally{
