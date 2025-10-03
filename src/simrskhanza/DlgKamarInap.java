@@ -190,7 +190,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","Nomer RM","Nama Pasien","Alamat Pasien","Penanggung Jawab","Hubungan P.J.","Jenis Bayar","Kamar","Tarif Kamar",
             "Diagnosa Awal","Diagnosa Akhir","Tgl.Masuk","Jam Masuk","Tgl.Keluar","Jam Keluar",
-            "Ttl.Biaya","Stts.Pulang","Lama Inap","Dokter Poli","Kamar","Dokter PJ Ranap","Status Bayar","Agama","Status Resume","SEP BPJS"
+            "Ttl.Biaya","Stts.Pulang","Lama Inap","Dokter Poli","Kamar","Dokter PJ Ranap","Status Bayar","Agama","Status Resume","SEP BPJS","Kelas Rawat"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -200,7 +200,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         tbKamIn.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamIn.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 25; i++) {
+        for (i = 0; i < 26; i++) {
             TableColumn column = tbKamIn.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -252,6 +252,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }else if(i==23){
                 column.setPreferredWidth(100);
             }else if(i==24){
+                column.setPreferredWidth(100);
+            }else if(i==25){
                 column.setPreferredWidth(100);
             }
         }
@@ -1281,6 +1283,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         TNoRwCari = new widget.TextBox();
         TNoRMCari = new widget.TextBox();
         TPasienCari = new widget.TextBox();
+        KelasBPJS = new widget.TextBox();
         BtnInput = new widget.Button();
         BtnInput1 = new widget.Button();
         BtnResume = new widget.Button();
@@ -5933,7 +5936,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-08-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5956,7 +5959,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-08-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -5982,7 +5985,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-08-2025" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -6005,7 +6008,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-08-2025" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -6091,6 +6094,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
         TPasienCari.setName("TPasienCari"); // NOI18N
         TPasienCari.setPreferredSize(new java.awt.Dimension(210, 23));
         panelGlass9.add(TPasienCari);
+
+        KelasBPJS.setEditable(false);
+        KelasBPJS.setHighlighter(null);
+        KelasBPJS.setName("KelasBPJS"); // NOI18N
+        KelasBPJS.setPreferredSize(new java.awt.Dimension(80, 23));
+        panelGlass9.add(KelasBPJS);
 
         BtnInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Stethoscope.png"))); // NOI18N
         BtnInput.setText("Input Pemeriksaan");
@@ -16628,6 +16637,7 @@ if(tabMode.getRowCount()==0){
     private javax.swing.JDialog DlgSakit2;
     private widget.TextBox JamMasuk;
     private widget.TextBox KdDPJP;
+    private widget.TextBox KelasBPJS;
     private widget.Label LCount;
     private widget.Label LblStts;
     private javax.swing.JMenu MenuBPJS;
@@ -17018,10 +17028,11 @@ if(tabMode.getRowCount()==0){
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    int SttResume,SttSEP,HitungJarak;
-                    String Resume,SEP,Jarak;
+                    int SttResume,SttSEP,HitungJarak,KlsBPJS;
+                    String Resume,SEP,Jarak,Kelas;
                     SttResume=Sequel.cariInteger("select count(no_rawat) from resume_pasien_ranap where no_rawat='"+rs.getString("no_rawat")+"' ");
                     SttSEP=Sequel.cariInteger("select count(no_rawat) from bridging_sep where bridging_sep.jnspelayanan='1' and no_rawat='"+rs.getString("no_rawat")+"' ");
+                    KlsBPJS=Sequel.cariInteger("select klsrawat from bridging_sep where bridging_sep.jnspelayanan='1' and no_rawat='"+rs.getString("no_rawat")+"' ");
                     HitungJarak=Sequel.cariInteger("SELECT IFNULL(DATEDIFF(kontrol,CONCAT(kamar_inap.tgl_keluar,' ',kamar_inap.jam_keluar)),'0')as jeda FROM resume_pasien_ranap INNER JOIN kamar_inap on kamar_inap.no_rawat=resume_pasien_ranap.no_rawat where resume_pasien_ranap.no_rawat='"+rs.getString("no_rawat")+"' GROUP BY resume_pasien_ranap.no_rawat");
 
                     if (rs.getString("kd_pj").equals("BPJ") && SttSEP>0) {
@@ -17032,6 +17043,7 @@ if(tabMode.getRowCount()==0){
                         SEP = "-";
                     }
                     
+                    Kelas = "Kelas "+KlsBPJS;
                     Jarak="x24 jam";
                     
                     if(HitungJarak<1){
@@ -17049,7 +17061,7 @@ if(tabMode.getRowCount()==0){
                         rs.getString("kamar"),Valid.SetAngka(rs.getDouble("trf_kamar")),rs.getString("diagnosa_awal"),
                         rs.getString("diagnosa_akhir"),rs.getString("tgl_masuk"),rs.getString("jam_masuk"),rs.getString("tgl_keluar"),
                         rs.getString("jam_keluar"),Valid.SetAngka(rs.getDouble("ttl_biaya")),rs.getString("stts_pulang"),
-                        rs.getString("lama"),rs.getString("nm_dokter"),rs.getString("kd_kamar"),rs.getString("dpjp"),rs.getString("status_bayar"),rs.getString("agama"),Resume,SEP
+                        rs.getString("lama"),rs.getString("nm_dokter"),rs.getString("kd_kamar"),rs.getString("dpjp"),rs.getString("status_bayar"),rs.getString("agama"),Resume,SEP,Kelas
                     });
                     psanak=koneksi.prepareStatement(
                         "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
@@ -17173,6 +17185,7 @@ if(tabMode.getRowCount()==0){
             TOut.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),13).toString());
             ttlbiaya.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),15).toString());
             cmbStatus.setSelectedItem(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),16).toString());
+            KelasBPJS.setText(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),25).toString());
         }
     }
 
