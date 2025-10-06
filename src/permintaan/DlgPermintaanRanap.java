@@ -1307,7 +1307,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }else{
             if(tbObat.getSelectedRow()> -1){
                 if(Sequel.mengedittf("permintaan_ranap","no_rawat=?","no_rawat=?,tanggal=?,kd_kamar=?,diagnosa=?,catatan=?,kd_dpjp=?,Rencana_rawat=?,tujuan_ranap=?",9,new String[]{
-                    NoRw.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),JnKamar.getSelectedItem()+"",Diagnosa.getText(),Catatan.getText(),KdDPJP.getText(),Rencana_rawat.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),TjnRanap.getSelectedItem()+""
+                    NoRw.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),JnKamar.getSelectedItem()+"",Diagnosa.getText(),Catatan.getText(),KdDPJP.getText(),Rencana_rawat.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),TjnRanap.getSelectedItem().toString()
                 })==true){
                     tampil();
 //                    Sequel.mengedit("kamar","kd_kamar=?","status='DIBOOKING'",1,new String[]{KdKamar.getText()});

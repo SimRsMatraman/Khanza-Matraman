@@ -231,7 +231,8 @@ public class DlgSITB extends javax.swing.JDialog {
         }else if(TCatatan.getText().trim().equals("")){
             Valid.textKosong(TCatatan,"No.SITB");
         }else{          
-            Sequel.menyimpan3("sitb_pasien","?,?",2,new String[]{TNoRW.getText(),TCatatan.getText()},"no_rawat=?","no_sitb=?",2,new String[]{TCatatan.getText(),TNoRW.getText()});
+//            Sequel.menyimpan3("sitb_pasien","?,?",2,new String[]{TNoRW.getText(),TCatatan.getText()},"no_rawat=?","no_sitb=?",2,new String[]{TCatatan.getText(),TNoRW.getText()});
+            Sequel.menyimpan3("sitb_pasien_norm","?,?",2,new String[]{TNoRM.getText(),TCatatan.getText()},"no_rkm_medis=?","no_sitb=?",2,new String[]{TCatatan.getText(),TNoRM.getText()});
             BtnKeluarActionPerformed(evt);        
         }  
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -245,7 +246,8 @@ public class DlgSITB extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-       Sequel.meghapus2("sitb_pasien","no_rawat",TNoRW.getText());
+//       Sequel.meghapus2("sitb_pasien","no_rawat",TNoRW.getText());
+       Sequel.meghapus2("sitb_pasien_norm","no_rkm_medis",TNoRM.getText());
        BtnKeluarActionPerformed(evt);       
 }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -266,11 +268,12 @@ public class DlgSITB extends javax.swing.JDialog {
 private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
     if(TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
         Valid.textKosong(TNoRM,"No.Rekam Medis");
-    }else if(TCatatan.getText().trim().equals("")){
-        Valid.textKosong(TCatatan,"No.SITB");
     }else{  
-        Sequel.mengedit2("sitb_pasien","no_rawat=?","no_sitb=?",2,new String[]{
-            TCatatan.getText(),TNoRW.getText()
+//        Sequel.mengedit2("sitb_pasien","no_rawat=?","no_sitb=?",2,new String[]{
+//            TCatatan.getText(),TNoRW.getText()
+//        });
+        Sequel.mengedit2("sitb_pasien_norm","no_rkm_medis=?","no_sitb=?",2,new String[]{
+            TCatatan.getText(),TNoRM.getText()
         });
         BtnKeluarActionPerformed(evt);
     }
@@ -328,7 +331,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         TNoRM.setText(norm); 
         TNoRW.setText(norawat);
         isPsien();   
-        Sequel.cariIsi("select sitb_pasien.no_sitb from sitb_pasien where sitb_pasien.no_rawat=?",TCatatan,TNoRW.getText());       
+//        Sequel.cariIsi("SELECT sitb_pasien.no_sitb from reg_periksa INNER JOIN sitb_pasien on sitb_pasien.no_rawat=reg_periksa.no_rawat WHERE reg_periksa.no_rkm_medis=? limit 1",TCatatan,TNoRM.getText()); 
+        Sequel.cariIsi("SELECT sitb_pasien_norm.no_sitb from sitb_pasien_norm WHERE sitb_pasien_norm.no_rkm_medis=? limit 1",TCatatan,TNoRM.getText());
     }
     
     
