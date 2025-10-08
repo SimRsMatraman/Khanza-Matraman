@@ -1422,7 +1422,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         " select permintaan_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                         "pasien.no_tlp,penjab.png_jawab,poliklinik.nm_poli,dokter.nm_dokter,permintaan_ranap.tanggal,permintaan_ranap.kd_kamar,"+ 
 //                        "kamar.kd_bangsal,bangsal.nm_bangsal,kamar.trf_kamar,"+ 
-                        "permintaan_ranap.diagnosa,permintaan_ranap.catatan,reg_periksa.kd_dokter from permintaan_ranap "+
+                        "permintaan_ranap.diagnosa,permintaan_ranap.catatan,reg_periksa.kd_dokter,permintaan_ranap.tujuan_ranap, permintaan_ranap.Rencana_rawat from permintaan_ranap "+
                         "inner join reg_periksa on permintaan_ranap.no_rawat=reg_periksa.no_rawat "+
                         "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
