@@ -1634,7 +1634,6 @@ public class DlgPasien extends javax.swing.JDialog {
         jPopupMenu2 = new javax.swing.JPopupMenu();
         MnViaBPJSNik = new javax.swing.JMenuItem();
         MnViaBPJSNoKartu = new javax.swing.JMenuItem();
-        MnViaSatuSehatNik = new javax.swing.JMenuItem();
         WindowGabungRM = new javax.swing.JDialog();
         internalFrame8 = new widget.InternalFrame();
         BtnCloseIn6 = new widget.Button();
@@ -1660,6 +1659,7 @@ public class DlgPasien extends javax.swing.JDialog {
         KdProp = new widget.TextBox();
         KdKel = new widget.TextBox();
         KdKab = new widget.TextBox();
+        MnViaSatuSehatNik = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -2856,20 +2856,6 @@ public class DlgPasien extends javax.swing.JDialog {
         });
         jPopupMenu2.add(MnViaBPJSNoKartu);
 
-        MnViaSatuSehatNik.setBackground(new java.awt.Color(255, 255, 254));
-        MnViaSatuSehatNik.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnViaSatuSehatNik.setForeground(new java.awt.Color(50, 50, 50));
-        MnViaSatuSehatNik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnViaSatuSehatNik.setText("Cek Via NIK/ID Pasien Web Servis Satu Sehat");
-        MnViaSatuSehatNik.setName("MnViaSatuSehatNik"); // NOI18N
-        MnViaSatuSehatNik.setPreferredSize(new java.awt.Dimension(290, 26));
-        MnViaSatuSehatNik.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnViaSatuSehatNikActionPerformed(evt);
-            }
-        });
-        jPopupMenu2.add(MnViaSatuSehatNik);
-
         WindowGabungRM.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowGabungRM.setModal(true);
         WindowGabungRM.setName("WindowGabungRM"); // NOI18N
@@ -3012,6 +2998,19 @@ public class DlgPasien extends javax.swing.JDialog {
         KdKab.setEditable(false);
         KdKab.setHighlighter(null);
         KdKab.setName("KdKab"); // NOI18N
+
+        MnViaSatuSehatNik.setBackground(new java.awt.Color(255, 255, 254));
+        MnViaSatuSehatNik.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnViaSatuSehatNik.setForeground(new java.awt.Color(50, 50, 50));
+        MnViaSatuSehatNik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnViaSatuSehatNik.setText("Cek Via NIK/ID Pasien Web Servis Satu Sehat");
+        MnViaSatuSehatNik.setName("MnViaSatuSehatNik"); // NOI18N
+        MnViaSatuSehatNik.setPreferredSize(new java.awt.Dimension(290, 26));
+        MnViaSatuSehatNik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnViaSatuSehatNikActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -7034,19 +7033,19 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             JOptionPane.showMessageDialog(null,"Silahkan isi terlebih dahulu NIK/No.KTP..!!");
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            BPJSCekNIK cekViaBPJS=new BPJSCekNIK();
-            String jk = cekViaBPJS.sex;
+            BPJSCekNIK cekViaBPJS=new BPJSCekNIK();            
             cekViaBPJS.tampil(TKtp.getText());
+            String jk = cekViaBPJS.sex;
             TNm.setText(cekViaBPJS.nama);
+            TNo.setText(cekViaBPJS.mrnoMR);
             if(jk.equals("L")){
             this.CmbJk.setSelectedItem("LAKI-LAKI");
             }else{            
             this.CmbJk.setSelectedItem("PEREMPUAN");
             }
-
+            TTlp.setText(cekViaBPJS.mrnoTelepon);
             TNoPeserta.setText(cekViaBPJS.noKartu);
             Pekerjaan.setText(cekViaBPJS.jenisPesertaketerangan);
-//            TUmurTh.setText(cekViaBPJS.umurumurSekarang);
             Valid.SetTgl(DTPLahir,cekViaBPJS.tglLahir);
             this.setCursor(Cursor.getDefaultCursor());
         }   
@@ -7060,11 +7059,18 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             BPJSCekNoKartu cekViaBPJSKartu=new BPJSCekNoKartu();
             cekViaBPJSKartu.tampil(TNoPeserta.getText());
-            TNm.setText(cekViaBPJSKartu.nama);
-            CmbJk.setSelectedItem(cekViaBPJSKartu.sex);
             TKtp.setText(cekViaBPJSKartu.nik);
+            String jk = cekViaBPJSKartu.sex;
+            TNm.setText(cekViaBPJSKartu.nama);
+            TNo.setText(cekViaBPJSKartu.mrnoMR);
+            if(jk.equals("L")){
+            this.CmbJk.setSelectedItem("LAKI-LAKI");
+            }else{            
+            this.CmbJk.setSelectedItem("PEREMPUAN");
+            }
+            TTlp.setText(cekViaBPJSKartu.mrnoTelepon);
+            TNoPeserta.setText(cekViaBPJSKartu.noKartu);
             Pekerjaan.setText(cekViaBPJSKartu.jenisPesertaketerangan);
-            TUmurTh.setText(cekViaBPJSKartu.umurumurSekarang);
             Valid.SetTgl(DTPLahir,cekViaBPJSKartu.tglLahir);
             this.setCursor(Cursor.getDefaultCursor());
         }
