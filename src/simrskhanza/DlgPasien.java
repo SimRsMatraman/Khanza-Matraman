@@ -7037,13 +7037,19 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             cekViaBPJS.tampil(TKtp.getText());
             String jk = cekViaBPJS.sex;
             TNm.setText(cekViaBPJS.nama);
-            TNo.setText(cekViaBPJS.mrnoMR);
+            String mr = cekViaBPJS.mrnoMR;           // hasil pencarian
+            if (mr != null && !mr.isEmpty() && !"null".equalsIgnoreCase(mr)) {
+                TNo.setText(mr);                           // hanya set kalau ada nilainya
+            }
             if(jk.equals("L")){
             this.CmbJk.setSelectedItem("LAKI-LAKI");
             }else{            
             this.CmbJk.setSelectedItem("PEREMPUAN");
-            }
-            TTlp.setText(cekViaBPJS.mrnoTelepon);
+            }           
+            String tlp = cekViaBPJS.mrnoTelepon;           // hasil pencarian
+            if (tlp != null && !tlp.isEmpty() && !"null".equalsIgnoreCase(tlp)) {
+                TTlp.setText(tlp);                           // hanya set kalau ada nilainya
+            }           
             TNoPeserta.setText(cekViaBPJS.noKartu);
             Pekerjaan.setText(cekViaBPJS.jenisPesertaketerangan);
             Valid.SetTgl(DTPLahir,cekViaBPJS.tglLahir);
@@ -7062,13 +7068,19 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
             TKtp.setText(cekViaBPJSKartu.nik);
             String jk = cekViaBPJSKartu.sex;
             TNm.setText(cekViaBPJSKartu.nama);
-            TNo.setText(cekViaBPJSKartu.mrnoMR);
+            String mr = cekViaBPJSKartu.mrnoMR;           // hasil pencarian
+            if (mr != null && !mr.isEmpty() && !"null".equalsIgnoreCase(mr)) {
+                TNo.setText(mr);                           // hanya set kalau ada nilainya
+            }
             if(jk.equals("L")){
             this.CmbJk.setSelectedItem("LAKI-LAKI");
             }else{            
             this.CmbJk.setSelectedItem("PEREMPUAN");
             }
-            TTlp.setText(cekViaBPJSKartu.mrnoTelepon);
+            String tlp = cekViaBPJSKartu.mrnoTelepon;           // hasil pencarian
+            if (tlp != null && !tlp.isEmpty() && !"null".equalsIgnoreCase(tlp)) {
+                TTlp.setText(tlp);                           // hanya set kalau ada nilainya
+            } 
             TNoPeserta.setText(cekViaBPJSKartu.noKartu);
             Pekerjaan.setText(cekViaBPJSKartu.jenisPesertaketerangan);
             Valid.SetTgl(DTPLahir,cekViaBPJSKartu.tglLahir);
