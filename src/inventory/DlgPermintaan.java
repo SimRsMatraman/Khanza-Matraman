@@ -216,9 +216,7 @@ public class DlgPermintaan extends javax.swing.JDialog {
                         kdgudangTujuan.requestFocus();
                         tampil();
 
-                        // Setelah tampil selesai update UI, jalankan getCekStokAuto()
                         new javax.swing.Timer(300, evt -> {
-                            System.out.println("Menjalankan getCekStokAuto() setelah tampil selesai...");
                             getCekStokAuto();
                             ((javax.swing.Timer) evt.getSource()).stop();
                         }).start();
