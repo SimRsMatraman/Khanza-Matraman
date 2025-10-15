@@ -37,7 +37,7 @@ public class WarnaTableApt extends DefaultTableCellRenderer {
         }
         component.setForeground(new Color(50, 50, 50));
         
-        if (column == 10) {
+        if (column == 10 || column == 13) {
             Object val10 = table.getValueAt(row, 10);
             boolean kosong = (val10 == null || val10.toString().trim().isEmpty());
             if (kosong) {
@@ -96,8 +96,12 @@ public class WarnaTableApt extends DefaultTableCellRenderer {
                         }
                     } else {
                         table.setValueAt("Stok " + namaGudangTujuan + " (" + stokPemintaText + "), kurang dari minimal Jml permintaan (" + minPermintaanText + ")", row, 12);
-                        if (column == 10 || column == 12) {
+                        if (column == 6 || column == 9 || column == 12) {
                             component.setBackground(new Color(255, 204, 153));
+                            component.setForeground(Color.BLACK);
+                        }
+                        if (column == 10) {
+                            component.setBackground(new Color(230,145,56));
                             component.setForeground(Color.BLACK);
                         }
                     }
@@ -113,26 +117,29 @@ public class WarnaTableApt extends DefaultTableCellRenderer {
             }
 
             if (stokPeminta > maxPermintaan) {
-            if (maxPermintaanText != null && !maxPermintaanText.trim().isEmpty()) {
+            boolean validMax = (maxPermintaanText != null 
+                                && !maxPermintaanText.trim().isEmpty()
+                                && !maxPermintaanText.trim().equals("0")
+                                && !maxPermintaanText.trim().equals("0.0"));
+
+            if (validMax) {
                 table.setValueAt("Stok " + namaGudangTujuan + " (" + stokPemintaText +
                                  "), lebih dari maksimal stok (" + maxPermintaanText + ")", row, 12);
 
                 if (column == 7 || column == 9 || column == 12) {
-                    component.setBackground(new Color(217, 234, 211)); // hijau lembut
+                    component.setBackground(new Color(217, 234, 211));
                     component.setForeground(new Color(68, 68, 68));
                 }
             } else {
-                // kosongkan pesan
                 table.setValueAt("", row, 12);
 
-                // 🌈 kembalikan ke warna dasar tabel sesuai baris (selang-seling)
                 if (!isSelected) {
                     if (row % 2 == 1) {
-                        component.setBackground(new Color(255, 244, 244)); // warna baris ganjil (merah muda lembut)
+                        component.setBackground(new Color(255, 244, 244));
                     } else {
-                        component.setBackground(new Color(255, 255, 255)); // warna baris genap (putih)
+                        component.setBackground(new Color(255, 255, 255));
                     }
-                    component.setForeground(new Color(50, 50, 50)); // teks normal
+                    component.setForeground(new Color(50, 50, 50));
                 }
             }
         }

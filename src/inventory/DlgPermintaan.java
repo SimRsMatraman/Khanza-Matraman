@@ -36,6 +36,11 @@ import java.awt.Component;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.SwingUtilities;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+
 
 public class DlgPermintaan extends javax.swing.JDialog {
 
@@ -94,6 +99,13 @@ public class DlgPermintaan extends javax.swing.JDialog {
             }
         };
         tbDokter.setModel(tabMode);
+        
+        JTableHeader header = tbDokter.getTableHeader();
+        header.setBackground(new Color(0, 102, 153));  // biru tua RSUD Matraman
+        header.setForeground(Color.WHITE);              // teks putih
+        header.setFont(new Font("Tahoma", Font.BOLD, 12));
+        header.setOpaque(true);
+        ((DefaultTableCellRenderer) header.getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800, 800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -105,7 +117,7 @@ public class DlgPermintaan extends javax.swing.JDialog {
             } else if (i == 1) {
                 column.setPreferredWidth(300);
             } else if (i == 2) {
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(70);
             } else if (i == 3) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -116,18 +128,18 @@ public class DlgPermintaan extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             } else if (i == 6) {
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(130);
             } else if (i == 7) {
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(130);
             } else if (i == 8) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             } else if (i == 9) {
-                column.setPreferredWidth(130);
+                column.setPreferredWidth(150);
             } else if (i == 10) {
                 column.setPreferredWidth(60);
             } else if (i == 11) {
-                column.setPreferredWidth(130);
+                column.setPreferredWidth(150);
             } else if (i == 12) {
                 column.setPreferredWidth(400);
             } else if (i == 13) {
@@ -293,18 +305,6 @@ public class DlgPermintaan extends javax.swing.JDialog {
             }
         });
         
-//        btnSuplier.addActionListener(e -> {
-//            if (kdgudangasal.getText().trim().isEmpty()) {
-//                JOptionPane.showMessageDialog(rootPane,
-//                    "Isi dulu asal barang sebelum memilih unit!",
-//                    "Peringatan", JOptionPane.WARNING_MESSAGE);
-//                kdgudangasal.requestFocus();
-//                return;
-//            }
-//
-//            // lanjutkan aksi normal di sini
-//        });
-        
         // Buat kondisi awal: tombol nonaktif jika kdgudangbangsal kosong
         btnSuplier.setEnabled(!kdgudangasal.getText().trim().isEmpty());
 
@@ -331,6 +331,19 @@ public class DlgPermintaan extends javax.swing.JDialog {
             }
         });
         
+        // 🎯 Update header ketika user mengganti nama gudang asal/tujuan
+        nmgudangasal.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { updateHeaderGudang(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { updateHeaderGudang(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { updateHeaderGudang(); }
+        });
+
+        nmgudangTujuan.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { updateHeaderGudang(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { updateHeaderGudang(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { updateHeaderGudang(); }
+        });
+        
         try {
             DEPOAKTIFOBAT = koneksiDB.DEPOAKTIFOBAT();
             STOKKOSONGRESEP = koneksiDB.STOKKOSONGRESEP();
@@ -338,6 +351,28 @@ public class DlgPermintaan extends javax.swing.JDialog {
             System.out.println("E : " + e);
             DEPOAKTIFOBAT = "";
             STOKKOSONGRESEP="no";
+        }
+    }
+    
+    // 🔄 Fungsi untuk memperbarui nama kolom stok sesuai gudang asal & tujuan
+    private void updateHeaderGudang() {
+        try {
+            String namaAsal   = nmgudangasal.getText().trim();
+            String namaTujuan = nmgudangTujuan.getText().trim();
+
+            if (namaAsal.isEmpty())   namaAsal   = "Unit Asal";
+            if (namaTujuan.isEmpty()) namaTujuan = "Unit Peminta";
+
+            JTableHeader header = tbDokter.getTableHeader();
+            TableColumnModel columns = header.getColumnModel();
+
+            // ubah hanya kolom 9 dan 11
+            columns.getColumn(9).setHeaderValue("Stok " + namaTujuan);
+            columns.getColumn(11).setHeaderValue("Stok " + namaAsal);
+
+            header.repaint(); // refresh tampilan header tabel
+        } catch (Exception e) {
+            System.err.println("Gagal update header gudang: " + e.getMessage());
         }
     }
 
@@ -1499,7 +1534,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             System.out.println("Notifikasi : " + e);
         }
         LCount.setText(""+tabMode.getRowCount());
-        
+        updateHeaderGudang();
 //        for (int r = 0; r < tbDokter.getRowCount(); r++) {
 //            prosesAutoJumlah(tbDokter, r);
 //        }
