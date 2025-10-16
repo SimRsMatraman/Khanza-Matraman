@@ -867,20 +867,45 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     NoPermintaan.getText(), kdgudangasal.getText(), kdptg.getText(), Valid.SetTgl(Tanggal.getSelectedItem() + ""), "Baru", kdgudangTujuan.getText()
                 }) == true) {
                     jml = tbDokter.getRowCount();
-                    for (i = 0; i < jml; i++) {
+                    for (i = 0; i < tbDokter.getRowCount(); i++) {
                         try {
-                            if (Valid.SetAngka(tbDokter.getValueAt(i, 10).toString()) > 0) {
-                                if (Sequel.menyimpantf2("detail_permintaan_medis", "?,?,?,?,?", "Detail Permintaan", 5, new String[]{
-                                    NoPermintaan.getText(),
-                                    tbDokter.getValueAt(i, 1).toString(), tbDokter.getValueAt(i, 3).toString(),
-                                    tbDokter.getValueAt(i, 10).toString(),
-                                    tbDokter.getValueAt(i, 13).toString().replaceAll("'", "").replaceAll("\"", "")
-                                }) == false) {
+                            String kodeBarang  = tbDokter.getValueAt(i, 0) == null ? "" : tbDokter.getValueAt(i, 0).toString().trim();
+                            String kodeSatuan  = tbDokter.getValueAt(i, 2) == null ? "" : tbDokter.getValueAt(i, 2).toString().trim();
+                            String jumlah      = tbDokter.getValueAt(i, 10) == null ? "" : tbDokter.getValueAt(i, 10).toString().trim();
+                            String keterangan  = tbDokter.getValueAt(i, 13) == null ? "" : tbDokter.getValueAt(i, 13).toString()
+                                                    .replaceAll("'", "")
+                                                    .replaceAll("\"", "")
+                                                    .trim();
+
+                            if (kodeBarang.isEmpty() || jumlah.isEmpty() || kodeSatuan.isEmpty()) {
+                                continue;
+                            }
+
+                            // ✅ Hanya proses jika jumlah > 0
+                            double jmlAngka = Valid.SetAngka(jumlah);
+                            if (jmlAngka > 0) {
+                                boolean berhasil = Sequel.menyimpantf2(
+                                    "detail_permintaan_medis",
+                                    "?,?,?,?,?",  
+                                    "Detail Permintaan",
+                                    5,
+                                    new String[]{
+                                        NoPermintaan.getText(),
+                                        kodeBarang,
+                                        kodeSatuan,
+                                        jumlah,
+                                        keterangan
+                                    }
+                                );
+
+                                if (!berhasil) {
                                     sukses = false;
                                 }
                             }
+
                         } catch (Exception e) {
-                            System.out.println("Notifikasi : " + e);
+                            sukses = false;
+                            System.out.println("⚠️ Error simpan detail row ke-" + i + ": " + e);
                         }
                     }
                 } else {
