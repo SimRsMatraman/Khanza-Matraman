@@ -115,9 +115,9 @@ public class DlgPermintaan extends javax.swing.JDialog {
             if (i == 0) {
                 column.setPreferredWidth(80);
             } else if (i == 1) {
-                column.setPreferredWidth(300);
+                column.setPreferredWidth(270);
             } else if (i == 2) {
-                column.setPreferredWidth(70);
+                column.setPreferredWidth(60);
             } else if (i == 3) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -128,20 +128,20 @@ public class DlgPermintaan extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             } else if (i == 6) {
-                column.setPreferredWidth(130);
+                column.setPreferredWidth(120);
             } else if (i == 7) {
-                column.setPreferredWidth(130);
+                column.setPreferredWidth(120);
             } else if (i == 8) {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             } else if (i == 9) {
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(140);
             } else if (i == 10) {
-                column.setPreferredWidth(60);
+                column.setPreferredWidth(50);
             } else if (i == 11) {
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(140);
             } else if (i == 12) {
-                column.setPreferredWidth(400);
+                column.setPreferredWidth(300);
             } else if (i == 13) {
                 column.setPreferredWidth(450);
             } else if (i == 14) {
@@ -1552,11 +1552,11 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             BtnSimpan.setEnabled(akses.getpermintaan_medis());
             BtnTambah.setEnabled(akses.getobat());
             nmptg.setText(pegawai.tampil3(kdptg.getText()));
-            if (!DEPOAKTIFOBAT.equals("")) {
-                kdgudangasal.setText(DEPOAKTIFOBAT);
-                nmgudangasal.setText(caribangsal.tampil3(DEPOAKTIFOBAT));
-                btnSuplier1.setEnabled(false);
-            }
+//            if (!DEPOAKTIFOBAT.equals("")) {
+//                kdgudangasal.setText(DEPOAKTIFOBAT);
+//                nmgudangasal.setText(caribangsal.tampil3(DEPOAKTIFOBAT));
+//                btnSuplier1.setEnabled(false);
+//            }
         }
     }
 
