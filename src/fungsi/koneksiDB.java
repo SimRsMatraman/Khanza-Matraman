@@ -22,7 +22,7 @@ public class koneksiDB {
     private static final Properties propVer = new Properties();
     private static final MysqlDataSource dataSource=new MysqlDataSource();
     private static String var="";
-    
+
     public koneksiDB(){} 
     public static Connection condb(){ 
         if(connection == null){
@@ -1541,6 +1541,26 @@ public class koneksiDB {
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=prop.getProperty("APIWA_RANAPVK");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWEBSITE_BASE(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWEBSITE_BASE");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String APIWEBSITE_KEY(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("APIWEBSITE_KEY");
         }catch(Exception e){
             var=""; 
         }

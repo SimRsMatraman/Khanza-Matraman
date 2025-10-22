@@ -90,7 +90,7 @@
     <entry key="CONSIDAPIAPLICARE">zRdntHf6Zt5Ist7sHgnpdw==</entry>
     <entry key="USERKEYAPIAPLICARE">5934td74k4ih5K95nOYUOG/9LtNZqIIf+a6oFu58HhAZgC5Lt28jpbiNdZf2q3dI</entry>
 
-    <entry key="URLAPIMOBILEJKN">https://apijkn.bpjs-kesehatan.go.id/antreanrs/</entry>
+    <entry key="URLAPIMOBILEJKN">https://apijkn-dev.bpjs-kesehatan.go.id/antreanrs_dev</entry>
     <entry key="SECRETKEYAPIMOBILEJKN">Nc9g9ojrGX2wmKT6sPM6LA==</entry>
     <entry key="CONSIDAPIMOBILEJKN">zRdntHf6Zt5Ist7sHgnpdw==</entry>
     <entry key="USERKEYAPIMOBILEJKN">iMijVhfyd+r4s7lcjitHTJoeJaiH8z0ge3xWS/lfZI31BjoxQQhkdYhTcdm+0xAE</entry>
@@ -212,9 +212,11 @@
     <entry key="APIWA_RAD">http://100.10.1.5:3200</entry>
     <entry key="APIWA_POLI">http://100.10.1.5:4000</entry>
     <entry key="APIWA_FO">http://100.10.1.5:3100</entry>
-    <entry key="APIWA_IGD"></entry>
+    <entry key="APIWA_IGD">http://100.10.1.5:3300</entry>
     <entry key="APIWA_APOTEK"></entry>
     <entry key="APIWA_RANAPDEW"></entry>
     <entry key="APIWA_RANAPANAK"></entry>
     <entry key="APIWA_RANAPVK"></entry>
+    <entry key="APIWEBSITE_BASE">https://rsudmatraman.jakarta.go.id/api-website</entry>
+    <entry key="APIWEBSITE_KEY">null</entry>
 </properties>
