@@ -1,5 +1,17 @@
 package whatsapp;
 
+// === [PATCH IMPORT: Kunjungan] ===
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.util.StringConverter;
+import javafx.beans.property.ReadOnlyStringWrapper;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 import fungsi.koneksiDB;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -37,6 +49,8 @@ public class WhatsAppSendLAB extends Application {
     private static String AUTH_USER = "simrs";
     private static String AUTH_PASS = "RotiBakar69";
     private static String BASE_URL  = "http://100.10.1.5:3000";
+    
+    private String logNoRawat, logTglPeriksa, logJam, logNoRM, logNama, logNoTelp, logNoOrder;
 
     // Endpoint (bukan static final agar ikut BASE_URL terbaru)
     private String ENDPOINT_FILE;
@@ -84,22 +98,47 @@ public class WhatsAppSendLAB extends Application {
     private String prefillFileUrl;
     private String prefillTanggal;
     private String prefillNama;
+    
+    // === [PATCH FIELDS: Kunjungan & API Website] ===
+    private Button tabKunjunganBtn;
+    private Pane kunjunganPane;
+    private VBox toastLayerKunjungan;
+
+    private DatePicker dpStart, dpEnd;
+    private TextField tfSearch;
+    private Button btnLoad;
+
+    private TableView<KunjunganRow> tvKunjungan;
+    private ObservableList<KunjunganRow> kunjunganData = FXCollections.observableArrayList();
+    private TextArea taTemplateKunjungan;
+
+    // API Website (untuk query kunjungan & log)
+    private String API_WEBSITE_BASE = "https://rsudmatraman.my.id/api-website";
+    private String API_WEBSITE_KEY  = "raisganteng"; // opsional
+    private String API_KUNJUNGAN;
+    private String API_LOGSEND;
 
     public WhatsAppSendLAB() {
-        super();
-        try {
-            AUTH_USER = koneksiDB.APIWA_USER();
-            AUTH_PASS = koneksiDB.APIWA_PASS();
-            BASE_URL  = koneksiDB.APIWA_LAB();
-        } catch (Exception e) {
-            System.out.println("Notif koneksiDB: " + e.getMessage());
-        }
-        ENDPOINT_FILE    = BASE_URL + "/send/file";
-        ENDPOINT_CHAT    = BASE_URL + "/send/message";
-        ENDPOINT_RECONN  = BASE_URL + "/app/reconnect";
-        ENDPOINT_LOGIN   = BASE_URL + "/app/login";
-        ENDPOINT_DEVICES = BASE_URL + "/app/devices";
-        ENDPOINT_LOGOUT  = BASE_URL + "/app/logout";
+    super();
+    try {
+        AUTH_USER = koneksiDB.APIWA_USER();
+        AUTH_PASS = koneksiDB.APIWA_PASS();
+        BASE_URL  = koneksiDB.APIWA_LAB();
+        // opsional, jika tersedia
+        try { API_WEBSITE_BASE = koneksiDB.APIWEBSITE_BASE(); } catch (Throwable ignore) {}
+        try { API_WEBSITE_KEY  = koneksiDB.APIWEBSITE_KEY();  } catch (Throwable ignore) {}
+    } catch (Exception e) {
+        System.out.println("Notif koneksiDB: " + e.getMessage());
+    }
+    ENDPOINT_FILE    = BASE_URL + "/send/file";
+    ENDPOINT_CHAT    = BASE_URL + "/send/message";
+    ENDPOINT_RECONN  = BASE_URL + "/app/reconnect";
+    ENDPOINT_LOGIN   = BASE_URL + "/app/login";
+    ENDPOINT_DEVICES = BASE_URL + "/app/devices";
+    ENDPOINT_LOGOUT  = BASE_URL + "/app/logout";
+
+    API_KUNJUNGAN = API_WEBSITE_BASE + "/lab/kunjungan";
+    API_LOGSEND   = API_WEBSITE_BASE + "/lab/log-send";
     }
 
     // Prefill untuk SEND (opsional)
@@ -113,6 +152,7 @@ public class WhatsAppSendLAB extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
+        stage.getIcons().add(new Image("https://rsudmatraman.my.id/upload/image/whatsapp.png"));
         stage.setTitle("WhatsApp RSUD Matraman");
 
         // ===== Root lebih dulu =====
@@ -126,7 +166,8 @@ public class WhatsAppSendLAB extends Application {
 
         tabLoginBtn = new Button("Login");
         tabSendBtn  = new Button("Kirim WA");
-        for (Button b : new Button[]{tabLoginBtn, tabSendBtn}) {
+        tabKunjunganBtn = new Button("Kunjungan");
+        for (Button b : new Button[]{tabLoginBtn, tabSendBtn, tabKunjunganBtn}) {
             b.setMaxWidth(Double.MAX_VALUE);
             b.setStyle(
                 "-fx-background-color:#1e293b; -fx-text-fill:white; -fx-font-weight:bold; " +
@@ -135,7 +176,8 @@ public class WhatsAppSendLAB extends Application {
         }
         tabLoginBtn.setOnAction(e -> showLoginPane());
         tabSendBtn.setOnAction(e -> showSendPane());
-        sideBar.getChildren().addAll(tabLoginBtn, tabSendBtn);
+        tabKunjunganBtn.setOnAction(e -> showKunjunganPane());
+        sideBar.getChildren().addAll(tabLoginBtn, tabSendBtn, tabKunjunganBtn);
         root.setLeft(sideBar);
 
         // ===== Content stack =====
@@ -146,12 +188,14 @@ public class WhatsAppSendLAB extends Application {
         // ===== Init PANE: LOGIN & SEND =====
         initLoginPane();
         initSendPane();
+        initKunjunganPane();
 
         // Default: ke LOGIN lalu pindah ke Kirim (opsional)
-        contentStack.getChildren().addAll(loginPane, sendPane);
+        contentStack.getChildren().addAll(loginPane, sendPane, kunjunganPane);
         setOnly(loginPane, true);
         setOnly(sendPane, false);
-        styleActiveTab(tabLoginBtn, tabSendBtn);
+        setOnly(kunjunganPane, false);
+        setActiveTab(tabSendBtn);
         showSendPane();
 
         // Scene
@@ -500,15 +544,24 @@ public class WhatsAppSendLAB extends Application {
         if (qrTimeline != null) qrTimeline.stop();
         setOnly(loginPane, true);
         setOnly(sendPane, false);
-        styleActiveTab(tabLoginBtn, tabSendBtn);
-        refreshQR(); // opsional
+        setOnly(kunjunganPane, false);
+        setActiveTab(tabLoginBtn);
     }
 
     private void showSendPane() {
         if (qrTimeline != null) qrTimeline.stop();
         setOnly(sendPane, true);
         setOnly(loginPane, false);
-        styleActiveTab(tabSendBtn, tabLoginBtn);
+        setOnly(kunjunganPane, false);
+        setActiveTab(tabSendBtn);
+    }
+
+    private void showKunjunganPane() {
+        if (qrTimeline != null) qrTimeline.stop();
+        setOnly(kunjunganPane, true);
+        setOnly(loginPane, false);
+        setOnly(sendPane, false);
+        setActiveTab(tabKunjunganBtn);
     }
 
     private void setOnly(Pane p, boolean on) {
@@ -517,9 +570,359 @@ public class WhatsAppSendLAB extends Application {
         if (on) p.toFront();
     }
 
-    private void styleActiveTab(Button active, Button inactive) {
-        active.setStyle("-fx-background-color:#22c55e; -fx-text-fill:white; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 12;");
-        inactive.setStyle("-fx-background-color:#1e293b; -fx-text-fill:white; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 12;");
+    // Helper: highlight 1 tombol & reset lainnya
+    private void setActiveTab(Button active) {
+        Button[] all = new Button[]{tabLoginBtn, tabSendBtn, tabKunjunganBtn};
+        for (Button b : all) {
+            if (b == null) continue;
+            if (b == active) {
+                b.setStyle("-fx-background-color:#22c55e; -fx-text-fill:white; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 12;");
+            } else {
+                b.setStyle("-fx-background-color:#1e293b; -fx-text-fill:white; -fx-font-weight:bold; -fx-background-radius:10; -fx-padding:10 12;");
+            }
+        }
+    }
+    
+    private void initKunjunganPane() {
+        // Filter bar
+        dpStart = new DatePicker(LocalDate.now());
+        dpEnd   = new DatePicker(LocalDate.now());
+        tfSearch = new TextField();
+        tfSearch.setPromptText("Cari (Nama/RM/No Rawat)");
+
+        btnLoad = new Button("Cari");
+        btnLoad.setOnAction(e -> loadKunjungan());
+        
+        // Enter di kolom search = klik Muat
+        tfSearch.setOnAction(e -> btnLoad.fire());
+
+        // Enter di datepicker juga jalanin Muat
+//        dpStart.setOnAction(e -> btnLoad.fire());
+        dpEnd.setOnAction(e -> btnLoad.fire());
+
+        // Date format Y-M-D
+        DateTimeFormatter ymd = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        StringConverter<LocalDate> conv = new StringConverter<LocalDate>() {
+            @Override
+            public String toString(LocalDate d) {
+                return d != null ? ymd.format(d) : "";
+            }
+            @Override
+            public LocalDate fromString(String s) {
+                if (s == null) return null;
+                s = s.trim();
+                return s.isEmpty() ? null : LocalDate.parse(s, ymd);
+            }
+        };
+        dpStart.setConverter(conv); dpEnd.setConverter(conv);
+
+        HBox filter = new HBox(8,
+            new Label("Tanggal 1"), dpStart,
+            new Label("Tanggal 2"), dpEnd,
+            tfSearch, btnLoad
+        );
+        filter.setAlignment(Pos.CENTER_LEFT);
+        filter.setPadding(new Insets(10));
+
+        // Table
+        tvKunjungan = new TableView<>();
+        tvKunjungan.setItems(kunjunganData);
+        tvKunjungan.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        TableColumn<KunjunganRow, String> cNoRawat = new TableColumn<>("No Rawat");
+        cNoRawat.setCellValueFactory(cd -> new ReadOnlyStringWrapper(
+                cd.getValue()!=null ? safe(cd.getValue().no_rawat) : ""
+        ));
+
+        TableColumn<KunjunganRow, String> cNama = new TableColumn<>("Nama Pasien");
+        cNama.setCellValueFactory(cd -> new ReadOnlyStringWrapper(
+                cd.getValue()!=null ? safe(cd.getValue().nm_pasien) : ""
+        ));
+
+        TableColumn<KunjunganRow, String> cNoRM = new TableColumn<>("No RM");
+        cNoRM.setCellValueFactory(cd -> new ReadOnlyStringWrapper(
+                cd.getValue()!=null ? safe(cd.getValue().no_rkm_medis) : ""
+        ));
+
+        TableColumn<KunjunganRow, String> cTgl = new TableColumn<>("Tanggal Periksa");
+        cTgl.setCellValueFactory(cd -> new ReadOnlyStringWrapper(
+                cd.getValue()!=null ? safe(cd.getValue().tgl_periksa) : ""
+        ));
+
+        TableColumn<KunjunganRow, String> cJam = new TableColumn<>("Jam");
+        cJam.setCellValueFactory(cd -> new ReadOnlyStringWrapper(
+                cd.getValue()!=null ? safe(cd.getValue().jam) : ""
+        ));
+
+        // kolom STATUS (baru) untuk menampilkan informasi kirim
+        TableColumn<KunjunganRow, String> cStatus = new TableColumn<>("Status");
+        cStatus.setCellValueFactory(cd -> {
+            KunjunganRow v = cd.getValue();
+            String s = "-";
+            if (v != null && v.sent && v.log_sent_at != null && !v.log_sent_at.trim().isEmpty()) {
+                s = "Terkirim " + v.log_sent_at + (v.retry_count > 0 ? " (+"+v.retry_count+")" : "");
+            }
+            return new ReadOnlyStringWrapper(s);
+        });
+        TableColumn<KunjunganRow, Void> cAct = new TableColumn<>("Action");
+        cAct.setCellFactory(new javafx.util.Callback<TableColumn<KunjunganRow, Void>, TableCell<KunjunganRow, Void>>() {
+            @Override
+            public TableCell<KunjunganRow, Void> call(TableColumn<KunjunganRow, Void> col) {
+                return new TableCell<KunjunganRow, Void>() {
+                    private final Button btn = new Button("Kirim WA");
+                    {
+                        btn.setOnAction(e -> {
+                            KunjunganRow r = getTableView().getItems().get(getIndex());
+                            prefillAndOpenSend(r);
+                        });
+                        btn.setMaxWidth(Double.MAX_VALUE);
+                        btn.setStyle("-fx-background-radius:8;");
+                    }
+                    @Override protected void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) { setGraphic(null); return; }
+                        setGraphic(btn);
+                    }
+                };
+            }
+        });
+
+        tvKunjungan.getColumns().setAll(cNoRawat, cNama, cNoRM, cTgl, cJam, cStatus, cAct);
+        cNoRawat.setMinWidth(110);
+        cNama.setMinWidth(180);
+        cNoRM.setMinWidth(70);
+        cTgl.setMinWidth(70);
+        cJam.setMinWidth(60);
+        cStatus.setMinWidth(160);
+        cAct.setMinWidth(70);
+
+        
+
+        // Toast layer untuk tab Kunjungan
+        toastLayerKunjungan = new VBox(6);
+        toastLayerKunjungan.setMouseTransparent(true);
+        toastLayerKunjungan.setFillWidth(false);
+        toastLayerKunjungan.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        StackPane.setAlignment(toastLayerKunjungan, Pos.TOP_RIGHT);
+        StackPane.setMargin(toastLayerKunjungan, new Insets(12, 12, 0, 0));
+
+        BorderPane content = new BorderPane();
+        content.setTop(filter);
+        content.setCenter(tvKunjungan);
+
+        StackPane wrapper = new StackPane(content);
+        wrapper.getChildren().add(toastLayerKunjungan);
+        wrapper.setPadding(new Insets(10));
+
+        kunjunganPane = wrapper;
+    }
+    
+    private void prefillAndOpenSend(KunjunganRow r) {
+        if (r == null) return;
+        
+        logNoRawat    = r.no_rawat;
+        logTglPeriksa = r.tgl_periksa;
+        logJam        = r.jam;
+        logNoRM       = r.no_rkm_medis;
+        logNama       = r.nm_pasien;
+        logNoTelp     = r.no_telp;
+        logNoOrder    = r.noorder;
+
+        // Normalisasi & isi phone
+        String phone = r.no_telp != null ? normalizePhone(r.no_telp) : "";
+        if (phoneField != null) phoneField.setText(phone);
+
+        // Jenis pengiriman → Send File
+        if (typeCombo != null) {
+            typeCombo.setValue("Send File");
+            // toggle visibilitas sudah di-handle listener typeCombo
+        }
+
+        // File URL
+        if (fileUrlField != null) fileUrlField.setText(safe(r.link_pdf));
+
+        // Caption dari template kunjungan (biar konsisten)
+        if (captionArea != null) {
+            captionArea.setText(
+                "Yth Bp/Ibu/Sdr " + r.nm_pasien + ".\n" +
+                "Berikut kami kirimkan hasil pemeriksaan laboratorium anda pada tanggal " +
+                r.tgl_periksa +" pukul "+  r.jam + ".\n\n" +
+                "Pesan ini dikirim secara elektronik, mohon unduh PDF dalam 24 jam setelah anda menerima pesan ini.\n" +
+                "Terima kasih."
+            );
+        }
+
+        // Arahkan ke tab Kirim WA (user bisa Preview dulu sebelum Send)
+        showSendPane();
+    }
+
+    private void loadKunjungan() {
+        LocalDate s = dpStart.getValue()!=null ? dpStart.getValue() : LocalDate.now();
+        LocalDate e = dpEnd.getValue()!=null   ? dpEnd.getValue()   : LocalDate.now();
+        String q = tfSearch.getText()!=null ? tfSearch.getText().trim() : "";
+
+        String url = API_KUNJUNGAN + "?start=" + s + "&end=" + e;
+        if (!q.isBlank()) url += "&q=" + encode(q);
+
+        btnLoad.setDisable(true);
+        final String finalUrl = url;
+
+        runAsync(() -> {
+            Exception err = null;
+            try {
+                // API Website TIDAK pakai BasicAuth; pakai header opsional X-Api-Key
+                Map<String,String> headers = new HashMap<>();
+                if (API_WEBSITE_KEY != null && !API_WEBSITE_KEY.isBlank()) {
+                    headers.put("X-Api-Key", API_WEBSITE_KEY);
+                }
+//                System.out.println("[KUNJUNGAN] GET " + finalUrl);
+                JSONObject resp = getJsonOpen(finalUrl, headers);
+                if (!resp.optBoolean("ok")) throw new RuntimeException("API ok=false");
+                JSONArray arr = resp.optJSONArray("data");
+                ObservableList<KunjunganRow> tmp = FXCollections.observableArrayList();
+                if (arr != null) {
+                    for (int i=0;i<arr.length();i++){
+                        JSONObject it = arr.getJSONObject(i);
+                        KunjunganRow r = new KunjunganRow();
+                        r.no_rawat     = it.optString("no_rawat","");
+                        r.nm_pasien    = it.optString("nm_pasien","");
+                        r.no_rkm_medis = it.optString("no_rkm_medis","");
+                        r.tgl_periksa  = it.optString("tgl_periksa","");
+                        r.jam          = it.optString("jam","");
+                        r.sent         = it.optBoolean("sent", false);
+                        r.log_sent_at  = cleanTs(it.optString("log_sent_at",""));
+                        r.retry_count  = it.optInt("retry_count", 0);
+                        r.no_telp      = it.optString("no_telp","");
+                        r.link_pdf     = it.optString("link_pdf","");
+                        r.noorder      = it.optString("noorder","");
+                        tmp.add(r);
+                    }
+                }
+                Platform.runLater(() -> {
+                    kunjunganData.setAll(tmp);
+                    btnLoad.setDisable(false);
+                    showToastKunjungan("Data dimuat: " + tmp.size() + " baris.", false);
+                });
+            } catch (Exception ex) {
+                err = ex;
+                Platform.runLater(() -> {
+                    btnLoad.setDisable(false);
+                    showToastKunjungan("Gagal memuat: " + ex.getMessage(), true);
+                });
+            }
+        });
+    }
+
+//    private void doSendKunjungan(KunjunganRow r) {
+//        // Validasi data penting
+//        if (r.link_pdf == null || r.link_pdf.trim().isEmpty()) {
+//            showToastKunjungan("File PDF tidak ditemukan (noorder kosong).", true);
+//            return;
+//        }
+//        if (r.no_telp == null || r.no_telp.trim().isEmpty()) {
+//            showToastKunjungan("Nomor telepon pasien kosong.", true);
+//            return;
+//        }
+//        String phone = normalizePhone(r.no_telp);
+//        if (!isValidMsisdn(phone)) {
+//            showToastKunjungan("Nomor tidak valid (MSISDN).", true);
+//            return;
+//        }
+//
+//        // Compose pesan dari template tab Kunjungan
+//        String pesan = taTemplateKunjungan.getText();
+//        if (pesan == null) pesan = "";
+//        pesan = pesan.replace("{NAMA}", safe(r.nm_pasien))
+//                     .replace("{TANGGAL}", safe(r.tgl_periksa));
+//
+//        // ---- Simpan SEMUA ke variabel final (supaya aman dipakai di lambda/thread) ----
+//        final String fPhone      = phone;
+//        final String fPesan      = pesan;
+//        final String fLinkPdf    = r.link_pdf;
+//        final String fNoRawat    = r.no_rawat;
+//        final String fTglPeriksa = r.tgl_periksa;
+//        final String fJam        = r.jam;
+//        final String fNoRM       = r.no_rkm_medis;
+//        final String fNama       = r.nm_pasien;
+//        final String fNoTelp     = r.no_telp;
+//        final String fNoOrder    = r.noorder;
+//
+//        // Konfirmasi (tanpa lambda, biar gak rewel soal effectively-final)
+//        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+//        confirm.setTitle("Konfirmasi Kirim");
+//        confirm.setHeaderText("Kirim hasil ke " + fNama + " (" + fPhone + ")");
+//        confirm.setContentText("File: " + fLinkPdf);
+//        java.util.Optional<ButtonType> res = confirm.showAndWait();
+//        if (!(res.isPresent() && res.get() == ButtonType.OK)) return;
+//
+//        setLoading(true);
+//        runAsync(() -> {
+//            boolean success = false;
+//            String err = null;
+//
+//            try {
+//                // Kirim via endpoint WA yang sudah ada (multipart)
+//                sendFileFromUrl(fPhone, fPesan, fLinkPdf);
+//                success = true;
+//            } catch (Throwable ex) {
+//                success = false;
+//                err = ex.getMessage();
+//            } finally {
+//                setLoading(false);
+//            }
+//
+//            // Log ke API website (idempoten triplet)
+//            try {
+//                org.json.JSONObject payload = new org.json.JSONObject();
+//                payload.put("no_rawat",    fNoRawat);
+//                payload.put("tgl_periksa", fTglPeriksa);
+//                payload.put("jam",         fJam);
+//                payload.put("no_rkm_medis",fNoRM);
+//                payload.put("nm_pasien",   fNama);
+//                payload.put("no_telp",     fNoTelp);
+//                payload.put("noorder",     fNoOrder);
+//                payload.put("file_url",    fLinkPdf);
+//                payload.put("status",      success ? "SENT" : "FAILED");
+//                payload.put("sent_by",     "wa-rsudmatraman");
+//                payload.put("last_error",  err == null ? "" : err);
+//
+//                java.util.Map<String,String> headers = new java.util.HashMap<>();
+//                headers.put("Content-Type", "application/json; charset=UTF-8");
+//                if (API_WEBSITE_KEY != null && !API_WEBSITE_KEY.trim().isEmpty()) { // <- ganti isBlank()
+//                    headers.put("X-Api-Key", API_WEBSITE_KEY);
+//                }
+//                httpPostJsonOpen(API_LOGSEND, payload.toString(), headers);
+//            } catch (Throwable logEx) {
+//                final String msg = logEx.getMessage();
+//                Platform.runLater(() -> showToastKunjungan("Gagal mencatat log: " + msg, true));
+//            }
+//
+//            final boolean successF = success;
+//            final String errF = err;
+//            Platform.runLater(() -> {
+//                if (successF) {
+//                    showToastKunjungan("Terkirim.", false);
+//                } else {
+//                    showToastKunjungan("Gagal kirim." + (errF != null ? " " + errF : ""), true);
+//                }
+//                loadKunjungan();
+//            });
+//        });
+//    }
+
+    // Data row
+    public static class KunjunganRow {
+        public String no_rawat;
+        public String nm_pasien;
+        public String no_rkm_medis;
+        public String tgl_periksa;
+        public String jam;
+        public boolean sent;
+        public String log_sent_at;
+        public int retry_count;
+        public String no_telp;
+        public String link_pdf;
+        public String noorder;
     }
 
     /* =======================
@@ -589,6 +992,9 @@ public class WhatsAppSendLAB extends Application {
         final String LF = "\r\n";
         HttpURLConnection connection = null;
 
+        boolean success = false;
+        String lastError = null;
+
         try {
             InputStream fileStream;
             String fileName;
@@ -609,7 +1015,7 @@ public class WhatsAppSendLAB extends Application {
                 fileName = f.getName();
                 String probe = null;
                 try { probe = Files.probeContentType(f.toPath()); } catch (IOException ignored) {}
-                if (probe != null && !probe.isBlank()) contentType = probe;
+                if (probe != null && !probe.trim().isEmpty()) contentType = probe;
                 if (fileName.toLowerCase().endsWith(".pdf")) contentType = "application/pdf";
             }
 
@@ -650,21 +1056,132 @@ public class WhatsAppSendLAB extends Application {
             String responseBody = readBody(connection, status);
 
             if (status == HttpURLConnection.HTTP_OK) {
+                success = true;
                 showToast("Pesan WhatsApp berhasil dikirim", false, cbCloseAfterSuccess.isSelected());
             } else {
                 String msg = extractMessageFromJson(responseBody);
-                showToast("Response (" + status + "): " + (msg != null ? msg : responseBody), true, false);
+                lastError = "Response (" + status + "): " + (msg != null ? msg : responseBody);
+                showToast(lastError, true, false);
             }
         } catch (Exception ex) {
+            lastError = ex.getMessage();
             showToast("Error: " + ex.getMessage(), true, false);
         } finally {
             if (connection != null) connection.disconnect();
+            // === [PATCH LOGGING] ===
+            // Hanya log jika meta wajib tersedia (endpoint mewajibkan: no_rawat, tgl_periksa, jam)
+            if (logNoRawat != null && !logNoRawat.trim().isEmpty()
+                    && logTglPeriksa != null && !logTglPeriksa.trim().isEmpty()
+                    && logJam != null && !logJam.trim().isEmpty()) {
+                try {
+                    org.json.JSONObject payload = new org.json.JSONObject();
+                    payload.put("no_rawat",    logNoRawat);
+                    payload.put("tgl_periksa", logTglPeriksa);
+                    payload.put("jam",         logJam);
+                    payload.put("no_rkm_medis",logNoRM != null ? logNoRM : org.json.JSONObject.NULL);
+                    payload.put("nm_pasien",   logNama != null ? logNama : org.json.JSONObject.NULL);
+                    payload.put("no_telp",     logNoTelp != null ? logNoTelp : org.json.JSONObject.NULL);
+                    payload.put("noorder",     logNoOrder != null ? logNoOrder : org.json.JSONObject.NULL);
+                    payload.put("file_url",    fileUrlStr != null ? fileUrlStr : org.json.JSONObject.NULL);
+                    payload.put("status",      success ? "SENT" : "FAILED");
+                    payload.put("sent_by",     "wa-javafx");
+                    payload.put("last_error",  lastError != null ? lastError : "");
+
+                    java.util.Map<String,String> headers = new java.util.HashMap<>();
+                    headers.put("Content-Type", "application/json; charset=UTF-8");
+                    if (API_WEBSITE_KEY != null && !API_WEBSITE_KEY.trim().isEmpty()) {
+                        headers.put("X-Api-Key", API_WEBSITE_KEY);
+                    }
+                    // gunakan helper open (tanpa basic auth)
+                    httpPostJsonOpen(API_LOGSEND, payload.toString(), headers);
+                } catch (Throwable logEx) {
+                    System.err.println("[log-send] gagal: " + logEx.getMessage());
+                }
+            }
         }
     }
 
     /* =======================
        -------- HELPERS ------
        ======================= */
+    
+    private JSONObject getJsonOpen(String urlStr, Map<String,String> headers) throws Exception {
+        URL url = new URL(urlStr);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setConnectTimeout(15000);
+        con.setReadTimeout(30000);
+        if (headers != null) {
+            for (Map.Entry<String,String> e : headers.entrySet()) {
+                con.setRequestProperty(e.getKey(), e.getValue());
+            }
+        }
+        int status = con.getResponseCode();
+        InputStream in = (status >= 200 && status < 300) ? con.getInputStream() : con.getErrorStream();
+        StringBuilder response = new StringBuilder();
+        if (in != null) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+                String line; while((line=br.readLine())!=null) response.append(line);
+            }
+        }
+        con.disconnect();
+        return new JSONObject(response.toString());
+    }
+
+    private String httpPostJsonOpen(String urlStr, String json, Map<String,String> headers) throws Exception {
+        HttpURLConnection con = (HttpURLConnection) new URL(urlStr).openConnection();
+        con.setRequestMethod("POST");
+        con.setDoOutput(true);
+        con.setConnectTimeout(15000);
+        con.setReadTimeout(30000);
+        if (headers!=null) {
+            for (Map.Entry<String,String> e : headers.entrySet()) {
+                con.setRequestProperty(e.getKey(), e.getValue());
+            }
+        }
+        try (OutputStream os = con.getOutputStream()) {
+            os.write(json.getBytes(StandardCharsets.UTF_8));
+        }
+        int status = con.getResponseCode();
+        String body = readBody(con, status);
+        con.disconnect();
+        return body;
+    }
+
+    // Helper kecil
+    private static String encode(String s){
+        try { return java.net.URLEncoder.encode(s, "UTF-8"); } catch (Exception e){ return ""; }
+    }
+    private static String cleanTs(String s){ return s==null? "" : s.replace('T',' ').trim(); }
+    private static String safe(String s){ return s==null? "" : s; }
+    
+    private void showToastKunjungan(String message, boolean isError) {
+        Platform.runLater(() -> {
+            Label lbl = new Label(message);
+            lbl.setWrapText(true);
+            lbl.setStyle("-fx-text-fill: white; -fx-font-size: 12px;");
+            HBox box = new HBox(lbl);
+            box.setPadding(new Insets(10, 12, 10, 12));
+            box.setMaxWidth(520);
+            box.setStyle(
+                "-fx-background-color: " + (isError ? "#dc2626" : "#16a34a") + ";" +
+                "-fx-background-radius: 10;" +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.2, 0, 2);"
+            );
+            if (toastLayerKunjungan == null) return;
+            toastLayerKunjungan.getChildren().add(box);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(150), box);
+            fadeIn.setFromValue(0.0); fadeIn.setToValue(1.0);
+            PauseTransition stay = new PauseTransition(Duration.millis(TOAST_MS));
+            FadeTransition fadeOut = new FadeTransition(Duration.millis(220), box);
+            fadeOut.setFromValue(1.0); fadeOut.setToValue(0.0);
+            fadeOut.setOnFinished(e -> toastLayerKunjungan.getChildren().remove(box));
+            fadeIn.setOnFinished(e -> stay.play());
+            stay.setOnFinished(e -> fadeOut.play());
+            fadeIn.play();
+        });
+    }
 
     // Escape sederhana JSON (untuk body POST)
     private static String jsonEscape(String s) {
