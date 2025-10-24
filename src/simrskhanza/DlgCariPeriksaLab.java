@@ -408,6 +408,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         btnPetugas = new widget.Button();
         label18 = new widget.Label();
         Tgl2 = new widget.Tanggal();
+        btnWhatsApp = new widget.Button();
         panelisi1 = new widget.panelisi();
         label10 = new widget.Label();
         TCari = new widget.TextBox();
@@ -984,13 +985,13 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         label16.setName("label16"); // NOI18N
         label16.setPreferredSize(new java.awt.Dimension(60, 23));
         panelisi3.add(label16);
-        label16.setBounds(385, 10, 60, 23);
+        label16.setBounds(330, 10, 60, 23);
 
         label13.setText("Petugas :");
         label13.setName("label13"); // NOI18N
         label13.setPreferredSize(new java.awt.Dimension(70, 23));
         panelisi3.add(label13);
-        label13.setBounds(385, 40, 60, 23);
+        label13.setBounds(330, 40, 60, 23);
 
         kdmem.setName("kdmem"); // NOI18N
         kdmem.setPreferredSize(new java.awt.Dimension(80, 23));
@@ -1000,7 +1001,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             }
         });
         panelisi3.add(kdmem);
-        kdmem.setBounds(449, 10, 80, 23);
+        kdmem.setBounds(390, 10, 80, 23);
 
         kdptg.setName("kdptg"); // NOI18N
         kdptg.setPreferredSize(new java.awt.Dimension(80, 23));
@@ -1010,19 +1011,19 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             }
         });
         panelisi3.add(kdptg);
-        kdptg.setBounds(449, 40, 80, 23);
+        kdptg.setBounds(390, 40, 80, 23);
 
         nmmem.setEditable(false);
         nmmem.setName("nmmem"); // NOI18N
         nmmem.setPreferredSize(new java.awt.Dimension(207, 23));
         panelisi3.add(nmmem);
-        nmmem.setBounds(531, 10, 240, 23);
+        nmmem.setBounds(470, 10, 240, 23);
 
         nmptg.setEditable(false);
         nmptg.setName("nmptg"); // NOI18N
         nmptg.setPreferredSize(new java.awt.Dimension(207, 23));
         panelisi3.add(nmptg);
-        nmptg.setBounds(531, 40, 240, 23);
+        nmptg.setBounds(470, 40, 240, 23);
 
         btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPasien.setMnemonic('1');
@@ -1035,7 +1036,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             }
         });
         panelisi3.add(btnPasien);
-        btnPasien.setBounds(774, 10, 28, 23);
+        btnPasien.setBounds(710, 10, 28, 23);
 
         btnPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPetugas.setMnemonic('2');
@@ -1048,7 +1049,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
             }
         });
         panelisi3.add(btnPetugas);
-        btnPetugas.setBounds(774, 40, 28, 23);
+        btnPetugas.setBounds(710, 40, 28, 23);
 
         label18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label18.setText("s.d.");
@@ -1066,6 +1067,20 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
         });
         panelisi3.add(Tgl2);
         Tgl2.setBounds(205, 40, 100, 23);
+
+        btnWhatsApp.setIcon(new javax.swing.ImageIcon("E:\\Khanza-Matraman\\src\\picture\\whatsapp.png")); // NOI18N
+        btnWhatsApp.setMnemonic('2');
+        btnWhatsApp.setText("Kirim WhatsApp");
+        btnWhatsApp.setToolTipText("Alt+2");
+        btnWhatsApp.setName("btnWhatsApp"); // NOI18N
+        btnWhatsApp.setPreferredSize(new java.awt.Dimension(28, 23));
+        btnWhatsApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWhatsAppActionPerformed(evt);
+            }
+        });
+        panelisi3.add(btnWhatsApp);
+        btnWhatsApp.setBounds(770, 10, 160, 40);
 
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_START);
 
@@ -3162,6 +3177,21 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         this.setCursor(Cursor.getDefaultCursor());        // TODO add your handling code here:
     }//GEN-LAST:event_MnCetakHasilKhanzaActionPerformed
 
+    private void btnWhatsAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsAppActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        Platform.runLater(() -> {
+            try {
+                WhatsAppSendLAB app = new WhatsAppSendLAB();
+                app.start(new Stage());
+                app.showKunjungan();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+        this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getDefaultCursor());        // TODO add your handling code here:
+    }//GEN-LAST:event_btnWhatsAppActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -3230,6 +3260,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private javax.swing.JDialog WindowSaran;
     private widget.Button btnPasien;
     private widget.Button btnPetugas;
+    private widget.Button btnWhatsApp;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame6;
     private widget.InternalFrame internalFrame7;
@@ -3844,7 +3875,9 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         nomr=Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+pasien+"'");
         TCari.setText(nomr);
     }
- 
 
- 
+    private void showKunjunganPane() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 }

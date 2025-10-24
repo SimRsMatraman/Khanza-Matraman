@@ -217,6 +217,6 @@
     <entry key="APIWA_RANAPDEW"></entry>
     <entry key="APIWA_RANAPANAK"></entry>
     <entry key="APIWA_RANAPVK"></entry>
-    <entry key="APIWEBSITE_BASE">https://rsudmatraman.jakarta.go.id/api-website</entry>
-    <entry key="APIWEBSITE_KEY">null</entry>
+    <entry key="APIWEBSITE_BASE">https://rsudmatraman.my.id/api-website</entry>
+    <entry key="APIWEBSITE_KEY">Administrator86</entry>
 </properties>

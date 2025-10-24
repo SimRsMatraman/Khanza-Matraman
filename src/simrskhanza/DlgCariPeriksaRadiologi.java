@@ -475,6 +475,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         btnPetugas = new widget.Button();
         label18 = new widget.Label();
         Tgl2 = new widget.Tanggal();
+        btnWhatsAppRad = new widget.Button();
         panelisi1 = new widget.panelisi();
         label10 = new widget.Label();
         TCari = new widget.TextBox();
@@ -979,13 +980,13 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         label16.setName("label16"); // NOI18N
         label16.setPreferredSize(new java.awt.Dimension(60, 23));
         panelisi3.add(label16);
-        label16.setBounds(385, 10, 60, 23);
+        label16.setBounds(330, 10, 60, 23);
 
         label13.setText("Petugas :");
         label13.setName("label13"); // NOI18N
         label13.setPreferredSize(new java.awt.Dimension(70, 23));
         panelisi3.add(label13);
-        label13.setBounds(385, 40, 60, 23);
+        label13.setBounds(330, 40, 60, 23);
 
         kdmem.setName("kdmem"); // NOI18N
         kdmem.setPreferredSize(new java.awt.Dimension(80, 23));
@@ -995,7 +996,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         });
         panelisi3.add(kdmem);
-        kdmem.setBounds(449, 10, 80, 23);
+        kdmem.setBounds(390, 10, 80, 23);
 
         kdptg.setName("kdptg"); // NOI18N
         kdptg.setPreferredSize(new java.awt.Dimension(80, 23));
@@ -1010,7 +1011,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         });
         panelisi3.add(kdptg);
-        kdptg.setBounds(449, 40, 80, 23);
+        kdptg.setBounds(390, 40, 80, 23);
 
         nmmem.setEditable(false);
         nmmem.setName("nmmem"); // NOI18N
@@ -1021,7 +1022,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         });
         panelisi3.add(nmmem);
-        nmmem.setBounds(531, 10, 240, 23);
+        nmmem.setBounds(470, 10, 240, 23);
 
         nmptg.setEditable(false);
         nmptg.setName("nmptg"); // NOI18N
@@ -1032,7 +1033,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         });
         panelisi3.add(nmptg);
-        nmptg.setBounds(531, 40, 240, 23);
+        nmptg.setBounds(470, 40, 240, 23);
 
         btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPasien.setMnemonic('1');
@@ -1045,7 +1046,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         });
         panelisi3.add(btnPasien);
-        btnPasien.setBounds(774, 10, 28, 23);
+        btnPasien.setBounds(720, 10, 28, 23);
 
         btnPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnPetugas.setMnemonic('2');
@@ -1058,7 +1059,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         });
         panelisi3.add(btnPetugas);
-        btnPetugas.setBounds(774, 40, 28, 23);
+        btnPetugas.setBounds(720, 40, 28, 23);
 
         label18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label18.setText("s.d.");
@@ -1076,6 +1077,20 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         });
         panelisi3.add(Tgl2);
         Tgl2.setBounds(205, 40, 100, 23);
+
+        btnWhatsAppRad.setIcon(new javax.swing.ImageIcon("E:\\Khanza-Matraman\\src\\picture\\whatsapp.png")); // NOI18N
+        btnWhatsAppRad.setMnemonic('2');
+        btnWhatsAppRad.setText("Kirim WhatsApp");
+        btnWhatsAppRad.setToolTipText("Alt+2");
+        btnWhatsAppRad.setName("btnWhatsAppRad"); // NOI18N
+        btnWhatsAppRad.setPreferredSize(new java.awt.Dimension(28, 23));
+        btnWhatsAppRad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWhatsAppRadActionPerformed(evt);
+            }
+        });
+        panelisi3.add(btnWhatsAppRad);
+        btnWhatsAppRad.setBounds(770, 10, 160, 40);
 
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_START);
 
@@ -2180,7 +2195,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }//GEN-LAST:event_tbListDicom1KeyPressed
 
     private void TabDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabDataMouseClicked
-        tampilOrthanc();
+//        tampilOrthanc();
     }//GEN-LAST:event_TabDataMouseClicked
 
     private void BtnPrint1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint1KeyPressed
@@ -2505,7 +2520,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             Platform.runLater(() -> {
                 try {
                     WhatsAppSendRAD app = new WhatsAppSendRAD();
-                    app.setPrefillData(nama,telp);
                     app.start(new Stage());
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -2515,6 +2529,20 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnWAActionPerformed
+
+    private void btnWhatsAppRadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsAppRadActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Platform.runLater(() -> {
+                try {
+                    WhatsAppSendRAD app = new WhatsAppSendRAD();
+                    app.start(new Stage());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+            this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getDefaultCursor());        // TODO add your handling code here:
+    }//GEN-LAST:event_btnWhatsAppRadActionPerformed
 
     /**
     * @param args the command line arguments
@@ -2596,6 +2624,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Button btnPasien;
     private widget.Button btnPetugas;
     private widget.Button btnPetugas1;
+    private widget.Button btnWhatsAppRad;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
@@ -2966,20 +2995,6 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             if(tbDokter.getSelectedRow()!= -1){
                 if((!Kd2.getText().equals(""))&&(!Petugas.getText().equals(""))){
                      if(TabData.getSelectedIndex()==2){
-//                         try {
-//                             Valid.tabelKosong(tabModeDicom);
-//                             ApiOrthanc orthanc=new ApiOrthanc();
-//                             root=orthanc.AmbilSeries(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()),Valid.SetTgl(Tgl1.getSelectedItem()+"").replaceAll("-",""),Valid.SetTgl(Tgl2.getSelectedItem()+"").replaceAll("-",""));
-//                             for(JsonNode list:root){
-//                                 for(JsonNode sublist:list.path("Series")){
-//                                      tabModeDicom.addRow(new Object[]{
-//                                           list.path("MainDicomTags").path("StudyInstanceUID").asText(),sublist.asText(),list.path("ID").asText()
-//                                      });   
-//                                 }        
-//                             }
-//                         } catch (Exception e) {
-//                             System.out.println("Notif : "+e);
-//                         }
                          try {
                              Valid.tabelKosong(tabModeDicom);
                              ApiOrthanc orthanc=new ApiOrthanc();

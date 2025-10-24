@@ -153,7 +153,7 @@ public class WhatsAppSendLAB extends Application {
     public void start(Stage primaryStage) {
         this.stage = primaryStage;
         stage.getIcons().add(new Image("https://rsudmatraman.my.id/upload/image/whatsapp.png"));
-        stage.setTitle("WhatsApp RSUD Matraman");
+        stage.setTitle("WhatsApp Laboratorium RSUD Matraman");
 
         // ===== Root lebih dulu =====
         root = new BorderPane();
@@ -199,7 +199,7 @@ public class WhatsAppSendLAB extends Application {
         showSendPane();
 
         // Scene
-        Scene scene = new Scene(root, 920, 600);
+        Scene scene = new Scene(root, 1080, 600);
         stage.setScene(scene);
         stage.show();
 
@@ -563,6 +563,14 @@ public class WhatsAppSendLAB extends Application {
         setOnly(sendPane, false);
         setActiveTab(tabKunjunganBtn);
     }
+    
+    public void showKunjungan() {
+        if (qrTimeline != null) qrTimeline.stop();
+        setOnly(kunjunganPane, true);
+        setOnly(loginPane, false);
+        setOnly(sendPane, false);
+        setActiveTab(tabKunjunganBtn);
+    }
 
     private void setOnly(Pane p, boolean on) {
         p.setVisible(on);
@@ -643,8 +651,13 @@ public class WhatsAppSendLAB extends Application {
         cNoRM.setCellValueFactory(cd -> new ReadOnlyStringWrapper(
                 cd.getValue()!=null ? safe(cd.getValue().no_rkm_medis) : ""
         ));
+        
+        TableColumn<KunjunganRow, String> cPJ = new TableColumn<>("Cara Bayar");
+        cPJ.setCellValueFactory(cd -> new ReadOnlyStringWrapper(
+                cd.getValue()!=null ? safe(cd.getValue().png_jawab) : ""
+        ));
 
-        TableColumn<KunjunganRow, String> cTgl = new TableColumn<>("Tanggal Periksa");
+        TableColumn<KunjunganRow, String> cTgl = new TableColumn<>("Tanggal");
         cTgl.setCellValueFactory(cd -> new ReadOnlyStringWrapper(
                 cd.getValue()!=null ? safe(cd.getValue().tgl_periksa) : ""
         ));
@@ -669,7 +682,7 @@ public class WhatsAppSendLAB extends Application {
             @Override
             public TableCell<KunjunganRow, Void> call(TableColumn<KunjunganRow, Void> col) {
                 return new TableCell<KunjunganRow, Void>() {
-                    private final Button btn = new Button("Kirim WA");
+                    private final Button btn = new Button("Kirim");
                     {
                         btn.setOnAction(e -> {
                             KunjunganRow r = getTableView().getItems().get(getIndex());
@@ -687,10 +700,11 @@ public class WhatsAppSendLAB extends Application {
             }
         });
 
-        tvKunjungan.getColumns().setAll(cNoRawat, cNama, cNoRM, cTgl, cJam, cStatus, cAct);
+        tvKunjungan.getColumns().setAll(cNoRawat, cNama, cNoRM, cPJ, cTgl, cJam, cStatus, cAct);
         cNoRawat.setMinWidth(110);
         cNama.setMinWidth(180);
         cNoRM.setMinWidth(70);
+        cPJ.setMinWidth(50);
         cTgl.setMinWidth(70);
         cJam.setMinWidth(60);
         cStatus.setMinWidth(160);
@@ -713,7 +727,6 @@ public class WhatsAppSendLAB extends Application {
         StackPane wrapper = new StackPane(content);
         wrapper.getChildren().add(toastLayerKunjungan);
         wrapper.setPadding(new Insets(10));
-
         kunjunganPane = wrapper;
     }
     
@@ -789,6 +802,7 @@ public class WhatsAppSendLAB extends Application {
                         r.no_rkm_medis = it.optString("no_rkm_medis","");
                         r.tgl_periksa  = it.optString("tgl_periksa","");
                         r.jam          = it.optString("jam","");
+                        r.png_jawab        = it.optString("png_jawab","");
                         r.sent         = it.optBoolean("sent", false);
                         r.log_sent_at  = cleanTs(it.optString("log_sent_at",""));
                         r.retry_count  = it.optInt("retry_count", 0);
@@ -813,103 +827,6 @@ public class WhatsAppSendLAB extends Application {
         });
     }
 
-//    private void doSendKunjungan(KunjunganRow r) {
-//        // Validasi data penting
-//        if (r.link_pdf == null || r.link_pdf.trim().isEmpty()) {
-//            showToastKunjungan("File PDF tidak ditemukan (noorder kosong).", true);
-//            return;
-//        }
-//        if (r.no_telp == null || r.no_telp.trim().isEmpty()) {
-//            showToastKunjungan("Nomor telepon pasien kosong.", true);
-//            return;
-//        }
-//        String phone = normalizePhone(r.no_telp);
-//        if (!isValidMsisdn(phone)) {
-//            showToastKunjungan("Nomor tidak valid (MSISDN).", true);
-//            return;
-//        }
-//
-//        // Compose pesan dari template tab Kunjungan
-//        String pesan = taTemplateKunjungan.getText();
-//        if (pesan == null) pesan = "";
-//        pesan = pesan.replace("{NAMA}", safe(r.nm_pasien))
-//                     .replace("{TANGGAL}", safe(r.tgl_periksa));
-//
-//        // ---- Simpan SEMUA ke variabel final (supaya aman dipakai di lambda/thread) ----
-//        final String fPhone      = phone;
-//        final String fPesan      = pesan;
-//        final String fLinkPdf    = r.link_pdf;
-//        final String fNoRawat    = r.no_rawat;
-//        final String fTglPeriksa = r.tgl_periksa;
-//        final String fJam        = r.jam;
-//        final String fNoRM       = r.no_rkm_medis;
-//        final String fNama       = r.nm_pasien;
-//        final String fNoTelp     = r.no_telp;
-//        final String fNoOrder    = r.noorder;
-//
-//        // Konfirmasi (tanpa lambda, biar gak rewel soal effectively-final)
-//        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-//        confirm.setTitle("Konfirmasi Kirim");
-//        confirm.setHeaderText("Kirim hasil ke " + fNama + " (" + fPhone + ")");
-//        confirm.setContentText("File: " + fLinkPdf);
-//        java.util.Optional<ButtonType> res = confirm.showAndWait();
-//        if (!(res.isPresent() && res.get() == ButtonType.OK)) return;
-//
-//        setLoading(true);
-//        runAsync(() -> {
-//            boolean success = false;
-//            String err = null;
-//
-//            try {
-//                // Kirim via endpoint WA yang sudah ada (multipart)
-//                sendFileFromUrl(fPhone, fPesan, fLinkPdf);
-//                success = true;
-//            } catch (Throwable ex) {
-//                success = false;
-//                err = ex.getMessage();
-//            } finally {
-//                setLoading(false);
-//            }
-//
-//            // Log ke API website (idempoten triplet)
-//            try {
-//                org.json.JSONObject payload = new org.json.JSONObject();
-//                payload.put("no_rawat",    fNoRawat);
-//                payload.put("tgl_periksa", fTglPeriksa);
-//                payload.put("jam",         fJam);
-//                payload.put("no_rkm_medis",fNoRM);
-//                payload.put("nm_pasien",   fNama);
-//                payload.put("no_telp",     fNoTelp);
-//                payload.put("noorder",     fNoOrder);
-//                payload.put("file_url",    fLinkPdf);
-//                payload.put("status",      success ? "SENT" : "FAILED");
-//                payload.put("sent_by",     "wa-rsudmatraman");
-//                payload.put("last_error",  err == null ? "" : err);
-//
-//                java.util.Map<String,String> headers = new java.util.HashMap<>();
-//                headers.put("Content-Type", "application/json; charset=UTF-8");
-//                if (API_WEBSITE_KEY != null && !API_WEBSITE_KEY.trim().isEmpty()) { // <- ganti isBlank()
-//                    headers.put("X-Api-Key", API_WEBSITE_KEY);
-//                }
-//                httpPostJsonOpen(API_LOGSEND, payload.toString(), headers);
-//            } catch (Throwable logEx) {
-//                final String msg = logEx.getMessage();
-//                Platform.runLater(() -> showToastKunjungan("Gagal mencatat log: " + msg, true));
-//            }
-//
-//            final boolean successF = success;
-//            final String errF = err;
-//            Platform.runLater(() -> {
-//                if (successF) {
-//                    showToastKunjungan("Terkirim.", false);
-//                } else {
-//                    showToastKunjungan("Gagal kirim." + (errF != null ? " " + errF : ""), true);
-//                }
-//                loadKunjungan();
-//            });
-//        });
-//    }
-
     // Data row
     public static class KunjunganRow {
         public String no_rawat;
@@ -923,6 +840,7 @@ public class WhatsAppSendLAB extends Application {
         public String no_telp;
         public String link_pdf;
         public String noorder;
+        public String png_jawab;
     }
 
     /* =======================
@@ -1084,7 +1002,7 @@ public class WhatsAppSendLAB extends Application {
                     payload.put("noorder",     logNoOrder != null ? logNoOrder : org.json.JSONObject.NULL);
                     payload.put("file_url",    fileUrlStr != null ? fileUrlStr : org.json.JSONObject.NULL);
                     payload.put("status",      success ? "SENT" : "FAILED");
-                    payload.put("sent_by",     "wa-javafx");
+                    payload.put("sent_by",     "wa-lab");
                     payload.put("last_error",  lastError != null ? lastError : "");
 
                     java.util.Map<String,String> headers = new java.util.HashMap<>();
