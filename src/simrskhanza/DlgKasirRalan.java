@@ -995,6 +995,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         KdPoli = new widget.TextBox();
         MnPiutangObat = new javax.swing.JMenuItem();
         MnPenjualan = new javax.swing.JMenuItem();
+        MnPeriksaMCUHAJI = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass6 = new widget.panelisi();
@@ -5566,7 +5567,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2025" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5613,7 +5614,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2025" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -5750,6 +5751,21 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPenjualan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnPenjualanActionPerformed(evt);
+            }
+        });
+
+        MnPeriksaMCUHAJI.setBackground(new java.awt.Color(255, 255, 254));
+        MnPeriksaMCUHAJI.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPeriksaMCUHAJI.setForeground(new java.awt.Color(50, 50, 50));
+        MnPeriksaMCUHAJI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPeriksaMCUHAJI.setText("Periksa MCU HAJI");
+        MnPeriksaMCUHAJI.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPeriksaMCUHAJI.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPeriksaMCUHAJI.setName("MnPeriksaMCUHAJI"); // NOI18N
+        MnPeriksaMCUHAJI.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPeriksaMCUHAJI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPeriksaMCUHAJIActionPerformed(evt);
             }
         });
 
@@ -5966,7 +5982,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5984,7 +6000,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-10-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -12821,6 +12837,10 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     }        // TODO add your handling code here:
     }//GEN-LAST:event_MnDataPemberianObatFDCActionPerformed
 
+    private void MnPeriksaMCUHAJIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaMCUHAJIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MnPeriksaMCUHAJIActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -13017,6 +13037,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem MnPeriksaLabPA2;
     private javax.swing.JMenuItem MnPeriksaMCU;
     private javax.swing.JMenuItem MnPeriksaMCU1;
+    private javax.swing.JMenuItem MnPeriksaMCUHAJI;
     private javax.swing.JMenuItem MnPeriksaMCUJIWA;
     private javax.swing.JMenuItem MnPeriksaRadiologi;
     private javax.swing.JMenuItem MnPeriksaRadiologi1;

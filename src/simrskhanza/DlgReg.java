@@ -179,7 +179,7 @@ import surat.SuratSakit;
 import surat.SuratSakitPihak2;
 import surat.SuratTidakHamil;
 import surat.SuratMCU;
-import surat.SuratMCUHaji;
+import surat.SuratMCUHajiOri;
 import surat.SuratGC;
 import surat.SuratHK;
 import surat.SuratIsoman;
@@ -14091,7 +14091,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                SuratMCUHaji haji=new SuratMCUHaji(null,false);
+                SuratMCUHajiOri haji=new SuratMCUHajiOri(null,false);
                 haji.isCek();
                 haji.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 haji.setLocationRelativeTo(internalFrame1);
