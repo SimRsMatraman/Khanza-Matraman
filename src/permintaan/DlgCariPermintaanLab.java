@@ -91,7 +91,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        WindowAmbilSampel.setSize(600,80);
+        WindowAmbilSampel.setSize(600,150);
         WindowGanti.setSize(530,80);
         WindowTerkirim.setSize(300,90);
         tabMode=new DefaultTableModel(null,new Object[]{
@@ -452,9 +452,13 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5 = new widget.InternalFrame();
         BtnCloseIn4 = new widget.Button();
         BtnSimpan4 = new widget.Button();
-        jLabel26 = new widget.Label();
         TanggalPulang = new widget.Tanggal();
         Cmbstatus = new widget.ComboBox();
+        jLabel28 = new widget.Label();
+        jLabel31 = new widget.Label();
+        jLabel32 = new widget.Label();
+        nmPasien = new widget.TextBox();
+        noTlp = new widget.TextBox();
         WindowTerkirim = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -480,6 +484,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         BtnKirimLica = new widget.Button();
         BtnAmbilLica = new widget.Button();
         Kd2 = new widget.TextBox();
+        noRM = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -576,12 +581,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(BtnSimpan4);
         BtnSimpan4.setBounds(390, 30, 100, 30);
 
-        jLabel26.setText("Tanggal & Jam :");
-        jLabel26.setName("jLabel26"); // NOI18N
-        internalFrame5.add(jLabel26);
-        jLabel26.setBounds(6, 32, 100, 23);
-
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-09-2025 12:00:07" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-10-2025 11:42:23" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -608,6 +608,51 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         });
         internalFrame5.add(Cmbstatus);
         Cmbstatus.setBounds(270, 32, 100, 23);
+
+        jLabel28.setText("Tanggal & Jam :");
+        jLabel28.setName("jLabel28"); // NOI18N
+        internalFrame5.add(jLabel28);
+        jLabel28.setBounds(6, 32, 100, 23);
+
+        jLabel31.setText("Nama :");
+        jLabel31.setName("jLabel31"); // NOI18N
+        internalFrame5.add(jLabel31);
+        jLabel31.setBounds(6, 72, 100, 20);
+
+        jLabel32.setText("Telp :");
+        jLabel32.setName("jLabel32"); // NOI18N
+        internalFrame5.add(jLabel32);
+        jLabel32.setBounds(6, 102, 100, 20);
+
+        nmPasien.setName("nmPasien"); // NOI18N
+        nmPasien.setPreferredSize(new java.awt.Dimension(318, 23));
+        nmPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nmPasienActionPerformed(evt);
+            }
+        });
+        nmPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nmPasienKeyPressed(evt);
+            }
+        });
+        internalFrame5.add(nmPasien);
+        nmPasien.setBounds(110, 70, 270, 23);
+
+        noTlp.setName("noTlp"); // NOI18N
+        noTlp.setPreferredSize(new java.awt.Dimension(318, 23));
+        noTlp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noTlpActionPerformed(evt);
+            }
+        });
+        noTlp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                noTlpKeyPressed(evt);
+            }
+        });
+        internalFrame5.add(noTlp);
+        noTlp.setBounds(110, 100, 270, 23);
 
         WindowAmbilSampel.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
@@ -688,7 +733,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-09-2025" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-10-2025" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -946,6 +991,19 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 Kd2KeyPressed(evt);
+            }
+        });
+
+        noRM.setName("noRM"); // NOI18N
+        noRM.setPreferredSize(new java.awt.Dimension(318, 23));
+        noRM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noRMActionPerformed(evt);
+            }
+        });
+        noRM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                noRMKeyPressed(evt);
             }
         });
 
@@ -2127,9 +2185,12 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         Valid.textKosong(TCari,"No.Permintaan");
                     }else{ 
                         TanggalPulang.setDate(new Date());
-                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         WindowAmbilSampel.setLocationRelativeTo(internalFrame1);
                         WindowAmbilSampel.setVisible(true);
+                        nomr = Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='" + NoRawat + "'");
+                        nmPasien.setText(Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='" + nomr + "'"));                        
+                        noTlp.setText(Sequel.cariIsi("select no_tlp from pasien where pasien.no_rkm_medis='" + nomr + "'"));
                         this.setCursor(Cursor.getDefaultCursor());
                     }
                 }else{            
@@ -2151,6 +2212,9 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
                         WindowAmbilSampel.setLocationRelativeTo(internalFrame1);
                         WindowAmbilSampel.setVisible(true);
+                        nomr = Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='" + NoRawat + "'");
+                        nmPasien.setText(Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='" + nomr + "'"));                        
+                        noTlp.setText(Sequel.cariIsi("select no_tlp from pasien where pasien.no_rkm_medis='" + nomr + "'"));
                         this.setCursor(Cursor.getDefaultCursor());
                     }
                 }else{            
@@ -4336,6 +4400,30 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         // TODO add your handling code here:
     }//GEN-LAST:event_Kd2ActionPerformed
 
+    private void nmPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nmPasienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nmPasienActionPerformed
+
+    private void nmPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmPasienKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nmPasienKeyPressed
+
+    private void noRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noRMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noRMActionPerformed
+
+    private void noRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noRMKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noRMKeyPressed
+
+    private void noTlpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noTlpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noTlpActionPerformed
+
+    private void noTlpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_noTlpKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noTlpKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -4427,12 +4515,17 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
     private widget.Label jLabel16;
     private widget.Label jLabel17;
     private widget.Label jLabel18;
-    private widget.Label jLabel26;
     private widget.Label jLabel27;
+    private widget.Label jLabel28;
+    private widget.Label jLabel31;
+    private widget.Label jLabel32;
     private javax.swing.JPanel jPanel2;
     private widget.Label label10;
     private widget.Label label11;
     private widget.Label label18;
+    private widget.TextBox nmPasien;
+    private widget.TextBox noRM;
+    private widget.TextBox noTlp;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;

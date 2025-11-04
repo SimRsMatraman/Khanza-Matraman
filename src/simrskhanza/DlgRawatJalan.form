@@ -50,6 +50,100 @@
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JumRujukKeyPressed"/>
       </Events>
     </Component>
+    <Component class="widget.Button" name="BtnProsedurKFR">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/picture/2.png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="   Form Uji Fungsi"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="name" type="java.lang.String" value="BtnProsedurKFR" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[160, 30]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnProsedurKFRActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnProsedurKFRKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="widget.Label" name="jLabel87">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Kunjungan Ke :"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="name" type="java.lang.String" value="jLabel87" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="widget.ComboBox" name="urutKunj">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="11">
+            <StringItem index="0" value="-"/>
+            <StringItem index="1" value="1"/>
+            <StringItem index="2" value="2"/>
+            <StringItem index="3" value="3"/>
+            <StringItem index="4" value="4"/>
+            <StringItem index="5" value="5"/>
+            <StringItem index="6" value="6"/>
+            <StringItem index="7" value="7"/>
+            <StringItem index="8" value="8"/>
+            <StringItem index="9" value="9"/>
+            <StringItem index="10" value="10"/>
+          </StringArray>
+        </Property>
+        <Property name="name" type="java.lang.String" value="urutKunj" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[62, 28]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="urutKunjKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="widget.TextBox" name="KetSuspek">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="-"/>
+        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="null"/>
+        </Property>
+        <Property name="name" type="java.lang.String" value="KetSuspek" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KetSuspekKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="widget.Label" name="jLabel70">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Keterangan :"/>
+        <Property name="name" type="java.lang.String" value="jLabel70" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="widget.ComboBox" name="Suspek">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Tidak"/>
+            <StringItem index="1" value="Ya"/>
+          </StringArray>
+        </Property>
+        <Property name="name" type="java.lang.String" value="Suspek" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[62, 28]"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SuspekKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="widget.Label" name="jLabel86">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Suspek Penyakit Akibat Kerja :"/>
+        <Property name="name" type="java.lang.String" value="jLabel86" noResource="true"/>
+      </Properties>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -320,7 +414,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="28-08-2025"/>
+                        <StringItem index="0" value="27-10-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -351,7 +445,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="28-08-2025"/>
+                        <StringItem index="0" value="27-10-2025"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -2561,7 +2655,10 @@
                                   <Properties>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                        <TitledBorder title="ANAMNESA"/>
+                                        <TitledBorder title="SUBJECTIVE">
+                                          <Font PropertyName="font" name="Segoe UI" size="12" style="3"/>
+                                          <Color PropertyName="color" blue="d6" green="9f" id="Actions.Blue" palette="3" red="38" type="palette"/>
+                                        </TitledBorder>
                                       </Border>
                                     </Property>
                                     <Property name="name" type="java.lang.String" value="scrollPane8" noResource="true"/>
@@ -2574,7 +2671,7 @@
 
                                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                                   <SubComponents>
-                                    <Component class="widget.TextArea" name="Anamnesa">
+                                    <Component class="widget.TextArea" name="Subjek">
                                       <Properties>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -2583,10 +2680,10 @@
                                         </Property>
                                         <Property name="columns" type="int" value="20"/>
                                         <Property name="rows" type="int" value="5"/>
-                                        <Property name="name" type="java.lang.String" value="Anamnesa" noResource="true"/>
+                                        <Property name="name" type="java.lang.String" value="Subjek" noResource="true"/>
                                       </Properties>
                                       <Events>
-                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="AnamnesaKeyPressed"/>
+                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SubjekKeyPressed"/>
                                       </Events>
                                     </Component>
                                   </SubComponents>
@@ -2595,7 +2692,10 @@
                                   <Properties>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                        <TitledBorder title="PEMERIKSAAN FISIK DAN UJI FUNGSI"/>
+                                        <TitledBorder title="OBECTIVE">
+                                          <Font PropertyName="font" name="Segoe UI" size="12" style="3"/>
+                                          <Color PropertyName="color" blue="d6" green="9f" id="Actions.Blue" palette="3" red="38" type="palette"/>
+                                        </TitledBorder>
                                       </Border>
                                     </Property>
                                     <Property name="name" type="java.lang.String" value="scrollPane9" noResource="true"/>
@@ -2608,7 +2708,7 @@
 
                                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                                   <SubComponents>
-                                    <Component class="widget.TextArea" name="PemeriksaanFisik">
+                                    <Component class="widget.TextArea" name="Objek">
                                       <Properties>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -2617,10 +2717,10 @@
                                         </Property>
                                         <Property name="columns" type="int" value="20"/>
                                         <Property name="rows" type="int" value="5"/>
-                                        <Property name="name" type="java.lang.String" value="PemeriksaanFisik" noResource="true"/>
+                                        <Property name="name" type="java.lang.String" value="Objek" noResource="true"/>
                                       </Properties>
                                       <Events>
-                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PemeriksaanFisikKeyPressed"/>
+                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ObjekKeyPressed"/>
                                       </Events>
                                     </Component>
                                   </SubComponents>
@@ -2629,7 +2729,10 @@
                                   <Properties>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                        <TitledBorder title="DIAGNOSIS (ICD-10)"/>
+                                        <TitledBorder title="ASSESMENT">
+                                          <Font PropertyName="font" name="Segoe UI" size="12" style="3"/>
+                                          <Color PropertyName="color" blue="d6" green="9f" id="Actions.Blue" palette="3" red="38" type="palette"/>
+                                        </TitledBorder>
                                       </Border>
                                     </Property>
                                     <Property name="name" type="java.lang.String" value="scrollPane10" noResource="true"/>
@@ -2642,7 +2745,7 @@
 
                                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                                   <SubComponents>
-                                    <Component class="widget.TextArea" name="Diagnosis">
+                                    <Component class="widget.TextArea" name="Ases">
                                       <Properties>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -2651,10 +2754,10 @@
                                         </Property>
                                         <Property name="columns" type="int" value="20"/>
                                         <Property name="rows" type="int" value="5"/>
-                                        <Property name="name" type="java.lang.String" value="Diagnosis" noResource="true"/>
+                                        <Property name="name" type="java.lang.String" value="Ases" noResource="true"/>
                                       </Properties>
                                       <Events>
-                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DiagnosisKeyPressed"/>
+                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="AsesKeyPressed"/>
                                       </Events>
                                     </Component>
                                   </SubComponents>
@@ -2663,20 +2766,23 @@
                                   <Properties>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                        <TitledBorder title="ANJURAN"/>
+                                        <TitledBorder title="EDUKASI">
+                                          <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
+                                          <Color PropertyName="color" blue="69" green="a8" id="Actions.Green" palette="3" red="59" type="palette"/>
+                                        </TitledBorder>
                                       </Border>
                                     </Property>
                                     <Property name="name" type="java.lang.String" value="scrollPane11" noResource="true"/>
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="10" y="280" width="360" height="80"/>
+                                      <AbsoluteConstraints x="10" y="250" width="360" height="50"/>
                                     </Constraint>
                                   </Constraints>
 
                                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                                   <SubComponents>
-                                    <Component class="widget.TextArea" name="Anjuran">
+                                    <Component class="widget.TextArea" name="Edukasi">
                                       <Properties>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -2685,10 +2791,10 @@
                                         </Property>
                                         <Property name="columns" type="int" value="20"/>
                                         <Property name="rows" type="int" value="5"/>
-                                        <Property name="name" type="java.lang.String" value="Anjuran" noResource="true"/>
+                                        <Property name="name" type="java.lang.String" value="Edukasi" noResource="true"/>
                                       </Properties>
                                       <Events>
-                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="AnjuranKeyPressed"/>
+                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="EdukasiKeyPressed"/>
                                       </Events>
                                     </Component>
                                   </SubComponents>
@@ -2776,17 +2882,6 @@
                                     </Constraint>
                                   </Constraints>
                                 </Component>
-                                <Component class="widget.Label" name="jLabel70">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Keterangan :"/>
-                                    <Property name="name" type="java.lang.String" value="jLabel70" noResource="true"/>
-                                  </Properties>
-                                  <Constraints>
-                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="400" y="300" width="160" height="23"/>
-                                    </Constraint>
-                                  </Constraints>
-                                </Component>
                                 <Component class="widget.ComboBox" name="cmbKesadaran1">
                                   <Properties>
                                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -2821,6 +2916,7 @@
                                     <Property name="mnemonic" type="int" value="75"/>
                                     <Property name="text" type="java.lang.String" value="   Riwayat Radiologi &amp; Laboratorium"/>
                                     <Property name="toolTipText" type="java.lang.String" value=""/>
+                                    <Property name="horizontalAlignment" type="int" value="2"/>
                                     <Property name="name" type="java.lang.String" value="BtnRiwayatRadLab" noResource="true"/>
                                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                                       <Dimension value="[160, 30]"/>
@@ -2832,7 +2928,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="540" y="330" width="250" height="30"/>
+                                      <AbsoluteConstraints x="840" y="305" width="250" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2870,31 +2966,10 @@
                                     </Component>
                                   </SubComponents>
                                 </Container>
-                                <Component class="widget.Button" name="Asesmen1">
-                                  <Properties>
-                                    <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/picture/190.png"/>
-                                    </Property>
-                                    <Property name="mnemonic" type="int" value="50"/>
-                                    <Property name="toolTipText" type="java.lang.String" value="Alt+2"/>
-                                    <Property name="name" type="java.lang.String" value="Asesmen1" noResource="true"/>
-                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                      <Dimension value="[28, 23]"/>
-                                    </Property>
-                                  </Properties>
-                                  <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Asesmen1ActionPerformed"/>
-                                  </Events>
-                                  <Constraints>
-                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="770" y="110" width="28" height="23"/>
-                                    </Constraint>
-                                  </Constraints>
-                                </Component>
                                 <Component class="widget.Button" name="Obat1">
                                   <Properties>
                                     <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/picture/190.png"/>
+                                      <Image iconType="3" name="/picture/2.png"/>
                                     </Property>
                                     <Property name="mnemonic" type="int" value="50"/>
                                     <Property name="text" type="java.lang.String" value="   Input Resep"/>
@@ -2909,7 +2984,7 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="410" y="330" width="120" height="30"/>
+                                      <AbsoluteConstraints x="410" y="310" width="140" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -2962,7 +3037,10 @@
                                   <Properties>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                        <TitledBorder title="TATA LAKSANA KFR (ICD-9)"/>
+                                        <TitledBorder title="PLANNING (GOAL) / PROCEDURE">
+                                          <Font PropertyName="font" name="Segoe UI" size="12" style="3"/>
+                                          <Color PropertyName="color" blue="d6" green="9f" id="Actions.Blue" palette="3" red="38" type="palette"/>
+                                        </TitledBorder>
                                       </Border>
                                     </Property>
                                     <Property name="name" type="java.lang.String" value="scrollPane14" noResource="true"/>
@@ -2975,7 +3053,7 @@
 
                                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                                   <SubComponents>
-                                    <Component class="widget.TextArea" name="Tatalaksana">
+                                    <Component class="widget.TextArea" name="Plan">
                                       <Properties>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -2984,10 +3062,10 @@
                                         </Property>
                                         <Property name="columns" type="int" value="20"/>
                                         <Property name="rows" type="int" value="5"/>
-                                        <Property name="name" type="java.lang.String" value="Tatalaksana" noResource="true"/>
+                                        <Property name="name" type="java.lang.String" value="Plan" noResource="true"/>
                                       </Properties>
                                       <Events>
-                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TatalaksanaKeyPressed"/>
+                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PlanKeyPressed"/>
                                       </Events>
                                     </Component>
                                   </SubComponents>
@@ -3017,20 +3095,23 @@
                                   <Properties>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                        <TitledBorder title="PEMERIKSAAN PENUNJANG"/>
+                                        <TitledBorder title="TINDAKAN/ PROGRAM RM">
+                                          <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
+                                          <Color PropertyName="color" blue="69" green="a8" id="Actions.Green" palette="3" red="59" type="palette"/>
+                                        </TitledBorder>
                                       </Border>
                                     </Property>
                                     <Property name="name" type="java.lang.String" value="scrollPane15" noResource="true"/>
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="10" y="190" width="360" height="80"/>
+                                      <AbsoluteConstraints x="10" y="190" width="360" height="50"/>
                                     </Constraint>
                                   </Constraints>
 
                                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                                   <SubComponents>
-                                    <Component class="widget.TextArea" name="PemeriksaanPenunjang">
+                                    <Component class="widget.TextArea" name="Penunjang">
                                       <Properties>
                                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                           <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -3039,10 +3120,10 @@
                                         </Property>
                                         <Property name="columns" type="int" value="20"/>
                                         <Property name="rows" type="int" value="5"/>
-                                        <Property name="name" type="java.lang.String" value="PemeriksaanPenunjang" noResource="true"/>
+                                        <Property name="name" type="java.lang.String" value="Penunjang" noResource="true"/>
                                       </Properties>
                                       <Events>
-                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PemeriksaanPenunjangKeyPressed"/>
+                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="PenunjangKeyPressed"/>
                                       </Events>
                                     </Component>
                                   </SubComponents>
@@ -3051,14 +3132,17 @@
                                   <Properties>
                                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                        <TitledBorder title="EVALUASI"/>
+                                        <TitledBorder title="RENCANA TIDAK LANJUT">
+                                          <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
+                                          <Color PropertyName="color" blue="69" green="a8" id="Actions.Green" palette="3" red="59" type="palette"/>
+                                        </TitledBorder>
                                       </Border>
                                     </Property>
                                     <Property name="name" type="java.lang.String" value="scrollPane16" noResource="true"/>
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="410" y="190" width="360" height="70"/>
+                                      <AbsoluteConstraints x="410" y="190" width="360" height="90"/>
                                     </Constraint>
                                   </Constraints>
 
@@ -3089,79 +3173,6 @@
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                       <AbsoluteConstraints x="820" y="10" width="80" height="23"/>
-                                    </Constraint>
-                                  </Constraints>
-                                </Component>
-                                <Component class="widget.ComboBox" name="Suspek">
-                                  <Properties>
-                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="2">
-                                        <StringItem index="0" value="Tidak"/>
-                                        <StringItem index="1" value="Ya"/>
-                                      </StringArray>
-                                    </Property>
-                                    <Property name="name" type="java.lang.String" value="Suspek" noResource="true"/>
-                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                      <Dimension value="[62, 28]"/>
-                                    </Property>
-                                  </Properties>
-                                  <Events>
-                                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SuspekKeyPressed"/>
-                                  </Events>
-                                  <Constraints>
-                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="570" y="270" width="180" height="23"/>
-                                    </Constraint>
-                                  </Constraints>
-                                </Component>
-                                <Component class="widget.TextBox" name="KetSuspek">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="-"/>
-                                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                                      <ComponentRef name="null"/>
-                                    </Property>
-                                    <Property name="name" type="java.lang.String" value="KetSuspek" noResource="true"/>
-                                  </Properties>
-                                  <Events>
-                                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="KetSuspekKeyPressed"/>
-                                  </Events>
-                                  <Constraints>
-                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="570" y="300" width="180" height="23"/>
-                                    </Constraint>
-                                  </Constraints>
-                                </Component>
-                                <Component class="widget.Label" name="jLabel86">
-                                  <Properties>
-                                    <Property name="text" type="java.lang.String" value="Suspek Penyakit Akibat Kerja :"/>
-                                    <Property name="name" type="java.lang.String" value="jLabel86" noResource="true"/>
-                                  </Properties>
-                                  <Constraints>
-                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="400" y="270" width="160" height="23"/>
-                                    </Constraint>
-                                  </Constraints>
-                                </Component>
-                                <Component class="widget.Button" name="BtnProsedurKFR">
-                                  <Properties>
-                                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                      <Image iconType="3" name="/picture/2.png"/>
-                                    </Property>
-                                    <Property name="text" type="java.lang.String" value="   Form Uji Fungsi"/>
-                                    <Property name="toolTipText" type="java.lang.String" value=""/>
-                                    <Property name="horizontalAlignment" type="int" value="2"/>
-                                    <Property name="name" type="java.lang.String" value="BtnProsedurKFR" noResource="true"/>
-                                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                      <Dimension value="[160, 30]"/>
-                                    </Property>
-                                  </Properties>
-                                  <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnProsedurKFRActionPerformed"/>
-                                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnProsedurKFRKeyPressed"/>
-                                  </Events>
-                                  <Constraints>
-                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="840" y="320" width="140" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -3207,52 +3218,78 @@
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="1000" y="320" width="200" height="30"/>
+                                      <AbsoluteConstraints x="570" y="310" width="200" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
-                                <Component class="widget.Label" name="jLabel87">
+                                <Container class="widget.ScrollPane" name="scrollPane18">
                                   <Properties>
-                                    <Property name="text" type="java.lang.String" value="Kunjungan Ke :"/>
-                                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                      <Font name="Tahoma" size="11" style="1"/>
+                                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                                        <TitledBorder title="FREKUENSI KUNJUNGAN">
+                                          <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
+                                          <Color PropertyName="color" blue="69" green="a8" id="Actions.Green" palette="3" red="59" type="palette"/>
+                                        </TitledBorder>
+                                      </Border>
                                     </Property>
-                                    <Property name="name" type="java.lang.String" value="jLabel87" noResource="true"/>
+                                    <Property name="name" type="java.lang.String" value="scrollPane18" noResource="true"/>
                                   </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="1010" y="270" width="100" height="30"/>
+                                      <AbsoluteConstraints x="10" y="310" width="360" height="50"/>
+                                    </Constraint>
+                                  </Constraints>
+
+                                  <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                                  <SubComponents>
+                                    <Component class="widget.TextArea" name="Frekuensi">
+                                      <Properties>
+                                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                                          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                            <EmptyBorder/>
+                                          </Border>
+                                        </Property>
+                                        <Property name="columns" type="int" value="20"/>
+                                        <Property name="rows" type="int" value="5"/>
+                                        <Property name="name" type="java.lang.String" value="Frekuensi" noResource="true"/>
+                                      </Properties>
+                                      <Events>
+                                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="FrekuensiKeyPressed"/>
+                                      </Events>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                                <Component class="javax.swing.JSeparator" name="jSeparator1">
+                                  <Properties>
+                                    <Property name="name" type="java.lang.String" value="jSeparator1" noResource="true"/>
+                                  </Properties>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                                      <AbsoluteConstraints x="0" y="0" width="-1" height="-1"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
-                                <Component class="widget.ComboBox" name="urutKunj">
+                                <Component class="widget.Button" name="BtnRiwayatRadLab1">
                                   <Properties>
-                                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                                      <StringArray count="11">
-                                        <StringItem index="0" value="-"/>
-                                        <StringItem index="1" value="1"/>
-                                        <StringItem index="2" value="2"/>
-                                        <StringItem index="3" value="3"/>
-                                        <StringItem index="4" value="4"/>
-                                        <StringItem index="5" value="5"/>
-                                        <StringItem index="6" value="6"/>
-                                        <StringItem index="7" value="7"/>
-                                        <StringItem index="8" value="8"/>
-                                        <StringItem index="9" value="9"/>
-                                        <StringItem index="10" value="10"/>
-                                      </StringArray>
+                                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                                      <Image iconType="3" name="/picture/190.png"/>
                                     </Property>
-                                    <Property name="name" type="java.lang.String" value="urutKunj" noResource="true"/>
+                                    <Property name="mnemonic" type="int" value="75"/>
+                                    <Property name="text" type="java.lang.String" value="   Riwayat Resep"/>
+                                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                                    <Property name="horizontalAlignment" type="int" value="2"/>
+                                    <Property name="name" type="java.lang.String" value="BtnRiwayatRadLab1" noResource="true"/>
                                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                      <Dimension value="[62, 28]"/>
+                                      <Dimension value="[160, 30]"/>
                                     </Property>
                                   </Properties>
                                   <Events>
-                                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="urutKunjKeyPressed"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnRiwayatRadLab1ActionPerformed"/>
+                                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="BtnRiwayatRadLab1KeyPressed"/>
                                   </Events>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                      <AbsoluteConstraints x="1120" y="275" width="50" height="23"/>
+                                      <AbsoluteConstraints x="840" y="340" width="250" height="30"/>
                                     </Constraint>
                                   </Constraints>
                                 </Component>
@@ -5041,7 +5078,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="28-08-2025"/>
+                    <StringItem index="0" value="27-10-2025"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>

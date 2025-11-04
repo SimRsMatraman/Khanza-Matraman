@@ -47,6 +47,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.time.*;
 import java.time.format.*;
+import javafx.scene.Node;
+import javafx.scene.input.Clipboard;
+import javafx.stage.FileChooser;
 
 // PDFBox
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -174,7 +177,7 @@ public class WhatsAppSendRAD extends Application {
     // ======= MODEL =======
     public static class RadiologiRow {
 
-        public String no_rawat, nm_pasien, no_rkm_medis, tgl_periksa, jam, png_jawab;
+        public String no_rawat, nm_pasien, no_rkm_medis, tgl_periksa, jam, png_jawab, last_error, lokasi_rawat;
         public String nm_perawatan;
         public String hasil_mask, hasil_exp, umur, jk, nm_dokter, tgl_lahir, nm_petugas;   // "Sudah"/"Belum"
         public boolean sent;
@@ -659,10 +662,10 @@ public class WhatsAppSendRAD extends Application {
         cPJ.setCellValueFactory(cd -> new ReadOnlyStringWrapper(safe(cd.getValue().png_jawab)));
 
         TableColumn<RadiologiRow, String> cTgl = new TableColumn<>("Tanggal");
-        cTgl.setCellValueFactory(cd -> new ReadOnlyStringWrapper(safe(cd.getValue().tgl_periksa)));
+        cTgl.setCellValueFactory(cd -> new ReadOnlyStringWrapper(safe(cd.getValue().tgl_periksa) + "\n" + safe(cd.getValue().jam)));
 
-        TableColumn<RadiologiRow, String> cJam = new TableColumn<>("Jam");
-        cJam.setCellValueFactory(cd -> new ReadOnlyStringWrapper(safe(cd.getValue().jam)));
+        TableColumn<RadiologiRow, String> cRuang = new TableColumn<>("Ruang");
+        cRuang.setCellValueFactory(cd -> new ReadOnlyStringWrapper(safe(cd.getValue().lokasi_rawat)));
 
         TableColumn<RadiologiRow, String> cPeriksa = new TableColumn<>("Pemeriksaan");
         cPeriksa.setCellValueFactory(cd -> new ReadOnlyStringWrapper(safe(cd.getValue().nm_perawatan)));
@@ -670,12 +673,22 @@ public class WhatsAppSendRAD extends Application {
         TableColumn<RadiologiRow, String> cHasil = new TableColumn<>("Hasil");
         cHasil.setCellValueFactory(cd -> new ReadOnlyStringWrapper(safe(cd.getValue().hasil_mask)));
 
+        // kolom STATUS (baru) untuk menampilkan informasi kirim
         TableColumn<RadiologiRow, String> cStatus = new TableColumn<>("Status");
         cStatus.setCellValueFactory(cd -> {
             RadiologiRow v = cd.getValue();
             String s = "-";
-            if (v != null && v.sent && v.log_sent_at != null && !v.log_sent_at.isBlank()) {
-                s = "✓ " + shortDate(v.log_sent_at) + (v.retry_count > 0 ? " (+" + v.retry_count + ")" : "");
+            if (v != null) {
+                if (v.sent && v.log_sent_at != null && !v.log_sent_at.trim().isEmpty()) {
+                    s = "Terkirim \n" + v.log_sent_at + (v.retry_count > 0 ? " (+" + v.retry_count + ")" : "");
+                } else if (v.last_error != null && !v.last_error.trim().isEmpty()) {
+                    s = "Gagal: " + summarizeError(v.last_error)
+                            + (v.retry_count > 0 ? " (+" + v.retry_count + ")" : "");
+                } else if (v.retry_count > 0) {
+                    s = "Belum terkirim (+" + v.retry_count + ")";
+                } else {
+                    s = "Belum terkirim";
+                }
             }
             return new ReadOnlyStringWrapper(s);
         });
@@ -716,13 +729,13 @@ public class WhatsAppSendRAD extends Application {
             }
         });
 
-        tvRad.getColumns().setAll(cNoRawat, cNama, cNoRM, cPJ, cTgl, cJam, cPeriksa, cHasil, cStatus, cAct);
+        tvRad.getColumns().setAll(cNoRawat, cNama, cNoRM, cPJ, cTgl, cRuang, cPeriksa, cHasil, cStatus, cAct);
         cNoRawat.setMinWidth(110);
         cNama.setMinWidth(180);
         cNoRM.setMinWidth(50);
         cPJ.setMinWidth(50);
         cTgl.setMinWidth(60);
-        cJam.setMinWidth(50);
+        cRuang.setMinWidth(120);
         cPeriksa.setMinWidth(90);
         cHasil.setMinWidth(40);
         cStatus.setMinWidth(80);
@@ -796,6 +809,8 @@ public class WhatsAppSendRAD extends Application {
                         r.log_sent_at = cleanTs(it.optString("log_sent_at", ""));
                         r.retry_count = it.optInt("retry_count", 0);
                         r.no_telp = it.optString("no_telp", "");
+                        r.last_error = it.optString("last_error", "");
+                        r.lokasi_rawat = it.optString("lokasi_rawat", "");
                         tmp.add(r);
                     }
                 }
@@ -964,121 +979,190 @@ public class WhatsAppSendRAD extends Application {
                 + "Terima kasih.";
         taMsg.setText(defMsg);
 
-        // --- Area gambar (pakai mekanisme Orthanc yang sama)
+        // --- Area gambar (SNIP: dari clipboard / file)
         FlowPane grid = new FlowPane(8, 8);
         grid.setPadding(new Insets(10));
-        Button btnLoadImg = new Button("Muat Gambar");
+        grid.setPrefWrapLength(880);
+
+        Button btnOpenViewer = new Button("Buka Stone WebViewer");
+        btnOpenViewer.setDisable(true); // default terkunci sampai UID ditemukan
+        Tooltip vvTip = new Tooltip("Study UID belum ditemukan");
+        btnOpenViewer.setTooltip(vvTip);
+
+        Button btnPaste = new Button("Tempel dari Clipboard");
+        Button btnAddFile = new Button("Tambah Gambar (File...)");
+        CheckBox cbSelectAll = new CheckBox("Pilih semua");
         Button btnSend = new Button("Kirim");
-        Label info = new Label("Pilih gambar yang akan dikirim.");
+        Label info = new Label("Tambahkan gambar dari Clipboard atau File.");
 
-        List<SelectedImageDokter> selected = new ArrayList<>();
+        // ===== Cari StudyInstanceUID untuk mengaktifkan tombol viewer =====
+        runAsync(() -> {
+            try {
+                String yyyymmdd = row.tgl_periksa.replace("-", "");
+                String auth = basicAuthHeader(ORTHANC_USER, ORTHANC_PASS);
 
-        btnLoadImg.setOnAction(e -> {
-            btnLoadImg.setDisable(true);
-            runAsync(() -> {
-                try {
-                    String yyyymmdd = row.tgl_periksa.replace("-", "");
-                    JSONObject req = new JSONObject()
-                            .put("Level", "Study").put("Expand", true)
-                            .put("Query", new JSONObject()
-                                    .put("StudyDate", yyyymmdd + "-" + yyyymmdd)
-                                    .put("PatientID", row.no_rkm_medis));
+                JSONObject req = new JSONObject()
+                        .put("Level", "Study").put("Expand", true)
+                        .put("Query", new JSONObject()
+                                .put("StudyDate", yyyymmdd + "-" + yyyymmdd)
+                                .put("PatientID", row.no_rkm_medis));
 
-                    HttpURLConnection con = (HttpURLConnection) new URL(ORTHANC_BASE + "/tools/find").openConnection();
-                    con.setRequestMethod("POST");
-                    con.setDoOutput(true);
-                    con.setRequestProperty("Authorization", basicAuthHeader(ORTHANC_USER, ORTHANC_PASS));
-                    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                    try (OutputStream os = con.getOutputStream()) {
-                        os.write(req.toString().getBytes(StandardCharsets.UTF_8));
-                    }
-                    int status = con.getResponseCode();
-                    String body = readBody(con, status);
-                    con.disconnect();
-                    if (status < 200 || status >= 300) {
-                        throw new IOException("Find HTTP " + status + ": " + body);
-                    }
-
-                    JSONArray studies = new JSONArray(body);
-                    List<SelectedImageDokter> all = new ArrayList<>();
-                    String auth = basicAuthHeader(ORTHANC_USER, ORTHANC_PASS);
-
-                    for (int i = 0; i < studies.length(); i++) {
-                        JSONObject st = studies.getJSONObject(i);
-                        JSONArray seriesArr = st.optJSONArray("Series");
-                        if (seriesArr == null) {
-                            continue;
-                        }
-
-                        for (int sidx = 0; sidx < seriesArr.length(); sidx++) {
-                            String seriesId = seriesArr.getString(sidx);
-                            JSONObject series = getJsonWithAuth(ORTHANC_BASE + "/series/" + seriesId, auth);
-
-                            JSONObject mt = series.optJSONObject("MainDicomTags");
-                            String seriesDesc = (mt != null ? mt.optString("SeriesDescription", "Series") : "Series");
-                            String studyUid = (mt != null ? mt.optString("StudyInstanceUID", null) : null);
-
-                            // fallback kalau StudyInstanceUID tidak ada di level series
-                            if (studyUid == null || studyUid.isBlank()) {
-                                String parentStudy = series.optString("ParentStudy", null);
-                                if (parentStudy != null) {
-                                    JSONObject studyJson = getJsonWithAuth(ORTHANC_BASE + "/studies/" + parentStudy, auth);
-                                    JSONObject mtStudy = studyJson.optJSONObject("MainDicomTags");
-                                    if (mtStudy != null) {
-                                        studyUid = mtStudy.optString("StudyInstanceUID", null);
-                                    }
-                                }
-                            }
-
-                            JSONArray instArr = series.optJSONArray("Instances");
-                            if (instArr == null) {
-                                continue;
-                            }
-
-                            for (int k = 0; k < instArr.length(); k++) {
-                                String instId = instArr.getString(k);
-                                byte[] jpg = getBytesWithAuth(ORTHANC_BASE + "/instances/" + instId + "/preview", auth);
-                                all.add(new SelectedImageDokter(instId, seriesDesc, jpg, true, seriesId, studyUid));
-                            }
-                        }
-                    }
-
-                    Platform.runLater(() -> {
-                        grid.getChildren().clear();
-                        selected.clear();
-                        selected.addAll(all);
-                        for (SelectedImageDokter si : selected) {
-                            ImageView iv = new ImageView(new Image(new ByteArrayInputStream(si.bytes)));
-                            iv.setFitWidth(180);
-                            iv.setPreserveRatio(true);
-                            CheckBox cb = new CheckBox((si.seriesDesc == null ? "" : si.seriesDesc)
-                                    + " (" + si.instanceId.substring(0, 8) + "…)");
-                            cb.setSelected(true);
-                            cb.selectedProperty().addListener((ob, ov, nv) -> si.selected = nv);
-                            VBox cell = new VBox(iv, cb);
-                            cell.setSpacing(4);
-                            grid.getChildren().add(cell);
-                        }
-                        info.setText("Gambar dimuat: " + selected.size());
-                        btnLoadImg.setDisable(false);
-                    });
-                } catch (Exception ex) {
-                    Platform.runLater(() -> {
-                        info.setText("Gagal muat gambar: " + ex.getMessage());
-                        btnLoadImg.setDisable(false);
-                    });
+                HttpURLConnection con = (HttpURLConnection) new URL(ORTHANC_BASE + "/tools/find").openConnection();
+                con.setRequestMethod("POST");
+                con.setDoOutput(true);
+                con.setRequestProperty("Authorization", auth);
+                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                try (OutputStream os = con.getOutputStream()) {
+                    os.write(req.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8));
                 }
-            });
+                int code = con.getResponseCode();
+                String body = readBody(con, code);
+                con.disconnect();
+                if (code < 200 || code >= 300) {
+                    throw new IOException("Find HTTP " + code + ": " + body);
+                }
+
+                String foundUid = null;
+                JSONArray studies = new JSONArray(body);
+                for (int i = 0; i < studies.length() && foundUid == null; i++) {
+                    JSONObject st = studies.getJSONObject(i);
+                    JSONObject mt = st.optJSONObject("MainDicomTags");
+                    if (mt != null) {
+                        foundUid = mt.optString("StudyInstanceUID", null);
+                    }
+                    if ((foundUid == null || foundUid.isBlank())) {
+                        String id = st.optString("ID", null);
+                        if (id != null) {
+                            JSONObject stFull = getJsonWithAuth(ORTHANC_BASE + "/studies/" + id, auth);
+                            JSONObject mt2 = stFull.optJSONObject("MainDicomTags");
+                            if (mt2 != null) {
+                                foundUid = mt2.optString("StudyInstanceUID", null);
+                            }
+                        }
+                    }
+                }
+
+                final String studyUidFinal = (foundUid != null && !foundUid.isBlank()) ? foundUid : null;
+                Platform.runLater(() -> {
+                    if (studyUidFinal != null) {
+                        btnOpenViewer.setDisable(false);
+                        btnOpenViewer.setTooltip(new Tooltip("Buka viewer untuk Study " + studyUidFinal));
+                        btnOpenViewer.setOnAction(ev -> openStoneViewer(studyUidFinal)); // gunakan helper milikmu
+                    } else {
+                        btnOpenViewer.setDisable(true);
+                        btnOpenViewer.setTooltip(new Tooltip("Study UID tidak ditemukan"));
+                    }
+                });
+            } catch (Exception e) {
+                Platform.runLater(() -> {
+                    btnOpenViewer.setDisable(true);
+                    btnOpenViewer.setTooltip(new Tooltip("Gagal mencari Study UID"));
+                });
+            }
         });
 
+        // ===== Model data snip =====
+        class SnipImg {
+
+            String label;
+            byte[] bytes;
+            boolean selected = true;
+
+            SnipImg(String label, byte[] bytes) {
+                this.label = label;
+                this.bytes = bytes;
+            }
+        }
+        List<SnipImg> selected = new ArrayList<>();
+
+        // Render ulang grid
+        Runnable rerender = () -> {
+            grid.getChildren().clear();
+            for (SnipImg si : selected) {
+                ImageView iv = new ImageView(new Image(new ByteArrayInputStream(si.bytes)));
+                iv.setFitWidth(180);
+                iv.setPreserveRatio(true);
+                CheckBox cb = new CheckBox(si.label);
+                cb.setSelected(si.selected);
+                cb.selectedProperty().addListener((o, ov, nv) -> si.selected = nv);
+                VBox cell = new VBox(iv, cb);
+                cell.setSpacing(4);
+                grid.getChildren().add(cell);
+            }
+            info.setText("Gambar dimuat: " + selected.size());
+        };
+
+        // Tempel dari clipboard
+        btnPaste.setOnAction(e -> {
+            try {
+                Clipboard cb = Clipboard.getSystemClipboard();
+                boolean added = false;
+                if (cb.hasImage()) {
+                    Image fxImg = cb.getImage();
+                    selected.add(new SnipImg("CLIP-" + System.currentTimeMillis(), fxImageToPngBytes(fxImg)));
+                    added = true;
+                }
+                if (cb.hasFiles()) {
+                    for (File f : cb.getFiles()) {
+                        if (isSupportedImageFile(f)) {
+                            selected.add(new SnipImg(f.getName(), readAllBytes(f)));
+                            added = true;
+                        }
+                    }
+                }
+                if (!added) {
+                    showToastRad("Clipboard tidak berisi gambar/file gambar.", true);
+                    return;
+                }
+                rerender.run();
+            } catch (Exception ex) {
+                showToastRad("Gagal tempel: " + ex.getMessage(), true);
+            }
+        });
+
+        // Tambah file
+        btnAddFile.setOnAction(e -> {
+            FileChooser fc = new FileChooser();
+            fc.setTitle("Pilih Gambar");
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter(
+                    "Gambar", "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif", "*.webp"));
+            List<File> files = fc.showOpenMultipleDialog(dlg);
+            if (files != null) {
+                for (File f : files) {
+                    try {
+                        selected.add(new SnipImg(f.getName(), readAllBytes(f)));
+                    } catch (IOException io) {
+                        showToastRad("Gagal baca: " + f.getName(), true);
+                    }
+                }
+                rerender.run();
+            }
+        });
+
+        // Toggle pilih semua
+        cbSelectAll.setOnAction(e -> {
+            boolean on = cbSelectAll.isSelected();
+            for (SnipImg s : selected) {
+                s.selected = on;
+            }
+            for (Node n : grid.getChildren()) {
+                if (n instanceof VBox) {
+                    Node chk = ((VBox) n).getChildren().get(1);
+                    if (chk instanceof CheckBox) {
+                        ((CheckBox) chk).setSelected(on);
+                    }
+                }
+            }
+        });
+
+        // KIRIM (caption hanya untuk gambar pertama)
         btnSend.setOnAction(e -> {
             String phone = normalizePhone(tfPhone.getText());
             if (!isValidMsisdn(phone)) {
                 showToastRad("Nomor dokter tidak valid", true);
                 return;
             }
-
-            List<SelectedImageDokter> picks = selected.stream().filter(x -> x.selected).collect(Collectors.toList());
+            List<SnipImg> picks = selected.stream().filter(x -> x.selected).collect(Collectors.toList());
             if (picks.isEmpty()) {
                 showToastRad("Pilih minimal 1 gambar.", true);
                 return;
@@ -1087,54 +1171,18 @@ public class WhatsAppSendRAD extends Application {
             btnSend.setDisable(true);
             runAsync(() -> {
                 try {
-                    // track study yang sudah dikasih link
-                    Set<String> linkedStudies = new HashSet<>();
-                    Map<String, byte[]> annotatedCache = new HashMap<>();
-
                     for (int i = 0; i < picks.size(); i++) {
-                        SelectedImageDokter si = picks.get(i);
+                        SnipImg si = picks.get(i);
+                        String caption = (i == 0) ? taMsg.getText().trim() : "";
 
-                        // 1) siapkan link viewer (sekali per StudyInstanceUID)
-                        String link = null;
-                        if (si.studyUid != null && !si.studyUid.isBlank() && linkedStudies.add(si.studyUid)) {
-                            link = buildViewerLink(si.studyUid);
-                        }
-
-                        // 2) caption (gambar pertama = pesan + link; berikutnya hanya link jika beda study)
-                        String caption = "";
-                        if (i == 0) {
-                            caption = taMsg.getText().trim();
-                            if (link != null) {
-                                caption += "\nViewer: " + link;
-                            }
-                        } else if (link != null) {
-                            caption = "Viewer: " + link;
-                        }
-
-                        // 3) ambil bytes annotated (fallback: pakai asli bila gagal anotasi)
-                        byte[] toSend = si.bytes;
-                        try {
-                            byte[] ann = annotatedCache.get(si.instanceId);
-                            if (ann == null) {
-                                InstanceInfo meta = fetchInstanceInfo(si.instanceId);
-                                // pakai fungsi annotate kamu (yang posisi header di atas / sesuai versi terakhir)
-                                ann = annotateJpegBottomPad(si.bytes, meta);
-                                annotatedCache.put(si.instanceId, ann);
-                            }
-                            toSend = ann;
-                        } catch (Exception ignore) {
-                            // kalau gagal annotate, tetap kirim gambar asli
-                        }
-
-                        // 4) kirim
+                        ImagePayload pay = normalizeToAllowedImage(si.bytes);
                         sendSingleImageToDoctor(
                                 phone,
                                 caption,
-                                toSend,
-                                "img-" + si.instanceId // ekstensi akan ditambahkan oleh sendSingleImageToDoctor()
+                                pay.data,
+                                "img-" + (si.label == null ? ("CLIP-" + i) : si.label.replaceAll("[\\s:]+", "_"))
                         );
                     }
-
                     Platform.runLater(() -> {
                         showToastRad("Gambar terkirim ke dokter.", false);
                         dlg.close();
@@ -1148,6 +1196,7 @@ public class WhatsAppSendRAD extends Application {
             });
         });
 
+        // --- Form layout
         GridPane form = new GridPane();
         form.setHgap(8);
         form.setVgap(6);
@@ -1159,15 +1208,12 @@ public class WhatsAppSendRAD extends Application {
         form.add(taMsg, 1, 2);
         GridPane.setHgrow(taMsg, Priority.ALWAYS);
 
-        VBox rootBox = new VBox(10,
-                loadLbl,
-                form,
-                new HBox(8, btnLoadImg, btnSend),
-                new ScrollPane(grid),
-                info
-        );
+        HBox actions = new HBox(8, btnOpenViewer, btnAddFile, btnPaste, cbSelectAll, btnSend);
+        actions.setAlignment(Pos.CENTER_LEFT);
+
+        VBox rootBox = new VBox(10, loadLbl, form, actions, new ScrollPane(grid), info);
         rootBox.setPadding(new Insets(12));
-        dlg.setScene(new Scene(rootBox, 960, 720));
+        dlg.setScene(new Scene(rootBox, 980, 760));
         dlg.show();
     }
 
@@ -1221,10 +1267,224 @@ public class WhatsAppSendRAD extends Application {
         return base;
     }
 
+//    private void openRadBuilder(RadiologiRow row) {
+//        Stage dlg = new Stage();
+//        dlg.getIcons().add(new Image("https://rsudmatraman.my.id/upload/image/whatsapp.png"));
+//        dlg.setTitle("Pilih Gambar Radiologi — " + safe(row.nm_pasien));
+//
+//        TextArea taExpert = new TextArea();
+//        taExpert.setPromptText("Hasil expertise (opsional, akan ditaruh di PDF)");
+//        taExpert.setText(row.hasil_exp);
+//
+//        FlowPane grid = new FlowPane();
+//        grid.setHgap(8);
+//        grid.setVgap(8);
+//        grid.setPadding(new Insets(10));
+//
+//        CheckBox cbSelectAll = new CheckBox("Pilih semua");
+//        Button btnLoadImg = new Button("Muat Gambar");
+//        Button btnCreatePdf = new Button("Buat PDF & Upload & Prefill WA");
+//        Label info = new Label("Pilih gambar lalu buat PDF");
+//
+//        VBox rootBox = new VBox(10,
+//                new Label("No. Rawat: " + row.no_rawat + " | Pasien: " + row.nm_pasien + " | RM: " + row.no_rkm_medis),
+//                new Label("Tanggal: " + row.tgl_periksa + " " + row.jam + " | Pemeriksaan: " + row.nm_perawatan + " | Hasil SIMRS: " + row.hasil_mask),
+//                new Label("Expertise:"), taExpert,
+//                cbSelectAll, btnLoadImg, new ScrollPane(grid),
+//                info, btnCreatePdf
+//        );
+//        rootBox.setPadding(new Insets(12));
+//
+//        List<SelectedImage> selected = new ArrayList<>();
+//
+//        btnLoadImg.setOnAction(e -> {
+//            btnLoadImg.setDisable(true);
+//            runAsync(() -> {
+//                try {
+//                    // POST /tools/find
+//                    String yyyymmdd = row.tgl_periksa.replace("-", "");
+//                    JSONObject req = new JSONObject()
+//                            .put("Level", "Study")
+//                            .put("Expand", true)
+//                            .put("Query", new JSONObject()
+//                                    .put("StudyDate", yyyymmdd + "-" + yyyymmdd)
+//                                    .put("PatientID", row.no_rkm_medis));
+//
+//                    HttpURLConnection con = (HttpURLConnection) new URL(ORTHANC_BASE + "/tools/find").openConnection();
+//                    con.setRequestMethod("POST");
+//                    con.setDoOutput(true);
+//                    con.setRequestProperty("Authorization", basicAuthHeader(ORTHANC_USER, ORTHANC_PASS));
+//                    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+//                    try (OutputStream os = con.getOutputStream()) {
+//                        os.write(req.toString().getBytes(StandardCharsets.UTF_8));
+//                    }
+//                    int status = con.getResponseCode();
+//                    String body = readBody(con, status);
+//                    con.disconnect();
+//                    if (status < 200 || status >= 300) {
+//                        throw new IOException("Find HTTP " + status + ": " + body);
+//                    }
+//                    JSONArray studies = new JSONArray(body);
+//
+//                    List<SelectedImage> all = new ArrayList<>();
+//                    String auth = basicAuthHeader(ORTHANC_USER, ORTHANC_PASS);
+//
+//                    for (int i = 0; i < studies.length(); i++) {
+//                        JSONObject st = studies.getJSONObject(i);
+//                        JSONArray seriesArr = st.optJSONArray("Series");
+//                        if (seriesArr == null) {
+//                            continue;
+//                        }
+//                        for (int sidx = 0; sidx < seriesArr.length(); sidx++) {
+//                            String seriesId = seriesArr.getString(sidx);
+//                            JSONObject series = getJsonWithAuth(ORTHANC_BASE + "/series/" + seriesId, auth);
+//                            String seriesDesc = series.optJSONObject("MainDicomTags").optString("SeriesDescription", "Series");
+//                            JSONArray instArr = series.optJSONArray("Instances");
+//                            if (instArr == null) {
+//                                continue;
+//                            }
+//                            for (int k = 0; k < instArr.length(); k++) {
+//                                String instId = instArr.getString(k);
+//                                byte[] jpg = getBytesWithAuth(ORTHANC_BASE + "/instances/" + instId + "/preview", auth);
+//                                all.add(new SelectedImage(instId, seriesDesc, jpg, true));
+//                            }
+//                        }
+//                    }
+//
+//                    Platform.runLater(() -> {
+//                        grid.getChildren().clear();
+//                        selected.clear();
+//                        selected.addAll(all);
+//                        for (SelectedImage si : selected) {
+//                            ImageView iv = new ImageView(new Image(new ByteArrayInputStream(si.bytes)));
+//                            iv.setFitWidth(180);
+//                            iv.setPreserveRatio(true);
+//                            CheckBox cb = new CheckBox(si.seriesDesc + " (" + si.instanceId.substring(0, 8) + "…)");
+//                            cb.setSelected(true);
+//                            cb.selectedProperty().addListener((ob, ov, nv) -> si.selected = nv);
+//                            VBox cell = new VBox(iv, cb);
+//                            cell.setSpacing(4);
+//                            grid.getChildren().add(cell);
+//                        }
+//                        cbSelectAll.setSelected(true);
+//                        cbSelectAll.setOnAction(ev -> {
+//                            boolean on = cbSelectAll.isSelected();
+//                            for (int idx = 0; idx < grid.getChildren().size(); idx++) {
+//                                VBox cell = (VBox) grid.getChildren().get(idx);
+//                                ((CheckBox) cell.getChildren().get(1)).setSelected(on);
+//                            }
+//                        });
+//                        info.setText("Gambar dimuat: " + selected.size());
+//                        btnLoadImg.setDisable(false);
+//                    });
+//                } catch (Exception ex1) {
+//                    Platform.runLater(() -> {
+//                        info.setText("Gagal muat gambar: " + ex1.getMessage());
+//                        btnLoadImg.setDisable(false);
+//                    });
+//                }
+//            });
+//        });
+//
+//        btnCreatePdf.setOnAction(e -> {
+//            List<SelectedImage> picks = selected.stream().filter(x -> x.selected).collect(Collectors.toList());
+//            if (picks.isEmpty()) {
+//                info.setText("Pilih minimal 1 gambar.");
+//                return;
+//            }
+//
+//            runAsync(() -> {
+//                try {
+//                    // 1) Upsert expertise bila berubah
+//                    String newExpert = taExpert.getText();
+//                    saveExpertiseIfChanged(row, newExpert, API_WEBSITE_KEY);
+//                    // 2) Lanjut buat PDF dari teks terkini (pakai newExpert)
+//                    File pdf = buildRadiologyPdf(row, newExpert, picks);
+//                    String desiredName = buildDesiredPdfName(row);
+//                    String uploadedUrl = uploadRadiologyPdf(pdf, desiredName);
+//                    if (uploadedUrl == null) {
+//                        throw new IOException("Upload gagal");
+//                    }
+//
+//                    // >>> HAPUS TEMP SETELAH SUKSES
+//                    try {
+//                        if (!pdf.delete()) {
+//                            pdf.deleteOnExit();
+//                        }
+//                    } catch (Throwable ignore) {
+//                    }
+//
+//                    // simpan meta log utk pengiriman WA
+//                    logNoRawat = row.no_rawat;
+//                    logTglPeriksa = row.tgl_periksa;
+//                    logJam = row.jam;
+//                    logNoRM = row.no_rkm_medis;
+//                    logNama = row.nm_pasien;
+//                    logNoTelp = row.no_telp;
+//
+//                    Platform.runLater(() -> {
+//                        if (typeCombo != null) {
+//                            typeCombo.setValue("Send File");
+//                        }
+//                        if (phoneField != null) {
+//                            phoneField.setText(normalizePhone(safe(row.no_telp)));
+//                        }
+//                        if (fileUrlField != null) {
+//                            fileUrlField.setText(uploadedUrl);
+//                        }
+//                        String caption = "Yth Bp/Ibu/Sdr " + safe(row.nm_pasien) + ".\n"
+//                                + "Berikut kami kirimkan hasil radiologi pada tanggal " + safe(row.tgl_periksa) + ".\n\n"
+//                                + "Mohon unduh PDF dalam 24 jam setelah menerima pesan ini.\nTerima kasih.";
+//                        if (captionArea != null) {
+//                            captionArea.setText(caption);
+//                        }
+//                        showSendPane();
+//                        showToast("PDF radiologi telah dibuat & diunggah.", false, false);
+//                    });
+//
+//                    // Pre-log FAILED (akan diupdate saat benar2 terkirim via WA)
+//                    try {
+//                        JSONObject payload = new JSONObject();
+//                        payload.put("no_rawat", row.no_rawat);
+//                        payload.put("tgl_periksa", row.tgl_periksa);
+//                        payload.put("jam", row.jam);
+//                        payload.put("no_rkm_medis", row.no_rkm_medis);
+//                        payload.put("nm_pasien", row.nm_pasien);
+//                        payload.put("no_telp", row.no_telp);
+//                        payload.put("series_desc", picks.stream().map(p -> p.seriesDesc).distinct().collect(Collectors.joining(", ")));
+//                        JSONArray inst = new JSONArray();
+//                        for (SelectedImage si : picks) {
+//                            inst.put(si.instanceId);
+//                        }
+//                        payload.put("instances", inst);
+//                        payload.put("file_url", uploadedUrl);
+//                        payload.put("status", "FAILED");
+//                        payload.put("sent_by", "wa-rsudm");
+//                        payload.put("last_error", "");
+//                        Map<String, String> headers = new HashMap<>();
+//                        headers.put("Content-Type", "application/json; charset=UTF-8");
+//                        if (API_WEBSITE_KEY != null && !API_WEBSITE_KEY.trim().isEmpty()) {
+//                            headers.put("X-Api-Key", API_WEBSITE_KEY);
+//                        }
+//                        httpPostJsonOpen(API_RAD_LOGSEND, payload.toString(), headers);
+//                    } catch (Throwable logEx) {
+//                        System.err.println("[rad-log] gagal: " + logEx.getMessage());
+//                    }
+//
+//                    Platform.runLater(dlg::close);
+//                } catch (Exception ex2) {
+//                    Platform.runLater(() -> info.setText("Gagal membuat/unggah PDF: " + ex2.getMessage()));
+//                }
+//            });
+//        });
+//
+//        dlg.setScene(new Scene(rootBox, 960, 720));
+//        dlg.show();
+//    }
     private void openRadBuilder(RadiologiRow row) {
         Stage dlg = new Stage();
         dlg.getIcons().add(new Image("https://rsudmatraman.my.id/upload/image/whatsapp.png"));
-        dlg.setTitle("Pilih Gambar Radiologi — " + safe(row.nm_pasien));
+        dlg.setTitle("Lampiran Foto (Snip) — " + safe(row.nm_pasien));
 
         TextArea taExpert = new TextArea();
         taExpert.setPromptText("Hasil expertise (opsional, akan ditaruh di PDF)");
@@ -1235,111 +1495,130 @@ public class WhatsAppSendRAD extends Application {
         grid.setVgap(8);
         grid.setPadding(new Insets(10));
 
-        CheckBox cbSelectAll = new CheckBox("Pilih semua");
-        Button btnLoadImg = new Button("Muat Gambar");
+        // Tombol-tombol baru
+        Button btnOpenViewer = new Button("Buka Stone WebViewer");
+        Button btnAddFiles = new Button("Tambah Gambar (File…)");
+        Button btnPaste = new Button("Tempel dari Clipboard");
         Button btnCreatePdf = new Button("Buat PDF & Upload & Prefill WA");
-        Label info = new Label("Pilih gambar lalu buat PDF");
+
+        Label info = new Label("Tips: Buka viewer → snip/screenshot → klik 'Tambah Gambar' atau 'Tempel dari Clipboard'.");
+        CheckBox cbSelectAll = new CheckBox("Pilih semua");
+        cbSelectAll.setSelected(true);
 
         VBox rootBox = new VBox(10,
                 new Label("No. Rawat: " + row.no_rawat + " | Pasien: " + row.nm_pasien + " | RM: " + row.no_rkm_medis),
                 new Label("Tanggal: " + row.tgl_periksa + " " + row.jam + " | Pemeriksaan: " + row.nm_perawatan + " | Hasil SIMRS: " + row.hasil_mask),
                 new Label("Expertise:"), taExpert,
-                cbSelectAll, btnLoadImg, new ScrollPane(grid),
+                new HBox(8, btnOpenViewer, btnAddFiles, btnPaste, cbSelectAll),
+                new ScrollPane(grid),
                 info, btnCreatePdf
         );
         rootBox.setPadding(new Insets(12));
 
         List<SelectedImage> selected = new ArrayList<>();
 
-        btnLoadImg.setOnAction(e -> {
-            btnLoadImg.setDisable(true);
-            runAsync(() -> {
-                try {
-                    // POST /tools/find
-                    String yyyymmdd = row.tgl_periksa.replace("-", "");
-                    JSONObject req = new JSONObject()
-                            .put("Level", "Study")
-                            .put("Expand", true)
-                            .put("Query", new JSONObject()
-                                    .put("StudyDate", yyyymmdd + "-" + yyyymmdd)
-                                    .put("PatientID", row.no_rkm_medis));
+        // 1) Hitung StudyInstanceUID untuk tombol "Buka Viewer"
+        btnOpenViewer.setDisable(true);
+        runAsync(() -> {
+            try {
+                String yyyymmdd = row.tgl_periksa.replace("-", "");
+                JSONObject req = new JSONObject()
+                        .put("Level", "Study")
+                        .put("Expand", true)
+                        .put("Query", new JSONObject()
+                                .put("StudyDate", yyyymmdd + "-" + yyyymmdd)
+                                .put("PatientID", row.no_rkm_medis));
 
-                    HttpURLConnection con = (HttpURLConnection) new URL(ORTHANC_BASE + "/tools/find").openConnection();
-                    con.setRequestMethod("POST");
-                    con.setDoOutput(true);
-                    con.setRequestProperty("Authorization", basicAuthHeader(ORTHANC_USER, ORTHANC_PASS));
-                    con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                    try (OutputStream os = con.getOutputStream()) {
-                        os.write(req.toString().getBytes(StandardCharsets.UTF_8));
-                    }
-                    int status = con.getResponseCode();
-                    String body = readBody(con, status);
-                    con.disconnect();
-                    if (status < 200 || status >= 300) {
-                        throw new IOException("Find HTTP " + status + ": " + body);
-                    }
-                    JSONArray studies = new JSONArray(body);
-
-                    List<SelectedImage> all = new ArrayList<>();
-                    String auth = basicAuthHeader(ORTHANC_USER, ORTHANC_PASS);
-
-                    for (int i = 0; i < studies.length(); i++) {
-                        JSONObject st = studies.getJSONObject(i);
-                        JSONArray seriesArr = st.optJSONArray("Series");
-                        if (seriesArr == null) {
-                            continue;
-                        }
-                        for (int sidx = 0; sidx < seriesArr.length(); sidx++) {
-                            String seriesId = seriesArr.getString(sidx);
-                            JSONObject series = getJsonWithAuth(ORTHANC_BASE + "/series/" + seriesId, auth);
-                            String seriesDesc = series.optJSONObject("MainDicomTags").optString("SeriesDescription", "Series");
-                            JSONArray instArr = series.optJSONArray("Instances");
-                            if (instArr == null) {
-                                continue;
-                            }
-                            for (int k = 0; k < instArr.length(); k++) {
-                                String instId = instArr.getString(k);
-                                byte[] jpg = getBytesWithAuth(ORTHANC_BASE + "/instances/" + instId + "/preview", auth);
-                                all.add(new SelectedImage(instId, seriesDesc, jpg, true));
-                            }
-                        }
-                    }
-
-                    Platform.runLater(() -> {
-                        grid.getChildren().clear();
-                        selected.clear();
-                        selected.addAll(all);
-                        for (SelectedImage si : selected) {
-                            ImageView iv = new ImageView(new Image(new ByteArrayInputStream(si.bytes)));
-                            iv.setFitWidth(180);
-                            iv.setPreserveRatio(true);
-                            CheckBox cb = new CheckBox(si.seriesDesc + " (" + si.instanceId.substring(0, 8) + "…)");
-                            cb.setSelected(true);
-                            cb.selectedProperty().addListener((ob, ov, nv) -> si.selected = nv);
-                            VBox cell = new VBox(iv, cb);
-                            cell.setSpacing(4);
-                            grid.getChildren().add(cell);
-                        }
-                        cbSelectAll.setSelected(true);
-                        cbSelectAll.setOnAction(ev -> {
-                            boolean on = cbSelectAll.isSelected();
-                            for (int idx = 0; idx < grid.getChildren().size(); idx++) {
-                                VBox cell = (VBox) grid.getChildren().get(idx);
-                                ((CheckBox) cell.getChildren().get(1)).setSelected(on);
-                            }
-                        });
-                        info.setText("Gambar dimuat: " + selected.size());
-                        btnLoadImg.setDisable(false);
-                    });
-                } catch (Exception ex1) {
-                    Platform.runLater(() -> {
-                        info.setText("Gagal muat gambar: " + ex1.getMessage());
-                        btnLoadImg.setDisable(false);
-                    });
+                HttpURLConnection con = (HttpURLConnection) new URL(ORTHANC_BASE + "/tools/find").openConnection();
+                con.setRequestMethod("POST");
+                con.setDoOutput(true);
+                con.setRequestProperty("Authorization", basicAuthHeader(ORTHANC_USER, ORTHANC_PASS));
+                con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                try (OutputStream os = con.getOutputStream()) {
+                    os.write(req.toString().getBytes(StandardCharsets.UTF_8));
                 }
-            });
+                int status = con.getResponseCode();
+                String body = readBody(con, status);
+                con.disconnect();
+                if (status < 200 || status >= 300) {
+                    throw new IOException("Find HTTP " + status + ": " + body);
+                }
+
+                // Ambil StudyInstanceUID pertama yang match
+                JSONArray studies = new JSONArray(body);
+                String studyUid = null;
+                for (int i = 0; i < studies.length() && studyUid == null; i++) {
+                    JSONObject st = studies.getJSONObject(i);
+                    JSONObject mt = st.optJSONObject("MainDicomTags");
+                    if (mt != null) {
+                        studyUid = mt.optString("StudyInstanceUID", null);
+                    }
+                }
+                final String fStudyUid = studyUid;
+
+                Platform.runLater(() -> {
+                    btnOpenViewer.setDisable(fStudyUid == null || fStudyUid.isBlank());
+                    btnOpenViewer.setOnAction(ev -> openStoneViewer(fStudyUid));
+                    if (fStudyUid == null) {
+                        info.setText("Viewer: Study UID tidak ditemukan dari Orthanc. Kamu masih bisa impor snip secara manual.");
+                    }
+                });
+            } catch (Exception ex) {
+                Platform.runLater(() -> {
+                    info.setText("Gagal mencari Study UID: " + ex.getMessage());
+                    btnOpenViewer.setDisable(true);
+                });
+            }
         });
 
+        // 2) Tambah gambar dari File
+        btnAddFiles.setOnAction(e -> {
+            FileChooser fc = new FileChooser();
+            fc.setTitle("Pilih gambar hasil snip (JPG/PNG)");
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.webp"));
+            List<File> files = fc.showOpenMultipleDialog(dlg);
+            if (files == null || files.isEmpty()) {
+                return;
+            }
+
+            try {
+                for (File f : files) {
+                    SelectedImage si = makeSelectedFromFile(f);
+                    selected.add(si);
+                }
+                refreshGridForSelected(grid, selected);
+                info.setText("Ditambahkan " + files.size() + " gambar.");
+            } catch (Exception ex) {
+                showToastRad("Gagal menambah gambar: " + ex.getMessage(), true);
+            }
+        });
+
+        // 3) Tempel dari Clipboard
+        btnPaste.setOnAction(e -> {
+            try {
+                SelectedImage si = makeSelectedFromClipboard();
+                if (si == null) {
+                    showToastRad("Clipboard tidak berisi gambar.", true);
+                    return;
+                }
+                selected.add(si);
+                refreshGridForSelected(grid, selected);
+                info.setText("1 gambar ditempel dari clipboard.");
+            } catch (Exception ex) {
+                showToastRad("Gagal tempel: " + ex.getMessage(), true);
+            }
+        });
+
+        // 4) Select all toggle
+        cbSelectAll.setOnAction(ev -> {
+            boolean on = cbSelectAll.isSelected();
+            for (SelectedImage si : selected) {
+                si.selected = on;
+            }
+            refreshGridForSelected(grid, selected);
+        });
+
+        // 5) Generate PDF seperti biasa (pakai gambar yang diimpor user)
         btnCreatePdf.setOnAction(e -> {
             List<SelectedImage> picks = selected.stream().filter(x -> x.selected).collect(Collectors.toList());
             if (picks.isEmpty()) {
@@ -1349,10 +1628,9 @@ public class WhatsAppSendRAD extends Application {
 
             runAsync(() -> {
                 try {
-                    // 1) Upsert expertise bila berubah
                     String newExpert = taExpert.getText();
                     saveExpertiseIfChanged(row, newExpert, API_WEBSITE_KEY);
-                    // 2) Lanjut buat PDF dari teks terkini (pakai newExpert)
+
                     File pdf = buildRadiologyPdf(row, newExpert, picks);
                     String desiredName = buildDesiredPdfName(row);
                     String uploadedUrl = uploadRadiologyPdf(pdf, desiredName);
@@ -1360,7 +1638,6 @@ public class WhatsAppSendRAD extends Application {
                         throw new IOException("Upload gagal");
                     }
 
-                    // >>> HAPUS TEMP SETELAH SUKSES
                     try {
                         if (!pdf.delete()) {
                             pdf.deleteOnExit();
@@ -1368,7 +1645,7 @@ public class WhatsAppSendRAD extends Application {
                     } catch (Throwable ignore) {
                     }
 
-                    // simpan meta log utk pengiriman WA
+                    // Pre-log + prefill send pane (tetap sama seperti kode lama)
                     logNoRawat = row.no_rawat;
                     logTglPeriksa = row.tgl_periksa;
                     logJam = row.jam;
@@ -1394,9 +1671,10 @@ public class WhatsAppSendRAD extends Application {
                         }
                         showSendPane();
                         showToast("PDF radiologi telah dibuat & diunggah.", false, false);
+                        dlg.close();
                     });
 
-                    // Pre-log FAILED (akan diupdate saat benar2 terkirim via WA)
+                    // pre-log FAILED (seperti sebelumnya)
                     try {
                         JSONObject payload = new JSONObject();
                         payload.put("no_rawat", row.no_rawat);
@@ -1424,16 +1702,37 @@ public class WhatsAppSendRAD extends Application {
                     } catch (Throwable logEx) {
                         System.err.println("[rad-log] gagal: " + logEx.getMessage());
                     }
-
-                    Platform.runLater(dlg::close);
                 } catch (Exception ex2) {
-                    Platform.runLater(() -> info.setText("Gagal membuat/unggah PDF: " + ex2.getMessage()));
+                    String msg = "Gagal membuat/unggah PDF: " + ex2.getMessage();
+                    System.err.println("[RAD-PDF] " + msg);
+                    ex2.printStackTrace(); // log lengkap di console
+
+                    Platform.runLater(() -> {
+                        info.setText(msg);
+                        showToastRad(msg, true);       // ← tampilkan toast merah
+                    });
                 }
             });
         });
 
-        dlg.setScene(new Scene(rootBox, 960, 720));
+        dlg.setScene(new Scene(rootBox, 980, 740));
         dlg.show();
+    }
+
+// --- Render ulang grid dari daftar SelectedImage
+    private void refreshGridForSelected(FlowPane grid, List<SelectedImage> selected) {
+        grid.getChildren().clear();
+        for (SelectedImage si : selected) {
+            ImageView iv = new ImageView(new Image(new ByteArrayInputStream(si.bytes)));
+            iv.setFitWidth(180);
+            iv.setPreserveRatio(true);
+            CheckBox cb = new CheckBox((si.seriesDesc == null ? "" : si.seriesDesc) + " (" + si.instanceId.substring(0, Math.min(8, si.instanceId.length())) + "…)");
+            cb.setSelected(si.selected);
+            cb.selectedProperty().addListener((ob, ov, nv) -> si.selected = nv);
+            VBox cell = new VBox(iv, cb);
+            cell.setSpacing(4);
+            grid.getChildren().add(cell);
+        }
     }
 
     private File buildRadiologyPdf(RadiologiRow row, String expertise, List<SelectedImage> picks) throws Exception {
@@ -1615,30 +1914,45 @@ public class WhatsAppSendRAD extends Application {
 
                         BufferedImage bimg = ImageIO.read(new ByteArrayInputStream(si.bytes));
                         if (bimg != null) {
-                            // Ambil meta untuk badge L/R + identitas
-                            InstanceInfo meta = fetchInstanceInfo(si.instanceId);
-                            byte[] annotated = annotateJpegBottomPad(si.bytes, meta);
-                            BufferedImage b2 = ImageIO.read(new ByteArrayInputStream(annotated));
+
+                            byte[] bytesForPdf = si.bytes;   // default: pakai apa adanya (snip)
+                            boolean gotMeta = false;
+
+                            // Kalau ini benar-benar instance Orthanc, baru coba ambil meta & anotasi
+                            try {
+                                String id = si.instanceId == null ? "" : si.instanceId;
+                                boolean looksLikeOrthancId
+                                        = (id.length() >= 32 && !id.startsWith("CLIP-")); // heuristik sederhana
+
+                                if (looksLikeOrthancId) {
+                                    InstanceInfo meta = fetchInstanceInfo(id);
+                                    // kalau mau tetap tambah header/footer otomatis, ganti ke fungsi anotasi kamu:
+                                    bytesForPdf = annotateJpegBottomPad(si.bytes, meta); // atau annotateJpegTopPad/BottomPad versi kamu
+                                    gotMeta = true;
+                                }
+                            } catch (Exception ignore404) {
+                                // 404 dari Orthanc saat bukan resource valid -> diamkan, pakai bytes snip
+                            }
+
+                            BufferedImage b2 = ImageIO.read(new ByteArrayInputStream(bytesForPdf));
                             PDImageXObject img = LosslessFactory.createFromImage(doc, b2);
 
-                            // area gambar: sisakan 2*panelH (dua baris) + margin bawah
                             float maxW = PAGE_W - (MARGIN * 2);
-                            float maxH = PAGE_H - (MARGIN * 2) - 70; // space aman untuk footer panel
+                            float maxH = PAGE_H - (MARGIN * 2) - 70;
                             float scale = Math.min(maxW / img.getWidth(), maxH / img.getHeight());
                             float w = img.getWidth() * scale;
                             float h = img.getHeight() * scale;
                             float x = (PAGE_W - w) / 2f;
-                            float drawY = (PAGE_H - h) / 2f + 24f; // sedikit naik supaya panel muat
+                            float drawY = (PAGE_H - h) / 2f + 24f;
 
                             cs.drawImage(img, x, drawY, w, h);
 
-                            // --- footer panel 2-baris, kiri-kanan sejajar ---
-//                            drawLampiranFooter(cs, F_REG, PAGE_W, MARGIN, meta, si.seriesDesc);
-                            // caption tipis paling bawah (instance id — series) opsional
+                            // Caption (instance id — series), aman untuk snip maupun Orthanc
                             cs.beginText();
                             cs.setFont(F_ITAL, 9);
-                            cs.newLineAtOffset(MARGIN, MARGIN - 6); // tepat di bawah panel
-                            cs.showText(clean((si.instanceId != null ? si.instanceId : "") + " — " + (si.seriesDesc != null ? si.seriesDesc : "Gambar")));
+                            cs.newLineAtOffset(MARGIN, MARGIN - 6);
+                            cs.showText(clean((si.instanceId != null ? si.instanceId : "") + " — "
+                                    + (si.seriesDesc != null ? si.seriesDesc : (gotMeta ? "Gambar" : "Snip"))));
                             cs.endText();
                         }
                     }
@@ -2145,6 +2459,49 @@ public class WhatsAppSendRAD extends Application {
                 && b[4] == 0x0D && b[5] == 0x0A && b[6] == 0x1A && b[7] == 0x0A;
     }
 
+    private static String summarizeError(String errMsg) {
+        if (errMsg == null) {
+            return "Gagal";
+        }
+        String s = errMsg.trim();
+        if (s.isEmpty()) {
+            return "Gagal";
+        }
+
+        String lower = s.toLowerCase();
+
+        // Kasus umum: "Phone 628123456789 is not on whatsapp" / "not on whatsapp"
+        if (lower.contains("not on whatsapp")) {
+            return "Nomor salah /\ntidak terdaftar";
+        }
+
+        // Beberapa mapping tambahan (opsional)
+        if (lower.contains("invalid phone") || lower.contains("bad number")) {
+            return "Nomor tidak valid";
+        }
+        if (lower.contains("blocked")) {
+            return "Nomor memblokir WhatsApp";
+        }
+        if (lower.contains("timeout") || lower.contains("timed out") || lower.contains("network")) {
+            return "Jaringan/timeout — coba ulang";
+        }
+        if (lower.contains("400")) {
+            // banyak error 400 menyertakan detail sensitif -> mask
+            return "Permintaan tidak valid";
+        }
+
+        // fallback: mask nomor telepon yang mungkin muncul
+        return stripPhones(s);
+    }
+
+    private static String stripPhones(String s) {
+        if (s == null) {
+            return null;
+        }
+        // Ganti pola nomor Indonesia 62XXXXXXXX (10–15 digit) menjadi 62***********
+        return s.replaceAll("62\\d{8,13}", "62***********");
+    }
+
 // payload yang siap dikirim ke API WA
     private static class ImagePayload {
 
@@ -2194,6 +2551,78 @@ public class WhatsAppSendRAD extends Application {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ImageIO.write(bi, "png", bos);
         return new ImagePayload(bos.toByteArray(), "image/png", ".png");
+    }
+
+    // --- Import gambar dari file menjadi SelectedImage
+    private SelectedImage makeSelectedFromFile(File f) throws IOException {
+        byte[] bytes = java.nio.file.Files.readAllBytes(f.toPath());
+        // normalisasi agar jpg/png valid untuk pipeline PDF
+        ImagePayload pay = normalizeToAllowedImage(bytes);
+        String name = f.getName();
+        String desc = name; // tampilkan nama file sebagai seriesDesc
+        // pakai instanceId pseudo dari nama (biar unik di UI)
+        String pseudoId = Integer.toHexString(name.hashCode()) + "-" + System.currentTimeMillis();
+        return new SelectedImage(pseudoId, desc, pay.data, true);
+    }
+
+// --- Import gambar dari Clipboard (JavaFX) jika ada image
+    private SelectedImage makeSelectedFromClipboard() throws IOException {
+        javafx.scene.input.Clipboard cb = javafx.scene.input.Clipboard.getSystemClipboard();
+        if (!cb.hasImage()) {
+            return null;
+        }
+        javafx.scene.image.Image fxImg = cb.getImage();
+
+        // konversi ke BufferedImage lalu ke PNG bytes
+        int w = (int) fxImg.getWidth();
+        int h = (int) fxImg.getHeight();
+        java.awt.image.BufferedImage bi = new java.awt.image.BufferedImage(w, h, java.awt.image.BufferedImage.TYPE_INT_ARGB);
+        javafx.embed.swing.SwingFXUtils.fromFXImage(fxImg, bi);
+
+        java.io.ByteArrayOutputStream bos = new java.io.ByteArrayOutputStream();
+        javax.imageio.ImageIO.write(bi, "png", bos);
+
+        String pseudoId = "CLIP-" + System.nanoTime();
+        return new SelectedImage(pseudoId, "RSUD Matraman", bos.toByteArray(), true);
+    }
+
+// --- Buka Stone WebViewer di browser default
+    private void openStoneViewer(String studyUid) {
+        try {
+            String url = buildViewerLink(studyUid);
+            if (url != null) {
+                java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+            } else {
+                showToastRad("Study UID tidak ditemukan.", true);
+            }
+        } catch (Exception ex) {
+            showToastRad("Gagal membuka viewer: " + ex.getMessage(), true);
+        }
+    }
+
+    private static boolean isSupportedImageFile(File f) {
+        String n = f.getName().toLowerCase();
+        return n.endsWith(".jpg") || n.endsWith(".jpeg") || n.endsWith(".png")
+                || n.endsWith(".bmp") || n.endsWith(".gif") || n.endsWith(".webp");
+    }
+
+    private static byte[] readAllBytes(File f) throws IOException {
+        try (InputStream in = new FileInputStream(f); ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            byte[] buf = new byte[8192];
+            int r;
+            while ((r = in.read(buf)) != -1) {
+                bos.write(buf, 0, r);
+            }
+            return bos.toByteArray();
+        }
+    }
+
+    private static byte[] fxImageToPngBytes(Image fxImg) throws IOException {
+        // convert JavaFX Image -> PNG bytes
+        java.awt.image.BufferedImage bimg = javafx.embed.swing.SwingFXUtils.fromFXImage(fxImg, null);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bimg, "png", bos);
+        return bos.toByteArray();
     }
 
     private static String shortDate(String ts) {
@@ -2536,7 +2965,6 @@ public class WhatsAppSendRAD extends Application {
 //            g.setColor(java.awt.Color.WHITE);
 //            g.drawString(LR, tx, ty);
 //        }
-
         g.dispose();
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ImageIO.write(out, "jpg", bos);

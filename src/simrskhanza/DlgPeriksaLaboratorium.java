@@ -1534,16 +1534,16 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
     private void BtnCari3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari3ActionPerformed
     if (Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where permintaan_detail_permintaan_lab.noorder=?", noorder.trim()) > 0) {
-            tampilSysmex(noorder);
-           }else{
+//            tampilSysmex(noorder);
+//           }else{
             tampilSysmexNoDetail(noorder);
         }
     }//GEN-LAST:event_BtnCari3ActionPerformed
 
     private void BtnCari3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari3KeyPressed
     if (Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where permintaan_detail_permintaan_lab.noorder=?", noorder.trim()) > 0) {
-            tampilSysmex(noorder);
-           }else{
+//            tampilSysmex(noorder);
+//           }else{
             tampilSysmexNoDetail(noorder);
         }
     }//GEN-LAST:event_BtnCari3KeyPressed
@@ -3051,8 +3051,8 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         isPsien();
         tampiltarif(order);
         if (Sequel.cariInteger("select count(noorder) from permintaan_detail_permintaan_lab where permintaan_detail_permintaan_lab.noorder=?", noorder.trim()) > 0) {
-            tampilSysmex(order);
-           }else{
+//            tampilSysmex(order);
+//           }else{
             tampilSysmexNoDetail(order);
         }        
     }

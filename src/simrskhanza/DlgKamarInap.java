@@ -1119,6 +1119,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         ppIKP = new javax.swing.JMenuItem();
         ppKlasifikasiPasien = new javax.swing.JMenuItem();
         ppSkriningManagerPelayananPasien = new javax.swing.JMenuItem();
+        inputSITB = new javax.swing.JMenuItem();
         SetStatus = new javax.swing.JMenu();
         MnStatusSembuh = new javax.swing.JMenuItem();
         MnStatusMembaik = new javax.swing.JMenuItem();
@@ -4473,6 +4474,22 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         });
         MenuInputData.add(ppSkriningManagerPelayananPasien);
+
+        inputSITB.setBackground(new java.awt.Color(255, 255, 254));
+        inputSITB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        inputSITB.setForeground(new java.awt.Color(50, 50, 50));
+        inputSITB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        inputSITB.setText("Input nomor SITB");
+        inputSITB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        inputSITB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        inputSITB.setName("inputSITB"); // NOI18N
+        inputSITB.setPreferredSize(new java.awt.Dimension(200, 26));
+        inputSITB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputSITBBtnPrintActionPerformed(evt);
+            }
+        });
+        MenuInputData.add(inputSITB);
 
         jPopupMenu1.add(MenuInputData);
 
@@ -16574,6 +16591,26 @@ if(tabMode.getRowCount()==0){
         }   // TODO add your handling code here:
     }//GEN-LAST:event_DataPasienBtnPrintActionPerformed
 
+    private void inputSITBBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSITBBtnPrintActionPerformed
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data pasien sudah habis...!!!!");
+            TCari.requestFocus();
+        } else if (TNoRwCari.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            if (tbKamIn.getSelectedRow() != -1) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgSITB catatan = new DlgSITB(null, true);
+                catatan.setNoRm(tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 1).toString(), tbKamIn.getValueAt(tbKamIn.getSelectedRow(), 0).toString());
+                catatan.setSize(720, 330);
+                catatan.setLocationRelativeTo(internalFrame1);
+                catatan.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_inputSITBBtnPrintActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -16887,6 +16924,7 @@ if(tabMode.getRowCount()==0){
     private widget.ComboBox cmbStatusBayar;
     private widget.TextBox diagnosaakhir;
     private widget.TextBox diagnosaawal;
+    private javax.swing.JMenuItem inputSITB;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame10;
     private widget.InternalFrame internalFrame11;
