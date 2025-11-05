@@ -1131,6 +1131,7 @@ public final class DlgReg extends javax.swing.JDialog {
         ppCatatanPasien = new javax.swing.JMenuItem();
         ppBerkasDigital = new javax.swing.JMenuItem();
         ppIKP = new javax.swing.JMenuItem();
+        inputSITB = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         MnCheckList = new javax.swing.JMenuItem();
         MnCheckList1 = new javax.swing.JMenuItem();
@@ -3818,6 +3819,22 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         MenuInputData.add(ppIKP);
+
+        inputSITB.setBackground(new java.awt.Color(255, 255, 254));
+        inputSITB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        inputSITB.setForeground(new java.awt.Color(50, 50, 50));
+        inputSITB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        inputSITB.setText("Input nomor SITB");
+        inputSITB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        inputSITB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        inputSITB.setName("inputSITB"); // NOI18N
+        inputSITB.setPreferredSize(new java.awt.Dimension(200, 26));
+        inputSITB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputSITBBtnPrintActionPerformed(evt);
+            }
+        });
+        MenuInputData.add(inputSITB);
 
         jPopupMenu1.add(MenuInputData);
 
@@ -6548,7 +6565,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6561,7 +6578,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6729,7 +6746,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2025" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -14656,6 +14673,26 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnWAActionPerformed
 
+    private void inputSITBBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSITBBtnPrintActionPerformed
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data pasien sudah habis...!!!!");
+            TCari.requestFocus();
+        } else if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            if (tbPetugas.getSelectedRow() != -1) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgSITB catatan = new DlgSITB(null, true);
+                catatan.setNoRm(tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 7).toString(), tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 3).toString());
+                catatan.setSize(720, 330);
+                catatan.setLocationRelativeTo(internalFrame1);
+                catatan.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_inputSITBBtnPrintActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -14996,6 +15033,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Button btnKel;
     private widget.Button btnPenjab;
     private widget.Button btnPenjab1;
+    private javax.swing.JMenuItem inputSITB;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame4;
     private widget.InternalFrame internalFrame5;

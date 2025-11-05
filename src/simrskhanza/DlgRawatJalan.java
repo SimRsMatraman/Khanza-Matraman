@@ -71,6 +71,7 @@ import permintaan.DlgPermintaanFisio;
 import rekammedis.MasterCariTemplatePemeriksaan;
 import rekammedis.MasterCariTemplateRalan;
 import rekammedis.RMCari5SOAPTerakhir;
+import rekammedis.RMCari5SOAPTerakhirRM;
 import rekammedis.RMChecklistPostOperasi;
 import rekammedis.RMChecklistPreOperasi;
 import rekammedis.RMDataAsuhanGizi;
@@ -196,6 +197,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     public DlgMasterO mastero = new DlgMasterO(null, false);
     public DlgMasterP masterp = new DlgMasterP(null, false);
     public RMCari5SOAPTerakhir soapterakhir = new RMCari5SOAPTerakhir(null, false);
+    public RMCari5SOAPTerakhirRM soapterakhirRM = new RMCari5SOAPTerakhirRM(null, false);
     private DlgDiagnosaPenyakitSoap penyakit = new DlgDiagnosaPenyakitSoap(null, false);
     private PreparedStatement ps, ps2, ps3, ps4, ps5, ps6, pstindakan, psset_tarif, psrekening;
     private ResultSet rs, rstindakan, rsset_tarif, rsrekening;
@@ -1391,6 +1393,47 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {
             }
         });
+        
+        soapterakhirRM.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (soapterakhirRM.getTable().getSelectedRow() != -1) {
+                    Subjek.setText(soapterakhirRM.getTable().getValueAt(soapterakhirRM.getTable().getSelectedRow(), 1).toString());
+                    Objek.setText(soapterakhirRM.getTable().getValueAt(soapterakhirRM.getTable().getSelectedRow(), 2).toString());
+                    Ases.setText(soapterakhirRM.getTable().getValueAt(soapterakhirRM.getTable().getSelectedRow(), 3).toString());
+                    Plan.setText(soapterakhirRM.getTable().getValueAt(soapterakhirRM.getTable().getSelectedRow(), 4).toString());
+                    Penunjang.setText(soapterakhirRM.getTable().getValueAt(soapterakhirRM.getTable().getSelectedRow(), 5).toString());                    
+                    Edukasi.setText(soapterakhirRM.getTable().getValueAt(soapterakhirRM.getTable().getSelectedRow(), 6).toString());
+                    Frekuensi.setText(soapterakhirRM.getTable().getValueAt(soapterakhirRM.getTable().getSelectedRow(), 7).toString());
+                    Evaluasi.setText(soapterakhirRM.getTable().getValueAt(soapterakhirRM.getTable().getSelectedRow(), 8).toString());
+                    Evaluasi.requestFocus();
+                }
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
 
         panelDiagnosa1.TabRawat.addMouseListener(new MouseListener() {
             @Override
@@ -1988,7 +2031,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         scrollPane18 = new widget.ScrollPane();
         Frekuensi = new widget.TextArea();
         jSeparator1 = new javax.swing.JSeparator();
-        BtnRiwayatRadLab1 = new widget.Button();
+        BtnRiwayatSoap1 = new widget.Button();
+        BtnRiwayatSoap2 = new widget.Button();
         internalFrame6 = new widget.InternalFrame();
         Scroll4 = new widget.ScrollPane();
         tbPemeriksaanObstetri = new widget.Table();
@@ -3974,7 +4018,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass16.add(Obat1);
-        Obat1.setBounds(410, 310, 140, 30);
+        Obat1.setBounds(410, 330, 140, 30);
 
         jLabel84.setText("Alergi :");
         jLabel84.setName("jLabel84"); // NOI18N
@@ -4099,7 +4143,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass16.add(BtnPermintaanFisio);
-        BtnPermintaanFisio.setBounds(570, 310, 200, 30);
+        BtnPermintaanFisio.setBounds(580, 330, 200, 30);
 
         scrollPane18.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "FREKUENSI KUNJUNGAN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), javax.swing.UIManager.getDefaults().getColor("Actions.Green"))); // NOI18N
         scrollPane18.setName("scrollPane18"); // NOI18N
@@ -4122,25 +4166,37 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass16.add(jSeparator1);
         jSeparator1.setBounds(0, 0, 0, 3);
 
-        BtnRiwayatRadLab1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnRiwayatRadLab1.setMnemonic('K');
-        BtnRiwayatRadLab1.setText("   Riwayat Resep");
-        BtnRiwayatRadLab1.setToolTipText("");
-        BtnRiwayatRadLab1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        BtnRiwayatRadLab1.setName("BtnRiwayatRadLab1"); // NOI18N
-        BtnRiwayatRadLab1.setPreferredSize(new java.awt.Dimension(160, 30));
-        BtnRiwayatRadLab1.addActionListener(new java.awt.event.ActionListener() {
+        BtnRiwayatSoap1.setMnemonic('R');
+        BtnRiwayatSoap1.setText("  Riwayat SOAP");
+        BtnRiwayatSoap1.setToolTipText("");
+        BtnRiwayatSoap1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BtnRiwayatSoap1.setGlassColor(new java.awt.Color(255, 204, 51));
+        BtnRiwayatSoap1.setName("BtnRiwayatSoap1"); // NOI18N
+        BtnRiwayatSoap1.setPreferredSize(new java.awt.Dimension(160, 30));
+        BtnRiwayatSoap1.setRoundRect(false);
+        BtnRiwayatSoap1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnRiwayatRadLab1ActionPerformed(evt);
+                BtnRiwayatSoap1ActionPerformed(evt);
             }
         });
-        BtnRiwayatRadLab1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnRiwayatRadLab1KeyPressed(evt);
+        panelGlass16.add(BtnRiwayatSoap1);
+        BtnRiwayatSoap1.setBounds(410, 290, 170, 20);
+
+        BtnRiwayatSoap2.setMnemonic('R');
+        BtnRiwayatSoap2.setText("  Riwayat Resep");
+        BtnRiwayatSoap2.setToolTipText("");
+        BtnRiwayatSoap2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BtnRiwayatSoap2.setGlassColor(new java.awt.Color(255, 204, 51));
+        BtnRiwayatSoap2.setName("BtnRiwayatSoap2"); // NOI18N
+        BtnRiwayatSoap2.setPreferredSize(new java.awt.Dimension(160, 30));
+        BtnRiwayatSoap2.setRoundRect(false);
+        BtnRiwayatSoap2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRiwayatSoap2ActionPerformed(evt);
             }
         });
-        panelGlass16.add(BtnRiwayatRadLab1);
-        BtnRiwayatRadLab1.setBounds(840, 340, 250, 30);
+        panelGlass16.add(BtnRiwayatSoap2);
+        BtnRiwayatSoap2.setBounds(600, 290, 170, 20);
 
         PanelInput4.add(panelGlass16, java.awt.BorderLayout.CENTER);
 
@@ -13747,7 +13803,21 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         // TODO add your handling code here:
     }//GEN-LAST:event_FrekuensiKeyPressed
 
-    private void BtnRiwayatRadLab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatRadLab1ActionPerformed
+    private void BtnRiwayatSoap1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatSoap1ActionPerformed
+        if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu pasien...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            soapterakhirRM.setNoRm(TNoRM.getText(), "Ralan");
+            soapterakhirRM.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+            soapterakhirRM.setLocationRelativeTo(internalFrame1);
+            soapterakhirRM.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnRiwayatSoap1ActionPerformed
+
+    private void BtnRiwayatSoap2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatSoap2ActionPerformed
         if (TNoRw.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -13761,12 +13831,8 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             daftar.setLocationRelativeTo(internalFrame1);
             daftar.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
-        }         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnRiwayatRadLab1ActionPerformed
-
-    private void BtnRiwayatRadLab1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnRiwayatRadLab1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnRiwayatRadLab1KeyPressed
+        }
+    }//GEN-LAST:event_BtnRiwayatSoap2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -13937,8 +14003,9 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnRiwayatPasien;
     private widget.Button BtnRiwayatPenunjang;
     private widget.Button BtnRiwayatRadLab;
-    private widget.Button BtnRiwayatRadLab1;
     private widget.Button BtnRiwayatSoap;
+    private widget.Button BtnRiwayatSoap1;
+    private widget.Button BtnRiwayatSoap2;
     private widget.Button BtnRujukIGD;
     private widget.Button BtnRujukInternal;
     private widget.Button BtnRujukKeluar;

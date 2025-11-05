@@ -147,6 +147,7 @@ import surat.SuratPulangAtasPermintaanSendiri;
 import surat.SuratSakit;
 import surat.SuratSakitPihak2;
 import integration_orthanc.DicomViewerHybridSplitRad;
+import java.util.Calendar;
 import kepegawaian.DlgCariDokter;
 import rekammedis.RMDataCatatanKeseimbanganCairan;
 import surat.SuratGCRanap;
@@ -9250,7 +9251,11 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     }
 
                     if(R1.isSelected()==true){
-                        dpjp.setNoRm(norawat.getText(),date,date,TIn.getText());
+                        Calendar cal = Calendar.getInstance(); 
+                        cal.setTime(date);
+                        cal.add(Calendar.DAY_OF_MONTH, -7);    // mundur 7 hari
+                        Date tgl1 = cal.getTime();
+                        dpjp.setNoRm(norawat.getText(),tgl1,date,TIn.getText());
                     }else if(R2.isSelected()==true){
                         dpjp.setNoRm(norawat.getText(),date,DTPCari2.getDate(),TIn.getText());
                     }else if(R3.isSelected()==true){
