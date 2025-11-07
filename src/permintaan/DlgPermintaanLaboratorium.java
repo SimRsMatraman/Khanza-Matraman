@@ -53,7 +53,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             psset_tarif;
     private ResultSet rstindakan,rstampil,rstampil1,rsset_tarif;
     private boolean[] pilih,pilih2; 
-    private String[] kode,nama,pemeriksaan2,satuan2,nilai_rujukan2,idtemplate2;
+    private String[] kode,nama,pemeriksaan2,satuan2,nilai_rujukan2,idtemplate2,ket;
     private double[] total;
     private int jml=0,i=0,index=0,jml2=0,jml3=0,i2=0,index2=0,jmlparsial=0;
     private String aktifkanparsial="no",norawatibu="",kelas="",kamar,namakamar,cara_bayar_lab="Yes",kelas_lab="Yes",status="",la="",ld="",pa="",pd="",finger="";
@@ -90,7 +90,6 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         };
         
         tbDetailPK.setModel(tabMode);
-        //tampilPr();
 
         tbDetailPK.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbDetailPK.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -100,7 +99,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             if(i==0){
                 column.setPreferredWidth(20);
             }else if(i==1){
-                column.setPreferredWidth(420);
+                column.setPreferredWidth(400);
             }else if(i==2){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -112,13 +111,13 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 column.setMaxWidth(0);                
             }
             else if(i==5){
-                column.setPreferredWidth(120);
+                column.setPreferredWidth(80);
             }
         }
         
         tbDetailPK.setDefaultRenderer(Object.class, new WarnaTable());
         
-        Object[] row2={"P","Kode Periksa","Nama Pemeriksaan","Tarif"};
+        Object[] row2={"P","Kode Periksa","Nama Pemeriksaan","Tarif","Keterangan"};
         tabMode2=new DefaultTableModel(null,row2){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -128,7 +127,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -140,7 +139,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         tbTarifPK.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbTarifPK.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for(i = 0; i < 4; i++) {
+        for(i = 0; i < 5; i++) {
             TableColumn column = tbTarifPK.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -148,10 +147,13 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else if(i==2){
-                column.setPreferredWidth(420);
+                column.setPreferredWidth(250);
             }
             else if(i==3){
-                column.setPreferredWidth(120);
+                column.setPreferredWidth(80);
+            }
+            else if(i==4){
+                column.setPreferredWidth(150);
             }
         }
         tbTarifPK.setDefaultRenderer(Object.class, new WarnaTable());
@@ -2157,10 +2159,9 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(tbTarifPK.getValueAt(i2,0).toString().equals("true")){
                     tabMode.addRow(new Object[]{false,tbTarifPK.getValueAt(i2,2).toString(),"","","",0}); 
 
-                    pstampil=koneksi.prepareStatement("select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa,template_laboratorium.biaya_item from template_laboratorium where template_laboratorium.kd_jenis_prw=? and template_laboratorium.Pemeriksaan like ? order by template_laboratorium.urut");
+                    pstampil=koneksi.prepareStatement("select template_laboratorium.id_template,template_laboratorium.Pemeriksaan,template_laboratorium.satuan,template_laboratorium.nilai_rujukan_ld,template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,template_laboratorium.nilai_rujukan_pa,template_laboratorium.biaya_item from template_laboratorium where template_laboratorium.kd_jenis_prw=? order by template_laboratorium.urut");
                     try {
                         pstampil.setString(1,tbTarifPK.getValueAt(i2,1).toString());
-                        pstampil.setString(2,"%"+TCari.getText().trim()+"%");
                         rstampil=pstampil.executeQuery();
                         while(rstampil.next()){
                             la="";ld="";pa="";pd="";
@@ -2511,6 +2512,8 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             nama=new String[jml];
             total=null;
             total=new double[jml];
+            ket=null;
+            ket=new String[jml];
             index=0; 
             for(i=0;i<tbTarifPK.getRowCount();i++){
                 if(tbTarifPK.getValueAt(i,0).toString().equals("true")){
@@ -2518,6 +2521,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     kode[index]=tbTarifPK.getValueAt(i,1).toString();
                     nama[index]=tbTarifPK.getValueAt(i,2).toString();
                     total[index]=Double.parseDouble(tbTarifPK.getValueAt(i,3).toString());
+                    ket[index]=tbTarifPK.getValueAt(i,4).toString();
                     index++;
                 }
             }
@@ -2525,36 +2529,80 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             Valid.tabelKosong(tabMode2);
             
             for(i=0;i<jml;i++){
-                tabMode2.addRow(new Object[] {pilih[i],kode[i],nama[i],total[i]});
+                tabMode2.addRow(new Object[] {pilih[i],kode[i],nama[i],total[i],ket[i]});
             }       
         
             if(cara_bayar_lab.equals("Yes")&&kelas_lab.equals("No")){
                 pstindakan=koneksi.prepareStatement(
-                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr "+
-                    "from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where "+
-                    " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and jns_perawatan_lab.kd_jenis_prw like ? or "+
+                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr, " +
+                    "  CASE " +
+                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Trigliserida%', 1, 0)) > 0 " +
+                    "      THEN '** Puasa 12 - 14 Jam' " +
+                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Puasa%', 1, 0)) > 0 " +
+                    "      OR  SUM(IF(tl.pemeriksaan LIKE '%Asam Urat%', 1, 0)) > 0 " +
+                    "      THEN '* Puasa 10 - 12 Jam' " +
+                    "    ELSE '' " +
+                    "  END AS keterangan "+
+                    "from jns_perawatan_lab " + 
+                    "inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj "+ 
+                    "left join template_laboratorium as tl on tl.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+         
+                    "where jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and jns_perawatan_lab.kd_jenis_prw like ? or "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and jns_perawatan_lab.nm_perawatan like ? "+
+                    "group by jns_perawatan_lab.kd_jenis_prw "+
                     "order by jns_perawatan_lab.kd_jenis_prw");
             }else if(cara_bayar_lab.equals("No")&&kelas_lab.equals("No")){
                 pstindakan2=koneksi.prepareStatement(
-                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr "+
-                    "from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where "+
-                    " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and jns_perawatan_lab.kd_jenis_prw like ? or "+
+                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr, " +
+                    "  CASE " +
+                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Trigliserida%', 1, 0)) > 0 " +
+                    "      THEN '** Puasa 12 - 14 Jam' " +
+                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Puasa%', 1, 0)) > 0 " +
+                    "      OR  SUM(IF(tl.pemeriksaan LIKE '%Asam Urat%', 1, 0)) > 0 " +
+                    "      THEN '* Puasa 10 - 12 Jam' " +
+                    "    ELSE '' " +
+                    "  END AS keterangan "+
+                    "from jns_perawatan_lab " + 
+                    "inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj "+ 
+                    "left join template_laboratorium as tl on tl.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
+                    "where jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and jns_perawatan_lab.kd_jenis_prw like ? or "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and jns_perawatan_lab.nm_perawatan like ?  "+
+                    "group by jns_perawatan_lab.kd_jenis_prw "+        
                     "order by jns_perawatan_lab.kd_jenis_prw"); 
             }else if(cara_bayar_lab.equals("Yes")&&kelas_lab.equals("Yes")){
                 pstindakan3=koneksi.prepareStatement(
-                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr "+
-                    "from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where "+
-                    " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.kd_jenis_prw like ? or "+
+                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr, " +
+                    "  CASE " +
+                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Trigliserida%', 1, 0)) > 0 " +
+                    "      THEN '** Puasa 12 - 14 Jam' " +
+                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Puasa%', 1, 0)) > 0 " +
+                    "      OR  SUM(IF(tl.pemeriksaan LIKE '%Asam Urat%', 1, 0)) > 0 " +
+                    "      THEN '* Puasa 10 - 12 Jam' " +
+                    "    ELSE '' " +
+                    "  END AS keterangan "+
+                    "from jns_perawatan_lab " + 
+                    "inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj "+ 
+                    "left join template_laboratorium as tl on tl.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
+                    "where jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.kd_jenis_prw like ? or "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kd_pj=? or jns_perawatan_lab.kd_pj='-') and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.nm_perawatan like ? "+
+                    "group by jns_perawatan_lab.kd_jenis_prw "+
                     "order by jns_perawatan_lab.kd_jenis_prw");
             }else if(cara_bayar_lab.equals("No")&&kelas_lab.equals("Yes")){
                 pstindakan4=koneksi.prepareStatement(
-                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr "+
-                    "from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where "+
-                    " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.kd_jenis_prw like ? or "+
+                    "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr, " +
+                    "  CASE " +
+                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Trigliserida%', 1, 0)) > 0 " +
+                    "      THEN '** Puasa 12 - 14 Jam' " +
+                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Puasa%', 1, 0)) > 0 " +
+                    "      OR  SUM(IF(tl.pemeriksaan LIKE '%Asam Urat%', 1, 0)) > 0 " +
+                    "      THEN '* Puasa 10 - 12 Jam' " +
+                    "    ELSE '' " +
+                    "  END AS keterangan "+
+                    "from jns_perawatan_lab " + 
+                    "inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj "+ 
+                    "left join template_laboratorium as tl on tl.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
+                    "where jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.kd_jenis_prw like ? or "+
                     " jns_perawatan_lab.kategori='PK' and jns_perawatan_lab.status='1' and (jns_perawatan_lab.kelas=? or jns_perawatan_lab.kelas='-') and jns_perawatan_lab.nm_perawatan like ?  "+
+                    "group by jns_perawatan_lab.kd_jenis_prw "+
                     "order by jns_perawatan_lab.kd_jenis_prw"); 
             } 
             
@@ -2586,7 +2634,7 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 } 
                             
                 while(rstindakan.next()){                
-                    tabMode2.addRow(new Object[]{false,rstindakan.getString(1),"   "+rstindakan.getString(2),rstindakan.getString(4)});
+                    tabMode2.addRow(new Object[]{false,rstindakan.getString(1),"   "+rstindakan.getString(2),rstindakan.getString(4),rstindakan.getString(5)});
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
