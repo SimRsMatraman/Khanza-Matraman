@@ -2536,11 +2536,10 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 pstindakan=koneksi.prepareStatement(
                     "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr, " +
                     "  CASE " +
-                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Trigliserida%', 1, 0)) > 0 " +
-                    "      THEN '** Puasa 12 - 14 Jam' " +
-                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Puasa%', 1, 0)) > 0 " +
-                    "      OR  SUM(IF(tl.pemeriksaan LIKE '%Asam Urat%', 1, 0)) > 0 " +
-                    "      THEN '* Puasa 10 - 12 Jam' " +
+                    "    WHEN SUM(CASE WHEN tl.pemeriksaan LIKE '%**%' THEN 1 ELSE 0 END) > 0 " +
+                    "      THEN 'Puasa 12 - 14 Jam' " +
+                    "    WHEN SUM(CASE WHEN tl.pemeriksaan LIKE '%*%' AND tl.pemeriksaan NOT LIKE '%**%' THEN 1 ELSE 0 END) > 0 " +
+                    "      THEN 'Puasa 10 - 12 Jam' " +
                     "    ELSE '' " +
                     "  END AS keterangan "+
                     "from jns_perawatan_lab " + 
@@ -2554,11 +2553,10 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 pstindakan2=koneksi.prepareStatement(
                     "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr, " +
                     "  CASE " +
-                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Trigliserida%', 1, 0)) > 0 " +
-                    "      THEN '** Puasa 12 - 14 Jam' " +
-                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Puasa%', 1, 0)) > 0 " +
-                    "      OR  SUM(IF(tl.pemeriksaan LIKE '%Asam Urat%', 1, 0)) > 0 " +
-                    "      THEN '* Puasa 10 - 12 Jam' " +
+                    "    WHEN SUM(CASE WHEN tl.pemeriksaan LIKE '%**%' THEN 1 ELSE 0 END) > 0 " +
+                    "      THEN 'Puasa 12 - 14 Jam' " +
+                    "    WHEN SUM(CASE WHEN tl.pemeriksaan LIKE '%*%' AND tl.pemeriksaan NOT LIKE '%**%' THEN 1 ELSE 0 END) > 0 " +
+                    "      THEN 'Puasa 10 - 12 Jam' " +
                     "    ELSE '' " +
                     "  END AS keterangan "+
                     "from jns_perawatan_lab " + 
@@ -2572,11 +2570,10 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 pstindakan3=koneksi.prepareStatement(
                     "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr, " +
                     "  CASE " +
-                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Trigliserida%', 1, 0)) > 0 " +
-                    "      THEN '** Puasa 12 - 14 Jam' " +
-                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Puasa%', 1, 0)) > 0 " +
-                    "      OR  SUM(IF(tl.pemeriksaan LIKE '%Asam Urat%', 1, 0)) > 0 " +
-                    "      THEN '* Puasa 10 - 12 Jam' " +
+                    "    WHEN SUM(CASE WHEN tl.pemeriksaan LIKE '%**%' THEN 1 ELSE 0 END) > 0 " +
+                    "      THEN 'Puasa 12 - 14 Jam' " +
+                    "    WHEN SUM(CASE WHEN tl.pemeriksaan LIKE '%*%' AND tl.pemeriksaan NOT LIKE '%**%' THEN 1 ELSE 0 END) > 0 " +
+                    "      THEN 'Puasa 10 - 12 Jam' " +
                     "    ELSE '' " +
                     "  END AS keterangan "+
                     "from jns_perawatan_lab " + 
@@ -2590,11 +2587,10 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 pstindakan4=koneksi.prepareStatement(
                     "select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,penjab.png_jawab,jns_perawatan_lab.total_byr, " +
                     "  CASE " +
-                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Trigliserida%', 1, 0)) > 0 " +
-                    "      THEN '** Puasa 12 - 14 Jam' " +
-                    "    WHEN SUM(IF(tl.pemeriksaan LIKE '%Puasa%', 1, 0)) > 0 " +
-                    "      OR  SUM(IF(tl.pemeriksaan LIKE '%Asam Urat%', 1, 0)) > 0 " +
-                    "      THEN '* Puasa 10 - 12 Jam' " +
+                    "    WHEN SUM(CASE WHEN tl.pemeriksaan LIKE '%**%' THEN 1 ELSE 0 END) > 0 " +
+                    "      THEN 'Puasa 12 - 14 Jam' " +
+                    "    WHEN SUM(CASE WHEN tl.pemeriksaan LIKE '%*%' AND tl.pemeriksaan NOT LIKE '%**%' THEN 1 ELSE 0 END) > 0 " +
+                    "      THEN 'Puasa 10 - 12 Jam' " +
                     "    ELSE '' " +
                     "  END AS keterangan "+
                     "from jns_perawatan_lab " + 
