@@ -2671,7 +2671,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         "inner join petugas on periksa_radiologi.nip=petugas.nip "+
                         "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                         "inner join dokter on periksa_radiologi.kd_dokter=dokter.kd_dokter where "+
-                        "periksa_radiologi.tgl_periksa between ? and ? group by concat(periksa_radiologi.no_rawat,periksa_radiologi.tgl_periksa,periksa_radiologi.jam) "+
+                        "periksa_radiologi.tgl_periksa between ? and ? GROUP BY periksa_radiologi.no_rawat, periksa_radiologi.tgl_periksa, periksa_radiologi.jam "+
                         "order by periksa_radiologi.tgl_periksa desc,periksa_radiologi.jam desc");
             }else{
                 ps=koneksi.prepareStatement(
@@ -2684,7 +2684,7 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         "inner join dokter on periksa_radiologi.kd_dokter=dokter.kd_dokter where "+
                         "periksa_radiologi.tgl_periksa between ? and ? and periksa_radiologi.no_rawat like ? and reg_periksa.no_rkm_medis like ? "+
                         "and petugas.nip like ? and (pasien.nm_pasien like ? or petugas.nama like ? or reg_periksa.no_rkm_medis like ? or penjab.png_jawab like ? ) "+
-                        "group by concat(periksa_radiologi.no_rawat,periksa_radiologi.tgl_periksa,periksa_radiologi.jam) "+
+                        "GROUP BY periksa_radiologi.no_rawat, periksa_radiologi.tgl_periksa, periksa_radiologi.jam "+
                         "order by periksa_radiologi.tgl_periksa desc,periksa_radiologi.jam desc");
             }
                 

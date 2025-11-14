@@ -388,11 +388,11 @@ public final class RMCari5SOAPTerakhirRM extends javax.swing.JDialog {
                     rs=ps.executeQuery();
                     while(rs.next()){
                         tabMode.addRow(new String[] {
-                            (rs.getString("tgl_perawatan")+" - "+rs.getString("jam_rawat")),
-                            rs.getString("tatalaksana"),                            
+                            (rs.getString("tgl_perawatan")+" - "+rs.getString("jam_rawat")),                                                       
                             rs.getString("anamnesa"),
                             rs.getString("pemeriksaanfisik"),
-                            rs.getString("diagnosis"),                            
+                            rs.getString("diagnosis"),  
+                            rs.getString("tatalaksana"), 
                             rs.getString("pemeriksaanpenunjang"),
                             rs.getString("anjuran"),
                             rs.getString("kunjungan"),
