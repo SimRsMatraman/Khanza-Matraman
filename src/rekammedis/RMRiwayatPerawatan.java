@@ -5322,21 +5322,21 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.status_lanjut "+
                     "from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "
-                    + "where reg_periksa.stts<>'Batal' and reg_periksa.kd_poli not in ('IGDK','U0015','U0016','U0033','U0035','U0036','U0041') and reg_periksa.no_rkm_medis=? and dokter.nm_dokter like ? and poliklinik.nm_poli like ? and reg_periksa.tgl_registrasi<=? order by reg_periksa.tgl_registrasi desc limit 5");
+                    + "where reg_periksa.stts<>'Batal' and reg_periksa.kd_poli not in ('U0015','U0016','U0033','U0035','U0036','U0041') and reg_periksa.no_rkm_medis=? and dokter.nm_dokter like ? and poliklinik.nm_poli like ? and reg_periksa.tgl_registrasi<=? order by reg_periksa.tgl_registrasi desc limit 5");
             }else if(R2.isSelected()==true){
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.status_lanjut "+
                     "from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "
-                    + "where reg_periksa.stts<>'Batal' and reg_periksa.kd_poli not in ('IGDK','U0015','U0016','U0033','U0035','U0036','U0041') and reg_periksa.no_rkm_medis=? and reg_periksa.tgl_registrasi between ? and ? and dokter.nm_dokter like ? and poliklinik.nm_poli like ? order by reg_periksa.tgl_registrasi asc");
+                    + "where reg_periksa.stts<>'Batal' and reg_periksa.kd_poli not in ('U0015','U0016','U0033','U0035','U0036','U0041') and reg_periksa.no_rkm_medis=? and reg_periksa.tgl_registrasi between ? and ? and dokter.nm_dokter like ? and poliklinik.nm_poli like ? order by reg_periksa.tgl_registrasi asc");
             }else if(R3.isSelected()==true){
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.status_lanjut "+
-                    "from reg_periksa where reg_periksa.stts<>'Batal' and reg_periksa.kd_poli not in ('IGDK','U0015','U0016','U0033','U0035','U0036','U0041') and reg_periksa.no_rkm_medis=? and "+
+                    "from reg_periksa where reg_periksa.stts<>'Batal' and reg_periksa.kd_poli not in ('U0015','U0016','U0033','U0035','U0036','U0041') and reg_periksa.no_rkm_medis=? and "+
                     "reg_periksa.tgl_registrasi between ? and ? order by reg_periksa.tgl_registrasi");
             }else if(R4.isSelected()==true){
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.status_lanjut "+
-                    "from reg_periksa where reg_periksa.stts<>'Batal' and reg_periksa.kd_poli not in ('IGDK','U0015','U0016','U0033','U0035','U0036','U0041') and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat=?");
+                    "from reg_periksa where reg_periksa.stts<>'Batal' and reg_periksa.kd_poli not in ('U0015','U0016','U0033','U0035','U0036','U0041') and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat=?");
             }
             try {
                 if(R1.isSelected()==true){
