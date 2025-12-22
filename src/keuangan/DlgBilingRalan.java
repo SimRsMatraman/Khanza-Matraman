@@ -70,7 +70,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                    ttlLaborat=0,ttlRadiologi=0,ttlObat=0,ttlRalan_Dokter=0,ttlRalan_Paramedis=0,
                    ttlTambahan=0,ttlPotongan=0,ttlRegistrasi=0,ttlRalan_Dokter_Param=0,ppnobat=0,ttlOperasi=0,
                    kekurangan=0,obatlangsung;
-    private int i,r,cek,row2,countbayar=0,z=0,jml=0,p,pl;
+    private int i,r,cek,row2,countbayar=0,z=0,jml=0;
     private String nota_jalan="",dokterrujukan="",polirujukan="",status="",biaya="",tambahan="",totals="",kdptg="",nmptg="",kd_pj="",notaralan="",centangdokterralan="",
             rinciandokterralan="",Tindakan_Ralan="",Laborat_Ralan="",Radiologi_Ralan="",no_rkm_medis, nm_pasien, alamat, jk, umurdaftar, tgl_registrasi, no_nota,
             Obat_Ralan="",Registrasi_Ralan="",Tambahan_Ralan="",Potongan_Ralan="",Obat_Langsung_Ralan="",tgl_lahir,
@@ -78,6 +78,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             sqlpscekbilling="select count(billing.no_rawat) from billing where billing.no_rawat=?",
             sqlpscekperiksalab="select count(periksa_lab.no_rawat) from periksa_lab where periksa_lab.no_rawat=?",
             sqlpscekpermintaanlab="select count(permintaan_lab.no_rawat) from permintaan_lab where permintaan_lab.no_rawat=?",
+            sqlpscekperiksarad="select count(periksa_radiologi.no_rawat) from periksa_radiologi where periksa_radiologi.no_rawat=?",
+            sqlpscekpermintaanrad="select count(permintaan_radiologi.no_rawat) from permintaan_radiologi where permintaan_radiologi.no_rawat=?",
             sqlpsreg="select reg_periksa.tgl_registrasi,reg_periksa.no_rkm_medis,reg_periksa.kd_poli,reg_periksa.no_rawat,"+
                      "reg_periksa.biaya_reg,current_time() as jam,reg_periksa.umurdaftar,reg_periksa.sttsumur "+
                      "from reg_periksa where reg_periksa.no_rawat=?",
@@ -130,14 +132,59 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     "sum(periksa_lab.tarif_tindakan_petugas) as totalpetugas,sum(periksa_lab.kso) as totalkso,sum(periksa_lab.bhp) as totalbhp "+
                     " from periksa_lab inner join jns_perawatan_lab on jns_perawatan_lab.kd_jenis_prw=periksa_lab.kd_jenis_prw where "+
                     " periksa_lab.no_rawat=? group by periksa_lab.kd_jenis_prw  ",
-            sqlpscariplab="SELECT permintaan_lab.tgl_permintaan, permintaan_detail_permintaan_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan, jns_perawatan_lab.total_byr as total_item, sum(biaya_item) as total_detail, jns_perawatan_lab.total_byr+sum(biaya_item) as total " +
-                    "   FROM permintaan_lab " +
-                    "	INNER JOIN permintaan_detail_permintaan_lab on permintaan_detail_permintaan_lab.noorder=permintaan_lab.noorder " +
-                    "	INNER JOIN jns_perawatan_lab on jns_perawatan_lab.kd_jenis_prw=permintaan_detail_permintaan_lab.kd_jenis_prw " +
-                    "	INNER JOIN template_laboratorium on template_laboratorium.id_template=permintaan_detail_permintaan_lab.id_template " +
-                    "   WHERE " +
-                    "	permintaan_lab.no_rawat=? " +
-                    "	GROUP BY kd_jenis_prw",
+            sqlpscariplab =
+                    "SELECT\n" +
+                    "    q1.tgl_permintaan,\n" +
+                    "    q1.kd_jenis_prw,\n" +
+                    "    q1.nm_perawatan,\n" +
+                    "    q1.total_item,\n" +
+                    "    q1.jml AS jumlah_item,\n" +
+                    "    IFNULL(q2.total_detail, 0) AS total_detail,\n" +
+                    "    (q1.total + IFNULL(q2.total_detail, 0)) AS total\n" +
+                    "FROM\n" +
+                    "(\n" +
+                    "    SELECT\n" +
+                    "        pl.tgl_permintaan,\n" +
+                    "        pl.tgl_hasil,\n" +                     
+                    "        pl.jam_hasil,\n" +
+                    "        ppl.kd_jenis_prw,\n" +
+                    "        jpl.nm_perawatan,\n" +
+                    "        jpl.total_byr AS total_item,\n" +
+                    "        COUNT(*) AS jml,\n" +
+                    "        SUM(jpl.total_byr) AS total\n" +
+                    "    FROM permintaan_lab pl\n" +
+                    "    INNER JOIN permintaan_pemeriksaan_lab ppl\n" +
+                    "        ON ppl.noorder = pl.noorder\n" +
+                    "    INNER JOIN jns_perawatan_lab jpl\n" +
+                    "        ON jpl.kd_jenis_prw = ppl.kd_jenis_prw\n" +
+                    "    WHERE pl.no_rawat = ?\n" +
+                    "      AND NOT EXISTS (\n" +
+                    "          SELECT 1\n" +
+                    "          FROM periksa_lab pl2\n" +
+                    "          WHERE pl2.no_rawat     = pl.no_rawat\n" +
+                    "            AND pl2.kd_jenis_prw = ppl.kd_jenis_prw\n" +
+                    "            AND pl2.tgl_periksa  = pl.tgl_hasil\n" +
+                    "            AND pl2.jam          = pl.jam_hasil\n" +
+                    "      )\n" +
+                    "    GROUP BY pl.tgl_permintaan, pl.tgl_hasil, pl.jam_hasil, ppl.kd_jenis_prw\n" +
+                    ") q1\n" +
+                    "LEFT JOIN\n" +
+                    "(\n" +
+                    "    SELECT\n" +
+                    "        pl.tgl_permintaan,\n" +
+                    "        pdl.kd_jenis_prw,\n" +
+                    "        SUM(tl.biaya_item) AS total_detail\n" +
+                    "    FROM permintaan_lab pl\n" +
+                    "    INNER JOIN permintaan_detail_permintaan_lab pdl\n" +
+                    "        ON pdl.noorder = pl.noorder\n" +
+                    "    INNER JOIN template_laboratorium tl\n" +
+                    "        ON tl.id_template = pdl.id_template\n" +
+                    "    WHERE pl.no_rawat = ?\n" +
+                    "    GROUP BY pl.tgl_permintaan, pdl.kd_jenis_prw\n" +
+                    ") q2\n" +
+                    "    ON q1.tgl_permintaan = q2.tgl_permintaan\n" +
+                    "   AND q1.kd_jenis_prw   = q2.kd_jenis_prw\n" +
+                    "ORDER BY q1.tgl_permintaan, q1.kd_jenis_prw",
             sqlpscariobat="select databarang.nama_brng,jenis.nama,detail_pemberian_obat.biaya_obat,"+
                           "sum(detail_pemberian_obat.jml) as jml,sum(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah) as tambahan,"+
                           "(sum(detail_pemberian_obat.total)-sum(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah)) as total, "+
@@ -166,6 +213,29 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     "sum(periksa_radiologi.tarif_tindakan_petugas) as totalpetugas,sum(periksa_radiologi.kso) as totalkso,sum(periksa_radiologi.bhp) as totalbhp "+
                     " from periksa_radiologi inner join jns_perawatan_radiologi on jns_perawatan_radiologi.kd_jenis_prw=periksa_radiologi.kd_jenis_prw where "+
                     " periksa_radiologi.no_rawat=? group by periksa_radiologi.kd_jenis_prw  ",
+            sqlpscariprad =
+                    "SELECT\n" +
+                    "    prad.tgl_permintaan,\n" +
+                    "    pprad.kd_jenis_prw,\n" +
+                    "    jprad.nm_perawatan,\n" +
+                    "    jprad.total_byr AS total_item,\n" +
+                    "    SUM(jprad.total_byr) AS total,\n" +
+                    "    COUNT(pprad.kd_jenis_prw) AS jml\n" +
+                    "FROM permintaan_radiologi prad\n" +
+                    "INNER JOIN permintaan_pemeriksaan_radiologi pprad\n" +
+                    "    ON pprad.noorder = prad.noorder\n" +
+                    "INNER JOIN jns_perawatan_radiologi jprad\n" +
+                    "    ON jprad.kd_jenis_prw = pprad.kd_jenis_prw\n" +
+                    "WHERE prad.no_rawat = ?\n" +
+                    "  AND NOT EXISTS (\n" +
+                    "      SELECT 1\n" +
+                    "      FROM periksa_radiologi pr\n" +
+                    "      WHERE pr.no_rawat     = prad.no_rawat\n" +
+                    "        AND pr.kd_jenis_prw = pprad.kd_jenis_prw\n" +
+                    "        AND pr.tgl_periksa  = prad.tgl_hasil\n" +  
+                    "        AND pr.jam          = prad.jam_hasil\n" +
+                    "  )\n" +
+                    "GROUP BY prad.tgl_permintaan, pprad.kd_jenis_prw",
             sqlpsoperasi="select paket_operasi.nm_perawatan,(operasi.biayaoperator1+operasi.biayaoperator2+"+
                          "operasi.biayaoperator3+operasi.biayaasisten_operator1+operasi.biayaasisten_operator2+"+
                          "operasi.biayaasisten_operator3+operasi.biayainstrumen+operasi.biayadokter_anak+"+
@@ -195,12 +265,12 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             
     private PreparedStatement pscaripoli2,pscekbilling,pscarirm,pscaripasien,psreg,pscaripoli,pscarialamat,psrekening,
             psdokterralan,psdokterralan2,pscariralandokter,pscariralanperawat,pscariralandrpr,pscarilab,pscariplab,pscariobat,psdetaillab,
-            psobatlangsung,pstambahan,psbiling,pstemporary,pspotongan,psbilling,pscariradiologi,
-            pstamkur,psnota,psoperasi,psobatoperasi,psakunbayar,psakunpiutang,pscekperiksalab,pscekpermintaanlab;
+            psobatlangsung,pstambahan,psbiling,pstemporary,pspotongan,psbilling,pscariradiologi,pscekpermintaanrad,
+            pstamkur,psnota,psoperasi,psobatoperasi,psakunbayar,psakunpiutang,pscekperiksalab,pscekperiksarad,pscariprad,pscekpermintaanlab;
     private ResultSet rscekbilling,rscarirm,rscaripasien,rsreg,rscaripoli,rscarialamat,rsrekening,rsobatoperasi,
             rsdokterralan,rsdokterralan2,rscariralandokter,rscariralanperawat,rscariralandrpr,rscarilab,rscariplab,rscariobat,rsdetaillab,
-            rsobatlangsung,rstambahan,rspotongan,rsbilling,rscariradiologi,rstamkur,rsoperasi,
-            rsakunbayar,rsakunpiutang,rscaripoli2,rscekperiksalab,rscekpermintaanlab;
+            rsobatlangsung,rstambahan,rspotongan,rsbilling,rscariradiologi,rscariprad,rstamkur,rsoperasi,
+            rsakunbayar,rsakunpiutang,rscaripoli2,rscekperiksalab,rscekperiksarad,rscekpermintaanlab,rscekpermintaanrad;
     private WarnaTable2 warna=new WarnaTable2();
     private WarnaTable2 warna2=new WarnaTable2();
     private File file;
@@ -831,6 +901,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         BtnAll = new widget.Button();
         BtnAll1 = new widget.Button();
         chkPLaborat = new widget.CekBox();
+        chkPRad = new widget.CekBox();
         panelPermintaan = new widget.panelisi();
         scrollPane5 = new widget.ScrollPane();
         tbLab = new widget.Table();
@@ -1187,7 +1258,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         WindowGantiDokterPoli.setUndecorated(true);
         WindowGantiDokterPoli.setResizable(false);
 
-        internalFrame3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ganti Dokter Poli ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ganti Dokter Poli ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame3.setName("internalFrame3"); // NOI18N
         internalFrame3.setWarnaBawah(new java.awt.Color(240, 245, 235));
         internalFrame3.setLayout(null);
@@ -1272,7 +1343,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         WindowObatLangsung.setUndecorated(true);
         WindowObatLangsung.setResizable(false);
 
-        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Input Total BHP & Obat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Input Total BHP & Obat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setLayout(null);
@@ -1353,7 +1424,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         WindowTambahanBiaya.setUndecorated(true);
         WindowTambahanBiaya.setResizable(false);
 
-        internalFrame4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Tambah Biaya ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Tambah Biaya ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame4.setName("internalFrame4"); // NOI18N
         internalFrame4.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1456,7 +1527,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         WindowGantiPoli.setUndecorated(true);
         WindowGantiPoli.setResizable(false);
 
-        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ganti Poliklinik ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ganti Poliklinik ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame5.setName("internalFrame5"); // NOI18N
         internalFrame5.setWarnaBawah(new java.awt.Color(240, 245, 235));
         internalFrame5.setLayout(null);
@@ -1526,7 +1597,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         WindowPotonganBiaya.setUndecorated(true);
         WindowPotonganBiaya.setResizable(false);
 
-        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Potongan Biaya ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Potongan Biaya ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame6.setName("internalFrame6"); // NOI18N
         internalFrame6.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1629,7 +1700,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         WindowGantiPenjab.setUndecorated(true);
         WindowGantiPenjab.setResizable(false);
 
-        internalFrame7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ganti Jenis Bayar ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Ganti Jenis Bayar ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame7.setName("internalFrame7"); // NOI18N
         internalFrame7.setWarnaBawah(new java.awt.Color(240, 245, 235));
         internalFrame7.setLayout(null);
@@ -1738,7 +1809,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Billing/Pembayaran Ralan Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Billing/Pembayaran Ralan Pasien ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -1794,7 +1865,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-07-2024 10:59:28" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-12-2025 08:20:34" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1893,7 +1964,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             }
         });
         panelBayar.add(chkPotongan);
-        chkPotongan.setBounds(395, 8, 90, 23);
+        chkPotongan.setBounds(460, 8, 90, 23);
 
         chkLaborat.setSelected(true);
         chkLaborat.setText("Lab");
@@ -1919,7 +1990,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             }
         });
         panelBayar.add(chkTarifDokter);
-        chkTarifDokter.setBounds(205, 8, 90, 23);
+        chkTarifDokter.setBounds(270, 8, 90, 23);
 
         chkTarifPrm.setSelected(true);
         chkTarifPrm.setText("Tarif Paramedis");
@@ -1932,7 +2003,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             }
         });
         panelBayar.add(chkTarifPrm);
-        chkTarifPrm.setBounds(585, 8, 120, 23);
+        chkTarifPrm.setBounds(650, 8, 120, 23);
 
         chkRadiologi.setSelected(true);
         chkRadiologi.setText("Radiologi");
@@ -1958,7 +2029,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             }
         });
         panelBayar.add(chkTambahan);
-        chkTambahan.setBounds(300, 8, 90, 23);
+        chkTambahan.setBounds(370, 8, 90, 23);
 
         chkObat.setSelected(true);
         chkObat.setText("Obat");
@@ -1971,7 +2042,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             }
         });
         panelBayar.add(chkObat);
-        chkObat.setBounds(490, 8, 90, 23);
+        chkObat.setBounds(560, 8, 90, 23);
 
         jLabel12.setText("Tagihan + PPN : Rp.");
         jLabel12.setName("jLabel12"); // NOI18N
@@ -1990,7 +2061,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             }
         });
         panelBayar.add(chkSarpras);
-        chkSarpras.setBounds(805, 8, 90, 23);
+        chkSarpras.setBounds(870, 8, 90, 23);
 
         TagihanPPn.setEditable(false);
         TagihanPPn.setText("0");
@@ -2011,7 +2082,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             }
         });
         panelBayar.add(chkAdministrasi);
-        chkAdministrasi.setBounds(710, 8, 95, 23);
+        chkAdministrasi.setBounds(780, 8, 95, 23);
 
         scrollPane3.setComponentPopupMenu(PopupBayar);
         scrollPane3.setName("scrollPane3"); // NOI18N
@@ -2196,6 +2267,19 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelBayar.add(chkPLaborat);
         chkPLaborat.setBounds(70, 8, 50, 23);
 
+        chkPRad.setSelected(true);
+        chkPRad.setText("PRad");
+        chkPRad.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkPRad.setName("chkPRad"); // NOI18N
+        chkPRad.setOpaque(false);
+        chkPRad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkPRadActionPerformed(evt);
+            }
+        });
+        panelBayar.add(chkPRad);
+        chkPRad.setBounds(204, 8, 50, 23);
+
         scrollPane8.setViewportView(panelBayar);
 
         TabRawat.addTab("Pembayaran", scrollPane8);
@@ -2205,7 +2289,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelPermintaan.setPreferredSize(new java.awt.Dimension(100, 137));
         panelPermintaan.setLayout(new java.awt.GridLayout(3, 0));
 
-        scrollPane5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "1. Permintaan Laborat : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        scrollPane5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "1. Permintaan Laborat : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         scrollPane5.setComponentPopupMenu(PopupBayar);
         scrollPane5.setName("scrollPane5"); // NOI18N
 
@@ -2227,7 +2311,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
         panelPermintaan.add(scrollPane5);
 
-        scrollPane6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "2. Permintaan Radiologi : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        scrollPane6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "2. Permintaan Radiologi : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         scrollPane6.setComponentPopupMenu(PopupBayar);
         scrollPane6.setName("scrollPane6"); // NOI18N
 
@@ -2249,7 +2333,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
         panelPermintaan.add(scrollPane6);
 
-        scrollPane7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "3. Permintaan Resep : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        scrollPane7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "3. Permintaan Resep : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         scrollPane7.setComponentPopupMenu(PopupBayar);
         scrollPane7.setName("scrollPane7"); // NOI18N
 
@@ -2400,6 +2484,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         chkLaborat.setSelected(true);
                         chkPLaborat.setSelected(true);
                         chkRadiologi.setSelected(true);
+                        chkPRad.setSelected(true);
                         isRawat();
                         BtnSimpanActionPerformed(evt);
                         dispose();
@@ -3945,8 +4030,11 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         isRawat();
     }//GEN-LAST:event_chkPLaboratActionPerformed
 
- 
+    private void chkPRadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPRadActionPerformed
+        isRawat();
+    }//GEN-LAST:event_chkPRadActionPerformed
 
+ 
     /**
     * @param args the command line arguments
     */
@@ -4039,6 +4127,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private widget.CekBox chkLaborat;
     private widget.CekBox chkObat;
     private widget.CekBox chkPLaborat;
+    private widget.CekBox chkPRad;
     private widget.CekBox chkPotongan;
     private widget.CekBox chkRadiologi;
     private widget.CekBox chkSarpras;
@@ -4118,45 +4207,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 if(pscekbilling != null){
                     pscekbilling.close();
                 }
-            }
-            
-            pscekperiksalab=koneksi.prepareStatement(sqlpscekperiksalab);            
-	    try{
-                pscekperiksalab.setString(1,TNoRw.getText());
-                rscekperiksalab=pscekperiksalab.executeQuery();
-                if(rscekperiksalab.next()){
-                    p=rscekperiksalab.getInt(1);
-                }
-            }catch (Exception e) {
-                p=0;
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rscekperiksalab != null){
-                    rscekperiksalab.close();
-                }
-                if(pscekperiksalab != null){
-                    pscekperiksalab.close();
-                }
-            }
-            
-            pscekpermintaanlab=koneksi.prepareStatement(sqlpscekpermintaanlab);            
-	    try{
-                pscekpermintaanlab.setString(1,TNoRw.getText());
-                rscekpermintaanlab=pscekpermintaanlab.executeQuery();
-                if(rscekpermintaanlab.next()){
-                    pl=rscekpermintaanlab.getInt(1);
-                }
-            }catch (Exception e) {
-                pl=0;
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rscekpermintaanlab != null){
-                    rscekpermintaanlab.close();
-                }
-                if(pscekpermintaanlab != null){
-                    pscekpermintaanlab.close();
-                }
-            }
+            }                      
                             
             pscarirm=koneksi.prepareStatement("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?");
             try{
@@ -4205,19 +4256,36 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         
         if(i<=0){
              prosesCariReg();    
-             if((chkLaborat.isSelected()==true)||(chkPLaborat.isSelected()==true)||(chkTarifDokter.isSelected()==true)||(chkTarifPrm.isSelected()==true)||(chkRadiologi.isSelected()==true)){
+             if((chkTarifDokter.isSelected()==true)||(chkTarifPrm.isSelected()==true)){
                  tabModeRwJlDr.addRow(new Object[]{true,"Tindakan",":","",null,null,null,null,"Ralan Dokter"});
              }             
              if(chkTarifDokter.isSelected()==true){prosesCariRwJlDr();prosesCariRwJlDrPr();}
              if(chkTarifPrm.isSelected()==true){prosesCariRwJlPr();}
-             if(p>0){
-                if(chkLaborat.isSelected()==true){prosesCariPeriksaLab();}
-             }
-             if(p<=0&&pl>0){
-             if(chkPLaborat.isSelected()==true){prosesCariPermintaanLab();}
-             }
-             if(chkRadiologi.isSelected()==true){prosesCariRadiologi();}    
+             
              prosesCariOperasi();
+             
+             if((chkLaborat.isSelected()==true)||(chkPLaborat.isSelected()==true)){
+                 tabModeRwJlDr.addRow(new Object[]{true,"Periksa Laboratorium",":","",null,null,null,null,"Laborat"});
+             }
+             //lab             
+             if(chkLaborat.isSelected()==true){
+                 prosesCariPeriksaLab();
+             }             
+             if(chkPLaborat.isSelected()==true){
+                 prosesCariPermintaanLab();
+             }
+             
+             if((chkRadiologi.isSelected()==true)||(chkPRad.isSelected()==true)){
+                 tabModeRwJlDr.addRow(new Object[]{true,"Periksa Radiologi",":","",null,null,null,null,"Radiologi"});
+             }
+             //rad
+             if(chkRadiologi.isSelected()==true){
+                 prosesCariRadiologi();
+                }
+             if(chkPRad.isSelected()==true){
+                 prosesCariPermintaanRad();
+             }
+             
              if(chkSarpras.isSelected()==true){
                 if(detailjs>0){
                    tabModeRwJlDr.addRow(new Object[]{true,"","Jasa Sarana dan Prasarana",":",null,null,null,detailjs,"Ralan Dokter"});
@@ -4344,19 +4412,35 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     
     public void isRawat2() {
         prosesCariReg();    
-        if((chkLaborat.isSelected()==true)||(chkPLaborat.isSelected()==true)||(chkTarifDokter.isSelected()==true)||(chkTarifPrm.isSelected()==true)||(chkRadiologi.isSelected()==true)){
+        if((chkTarifDokter.isSelected()==true)||(chkTarifPrm.isSelected()==true)){
             tabModeRwJlDr.addRow(new Object[]{true,"Tindakan",":","",null,null,null,null,"Ralan Dokter"});
         }
         if(chkTarifDokter.isSelected()==true){prosesCariRwJlDr();prosesCariRwJlDrPr();}
         if(chkTarifPrm.isSelected()==true){prosesCariRwJlPr();}
         prosesCariOperasi();
-        if(p>0){
-            if(chkLaborat.isSelected()==true){prosesCariPeriksaLab();}
+        
+        if((chkLaborat.isSelected()==true)||(chkPLaborat.isSelected()==true)){
+                 tabModeRwJlDr.addRow(new Object[]{true,"Periksa Laboratorium",":","",null,null,null,null,"Laborat"});
         }
-        if(p<=0&&pl>0){
-            if(chkPLaborat.isSelected()==true){prosesCariPermintaanLab();}
+             //lab             
+             if(chkLaborat.isSelected()==true){
+                 prosesCariPeriksaLab();
+             }             
+             if(chkPLaborat.isSelected()==true){
+                 prosesCariPermintaanLab();
+             }
+             
+        if((chkRadiologi.isSelected()==true)||(chkPRad.isSelected()==true)){
+                 tabModeRwJlDr.addRow(new Object[]{true,"Periksa Radiologi",":","",null,null,null,null,"Radiologi"});
         }
-        if(chkRadiologi.isSelected()==true){prosesCariRadiologi();}             
+             //rad
+             if(chkRadiologi.isSelected()==true){
+                 prosesCariRadiologi();
+                }
+             if(chkPRad.isSelected()==true){
+                 prosesCariPermintaanRad();
+             }
+                
         if(chkSarpras.isSelected()==true){
             if(detailjs>0){
                tabModeRwJlDr.addRow(new Object[]{true,"","Jasa Sarana dan Prasarana",":",null,null,null,detailjs,"Ralan Dokter"});
@@ -4812,67 +4896,28 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         try{
             pscariplab=koneksi.prepareStatement(sqlpscariplab);
             pscariplab.setString(1,TNoRw.getText());
+            pscariplab.setString(2,TNoRw.getText());
             rscariplab=pscariplab.executeQuery();                
             subttl=0;
             
             if(rscariplab!=null){
-            try {
-                    while(rscariplab.next()){ 
-                           tabModeRwJlDr.addRow(new Object[]{true,"Permintaan Lab"+" ("+rscariplab.getString("tgl_permintaan")+")",rscariplab.getString("nm_perawatan"),":",
-                           rscariplab.getDouble("total_item"),itempermintaan,rscariplab.getDouble("total_detail"),(rscariplab.getDouble("total")),"Laborat"});
-                           subttl=subttl+rscariplab.getDouble("total");
-                    } 
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e); 
-            } finally{
-                if(rscariplab!=null){
-                    rscariplab.close();
-                }
-                if(pscariplab!=null){
-                    pscariplab.close();
+                try {
+                        while(rscariplab.next()){ 
+                               tabModeRwJlDr.addRow(new Object[]{true,"","P.lab"+" ("+rscariplab.getString("tgl_permintaan")+") "+rscariplab.getString("nm_perawatan"),":",
+                               rscariplab.getDouble("total_item"),rscariplab.getDouble("jumlah_item"),rscariplab.getDouble("total_detail"),(rscariplab.getDouble("total")),"Laborat"});
+                               subttl=subttl+rscariplab.getDouble("total");
+                        } 
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e); 
+                } finally{
+                    if(rscariplab!=null){
+                        rscariplab.close();
+                    }
+                    if(pscariplab!=null){
+                        pscariplab.close();
+                    }
                 }
             }
-            }
-            
-//            if(rscarilab!=null) {
-//                try {
-//                    while(rscarilab.next()){
-//                    psdetaillab=koneksi.prepareStatement(sqlpsdetaillab);
-//                    try {
-//                        psdetaillab.setString(1,TNoRw.getText());
-//                        psdetaillab.setString(2,rscarilab.getString("kd_jenis_prw"));
-//                        rsdetaillab=psdetaillab.executeQuery();
-//                        ralanparamedis=0;
-//                        while(rsdetaillab.next()){  
-//                            ralanparamedis=rsdetaillab.getDouble("total");               
-//                        }
-//                    } catch (Exception e) {
-//                        ralanparamedis=0;
-//                        System.out.println("Notifikasi : "+e); 
-//                    } finally{
-//                        if(rsdetaillab!=null){
-//                            rsdetaillab.close();
-//                        }
-//                        if(psdetaillab!=null){
-//                            psdetaillab.close();
-//                        }
-//                    }
-//                    tabModeRwJlDr.addRow(new Object[]{true,"",rscarilab.getString("nm_perawatan"),":",
-//                                   rscarilab.getDouble("biaya"),rscarilab.getDouble("jml"),ralanparamedis,(rscarilab.getDouble("total")+ralanparamedis),"Laborat"});
-//                    subttl=subttl+rscarilab.getDouble("total")+ralanparamedis;
-//                    }                                   
-//                }
-//                catch (Exception e) {
-//                System.out.println("Notifikasi : "+e); 
-//                } finally{
-//                    if(rscariplab!=null){
-//                        rscariplab.close();
-//                    }
-//                    if(pscariplab!=null){
-//                        pscariplab.close();
-//                    }
-//                }
-//            }           
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -4921,6 +4966,36 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     pscariradiologi.close();
                 }
             }            
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
+    }
+    
+    private void prosesCariPermintaanRad() {
+        try{
+            pscariprad=koneksi.prepareStatement(sqlpscariprad);
+            pscariprad.setString(1,TNoRw.getText());
+            rscariprad=pscariprad.executeQuery();                
+            subttl=0;
+            
+            if(rscariprad!=null){
+                try {
+                        while(rscariprad.next()){ 
+                               tabModeRwJlDr.addRow(new Object[]{true,"","P.rad"+" ("+rscariprad.getString("tgl_permintaan")+") "+rscariprad.getString("nm_perawatan"),":",
+                               rscariprad.getDouble("total_item"),rscariprad.getDouble("jml"),0,(rscariprad.getDouble("total")),"Radiologi"});
+                               subttl=subttl+rscariprad.getDouble("total");
+                        } 
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e); 
+                } finally{
+                    if(rscariprad!=null){
+                        rscariprad.close();
+                    }
+                    if(rscariprad!=null){
+                        rscariprad.close();
+                    }
+                }
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -5404,6 +5479,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         chkRadiologi.setSelected(true);
         chkLaborat.setSelected(true);
         chkPLaborat.setSelected(true);
+        chkPRad.setSelected(true);
     }
     
     private void tampilAkunBankJateng() { 
@@ -5829,7 +5905,8 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         if(notaralan.equals("Yes")){
             chkLaborat.setSelected(true);
             chkPLaborat.setSelected(true);
-            chkRadiologi.setSelected(true);    
+            chkRadiologi.setSelected(true); 
+            chkPRad.setSelected(true);
             chkPotongan.setSelected(true);  
             chkTambahan.setSelected(true);  
             chkObat.setSelected(true);  
@@ -5841,7 +5918,7 @@ private void MnPeriksaLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
             BtnNotaActionPerformed(null);
         }
 
-        if((chkLaborat.isSelected()==false)||(chkPLaborat.isSelected()==false)||(chkRadiologi.isSelected()==false)){
+        if((chkLaborat.isSelected()==false)||(chkPLaborat.isSelected()==false)||(chkRadiologi.isSelected()==false)||(chkPRad.isSelected()==false)){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan tampilkan semua pilihan tagihan...!!!");
         }else{
             try {
