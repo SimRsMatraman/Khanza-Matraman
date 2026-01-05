@@ -2,7 +2,6 @@
 /lib
 /libproject
 /nbproject/private
-/dist
 /webapps/serverupdate
 /tempfile
 /test
@@ -27,3 +26,4 @@ nbproject/project.properties
 src/.DS_Store
 setting/database.xml
 report/rptPeriksaLabPermintaan.pdf
+dist/SimRSUDMATRAMAN.jar
