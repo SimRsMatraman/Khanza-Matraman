@@ -56,6 +56,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import widget.TextBox;
 
 /**
  *
@@ -24937,6 +24938,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     .append("</tr>");
             }
         }
+
+    public void setNoRm(TextBox txtNoRm, TextBox txtNamaPasien) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     /**
  *

@@ -34,6 +34,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import javax.swing.JOptionPane;
+import rekammedis.RMRiwayatPerawatan;
 
 public final class DlgDetailKlaim extends javax.swing.JDialog {
 
@@ -56,6 +57,7 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
     String tglNow = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     String jamNow = new SimpleDateFormat("HH:mm:ss").format(new Date());
     private String noRawat = "";
+    private String kamarintensif;
 
 
     public DlgDetailKlaim(java.awt.Frame parent, boolean modal) {
@@ -691,6 +693,7 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
         setDataKlaim = new widget.Button();
         btnUpdateDataKlaim = new widget.Button();
         btnImportDiagnosaDokter = new widget.Button();
+        RiwayatPasien = new widget.Button();
         FrameKoding = new widget.InternalFrame();
         FormKodingIDRG = new widget.InternalFrame();
         FormInputIDRG = new widget.PanelBiasa();
@@ -2384,6 +2387,11 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
                 ChkPasienTBItemStateChanged(evt);
             }
         });
+        ChkPasienTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkPasienTBActionPerformed(evt);
+            }
+        });
         FormDataPelayanan.add(ChkPasienTB);
         ChkPasienTB.setBounds(70, 140, 23, 23);
 
@@ -2647,7 +2655,7 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
         panelRawatIntensif.add(jLabel106);
 
         tglIntubasi.setForeground(new java.awt.Color(50, 70, 50));
-        tglIntubasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-12-2025 09:01:01" }));
+        tglIntubasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-01-2026 09:14:14" }));
         tglIntubasi.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         tglIntubasi.setName("tglIntubasi"); // NOI18N
         tglIntubasi.setOpaque(false);
@@ -2664,7 +2672,7 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
         panelRawatIntensif.add(jLabel107);
 
         tglEkstubasi.setForeground(new java.awt.Color(50, 70, 50));
-        tglEkstubasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-12-2025 09:01:01" }));
+        tglEkstubasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-01-2026 09:14:15" }));
         tglEkstubasi.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         tglEkstubasi.setName("tglEkstubasi"); // NOI18N
         tglEkstubasi.setOpaque(false);
@@ -2850,6 +2858,11 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
         jLabel24.setBounds(400, 110, 130, 23);
 
         tfLaboratorium.setName("tfLaboratorium"); // NOI18N
+        tfLaboratorium.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfLaboratoriumActionPerformed(evt);
+            }
+        });
         FormInput1.add(tfLaboratorium);
         tfLaboratorium.setBounds(530, 110, 270, 23);
 
@@ -3000,6 +3013,21 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
             }
         });
         internalFrame8.add(btnImportDiagnosaDokter);
+
+        RiwayatPasien.setBackground(new java.awt.Color(0, 0, 102));
+        RiwayatPasien.setForeground(new java.awt.Color(255, 255, 255));
+        RiwayatPasien.setMnemonic('4');
+        RiwayatPasien.setText("Riwayat Pasien");
+        RiwayatPasien.setToolTipText("Alt+4");
+        RiwayatPasien.setName("RiwayatPasien"); // NOI18N
+        RiwayatPasien.setOpaque(true);
+        RiwayatPasien.setPreferredSize(new java.awt.Dimension(150, 23));
+        RiwayatPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RiwayatPasienActionPerformed(evt);
+            }
+        });
+        internalFrame8.add(RiwayatPasien);
 
         internalFrameDataPasien.add(internalFrame8, java.awt.BorderLayout.PAGE_END);
 
@@ -4192,13 +4220,34 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_btnValidasiSITBActionPerformed
 
     private void ChkPasienTBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkPasienTBItemStateChanged
-        if (ChkPasienTB.isSelected() == true) {
-            txtIDSITB.setVisible(true);
-            btnValidasiSITB.setVisible(true);
-        } else {
-            txtIDSITB.setVisible(false);
-            btnValidasiSITB.setVisible(false);
+    if (ChkPasienTB.isSelected()) {
+
+        txtIDSITB.setVisible(true);
+        btnValidasiSITB.setVisible(true);
+
+        // Ambil ID SITB berdasarkan No. RM
+        String idSITB = Sequel.cariIsi(
+            "select IFNULL(no_sitb,'') " +
+            "from sitb_pasien_norm " +
+            "where no_rkm_medis='" + txtNoRm.getText() + "'"
+        );
+
+        txtIDSITB.setText(idSITB);
+
+        // Optional: kalau tidak ditemukan
+        if (idSITB.isEmpty()) {
+            txtIDSITB.setText("");
+            // bisa juga kasih notifikasi kalau mau
+             JOptionPane.showMessageDialog(null, "Data SITB belum tersedia");
         }
+
+    } else {
+
+        txtIDSITB.setVisible(false);
+        btnValidasiSITB.setVisible(false);
+        txtIDSITB.setText("");
+
+    }
     }//GEN-LAST:event_ChkPasienTBItemStateChanged
 
     private void beratLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_beratLahirKeyPressed
@@ -4980,6 +5029,27 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNoRawatActionPerformed
 
+    private void RiwayatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RiwayatPasienActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//        isTutup();
+        RMRiwayatPerawatan form = new RMRiwayatPerawatan(null,false);
+//        form.emptTeks();
+//        form.setNoRm(txtNoRm, txtNamaPasien);
+        form.setNoRm(txtNoRm.getText(), txtNamaPasien.getText());
+        form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+        form.setLocationRelativeTo(internalFrame1);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_RiwayatPasienActionPerformed
+
+    private void tfLaboratoriumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLaboratoriumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfLaboratoriumActionPerformed
+
+    private void ChkPasienTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkPasienTBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChkPasienTBActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             DlgDetailKlaim dialog = new DlgDetailKlaim(new javax.swing.JFrame(), true);
@@ -5037,6 +5107,7 @@ public final class DlgDetailKlaim extends javax.swing.JDialog {
     private widget.RadioButton R2;
     private widget.RadioButton R3;
     private widget.RadioButton R4;
+    private widget.Button RiwayatPasien;
     private widget.ScrollPane Scroll16;
     private widget.ScrollPane Scroll17;
     private widget.ScrollPane Scroll18;
@@ -7497,48 +7568,92 @@ if(response.path("mdc_number").asText().equals("36")){
 
     }
 
-    private void getDataBilling() {
-        if (Sequel.cariInteger("Select count(no_rawat) from billing where  no_rawat='" + norawat + "' ") > 0) {
-            non_bedah = Sequel.cariIsi("select IFNULL(SUM(totalbiaya), 0) AS total from billing where no_rawat='" + norawat + "' and status='Dokter'");
-            bedah = Sequel.cariIsi("select IFNULL(SUM(totalbiaya), 0) AS total from billing where no_rawat='" + norawat + "' and status='Operasi'");
-            keperawatan = Sequel.cariIsi("select IFNULL(SUM(totalbiaya), 0) AS total from billing where no_rawat='" + norawat + "' and status='Ralan Dokter Paramedis'");
-            konsultasi = Sequel.cariIsi("select IFNULL(SUM(totalbiaya), 0) AS total from billing where no_rawat='" + norawat + "' and status='Registrasi'");
-            radiologi = Sequel.cariIsi("select IFNULL(SUM(totalbiaya), 0) AS total from billing where no_rawat='" + norawat + "' and status='Radiologi'");
-            lab = Sequel.cariIsi("select IFNULL(SUM(totalbiaya), 0) AS total from billing where no_rawat='" + norawat + "' and status='Laborat'");
-            obat = Sequel.cariIsi("select IFNULL(SUM(totalbiaya), 0) AS total from billing where no_rawat='" + norawat + "' and status='Obat'");
+private void getDataBilling() {
 
-        } else {
-            non_bedah = "0";
-            bedah = "0";
-            keperawatan = "0";
-            konsultasi = "0";
-            radiologi = "0";
-            lab = "0";
-            obat = "0";
-        }
-        int subTotal = Integer.parseInt(non_bedah) + Integer.parseInt(bedah) + Integer.parseInt(keperawatan) + Integer.parseInt(konsultasi) + Integer.parseInt(radiologi) + Integer.parseInt(lab) + Integer.parseInt(obat);
-        tfTotal.setText(subTotal + "");
-        tfNonBedah.setText(non_bedah);
-        tfBedah.setText(bedah);
-        tfBedah.setText(bedah);
-        tfKeperawatan.setText(keperawatan);
-        tfKonsultasi.setText(konsultasi);
-        tfRadiologi.setText(radiologi);
-        tfLaboratorium.setText(lab);
-        tfObat.setText(obat);
-        tfTenagaAhli.setText("0");
-        tfRehabilitasi.setText("0");
-        tfAlkes.setText("0");
-        tfKamar.setText("0");
-        tfObatKronis.setText("0");
-        tfBMHP.setText("0");
-        tfPenunjang.setText("0");
-        tfDarah.setText("0");
-        tfRawatIntensif.setText("0");
-        tfObatKemoterapi.setText("0");
-        tfSewaAlat.setText("0");
+    // ==================== KAMAR ====================
+    kamar = Sequel.cariIsi(
+        "select IFNULL(SUM(ttl_biaya), 0) " +
+        "from kamar_inap where no_rawat='" + norawat + "'"
+    );
 
-    }
+    kamarintensif = Sequel.cariIsi(
+        "select IFNULL(SUM(ttl_biaya), 0) " +
+        "from kamar_inap " +
+        "where no_rawat='" + norawat + "' " +
+        "and kd_kamar in ('ICU-01','ICU-02','ICU-03','ICU-04'," +
+        "'NICU-01','PICU-01','PICU-02','PICU-03')"
+    );
+
+    // ==================== KEPERAWATAN ====================
+    keperawatan = Sequel.cariIsi(
+        "select IFNULL(SUM(biaya_rawat), 0) from (" +
+        "   select biaya_rawat from rawat_jl_dr where no_rawat='" + norawat + "' " +
+        "   union all " +
+        "   select biaya_rawat from rawat_jl_drpr where no_rawat='" + norawat + "' " +
+        "   union all " +
+        "   select biaya_rawat from rawat_inap_dr where no_rawat='" + norawat + "' " +
+        "   union all " +
+        "   select biaya_rawat from rawat_inap_drpr where no_rawat='" + norawat + "' " +
+        ") x"
+    );
+
+    // ==================== KONSULTASI / REGISTRASI ====================
+    konsultasi = Sequel.cariIsi(
+        "select IFNULL(biaya_reg, 0) " +
+        "from reg_periksa where no_rawat='" + norawat + "'"
+    );
+
+    // ==================== RADIOLOGI ====================
+    radiologi = Sequel.cariIsi(
+        "select IFNULL(SUM(biaya), 0) " +
+        "from periksa_radiologi where no_rawat='" + norawat + "'"
+    );
+
+    // ==================== LABORATORIUM ====================
+    lab = Sequel.cariIsi(
+        "select IFNULL(SUM(biaya), 0) " +
+        "from periksa_lab where no_rawat='" + norawat + "'"
+    );
+
+    // ==================== OBAT ====================
+    obat = Sequel.cariIsi(
+        "select IFNULL(SUM(total), 0) " +
+        "from detail_pemberian_obat where no_rawat='" + norawat + "'"
+    );
+
+    // ==================== HITUNG SUB TOTAL ====================
+    int subTotal =
+            Integer.parseInt(kamar)
+          + Integer.parseInt(kamarintensif)
+          + Integer.parseInt(keperawatan)
+          + Integer.parseInt(konsultasi)
+          + Integer.parseInt(radiologi)
+          + Integer.parseInt(lab)
+          + Integer.parseInt(obat);
+
+    // ==================== SET KE FORM ====================
+    tfTotal.setText(String.valueOf(subTotal));
+
+    tfNonBedah.setText("0");
+    tfBedah.setText("0");
+    tfTenagaAhli.setText("0");
+    tfRehabilitasi.setText("0");
+    tfAlkes.setText("0");
+    tfObatKronis.setText("0");
+    tfBMHP.setText("0");
+    tfPenunjang.setText("0");
+    tfDarah.setText("0");
+    tfObatKemoterapi.setText("0");
+    tfSewaAlat.setText("0");
+
+    tfKeperawatan.setText(keperawatan);
+    tfKonsultasi.setText(konsultasi);
+    tfRadiologi.setText(radiologi);
+    tfLaboratorium.setText(lab);
+    tfObat.setText(obat);
+    tfKamar.setText(kamar);
+    tfRawatIntensif.setText(kamarintensif);
+}
 
     private void getHasiliDRG() {
         infoHasiliDRG.setText("");

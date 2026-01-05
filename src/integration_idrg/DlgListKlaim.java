@@ -1655,7 +1655,14 @@ BekasIndividualKlaim = (jmlFileIndividual > 0) ? "Sudah Ada" : "Belum";
                     String tglCheckout = "", kamar = "", SetDataKlaim = "-", FinalIdrg = "-", FinalInaCbg = "-", FinalKlaim = "-", BekasIndividualKlaim = "-", KirimOnline = "-";
                     boolean fileSep, fileResume, fileLaboratorium, fileRadiologi, fileBilling, fileindividual, fileusg;
 
-                    kamar = Sequel.cariIsi("select concat(kd_kamar,' ',nm_kamar) from kamar_inap JOIN kamar ON kamar_inap.kd_kamar=kamar.kd_kamar where no_rawat='" + rs.getString("no_rawat") + "' order by tgl_keluar DESC");
+kamar = Sequel.cariIsi(
+    "select concat(ki.kd_kamar,' - ',b.nm_bangsal) " +
+    "from kamar_inap ki " +
+    "join kamar k on ki.kd_kamar = k.kd_kamar " +
+    "join bangsal b on k.kd_bangsal = b.kd_bangsal " +
+    "where ki.no_rawat='" + rs.getString("no_rawat") + "' " +
+    "order by ki.tgl_keluar desc limit 1"
+);
 
                     int berkassep = Sequel.cariInteger("select count(no_rawat) as total from tt_berkasdigital where jenis_file='sep' and  no_rawat='" + rs.getString("no_rawat") + "'");
                     if (berkassep > 0) {
