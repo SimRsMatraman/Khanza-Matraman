@@ -2172,6 +2172,10 @@ public final class sekuel {
         System.out.println(str);
     }
 
+    public void mengedit(String tt_status_eklaim, String no_rawat_and_no_sep, String final_idrg, String status_klaim, int i, String[] string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public class Painter extends Canvas {
 
         Image image;

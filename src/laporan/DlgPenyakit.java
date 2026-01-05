@@ -11,6 +11,9 @@
 
 package laporan;
 
+import bridging.ApiBPJS;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -34,6 +37,10 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 
 /**
  *
@@ -41,16 +48,21 @@ import javax.swing.table.TableColumn;
  */
 public final class DlgPenyakit extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
+    private ApiBPJS api = new ApiBPJS();
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private DlgKtgPenyakit ktg=new DlgKtgPenyakit(null,false);
     private String[] hlm;
-    private String awal="0";
+    private String awal="0",URL = "";
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
     private double jumlah=0,x=0,i=0;
     private int z=0,j=0,mulai=0;
+    private HttpHeaders headers;
+    private HttpEntity requestEntity;
+    private ObjectMapper mapper = new ObjectMapper();
+    private JsonNode root, response;
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -58,9 +70,9 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocation(10,2);
-        setSize(628,674);
+        setSize(828,674);
 
-        Object[] row={"P","Kode","Nama Penyakit","Ciri-ciri Penyakit","Keterangan","Kategori Penyakit","Ciri-ciri Umum","Status"};
+        Object[] row={"P","Kode","Nama Penyakit","Ciri-ciri Penyakit","Keterangan","Kategori Penyakit","Ciri-ciri Umum","Status", "validcode", "accpdx", "code_asterisk", "asterisk", "im"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -71,7 +83,8 @@ public final class DlgPenyakit extends javax.swing.JDialog {
              }
              Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -83,7 +96,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         tbPenyakit.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbPenyakit.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (z = 0; z < 8; z++) {
+        for (z = 0; z < 13; z++) {
             TableColumn column = tbPenyakit.getColumnModel().getColumn(z);
             if(z==0){
                 column.setPreferredWidth(20);
@@ -100,6 +113,8 @@ public final class DlgPenyakit extends javax.swing.JDialog {
             }else if(z==6){
                 column.setPreferredWidth(150);
             }else if(z==7){
+                column.setPreferredWidth(100);
+            }else{
                 column.setPreferredWidth(100);
             }
         }
@@ -138,7 +153,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         isForm(); 
         try{
             ps=koneksi.prepareStatement("select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan, "+
-                "kategori_penyakit.nm_kategori,kategori_penyakit.ciri_umum,status "+
+                "kategori_penyakit.nm_kategori,kategori_penyakit.ciri_umum,status,validcode,accpdx,code_asterisk,asterisk,im "+
                 "from kategori_penyakit inner join penyakit "+
                 "on penyakit.kd_ktg=kategori_penyakit.kd_ktg where  "+
                 " penyakit.kd_penyakit like ? or "+
@@ -195,6 +210,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         LCount = new widget.Label();
         jLabel11 = new widget.Label();
         cmbHlm = new widget.ComboBox();
+        BtnEdit2 = new widget.Button();
         PanelInput = new javax.swing.JPanel();
         FormInput = new widget.PanelBiasa();
         jLabel3 = new widget.Label();
@@ -232,7 +248,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data ICD 10 Penyakit ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data ICD 10 Penyakit ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -447,6 +463,24 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         cmbHlm.setPreferredSize(new java.awt.Dimension(80, 23));
         panelGlass9.add(cmbHlm);
 
+        BtnEdit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/36.png"))); // NOI18N
+        BtnEdit2.setMnemonic('G');
+        BtnEdit2.setText("Import From Eklaim");
+        BtnEdit2.setToolTipText("Alt+G");
+        BtnEdit2.setName("BtnEdit2"); // NOI18N
+        BtnEdit2.setPreferredSize(new java.awt.Dimension(180, 30));
+        BtnEdit2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEdit2ActionPerformed(evt);
+            }
+        });
+        BtnEdit2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnEdit2KeyPressed(evt);
+            }
+        });
+        panelGlass9.add(BtnEdit2);
+
         jPanel3.add(panelGlass9, java.awt.BorderLayout.PAGE_START);
 
         internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -510,7 +544,7 @@ public final class DlgPenyakit extends javax.swing.JDialog {
         jLabel9.setBounds(0, 42, 100, 23);
 
         ScrollCiri.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ScrollCiri.setForeground(new java.awt.Color(50,50,50));
+        ScrollCiri.setForeground(new java.awt.Color(50, 50, 50));
         ScrollCiri.setName("ScrollCiri"); // NOI18N
 
         TCiri.setBorder(null);
@@ -913,6 +947,17 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         ktg.getTable().removeKeyListener(null);
     }//GEN-LAST:event_formWindowDeactivated
 
+    private void BtnEdit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEdit2ActionPerformed
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        importDiagnosa(TCari.getText());
+        tampil();
+        setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnEdit2ActionPerformed
+
+    private void BtnEdit2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEdit2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnEdit2KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -934,6 +979,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
     private widget.Button BtnEdit;
+    private widget.Button BtnEdit2;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
@@ -993,7 +1039,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                rs.getString(4),
                                rs.getString(5),
                                rs.getString(6),
-                               rs.getString(7)});
+                               rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12)});
             }
             
             cmbHlm.removeAllItems();
@@ -1075,5 +1121,35 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         BtnHapus.setEnabled(akses.getpenyakit());
         BtnEdit.setEnabled(akses.getpenyakit());
         BtnPrint.setEnabled(akses.getpenyakit());
+    }
+    private void importDiagnosa(String kodediagnosa) {
+        try {
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            requestEntity = new HttpEntity(headers);
+            URL = "http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg_idrg_dev/index.php?act=searchDiagnosisInagrouper&kodeDiagnosa=" + kodediagnosa;
+            requestEntity = new HttpEntity(headers);
+            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+            response = root.path("response");
+            System.out.println("Response : " + response);
+            for (JsonNode list : response.path("data")) {
+                 if (Sequel.cariInteger("Select count(kd_penyakit) from penyakit where  kd_penyakit='" + list.path("code").asText() + "' ") > 0) {
+                     Sequel.mengedit("penyakit", "kd_penyakit=?", "validcode=?,accpdx=?,code_asterisk=?,asterisk=?,im=?", 7, new String[]{
+                        list.path("validcode").asText(),list.path("accpdx").asText(),list.path("code_asterisk").asText(),list.path("asterisk").asText(),list.path("im").asText(), list.path("code").asText()
+                    });
+                 }else{
+                       Sequel.menyimpan("penyakit", "?,?,?,?,?,?,?,?,?,?,?", "Kode Penyakit", 11, new String[]{
+                list.path("code").asText(), list.path("description").asText(), list.path("description").asText(), "-", "-", "Tidak Menular",
+                           list.path("validcode").asText(),list.path("accpdx").asText(),list.path("code_asterisk").asText(),list.path("asterisk").asText(),list.path("im").asText()
+            });
+                 }
+            }
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : " + ex);
+            if (ex.toString().contains("UnknownHostException")) {
+                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server E-klaim terputus...!");
+            }
+        }
+
     }
 }

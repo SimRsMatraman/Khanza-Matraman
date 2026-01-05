@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="rptRekapObatPasien_Ranap_fix" pageWidth="842" pageHeight="595" orientation="Landscape"
+    columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="12345678-1234-1234-1234-1234567890ab">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value=""/>
+    <parameter name="namars" class="java.lang.String"/>
+    <parameter name="alamatrs" class="java.lang.String"/>
+    <parameter name="kotars" class="java.lang.String"/>
+    <parameter name="propinsirs" class="java.lang.String"/>
+    <parameter name="kontakrs" class="java.lang.String"/>
+    <parameter name="emailrs" class="java.lang.String"/>
+    <parameter name="logo" class="java.io.InputStream"/>
+    <field name="temp1" class="java.lang.String"/>
+    <field name="temp2" class="java.lang.String"/>
+    <field name="temp3" class="java.lang.String"/>
+    <field name="temp4" class="java.lang.String"/>
+    <field name="temp5" class="java.lang.String"/>
+    <field name="temp6" class="java.lang.String"/>
+    <field name="temp7" class="java.lang.String"/>
+    <field name="temp8" class="java.lang.String"/>
+    <field name="temp9" class="java.lang.String"/>
+    <field name="temp10" class="java.lang.String"/>
+    <field name="temp11" class="java.lang.String"/>
+    <field name="temp12" class="java.lang.String"/>
+    <field name="no" class="java.lang.Integer"/>
+    <title>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="0" width="802" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[[ Rekap Penggunaan Obat Per Pasien ]]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="0" y="22" width="802" height="16"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{alamatrs}+" - "+$P{kotars}+" - "+$P{propinsirs}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <columnHeader>
+        <band height="18">
+            
+        <staticText>
+            <reportElement x="0" y="0" width="19" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[No]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="19" y="0" width="91" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Nama Pasien]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="110" y="0" width="45" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[No.RM]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="155" y="0" width="62" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[No.Rawat]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="217" y="0" width="39" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Lama Rawat]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="256" y="0" width="78" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Dokter]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="334" y="0" width="71" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Aturan]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="405" y="0" width="110" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Nama Obat]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="515" y="0" width="52" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Jenis]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="567" y="0" width="58" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Cara Bayar]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="625" y="0" width="58" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Kategori]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="683" y="0" width="58" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Asal Stok]]></text>
+        </staticText>
+        <staticText>
+            <reportElement x="741" y="0" width="61" height="18" forecolor="#000000" backcolor="#E6E6E6" mode="Opaque"/>
+            <textElement textAlignment="Center" verticalAlignment="Middle">
+                <font size="9" isBold="true"/>
+            </textElement>
+            <text><![CDATA[Golongan]]></text>
+        </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="16">
+            
+        <textField isStretchWithOverflow="true">
+            <reportElement x="0" y="0" width="19" height="16"/>
+            <textElement textAlignment="Center" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{no}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="19" y="0" width="91" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp1}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="110" y="0" width="45" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp2}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="155" y="0" width="62" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp3}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="217" y="0" width="39" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp4}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="256" y="0" width="78" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp5}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="334" y="0" width="71" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp6}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="405" y="0" width="110" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp7}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="515" y="0" width="52" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp8}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="567" y="0" width="58" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp9}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="625" y="0" width="58" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp10}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="683" y="0" width="58" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp11}]]></textFieldExpression>
+        </textField>
+        <textField isStretchWithOverflow="true">
+            <reportElement x="741" y="0" width="61" height="16"/>
+            <textElement textAlignment="Left" verticalAlignment="Top">
+                <font size="9"/>
+            </textElement>
+            <textFieldExpression><![CDATA[$F{temp12}]]></textFieldExpression>
+        </textField>
+        </band>
+    </detail>
+    <pageFooter>
+        <band height="18">
+            <textField>
+                <reportElement x="0" y="0" width="802" height="16"/>
+                <textElement textAlignment="Right">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+</jasperReport>

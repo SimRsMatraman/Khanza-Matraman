@@ -1509,4 +1509,8 @@ public final class validasi {
         df.setGroupingUsed(false);      // hilangkan pemisah ribuan
         return df.format(angka);
     }
+
+    public void MyReportPDFWithNameQry(String rptCetakHasilPemeriksaanUSGjasper, String report, String tempfile, String FileName, String _Formulir_Hasil_Pemeriksaan_USG_, String string, Map<String, Object> param) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -11,6 +11,9 @@
 
 package laporan;
 
+import bridging.ApiBPJS;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -31,6 +34,10 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 
 /**
  *
@@ -38,12 +45,18 @@ import javax.swing.table.TableColumn;
  */
 public final class DlgICD9 extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
+    private ApiBPJS api = new ApiBPJS();
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private PreparedStatement ps;
+    private String URL = "";
     private ResultSet rs;
     private int z=0;
+    private HttpHeaders headers;
+    private HttpEntity requestEntity;
+    private ObjectMapper mapper = new ObjectMapper();
+    private JsonNode root, response;
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -51,9 +64,9 @@ public final class DlgICD9 extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocation(10,2);
-        setSize(628,674);
+        setSize(828,674);
 
-        Object[] row={"P","Kode","Deskripsi Panjang","Deskripsi Pendek"};
+        Object[] row={"P","Kode","Deskripsi Panjang","Deskripsi Pendek", "validcode", "IM"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -63,7 +76,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -75,7 +88,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
         tbPenyakit.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbPenyakit.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (z = 0; z < 4; z++) {
+        for (z = 0; z < 6; z++) {
             TableColumn column = tbPenyakit.getColumnModel().getColumn(z);
             if(z==0){
                 column.setPreferredWidth(20);
@@ -85,6 +98,8 @@ public final class DlgICD9 extends javax.swing.JDialog {
                 column.setPreferredWidth(360);
             }else if(z==3){
                 column.setPreferredWidth(200);
+            }else{
+                column.setPreferredWidth(100);
             }
         }
         tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable());
@@ -151,6 +166,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
         BtnAll = new widget.Button();
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
+        BtnEdit2 = new widget.Button();
         PanelInput = new javax.swing.JPanel();
         FormInput = new widget.PanelBiasa();
         jLabel3 = new widget.Label();
@@ -171,7 +187,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data ICD 9 Prosedur Tindakan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50,50,50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data ICD 9 Prosedur Tindakan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -377,6 +393,24 @@ public final class DlgICD9 extends javax.swing.JDialog {
         LCount.setPreferredSize(new java.awt.Dimension(50, 23));
         panelGlass9.add(LCount);
 
+        BtnEdit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/36.png"))); // NOI18N
+        BtnEdit2.setMnemonic('G');
+        BtnEdit2.setText("Import From Eklaim");
+        BtnEdit2.setToolTipText("Alt+G");
+        BtnEdit2.setName("BtnEdit2"); // NOI18N
+        BtnEdit2.setPreferredSize(new java.awt.Dimension(180, 30));
+        BtnEdit2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEdit2ActionPerformed(evt);
+            }
+        });
+        BtnEdit2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnEdit2KeyPressed(evt);
+            }
+        });
+        panelGlass9.add(BtnEdit2);
+
         jPanel3.add(panelGlass9, java.awt.BorderLayout.PAGE_START);
 
         internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -426,7 +460,7 @@ public final class DlgICD9 extends javax.swing.JDialog {
         jLabel9.setBounds(0, 42, 100, 23);
 
         ScrollCiri.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ScrollCiri.setForeground(new java.awt.Color(50,50,50));
+        ScrollCiri.setForeground(new java.awt.Color(50, 50, 50));
         ScrollCiri.setName("ScrollCiri"); // NOI18N
 
         Panjang.setBorder(null);
@@ -672,6 +706,17 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         //tampil();
     }//GEN-LAST:event_formWindowOpened
 
+    private void BtnEdit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEdit2ActionPerformed
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        importProsedur(TCari.getText());
+        tampil();
+        setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnEdit2ActionPerformed
+
+    private void BtnEdit2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEdit2KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnEdit2KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -693,6 +738,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
     private widget.Button BtnEdit;
+    private widget.Button BtnEdit2;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
@@ -731,7 +777,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
-                        false,rs.getString(1),rs.getString(2),rs.getString(3)});
+                        false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
                 }
             }catch(Exception ex){
                 System.out.println(ex);
@@ -792,5 +838,34 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         BtnHapus.setEnabled(akses.geticd9());
         BtnEdit.setEnabled(akses.geticd9());
         BtnPrint.setEnabled(akses.geticd9());
+    }
+    private void importProsedur(String kodeprosedur) {
+        try {
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            requestEntity = new HttpEntity(headers);
+            URL = "http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg_idrg_dev_dev/index.php?act=searchProcedureInagrouper&kodeProcedure=" + kodeprosedur;
+            requestEntity = new HttpEntity(headers);
+            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+            response = root.path("response");
+            System.out.println("Response : " + response);
+            for (JsonNode list : response.path("data")) {
+                 if (Sequel.cariInteger("Select count(kode) from icd9 where  kode='" + list.path("code").asText() + "' ") > 0) {
+                     Sequel.mengedit("icd9", "kode=?", "validcode=?,im=?", 3, new String[]{
+                         list.path("validcode").asText(), list.path("im").asText(), list.path("code").asText()
+                    });
+                 }else{
+                       Sequel.menyimpan("icd9", "?,?,?,?,?", "Kode Prosedur", 5, new String[]{
+                list.path("code").asText(), list.path("description").asText(), list.path("description").asText(), list.path("validcode").asText(), list.path("im").asText()
+            });
+                 }
+            }
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : " + ex);
+            if (ex.toString().contains("UnknownHostException")) {
+                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server E-klaim terputus...!");
+            }
+        }
+
     }
 }

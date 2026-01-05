@@ -993,6 +993,7 @@ import digitalsignature.DlgListLogTte;
 import digitalsignature.DlgManagementSignatureUser;
 import integration.DataInstansiTerintegrasi;
 import antrian.MapingAntrianDokter;
+import digital_klaim.DlgManagemenFileKlaim;
 import inventory.DlgPemberianObatFDC;
 import java.io.InputStream;
 import java.net.URL;
@@ -1009,6 +1010,8 @@ public class frmUtama extends javax.swing.JFrame {
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
     private final DlgKasirRalan kasirralan=new DlgKasirRalan(this,false);
+//    private static DlgManagemenFileKlaim digitalklaim;
+    private final DlgManagemenFileKlaim digitalklaim=new DlgManagemenFileKlaim(this,false);
     private final DlgReg reg=new DlgReg(this,false);
 //    private final DlgKamarInap kamarinap=new DlgKamarInap(this,false);
 //    private static DlgKasirRalan kasirralan;
@@ -1709,6 +1712,7 @@ public class frmUtama extends javax.swing.JFrame {
         BtnToolKamnap = new widget.ButtonBig();
         BtnToolKasir = new widget.ButtonBig();
         jSeparator7 = new javax.swing.JSeparator();
+        BtnDigitalKlaim = new widget.ButtonBig();
         BtnLog = new widget.ButtonBig();
         BtnClose = new widget.ButtonBig();
         internalFrame4 = new widget.InternalFrame();
@@ -1851,7 +1855,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.setResizable(false);
 
         panelMenu.setBackground(new java.awt.Color(255, 253, 253));
-        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(223, 233, 213)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        panelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(223, 233, 213)), "::[ Menu Utama ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
         panelMenu.setName("panelMenu"); // NOI18N
         panelMenu.setPreferredSize(new java.awt.Dimension(2412, 3653));
         panelMenu.setWarnaAtas(new java.awt.Color(255, 252, 252));
@@ -7308,6 +7312,24 @@ public class frmUtama extends javax.swing.JFrame {
         jSeparator7.setPreferredSize(new java.awt.Dimension(1, 36));
         internalFrame1.add(jSeparator7);
 
+        BtnDigitalKlaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inbox.png"))); // NOI18N
+        BtnDigitalKlaim.setMnemonic('S');
+        BtnDigitalKlaim.setText("Digital Klaim");
+        BtnDigitalKlaim.setToolTipText("Alt+S");
+        BtnDigitalKlaim.setEnabled(false);
+        BtnDigitalKlaim.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        BtnDigitalKlaim.setIconTextGap(2);
+        BtnDigitalKlaim.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        BtnDigitalKlaim.setName("BtnDigitalKlaim"); // NOI18N
+        BtnDigitalKlaim.setPreferredSize(new java.awt.Dimension(110, 38));
+        BtnDigitalKlaim.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
+        BtnDigitalKlaim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDigitalKlaimActionPerformed(evt);
+            }
+        });
+        internalFrame1.add(BtnDigitalKlaim);
+
         BtnLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/login2.png"))); // NOI18N
         BtnLog.setMnemonic('L');
         BtnLog.setText("Log In");
@@ -7628,6 +7650,7 @@ public class frmUtama extends javax.swing.JFrame {
                 BtnToolKamnap.setEnabled(false);
                 BtnToolFisio.setVisible(false);
                 BtnToolKasir.setEnabled(false);
+                BtnDigitalKlaim.setEnabled(false);
                 btnToolIGD.setEnabled(false);
                 MnGantiPassword.setEnabled(false);
 //                MnPengajuanCutiPegawai.setEnabled(false);        
@@ -7672,7 +7695,8 @@ public class frmUtama extends javax.swing.JFrame {
                     BtnToolKamnap.setEnabled(true);
                     BtnToolFisio.setVisible(true);
                     BtnToolFisio.setEnabled(true);
-                    BtnToolKasir.setEnabled(true); 
+                    BtnToolKasir.setEnabled(true);
+                    BtnDigitalKlaim.setEnabled(true);
                     btnToolIGD.setEnabled(true);
                     btnPermintaanLab.setEnabled(true);
 //                    btnPermintaanLabPA.setEnabled(true);
@@ -7722,6 +7746,12 @@ public class frmUtama extends javax.swing.JFrame {
                     }else{
                         BtnToolKasir.setEnabled(akses.getkasir_ralan());
                     }
+                    
+                    if((akses.getkasir_ralan()==true)||(akses.getbilling_ralan()==true)){
+                        BtnDigitalKlaim.setEnabled(true);
+                    }else{
+                        BtnDigitalKlaim.setEnabled(akses.getkasir_ralan());
+                    }
                         
                     if((akses.getpermintaan_radiologi()==true)||(akses.getperiksa_radiologi()==true)){
                         btnPermintaanRadiologi.setEnabled(true);
@@ -7769,6 +7799,7 @@ public class frmUtama extends javax.swing.JFrame {
                     BtnToolKamnap.setEnabled(false);
                     BtnToolFisio.setVisible(false);
                     BtnToolKasir.setEnabled(false);
+                    BtnDigitalKlaim.setEnabled(false);
                     MnGantiPassword.setEnabled(false);  
 //                    MnPengajuanCutiPegawai.setEnabled(false);
                     btnToolIGD.setEnabled(false);
@@ -13749,6 +13780,25 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());        // TODO add your handling code here:
     }//GEN-LAST:event_btnResepObatFDCActionPerformed
+
+    private void BtnDigitalKlaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDigitalKlaimActionPerformed
+        if(loadKasirRalan=="load"){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            isTutup();
+            //        digitalklaim.isCek();
+            //        digitalklaim.setCariKosong();
+            digitalklaim.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+            digitalklaim.setLocationRelativeTo(PanelUtama);
+            digitalklaim.setVisible(true);
+            DlgHome.dispose();
+            this.setCursor(Cursor.getDefaultCursor());
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            JOptionPane.showMessageDialog(null,"Halaman sedang di siapkan, silahkan tunggu beberapa saat..!!");
+            isTutup();
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnDigitalKlaimActionPerformed
 
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -19973,6 +20023,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig BtnAbsen;
     private widget.Button BtnCancel;
     private widget.ButtonBig BtnClose;
+    private widget.ButtonBig BtnDigitalKlaim;
     private widget.ButtonBig BtnDpjp;
     private widget.ButtonBig BtnJadwal;
     private widget.ButtonBig BtnLog;
