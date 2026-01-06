@@ -844,7 +844,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             requestEntity = new HttpEntity(headers);
-            URL = "http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg_idrg_dev_dev/index.php?act=searchProcedureInagrouper&kodeProcedure=" + kodeprosedur;
+            URL = "http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg_idrg/index.php?act=searchProcedureInagrouper&kodeProcedure=" + kodeprosedur;
             requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             response = root.path("response");
