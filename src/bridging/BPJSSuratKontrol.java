@@ -1519,6 +1519,13 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         tampil();
     }
     
+    public void setpolidokter(String kdpoli,String nmpoli,String kddpjp,String nmdpjp) {
+        KdPoli.setText(kdpoli);
+        NmPoli.setText(nmpoli);
+        KdDokter.setText(kddpjp);
+        NmDokter.setText(nmdpjp);
+    }
+    
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);

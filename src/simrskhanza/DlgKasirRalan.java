@@ -10442,7 +10442,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         } else {
             if (tbKasirRalan.getSelectedRow() != -1) {
                 try {
-                    pskasir = koneksi.prepareStatement("select no_sep,no_kartu,tanggal_lahir,jkel,nmdiagnosaawal from bridging_sep where no_rawat=?");
+                    pskasir = koneksi.prepareStatement("select no_sep,no_kartu,tanggal_lahir,jkel,nmdiagnosaawal,kdpolitujuan,nmpolitujuan,kddpjp,nmdpdjp from bridging_sep where no_rawat=?");
                     try {
                         pskasir.setString(1, TNoRw.getText());
                         rskasir = pskasir.executeQuery();
@@ -10450,6 +10450,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             BPJSSuratKontrol form = new BPJSSuratKontrol(null, false);
                             form.setNoRm(TNoRwCari.getText(), rskasir.getString("no_sep"), rskasir.getString("no_kartu"), TNoRMCari.getText(), TPasienCari.getText(), rskasir.getString("tanggal_lahir"), rskasir.getString("jkel"), rskasir.getString("nmdiagnosaawal"));
+                            form.setpolidokter(rskasir.getString("kdpolitujuan"), rskasir.getString("nmpolitujuan"), rskasir.getString("kddpjp"), rskasir.getString("nmdpdjp"));
                             form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
                             form.setLocationRelativeTo(internalFrame1);
                             form.setVisible(true);
@@ -12586,7 +12587,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         } else {
             if (tbKasirRalan.getSelectedRow() != -1) {
                 try {
-                    pskasir = koneksi.prepareStatement("select no_sep,no_kartu,tanggal_lahir,jkel,nmdiagnosaawal from bridging_sep where no_rawat=?");
+                    pskasir = koneksi.prepareStatement("select no_sep,no_kartu,tanggal_lahir,jkel,nmdiagnosaawal,kdpolitujuan,nmpolitujuan,kddpjp,nmdpdjp from bridging_sep where no_rawat=?");
                     try {
                         pskasir.setString(1, TNoRw.getText());
                         rskasir = pskasir.executeQuery();
@@ -12594,6 +12595,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             BPJSSuratKontrol form = new BPJSSuratKontrol(null, false);
                             form.setNoRm(TNoRwCari.getText(), rskasir.getString("no_sep"), rskasir.getString("no_kartu"), TNoRMCari.getText(), TPasienCari.getText(), rskasir.getString("tanggal_lahir"), rskasir.getString("jkel"), rskasir.getString("nmdiagnosaawal"));
+                            form.setpolidokter(rskasir.getString("kdpolitujuan"), rskasir.getString("nmpolitujuan"), rskasir.getString("kddpjp"), rskasir.getString("nmdpdjp"));
                             form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
                             form.setLocationRelativeTo(internalFrame1);
                             form.setVisible(true);
