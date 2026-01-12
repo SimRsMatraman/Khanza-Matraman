@@ -468,39 +468,111 @@ public final class DlgPilihanCreateDokumen extends javax.swing.JDialog {
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                     this.setCursor(Cursor.getDefaultCursor());
+//                }else if (tbData.getValueAt(i, 1).toString().equals("Formulir Klaim Rehab Medik")) {
+//                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+//                     
+//                    Map<String, Object> param = new HashMap<>();
+//                    String kdDokter,noRm,nmPasien,tglLhr,jk,FileName;
+//                    FileName = "klaimkfr_" + NoRawat.replaceAll("/", "") + ".pdf";
+//                    kdDokter=Sequel.cariIsi("select nik from pemeriksaan_ralan_rehab where no_rawat='" + NoRawat + "'");
+//                    noRm=Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat='" + NoRawat + "'");
+//                    nmPasien=Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis='" + noRm + "'");
+//                    tglLhr=Sequel.cariIsi("select tgl_lahir from pasien where no_rkm_medis='" + noRm + "'");
+//                    jk=Sequel.cariIsi("select jk from pasien where no_rkm_medis='" + noRm + "'");
+//                    param.put("namars", akses.getnamars());
+//                    param.put("alamatrs", akses.getalamatrs());
+//                    param.put("kotars", akses.getkabupatenrs());
+//                    param.put("propinsirs", akses.getpropinsirs());
+//                    param.put("kontakrs", akses.getkontakrs());
+//                    param.put("emailrs", akses.getemailrs());
+//                    param.put("logo", Sequel.cariGambar("select logo from setting"));
+//                    param.put("namauser", "");
+//                    param.put("petugas", kdDokter);
+//                    param.put("norm", noRm);
+//                    param.put("namapasien",nmPasien);
+//                    param.put("tgllhr", tglLhr.split("-")[2] + "-" + tglLhr.split("-")[1] + "-" + tglLhr.split("-")[0]);
+//                    param.put("jnskelamin", jk);
+//                    param.put("image_ttd", Sequel.cariIsi("select path_ttd from tm_image_ttd_petugas where kd_petugas='" + kdDokter + "'"));
+//                    Valid.MyReportPDFWithNameQry("rptLembarKalimRehabMedikTtd.jasper", "report", "tempfile", FileName, "::[ Cetak Klaim KFR ]::",
+//                            "SELECT tt_klaim_kfr.*,pasien.jk,pasien.nm_pasien,pasien.tgl_lahir,concat(pasien.alamat,' ',nm_kel,' ',nm_kec,' ',nm_kab,' ',nm_prop) AS alamat,pasien.no_rkm_medis,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) AS umur,dokterLayanan.nm_dokter AS dokterPemberiLayanan,dokterPerujuk.nm_dokter AS dokterPerujukLayanan FROM tt_klaim_kfr LEFT JOIN reg_periksa ON tt_klaim_kfr.no_rawat=reg_periksa.no_rawat LEFT JOIN dokter AS dokterLayanan ON tt_klaim_kfr.dokter_pemberi_layanan=dokterLayanan.kd_dokter LEFT JOIN dokter AS dokterPerujuk ON tt_klaim_kfr.dokter_perujuk=dokterPerujuk.kd_dokter LEFT JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis LEFT JOIN kelurahan ON pasien.kd_kel=kelurahan.kd_kel LEFT JOIN kecamatan ON pasien.kd_kec=kecamatan.kd_kec LEFT JOIN kabupaten ON pasien.kd_kab=kabupaten.kd_kab LEFT JOIN propinsi ON pasien.kd_prop=propinsi.kd_prop where tt_klaim_kfr.no_rawat='" + NoRawat + "' ", param);
+////                    uploadPdf(FileName, "kfr");
+//                    uploadPdf(NoRawat, "kfr", FileName, "kfr");
+////                    saveFileNameBerkas(NoRawat, "kfr", "kfr/" + FileName);
+//
+//                    deleteFile();
+//                    this.setCursor(Cursor.getDefaultCursor());
                 }else if (tbData.getValueAt(i, 1).toString().equals("Formulir Klaim Rehab Medik")) {
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                     
-                    Map<String, Object> param = new HashMap<>();
-                    String kdDokter,noRm,nmPasien,tglLhr,jk,FileName;
-                    FileName = "klaimkfr_" + NoRawat.replaceAll("/", "") + ".pdf";
-                    kdDokter=Sequel.cariIsi("select dokter_pemberi_layanan from tt_klaim_kfr where no_rawat='" + NoRawat + "'");
-                    noRm=Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat='" + NoRawat + "'");
-                    nmPasien=Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis='" + noRm + "'");
-                    tglLhr=Sequel.cariIsi("select tgl_lahir from pasien where no_rkm_medis='" + noRm + "'");
-                    jk=Sequel.cariIsi("select jk from pasien where no_rkm_medis='" + noRm + "'");
-                    param.put("namars", akses.getnamars());
-                    param.put("alamatrs", akses.getalamatrs());
-                    param.put("kotars", akses.getkabupatenrs());
-                    param.put("propinsirs", akses.getpropinsirs());
-                    param.put("kontakrs", akses.getkontakrs());
-                    param.put("emailrs", akses.getemailrs());
-                    param.put("logo", Sequel.cariGambar("select logo from setting"));
-                    param.put("namauser", "");
-                    param.put("petugas", kdDokter);
-                    param.put("norm", noRm);
-                    param.put("namapasien",nmPasien);
-                    param.put("tgllhr", tglLhr.split("-")[2] + "-" + tglLhr.split("-")[1] + "-" + tglLhr.split("-")[0]);
-                    param.put("jnskelamin", jk);
-                    param.put("image_ttd", Sequel.cariIsi("select path_ttd from tm_image_ttd_petugas where kd_petugas='" + kdDokter + "'"));
-                    Valid.MyReportPDFWithNameQry("rptLembarKalimRehabMedikTtd.jasper", "report", "tempfile", FileName, "::[ Cetak Klaim KFR ]::",
-                            "SELECT tt_klaim_kfr.*,pasien.jk,pasien.nm_pasien,pasien.tgl_lahir,concat(pasien.alamat,' ',nm_kel,' ',nm_kec,' ',nm_kab,' ',nm_prop) AS alamat,pasien.no_rkm_medis,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) AS umur,dokterLayanan.nm_dokter AS dokterPemberiLayanan,dokterPerujuk.nm_dokter AS dokterPerujukLayanan FROM tt_klaim_kfr LEFT JOIN reg_periksa ON tt_klaim_kfr.no_rawat=reg_periksa.no_rawat LEFT JOIN dokter AS dokterLayanan ON tt_klaim_kfr.dokter_pemberi_layanan=dokterLayanan.kd_dokter LEFT JOIN dokter AS dokterPerujuk ON tt_klaim_kfr.dokter_perujuk=dokterPerujuk.kd_dokter LEFT JOIN pasien ON reg_periksa.no_rkm_medis=pasien.no_rkm_medis LEFT JOIN kelurahan ON pasien.kd_kel=kelurahan.kd_kel LEFT JOIN kecamatan ON pasien.kd_kec=kecamatan.kd_kec LEFT JOIN kabupaten ON pasien.kd_kab=kabupaten.kd_kab LEFT JOIN propinsi ON pasien.kd_prop=propinsi.kd_prop where tt_klaim_kfr.no_rawat='" + NoRawat + "' ", param);
-//                    uploadPdf(FileName, "kfr");
-                    uploadPdf(NoRawat, "kfr", FileName, "kfr");
-//                    saveFileNameBerkas(NoRawat, "kfr", "kfr/" + FileName);
 
-                    deleteFile();
-                    this.setCursor(Cursor.getDefaultCursor());
+                    try {
+                        Map<String, Object> param = new HashMap<>();
+                        String kdDokter, noRm, nmPasien, tglLhr, jk, FileName;
+
+                        FileName = "file_rehab_" + NoRawat.replaceAll("/", "") + ".pdf";
+
+                        kdDokter = Sequel.cariIsi(
+                                "select nik from pemeriksaan_ralan_rehab where no_rawat='" + NoRawat + "'"
+                        );
+                        noRm = Sequel.cariIsi(
+                                "select no_rkm_medis from reg_periksa where no_rawat='" + NoRawat + "'"
+                        );
+                        nmPasien = Sequel.cariIsi(
+                                "select nm_pasien from pasien where no_rkm_medis='" + noRm + "'"
+                        );
+                        tglLhr = Sequel.cariIsi(
+                                "select tgl_lahir from pasien where no_rkm_medis='" + noRm + "'"
+                        );
+                        jk = Sequel.cariIsi(
+                                "select jk from pasien where no_rkm_medis='" + noRm + "'"
+                        );
+
+                        // antisipasi kalau tanggal lahir kosong
+                        String tglLahirFormat = "";
+                        if (tglLhr != null && !tglLhr.equals("")) {
+                            String[] tgl = tglLhr.split("-");
+                            if (tgl.length == 3) {
+                                tglLahirFormat = tgl[2] + "-" + tgl[1] + "-" + tgl[0];
+                            }
+                        }
+
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select logo from setting"));
+                        param.put("namauser", "");
+                        param.put("petugas", kdDokter);
+                        param.put("norm", noRm);
+                        param.put("namapasien", nmPasien);
+                        param.put("tgllhr", tglLahirFormat);
+                        param.put("jnskelamin", jk);
+                        param.put("norawat", NoRawat);
+                        // param.put("image_ttd", ...);
+
+                        Valid.MyReportPDFWithName(
+                                "rptLembarKalimRehabMedikTtd.jasper",
+                                "report",
+                                "tempfile",
+                                FileName,
+                                "::[ Cetak Klaim Pasien Rehab Ralan ]::",
+                                param
+                        );
+
+                        // upload ke server
+                        uploadPdf(NoRawat, "rehab", FileName, "rehab");
+                        
+
+                        deleteFile();
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Gagal cetak File Rehab : " + e.getMessage());
+                        e.printStackTrace();
+                    } finally {
+                        this.setCursor(Cursor.getDefaultCursor());
+                    }
+                    
                 } else if (tbData.getValueAt(i, 1).toString().equals("Import Berkas Digital Keperawatan")) {
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     try {
@@ -842,7 +914,10 @@ public final class DlgPilihanCreateDokumen extends javax.swing.JDialog {
             if(triase > 0){
             TabMode.addRow(new Object[]{false, "Triase IGD Zona Merah"});//20,0
             }else{}
-//            TabMode.addRow(new Object[]{false, "Formulir Klaim Rehab Medik"});//20,0
+            int rehab = Sequel.cariInteger("select count(no_rawat) from pemeriksaan_ralan_rehab where no_rawat='"+NoRawat+"' ");
+            if(rehab > 0){
+            TabMode.addRow(new Object[]{false, "Formulir Klaim Rehab Medik"});//20,0
+            }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }

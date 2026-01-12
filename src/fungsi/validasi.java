@@ -753,7 +753,7 @@ public final class validasi {
         }
     }
     
-    public void MyReportPDFWithName(String reportName,String reportDirName,String reportDirLoc,String name,String judul,Map parameters){
+    public void MyReportPDFWithName(String reportName, String reportDirName, String reportDirLoc, String name, String judul, Map parameters) {
         Properties systemProp = System.getProperties();
 
         // Ambil current dir
@@ -765,33 +765,64 @@ public final class validasi {
         String fullPath = "";
         if (dir.isDirectory()) {
             String[] isiDir = dir.list();
-            for (String iDir : isiDir) {
-                fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar + reportDirName + File.separatorChar + reportName);
-                if (fileRpt.isFile()) { // Cek apakah file RptMaster.jasper ada
-                    fullPath = fileRpt.toString();
-                    System.out.println("Found Report File at : " + fullPath);
-                } // end if
-            } // end for i
-        } // end if
+            if (isiDir != null) { // TAMBAHAN: antisipasi null
+                for (String iDir : isiDir) {
+                    fileRpt = new File(currentDir + File.separatorChar + iDir + File.separatorChar
+                            + reportDirName + File.separatorChar + reportName);
+                    if (fileRpt.isFile()) { // Cek apakah file .jasper ada
+                        fullPath = fileRpt.toString();
+                        System.out.println("Found Report File at : " + fullPath);
+                    }
+                }
+            }
+        }
+
+        // TAMBAHAN: kalau ketemu path .jasper, pakai itu, dan set SUBREPORT_DIR juga
+        if (!fullPath.isEmpty()) {
+            // folder tempat file jasper berada
+            File jasperFile = new File(fullPath);
+            String jasperDir = jasperFile.getParent() + File.separator;
+            if (parameters != null) {
+                parameters.put("SUBREPORT_DIR", jasperDir); // untuk subreport [web:59][web:63]
+                parameters.put("judul", judul);
+            }
+        } else {
+            // fallback: tetap pakai pola lama ./reportDirName/reportName
+            if (parameters != null) {
+                parameters.put("judul", judul);
+            }
+        }
 
         try {
             try (Statement stm = connect.createStatement()) {
                 try {
-                    File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf")); 
-                    String namafile="./"+reportDirName+"/"+reportName;
-                    JasperPrint jasperPrint = JasperFillManager.fillReport(namafile, parameters, connect);
-                    JasperExportManager.exportReportToPdfFile(jasperPrint,"./"+reportDirLoc+"/"+name);
-                   // Desktop.getDesktop().open(f);
+                    // pastikan folder output ada (TAMBAHAN)
+                    File outDir = new File("./" + reportDirLoc);
+                    if (!outDir.exists()) {
+                        outDir.mkdirs(); 
+                    }
+
+                    // path .jasper (tetap seperti semula supaya modul lain tidak rusak)
+                    String namafile = "./" + reportDirName + "/" + reportName;
+                    
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(
+                            namafile, parameters, connect); 
+
+                    JasperExportManager.exportReportToPdfFile(
+                            jasperPrint, "./" + reportDirLoc + "/" + name);
+
+                    // File f = new File("./"+reportDirName+"/"+reportName.replaceAll("jasper","pdf"));
+                    // Desktop.getDesktop().open(f);
                 } catch (Exception rptexcpt) {
                     System.out.println("Report Can't view because : " + rptexcpt);
-                    JOptionPane.showMessageDialog(null,"Report Can't view because : "+ rptexcpt);
+                    JOptionPane.showMessageDialog(null, "Report Can't view because : " + rptexcpt);
                 }
             }
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
+
     public void MyReportqry(String reportName,String reportDirName,String judul,String qry,Map parameters){
         Properties systemProp = System.getProperties();
 

@@ -1143,15 +1143,18 @@ private void prosesCari() {
     try {
         Valid.tabelKosong(tabMode);
 
+        // =========================
+        // QUERY REG (TANPA TCari)
+        // =========================
         psreg = koneksi.prepareStatement(
             "select reg_periksa.no_rawat " +
             "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
             "left join penjab on reg_periksa.kd_pj=penjab.kd_pj " +
-            "where reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi between ? and ? " +
+            "where reg_periksa.stts<>'Batal' " +
+            "and reg_periksa.tgl_registrasi between ? and ? " +
             "and reg_periksa.status_lanjut like ? " +
             "and concat(reg_periksa.kd_pj,ifnull(penjab.png_jawab,'')) like ? " +
-            "and (reg_periksa.no_rkm_medis like ? or pasien.nm_pasien like ?) " +
-            "and reg_periksa.kd_poli like ? " +   // filter poli by kd_poli
+            "and reg_periksa.kd_poli like ? " +
             "order by reg_periksa.tgl_registrasi"
         );
 
@@ -1162,71 +1165,78 @@ private void prosesCari() {
                 .replaceAll("Obat Rawat Inap","Ranap")
                 .replaceAll("Semua Status","")+"%");
         psreg.setString(4, "%"+kdpenjab.getText()+nmpenjab.getText()+"%");
-        psreg.setString(5, "%"+TCari.getText().trim()+"%");
-        psreg.setString(6, "%"+TCari.getText().trim()+"%");
-
-        // ⚠️ karena kamu hanya simpan nm poli, kita cari kd_poli dari table poliklinik
-String kdPoliFilter = getKdPoliFilter();
-psreg.setString(7, getKdPoliFilter());
+        psreg.setString(5, getKdPoliFilter());
 
         rsreg = psreg.executeQuery();
         i = 1;
 
+        // =========================
+        // LOOP PER NO_RAWAT
+        // =========================
         while (rsreg.next()) {
+
 String sqlObat =
-    "select " +
-    " reg_periksa.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, " +
-    " ifnull(dokter.nm_dokter,'-') as nm_dokter, " +
-    " ifnull(aplast.aturan,'') as aturan_pakai, " +
-    " databarang.nama_brng, ifnull(jenis.nama,'-') as jenis_obat, " +
-    " ifnull(penjab.png_jawab,'-') as cara_bayar, " +
-    " ifnull(kategori_barang.nama,'-') as kategori, " +
-    " ifnull(bangsal.nm_bangsal,'-') as asal_stok, " +
-    " ifnull(golongan_barang.nama,'-') as golongan " +
-    "from detail_pemberian_obat " +
-    "inner join reg_periksa on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat " +
-    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
-    "left join penjab on reg_periksa.kd_pj=penjab.kd_pj " +
-    "left join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng " +
-    "left join jenis on databarang.kdjns=jenis.kdjns " +
+"select " +
+" reg_periksa.no_rawat, reg_periksa.no_rkm_medis, pasien.nm_pasien, " +
+" ifnull(dokter.nm_dokter,'-') as nm_dokter, " +
+" ifnull(aplast.aturan,'') as aturan_pakai, " +
+" databarang.nama_brng, ifnull(jenis.nama,'-') as jenis_obat, " +
+" ifnull(penjab.png_jawab,'-') as cara_bayar, " +
+" ifnull(kategori_barang.nama,'-') as kategori, " +
+" ifnull(bangsal.nm_bangsal,'-') as asal_stok, " +
+" ifnull(golongan_barang.nama,'-') as golongan " +
 
-    // ambil aturan terakhir per no_rawat+kode_brng
-    "left join ( " +
-    "   select ap1.no_rawat, ap1.kode_brng, ap1.aturan " +
-    "   from aturan_pakai ap1 " +
-    "   inner join ( " +
-    "       select no_rawat, kode_brng, max(timestamp(tgl_perawatan,jam)) as tmax " +
-    "       from aturan_pakai " +
-    "       where no_rawat=? " +
-    "       group by no_rawat, kode_brng " +
-    "   ) ap2 on ap2.no_rawat=ap1.no_rawat and ap2.kode_brng=ap1.kode_brng " +
-    "        and timestamp(ap1.tgl_perawatan,ap1.jam)=ap2.tmax " +
-    ") aplast on aplast.no_rawat=detail_pemberian_obat.no_rawat " +
-    "        and aplast.kode_brng=detail_pemberian_obat.kode_brng " +
+"from detail_pemberian_obat " +
+"inner join reg_periksa on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat " +
+"inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis " +
+"left join penjab on reg_periksa.kd_pj=penjab.kd_pj " +
+"left join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng " +
+"left join jenis on databarang.kdjns=jenis.kdjns " +
 
-    "left join kategori_barang on kategori_barang.kode=databarang.kode_kategori " +
-    "left join golongan_barang on golongan_barang.kode=databarang.kode_golongan " +
-    "left join bangsal on detail_pemberian_obat.kd_bangsal=bangsal.kd_bangsal " +
-    "left join ( " +
-    "   select ro.no_rawat, ro.kd_dokter " +
-    "   from resep_obat ro " +
-    "   where ro.no_rawat=? " +
-    "   order by ro.tgl_perawatan desc, ro.jam desc limit 1 " +
-    ") rlast on rlast.no_rawat=reg_periksa.no_rawat " +
-    "left join dokter on dokter.kd_dokter=rlast.kd_dokter " +
-    "where detail_pemberian_obat.no_rawat=? " +
-    "and detail_pemberian_obat.status like ? " +
-    "and concat(databarang.kdjns,ifnull(jenis.nama,'')) like ? " +
-    "and concat(databarang.kode_kategori,ifnull(kategori_barang.nama,'')) like ? " +
-    "and concat(databarang.kode_golongan,ifnull(golongan_barang.nama,'')) like ? " +
-    "and concat(detail_pemberian_obat.kd_bangsal,ifnull(bangsal.nm_bangsal,'')) like ? " +
-    "group by detail_pemberian_obat.kode_brng, aplast.aturan " +
-    "order by pasien.nm_pasien, databarang.nama_brng";
+"left join ( " +
+"   select ap1.no_rawat, ap1.kode_brng, ap1.aturan " +
+"   from aturan_pakai ap1 " +
+"   inner join ( " +
+"       select no_rawat, kode_brng, max(timestamp(tgl_perawatan,jam)) as tmax " +
+"       from aturan_pakai where no_rawat=? group by no_rawat, kode_brng " +
+"   ) ap2 on ap2.no_rawat=ap1.no_rawat and ap2.kode_brng=ap1.kode_brng " +
+"        and timestamp(ap1.tgl_perawatan,ap1.jam)=ap2.tmax " +
+") aplast on aplast.no_rawat=detail_pemberian_obat.no_rawat " +
+"        and aplast.kode_brng=detail_pemberian_obat.kode_brng " +
+
+"left join kategori_barang on kategori_barang.kode=databarang.kode_kategori " +
+"left join golongan_barang on golongan_barang.kode=databarang.kode_golongan " +
+"left join bangsal on detail_pemberian_obat.kd_bangsal=bangsal.kd_bangsal " +
+
+"left join ( " +
+"   select ro.no_rawat, ro.kd_dokter " +
+"   from resep_obat ro where ro.no_rawat=? " +
+"   order by ro.tgl_perawatan desc, ro.jam desc limit 1 " +
+") rlast on rlast.no_rawat=reg_periksa.no_rawat " +
+
+"left join dokter on dokter.kd_dokter=rlast.kd_dokter " +
+
+"where detail_pemberian_obat.no_rawat=? " +
+"and detail_pemberian_obat.status like ? " +
+"and concat(databarang.kdjns,ifnull(jenis.nama,'')) like ? " +
+"and concat(databarang.kode_kategori,ifnull(kategori_barang.nama,'')) like ? " +
+"and concat(databarang.kode_golongan,ifnull(golongan_barang.nama,'')) like ? " +
+"and concat(detail_pemberian_obat.kd_bangsal,ifnull(bangsal.nm_bangsal,'')) like ? " +
+
+"and ( pasien.nm_pasien like ? or reg_periksa.no_rkm_medis like ? or reg_periksa.no_rawat like ? " +
+"or dokter.nm_dokter like ? or aplast.aturan like ? or databarang.nama_brng like ? " +
+"or jenis.nama like ? or penjab.png_jawab like ? or kategori_barang.nama like ? " +
+"or bangsal.nm_bangsal like ? or golongan_barang.nama like ? ) " +
+
+"group by detail_pemberian_obat.kode_brng, aplast.aturan " +
+"order by pasien.nm_pasien, databarang.nama_brng";
 
 psobat = koneksi.prepareStatement(sqlObat);
-psobat.setString(1, rsreg.getString("no_rawat")); // untuk subquery aturan_pakai (where no_rawat=?)
-psobat.setString(2, rsreg.getString("no_rawat")); // resep_obat ro.no_rawat=?
-psobat.setString(3, rsreg.getString("no_rawat")); // where detail_pemberian_obat.no_rawat=?
+
+psobat.setString(1, rsreg.getString("no_rawat"));
+psobat.setString(2, rsreg.getString("no_rawat"));
+psobat.setString(3, rsreg.getString("no_rawat"));
+
 psobat.setString(4, "%"+status.getSelectedItem().toString()
         .replaceAll("Obat Rawat Jalan","Ralan")
         .replaceAll("Obat Rawat Inap","Ranap")
@@ -1236,26 +1246,39 @@ psobat.setString(6, "%"+kdkategori.getText()+nmkategori.getText()+"%");
 psobat.setString(7, "%"+kdgolongan.getText()+nmgolongan.getText()+"%");
 psobat.setString(8, "%"+kdasal.getText()+nmasal.getText()+"%");
 
-            rsobat = psobat.executeQuery();
-            while (rsobat.next()) {
-                tabMode.addRow(new Object[]{
-                    i++,
-                    rsobat.getString("nm_pasien"),
-                    rsobat.getString("no_rkm_medis"),
-                    rsobat.getString("no_rawat"),
-                    rsobat.getString("nm_dokter"),
-                    rsobat.getString("aturan_pakai"),
-                    rsobat.getString("nama_brng"),
-                    rsobat.getString("jenis_obat"),
-                    rsobat.getString("cara_bayar"),
-                    rsobat.getString("kategori"),
-                    rsobat.getString("asal_stok"),
-                    rsobat.getString("golongan")
-                });
-            }
+String key = "%"+TCari.getText().trim()+"%";
+psobat.setString(9, key);
+psobat.setString(10, key);
+psobat.setString(11, key);
+psobat.setString(12, key);
+psobat.setString(13, key);
+psobat.setString(14, key);
+psobat.setString(15, key);
+psobat.setString(16, key);
+psobat.setString(17, key);
+psobat.setString(18, key);
+psobat.setString(19, key);
 
-            if (rsobat != null) rsobat.close();
-            if (psobat != null) psobat.close();
+rsobat = psobat.executeQuery();
+while (rsobat.next()) {
+    tabMode.addRow(new Object[]{
+        i++,
+        rsobat.getString("nm_pasien"),
+        rsobat.getString("no_rkm_medis"),
+        rsobat.getString("no_rawat"),
+        rsobat.getString("nm_dokter"),
+        rsobat.getString("aturan_pakai"),
+        rsobat.getString("nama_brng"),
+        rsobat.getString("jenis_obat"),
+        rsobat.getString("cara_bayar"),
+        rsobat.getString("kategori"),
+        rsobat.getString("asal_stok"),
+        rsobat.getString("golongan")
+    });
+}
+
+if (rsobat != null) rsobat.close();
+if (psobat != null) psobat.close();
         }
 
     } catch (Exception e) {

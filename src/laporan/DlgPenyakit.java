@@ -1134,7 +1134,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             System.out.println("Response : " + response);
             for (JsonNode list : response.path("data")) {
                  if (Sequel.cariInteger("Select count(kd_penyakit) from penyakit where  kd_penyakit='" + list.path("code").asText() + "' ") > 0) {
-                     Sequel.mengedit("penyakit", "kd_penyakit=?", "validcode=?,accpdx=?,code_asterisk=?,asterisk=?,im=?", 7, new String[]{
+                     Sequel.mengedit("penyakit", "kd_penyakit=?", "validcode=?,accpdx=?,code_asterisk=?,asterisk=?,im=?", 6, new String[]{
                         list.path("validcode").asText(),list.path("accpdx").asText(),list.path("code_asterisk").asText(),list.path("asterisk").asText(),list.path("im").asText(), list.path("code").asText()
                     });
                  }else{
