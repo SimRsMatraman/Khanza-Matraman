@@ -221,7 +221,7 @@
     <entry key="APIWEBSITE_KEY">Administrator86</entry>
 
          <!-- JAKPORTAL -->
-    <entry key="JAKPORTALURL">https://api-dinkes.jakarta.go.id/dev/patientjourney/api/v1</entry>
+    <entry key="JAKPORTALURL">https://api-dinkes.jakarta.go.id/patientjourney/api/v1</entry>
     <entry key="JAKPORTALUSERNAME">93qXL/f5dDd+HCEGPgUfxw==</entry>
     <entry key="JAKPORTALKEY">L1rXqpY7SfHb9H2yDzXpBiOahhTznBqwhQwhvC7ezOA=</entry>
 </properties>
