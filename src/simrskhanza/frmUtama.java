@@ -994,11 +994,14 @@ import digitalsignature.DlgManagementSignatureUser;
 import integration.DataInstansiTerintegrasi;
 import antrian.MapingAntrianDokter;
 import digital_klaim.DlgManagemenFileKlaim;
+import integration_jakportal.JakPortalLog;
+import integration_jakportal.CekReferensiPoli;
 import inventory.DlgPemberianObatFDC;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+//import integration_jakportal.JakPortalLog;
 
 
 /**
@@ -1012,6 +1015,7 @@ public class frmUtama extends javax.swing.JFrame {
     private final DlgKasirRalan kasirralan=new DlgKasirRalan(this,false);
 //    private static DlgManagemenFileKlaim digitalklaim;
     private final DlgManagemenFileKlaim digitalklaim=new DlgManagemenFileKlaim(this,false);
+    private final JakPortalLog integration_jakportal=new JakPortalLog(this,false);
     private final DlgReg reg=new DlgReg(this,false);
 //    private final DlgKamarInap kamarinap=new DlgKamarInap(this,false);
 //    private static DlgKasirRalan kasirralan;
@@ -1697,6 +1701,8 @@ public class frmUtama extends javax.swing.JFrame {
         BtnAbsen = new widget.ButtonBig();
         btnResepObatAntibiotik = new widget.ButtonBig();
         btnResepObatFDC = new widget.ButtonBig();
+        btnJakPoralLog = new widget.ButtonBig();
+        btnJakCekReferensiPoli = new widget.ButtonBig();
         internalFrame1 = new widget.InternalFrame();
         BtnMenu = new widget.ButtonBig();
         jSeparator4 = new javax.swing.JSeparator();
@@ -1947,7 +1953,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02/09/2025" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14/01/2026" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7068,6 +7074,28 @@ public class frmUtama extends javax.swing.JFrame {
             }
         });
 
+        btnJakPoralLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815935_contacts.png"))); // NOI18N
+        btnJakPoralLog.setText("Jak Portal Log");
+        btnJakPoralLog.setIconTextGap(0);
+        btnJakPoralLog.setName("btnJakPoralLog"); // NOI18N
+        btnJakPoralLog.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnJakPoralLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJakPoralLogActionPerformed(evt);
+            }
+        });
+
+        btnJakCekReferensiPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360815935_contacts.png"))); // NOI18N
+        btnJakCekReferensiPoli.setText("Cari Referensi Jak Portal");
+        btnJakCekReferensiPoli.setIconTextGap(0);
+        btnJakCekReferensiPoli.setName("btnJakCekReferensiPoli"); // NOI18N
+        btnJakCekReferensiPoli.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnJakCekReferensiPoli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJakCekReferensiPoliActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("::[ Khanza SIMKES 2022 ]::");
         setBackground(new java.awt.Color(255, 254, 254));
@@ -7651,6 +7679,7 @@ public class frmUtama extends javax.swing.JFrame {
                 BtnToolFisio.setVisible(false);
                 BtnToolKasir.setEnabled(false);
                 BtnDigitalKlaim.setEnabled(false);
+//                BtnJak.setEnabled(false);
                 btnToolIGD.setEnabled(false);
                 MnGantiPassword.setEnabled(false);
 //                MnPengajuanCutiPegawai.setEnabled(false);        
@@ -7697,6 +7726,7 @@ public class frmUtama extends javax.swing.JFrame {
                     BtnToolFisio.setEnabled(true);
                     BtnToolKasir.setEnabled(true);
                     BtnDigitalKlaim.setEnabled(true);
+//                    BtnJak.setEnabled(true);
                     btnToolIGD.setEnabled(true);
                     btnPermintaanLab.setEnabled(true);
 //                    btnPermintaanLabPA.setEnabled(true);
@@ -7752,6 +7782,12 @@ public class frmUtama extends javax.swing.JFrame {
                     }else{
                         BtnDigitalKlaim.setEnabled(akses.getkasir_ralan());
                     }
+                    
+//                    if((akses.getkasir_ralan()==true)||(akses.getbilling_ralan()==true)){
+//                        BtnJak.setEnabled(true);
+//                    }else{
+//                        BtnJak.setEnabled(akses.getkasir_ralan());
+//                    }
                         
                     if((akses.getpermintaan_radiologi()==true)||(akses.getperiksa_radiologi()==true)){
                         btnPermintaanRadiologi.setEnabled(true);
@@ -7800,6 +7836,7 @@ public class frmUtama extends javax.swing.JFrame {
                     BtnToolFisio.setVisible(false);
                     BtnToolKasir.setEnabled(false);
                     BtnDigitalKlaim.setEnabled(false);
+//                    BtnJak.setEnabled(false);
                     MnGantiPassword.setEnabled(false);  
 //                    MnPengajuanCutiPegawai.setEnabled(false);
                     btnToolIGD.setEnabled(false);
@@ -13799,6 +13836,28 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnDigitalKlaimActionPerformed
+
+    private void btnJakPoralLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJakPoralLogActionPerformed
+isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        JakPortalLog form=new JakPortalLog(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnJakPoralLogActionPerformed
+
+    private void btnJakCekReferensiPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJakCekReferensiPoliActionPerformed
+isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        CekReferensiPoli form=new CekReferensiPoli(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_btnJakCekReferensiPoliActionPerformed
 
     private void btnKategoriPerpustakaanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
@@ -20210,6 +20269,8 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private widget.ButtonBig btnJadwalOperasi;
     private widget.ButtonBig btnJadwalPegawai;
     private widget.ButtonBig btnJadwalTambahan;
+    private widget.ButtonBig btnJakCekReferensiPoli;
+    private widget.ButtonBig btnJakPoralLog;
     private widget.ButtonBig btnJamPresensi;
     private widget.ButtonBig btnJenisInventaris;
     private widget.ButtonBig btnJenisIpsrs;
@@ -23013,7 +23074,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 jmlmenu++;
                 Panelmenu.add(btnBatalPendaftaranJakSehat);
                 jmlmenu++;
-            }    
+            } 
+            
+            if(akses.getbpjs_cek_nik()==true){
+                Panelmenu.add(btnJakPoralLog);
+                jmlmenu++;
+            }
+            
+            if(akses.getbpjs_cek_nik()==true){
+                Panelmenu.add(btnJakCekReferensiPoli);
+                jmlmenu++;
+            }
 
             if(akses.getbpjs_cek_nik()==true){
                 Panelmenu.add(btnCekBPJSNik);
@@ -27774,7 +27845,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             jmlmenu++;
             Panelmenu.add(btnBatalPendaftaranJakSehat);
             jmlmenu++;
-        }    
+        }  
+        
+        if(akses.getbpjs_cek_nik()==true){
+            Panelmenu.add(btnJakPoralLog);
+            jmlmenu++;
+        }
+        
+        if(akses.getbpjs_cek_nik()==true){
+            Panelmenu.add(btnJakCekReferensiPoli);
+            jmlmenu++;
+        }
 
         if(akses.getbpjs_cek_nik()==true){
             Panelmenu.add(btnCekBPJSNik);
@@ -33449,7 +33530,21 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
                 Panelmenu.add(btnBatalPendaftaranJakSehat);
                 jmlmenu++;
             }
-        }    
+        }  
+        
+        if(akses.getbpjs_cek_nik()==true){
+            if(btnJakPoralLog.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnJakPoralLog);
+                jmlmenu++;
+            }                
+        }
+        
+        if(akses.getbpjs_cek_nik()==true){
+            if(btnJakCekReferensiPoli.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnJakCekReferensiPoli);
+                jmlmenu++;
+            }                
+        }
 
         if(akses.getbpjs_cek_nik()==true){
             if(btnCekBPJSNik.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){

@@ -23,6 +23,14 @@ public class koneksiDB {
     private static final MysqlDataSource dataSource=new MysqlDataSource();
     private static String var="";
 
+//    public static String JAKPORTALURL() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+
+//    public static String JAKPORTALURL() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+
     public koneksiDB(){} 
     public static Connection condb(){ 
         if(connection == null){
@@ -1561,6 +1569,36 @@ public class koneksiDB {
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=prop.getProperty("APIWEBSITE_KEY");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String JAKPORTALURL(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=prop.getProperty("JAKPORTALURL");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String JAKPORTALUSERNAME(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=EnkripsiAES.decrypt(prop.getProperty("JAKPORTALUSERNAME"));
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+    
+    public static String JAKPORTALKEY(){
+        try{
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
+            var=EnkripsiAES.decrypt(prop.getProperty("JAKPORTALKEY"));
         }catch(Exception e){
             var=""; 
         }
