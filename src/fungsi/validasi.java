@@ -1544,4 +1544,8 @@ public final class validasi {
     public void MyReportPDFWithNameQry(String rptCetakHasilPemeriksaanUSGjasper, String report, String tempfile, String FileName, String _Formulir_Hasil_Pemeriksaan_USG_, String string, Map<String, Object> param) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public void textKosong(JCheckBox jCBPagi, String waktu) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
