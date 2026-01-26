@@ -51,7 +51,6 @@ import permintaan.DlgPermintaanLaboratorium;
 import permintaan.DlgPermintaanPelayananInformasiObat;
 import permintaan.DlgPermintaanRadiologi;
 import rekammedis.RMRiwayatRadLab;
-import surat.SuratAPSRanap;
 import rekammedis.RMCari5SOAPTerakhir;
 import rekammedis.RMChecklistPostOperasi;
 import rekammedis.RMChecklistPreOperasi;

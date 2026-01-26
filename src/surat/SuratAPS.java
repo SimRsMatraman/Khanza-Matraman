@@ -333,7 +333,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Atas Permintaan Sendiri IGD/Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Atas Permintaan Sendiri (APS) ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -507,7 +507,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-01-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -521,7 +521,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-01-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -671,7 +671,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         jLabel13.setBounds(550, 70, 90, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2025" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-01-2026" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -864,6 +864,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         FormInput.add(jLabel20);
         jLabel20.setBounds(30, 190, 70, 23);
 
+        Nama_kel.setEditable(false);
         Nama_kel.setHighlighter(null);
         Nama_kel.setName("Nama_kel"); // NOI18N
         Nama_kel.addActionListener(new java.awt.event.ActionListener() {
@@ -889,6 +890,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         FormInput.add(JK);
         JK.setBounds(110, 220, 140, 23);
 
+        Umur_kel.setEditable(false);
         Umur_kel.setHighlighter(null);
         Umur_kel.setName("Umur_kel"); // NOI18N
         Umur_kel.addActionListener(new java.awt.event.ActionListener() {
@@ -904,6 +906,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         FormInput.add(Umur_kel);
         Umur_kel.setBounds(110, 190, 40, 24);
 
+        No_ktp.setEditable(false);
         No_ktp.setHighlighter(null);
         No_ktp.setName("No_ktp"); // NOI18N
         No_ktp.addActionListener(new java.awt.event.ActionListener() {
@@ -919,6 +922,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         FormInput.add(No_ktp);
         No_ktp.setBounds(110, 250, 130, 24);
 
+        Alamat.setEditable(false);
         Alamat.setHighlighter(null);
         Alamat.setName("Alamat"); // NOI18N
         Alamat.addActionListener(new java.awt.event.ActionListener() {
@@ -1004,14 +1008,14 @@ public final class SuratAPS extends javax.swing.JDialog {
             Valid.textKosong(BtnDokter1,"DPJP");
         }else if(Alasan.getText().trim().equals("")){
             Valid.textKosong(Alasan,"Alasan");
-        }else if(Nama_kel.getText().trim().equals("")){
-            Valid.textKosong(Nama_kel,"Nama_kel");
-        }else if(Umur_kel.getText().trim().equals("")){
-            Valid.textKosong(Umur_kel,"Umur_kel");
-        }else if(No_ktp.getText().trim().equals("")){
-            Valid.textKosong(No_ktp,"No_ktp");
-        }else if(Alamat.getText().trim().equals("")){
-            Valid.textKosong(Alamat,"Alamat");
+//        }else if(Nama_kel.getText().trim().equals("")){
+//            Valid.textKosong(Nama_kel,"Nama_kel");
+//        }else if(Umur_kel.getText().trim().equals("")){
+//            Valid.textKosong(Umur_kel,"Umur_kel");
+//        }else if(No_ktp.getText().trim().equals("")){
+//            Valid.textKosong(No_ktp,"No_ktp");
+//        }else if(Alamat.getText().trim().equals("")){
+//            Valid.textKosong(Alamat,"Alamat");
         }else{
             if(Sequel.menyimpantf("surat_aps","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat",15,new String[]{
                     NoSurat.getText(),TNoRw.getText(),KodeDokter.getText(),KodeDokter1.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),jamNow.format(new Date()),"-","-",Alasan.getText(),Nama_kel.getText(),Umur_kel.getText(),JK.getSelectedItem().toString(),No_ktp.getText(),Alamat.getText(),""
@@ -1560,7 +1564,7 @@ public final class SuratAPS extends javax.swing.JDialog {
 //        Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat='"+TNoRw.setText()+"' ",NoSurat);
 //        KodeDokter.setText("");
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_surat,3),signed)),0) from surat_aps where tanggal_surat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
-        "APRJ"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),4,NoSurat);
+        "APS"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),4,NoSurat);
 //        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_surat,3),signed)),0) from edukasi_pasien_rajal where tanggal_surat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
 //                "EPRJ"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),4,NoSurat);
         NoSurat.requestFocus();
@@ -1632,7 +1636,7 @@ public final class SuratAPS extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getregistrasi());
         BtnEdit.setEnabled(akses.getregistrasi());
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_surat,3),signed)),0) from surat_aps where tanggal_surat='"+Valid.SetTgl(TanggalSurat.getSelectedItem()+"")+"' ",
-        "APRJ"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),4,NoSurat);
+        "APS"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),4,NoSurat);
         if(akses.getjml2()>=1){
             KodeDokter.setEditable(false);
             BtnDokter.setEnabled(false);
