@@ -1198,7 +1198,7 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(jCBPagi);
-        jCBPagi.setBounds(420, 70, 90, 20);
+        jCBPagi.setBounds(420, 70, 90, 23);
 
         jCBSiang.setSelected(true);
         jCBSiang.setText("Siang");
@@ -1209,7 +1209,7 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(jCBSiang);
-        jCBSiang.setBounds(420, 100, 84, 20);
+        jCBSiang.setBounds(420, 100, 84, 23);
 
         jCBSore.setSelected(true);
         jCBSore.setText("Sore");
@@ -1220,7 +1220,7 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(jCBSore);
-        jCBSore.setBounds(510, 70, 90, 20);
+        jCBSore.setBounds(510, 70, 90, 23);
 
         jCBMalam.setSelected(true);
         jCBMalam.setText("Malam");
@@ -1231,7 +1231,7 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
             }
         });
         internalFrame5.add(jCBMalam);
-        jCBMalam.setBounds(510, 100, 100, 20);
+        jCBMalam.setBounds(510, 100, 100, 23);
 
         label15.setText("Pengkaji :");
         label15.setName("label15"); // NOI18N
@@ -1262,7 +1262,7 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Daftar Pemberian Obat Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Daftar Pemberian Obat Rawat Inap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -4256,7 +4256,7 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
                 "PORI"+TanggalSurat.getSelectedItem().toString().substring(6,10)+TanggalSurat.getSelectedItem().toString().substring(3,5)+TanggalSurat.getSelectedItem().toString().substring(0,2),4,NoSurat); 
         if(akses.getjml2()>=1){
             KodeDokter.setEditable(false);
-            BtnDokter.setEnabled(false);
+//            BtnDokter.setEnabled(false);
             KodeDokter.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter,KodeDokter.getText());
 //            if(NmPetugas.getText().equals("")){
