@@ -1804,7 +1804,7 @@ public class ViewerKoding extends javax.swing.JDialog {
                         headers = new HttpHeaders();
                         headers.setContentType(MediaType.APPLICATION_JSON);
 //                        requestEntity = new HttpEntity(headers);
-                        URL = "http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg_idrg_dev/index.php?act=cekSep&noSep=" + noSep;
+                        URL = "http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg_idrg/index.php?act=cekSep&noSep=" + noSep;
                         requestEntity = new HttpEntity(headers);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
                         if (root.path("metadata").path("code").asText().equals("200")) {
@@ -1844,10 +1844,10 @@ public class ViewerKoding extends javax.swing.JDialog {
             return;
         }
 
-        if (prodPasien == null || prodPasien.trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Prosedur belum dipilih!");
-            return;
-        }
+//        if (prodPasien == null || prodPasien.trim().equals("")) {
+//            JOptionPane.showMessageDialog(null, "Prosedur belum dipilih!");
+//            return;
+//        }
 
         if (noSep == null || noSep.trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Nomor SEP kosong!");
@@ -1883,7 +1883,7 @@ public class ViewerKoding extends javax.swing.JDialog {
         // --- URL KIRIM E-KLAIM ---
         URL = "http://" + koneksiDB.HOSTHYBRIDWEB() + "/" 
                 + koneksiDB.HYBRIDWEB() 
-                + "/inacbg_idrg_dev/index.php?act=createNgroupingClaim&nikCoder=" + noik;
+                + "/inacbg_idrg/index.php?act=createNgroupingClaim&nikCoder=" + noik;
 
         // --- JSON REQUEST ---
         requestJson = "{"
@@ -1968,7 +1968,7 @@ public class ViewerKoding extends javax.swing.JDialog {
 
             String urlOnline = "http://" + koneksiDB.HOSTHYBRIDWEB() + "/" 
                     + koneksiDB.HYBRIDWEB() 
-                    + "/inacbg_idrg_dev/index.php?act=kirimOnlineKlaim&nikCoder=" + akses.getkode();
+                    + "/inacbg_idrg/index.php?act=kirimOnlineKlaim&nikCoder=" + akses.getkode();
 
             HttpEntity<String> req = new HttpEntity<>(json, headers);
 
