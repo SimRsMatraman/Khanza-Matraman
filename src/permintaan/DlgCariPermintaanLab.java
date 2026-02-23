@@ -2071,19 +2071,37 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 }//GEN-LAST:event_BtnHapusKeyPressed
 
 private void tbLabRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLabRalanMouseClicked
-    if(tabMode.getRowCount()!=0){
-        try {
-            getData();
-        } catch (java.lang.NullPointerException e) {
+    if (tabMode.getRowCount() == 0) return;
+    if (evt.getClickCount() != 1) return;
+
+    int row = tbLabRalan.rowAtPoint(evt.getPoint());
+    if (row < 0) return;
+
+    String jenisPasien = String.valueOf(tbLabRalan.getValueAt(row, 15));
+    String statusBayar = String.valueOf(tbLabRalan.getValueAt(row, 17));
+    String poliRaw     = String.valueOf(tbLabRalan.getValueAt(row, 11));
+
+    boolean umum = "UMUM".equalsIgnoreCase(jenisPasien);
+    boolean belumBayar = "Belum Bayar".equalsIgnoreCase(statusBayar);
+
+    String poli = poliRaw.toUpperCase();
+    boolean poliKhusus = poli.contains("IGD") || poli.contains("MCU"); // tambah MCU di sini
+
+    if (umum && belumBayar) {
+        if (poliKhusus) {
+            BtnSampel.setEnabled(akses.getperiksa_lab());
+            JOptionPane.showMessageDialog(null,
+                "Pasien UMUM (" + poliRaw + ") masih Belum Bayar. Mohon konfirmasi sesuai kebijakan.");
+        } else {
+            BtnSampel.setEnabled(false);
+            JOptionPane.showMessageDialog(null,
+                "Pasien Umum, konfirmasi pembayaran sebelum melanjutkan pemeriksaan!");
         }
-        if(evt.getClickCount()==1){
-                if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 15).toString().equals("UMUM") && 
-                    tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 17).toString().equals("Belum Bayar")
-                            ) {
-                        JOptionPane.showMessageDialog(null, "Pasien Umum, konfirmasi pembayaran sebelum melanjutkan pemeriksaan!");
-                    }
-        }
+    } else {
+        BtnSampel.setEnabled(akses.getperiksa_lab());
     }
+
+    try { getData(); } catch (Exception ignored) {}
 }//GEN-LAST:event_tbLabRalanMouseClicked
 
 private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbLabRalanKeyPressed
