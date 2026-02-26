@@ -1476,6 +1476,14 @@ public final class RMDataAsuhanGizi extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
+        }else if(Bentuk.getText().trim().equals("")){
+            Valid.textKosong(Bentuk,"Bentuk");
+        }else if(Diet.getText().trim().equals("")){
+            Valid.textKosong(Diet,"Diet");
+        }else if(Rute.getText().trim().equals("")){
+            Valid.textKosong(Rute,"Rute");
+        }else if(Kalori.getText().trim().equals("")){
+            Valid.textKosong(Kalori,"Kalori");
         }else{
             alergi_telur="Tidak"; 
             alergi_susu_sapi="Tidak";

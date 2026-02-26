@@ -67,7 +67,7 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.R.M.","Nama Pasien","Umur","JK","Tanggal","BB","TB","Alergi",
             "Skor IMT/z Score","Skor 1","Skor Kehilangan BB","Skor 2","Skor Efek Penyakit","Skor 3",
-            "Ttl.Skor","Kesimpulan","NIP","Petugas","Tgl.Lahir"
+            "Ttl.Skor","Kesimpulan","NIP","Petugas","Tgl.Lahir","Validator"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -77,7 +77,7 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < 21; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -113,8 +113,15 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
                 column.setPreferredWidth(45);
             }else if(i==16){
                 column.setPreferredWidth(250);
+            }else if(i==17){
+                column.setPreferredWidth(45);
             }else if(i==18){
-                column.setPreferredWidth(125);
+                column.setPreferredWidth(180);
+            }else if(i==19){
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }else if(i==20){
+                column.setPreferredWidth(180);
             }else{
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -203,6 +210,7 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
         BtnEdit = new widget.Button();
+        BtnValidasi = new widget.Button();
         BtnPrint = new widget.Button();
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
@@ -387,6 +395,24 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
         });
         panelGlass8.add(BtnEdit);
 
+        BtnValidasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnValidasi.setMnemonic('V');
+        BtnValidasi.setText("Validasi");
+        BtnValidasi.setToolTipText("Alt+G");
+        BtnValidasi.setName("BtnValidasi"); // NOI18N
+        BtnValidasi.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnValidasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnValidasiActionPerformed(evt);
+            }
+        });
+        BtnValidasi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnValidasiKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnValidasi);
+
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
@@ -446,7 +472,7 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2020" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -460,7 +486,7 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2020" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -556,7 +582,7 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-11-2020" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -917,11 +943,11 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
             isCombo3();
             isjml();
             isHitung();
-            if(Sequel.menyimpantf("skrining_gizi","?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",14,new String[]{
+            if(Sequel.menyimpantf("skrining_gizi","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",15,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 BB.getText(),TB.getText(),Alergi.getText(),
                 cmbSkor1.getSelectedItem().toString(),Skor1.getText(),cmbSkor2.getSelectedItem().toString(),Skor2.getText(),
-                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),ParameterSkor.getText(),nip.getText()
+                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),ParameterSkor.getText(),nip.getText(),"D0000001"
             })==true){
                 tampil();
                 emptTeks();
@@ -995,10 +1021,10 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
             isjml();
             isHitung();
             Sequel.mengedit("skrining_gizi","tanggal=? and no_rawat=?","no_rawat=?,tanggal=?,skrining_bb=?,skrining_tb=?,alergi=?,parameter_imt=?,skor_imt=?,"+
-                "parameter_bb=?,skor_bb=?,parameter_penyakit=?,skor_penyakit=?,skor_total=?,parameter_total=?,nip=?",16,new String[]{
+                "parameter_bb=?,skor_bb=?,parameter_penyakit=?,skor_penyakit=?,skor_total=?,parameter_total=?,nip=?,nip_validator=?",17,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 BB.getText(),TB.getText(),Alergi.getText(),cmbSkor1.getSelectedItem().toString(),Skor1.getText(),cmbSkor2.getSelectedItem().toString(),Skor2.getText(),
-                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),ParameterSkor.getText(),nip.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                cmbSkor3.getSelectedItem().toString(),Skor3.getText(),TotalSkor.getText(),ParameterSkor.getText(),nip.getText(),"D0000001",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             });
             if(tabMode.getRowCount()!=0){tampil();}
             emptTeks();
@@ -1245,6 +1271,47 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
         isHitung();
     }//GEN-LAST:event_cmbSkor3ItemStateChanged
 
+    private void BtnValidasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnValidasiActionPerformed
+        if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
+            Valid.textKosong(TNoRw,"pasien");
+        }else if(nip.getText().trim().equals("")||namapetugas.getText().trim().equals("")){
+            Valid.textKosong(nip,"Petugas");
+        }else if(BB.getText().trim().equals("")){
+            Valid.textKosong(BB,"Berat Badan");
+        }else if(TB.getText().trim().equals("")){
+            Valid.textKosong(TB,"Tinggi Badan");
+        }else if(Alergi.getText().trim().equals("")){
+            Valid.textKosong(Alergi,"Alergi");
+        }else if(Skor1.getText().trim().equals("")){
+            Valid.textKosong(Skor1,"Skor 1");
+        }else if(Skor2.getText().trim().equals("")){
+            Valid.textKosong(Skor2,"Skor 2");
+        }else if(Skor3.getText().trim().equals("")){
+            Valid.textKosong(Skor1,"Skor 3");
+        }
+        int reply = JOptionPane.showConfirmDialog(rootPane,"Validasi Data Ini?","Konfirmasi",JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            isCombo1();
+            isCombo2();
+            isCombo3();
+            isjml();
+            isHitung();
+            Sequel.mengedit("skrining_gizi","tanggal=? and no_rawat=?","nip_validator=?",3,new String[]{
+                akses.getkode(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            });
+            if(tabMode.getRowCount()!=0){tampil();}
+            emptTeks();
+        }
+        else{      
+            if(tabMode.getRowCount()!=0){tampil();}
+            emptTeks();
+        }
+    }//GEN-LAST:event_BtnValidasiActionPerformed
+
+    private void BtnValidasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnValidasiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnValidasiKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1272,6 +1339,7 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
+    private widget.Button BtnValidasi;
     private widget.CekBox ChkInput;
     private widget.CekBox ChkKejadian;
     private widget.Tanggal DTPCari1;
@@ -1339,20 +1407,20 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                     "pasien.jk,skrining_gizi.tanggal,skrining_gizi.skrining_bb,skrining_gizi.skrining_tb,skrining_gizi.alergi,"+
                     "skrining_gizi.parameter_imt,skrining_gizi.skor_imt,skrining_gizi.parameter_bb,skrining_gizi.skor_bb,skrining_gizi.parameter_penyakit,skrining_gizi.skor_penyakit,"+
-                    "skrining_gizi.skor_total,skrining_gizi.parameter_total,skrining_gizi.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir "+
+                    "skrining_gizi.skor_total,skrining_gizi.parameter_total,skrining_gizi.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir,b.nama as validator "+
                     "from skrining_gizi inner join reg_periksa on skrining_gizi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on skrining_gizi.nip=petugas.nip where "+
+                    "inner join petugas on skrining_gizi.nip=petugas.nip INNER JOIN petugas b ON skrining_gizi.nip_validator = b.nip where "+
                     "skrining_gizi.tanggal between ? and ? order by skrining_gizi.tanggal ");
             }else{
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
                     "pasien.jk,skrining_gizi.tanggal,skrining_gizi.skrining_bb,skrining_gizi.skrining_tb,skrining_gizi.alergi,"+
                     "skrining_gizi.parameter_imt,skrining_gizi.skor_imt,skrining_gizi.parameter_bb,skrining_gizi.skor_bb,skrining_gizi.parameter_penyakit,skrining_gizi.skor_penyakit,"+
-                    "skrining_gizi.skor_total,skrining_gizi.parameter_total,skrining_gizi.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir "+
+                    "skrining_gizi.skor_total,skrining_gizi.parameter_total,skrining_gizi.nip,petugas.nama,date_format(pasien.tgl_lahir,'%d-%m-%Y') as lahir,b.nama as validator "+
                     "from skrining_gizi inner join reg_periksa on skrining_gizi.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on skrining_gizi.nip=petugas.nip "+
+                    "inner join petugas on skrining_gizi.nip=petugas.nip INNER JOIN petugas b ON skrining_gizi.nip_validator = b.nip "+
                     "where skrining_gizi.tanggal between ? and ? and "+
                     "(reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or skrining_gizi.alergi like ? or skrining_gizi.parameter_total like ? or skrining_gizi.nip like ? or petugas.nama like ?) "+
                     "order by skrining_gizi.tanggal ");
@@ -1382,7 +1450,7 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
                         rs.getString("tanggal"),rs.getString("skrining_bb"),rs.getString("skrining_tb"),rs.getString("alergi"),
                         rs.getString("parameter_imt"),rs.getString("skor_imt"),rs.getString("parameter_bb"),rs.getString("skor_bb"),
                         rs.getString("parameter_penyakit"),rs.getString("skor_penyakit"),rs.getString("skor_total"),rs.getString("parameter_total"),
-                        rs.getString("nip"),rs.getString("nama"),rs.getString("lahir")
+                        rs.getString("nip"),rs.getString("nama"),rs.getString("lahir"),rs.getString("validator")
                     });
                 }
             } catch (Exception e) {
@@ -1527,9 +1595,9 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
     }
     
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getskrining_gizi());
-        BtnHapus.setEnabled(akses.getskrining_gizi());
-        BtnEdit.setEnabled(akses.getskrining_gizi());
+        BtnSimpan.setEnabled(akses.gettindakan_ranap());
+        BtnHapus.setEnabled(akses.gettindakan_ranap());
+        BtnEdit.setEnabled(akses.gettindakan_ranap());
         BtnPrint.setEnabled(akses.getskrining_gizi()); 
         if(akses.getjml2()>=1){
             nip.setText(akses.getkode());

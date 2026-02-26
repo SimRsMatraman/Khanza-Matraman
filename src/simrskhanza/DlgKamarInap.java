@@ -17540,7 +17540,6 @@ if(tabMode.getRowCount()==0){
 //        MnPenilaianAwalKeperawatanKebidanan.setEnabled(akses.getpenilaian_awal_keperawatan_ranapkebidanan());
 //        MnPenilaianAwalMedisRanap.setEnabled(akses.getpenilaian_awal_medis_ranap());
 //        MnPenilaianAwalMedisKandungan.setEnabled(akses.getpenilaian_awal_medis_ranap_kebidanan());
-        ppSkriningGizi.setEnabled(akses.getskrining_gizi());
         ppSuratKontrol.setEnabled(akses.getbpjs_surat_kontrol()); 
         MnSuratKeteranganRawatInap.setEnabled(akses.getsurat_keterangan_rawat_inap());  
         ppSuratPRI.setEnabled(akses.getbpjs_surat_pri());  
