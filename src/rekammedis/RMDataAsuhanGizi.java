@@ -579,7 +579,7 @@ public final class RMDataAsuhanGizi extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-08-2022" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2023" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -593,7 +593,7 @@ public final class RMDataAsuhanGizi extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-08-2022" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-05-2023" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1476,46 +1476,6 @@ public final class RMDataAsuhanGizi extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
-        }else if(BB.getText().trim().equals("")){
-            Valid.textKosong(BB,"Berat Badan");
-        }else if(TB.getText().trim().equals("")){
-            Valid.textKosong(TB,"Tinggi Badan");
-        }else if(IMT.getText().trim().equals("")){
-            Valid.textKosong(IMT,"Indeks Masa Tubuh");
-        }else if(LiLA.getText().trim().equals("")){
-            Valid.textKosong(LiLA,"Lingkar Lengan Atas");
-        }else if(TL.getText().trim().equals("")){
-            Valid.textKosong(TL,"Tinggi Lutut");
-        }else if(ULNA.getText().trim().equals("")){
-            Valid.textKosong(ULNA,"ULNA");
-        }else if(BBIdeal.getText().trim().equals("")){
-            Valid.textKosong(BBIdeal,"Berat Badan Ideal");
-        }else if(BBPerU.getText().trim().equals("")){
-            Valid.textKosong(BBPerU,"BB/U");
-        }else if(TBPerU.getText().trim().equals("")){
-            Valid.textKosong(TBPerU,"TB/U");
-        }else if(BBPerTB.getText().trim().equals("")){
-            Valid.textKosong(BBPerTB,"BB/TB");
-        }else if(LiLAPerU.getText().trim().equals("")){
-            Valid.textKosong(LiLAPerU,"LilA/U");
-        }else if(Biokimia.getText().trim().equals("")){
-            Valid.textKosong(Biokimia,"Biokimia");
-        }else if(FisikKlinis.getText().trim().equals("")){
-            Valid.textKosong(FisikKlinis,"Fisik/Klinis");
-        }else if(PolaMakan.getText().trim().equals("")){
-            Valid.textKosong(PolaMakan,"Pola Makan");
-        }else if(RiwayatPersonal.getText().trim().equals("")){
-            Valid.textKosong(RiwayatPersonal,"Riwayat Personal");
-        }else if(DiagnosisGizi.getText().trim().equals("")){
-            Valid.textKosong(DiagnosisGizi,"Diagnosis Gizi");
-        }else if(IntervensiGizi.getText().trim().equals("")){
-            Valid.textKosong(IntervensiGizi,"Intervensi Gizi");
-        }else if(Monitoring.getText().trim().equals("")){
-            Valid.textKosong(Monitoring,"Monitoring & Evaluasi");
-        }else if(StatusGizi.getText().trim().equals("")){
-            Valid.textKosong(StatusGizi,"Status Gizi");
-        }else if(NmPetugas.getText().trim().equals("")){
-            Valid.textKosong(BtnDokter,"Petugas");
         }else{
             alergi_telur="Tidak"; 
             alergi_susu_sapi="Tidak";

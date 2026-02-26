@@ -216,7 +216,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             "Kode Dokter", "Dokter Dituju", "No.RM", "Pasien", "SEP BPJS",
             "Poliklinik", "No.Reg", "Penanggung Jawab", "Alamat P.J.", "Hubungan P.J.",
             "Jenis Bayar", "Status", "No.Rawat", "Tanggal",
-            "Jam", "Status Bayar", "Status Poli", "Kd PJ", "Kd Poli", "No.Telp Pasien", "Status SOAP", "Resume Medis"}) {
+            "Jam", "Status Bayar", "Status Poli", "Kd PJ", "Kd Poli", "No.Telp", "SOAP", "Resume"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -227,24 +227,24 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         tbKasirRalan.setPreferredScrollableViewportSize(new Dimension(800, 800));
         tbKasirRalan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 21; i++) {
+        for (i = 0; i < 22; i++) {
             TableColumn column = tbKasirRalan.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(70);
             } else if (i == 1) {
                 column.setPreferredWidth(180);
             } else if (i == 2) {
-                column.setPreferredWidth(65);
+                column.setPreferredWidth(55);
             } else if (i == 3) {
                 column.setPreferredWidth(170);
             } else if (i == 4) {
-                column.setPreferredWidth(70);
+                column.setPreferredWidth(50);
             } else if (i == 5) {
                 column.setPreferredWidth(140);
             } else if (i == 6) {
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(30);
             } else if (i == 7) {
-                column.setPreferredWidth(160);
+                column.setPreferredWidth(100);
             } else if (i == 8) {
                 column.setPreferredWidth(80);
             } else if (i == 9) {
@@ -254,7 +254,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             } else if (i == 11) {
                 column.setPreferredWidth(60);
             } else if (i == 12) {
-                column.setPreferredWidth(105);
+                column.setPreferredWidth(105); //no rawat
             } else if (i == 13) {
                 column.setPreferredWidth(70);
             } else if (i == 14) {
@@ -270,9 +270,11 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             } else if (i == 19) {
-                column.setPreferredWidth(95);
+                column.setPreferredWidth(80);
             } else if (i == 20) {
-                column.setPreferredWidth(95);
+                column.setPreferredWidth(43);
+            } else if (i == 21) {
+                column.setPreferredWidth(43);
             }
         }
         try {
@@ -288,7 +290,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         tabModekasir2 = new DefaultTableModel(null, new String[]{
             "Kd.Dokter", "Dokter Rujukan", "Nomer RM", "Pasien",
             "Poliklinik Rujukan", "Penanggung Jawab", "Alamat P.J.", "Hubungan P.J.",
-            "Jenis Bayar", "Status", "No.Rawat", "Tanggal", "Jam", "Kode Poli", "Kode PJ", "No.Telp Pasien", "Status Askep", "Status SOAP"}) {
+            "Jenis Bayar", "Status", "No.Rawat", "Tanggal", "Jam", "Kode Poli", "Kode PJ", "No.Telp Pasien", "Status Askep", "SOAP"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -13266,7 +13268,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     + "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,poliklinik.nm_poli,"
                     + "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts,penjab.png_jawab,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur, "
                     + "reg_periksa.status_bayar,IF(reg_periksa.status_poli='Lama','Pasien Lama','Pasien Baru') as status_poli,reg_periksa.kd_pj,reg_periksa.kd_poli,pasien.no_tlp,IF(bridging_sep.no_sep!='','1','0')as no_sep,IF(pemeriksaan_ralan.nik!='','Sudah','Belum') as soap,IF(pemeriksaan_ralan_rehab.nik!='','Sudah','Belum') as soaprm, "
-                    + "IF(resume_pasien_rajal.kd_dokter!='' or resume_pasien.kd_dokter!='','Sudah','Belum') as resume "
+                    + "IF(resume_pasien_rajal.kd_dokter!='' or resume_pasien.kd_dokter!='','Sudah','Belum') as resume, CONCAT('Kelas ',bridging_sep.klsrawat) as klsrawat "
                     + "from reg_periksa "
                     + "left join pemeriksaan_ralan on pemeriksaan_ralan.no_rawat=reg_periksa.no_rawat "
                     + "left join pemeriksaan_ralan_rehab on pemeriksaan_ralan_rehab.no_rawat=reg_periksa.no_rawat "
@@ -13348,7 +13350,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     }
 
                     if (rskasir.getString("kd_pj").equals("BPJ") && rskasir.getString("no_sep").equals("1")) {
-                        SEP = "SEP Terbit";
+                        SEP = rskasir.getString("klsrawat");
                     } else if (rskasir.getString("kd_pj").equals("BPJ") && rskasir.getString("no_sep").equals("0")) {
                         SEP = "Belum Terbit";
                     } else {

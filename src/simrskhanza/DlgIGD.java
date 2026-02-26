@@ -52,6 +52,7 @@ import fungsi.validasi;
 import fungsi.akses;
 import inventory.DlgCopyResep;
 import inventory.DlgPeresepanDokter;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -77,11 +78,14 @@ import java.util.Map;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import keuangan.DlgBilingParsialRalan;
@@ -249,9 +253,9 @@ public final class DlgIGD extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        Object[] row={"P","No.Reg","No.Rawat","Tanggal","Jam","Kd.Dokter","Dokter Dituju","Nomer RM",
-            "Pasien","J.K.","Umur","Poliklinik","Penanggung Jawab","Alamat P.J.","Hubungan dg P.J.",
-            "Biaya Regristrasi","Status Daftar","Jenis Bayar","Stts Rawat","Kd PJ","Status Bayar","Status Resume","SEP BPJS"};
+        Object[] row={"P","Reg","No.Rawat","Tanggal","Jam","Kd.Dokter","Dokter Dituju","Nomer RM",
+            "Pasien","J.K.","Umur","Poliklinik","Penanggung Jawab","Alamat PJ","Hubungan PJ",
+            "Biaya Regristrasi","Stts Daftar","Jns Bayar","Status","Kd PJ","Stts Bayar","SEP BPJS","Resume","Triase","Medis","Keperawatan"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -266,7 +270,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                  java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -278,26 +282,26 @@ public final class DlgIGD extends javax.swing.JDialog {
         tbPetugas.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbPetugas.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 23; i++) {
+        for (i = 0; i < 26; i++) {
             TableColumn column = tbPetugas.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
             }else if(i==1){
-                column.setPreferredWidth(45);
+                column.setPreferredWidth(25);
             }else if(i==2){
-                column.setPreferredWidth(110);
+                column.setPreferredWidth(100);
             }else if(i==3){
-                column.setPreferredWidth(70);
+                column.setPreferredWidth(65);
             }else if(i==4){
                 column.setPreferredWidth(50);   
             }else if(i==5){
-                column.setPreferredWidth(70);
+                column.setPreferredWidth(65);
             }else if(i==6){
-                column.setPreferredWidth(120);
+                column.setPreferredWidth(130);
             }else if(i==7){
-                column.setPreferredWidth(70);
+                column.setPreferredWidth(65);
             }else if(i==8){
-                column.setPreferredWidth(200);
+                column.setPreferredWidth(180);
             }else if(i==9){
                 column.setPreferredWidth(30);
             }else if(i==10){
@@ -309,7 +313,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else if(i==13){
                 column.setPreferredWidth(100);
             }else if(i==14){
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(80);
             }else if(i==15){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
@@ -318,29 +322,52 @@ public final class DlgIGD extends javax.swing.JDialog {
             }else if(i==17){
                 column.setPreferredWidth(50);
             }else if(i==18){
-                column.setPreferredWidth(70);
+                column.setPreferredWidth(50);
             }else if(i==19){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else if(i==20){
-                column.setPreferredWidth(75);
+                column.setPreferredWidth(65);
             }else if(i==21){
-                column.setPreferredWidth(75);
+                column.setPreferredWidth(55);  // SEP
+            }else if(i==22){
+                column.setPreferredWidth(55);  // Resume  
+            }else if(i==23){
+                column.setPreferredWidth(55);  // Triase
+            }else if(i==24){
+                column.setPreferredWidth(55);  // Medis
+            }else if(i==25){
+                column.setPreferredWidth(70);  // Perawat
             }else{
-                column.setPreferredWidth(75);
+                column.setPreferredWidth(55);
             }        
         }
-//        try {
-//            if(koneksiDB.AKTIFKANWARNARALAN().equals("yes")){
-//                tbPetugas.setDefaultRenderer(Object.class, new WarnaTableIGD());
-//            }else{
-//                tbPetugas.setDefaultRenderer(Object.class, new WarnaTable());
-//            }
-//        } catch (Exception e) {
-//            tbPetugas.setDefaultRenderer(Object.class, new WarnaTable());
-//        }
+        
         tbPetugas.setDefaultRenderer(Object.class, new WarnaTableIGD());
-
+        
+        int[] checkboxColumns = {22, 23, 24, 25};  // Resume, Triase, Medis, Perawat
+        for(int col : checkboxColumns) {
+            TableColumn cbColumn = tbPetugas.getColumnModel().getColumn(col);
+            cbColumn.setCellRenderer(new DefaultTableCellRenderer() {
+                private JCheckBox checkBox = new JCheckBox();
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, 
+                        boolean isSelected, boolean hasFocus, int row, int column) {
+                    checkBox.setHorizontalAlignment(JLabel.CENTER);
+                    checkBox.setSelected(value != null && (Boolean) value);
+                    checkBox.setEnabled(!table.isEnabled() || !isSelected);
+                    if (isSelected) {
+                        checkBox.setForeground(table.getSelectionForeground());
+                        checkBox.setBackground(table.getSelectionBackground());
+                    } else {
+                        checkBox.setForeground(table.getForeground());
+                        checkBox.setBackground(table.getBackground());
+                    }
+                    return checkBox;
+                }
+            });
+        }
+        
         TNoReg.setDocument(new batasInput((byte)8).getKata(TNoReg));
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TNoRM.setDocument(new batasInput((byte)10).getKata(TNoRM));
@@ -5509,7 +5536,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                         this.setCursor(Cursor.getDefaultCursor());
                     }  
                 }
-                if(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),22).toString().equals("Belum Terbit")
+                if(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),21).toString().equals("Belum Terbit")
                             ){
                         JOptionPane.showMessageDialog(null,"Pasien belum terbit SEP!");
                     }
@@ -5532,19 +5559,19 @@ public final class DlgIGD extends javax.swing.JDialog {
                     if(akses.getperiksa_lab()==true){
                         MnPeriksaLabActionPerformed(null);
                     }                    
-                }else if(i==5){
+                }else if(i==5 || i == 24){
                     if(akses.getpenilaian_awal_medis_igd()==true){
                         MnPeniliaianAwalMedisIGDActionPerformed(null);
                     }                    
-                }else if(i==6){
+                }else if(i==6 || i == 23){
                     if(akses.getdata_triase_igd()==true){
                         MnDataTriaseIGDActionPerformed(null);
                     }                    
-                }else if(i==7){
+                }else if(i==7 || i == 22){
                     if(akses.getdata_resume_pasien()==true){
                         ppResumeBtnPrintActionPerformed(null);
                     }                    
-                }else if(i==8){
+                }else if(i==8 || i == 25){
                     if(akses.getdata_resume_pasien()==true){
                         MnPenilaianAwalKeperawatanIGDActionPerformed(null);
                     }                    
@@ -10529,12 +10556,43 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
     private void tampil() {
         Valid.tabelKosong(tabMode);   
         try{  
-            ps=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                   "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,"+
-                   "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.stts,reg_periksa.kd_pj,reg_periksa.status_bayar,IF(bridging_sep.no_sep!='','1','0')as no_sep "+
-                   "from reg_periksa left join bridging_sep on bridging_sep.no_rawat=reg_periksa.no_rawat inner join dokter inner join pasien inner join poliklinik inner join penjab "+
-                   "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                   "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli  where  "+
+            ps=koneksi.prepareStatement("SELECT\n" +
+                "	reg_periksa.no_reg,\n" +
+                "	reg_periksa.no_rawat,\n" +
+                "	reg_periksa.tgl_registrasi,\n" +
+                "	reg_periksa.jam_reg,\n" +
+                "	 reg_periksa.kd_dokter,\n" +
+                "	dokter.nm_dokter,\n" +
+                "	reg_periksa.no_rkm_medis,\n" +
+                "	pasien.nm_pasien,\n" +
+                "	pasien.jk,\n" +
+                "	concat( reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur ) AS umur,\n" +
+                "	poliklinik.nm_poli,\n" +
+                "	 reg_periksa.p_jawab,\n" +
+                "	reg_periksa.almt_pj,\n" +
+                "	reg_periksa.hubunganpj,\n" +
+                "	reg_periksa.biaya_reg,\n" +
+                "	reg_periksa.stts_daftar,\n" +
+                "	penjab.png_jawab,\n" +
+                "	reg_periksa.stts,\n" +
+                "	reg_periksa.kd_pj,\n" +
+                "	reg_periksa.status_bayar,\n" +
+                "	CONCAT('Kelas ',bridging_sep.klsrawat) as klsrawat,\n" +    
+                "	IF( bridging_sep.no_sep != '', '1', '0' ) AS no_sep,\n" +
+                "	IF( resume_pasien.no_rawat != '', '1', '0' ) AS resume,\n" +
+                "	IF( data_triase_igd.no_rawat != '', '1', '0' ) AS triase,\n" +
+                "	IF( asesmen_medis_igd.no_rawat != '', '1', '0' ) AS medis,\n" +
+                "	IF( penilaian_awal_keperawatan_igd.no_rawat != '', '1', '0' ) AS perawat\n" +
+                "       FROM reg_periksa \n" +
+                "	INNER JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter \n" +
+                "	INNER JOIN pasien ON reg_periksa.no_rkm_medis = pasien.no_rkm_medis \n" +
+                "	INNER JOIN poliklinik ON reg_periksa.kd_poli = poliklinik.kd_poli\n" +
+                "	INNER JOIN penjab ON reg_periksa.kd_pj = penjab.kd_pj\n" +
+                "	LEFT JOIN bridging_sep ON bridging_sep.no_rawat = reg_periksa.no_rawat\n" +
+                "	LEFT JOIN resume_pasien ON resume_pasien.no_rawat = reg_periksa.no_rawat\n" +
+                "	LEFT JOIN data_triase_igd ON data_triase_igd.no_rawat = reg_periksa.no_rawat\n" +
+                "	LEFT JOIN asesmen_medis_igd ON asesmen_medis_igd.no_rawat = reg_periksa.no_rawat\n" +
+                "	LEFT JOIN penilaian_awal_keperawatan_igd ON penilaian_awal_keperawatan_igd.no_rawat = reg_periksa.no_rawat WHERE  "+
                 "  poliklinik.kd_poli='IGDK' and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.no_reg like ? or "+
                 "  poliklinik.kd_poli='IGDK' and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.no_rawat like ? or "+
                 "  poliklinik.kd_poli='IGDK' and reg_periksa.tgl_registrasi between ? and ? and  reg_periksa.tgl_registrasi like ? or "+
@@ -10590,34 +10648,31 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
                 ps.setString(39,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    int cekResume;
-                    String Resume,SEP;
-                    
-                    cekResume=Sequel.cariInteger("select count(resume_pasien.no_rawat) from resume_pasien where no_rawat='"+rs.getString("no_rawat")+"' ");
-                    
-                    
-                    if(cekResume>0){
-                        Resume="Sudah Resume";
-                    }else{
-                        Resume="Belum";
-                    }
-                    
-                    if(rs.getString("kd_pj").equals("BPJ")&&rs.getString("no_sep").equals("1")){
-                        SEP="SEP Terbit";
-                    }else if(rs.getString("kd_pj").equals("BPJ")&&rs.getString("no_sep").equals("0")){
-                        SEP="Belum Terbit";
-                    }else{
-                        SEP="-";
-                    }
-                    
-                    tabMode.addRow(new Object[] {
-                        false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
-                        rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),
-                        rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),
-                        Valid.SetAngka(rs.getDouble(15)),rs.getString(16),rs.getString(17),rs.getString(18),
-                        rs.getString("kd_pj"),rs.getString("status_bayar"),Resume, SEP
-                    });
-                } 
+                String SEP;
+
+                // Resume jadi Boolean, bukan String Unicode
+                boolean isResume = rs.getString("no_sep").equals("1");
+                boolean isTriase = rs.getString("triase").equals("1");
+                boolean isMedis = rs.getString("medis").equals("1");
+                boolean isPerawat = rs.getString("perawat").equals("1");
+
+                if(rs.getString("kd_pj").equals("BPJ")&&rs.getString("no_sep").equals("1")){
+                    SEP = rs.getString("klsrawat");
+                }else if(rs.getString("kd_pj").equals("BPJ")&&rs.getString("no_sep").equals("0")){
+                    SEP = "Belum Terbit";
+                }else{
+                    SEP = "-";
+                }
+
+                tabMode.addRow(new Object[] {
+                    false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
+                    rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),
+                    rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),
+                    Valid.SetAngka(rs.getDouble(15)),rs.getString(16),rs.getString(17),rs.getString(18),
+                    rs.getString("kd_pj"),rs.getString("status_bayar"), SEP, isResume, isTriase, isMedis, isPerawat
+                });
+            }
+
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
@@ -10853,7 +10908,6 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
         BtnHapus.setEnabled(akses.getigd());
         BtnEdit.setEnabled(akses.getigd());
         BtnPrint.setEnabled(akses.getigd());
-//        MnKamarInap.setEnabled(akses.getkamar_inap());
         MnRawatJalan.setEnabled(akses.gettindakan_ralan());
         ppRiwayat.setEnabled(akses.getresume_pasien());
         MnHemodialisa.setEnabled(akses.gethemodialisa());
