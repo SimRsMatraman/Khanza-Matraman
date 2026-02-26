@@ -1531,7 +1531,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getsurat_keterangan_sehat());
         BtnEdit.setEnabled(akses.getsurat_keterangan_sehat());
         
-        if (akses.getkode().equals("122650") || akses.getkode().equals("Admin Utama") ) {
+        if (akses.getkode().equals("D0000030") || akses.getkode().equals("D0000010") || akses.getkode().equals("Admin Utama") ) {
             MnCetakSuratSehatSign.setEnabled(true);
         } else {
             MnCetakSuratSehatSign.setVisible(false);

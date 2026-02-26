@@ -1279,7 +1279,7 @@ Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(surat_mcu_jiwa.no_surat,3),sig
         BtnHapus.setEnabled(akses.getsurat_keterangan_sehat());
         BtnEdit.setEnabled(akses.getsurat_keterangan_sehat());
         
-        if (akses.getkode().equals("122650") || akses.getkode().equals("Admin Utama") ) {
+        if (akses.getkode().equals("D0000030") || akses.getkode().equals("D0000010") || akses.getkode().equals("Admin Utama") ) {
             MnCetakSuratSehatSignMCU.setEnabled(true);
             MnCetakSuratSehatSignLengkap.setEnabled(true);
         } else {
