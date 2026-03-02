@@ -29,7 +29,7 @@ import javax.swing.table.TableColumn;
  *
  * @author dosen
  */
-public final class RMCariEdukasiRehabMedik extends javax.swing.JDialog {
+public final class RMCariHakPasiendanKeluarga extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
@@ -40,7 +40,7 @@ public final class RMCariEdukasiRehabMedik extends javax.swing.JDialog {
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
-    public RMCariEdukasiRehabMedik(java.awt.Frame parent, boolean modal) {
+    public RMCariHakPasiendanKeluarga(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(10,2);
@@ -122,7 +122,7 @@ public final class RMCariEdukasiRehabMedik extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Master Data Edukasi Rehab Medik/Lainnya ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 10), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Master Data Edukasi Hak Pasien dan Keluarga ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -228,6 +228,7 @@ public final class RMCariEdukasiRehabMedik extends javax.swing.JDialog {
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_END);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
+        internalFrame1.getAccessibleContext().setAccessibleName("::[ Master Data Edukasi Hak Pasien dan Keluarga ]::");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -310,7 +311,7 @@ public final class RMCariEdukasiRehabMedik extends javax.swing.JDialog {
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            RMCariEdukasiRehabMedik dialog = new RMCariEdukasiRehabMedik(new javax.swing.JFrame(), true);
+            RMCariHakPasiendanKeluarga dialog = new RMCariHakPasiendanKeluarga(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -339,7 +340,7 @@ public final class RMCariEdukasiRehabMedik extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                    "SELECT kode_edukasi, nama_edukasi FROM master_edukasi_pasien WHERE kode_edukasi LIKE 'med%' ");
+                    "SELECT kode_edukasi, nama_edukasi FROM master_edukasi_pasien WHERE kode_edukasi LIKE 'hpk%' ");
             try{
 //                ps.setString(1,norawat);
 //                ps.setString(2,"%"+TCari.getText().trim()+"%");

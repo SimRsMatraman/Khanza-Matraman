@@ -339,7 +339,7 @@ public final class RMCariEdukasiDokter extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                    "select master_edukasi_dokter.kode_edukasi,master_edukasi_dokter.nama_edukasi from master_edukasi_dokter ");
+                    "SELECT kode_edukasi, nama_edukasi FROM master_edukasi_pasien WHERE kode_edukasi LIKE 'dok%' ");
             try{
 //                ps.setString(1,norawat);
 //                ps.setString(2,"%"+TCari.getText().trim()+"%");
