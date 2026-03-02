@@ -135,7 +135,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import bridging.ApiICareBPJS;
 import rekammedis.RMDataCatatanKeseimbanganCairan;
-import rekammedis.RMDataEdukasiRanap;
+import rekammedis.RMDataEdukasi;
 import rekammedis.RMPemberianObatRanap;
 import surat.SuratAPS;
 
@@ -8838,7 +8838,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             TCari.requestFocus();
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataEdukasiRanap form=new RMDataEdukasiRanap(null,false);
+            RMDataEdukasi form=new RMDataEdukasi(null,false);
             form.isCek();
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
@@ -8846,6 +8846,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
             form.tampil();
+            form.generateNoSuratRanap();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEPRanapActionPerformed

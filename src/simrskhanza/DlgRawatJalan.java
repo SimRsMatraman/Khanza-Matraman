@@ -13160,6 +13160,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEPActionPerformed
@@ -13177,6 +13178,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP1ActionPerformed
@@ -13194,6 +13196,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP2ActionPerformed
@@ -13211,6 +13214,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP3ActionPerformed
@@ -13228,6 +13232,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP4ActionPerformed
@@ -13245,6 +13250,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP5ActionPerformed
@@ -13262,6 +13268,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP6ActionPerformed
@@ -13279,6 +13286,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP7ActionPerformed
@@ -13296,6 +13304,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP8ActionPerformed
@@ -13313,6 +13322,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP9ActionPerformed
@@ -13330,6 +13340,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP10ActionPerformed
@@ -13347,6 +13358,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP11ActionPerformed
@@ -13364,6 +13376,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP12ActionPerformed
@@ -13381,6 +13394,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP13ActionPerformed
@@ -13398,6 +13412,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ep.setNoRm(TNoRw.getText(), DTPCari2.getDate());
             ep.tampil();
             ep.setVisible(true);
+            ep.generateNoSuratJalan();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnEP14ActionPerformed
