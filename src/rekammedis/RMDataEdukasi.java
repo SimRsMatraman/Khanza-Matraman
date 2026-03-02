@@ -169,7 +169,8 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
         "Alasan Kesediaan",
         "Kebutuhan Edukasi",
         "Hubungan",
-        "ACC"
+        "ACC",
+        "Status Pasien"
     }) {
         @Override
         public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -295,6 +296,8 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
         DTPCari1 = new widget.Tanggal();
         jLabel21 = new widget.Label();
         DTPCari2 = new widget.Tanggal();
+        jLabel20 = new widget.Label();
+        Status = new widget.ComboBox();
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
@@ -625,7 +628,7 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -639,12 +642,26 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
         DTPCari2.setPreferredSize(new java.awt.Dimension(95, 23));
         panelGlass9.add(DTPCari2);
+
+        jLabel20.setText("  Status :");
+        jLabel20.setName("jLabel20"); // NOI18N
+        jLabel20.setPreferredSize(new java.awt.Dimension(67, 23));
+        panelGlass9.add(jLabel20);
+
+        Status.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Rawat Jalan", "Rawat Inap" }));
+        Status.setName("Status"); // NOI18N
+        Status.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                StatusKeyPressed(evt);
+            }
+        });
+        panelGlass9.add(Status);
 
         jLabel6.setText("Key Word :");
         jLabel6.setName("jLabel6"); // NOI18N
@@ -816,7 +833,7 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
         jLabel13.setBounds(630, 40, 90, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-02-2026" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -1727,7 +1744,7 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
 
         TanggalEdukasi.setEditable(false);
         TanggalEdukasi.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalEdukasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "24-02-2026" }));
+        TanggalEdukasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
         TanggalEdukasi.setDisplayFormat("dd-MM-yyyy");
         TanggalEdukasi.setName("TanggalEdukasi"); // NOI18N
         TanggalEdukasi.setOpaque(false);
@@ -2572,6 +2589,10 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnBatal1KeyPressed
 
+    private void StatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StatusKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StatusKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -2673,6 +2694,7 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
     private widget.ScrollPane Scroll4;
     private widget.ScrollPane Scroll5;
     private javax.swing.JCheckBox Simulasi;
+    private widget.ComboBox Status;
     private widget.TextBox TCari;
     private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
@@ -2687,6 +2709,7 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
     private widget.Label jLabel14;
     private widget.Label jLabel15;
     private widget.Label jLabel19;
+    private widget.Label jLabel20;
     private widget.Label jLabel21;
     private widget.Label jLabel24;
     private widget.Label jLabel25;
@@ -2758,7 +2781,7 @@ public void tampil() {
             "ep.pendidikan, ep.agama, ep.tingkat_pengetahuan, " +
             "ep.alkohol, ep.merokok, " +
             "ep.ketersediaan_pasiein, ep.alasan_kesediaan, ep.kebutuhan_edukasi, " +
-            "ep.hubungan, ep.acc_hpk " +
+            "ep.hubungan, ep.acc_hpk, rp.status_lanjut " +
             "FROM edukasi_pasien ep " +
             "INNER JOIN reg_periksa rp ON ep.no_rawat = rp.no_rawat " +
             "INNER JOIN pasien ps ON rp.no_rkm_medis = ps.no_rkm_medis " +
@@ -2787,6 +2810,16 @@ public void tampil() {
             kondisi.add("DATE(ep.tanggal_surat) BETWEEN ? AND ?");
             params.add(Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
             params.add(Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
+        }
+
+        // =====================
+        // FILTER STATUS
+        // =====================
+        String statusText = (Status.getSelectedItem() != null) ? Status.getSelectedItem().toString() : "";
+        if (!statusText.equals("Semua")) {
+            String statusValue = statusText.equals("Rawat Jalan") ? "Ralan" : "Ranap";
+            kondisi.add("rp.status_lanjut = ?");
+            params.add(statusValue);
         }
 
         // =====================
@@ -2832,19 +2865,21 @@ public void tampil() {
                 rs.getString("alasan_kesediaan"),
                 rs.getString("kebutuhan_edukasi"),
                 rs.getString("hubungan"),
-                rs.getString("acc_hpk")
+                rs.getString("acc_hpk"),
+                rs.getString("status_lanjut")
             });
         }
 
     } catch (Exception e) {
         System.out.println("Notifikasi : " + e);
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+        } catch (Exception ex) {
+            System.out.println("Error close: " + ex);
+        }
     }
-            
-//    loadEdukasiByTopik();
-//    loadCheckboxEdukasi();
-//    loadSignaturePhotos();
-//    loadFormData(); 
-//    isRawat();
 }
     public void emptTeks() {
         KodeDokter.setText("");
