@@ -152,6 +152,8 @@ import kepegawaian.DlgCariDokter;
 import rekammedis.RMDataCatatanKeseimbanganCairan;
 import surat.SuratGCRanap;
 
+import rekammedis.RMDataEdukasi;
+
 /**
  *
  * @author perpustakaan
@@ -5954,7 +5956,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -5977,7 +5979,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6003,7 +6005,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2026" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -6026,7 +6028,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2026" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -6557,15 +6559,48 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     norawat.requestFocus();
                 }
             }else if(norawat.isEditable()==false){
-                if(cmbStatus.getSelectedItem().equals("-")){
-                    Valid.textKosong(cmbStatus,"Status Pulang");
-                }else if(diagnosaakhir.getText().equals("")){
-                    Valid.textKosong(diagnosaakhir,"Diagnosa Akhir");
-                }else{
+                String countEdukasi = Sequel.cariIsi("SELECT COUNT(*) FROM edukasi_pasien WHERE no_rawat=?", norawat.getText());
+
+                if(countEdukasi.equals("0")) {
+                    int choice = JOptionPane.showConfirmDialog(
+                        null, 
+                        "Belum isi edukasi pasien dan keluarga!\nApakah ingin mengisi sekarang?", 
+                        "Edukasi Diperlukan", 
+                        JOptionPane.YES_NO_OPTION
+                    );
+
+                    if(choice == JOptionPane.YES_OPTION) {
+                        RMDataEdukasi form=new RMDataEdukasi(null,false);
+                        form.isCek();
+                        form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        form.setLocationRelativeTo(internalFrame1);
+                        form.setVisible(true);
+                        form.emptTeks();
+                        form.setNoRm(norawat.getText(), new Date());
+                        form.tampil();
+                        form.generateNoSuratRanap();
+                        this.setCursor(Cursor.getDefaultCursor());
+                    }
+                    return;
+                }
+
+                // 🔥 GANTI MENGEDIT (bukan mengedittf)
+                    Sequel.mengedit("edukasi_pasien","no_rawat='"+norawat.getText()+"'","status='1'");
+
+                    if(cmbStatus.getSelectedItem().equals("-")){
+                        Valid.textKosong(cmbStatus,"Status Pulang");
+                        Sequel.mengedit("edukasi_pasien","no_rawat='"+norawat.getText()+"'","status='0'");
+                        return;
+                    }else if(diagnosaakhir.getText().equals("")){
+                        Valid.textKosong(diagnosaakhir,"Diagnosa Akhir");
+                        Sequel.mengedit("edukasi_pasien","no_rawat='"+norawat.getText()+"'","status='0'");
+                        return;
+                    }else{
                     if(Sequel.mengedittf("kamar_inap","no_rawat='"+norawat.getText()+"' and kd_kamar='"+kdkamar.getText()+"' and tgl_masuk='"+TIn.getText()+"' and jam_masuk='"+JamMasuk.getText()+"'",
                             "tgl_keluar='"+CmbTahun.getSelectedItem()+"-"+CmbBln.getSelectedItem()+"-"+CmbTgl.getSelectedItem()+
                             "',trf_kamar='"+TTarif.getText()+"',jam_keluar='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+
                             "',ttl_biaya='"+ttlbiaya.getText()+"',stts_pulang='"+cmbStatus.getSelectedItem()+"',diagnosa_akhir='"+diagnosaakhir.getText()+"',lama='"+TJmlHari.getText()+"'")==true){
+                        // Sukses - lanjut normal
                         if(tabMode.getRowCount()>1){
                             try {
                                 if(tbKamIn.getValueAt(tbKamIn.getSelectedRow()+1,0).toString().equals("")){
@@ -6603,26 +6638,14 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         } catch (Exception e) {
                         }
                         Sequel.mengedit("kamar","kd_kamar='"+kdkamar.getText()+"'","status='KOSONG'");
+                        Sequel.mengedit("edukasi_pasien","no_rawat='"+norawat.getText()+"'","status='1'");
                         WindowInputKamar.dispose();
-                        emptTeks();  
-                    }                  
+                        emptTeks(); 
+                    } else {
+                        Sequel.mengedit("edukasi_pasien","no_rawat='"+norawat.getText()+"'","status='0'");
+                    }
                 }                
-            }
-//            else{    
-//            for(i=0;i<tbDiagnosa.getRowCount();i++){ 
-//                if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
-//                    if(Sequel.menyimpantf("dpjp_ranap","?,?","Dokter",2,new String[]{
-//                            TNoRw.getText(),tbDiagnosa.getValueAt(i,1).toString()
-//                        })==true){
-//                        TabModePasien.addRow(new Object[]{
-//                            false,Tanggal.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),tbDiagnosa.getValueAt(i,1).toString(),tbDiagnosa.getValueAt(i,2).toString()
-//                        });
-//                        tbDiagnosa.setValueAt(false,i,0);
-//                    }
-//                }                    
-//            }
-//            LCount.setText(""+TabModePasien.getRowCount());
-//        }          
+            }      
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 

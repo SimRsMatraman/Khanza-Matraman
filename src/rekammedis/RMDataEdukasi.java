@@ -649,9 +649,9 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
         DTPCari2.setPreferredSize(new java.awt.Dimension(95, 23));
         panelGlass9.add(DTPCari2);
 
-        jLabel20.setText("  Status :");
+        jLabel20.setText("  Status Rawat :");
         jLabel20.setName("jLabel20"); // NOI18N
-        jLabel20.setPreferredSize(new java.awt.Dimension(67, 23));
+        jLabel20.setPreferredSize(new java.awt.Dimension(110, 23));
         panelGlass9.add(jLabel20);
 
         Status.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Rawat Jalan", "Rawat Inap" }));
