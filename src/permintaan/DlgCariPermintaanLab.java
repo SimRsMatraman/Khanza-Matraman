@@ -2093,9 +2093,9 @@ private void tbLabRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
             JOptionPane.showMessageDialog(null,
                 "Pasien UMUM (" + poliRaw + ") masih Belum Bayar. Mohon konfirmasi sesuai kebijakan.");
         } else {
-            BtnSampel.setEnabled(false);
+            BtnSampel.setEnabled(akses.getperiksa_lab());
             JOptionPane.showMessageDialog(null,
-                "Pasien Umum, konfirmasi pembayaran sebelum melanjutkan pemeriksaan!");
+                "Pasien UMUM (" + poliRaw + ") masih Belum Bayar. Mohon konfirmasi sesuai kebijakan.");
         }
     } else {
         BtnSampel.setEnabled(akses.getperiksa_lab());
