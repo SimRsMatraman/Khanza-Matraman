@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -2521,14 +2522,47 @@ public final class RMDataEdukasi extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalEdukasiKeyPressed
 
     private void BtnlinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnlinkActionPerformed
+//        try {
+//            String noRawat = TNoRw.getText().trim();
+//            if(noRawat.isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "No.Rawat kosong!");
+//                return;
+//            }
+//
+//            String baseUrl = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB();
+//            // 🔥 PASS TNoRw via URL parameter
+//            String fullUrl = baseUrl + "/webapps/verified/epri.php?norawat=" + URLEncoder.encode(noRawat, "UTF-8");
+//
+//            java.awt.Desktop.getDesktop().browse(new java.net.URI(fullUrl));
+//        } catch (Exception e) {
+//            System.out.println("Error open browser: " + e);
+//        }
         try {
-            String baseUrl = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB();
-            String fullUrl = baseUrl + "/webapps/verified/epri.php";
+            String noRawat = TNoRw.getText().trim();
+            if(noRawat.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No.Rawat kosong!");
+                return;
+            }
 
-            // Buka di default browser
+            // 🔥 CEK ADA DI KAMAR_INAP?
+            boolean adaDiKamarInap = Sequel.cariIsi("SELECT COUNT(*) FROM kamar_inap WHERE no_rawat=?", noRawat).equals("1");
+
+            String baseUrl = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB();
+            String page;
+
+            if(adaDiKamarInap) {
+                // Rawat Inap → epri.php
+                page = "/webapps/verified/epri.php?norawat=" + URLEncoder.encode(noRawat, "UTF-8");
+            } else {
+                // Rawat Jalan → ep.php
+                page = "/webapps/verified/ep.php?norawat=" + URLEncoder.encode(noRawat, "UTF-8");
+            }
+
+            String fullUrl = baseUrl + page;
             java.awt.Desktop.getDesktop().browse(new java.net.URI(fullUrl));
 
         } catch (Exception e) {
+            System.out.println("Error open browser: " + e);
         }
     }//GEN-LAST:event_BtnlinkActionPerformed
 
