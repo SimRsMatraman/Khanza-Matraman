@@ -31,6 +31,7 @@ import javax.swing.JCheckBox;
 import javax.swing.table.JTableHeader;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ItemEvent;
 //import java.util.Map;
 //import java.util.HashMap;
 //import java.util.Arrays;
@@ -585,6 +586,117 @@ private String safeString(Object obj){
         }
 
     }
+    
+     private boolean kosong(String val){
+    return val==null || val.trim().equals("");
+}
+     
+     private void delay(int ms){
+    try{
+        Thread.sleep(ms);
+    }catch(Exception e){}
+}
+    
+    private void prosesJakportalStabil(String noRawat){
+
+try{
+
+String tglReg = Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+noRawat+"'");
+String jamReg = Sequel.cariIsi("select jam_reg from reg_periksa where no_rawat='"+noRawat+"'");
+
+String idcheckin = Sequel.cariIsi("select id_checkin from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+// CHECKIN
+if(kosong(idcheckin)){
+
+CheckIn(noRawat,tglReg,jamReg,"","","","","","","","","08:00:00","12:00:00","P002");
+
+delay(300);
+
+idcheckin = Sequel.cariIsi("select id_checkin from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+}
+
+// CHECKIN END
+String idcheckinend = Sequel.cariIsi("select id_checkin_end from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+if(kosong(idcheckinend)){
+
+CheckInEnd(noRawat,idcheckin,tglReg,jamReg);
+
+delay(300);
+
+}
+
+// NS
+String idns = Sequel.cariIsi("select id_ns from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+if(kosong(idns)){
+
+NurseStation(noRawat,idcheckin,tglReg,jamReg);
+
+delay(300);
+
+idns = Sequel.cariIsi("select id_ns from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+}
+
+// NS END
+String idnsend = Sequel.cariIsi("select id_ns_end from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+if(kosong(idnsend)){
+
+NurseStationEnd(noRawat,idcheckin,idns,tglReg,jamReg);
+
+delay(300);
+
+}
+
+// POLI
+String idpoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+if(kosong(idpoli)){
+
+Poliklinik(noRawat,idcheckin,tglReg,jamReg);
+
+delay(300);
+
+idpoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+}
+
+// POLI END
+String idpoliend = Sequel.cariIsi("select id_poli_end from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+if(kosong(idpoliend)){
+
+PoliklinikEnd(noRawat,idcheckin,idpoli,tglReg,jamReg);
+
+delay(300);
+
+}
+
+// CHECKOUT
+String idcheckout = Sequel.cariIsi("select id_check_out from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+String idnsend2 = Sequel.cariIsi("select id_ns_end from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+String idpoliend2 = Sequel.cariIsi("select id_poli_end from jakportal_patientjourney where no_rawat='"+noRawat+"'");
+
+if(kosong(idcheckout)){
+
+CheckOut(noRawat,idcheckin,idnsend2,idpoliend2,tglReg,jamReg);
+
+delay(300);
+
+}
+
+}catch(Exception e){
+
+System.out.println("Error Jakportal : "+e);
+
+}
+
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -619,8 +731,8 @@ private String safeString(Object obj){
         DTPCari1 = new widget.Tanggal();
         jLabel21 = new widget.Label();
         DTPCari2 = new widget.Tanggal();
-        jLabel10 = new widget.Label();
-        cmbStatus = new widget.ComboBox();
+        jLabel12 = new widget.Label();
+        cmbStatusJakportal = new javax.swing.JComboBox<>();
         jLabel11 = new widget.Label();
         cmbTask = new widget.ComboBox();
         jLabel6 = new widget.Label();
@@ -882,20 +994,26 @@ private String safeString(Object obj){
         DTPCari2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelGlass10.add(DTPCari2);
 
-        jLabel10.setText("Status :");
-        jLabel10.setName("jLabel10"); // NOI18N
-        jLabel10.setPreferredSize(new java.awt.Dimension(45, 23));
-        panelGlass10.add(jLabel10);
+        jLabel12.setText("Status JakPortal :");
+        jLabel12.setName("jLabel12"); // NOI18N
+        jLabel12.setPreferredSize(new java.awt.Dimension(100, 23));
+        panelGlass10.add(jLabel12);
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Success", "Failed" }));
-        cmbStatus.setName("cmbStatus"); // NOI18N
-        cmbStatus.setPreferredSize(new java.awt.Dimension(80, 20));
-        cmbStatus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbStatusKeyPressed(evt);
+        cmbStatusJakportal.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        cmbStatusJakportal.setForeground(new java.awt.Color(50, 50, 50));
+        cmbStatusJakportal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Belum Checkin", "Sudah Checkin", "Checkin Selesai", "Belum Nurse Station", "Sudah Nurse Station", "Nurse Station Selesai", "Belum Poliklinik", "Sudah Poliklinik", "Poliklinik Selesai", "Belum Checkout", "Sudah Checkout", "Belum Selesai" }));
+        cmbStatusJakportal.setName("cmbStatusJakportal"); // NOI18N
+        cmbStatusJakportal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbStatusJakportalItemStateChanged(evt);
             }
         });
-        panelGlass10.add(cmbStatus);
+        cmbStatusJakportal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbStatusJakportalActionPerformed(evt);
+            }
+        });
+        panelGlass10.add(cmbStatusJakportal);
 
         jLabel11.setText("Task :");
         jLabel11.setName("jLabel11"); // NOI18N
@@ -905,6 +1023,11 @@ private String safeString(Object obj){
         cmbTask.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Check IN", "Nurse Station", "Poliklinik", "Resep Obat", "Laboratorium", "Radiologi", "Check Out", " " }));
         cmbTask.setName("cmbTask"); // NOI18N
         cmbTask.setPreferredSize(new java.awt.Dimension(100, 20));
+        cmbTask.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTaskActionPerformed(evt);
+            }
+        });
         cmbTask.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cmbTaskKeyPressed(evt);
@@ -1225,8 +1348,10 @@ private void ceklisResep(){
     for(int i=0;i<tbKunjungan.getRowCount();i++){
 
         String resep = safeString(tbKunjungan.getValueAt(i,3));
+        String idPoli = safeString(tbKunjungan.getValueAt(i,10));
+        String idPoliEnd = safeString(tbKunjungan.getValueAt(i,11));
 
-        if(!resep.equals("")){
+        if(!resep.equals("") && !idPoli.equals("") && !idPoliEnd.equals("")){
             tbKunjungan.setValueAt(resepSelected,i,0);
         }
     }
@@ -1239,8 +1364,10 @@ private void ceklisLab(){
     for(int i=0;i<tbKunjungan.getRowCount();i++){
 
         String lab = safeString(tbKunjungan.getValueAt(i,4));
+        String idPoli = safeString(tbKunjungan.getValueAt(i,10));
+        String idPoliEnd = safeString(tbKunjungan.getValueAt(i,11));
 
-        if(!lab.equals("")){
+        if(!lab.equals("") && !idPoli.equals("") && !idPoliEnd.equals("")){
             tbKunjungan.setValueAt(labSelected,i,0);
         }
     }
@@ -1253,8 +1380,10 @@ private void ceklisRadiologi(){
     for(int i=0;i<tbKunjungan.getRowCount();i++){
 
         String rad = safeString(tbKunjungan.getValueAt(i,5));
+        String idPoli = safeString(tbKunjungan.getValueAt(i,10));
+        String idPoliEnd = safeString(tbKunjungan.getValueAt(i,11));
 
-        if(!rad.equals("")){
+        if(!rad.equals("") && !idPoli.equals("") && !idPoliEnd.equals("")){
             tbKunjungan.setValueAt(radSelected,i,0);
         }
     }
@@ -1339,8 +1468,13 @@ private void ceklisRadiologi(){
 // di dalam class JakPortalLog, tapi DI LUAR BtnPrint1ActionPerformed
 // Ambil waktu aman, return null kalau datetime kosong atau 0000-00-00
 private String getSafeTime(String noRawat, String kolom) {
+
+    if(noRawat==null || noRawat.equals("")){
+        return null;
+    }
+
     String datetime = Sequel.cariIsi(
-        "select " + kolom + " from jakportal_patientjourney where no_rawat='" + noRawat + "'"
+        "SELECT jp." + kolom + " FROM jakportal_patientjourney jp WHERE jp.no_rawat='" + noRawat + "'"
     );
 
     if (datetime == null || datetime.equals("") || datetime.startsWith("0000-00-00")) {
@@ -1468,7 +1602,7 @@ this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             // cmbTask 3–7, pakai cara sama: getSafeTime + cek null
             // =========================
             } else if (cmbTask.getSelectedIndex() == 3) {
-String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney where no_rawat='" + noRawat + "'");
+String idPoli = Sequel.cariIsi("SELECT jp.id_poli FROM jakportal_patientjourney jp WHERE jp.no_rawat='" + noRawat + "'");
     
     // Ambil waktu aman
     time = getSafeTime(noRawat, (idPoli == null || idPoli.equals("")) ? "id_ns_end_datetime" : "id_poli_datetime");
@@ -1493,7 +1627,7 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
     continue;
 
             } else if (cmbTask.getSelectedIndex() == 4) {
-                String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney where no_rawat='" + noRawat + "'");
+                String idPoli = Sequel.cariIsi("SELECT jp.id_poli FROM jakportal_patientjourney jp WHERE jp.no_rawat='" + noRawat + "'");
                 if (idPoli == null || idPoli.equals("")) { JOptionPane.showMessageDialog(internalFrame1, "Pasien Belum Masuk Poliklinik"); continue; }
                 String datetime = getSafeTime(noRawat, "id_poli_datetime");
                 if (datetime == null) continue;
@@ -1501,7 +1635,7 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
                 ResepPermintaan(noRawat, idcheckin, "Non Racikan", tglReg, jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date()));
 
             } else if (cmbTask.getSelectedIndex() == 5) {
-                String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney where no_rawat='" + noRawat + "'");
+                String idPoli = Sequel.cariIsi("SELECT jp.id_poli FROM jakportal_patientjourney jp WHERE jp.no_rawat='" + noRawat + "'");
                 if (idPoli == null || idPoli.equals("")) { JOptionPane.showMessageDialog(internalFrame1, "Pasien Belum Masuk Poliklinik"); continue; }
                 String datetime = getSafeTime(noRawat, "id_poli_datetime");
                 if (datetime == null) continue;
@@ -1509,7 +1643,7 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
                 LaboratoriumPermintaan(noRawat, idcheckin, "PK", tglReg, jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date()));
 
             } else if (cmbTask.getSelectedIndex() == 6) {
-                String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney where no_rawat='" + noRawat + "'");
+                String idPoli = Sequel.cariIsi("SELECT jp.id_poli FROM jakportal_patientjourney jp WHERE jp.no_rawat='" + noRawat + "'");
                 if (idPoli == null || idPoli.equals("")) { JOptionPane.showMessageDialog(internalFrame1, "Pasien Belum Masuk Poliklinik"); continue; }
                 String datetime = getSafeTime(noRawat, "id_poli_datetime");
                 if (datetime == null) continue;
@@ -1534,10 +1668,6 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
     private void BtnPrint1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint1KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnPrint1KeyPressed
-
-    private void cmbStatusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbStatusKeyPressed
-        //        Valid.pindah(evt,CmbMenit,kddokter);
-    }//GEN-LAST:event_cmbStatusKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
         for (i = 0; i < tbKunjungan.getRowCount(); i++) {
@@ -1616,32 +1746,71 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
     }//GEN-LAST:event_BtnKeluar1KeyPressed
 
     private void BtnPrint6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint6ActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        for (i = 0; i < tbPaneDaftarResep.getRowCount(); i++) {
-            if (tbPaneDaftarResep.getValueAt(i, 0).toString().equals("true")) {
-                String noRawat = tbPaneDaftarResep.getValueAt(i, 1).toString();
-                String idPermintaan = tbPaneDaftarResep.getValueAt(i, 3).toString();
-                String noRkmMedis = Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat='" + noRawat + "'");
-                String tglReg = Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='" + noRawat + "'");
-                String kodebiaya = Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat='" + noRawat + "'");
-                String kodeBiaya = "", interval = "2", time = "", jamReg = "";
-                String idcheckin = Sequel.cariIsi("select id_checkin from jakportal_patientjourney where no_rawat='" + noRawat + "'");
-                String idValidasi = Sequel.cariIsi("select id_validasi from jakportal_patientjourney_resep where id_permintaan='" + idPermintaan + "'");
-                if (idValidasi.equals("") || idValidasi.isEmpty()) {
-                    String datetime = Sequel.cariIsi("select id_permintaan_datetime from jakportal_patientjourney_resep where id_permintaan='" + idPermintaan + "'");
-                    time = Sequel.cariIsi("select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE) ");
-                    jamReg = time.split(" ")[1];
-                    ResepValidasi(noRawat, idcheckin, idPermintaan, tglReg, jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date()));
-                } else {
-                   String datetime = Sequel.cariIsi("select id_validasi_datetime from jakportal_patientjourney_resep where id_permintaan='" + idPermintaan + "'");
-                    time = Sequel.cariIsi("select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE) ");
-                    jamReg = time.split(" ")[1];
-                    ResepPenyerahan(noRawat, idcheckin, idValidasi, tglReg, jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date()));
-                }
+    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+    for (int i = 0; i < tbPaneDaftarResep.getRowCount(); i++) {
+        if (tbPaneDaftarResep.getValueAt(i, 0).toString().equals("true")) {
+
+            String noRawat = tbPaneDaftarResep.getValueAt(i, 1).toString();
+            String idPermintaan = tbPaneDaftarResep.getValueAt(i, 3).toString();
+
+            String noRkmMedis = Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat='" + noRawat + "'");
+            String tglReg = Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='" + noRawat + "'");
+            String idcheckin = Sequel.cariIsi("select id_checkin from jakportal_patientjourney where no_rawat='" + noRawat + "'");
+
+            String time = "", jamReg = "";
+
+            String idValidasi = Sequel.cariIsi(
+                "select id_validasi from jakportal_patientjourney_resep where id_permintaan='" + idPermintaan + "'"
+            );
+
+            if (idValidasi.equals("") || idValidasi.isEmpty()) {
+
+                String datetime = Sequel.cariIsi(
+                    "select id_permintaan_datetime from jakportal_patientjourney_resep where id_permintaan='" + idPermintaan + "'"
+                );
+
+                time = Sequel.cariIsi(
+                    "select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE)"
+                );
+
+                jamReg = time.split(" ")[1];
+
+                ResepValidasi(
+                    noRawat, idcheckin, idPermintaan, tglReg,
+                    jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date())
+                );
+
+            } else {
+
+                String datetime = Sequel.cariIsi(
+                    "select id_validasi_datetime from jakportal_patientjourney_resep where id_permintaan='" + idPermintaan + "'"
+                );
+
+                time = Sequel.cariIsi(
+                    "select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE)"
+                );
+
+                jamReg = time.split(" ")[1];
+
+                ResepPenyerahan(
+                    noRawat, idcheckin, idValidasi, tglReg,
+                    jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date())
+                );
             }
         }
-        tampilResepJourney(tbPaneDaftarResep.getValueAt(tbPaneDaftarResep.getSelectedRow(), 0).toString());
-        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    // refresh tabel
+    tampilResep();
+
+    // tampil journey jika ada row dipilih
+    int row = tbPaneDaftarResep.getSelectedRow();
+    if(row > -1){
+        tampilResepJourney(tbPaneDaftarResep.getValueAt(row,1).toString());
+    }
+
+    this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrint6ActionPerformed
 
     private void BtnPrint6KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint6KeyPressed
@@ -1665,33 +1834,70 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
     }//GEN-LAST:event_BtnKeluar3KeyPressed
 
     private void BtnPrint7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint7ActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        for (i = 0; i < tbPaneDaftarLaboratorium.getRowCount(); i++) {
-            if (tbPaneDaftarLaboratorium.getValueAt(i, 0).toString().equals("true")) {
-                String noRawat = tbPaneDaftarLaboratorium.getValueAt(i, 1).toString();
-                String idPermintaan = tbPaneDaftarLaboratorium.getValueAt(i, 3).toString();
-                String noRkmMedis = Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat='" + noRawat + "'");
-                String tglReg = Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='" + noRawat + "'");
-                String kodebiaya = Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat='" + noRawat + "'");
-                String kodeBiaya = "", interval = "2", time = "", jamReg = "";
-                String idcheckin = Sequel.cariIsi("select id_checkin from jakportal_patientjourney where no_rawat='" + noRawat + "'");
-                String idSampel = Sequel.cariIsi("select id_sampel from jakportal_patientjourney_laboratorium where id_permintaan='" + idPermintaan + "'");
-                if (idSampel.equals("") || idSampel.isEmpty()) {
-                    String datetime = Sequel.cariIsi("select id_permintaan_datetime from jakportal_patientjourney_laboratorium where id_permintaan='" + idPermintaan + "'");
-                    time = Sequel.cariIsi("select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE) ");
-                    jamReg = time.split(" ")[1];
-                    LaboratoriumSampel(noRawat, idcheckin, idPermintaan, tglReg, jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date()));
-                } else {
+    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-                    String datetime = Sequel.cariIsi("select id_sampel_datetime from jakportal_patientjourney_laboratorium where id_permintaan='" + idPermintaan + "'");
-                    time = Sequel.cariIsi("select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE) ");
-                    jamReg = time.split(" ")[1];
-                    LaboratoriumHasil(noRawat, idcheckin, idSampel, tglReg, jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date()));
-                }
+    for (int i = 0; i < tbPaneDaftarLaboratorium.getRowCount(); i++) {
+        if (tbPaneDaftarLaboratorium.getValueAt(i, 0).toString().equals("true")) {
+
+            String noRawat = tbPaneDaftarLaboratorium.getValueAt(i, 1).toString();
+            String idPermintaan = tbPaneDaftarLaboratorium.getValueAt(i, 3).toString();
+
+            String tglReg = Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='" + noRawat + "'");
+            String idcheckin = Sequel.cariIsi("select id_checkin from jakportal_patientjourney where no_rawat='" + noRawat + "'");
+
+            String time = "", jamReg = "";
+
+            String idSampel = Sequel.cariIsi(
+                "select id_sampel from jakportal_patientjourney_laboratorium where id_permintaan='" + idPermintaan + "'"
+            );
+
+            if (idSampel.equals("") || idSampel.isEmpty()) {
+
+                String datetime = Sequel.cariIsi(
+                    "select id_permintaan_datetime from jakportal_patientjourney_laboratorium where id_permintaan='" + idPermintaan + "'"
+                );
+
+                time = Sequel.cariIsi(
+                    "select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE)"
+                );
+
+                jamReg = time.split(" ")[1];
+
+                LaboratoriumSampel(
+                    noRawat, idcheckin, idPermintaan, tglReg,
+                    jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date())
+                );
+
+            } else {
+
+                String datetime = Sequel.cariIsi(
+                    "select id_sampel_datetime from jakportal_patientjourney_laboratorium where id_permintaan='" + idPermintaan + "'"
+                );
+
+                time = Sequel.cariIsi(
+                    "select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE)"
+                );
+
+                jamReg = time.split(" ")[1];
+
+                LaboratoriumHasil(
+                    noRawat, idcheckin, idSampel, tglReg,
+                    jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date())
+                );
             }
         }
-        tampilLaboratoriumJourney(tbPaneDaftarLaboratorium.getValueAt(tbPaneDaftarLaboratorium.getSelectedRow(), 0).toString());
-        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    // refresh tabel
+    tampilLaboratorium();
+
+    // tampil journey jika ada row dipilih
+    int row = tbPaneDaftarLaboratorium.getSelectedRow();
+    if(row > -1){
+        tampilLaboratoriumJourney(tbPaneDaftarLaboratorium.getValueAt(row,1).toString());
+    }
+
+    this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrint7ActionPerformed
 
     private void BtnPrint7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint7KeyPressed
@@ -1699,37 +1905,104 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
     }//GEN-LAST:event_BtnPrint7KeyPressed
 
     private void BtnPrint8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint8ActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        for (i = 0; i < tbPaneDaftarRadiologi.getRowCount(); i++) {
-            if (tbPaneDaftarRadiologi.getValueAt(i, 0).toString().equals("true")) {
-                String noRawat = tbPaneDaftarRadiologi.getValueAt(i, 1).toString();
-                String idPermintaan = tbPaneDaftarRadiologi.getValueAt(i, 3).toString();
-                String noRkmMedis = Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat='" + noRawat + "'");
-                String tglReg = Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='" + noRawat + "'");
-                String kodebiaya = Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat='" + noRawat + "'");
-                String kodeBiaya = "", interval = "2", time = "", jamReg = "";
-                String idcheckin = Sequel.cariIsi("select id_checkin from jakportal_patientjourney where no_rawat='" + noRawat + "'");
-                String idSampel = Sequel.cariIsi("select id_sampel from jakportal_patientjourney_radiologi where id_permintaan='" + idPermintaan + "'");
-                if (idSampel.equals("") || idSampel.isEmpty()) {
-                    String datetime = Sequel.cariIsi("select id_permintaan_datetime from jakportal_patientjourney_radiologi where id_permintaan='" + idPermintaan + "'");
-                    time = Sequel.cariIsi("select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor()+ " MINUTE) ");
-                    jamReg = time.split(" ")[1];
-                    RadiologiSampel(noRawat, idcheckin, idPermintaan, tglReg, jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date()));
-                } else {
-                    String datetime = Sequel.cariIsi("select id_sampel_datetime from jakportal_patientjourney_radiologi where id_permintaan='" + idPermintaan + "'");
-                    time = Sequel.cariIsi("select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE) ");
-                    jamReg = time.split(" ")[1];
-                    RadiologiHasil(noRawat, idcheckin, idSampel, tglReg, jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date()));
-                }
+    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+    for (int i = 0; i < tbPaneDaftarRadiologi.getRowCount(); i++) {
+        if (tbPaneDaftarRadiologi.getValueAt(i, 0).toString().equals("true")) {
+
+            String noRawat = tbPaneDaftarRadiologi.getValueAt(i, 1).toString();
+            String idPermintaan = tbPaneDaftarRadiologi.getValueAt(i, 3).toString();
+
+            String tglReg = Sequel.cariIsi(
+                "select tgl_registrasi from reg_periksa where no_rawat='" + noRawat + "'"
+            );
+
+            String idcheckin = Sequel.cariIsi(
+                "select id_checkin from jakportal_patientjourney where no_rawat='" + noRawat + "'"
+            );
+
+            String time = "", jamReg = "";
+
+            String idSampel = Sequel.cariIsi(
+                "select id_sampel from jakportal_patientjourney_radiologi where id_permintaan='" + idPermintaan + "'"
+            );
+
+            if (idSampel.equals("") || idSampel.isEmpty()) {
+
+                String datetime = Sequel.cariIsi(
+                    "select id_permintaan_datetime from jakportal_patientjourney_radiologi where id_permintaan='" + idPermintaan + "'"
+                );
+
+                time = Sequel.cariIsi(
+                    "select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE)"
+                );
+
+                jamReg = time.split(" ")[1];
+
+                RadiologiSampel(
+                    noRawat,
+                    idcheckin,
+                    idPermintaan,
+                    tglReg,
+                    jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date())
+                );
+
+            } else {
+
+                String datetime = Sequel.cariIsi(
+                    "select id_sampel_datetime from jakportal_patientjourney_radiologi where id_permintaan='" + idPermintaan + "'"
+                );
+
+                time = Sequel.cariIsi(
+                    "select DATE_ADD('" + datetime + "',INTERVAL " + randomNomor() + " MINUTE)"
+                );
+
+                jamReg = time.split(" ")[1];
+
+                RadiologiHasil(
+                    noRawat,
+                    idcheckin,
+                    idSampel,
+                    tglReg,
+                    jamReg.split(":")[0] + ":" + jamReg.split(":")[1] + ":" + secondTime.format(new Date())
+                );
             }
         }
-        tampilRadiologiJourney(tbPaneDaftarRadiologi.getValueAt(tbPaneDaftarRadiologi.getSelectedRow(), 0).toString());
-        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    // refresh tabel radiologi
+    tampilRadiologi();
+
+    // tampil journey jika ada row dipilih
+    int row = tbPaneDaftarRadiologi.getSelectedRow();
+    if (row > -1) {
+        tampilRadiologiJourney(tbPaneDaftarRadiologi.getValueAt(row, 1).toString());
+    }
+
+    this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrint8ActionPerformed
 
     private void BtnPrint8KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrint8KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnPrint8KeyPressed
+
+    private void cmbTaskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTaskActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTaskActionPerformed
+
+    private void cmbStatusJakportalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusJakportalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbStatusJakportalActionPerformed
+
+    private void cmbStatusJakportalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbStatusJakportalItemStateChanged
+        if(evt.getStateChange()==java.awt.event.ItemEvent.SELECTED){
+        new Thread(){
+            public void run(){
+                tampil();
+            }
+        }.start();
+    }
+    }//GEN-LAST:event_cmbStatusJakportalItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -1772,7 +2045,7 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
     private widget.TextBox TCari;
     private javax.swing.JTabbedPane TabPenunjang;
     private javax.swing.JTabbedPane TabRawat;
-    private widget.ComboBox cmbStatus;
+    private javax.swing.JComboBox<String> cmbStatusJakportal;
     private widget.ComboBox cmbTask;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
@@ -1781,8 +2054,8 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
     private widget.InternalFrame internalFrame6;
     private widget.InternalFrame internalFrame8;
     private widget.InternalFrame internalFrame9;
-    private widget.Label jLabel10;
     private widget.Label jLabel11;
+    private widget.Label jLabel12;
     private widget.Label jLabel19;
     private widget.Label jLabel21;
     private widget.Label jLabel6;
@@ -1895,26 +2168,106 @@ String idPoli = Sequel.cariIsi("select id_poli from jakportal_patientjourney whe
 public void tampil() {
     Valid.tabelKosong(tabModeKunjungan);
     try {
-        ps = koneksi.prepareStatement(
+
+String kondisiStatus="";
+
+String status=cmbStatusJakportal.getSelectedItem().toString();
+
+if(status.equals("Belum Checkin")){
+    kondisiStatus=" AND IFNULL(jp.id_checkin,'')='' ";
+
+}else if(status.equals("Sudah Checkin")){
+    kondisiStatus=" AND IFNULL(jp.id_checkin,'')<>'' ";
+
+}else if(status.equals("Checkin Selesai")){
+    kondisiStatus=" AND IFNULL(jp.id_checkin_end,'')<>'' ";
+
+}else if(status.equals("Belum Nurse Station")){
+    kondisiStatus=" AND IFNULL(jp.id_ns,'')='' ";
+
+}else if(status.equals("Sudah Nurse Station")){
+    kondisiStatus=" AND IFNULL(jp.id_ns,'')<>'' ";
+
+}else if(status.equals("Nurse Station Selesai")){
+    kondisiStatus=" AND IFNULL(jp.id_ns_end,'')<>'' ";
+
+}else if(status.equals("Belum Poliklinik")){
+    kondisiStatus=" AND IFNULL(jp.id_poli,'')='' ";
+
+}else if(status.equals("Sudah Poliklinik")){
+    kondisiStatus=" AND IFNULL(jp.id_poli,'')<>'' ";
+
+}else if(status.equals("Poliklinik Selesai")){
+    kondisiStatus=" AND IFNULL(jp.id_poli_end,'')<>'' ";
+
+}else if(status.equals("Belum Checkout")){
+    kondisiStatus=" AND IFNULL(jp.id_check_out,'')='' ";
+
+}else if(status.equals("Sudah Checkout")){
+    kondisiStatus=" AND IFNULL(jp.id_check_out,'')<>'' ";
+    
+}else if(status.equals("Belum Selesai")){
+    kondisiStatus=" AND ( " +
+                  "IFNULL(jp.id_checkin,'')='' OR " +
+                  "IFNULL(jp.id_checkin_end,'')='' OR " +
+                  "IFNULL(jp.id_ns,'')='' OR " +
+                  "IFNULL(jp.id_ns_end,'')='' OR " +
+                  "IFNULL(jp.id_poli,'')='' OR " +
+                  "IFNULL(jp.id_poli_end,'')='' OR " +
+                  "IFNULL(jp.id_check_out,'')='' OR " +
+
+                  "EXISTS (SELECT 1 FROM jakportal_patientjourney_laboratorium jl " +
+                  "WHERE jl.no_rawat=rp.no_rawat AND " +
+                  "(IFNULL(jl.id_permintaan,'')='' OR IFNULL(jl.id_sampel,'')='' OR IFNULL(jl.id_hasil,'')='')) OR " +
+
+                  "EXISTS (SELECT 1 FROM jakportal_patientjourney_radiologi jr " +
+                  "WHERE jr.no_rawat=rp.no_rawat AND " +
+                  "(IFNULL(jr.id_permintaan,'')='' OR IFNULL(jr.id_sampel,'')='' OR IFNULL(jr.id_hasil,'')='')) OR " +
+
+                  "EXISTS (SELECT 1 FROM jakportal_patientjourney_resep jre " +
+                  "WHERE jre.no_rawat=rp.no_rawat AND " +
+                  "(IFNULL(jre.id_permintaan,'')='' OR IFNULL(jre.id_validasi,'')='' OR IFNULL(jre.id_penyerahan,'')='')) " +
+                  ")";
+}
+
+ps = koneksi.prepareStatement(
 "SELECT rp.no_rawat, rp.tgl_registrasi, rp.jam_reg, " +
 "jp.id_checkin, jp.id_checkin_end, jp.id_ns, jp.id_ns_end, " +
 "jp.id_poli, jp.id_poli_end, jp.id_check_out, " +
 
-"(SELECT GROUP_CONCAT(ro.no_resep SEPARATOR ', ') " +
-" FROM resep_obat ro WHERE ro.no_rawat = rp.no_rawat) AS no_resep, " +
-
-"(SELECT GROUP_CONCAT(pl.noorder SEPARATOR ', ') " +
-" FROM permintaan_lab pl WHERE pl.no_rawat = rp.no_rawat) AS no_lab, " +
-
-"(SELECT GROUP_CONCAT(pr.noorder SEPARATOR ', ') " +
-" FROM permintaan_radiologi pr WHERE pr.no_rawat = rp.no_rawat) AS no_rad " +
+"(SELECT GROUP_CONCAT(ro.no_resep SEPARATOR ', ') FROM resep_obat ro WHERE ro.no_rawat=rp.no_rawat) AS no_resep, " +
+"(SELECT GROUP_CONCAT(pl.noorder SEPARATOR ', ') FROM permintaan_lab pl WHERE pl.no_rawat=rp.no_rawat) AS no_lab, " +
+"(SELECT GROUP_CONCAT(pr.noorder SEPARATOR ', ') FROM permintaan_radiologi pr WHERE pr.no_rawat=rp.no_rawat) AS no_rad " +
 
 "FROM reg_periksa rp " +
-"LEFT JOIN jakportal_patientjourney jp ON rp.no_rawat = jp.no_rawat " +
-"INNER JOIN poliklinik p ON rp.kd_poli = p.kd_poli " +
+"LEFT JOIN jakportal_patientjourney jp ON rp.no_rawat=jp.no_rawat " +
+"INNER JOIN poliklinik p ON rp.kd_poli=p.kd_poli " +
+
 "WHERE rp.tgl_registrasi BETWEEN ? AND ? " +
-"AND p.status = '1' " +
-"AND rp.kd_poli <> 'U0035'"
+"AND p.status='1' " +
+"AND rp.kd_poli <> 'U0035' " +
+
+kondisiStatus +
+
+"AND ( " +
+"IFNULL(jp.id_checkin,'')='' OR " +
+"IFNULL(jp.id_checkin_end,'')='' OR " +
+"IFNULL(jp.id_ns,'')='' OR " +
+"IFNULL(jp.id_ns_end,'')='' OR " +
+"IFNULL(jp.id_poli,'')='' OR " +
+"IFNULL(jp.id_poli_end,'')='' OR " +
+"IFNULL(jp.id_check_out,'')='' " +
+
+"OR EXISTS (SELECT 1 FROM jakportal_patientjourney_laboratorium jl " +
+"WHERE jl.no_rawat=rp.no_rawat AND (IFNULL(jl.id_permintaan,'')='' OR IFNULL(jl.id_sampel,'')='' OR IFNULL(jl.id_hasil,'')='')) " +
+
+"OR EXISTS (SELECT 1 FROM jakportal_patientjourney_radiologi jr " +
+"WHERE jr.no_rawat=rp.no_rawat AND (IFNULL(jr.id_permintaan,'')='' OR IFNULL(jr.id_sampel,'')='' OR IFNULL(jr.id_hasil,'')='')) " +
+
+"OR EXISTS (SELECT 1 FROM jakportal_patientjourney_resep jre " +
+"WHERE jre.no_rawat=rp.no_rawat AND (IFNULL(jre.id_permintaan,'')='' OR IFNULL(jre.id_validasi,'')='' OR IFNULL(jre.id_penyerahan,'')='')) " +
+
+")"
 );
 
         ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
@@ -1966,10 +2319,11 @@ public void tampilResep() {
     Valid.tabelKosong(tabModeResep);
     try {
         ps = koneksi.prepareStatement(
-                "SELECT * from jakportal_patientjourney_resep " +
-                "join reg_periksa ON jakportal_patientjourney_resep.no_rawat=reg_periksa.no_rawat " +
-                "where tgl_registrasi between ? and ? " +
-                "group by jakportal_patientjourney_resep.no_rawat");
+            "SELECT * FROM jakportal_patientjourney_resep " +
+            "JOIN reg_periksa ON jakportal_patientjourney_resep.no_rawat=reg_periksa.no_rawat " +
+            "WHERE tgl_registrasi BETWEEN ? AND ? " +
+            "AND (IFNULL(id_validasi,'')='' OR IFNULL(id_penyerahan,'')='')"
+        );
 
         try {
             ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
@@ -1989,19 +2343,15 @@ public void tampilResep() {
 
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            e.printStackTrace();   // ← TAMBAHKAN DI SINI
+            e.printStackTrace();
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
         }
 
     } catch (Exception e) {
         System.out.println("Notifikasi : " + e);
-        e.printStackTrace();   // ← TAMBAHKAN JUGA DI SINI
+        e.printStackTrace();
     }
 
     LCount.setText("" + tabModeResep.getRowCount());
@@ -2067,47 +2417,44 @@ public void tampilResep() {
 //        }
 //        LCount.setText("" + tabModeLaboratorium.getRowCount());
 Valid.tabelKosong(tabModeLaboratorium);
+try {
+    ps = koneksi.prepareStatement(
+        "SELECT * FROM jakportal_patientjourney_laboratorium " +
+        "JOIN reg_periksa ON jakportal_patientjourney_laboratorium.no_rawat=reg_periksa.no_rawat " +
+        "WHERE tgl_registrasi BETWEEN ? AND ? " +
+        "AND (IFNULL(id_sampel,'')='' OR IFNULL(id_hasil,'')='')"
+    );
+
     try {
-        ps = koneksi.prepareStatement(
-                "SELECT * from jakportal_patientjourney_laboratorium " +
-                "join reg_periksa ON jakportal_patientjourney_laboratorium.no_rawat=reg_periksa.no_rawat " +
-                "where tgl_registrasi between ? and ? " +
-                "group by jakportal_patientjourney_laboratorium.no_rawat");
+        ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
+        ps.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
+        rs = ps.executeQuery();
 
-        try {
-            ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
-            ps.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                tabModeLaboratorium.addRow(new Object[]{
-                    false,
-                    rs.getString("no_rawat"),
-                    rs.getString("id_checkin"),
-                    rs.getString("id_permintaan"),
-                    rs.getString("id_sampel"),
-                    rs.getString("id_hasil")
-                });
-            }
-
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            e.printStackTrace();   // ← TAMBAHKAN DI SINI
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
+        while (rs.next()) {
+            tabModeLaboratorium.addRow(new Object[]{
+                false,
+                rs.getString("no_rawat"),
+                rs.getString("id_checkin"),
+                rs.getString("id_permintaan"),
+                rs.getString("id_sampel"),
+                rs.getString("id_hasil")
+            });
         }
 
     } catch (Exception e) {
-        System.out.println("Notifikasi : " + e);
-        e.printStackTrace();   // ← TAMBAHKAN JUGA DI SINI
+        System.out.println("Notif : " + e);
+        e.printStackTrace();
+    } finally {
+        if (rs != null) rs.close();
+        if (ps != null) ps.close();
     }
 
-    LCount.setText("" + tabModeLaboratorium.getRowCount());
+} catch (Exception e) {
+    System.out.println("Notifikasi : " + e);
+    e.printStackTrace();
+}
+
+LCount.setText("" + tabModeLaboratorium.getRowCount());
     }
 
     public void tampilLaboratoriumJourney(String noRawat) {
@@ -2170,47 +2517,44 @@ Valid.tabelKosong(tabModeLaboratorium);
 //        }
 //        LCount.setText("" + tabModeRadiologi.getRowCount());
 Valid.tabelKosong(tabModeRadiologi);
+try {
+    ps = koneksi.prepareStatement(
+        "SELECT * FROM jakportal_patientjourney_radiologi " +
+        "JOIN reg_periksa ON jakportal_patientjourney_radiologi.no_rawat=reg_periksa.no_rawat " +
+        "WHERE tgl_registrasi BETWEEN ? AND ? " +
+        "AND (IFNULL(id_sampel,'')='' OR IFNULL(id_hasil,'')='')"
+    );
+
     try {
-        ps = koneksi.prepareStatement(
-                "SELECT * from jakportal_patientjourney_radiologi " +
-                "join reg_periksa ON jakportal_patientjourney_radiologi.no_rawat=reg_periksa.no_rawat " +
-                "where tgl_registrasi between ? and ? " +
-                "group by jakportal_patientjourney_radiologi.no_rawat");
+        ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
+        ps.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
+        rs = ps.executeQuery();
 
-        try {
-            ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
-            ps.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                tabModeRadiologi.addRow(new Object[]{
-                    false,
-                    rs.getString("no_rawat"),
-                    rs.getString("id_checkin"),
-                    rs.getString("id_permintaan"),
-                    rs.getString("id_sampel"),
-                    rs.getString("id_hasil")
-                });
-            }
-
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            e.printStackTrace();   // ← TAMBAHKAN DI SINI
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
+        while (rs.next()) {
+            tabModeRadiologi.addRow(new Object[]{
+                false,
+                rs.getString("no_rawat"),
+                rs.getString("id_checkin"),
+                rs.getString("id_permintaan"),
+                rs.getString("id_sampel"),
+                rs.getString("id_hasil")
+            });
         }
 
     } catch (Exception e) {
-        System.out.println("Notifikasi : " + e);
-        e.printStackTrace();   // ← TAMBAHKAN JUGA DI SINI
+        System.out.println("Notif : " + e);
+        e.printStackTrace();
+    } finally {
+        if (rs != null) rs.close();
+        if (ps != null) ps.close();
     }
 
-    LCount.setText("" + tabModeRadiologi.getRowCount());
+} catch (Exception e) {
+    System.out.println("Notifikasi : " + e);
+    e.printStackTrace();
+}
+
+LCount.setText("" + tabModeRadiologi.getRowCount());
     }
 
     public void tampilRadiologiJourney(String noRawat) {
@@ -2463,32 +2807,76 @@ Valid.tabelKosong(tabModeRadiologi);
     }
 
     private void ResepPermintaan(String noRawatpasien, String idCheckin, String JenisResep, String tglReg, String jamReg) {
-        try {
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("x-username", koneksiDB.JAKPORTALUSERNAME());
-            headers.add("x-token", api.Token());
-            requestJson = "{"
-                    + "\"idcheckin\": \"" + idCheckin + "\","
-                    + "\"jenis\": \"" + JenisResep + "\","
-                    + "\"tanggal\": \"" + tglReg + "\","
-                    + "\"jam\": \"" + jamReg + "\""
-                    + "}";
-//            System.out.println("Notifikasi : " + requestJson);
-            requestEntity = new HttpEntity(requestJson, headers);
-            URL = koneksiDB.JAKPORTALURL();
-            root = mapper.readTree(api.getRest().exchange(URL + "/reseppermintaan", HttpMethod.POST, requestEntity, String.class).getBody());
-            response = root.path("response");
-//            System.out.println("Notifikasi : " + root);
-            Sequel.menyimpantf2("jakportal_patientjourney_resep", "?,?,?,?,?,?,?,?", "No.Rawat", 8,
-                    new String[]{noRawatpasien, idCheckin, response.path("idreseppermintaan").asText(), tglReg + " " + jamReg, "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00"});
+try {
 
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
+        // Ambil No Resep dari tabel resep_dokter
+        String noResep = Sequel.cariIsi(
+    "SELECT no_resep FROM resep_dokter WHERE no_rawat=? ORDER BY tgl_perawatan DESC, jam DESC LIMIT 1",
+    noRawatpasien
+);
+
+if(noResep == null || noResep.equals("")){
+    noResep = Sequel.cariIsi(
+        "SELECT no_resep FROM resep_obat WHERE no_rawat=? ORDER BY tgl_perawatan DESC, jam DESC LIMIT 1",
+        noRawatpasien
+    );
+}
+
+        headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("x-username", koneksiDB.JAKPORTALUSERNAME());
+        headers.add("x-token", api.Token());
+
+        requestJson = "{"
+                + "\"idcheckin\": \"" + idCheckin + "\","
+                + "\"noresep\": \"" + noResep + "\","
+                + "\"jenis\": \"" + JenisResep + "\","
+                + "\"tanggal\": \"" + tglReg + "\","
+                + "\"jam\": \"" + jamReg + "\""
+                + "}";
+
+        // System.out.println("Notifikasi : " + requestJson);
+
+        requestEntity = new HttpEntity(requestJson, headers);
+        URL = koneksiDB.JAKPORTALURL();
+
+        root = mapper.readTree(
+                api.getRest().exchange(
+                        URL + "/reseppermintaan",
+                        HttpMethod.POST,
+                        requestEntity,
+                        String.class
+                ).getBody()
+        );
+
+        response = root.path("response");
+
+        // Simpan hasil ke tabel lokal
+        Sequel.menyimpantf2(
+                "jakportal_patientjourney_resep",
+                "?,?,?,?,?,?,?,?",
+                "No.Rawat",
+                8,
+                new String[]{
+                    noRawatpasien,
+                    idCheckin,
+                    response.path("idreseppermintaan").asText(),
+                    tglReg + " " + jamReg,
+                    "",
+                    "0000-00-00 00:00:00",
+                    "",
+                    "0000-00-00 00:00:00"
+                }
+        );
+
+    } catch (Exception ex) {
+
+        System.out.println("Notifikasi : " + ex);
+
+        if (ex.toString().contains("UnknownHostException")) {
+            JOptionPane.showMessageDialog(rootPane, "Koneksi ke server Dinkes terputus...!");
         }
+    }
     }
 
     private void ResepValidasi(String noRawatpasien, String idCheckin, String idPermintaan, String tglReg, String jamReg) {
@@ -2548,30 +2936,65 @@ Valid.tabelKosong(tabModeRadiologi);
     }
 
     private void LaboratoriumPermintaan(String noRawatpasien, String idCheckin, String JenisLab, String tglReg, String jamReg) {
-        try {
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("x-username", koneksiDB.JAKPORTALUSERNAME());
-            headers.add("x-token", api.Token());
-            requestJson = "{"
-                    + "\"idcheckin\": \"" + idCheckin + "\","
-                    + "\"jenis\": \"" + JenisLab + "\","
-                    + "\"tanggal\": \"" + tglReg + "\","
-                    + "\"jam\": \"" + jamReg + "\""
-                    + "}";
-            requestEntity = new HttpEntity(requestJson, headers);
-            URL = koneksiDB.JAKPORTALURL();
-            root = mapper.readTree(api.getRest().exchange(URL + "/labpermintaan", HttpMethod.POST, requestEntity, String.class).getBody());
-            response = root.path("response");
-            Sequel.menyimpantf2("jakportal_patientjourney_laboratorium", "?,?,?,?,?,?,?,?", "No.Rawat", 8,
-                    new String[]{noRawatpasien, idCheckin, response.path("idlabpermintaan").asText(), tglReg + " " + jamReg, "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00"});
+try {
 
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
+        // Ambil No Order Lab dari SIMRS
+        String noOrder = Sequel.cariIsi(
+            "SELECT noorder FROM permintaan_lab WHERE no_rawat=? ORDER BY tgl_permintaan DESC, jam_permintaan DESC LIMIT 1",
+            noRawatpasien
+        );
+
+        headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("x-username", koneksiDB.JAKPORTALUSERNAME());
+        headers.add("x-token", api.Token());
+
+        requestJson = "{"
+                + "\"idcheckin\": \"" + idCheckin + "\","
+                + "\"noorder\": \"" + noOrder + "\","
+                + "\"jenis\": \"" + JenisLab + "\","
+                + "\"tanggal\": \"" + tglReg + "\","
+                + "\"jam\": \"" + jamReg + "\""
+                + "}";
+
+        requestEntity = new HttpEntity(requestJson, headers);
+        URL = koneksiDB.JAKPORTALURL();
+
+        root = mapper.readTree(
+                api.getRest().exchange(
+                        URL + "/labpermintaan",
+                        HttpMethod.POST,
+                        requestEntity,
+                        String.class
+                ).getBody()
+        );
+
+        response = root.path("response");
+
+        Sequel.menyimpantf2(
+                "jakportal_patientjourney_laboratorium",
+                "?,?,?,?,?,?,?,?",
+                "No.Rawat",
+                8,
+                new String[]{
+                    noRawatpasien,
+                    idCheckin,
+                    response.path("idlabpermintaan").asText(),
+                    tglReg + " " + jamReg,
+                    "",
+                    "0000-00-00 00:00:00",
+                    "",
+                    "0000-00-00 00:00:00"
+                }
+        );
+
+    } catch (Exception ex) {
+        System.out.println("Notifikasi : " + ex);
+
+        if (ex.toString().contains("UnknownHostException")) {
+            JOptionPane.showMessageDialog(rootPane, "Koneksi ke server Dinkes terputus...!");
         }
+    }
     }
 
     private void LaboratoriumSampel(String noRawatpasien, String idCheckin, String idPermintaan, String tglReg, String jamReg) {
@@ -2631,29 +3054,64 @@ Valid.tabelKosong(tabModeRadiologi);
     }
 
     private void RadiologiPermintaan(String noRawatpasien, String idCheckin, String tglReg, String jamReg) {
-        try {
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("x-username", koneksiDB.JAKPORTALUSERNAME());
-            headers.add("x-token", api.Token());
-            requestJson = "{"
-                    + "\"idcheckin\": \"" + idCheckin + "\","
-                    + "\"tanggal\": \"" + tglReg + "\","
-                    + "\"jam\": \"" + jamReg + "\""
-                    + "}";
-            requestEntity = new HttpEntity(requestJson, headers);
-            URL = koneksiDB.JAKPORTALURL();
-            root = mapper.readTree(api.getRest().exchange(URL + "/radiologipermintaan", HttpMethod.POST, requestEntity, String.class).getBody());
-            response = root.path("response");
-            Sequel.menyimpantf2("jakportal_patientjourney_radiologi", "?,?,?,?,?,?,?,?", "No.Rawat", 8,
-                    new String[]{noRawatpasien, idCheckin, response.path("idradiologipermintaan").asText(), tglReg + " " + jamReg, "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00"});
+try {
 
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
+        // Ambil No Order Radiologi dari SIMRS
+        String noOrder = Sequel.cariIsi(
+            "SELECT noorder FROM permintaan_radiologi WHERE no_rawat=? ORDER BY tgl_permintaan DESC, jam_permintaan DESC LIMIT 1",
+            noRawatpasien
+        );
+
+        headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("x-username", koneksiDB.JAKPORTALUSERNAME());
+        headers.add("x-token", api.Token());
+
+        requestJson = "{"
+                + "\"idcheckin\": \"" + idCheckin + "\","
+                + "\"noorder\": \"" + noOrder + "\","
+                + "\"tanggal\": \"" + tglReg + "\","
+                + "\"jam\": \"" + jamReg + "\""
+                + "}";
+
+        requestEntity = new HttpEntity(requestJson, headers);
+        URL = koneksiDB.JAKPORTALURL();
+
+        root = mapper.readTree(
+                api.getRest().exchange(
+                        URL + "/radiologipermintaan",
+                        HttpMethod.POST,
+                        requestEntity,
+                        String.class
+                ).getBody()
+        );
+
+        response = root.path("response");
+
+        Sequel.menyimpantf2(
+                "jakportal_patientjourney_radiologi",
+                "?,?,?,?,?,?,?,?",
+                "No.Rawat",
+                8,
+                new String[]{
+                    noRawatpasien,
+                    idCheckin,
+                    response.path("idradiologipermintaan").asText(),
+                    tglReg + " " + jamReg,
+                    "",
+                    "0000-00-00 00:00:00",
+                    "",
+                    "0000-00-00 00:00:00"
+                }
+        );
+
+    } catch (Exception ex) {
+        System.out.println("Notifikasi : " + ex);
+
+        if (ex.toString().contains("UnknownHostException")) {
+            JOptionPane.showMessageDialog(rootPane, "Koneksi ke server Dinkes terputus...!");
         }
+    }
     }
 
     private void RadiologiSampel(String noRawatpasien, String idCheckin, String idPermintaan, String tglReg, String jamReg) {
@@ -2740,6 +3198,7 @@ Valid.tabelKosong(tabModeRadiologi);
             }
         }
     }
+    
 
 //    private class BackgroundWorker extends SwingWorker<String, Integer> {
 //
