@@ -209,6 +209,7 @@ public final class DlgReg extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     public  DlgPasien pasien=new DlgPasien(null,false);
+    private DlgPRB prb = new DlgPRB(null, false);
     public  DlgCariDokter dokter=new DlgCariDokter(null,false);
     public  DlgCariDokter2 dokter2=new DlgCariDokter2(null,false);
     private DlgCariPoli poli=new DlgCariPoli(null,false);
@@ -1132,6 +1133,7 @@ public final class DlgReg extends javax.swing.JDialog {
         ppBerkasDigital = new javax.swing.JMenuItem();
         ppIKP = new javax.swing.JMenuItem();
         inputSITB = new javax.swing.JMenuItem();
+        ppPRB = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         MnCheckList = new javax.swing.JMenuItem();
         MnCheckList1 = new javax.swing.JMenuItem();
@@ -3835,6 +3837,22 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         });
         MenuInputData.add(inputSITB);
+
+        ppPRB.setBackground(new java.awt.Color(255, 255, 254));
+        ppPRB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPRB.setForeground(new java.awt.Color(50, 50, 50));
+        ppPRB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPRB.setText("Catatan Untuk Pasien");
+        ppPRB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPRB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPRB.setName("ppPRB"); // NOI18N
+        ppPRB.setPreferredSize(new java.awt.Dimension(200, 26));
+        ppPRB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPRBBtnPrintActionPerformed(evt);
+            }
+        });
+        MenuInputData.add(ppPRB);
 
         jPopupMenu1.add(MenuInputData);
 
@@ -6565,7 +6583,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(60, 23));
         panelGlass7.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-03-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6578,7 +6596,7 @@ public final class DlgReg extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(24, 23));
         panelGlass7.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-03-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6721,6 +6739,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(TDokter);
         TDokter.setBounds(183, 102, 209, 23);
 
+        TNoRw.setEditable(false);
         TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -6746,7 +6765,7 @@ public final class DlgReg extends javax.swing.JDialog {
         FormInput.add(jLabel9);
         jLabel9.setBounds(165, 72, 36, 23);
 
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-03-2026" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -7235,6 +7254,40 @@ public final class DlgReg extends javax.swing.JDialog {
         pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pasien.setLocationRelativeTo(internalFrame1);
         pasien.setVisible(true);
+        
+        
+           pasien.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                String noRM = pasien.getNoRM();
+                if (!noRM.trim().isEmpty()) {
+                    TNoRM.setText(noRM);
+
+                    // 🔥 CEK ISI OBAT KRONIS DULU
+                    String catatanObat = Sequel.cariIsi(
+                        "SELECT CONCAT('Pasien dengan ', a.nm_pasien, ' telah mendapatkan obat kronis kurang dari 1 bulan yang lalu', '\n\n', " +
+                        "GROUP_CONCAT(CONCAT('pada tanggal ', c.tgl_perawatan, ' (', d.nama_brng, ' (', c.jml, ')') ORDER BY c.tgl_perawatan DESC SEPARATOR '\n')) " +
+                        "FROM pasien a INNER JOIN reg_periksa b ON b.no_rkm_medis = a.no_rkm_medis " +
+                        "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
+                        "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
+                        "INNER JOIN golongan_barang e ON e.kode = d.kode_golongan " +
+                        "WHERE a.no_rkm_medis = ? AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) " +
+                        "AND d.kode_golongan IN ('G04', 'G05') GROUP BY a.no_rkm_medis, a.nm_pasien", 
+                        noRM
+                    );
+
+                    // 🔥 JIKA ADA ISI BARU BUKA DlgPRB
+                    if (!catatanObat.trim().isEmpty()) {
+                        prb.setNoRm(noRM);
+                        prb.setSize(720, 330);
+                        prb.setLocationRelativeTo(internalFrame1);
+                        prb.setVisible(true);
+                        internalFrame1.setCursor(Cursor.getDefaultCursor());
+                    }
+                    // Jika kosong → DlgPRB TIDAK DIBUKA
+                }
+            }
+        });
 }//GEN-LAST:event_BtnPasienActionPerformed
 
     private void THbngnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_THbngnKeyPressed
@@ -10205,6 +10258,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
                 }else {
                     DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
+                    DlgPRB prb = new DlgPRB(null, false);
                     resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     resep.setLocationRelativeTo(internalFrame1);
                     resep.setNoRm(TNoRw.getText(),new Date(),CmbJam.getSelectedItem().toString(),CmbMenit.getSelectedItem().toString(),CmbDetik.getSelectedItem().toString(),
@@ -10212,6 +10266,29 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                     resep.isCek();
                     resep.tampilobat();
                     resep.setVisible(true);
+                    
+                    // 🔥 AUTO CEK & BUKA DlgPRB setelah Pemberian Obat
+                    String noRM = TNoRM.getText();  // Atau ambil dari pasien
+                    String catatanObat = Sequel.cariIsi(
+                        "SELECT CONCAT('Pasien ', e.png_jawab, ' dengan nama ', a.nm_pasien, ' telah mendapatkan obat PRB kurang dari 1 bulan yang lalu', '\\n\\n', " +
+                        "GROUP_CONCAT(CONCAT('pada tanggal ', DATE_FORMAT(b.tgl_registrasi,'%Y-%m-%d'), ' (', d.nama_brng, ' (', c.jml, ')') " +
+                        "ORDER BY b.tgl_registrasi DESC SEPARATOR '\\n')) " +
+                        "FROM pasien a INNER JOIN reg_periksa b ON b.no_rkm_medis = a.no_rkm_medis " +
+                        "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
+                        "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
+                        "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
+                        "WHERE a.no_rkm_medis = ? AND b.tgl_registrasi >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND b.kd_pj='BPJ' " +
+                        "GROUP BY a.no_rkm_medis, a.nm_pasien", 
+                        noRM
+                    );
+
+                    if (!catatanObat.trim().isEmpty()) {
+                        prb.setNoRm(noRM);
+                        prb.setSize(720, 330);
+                        prb.setLocationRelativeTo(internalFrame1);
+                        prb.toFront();
+                        prb.setVisible(true);
+                    }
                 }    
             }
         }
@@ -14693,6 +14770,24 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }        // TODO add your handling code here:
     }//GEN-LAST:event_inputSITBBtnPrintActionPerformed
 
+    private void ppPRBBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPRBBtnPrintActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
+            TNoRw.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgPRB prb=new DlgPRB(null,false);
+            prb.setNoRm(TNoRM.getText());
+            prb.setSize(720,330);
+            prb.setLocationRelativeTo(internalFrame1);
+            prb.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_ppPRBBtnPrintActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -15115,6 +15210,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private javax.swing.JMenuItem ppIKP;
     private javax.swing.JMenuItem ppIKP1;
     private javax.swing.JMenuItem ppMonitoringAsuhanGizi;
+    private javax.swing.JMenuItem ppPRB;
     private javax.swing.JMenuItem ppPasienCorona;
     private javax.swing.JMenuItem ppPerawatanCorona;
     private javax.swing.JMenuItem ppPewsRalan;
@@ -15567,6 +15663,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         ppRiwayat.setEnabled(akses.getresume_pasien());
         ppRiwayat1.setEnabled(akses.getresume_pasien());
         ppCatatanPasien.setEnabled(akses.getcatatan_pasien());
+        ppPRB.setEnabled(akses.getcatatan_pasien());
         MnPoliInternal.setEnabled(akses.getrujukan_poli_internal());
         MnHapusRujukan.setEnabled(akses.getrujukan_poli_internal());        
         ppIKP.setEnabled(akses.getinsiden_keselamatan_pasien());

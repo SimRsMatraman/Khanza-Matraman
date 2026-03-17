@@ -1610,6 +1610,7 @@ public class DlgPasien extends javax.swing.JDialog {
         ppCatatanPasien = new javax.swing.JMenuItem();
         ppGabungRM = new javax.swing.JMenuItem();
         ppPasienCorona = new javax.swing.JMenuItem();
+        ppPRB = new javax.swing.JMenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         Kd2 = new widget.TextBox();
         DlgDemografi = new javax.swing.JDialog();
@@ -2669,6 +2670,21 @@ public class DlgPasien extends javax.swing.JDialog {
         });
         jPopupMenu1.add(ppPasienCorona);
 
+        ppPRB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppPRB.setForeground(new java.awt.Color(50, 50, 50));
+        ppPRB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppPRB.setText("Catatan Untuk Pasien");
+        ppPRB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppPRB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppPRB.setName("ppPRB"); // NOI18N
+        ppPRB.setPreferredSize(new java.awt.Dimension(220, 26));
+        ppPRB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppPRBBtnPrintActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(ppPRB);
+
         Kd2.setName("Kd2"); // NOI18N
         Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
 
@@ -3331,7 +3347,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(4, 102, 95, 23);
 
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-10-2025" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -3463,7 +3479,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(TKtp);
         TKtp.setBounds(743, 132, 130, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-10-2025" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-10-2025" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -8541,6 +8557,24 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         Valid.pindah(evt,NmIbu,Saudara);
     }//GEN-LAST:event_CmbKeluargaKeyPressed
 
+    private void ppPRBBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPRBBtnPrintActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data pasien sudah habis...!!!!");
+            TNo.requestFocus();
+        }else if(TNm.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu data pasien pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            DlgPRB prb=new DlgPRB(null,true);
+            prb.setNoRm(TNo.getText());
+            prb.setSize(720,330);
+            prb.setLocationRelativeTo(internalFrame1);
+            prb.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_ppPRBBtnPrintActionPerformed
+
     /**
      * @data args the command line arguments
      */
@@ -8849,6 +8883,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
     private javax.swing.JMenuItem ppGrafikPerPekerjaan;
     private javax.swing.JMenuItem ppGrafikjkbayi;
     private javax.swing.JMenuItem ppKelahiranBayi;
+    private javax.swing.JMenuItem ppPRB;
     private javax.swing.JMenuItem ppPasienCorona;
     private javax.swing.JMenuItem ppRegistrasi;
     private javax.swing.JMenuItem ppRegistrasi1;
@@ -9954,6 +9989,7 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
         ppGabungRM.setEnabled(akses.getgabung_rm());
         ppRiwayat.setEnabled(akses.getresume_pasien());
         ppCatatanPasien.setEnabled(akses.getcatatan_pasien());
+        ppPRB.setEnabled(akses.getcatatan_pasien());
         ppPasienCorona.setEnabled(akses.getpasien_corona());
         asalform=akses.getform();
     }
@@ -10114,5 +10150,9 @@ private void KabupatenMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
                 System.out.println("Notif : "+e);
             } 
         }
+    }
+    
+    public String getNoRM() {
+        return TNo.getText();
     }
 }

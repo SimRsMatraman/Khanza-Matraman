@@ -8470,26 +8470,80 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                         jmlparsial = Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 17).toString());
                     }
                     if (jmlparsial > 0) {
-                        DlgPeresepanDokter resep = new DlgPeresepanDokter(null, false);
-                        resep.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                        DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
+                        DlgPRB prb = new DlgPRB(null, false);
+                        resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         resep.setLocationRelativeTo(internalFrame1);
                         resep.setNoRm(TNoRw.getText(), new Date(), Jam.getText().substring(0, 2), Jam.getText().substring(3, 5), Jam.getText().substring(6, 8),
-                                tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 1).toString(), "ralan");
+                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 1).toString(), "ralan");
                         resep.isCek();
                         resep.tampilobat();
-                        resep.setVisible(true);
+                        resep.setVisible(true); 
+                        resep.toFront();
+                        resep.repaint();
+                        resep.requestFocus();
+
+                        // 🔥 AUTO CEK & BUKA DlgPRB setelah Pemberian Obat
+                        String noRM = TNoRMCari.getText();  // Atau ambil dari pasien
+                        String catatanObat = Sequel.cariIsi(
+                            "SELECT CONCAT('Pasien ', e.png_jawab, ' dengan nama ', a.nm_pasien, ' telah mendapatkan obat PRB kurang dari 1 bulan yang lalu', '\\n\\n', " +
+                            "GROUP_CONCAT(CONCAT('pada tanggal ', DATE_FORMAT(b.tgl_registrasi,'%Y-%m-%d'), ' (', d.nama_brng, ' (', c.jml, ')') " +
+                            "ORDER BY b.tgl_registrasi DESC SEPARATOR '\\n')) " +
+                            "FROM pasien a INNER JOIN reg_periksa b ON b.no_rkm_medis = a.no_rkm_medis " +
+                            "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
+                            "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
+                            "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
+                            "WHERE a.no_rkm_medis = ? AND b.tgl_registrasi >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND b.kd_pj='BPJ' " +
+                            "GROUP BY a.no_rkm_medis, a.nm_pasien", 
+                            noRM
+                        );
+
+                        if (!catatanObat.trim().isEmpty()) {
+                            prb.setNoRm(noRM);
+                            prb.setSize(720, 330);
+                            prb.setLocationRelativeTo(internalFrame1);
+                            prb.toFront();
+                            prb.setVisible(true);
+                        }
                     } else {
                         if (Sequel.cariRegistrasi(TNoRw.getText()) > 0) {
                             JOptionPane.showMessageDialog(rootPane, "Data billing sudah terverifikasi ..!!");
                         } else {
-                            DlgPeresepanDokter resep = new DlgPeresepanDokter(null, false);
-                            resep.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                            DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
+                            DlgPRB prb = new DlgPRB(null, false);
+                            resep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             resep.setLocationRelativeTo(internalFrame1);
                             resep.setNoRm(TNoRw.getText(), new Date(), Jam.getText().substring(0, 2), Jam.getText().substring(3, 5), Jam.getText().substring(6, 8),
-                                    tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 1).toString(), "ralan");
+                                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 1).toString(), "ralan");
                             resep.isCek();
                             resep.tampilobat();
                             resep.setVisible(true);
+                            resep.toFront();
+                            resep.repaint();
+                            resep.requestFocus();
+
+                            // 🔥 AUTO CEK & BUKA DlgPRB setelah Pemberian Obat
+                            String noRM = TNoRMCari.getText();  // Atau ambil dari pasien
+                            String catatanObat = Sequel.cariIsi(
+                                "SELECT CONCAT('Pasien ', e.png_jawab, ' dengan nama ', a.nm_pasien, ' telah mendapatkan obat PRB kurang dari 1 bulan yang lalu', '\\n\\n', " +
+                                "GROUP_CONCAT(CONCAT('pada tanggal ', DATE_FORMAT(b.tgl_registrasi,'%Y-%m-%d'), ' (', d.nama_brng, ' (', c.jml, ')') " +
+                                "ORDER BY b.tgl_registrasi DESC SEPARATOR '\\n')) " +
+                                "FROM pasien a INNER JOIN reg_periksa b ON b.no_rkm_medis = a.no_rkm_medis " +
+                                "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
+                                "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
+                                "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
+                                "WHERE a.no_rkm_medis = ? AND b.tgl_registrasi >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND b.kd_pj='BPJ' " +
+                                "GROUP BY a.no_rkm_medis, a.nm_pasien", 
+                                noRM
+                            );
+
+                            if (!catatanObat.trim().isEmpty()) {
+                                prb.setNoRm(noRM);
+                                prb.setSize(720, 330);
+                                prb.setLocationRelativeTo(internalFrame1);
+                                prb.toFront();
+                                prb.setVisible(true);
+                            }
                         }
                     }
                 }
