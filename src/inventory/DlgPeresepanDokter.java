@@ -3964,6 +3964,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     // Row 12 teks PRB → BLOCK EDIT
                     JOptionPane.showMessageDialog(rootPane,
                         "Maaf, obatnya belum bisa diberikan lagi karena pasien sudah mendapatkannya kurang dari 1 bulan yang lalu...!!");
+                    tbResep.setValueAt(false, tbResep.getSelectedRow(), 0);
                     tbResep.setValueAt("", tbResep.getSelectedRow(), 1);
                     tbResep.changeSelection(tbResep.getSelectedRow(), 1, false, false);
                     return;
