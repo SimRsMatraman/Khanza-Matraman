@@ -436,6 +436,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         BtnKeluar = new widget.Button();
         FormInput = new widget.PanelBiasa();
         TNoRw = new widget.TextBox();
+        TNoRM = new widget.TextBox();
         TPasien = new widget.TextBox();
         KdDokter = new widget.TextBox();
         NmDokter = new widget.TextBox();
@@ -701,6 +702,15 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         FormInput.add(TNoRw);
         TNoRw.setBounds(75, 12, 120, 23);
 
+        TNoRM.setName("TNoRM"); // NOI18N
+        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNoRMKeyPressed(evt);
+            }
+        });
+        FormInput.add(TNoRM);
+        TNoRM.setBounds(1350, 110, 140, 23);
+
         TPasien.setEditable(false);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
@@ -767,7 +777,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-03-2025" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2026" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1590,6 +1600,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         // TODO add your handling code here:
     }//GEN-LAST:event_etterKeyPressed
 
+    private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TNoRMKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1634,6 +1648,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
     private widget.TextBox TCari;
+    private widget.TextBox TNoRM;
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
     private javax.swing.JTabbedPane TabRawat;
@@ -1753,6 +1768,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         
         try {
             qrystokkosong = "";
+            TNoRM.setText(Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText().trim()));
             if(STOKKOSONGRESEP.equals("no")){
                 qrystokkosong = " and gudangbarang.stok>0 ";
             }
@@ -1763,26 +1779,30 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     "databarang.kode_sat, (databarang.h_beli+(databarang.h_beli*?)) as harga, " +
                     "databarang.letak_barang, industrifarmasi.nama_industri, databarang.h_beli, " +
                     "SUM(gudangbarang.stok) as stok, " +
-                    "CASE WHEN pernah_diberikan.kode_brng IS NOT NULL " +
-                    "THEN 'Obat ini sudah diberikan dalam waktu kurang dari 1 bulan terakhir.' ELSE '' END as status_terakhir " +
+                    "CASE WHEN pernah_diberikan.kode_brng IS NOT NULL \n" +
+                    "AND databarang.kode_golongan IN ( 'G04', 'G05' ) THEN\n" +
+                    "'Obat kronis ini sudah diberikan dalam waktu kurang dari 1 bulan terakhir.' ELSE '' \n" +
+                    "END AS status_terakhir " +
                     "FROM databarang INNER JOIN jenis ON databarang.kdjns = jenis.kdjns " +
                     "INNER JOIN industrifarmasi ON industrifarmasi.kode_industri = databarang.kode_industri " +
                     "INNER JOIN gudangbarang ON databarang.kode_brng = gudangbarang.kode_brng " +
                     "LEFT JOIN (SELECT DISTINCT c.kode_brng FROM detail_pemberian_obat c " +
-                    "INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat WHERE b.no_rawat=? " +
-                    " AND b.kd_pj='BPJ' AND b.tgl_registrasi >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)) pernah_diberikan " +
+                    "INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat WHERE b.no_rkm_medis=? " +
+                    "AND b.kd_pj='BPJ' AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND c.kode_brng IN ( SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ( 'G04', 'G05' )) " +
+                    ") AS pernah_diberikan " +
                     "ON pernah_diberikan.kode_brng = databarang.kode_brng " +
-                    "WHERE databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') " + qrystokkosong +
+                    "WHERE databarang.status='1' " + qrystokkosong +
                     (aktifkanbatch.equals("yes") ? " AND gudangbarang.no_batch<>'' AND gudangbarang.no_faktur<>''" : 
-                     " AND gudangbarang.no_batch='' AND gudangbarang.no_faktur=''") +
+                    " AND gudangbarang.no_batch='' AND gudangbarang.no_faktur=''") +
                     " AND gudangbarang.kd_bangsal=? AND (databarang.kode_brng LIKE ? OR " +
                     "databarang.nama_brng LIKE ? OR jenis.nama LIKE ? OR databarang.letak_barang LIKE ?) " +
-                    "GROUP BY databarang.kode_brng ORDER BY CASE WHEN pernah_diberikan.kode_brng IS NOT NULL " +
-                    "THEN 0 ELSE 1 END, databarang.nama_brng";
+                    "GROUP BY databarang.kode_brng " +
+                    "ORDER BY CASE WHEN pernah_diberikan.kode_brng IS NOT NULL \n" +
+                    "AND databarang.kode_golongan IN ( 'G04', 'G05' ) THEN 0 ELSE 1 END,databarang.nama_brng";
 
                 psresepasuransi = koneksi.prepareStatement(sql);
                 psresepasuransi.setDouble(1, kenaikan);
-                psresepasuransi.setString(2, TNoRw.getText().trim());
+                psresepasuransi.setString(2, TNoRM.getText().trim());
                 psresepasuransi.setString(3, bangsal);
                 psresepasuransi.setString(4, "%"+TCari.getText().trim()+"%");
                 psresepasuransi.setString(5, "%"+TCari.getText().trim()+"%");
@@ -1809,25 +1829,27 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     "databarang.utama, databarang.ralan, databarang.beliluar, databarang.kelas1, " +
                     "databarang.kelas2, databarang.kelas3, databarang.vip, databarang.vvip, " +
                     "industrifarmasi.nama_industri, databarang.h_beli, SUM(gudangbarang.stok) as stok, " +
-                    "CASE WHEN pernah_diberikan.kode_brng IS NOT NULL " +
+                    "CASE WHEN pernah_diberikan.kode_brng IS NOT NULL AND databarang.kode_golongan IN ( 'G04', 'G05' ) " +
                     "THEN 'Obat ini sudah diberikan dalam waktu kurang dari 1 bulan terakhir.' ELSE '' END as status_terakhir " +
                     "FROM databarang INNER JOIN jenis ON databarang.kdjns = jenis.kdjns " +
                     "INNER JOIN industrifarmasi ON industrifarmasi.kode_industri = databarang.kode_industri " +
                     "INNER JOIN gudangbarang ON databarang.kode_brng = gudangbarang.kode_brng " +
                     "LEFT JOIN (SELECT DISTINCT c.kode_brng FROM detail_pemberian_obat c " +
-                    "INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat WHERE b.no_rawat=? " +
-                    "AND b.kd_pj='BPJ'AND b.tgl_registrasi >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)) pernah_diberikan " +
-                    "ON pernah_diberikan.kode_brng = databarang.kode_brng " +
-                    "WHERE databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') " + qrystokkosong +
+                    "INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat WHERE b.no_rkm_medis=? " +
+                    "AND b.kd_pj='BPJ' AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) " +
+                    "AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05'))" +    
+                    ") AS pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng " +
+                    "WHERE databarang.status='1' " + qrystokkosong +
                     (aktifkanbatch.equals("yes") ? " AND gudangbarang.no_batch<>'' AND gudangbarang.no_faktur<>''" : 
                      " AND gudangbarang.no_batch='' AND gudangbarang.no_faktur=''") +
                     " AND gudangbarang.kd_bangsal=? AND (databarang.kode_brng LIKE ? OR " +
                     "databarang.nama_brng LIKE ? OR jenis.nama LIKE ? OR databarang.letak_barang LIKE ?) " +
-                    "GROUP BY databarang.kode_brng ORDER BY CASE WHEN pernah_diberikan.kode_brng IS NOT NULL " +
-                    "THEN 0 ELSE 1 END, databarang.nama_brng";
+                    "GROUP BY databarang.kode_brng " +
+                    "ORDER BY CASE WHEN pernah_diberikan.kode_brng IS NOT NULL \n" +
+                    "AND databarang.kode_golongan IN ( 'G04', 'G05' ) THEN 0 ELSE 1 END,databarang.nama_brng";
 
                 psresep = koneksi.prepareStatement(sql);
-                psresep.setString(1, TNoRw.getText().trim());
+                psresep.setString(1, TNoRM.getText().trim());
                 psresep.setString(2, bangsal);
                 psresep.setString(3, "%"+TCari.getText().trim()+"%");
                 psresep.setString(4, "%"+TCari.getText().trim()+"%");
@@ -2137,7 +2159,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang "+
                         " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
-                        " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                         " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ?) group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
@@ -2149,7 +2171,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang "+
                         " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
-                        " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                         " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ?) order by databarang.nama_brng");
                 }
                     
@@ -2195,7 +2217,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang "+
                         " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
-                        " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                         " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ?) group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
@@ -2210,7 +2232,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang "+
                         " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
-                        " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                         " (databarang.kode_brng like ? or databarang.nama_brng like ? or jenis.nama like ? or databarang.letak_barang like ?) order by databarang.nama_brng");
                 }
                     
@@ -2392,7 +2414,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
-                        " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
@@ -2405,7 +2427,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
-                        " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? order by databarang.nama_brng");
                 }
                 try{
@@ -2465,7 +2487,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
-                        " where  databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                        " where  databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
@@ -2481,7 +2503,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
-                        " where  databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                        " where  databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? order by databarang.nama_brng");
                 }
                 try{
@@ -2704,7 +2726,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join resep_dokter_racikan_detail "+
                                 " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                                 " and industrifarmasi.kode_industri=databarang.kode_industri and resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
-                                " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                                " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                                 " resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                         }else{
                             qrystokkosong="";
@@ -2717,7 +2739,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join resep_dokter_racikan_detail "+
                                 " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                                 " and industrifarmasi.kode_industri=databarang.kode_industri and resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
-                                " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                                " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                                 " resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? order by databarang.nama_brng");
                         }
                         try{ 
@@ -2784,7 +2806,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join resep_dokter_racikan_detail "+
                                 " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                                 " and industrifarmasi.kode_industri=databarang.kode_industri and resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
-                                " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                                " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                                 " resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                         }else{
                             qrystokkosong="";
@@ -2800,7 +2822,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join resep_dokter_racikan_detail "+
                                 " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                                 " and industrifarmasi.kode_industri=databarang.kode_industri and resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
-                                " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                                " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                                 " resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? order by databarang.nama_brng");
                         }
                         try{ 
@@ -3084,7 +3106,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
-                        " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
@@ -3097,7 +3119,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
-                        " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                        " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? order by databarang.nama_brng");
                 }
                 
@@ -3158,7 +3180,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
-                        " where  databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                        " where  databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                 }else{
                     qrystokkosong="";
@@ -3174,7 +3196,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
-                        " where  databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                        " where  databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                         " resep_dokter.no_resep=? order by databarang.nama_brng");
                 }
                 
@@ -3398,7 +3420,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join resep_dokter_racikan_detail "+
                                 " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                                 " and industrifarmasi.kode_industri=databarang.kode_industri and resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
-                                " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                                " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                                 " resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                         }else{
                             qrystokkosong="";
@@ -3411,7 +3433,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join resep_dokter_racikan_detail "+
                                 " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                                 " and industrifarmasi.kode_industri=databarang.kode_industri and resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
-                                " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                                " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                                 " resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? order by databarang.nama_brng");
                         }
                         
@@ -3478,7 +3500,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join resep_dokter_racikan_detail "+
                                 " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                                 " and industrifarmasi.kode_industri=databarang.kode_industri and resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
-                                " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
+                                " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>'' and gudangbarang.kd_bangsal=? and "+
                                 " resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? group by gudangbarang.kode_brng order by databarang.nama_brng");
                         }else{
                             qrystokkosong="";
@@ -3494,7 +3516,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                                 " from databarang inner join jenis inner join industrifarmasi inner join gudangbarang inner join resep_dokter_racikan_detail "+
                                 " on databarang.kdjns=jenis.kdjns and databarang.kode_brng=gudangbarang.kode_brng "+
                                 " and industrifarmasi.kode_industri=databarang.kode_industri and resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
-                                " where databarang.status='1' AND databarang.kode_golongan IN ('G04','G05') "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
+                                " where databarang.status='1' "+qrystokkosong+" and gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.kd_bangsal=? and "+
                                 " resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=? order by databarang.nama_brng");
                         }
                         try{ 
@@ -3962,12 +3984,12 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     // Row 12 kosong/angka → AMAN, cek stok
                 } else {
                     // Row 12 teks PRB → BLOCK EDIT
-                    JOptionPane.showMessageDialog(rootPane,
-                        "Maaf, obatnya belum bisa diberikan lagi karena pasien sudah mendapatkannya kurang dari 1 bulan yang lalu...!!");
-                    tbResep.setValueAt(false, tbResep.getSelectedRow(), 0);
-                    tbResep.setValueAt("", tbResep.getSelectedRow(), 1);
-                    tbResep.changeSelection(tbResep.getSelectedRow(), 1, false, false);
-                    return;
+//                    JOptionPane.showMessageDialog(rootPane,
+//                        "Maaf, obatnya belum bisa diberikan lagi karena pasien sudah mendapatkannya kurang dari 1 bulan yang lalu...!!");
+//                    tbResep.setValueAt(false, tbResep.getSelectedRow(), 0);
+//                    tbResep.setValueAt("", tbResep.getSelectedRow(), 1);
+//                    tbResep.changeSelection(tbResep.getSelectedRow(), 1, false, false);
+//                    return;
                 }
 
                 try {

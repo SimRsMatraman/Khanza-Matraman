@@ -6844,8 +6844,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                         "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
                         "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
                         "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
-                        "WHERE a.no_rkm_medis = ? AND b.tgl_registrasi >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND b.kd_pj='BPJ' " +
-                        "GROUP BY a.no_rkm_medis, a.nm_pasien", 
+                        "WHERE a.no_rkm_medis = ? AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY ) AND b.kd_pj='BPJ' " +
+                        "AND d.kode_golongan IN ('G04', 'G05') GROUP BY a.no_rkm_medis, a.nm_pasien", 
                         noRM
                     );
 
@@ -9909,6 +9909,30 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
                 resep.isCek();
                 resep.tampilobat();
                 resep.setVisible(true);
+                
+                // 🔥 AUTO CEK & BUKA DlgPRB setelah Pemberian Obat
+                    DlgPRB prb = new DlgPRB(null, false);
+                    String noRM = TNoRM.getText();  // Atau ambil dari pasien
+                    String catatanObat = Sequel.cariIsi(
+                        "SELECT CONCAT('Pasien ', e.png_jawab, ' dengan nama ', a.nm_pasien, ' telah mendapatkan obat PRB kurang dari 1 bulan yang lalu', '\\n\\n', " +
+                        "GROUP_CONCAT(CONCAT('pada tanggal ', DATE_FORMAT(b.tgl_registrasi,'%Y-%m-%d'), ' (', d.nama_brng, ' (', c.jml, ')') " +
+                        "ORDER BY b.tgl_registrasi DESC SEPARATOR '\\n')) " +
+                        "FROM pasien a INNER JOIN reg_periksa b ON b.no_rkm_medis = a.no_rkm_medis " +
+                        "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
+                        "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
+                        "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
+                        "WHERE a.no_rkm_medis = ? AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY ) AND b.kd_pj='BPJ' " +
+                        "AND d.kode_golongan IN ('G04', 'G05') GROUP BY a.no_rkm_medis, a.nm_pasien", 
+                        noRM
+                    );
+
+                    if (!catatanObat.trim().isEmpty()) {
+                        prb.setNoRm(noRM);
+                        prb.setSize(720, 330);
+                        prb.setLocationRelativeTo(internalFrame1);
+                        prb.toFront();
+                        prb.setVisible(true);
+                    }
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_BtnInput3ActionPerformed

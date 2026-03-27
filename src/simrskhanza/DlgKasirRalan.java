@@ -8493,8 +8493,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                             "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
                             "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
                             "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
-                            "WHERE a.no_rkm_medis = ? AND b.tgl_registrasi >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND b.kd_pj='BPJ' " +
-                            "GROUP BY a.no_rkm_medis, a.nm_pasien", 
+                            "WHERE a.no_rkm_medis = ? AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY ) AND b.kd_pj='BPJ' " +
+                            "AND d.kode_golongan IN ('G04', 'G05') GROUP BY a.no_rkm_medis, a.nm_pasien", 
                             noRM
                         );
 
@@ -8532,8 +8532,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                 "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
                                 "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
                                 "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
-                                "WHERE a.no_rkm_medis = ? AND b.tgl_registrasi >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND b.kd_pj='BPJ' " +
-                                "GROUP BY a.no_rkm_medis, a.nm_pasien", 
+                                "WHERE a.no_rkm_medis = ? AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY ) AND b.kd_pj='BPJ' " +
+                                "AND d.kode_golongan IN ('G04', 'G05') GROUP BY a.no_rkm_medis, a.nm_pasien", 
                                 noRM
                             );
 
