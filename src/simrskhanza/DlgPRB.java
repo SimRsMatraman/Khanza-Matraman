@@ -244,7 +244,7 @@ public class DlgPRB extends javax.swing.JDialog {
                         "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
                         "WHERE a.no_rkm_medis = ? " +
                         "  AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) AND b.kd_pj='BPJ' " +
-                        "GROUP BY a.no_rkm_medis, a.nm_pasien", TCatatan, TNoRM.getText());
+                        "AND d.kode_golongan IN ('G04', 'G05') GROUP BY a.no_rkm_medis, a.nm_pasien", TCatatan, TNoRM.getText());
     }
 
 

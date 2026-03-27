@@ -22,7 +22,7 @@ public final class akses {
     private static String kode="",kdbangsal="",alamatip="",namars="",alamatrs="",kabupatenrs="",propinsirs="",kontakrs="",emailrs="",form="",namauser="",kode_ppk=""; 
     private static int jml1=0,jml2=0,lebar=0,tinggi=0;
     private static boolean aktif=false,admin=false,user=false,vakum=false,aplikasi=false,penyakit=false,obat_penyakit=false,dokter=false,jadwal_praktek=false,petugas=false,pasien=false,registrasi=false,
-            tindakan_ralan=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
+            tindakan_ralan=false,tindakan_ralan_edit=false,kamar_inap=false,tindakan_ranap=false,operasi=false,rujukan_keluar=false,rujukan_masuk=false,beri_obat=false,
             resep_pulang=false,pasien_meninggal=false,diet_pasien=false,kelahiran_bayi=false,periksa_lab=false,periksa_radiologi=false,
             kasir_ralan=false,deposit_pasien=false,piutang_pasien=false,peminjaman_berkas=false,barcode=false,presensi_harian=false,
             presensi_bulanan=false,pegawai_admin=false,pegawai_user=false,suplier=false,satuan_barang=false,konversi_satuan=false,jenis_barang=false,
@@ -245,6 +245,7 @@ public final class akses {
                         akses.pasien=true;
                         akses.registrasi=true;
                         akses.tindakan_ralan=true;
+                        akses.tindakan_ralan_edit=true;
                         akses.kamar_inap=true;
                         akses.tindakan_ranap=true;
                         akses.operasi=true;
@@ -1239,6 +1240,7 @@ public final class akses {
                         akses.pasien=rs2.getBoolean("pasien");
                         akses.registrasi=rs2.getBoolean("registrasi");
                         akses.tindakan_ralan=rs2.getBoolean("tindakan_ralan");
+                        akses.tindakan_ralan_edit=rs2.getBoolean("tindakan_ralan_edit");
                         akses.kamar_inap=rs2.getBoolean("kamar_inap");
                         akses.tindakan_ranap=rs2.getBoolean("tindakan_ranap");
                         akses.operasi=rs2.getBoolean("operasi");
@@ -2232,6 +2234,7 @@ public final class akses {
                         akses.pasien= false;
                         akses.registrasi= false;
                         akses.tindakan_ralan= false;
+                        akses.tindakan_ralan_edit= false;
                         akses.kamar_inap= false;
                         akses.tindakan_ranap= false;
                         akses.operasi= false;
@@ -3247,6 +3250,7 @@ public final class akses {
         akses.pasien= false;
         akses.registrasi= false;
         akses.tindakan_ralan= false;
+        akses.tindakan_ralan_edit= false;
         akses.kamar_inap= false;
         akses.tindakan_ranap= false;
         akses.operasi= false;
@@ -4298,7 +4302,8 @@ public final class akses {
     public static boolean getpetugas(){return akses.petugas;} 
     public static boolean getpasien(){return akses.pasien;} 
     public static boolean getregistrasi(){return akses.registrasi;} 
-    public static boolean gettindakan_ralan(){return akses.tindakan_ralan;} 
+    public static boolean gettindakan_ralan(){return akses.tindakan_ralan;}
+    public static boolean gettindakan_ralan_edit(){return akses.tindakan_ralan_edit;}
     public static boolean getkamar_inap(){return akses.kamar_inap;} 
     public static boolean gettindakan_ranap(){return akses.tindakan_ranap;} 
     public static boolean getoperasi(){return akses.operasi;} 

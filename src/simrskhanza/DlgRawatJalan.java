@@ -2583,7 +2583,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-10-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2602,7 +2602,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-10-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -5106,7 +5106,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-10-2025" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -9152,8 +9152,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 BtnSimpan.setEnabled(akses.gettindakan_ralan());
-                BtnHapus.setEnabled(akses.gettindakan_ralan());
-                BtnEdit.setEnabled(akses.gettindakan_ralan());
+                BtnHapus.setEnabled(akses.gettindakan_ralan_edit());
+                BtnEdit.setEnabled(akses.gettindakan_ralan_edit());
                 BtnPrint.setEnabled(akses.gettindakan_ralan());
                 BtnTambahTindakan.setVisible(true);
                 TCari.setPreferredSize(new Dimension(207, 23));
@@ -9161,8 +9161,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                 break;
             case 1:
                 BtnSimpan.setEnabled(akses.gettindakan_ralan());
-                BtnHapus.setEnabled(akses.gettindakan_ralan());
-                BtnEdit.setEnabled(akses.gettindakan_ralan());
+                BtnHapus.setEnabled(akses.gettindakan_ralan_edit());
+                BtnEdit.setEnabled(akses.gettindakan_ralan_edit());
                 BtnPrint.setEnabled(akses.gettindakan_ralan());
                 BtnTambahTindakan.setVisible(true);
                 TCari.setPreferredSize(new Dimension(207, 23));
@@ -9170,8 +9170,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                 break;
             case 2:
                 BtnSimpan.setEnabled(akses.gettindakan_ralan());
-                BtnHapus.setEnabled(akses.gettindakan_ralan());
-                BtnEdit.setEnabled(akses.gettindakan_ralan());
+                BtnHapus.setEnabled(akses.gettindakan_ralan_edit());
+                BtnEdit.setEnabled(akses.gettindakan_ralan_edit());
                 BtnPrint.setEnabled(akses.gettindakan_ralan());
                 BtnTambahTindakan.setVisible(true);
                 TCari.setPreferredSize(new Dimension(207, 23));
@@ -16666,7 +16666,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
                                 "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
                                 "WHERE a.no_rkm_medis = ? AND b.tgl_registrasi >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND b.kd_pj='BPJ' " +
-                                "GROUP BY a.no_rkm_medis, a.nm_pasien", 
+                                "AND d.kode_golongan IN ('G04', 'G05') GROUP BY a.no_rkm_medis, a.nm_pasien", 
                                 noRM
                             );
 
