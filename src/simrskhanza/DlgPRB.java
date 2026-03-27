@@ -230,18 +230,19 @@ public class DlgPRB extends javax.swing.JDialog {
 
         // Otomatis kosong jika tidak ada data
         Sequel.cariIsi("SELECT " +
-                        "  CONCAT('Pasien ', e.png_jawab, ' dengan nama ', a.nm_pasien, ' sudah mendapatkan obat kronis kurang dari 1 bulan lalu,\\nberikut ini daftar obat yang sudah diberikan :', '\\n\\n', " +
+                        "  CONCAT('Pasien dengan nama ', a.nm_pasien, ' sudah menerima obat kronis dalam periode kurang dari 30 hari terakhir,\\nberikut ini daftar obat yang sudah diberikan :', '\\n\\n', " +
                         "    GROUP_CONCAT( " +
-                        "      CONCAT(c.tgl_perawatan, ' : ', d.nama_brng, ' (Jumlah ', c.jml, ')') " +
+                        "      CONCAT(c.tgl_perawatan,' (',f.nm_poli,')',' : ', d.nama_brng, ' (Jumlah ', c.jml, ')') " +
                         "      ORDER BY c.tgl_perawatan DESC " +
                         "      SEPARATOR '\\n'" +
                         "    )" +
-                        "  ,'\\n\\nMohon untuk menjadi perhatian untuk tidak diberikan lagi sebelum 30 hari') as catatan " +
+                        "  ,'\\n\\nMohon menjadi perhatian untuk menghindari penolakan klaim,\\nagar obat kronis yang sama tidak diresepkan kembali sebelum jadwal pemberian berikutnya. terutama pasien PRB.') as catatan " +
                         "FROM pasien a  " +
                         "INNER JOIN reg_periksa b ON b.no_rkm_medis = a.no_rkm_medis " +
                         "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
                         "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
                         "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
+                        "INNER JOIN poliklinik f ON f.kd_poli=b.kd_poli " +
                         "WHERE a.no_rkm_medis = ? " +
                         "  AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY ) AND b.kd_pj='BPJ' " +
                         "AND d.kode_golongan IN ('G04', 'G05') GROUP BY a.no_rkm_medis, a.nm_pasien", TCatatan, TNoRM.getText());
