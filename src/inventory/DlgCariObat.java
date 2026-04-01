@@ -67,8 +67,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private int i=0,z=0,row=0,row2,r;
     private Jurnal jur=new Jurnal();
     private boolean[] pilih; 
-    private double[] jumlah,harga,eb,ts,stok,beli,kapasitas,kandungan;
-    private String[] kodebarang,namabarang,kodesatuan,etter,letakbarang,namajenis,aturan,industri,kategori,golongan,no,nobatch,nofaktur,kadaluarsa,ulangi,ejum;
+    private double[] jumlah,harga,stok,beli,kapasitas,kandungan;
+    private String[] kodebarang,namabarang,kodesatuan,etter,letakbarang,namajenis,aturan,industri,kategori,golongan,no,nobatch,nofaktur,kadaluarsa,ulangi,ejum,eb,ts;
     private String signa1="1",signa2="1",nokunjungan="",kdObatSK="",requestJson="",URL="",otorisasi,sql="",aktifpcare="no",no_batchcari="", tgl_kadaluarsacari="", no_fakturcari="", aktifkanbatch="no",kodedokter="",namadokter="",noresep="",bangsal="",bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),tampilkan_ppnobat_ralan="",
                    Suspen_Piutang_Obat_Ralan="",Obat_Ralan="",HPP_Obat_Rawat_Jalan="",Persediaan_Obat_Rawat_Jalan="",hppfarmasi="",VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="";
     private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
@@ -99,8 +99,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
         tabModeobat=new DefaultTableModel(null,new Object[]{
                 "E","Jumlah","Kode Barang","Nama Barang","Satuan","Kandungan",
-                "Harga(Rp)","Jenis Obat","Emb","Tsl","Stok","Aturan Pakai","I.F.",
-                "H.Beli","Kategori","Golongan","No.Batch","No.Faktur","Kadaluarsa","Edit Iterasi","Iterasi","jumlah Iterasi"
+                "Harga(Rp)","Jenis Obat","Sebelumnya","Sisa","Stok","Aturan Pakai","I.F.",
+                "H.Beli","Kategori","Golongan","No.Batch","No.Faktur","Kadaluarsa","Edit Iterasi","Iterasi","jml Iter"
             }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -113,7 +113,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
              Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
                 java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class, 
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class,
                 java.lang.Object.class,java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, 
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class
@@ -150,9 +150,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
             }else if(i==7){
                 column.setPreferredWidth(85);
             }else if(i==8){
-                column.setPreferredWidth(40);
+                column.setPreferredWidth(80);
             }else if(i==9){
-                column.setPreferredWidth(40);
+                column.setPreferredWidth(80);
             }else if(i==10){
                 column.setPreferredWidth(40);
             }else if(i==11){
@@ -173,11 +173,11 @@ public final class DlgCariObat extends javax.swing.JDialog {
             }else if(i==18){
                 column.setPreferredWidth(65);
             }else if(i==19){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(70);
             }else if(i==20){
                 column.setPreferredWidth(150);
             }else if(i==21){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(40);
             }                
         }
         
@@ -2477,9 +2477,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         harga=null;
         harga=new double[z];
         eb=null;
-        eb=new double[z];
+        eb=new String[z];
         ts=null;
-        ts=new double[z];
+        ts=new String[z];
         stok=null;
         stok=new double[z];
         kodebarang=null;
@@ -2530,16 +2530,11 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     harga[z]=0;
                 }                  
                 namajenis[z]=tbObat.getValueAt(i,7).toString();
-                try {
-                    eb[z]=Double.parseDouble(tbObat.getValueAt(i,8).toString());
-                } catch (Exception e) {
-                    eb[z]=0;
-                }  
-                try {
-                    ts[z]=Double.parseDouble(tbObat.getValueAt(i,9).toString());
-                } catch (Exception e) {
-                    ts[z]=0;
-                } 
+                
+                
+                eb[z]=tbObat.getValueAt(i,8).toString();
+                ts[z]=tbObat.getValueAt(i,9).toString();
+                
                 try {
                     stok[z]=Double.parseDouble(tbObat.getValueAt(i,10).toString());
                 } catch (Exception e) {
@@ -2584,24 +2579,54 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     if(aktifpcare.equals("yes")){
                         sql="select data_batch.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(data_batch.h_beli+(data_batch.h_beli*?)) as harga,"+
                             " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,golongan_barang.nama as golongan,"+
-                            " data_batch.no_batch,data_batch.no_faktur,data_batch.tgl_kadaluarsa,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar "+
+                            " data_batch.no_batch,data_batch.no_faktur,data_batch.tgl_kadaluarsa,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar, COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, COALESCE(pernah_diberikan.vvip, '') as jml_max  "+
                             " from data_batch inner join databarang on data_batch.kode_brng=databarang.kode_brng "+
                             " inner join jenis on databarang.kdjns=jenis.kdjns "+
                             " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                             " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+
                             " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
                             " inner join maping_obat_pcare on maping_obat_pcare.kode_brng=databarang.kode_brng "+
-                            " inner join gudangbarang on gudangbarang.kode_brng=data_batch.kode_brng and gudangbarang.no_batch=data_batch.no_batch and gudangbarang.no_faktur=data_batch.no_faktur ";
+                            " inner join gudangbarang on gudangbarang.kode_brng=data_batch.kode_brng and gudangbarang.no_batch=data_batch.no_batch and gudangbarang.no_faktur=data_batch.no_faktur "+
+                            " LEFT JOIN ( " +
+                            " SELECT c.kode_brng, " +
+                            " SUM(c.jml) as jml_terakhir, " +
+                            " f.vvip " +
+                            " FROM detail_pemberian_obat c " +
+                            " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                            " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                            " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                            " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                            " WHERE e.no_rkm_medis =? " +
+                            " AND b.kd_pj = 'BPJ' " +
+                            " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                            " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                            " GROUP BY c.kode_brng " +
+                            " )pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng ";
                     }else{
                         sql="select data_batch.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(data_batch.h_beli+(data_batch.h_beli*?)) as harga,"+
                             " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,golongan_barang.nama as golongan,"+
-                            " data_batch.no_batch,data_batch.no_faktur,data_batch.tgl_kadaluarsa,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar "+
+                            " data_batch.no_batch,data_batch.no_faktur,data_batch.tgl_kadaluarsa,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar, COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, COALESCE(pernah_diberikan.vvip, '') as jml_max  "+
                             " from data_batch inner join databarang on data_batch.kode_brng=databarang.kode_brng "+
                             " inner join jenis on databarang.kdjns=jenis.kdjns "+
                             " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                             " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+
                             " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
-                            " inner join gudangbarang on gudangbarang.kode_brng=data_batch.kode_brng and gudangbarang.no_batch=data_batch.no_batch and gudangbarang.no_faktur=data_batch.no_faktur ";
+                            " inner join gudangbarang on gudangbarang.kode_brng=data_batch.kode_brng and gudangbarang.no_batch=data_batch.no_batch and gudangbarang.no_faktur=data_batch.no_faktur "+
+                            " LEFT JOIN ( " +
+                            " SELECT c.kode_brng, " +
+                            " SUM(c.jml) as jml_terakhir, " +
+                            " f.vvip " +
+                            " FROM detail_pemberian_obat c " +
+                            " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                            " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                            " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                            " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                            " WHERE e.no_rkm_medis =? " +
+                            " AND b.kd_pj = 'BPJ' " +
+                            " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                            " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                            " GROUP BY c.kode_brng " +
+                            " )pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng ";
                     }
                     psobat=koneksi.prepareStatement(
                         sql+" where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? "+(TCari.getText().trim().equals("")?"":
@@ -2611,9 +2636,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "order by data_batch.tgl_kadaluarsa asc");
                     try{
                         psobat.setDouble(1,kenaikan);
-                        psobat.setString(2,kdgudang.getText());
+                        psobat.setString(2, TNoRM.getText().trim());
+                        psobat.setString(3,kdgudang.getText());
                         if(!TCari.getText().trim().equals("")){
-                            psobat.setString(3,"%"+TCari.getText().trim()+"%");
                             psobat.setString(4,"%"+TCari.getText().trim()+"%");
                             psobat.setString(5,"%"+TCari.getText().trim()+"%");
                             psobat.setString(6,"%"+TCari.getText().trim()+"%");
@@ -2621,13 +2646,32 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             psobat.setString(8,"%"+TCari.getText().trim()+"%");
                             psobat.setString(9,"%"+TCari.getText().trim()+"%");
                             psobat.setString(10,"%"+TCari.getText().trim()+"%");
+                            psobat.setString(11,"%"+TCari.getText().trim()+"%");
                         }
                             
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
+                            String jmlMax         = rsobat.getString("jml_max");
+                            String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                            String hasilKurangText = ""; // default kosong
+                            if (jmlMax != null && !jmlMax.isEmpty() &&
+                                jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                                try {
+                                    int max  = Integer.parseInt(jmlMax);
+                                    int last = Integer.parseInt(jmlTerakhir);
+
+                                    if (last > 0) {
+                                        int hasil = max - last;
+                                        hasilKurangText = String.valueOf(hasil); // tetap String
+                                    }
+                                } catch (NumberFormatException e) {
+                                    hasilKurangText = ""; // jika format bukan angka, kosongkan
+                                }
+                            }
                             tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("harga"),100),
-                               rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                               rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),
                                rsobat.getString("no_batch"),rsobat.getString("no_faktur"),rsobat.getString("tgl_kadaluarsa"),"","","3"
                             });          
@@ -2645,21 +2689,51 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 }else{
                     if(aktifpcare.equals("yes")){
                         sql="select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
-                            " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,gudangbarang.stok,golongan_barang.nama as golongan,databarang."+hppfarmasi+" as dasar "+
+                            " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,gudangbarang.stok,golongan_barang.nama as golongan,databarang."+hppfarmasi+" as dasar, COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, COALESCE(pernah_diberikan.vvip, '') as jml_max  "+
                             " from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
                             " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                             " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+
                             " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
                             " inner join maping_obat_pcare on maping_obat_pcare.kode_brng=databarang.kode_brng "+
-                            " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng ";
+                            " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
+                            " LEFT JOIN ( " +
+                            " SELECT c.kode_brng, " +
+                            " SUM(c.jml) as jml_terakhir, " +
+                            " f.vvip " +
+                            " FROM detail_pemberian_obat c " +
+                            " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                            " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                            " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                            " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                            " WHERE e.no_rkm_medis =? " +
+                            " AND b.kd_pj = 'BPJ' " +
+                            " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                            " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                            " GROUP BY c.kode_brng " +
+                            " )pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng ";
                     }else{
                         sql="select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
-                            " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,gudangbarang.stok,golongan_barang.nama as golongan,databarang."+hppfarmasi+" as dasar "+
+                            " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,gudangbarang.stok,golongan_barang.nama as golongan,databarang."+hppfarmasi+" as dasar, COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, COALESCE(pernah_diberikan.vvip, '') as jml_max  "+
                             " from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
                             " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                             " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+
                             " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
-                            " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng ";
+                            " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng"+
+                            " LEFT JOIN ( " +
+                            " SELECT c.kode_brng, " +
+                            " SUM(c.jml) as jml_terakhir, " +
+                            " f.vvip " +
+                            " FROM detail_pemberian_obat c " +
+                            " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                            " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                            " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                            " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                            " WHERE e.no_rkm_medis =? " +
+                            " AND b.kd_pj = 'BPJ' " +
+                            " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                            " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                            " GROUP BY c.kode_brng " +
+                            " )pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng ";
                     }
                     psobat=koneksi.prepareStatement(
                         sql+" where gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and databarang.status='1' "+
@@ -2668,21 +2742,40 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "order by databarang.nama_brng");
                     try{
                         psobat.setDouble(1,kenaikan);
-                        psobat.setString(2,kdgudang.getText());
+                        psobat.setString(2, TNoRM.getText().trim());
+                        psobat.setString(3,kdgudang.getText());
                         if(!TCari.getText().trim().equals("")){
-                            psobat.setString(3,"%"+TCari.getText().trim()+"%");
                             psobat.setString(4,"%"+TCari.getText().trim()+"%");
                             psobat.setString(5,"%"+TCari.getText().trim()+"%");
                             psobat.setString(6,"%"+TCari.getText().trim()+"%");
                             psobat.setString(7,"%"+TCari.getText().trim()+"%");
                             psobat.setString(8,"%"+TCari.getText().trim()+"%");
+                            psobat.setString(9,"%"+TCari.getText().trim()+"%");
                         }
                             
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
+                            String jmlMax         = rsobat.getString("jml_max");
+                            String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                            String hasilKurangText = ""; // default kosong
+                            if (jmlMax != null && !jmlMax.isEmpty() &&
+                                jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                                try {
+                                    int max  = Integer.parseInt(jmlMax);
+                                    int last = Integer.parseInt(jmlTerakhir);
+
+                                    if (last > 0) {
+                                        int hasil = max - last;
+                                        hasilKurangText = String.valueOf(hasil); // tetap String
+                                    }
+                                } catch (NumberFormatException e) {
+                                    hasilKurangText = ""; // jika format bukan angka, kosongkan
+                                }
+                            }
                             tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("harga"),100),
-                               rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                               rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","","","","3"
                             });          
                         }
@@ -2702,24 +2795,54 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     if(aktifpcare.equals("yes")){
                         sql="select data_batch.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,data_batch.karyawan,data_batch.ralan,data_batch.beliluar,"+
                             " databarang.letak_barang,data_batch.utama,industrifarmasi.nama_industri,data_batch.h_beli,kategori_barang.nama as kategori,golongan_barang.nama as golongan, "+
-                            " data_batch.no_batch,data_batch.no_faktur,data_batch.tgl_kadaluarsa,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar "+
+                            " data_batch.no_batch,data_batch.no_faktur,data_batch.tgl_kadaluarsa,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar, COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, COALESCE(pernah_diberikan.vvip, '') as jml_max  "+
                             " from data_batch inner join databarang on data_batch.kode_brng=databarang.kode_brng "+
                             " inner join jenis on databarang.kdjns=jenis.kdjns "+
                             " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                             " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+
                             " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
                             " inner join maping_obat_pcare on maping_obat_pcare.kode_brng=databarang.kode_brng "+
-                            " inner join gudangbarang on gudangbarang.kode_brng=data_batch.kode_brng and gudangbarang.no_batch=data_batch.no_batch and gudangbarang.no_faktur=data_batch.no_faktur ";
+                            " inner join gudangbarang on gudangbarang.kode_brng=data_batch.kode_brng and gudangbarang.no_batch=data_batch.no_batch and gudangbarang.no_faktur=data_batch.no_faktur "+
+                            " LEFT JOIN ( " +
+                            " SELECT c.kode_brng, " +
+                            " SUM(c.jml) as jml_terakhir, " +
+                            " f.vvip " +
+                            " FROM detail_pemberian_obat c " +
+                            " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                            " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                            " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                            " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                            " WHERE e.no_rkm_medis =? " +
+                            " AND b.kd_pj = 'BPJ' " +
+                            " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                            " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                            " GROUP BY c.kode_brng " +
+                            " )pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng ";
                     }else{
                         sql="select data_batch.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,data_batch.karyawan,data_batch.ralan,data_batch.beliluar,"+
                             " databarang.letak_barang,data_batch.utama,industrifarmasi.nama_industri,data_batch.h_beli,kategori_barang.nama as kategori,golongan_barang.nama as golongan, "+
-                            " data_batch.no_batch,data_batch.no_faktur,data_batch.tgl_kadaluarsa,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar "+
+                            " data_batch.no_batch,data_batch.no_faktur,data_batch.tgl_kadaluarsa,gudangbarang.stok,data_batch."+hppfarmasi+" as dasar, COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, COALESCE(pernah_diberikan.vvip, '') as jml_max  "+
                             " from data_batch inner join databarang on data_batch.kode_brng=databarang.kode_brng "+
                             " inner join jenis on databarang.kdjns=jenis.kdjns "+
                             " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                             " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+
                             " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
-                            " inner join gudangbarang on gudangbarang.kode_brng=data_batch.kode_brng and gudangbarang.no_batch=data_batch.no_batch and gudangbarang.no_faktur=data_batch.no_faktur ";                        
+                            " inner join gudangbarang on gudangbarang.kode_brng=data_batch.kode_brng and gudangbarang.no_batch=data_batch.no_batch and gudangbarang.no_faktur=data_batch.no_faktur "+
+                            " LEFT JOIN ( " +
+                            " SELECT c.kode_brng, " +
+                            " SUM(c.jml) as jml_terakhir, " +
+                            " f.vvip " +
+                            " FROM detail_pemberian_obat c " +
+                            " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                            " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                            " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                            " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                            " WHERE e.no_rkm_medis =? " +
+                            " AND b.kd_pj = 'BPJ' " +
+                            " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                            " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                            " GROUP BY c.kode_brng " +
+                            " )pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng ";                        
                     }
                     psobat=koneksi.prepareStatement(
                         sql+" where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? "+(TCari.getText().trim().equals("")?"":
@@ -2727,9 +2850,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "golongan_barang.nama like ? or data_batch.no_batch like ? or data_batch.no_faktur like ? or "+
                         "jenis.nama like ? or databarang.letak_barang like ?)")+" order by data_batch.tgl_kadaluarsa asc");
                     try{
-                        psobat.setString(1,kdgudang.getText());
+                        psobat.setString(1, TNoRM.getText().trim());
+                        psobat.setString(2,kdgudang.getText());
                         if(!TCari.getText().trim().equals("")){
-                            psobat.setString(2,"%"+TCari.getText().trim()+"%");
                             psobat.setString(3,"%"+TCari.getText().trim()+"%");
                             psobat.setString(4,"%"+TCari.getText().trim()+"%");
                             psobat.setString(5,"%"+TCari.getText().trim()+"%");
@@ -2737,14 +2860,33 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             psobat.setString(7,"%"+TCari.getText().trim()+"%");
                             psobat.setString(8,"%"+TCari.getText().trim()+"%");
                             psobat.setString(9,"%"+TCari.getText().trim()+"%");
+                            psobat.setString(10,"%"+TCari.getText().trim()+"%");
                         }
                             
                         rsobat=psobat.executeQuery();
+                            String jmlMax         = rsobat.getString("jml_max");
+                            String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                            String hasilKurangText = ""; // default kosong
+                            if (jmlMax != null && !jmlMax.isEmpty() &&
+                                jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                                try {
+                                    int max  = Integer.parseInt(jmlMax);
+                                    int last = Integer.parseInt(jmlTerakhir);
+
+                                    if (last > 0) {
+                                        int hasil = max - last;
+                                        hasilKurangText = String.valueOf(hasil); // tetap String
+                                    }
+                                } catch (NumberFormatException e) {
+                                    hasilKurangText = ""; // jika format bukan angka, kosongkan
+                                }
+                            }
                         if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                             while(rsobat.next()){
                                 tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("karyawan"),100),
-                                   rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),
                                    rsobat.getString("no_batch"),rsobat.getString("no_faktur"),rsobat.getString("tgl_kadaluarsa"),"","","3"
                                 });           
@@ -2753,7 +2895,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             while(rsobat.next()){
                                 tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("ralan"),100),
-                                   rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),
                                    rsobat.getString("no_batch"),rsobat.getString("no_faktur"),rsobat.getString("tgl_kadaluarsa"),"","","3"
                                 });        
@@ -2762,7 +2904,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             while(rsobat.next()){
                                 tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("beliluar"),100),
-                                   rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),
                                    rsobat.getString("no_batch"),rsobat.getString("no_faktur"),rsobat.getString("tgl_kadaluarsa"),"","","3"
                                 });      
@@ -2771,7 +2913,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             while(rsobat.next()){
                                 tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("utama"),100),
-                                   rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),
                                    rsobat.getString("no_batch"),rsobat.getString("no_faktur"),rsobat.getString("tgl_kadaluarsa"),"","","3"
                                 });           
@@ -2791,21 +2933,51 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                 }else{
                     if(aktifpcare.equals("yes")){
                         sql="select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,databarang.karyawan,databarang.ralan,databarang.beliluar,gudangbarang.stok,"+
-                            " databarang.letak_barang,databarang.utama,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,golongan_barang.nama as golongan,databarang."+hppfarmasi+" as dasar "+
+                            " databarang.letak_barang,databarang.utama,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,golongan_barang.nama as golongan,databarang."+hppfarmasi+" as dasar, COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, COALESCE(pernah_diberikan.vvip, '') as jml_max  "+
                             " from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
                             " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                             " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+
                             " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
                             " inner join maping_obat_pcare on maping_obat_pcare.kode_brng=databarang.kode_brng "+
-                            " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng ";
+                            " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
+                            " LEFT JOIN ( " +
+                            " SELECT c.kode_brng, " +
+                            " SUM(c.jml) as jml_terakhir, " +
+                            " f.vvip " +
+                            " FROM detail_pemberian_obat c " +
+                            " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                            " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                            " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                            " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                            " WHERE e.no_rkm_medis =? " +
+                            " AND b.kd_pj = 'BPJ' " +
+                            " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                            " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                            " GROUP BY c.kode_brng " +
+                            " )pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng ";
                     }else{
                         sql="select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat,databarang.karyawan,databarang.ralan,databarang.beliluar,gudangbarang.stok,"+
-                            " databarang.letak_barang,databarang.utama,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,golongan_barang.nama as golongan,databarang."+hppfarmasi+" as dasar "+
+                            " databarang.letak_barang,databarang.utama,industrifarmasi.nama_industri,databarang.h_beli,kategori_barang.nama as kategori,golongan_barang.nama as golongan,databarang."+hppfarmasi+" as dasar, COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, COALESCE(pernah_diberikan.vvip, '') as jml_max  "+
                             " from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
                             " inner join industrifarmasi on industrifarmasi.kode_industri=databarang.kode_industri "+
                             " inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+
                             " inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
-                            " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng ";
+                            " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
+                            " LEFT JOIN ( " +
+                            " SELECT c.kode_brng, " +
+                            " SUM(c.jml) as jml_terakhir, " +
+                            " f.vvip " +
+                            " FROM detail_pemberian_obat c " +
+                            " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                            " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                            " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                            " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                            " WHERE e.no_rkm_medis =? " +
+                            " AND b.kd_pj = 'BPJ' " +
+                            " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                            " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                            " GROUP BY c.kode_brng " +
+                            " )pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng ";
                     }
                     psobat=koneksi.prepareStatement(
                         sql+" where gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and databarang.status='1'"+
@@ -2813,22 +2985,41 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "golongan_barang.nama like ? or jenis.nama like ? or databarang.letak_barang like ?)")+
                         " order by databarang.nama_brng");
                     try{
-                        psobat.setString(1,kdgudang.getText());
+                        psobat.setString(1, TNoRM.getText().trim());
+                        psobat.setString(2,kdgudang.getText());
                         if(!TCari.getText().trim().equals("")){
-                            psobat.setString(2,"%"+TCari.getText().trim()+"%");
                             psobat.setString(3,"%"+TCari.getText().trim()+"%");
                             psobat.setString(4,"%"+TCari.getText().trim()+"%");
                             psobat.setString(5,"%"+TCari.getText().trim()+"%");
                             psobat.setString(6,"%"+TCari.getText().trim()+"%");
                             psobat.setString(7,"%"+TCari.getText().trim()+"%");
+                            psobat.setString(8,"%"+TCari.getText().trim()+"%");
                         }
                             
                         rsobat=psobat.executeQuery();
+                            String jmlMax         = rsobat.getString("jml_max");
+                            String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                            String hasilKurangText = ""; // default kosong
+                            if (jmlMax != null && !jmlMax.isEmpty() &&
+                                jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                                try {
+                                    int max  = Integer.parseInt(jmlMax);
+                                    int last = Integer.parseInt(jmlTerakhir);
+
+                                    if (last > 0) {
+                                        int hasil = max - last;
+                                        hasilKurangText = String.valueOf(hasil); // tetap String
+                                    }
+                                } catch (NumberFormatException e) {
+                                    hasilKurangText = ""; // jika format bukan angka, kosongkan
+                                }
+                            }
                         if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                             while(rsobat.next()){
                                 tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("karyawan"),100),
-                                   rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","","","",""
                                 });     
                             }
@@ -2836,7 +3027,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             while(rsobat.next()){
                                 tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("ralan"),100),
-                                   rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","","","","3"
                                 });
                             }
@@ -2844,7 +3035,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             while(rsobat.next()){
                                 tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("beliluar"),100),
-                                   rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","","","","3"
                                 });          
                             }
@@ -2852,7 +3043,7 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                             while(rsobat.next()){
                                 tabModeobat.addRow(new Object[] {false,"",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("utama"),100),
-                                   rsobat.getString("nama"),0,0,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,rsobat.getDouble("stok"),"",rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","","","","3"
                                 });           
                             }
@@ -2884,19 +3075,37 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
                     psobat=koneksi.prepareStatement(
-                        "select databarang.kode_brng, databarang.nama_brng,jenis.nama, "+
-                        "databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
+                        " select databarang.kode_brng, databarang.nama_brng,jenis.nama, "+
+                        " databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                         " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli, "+
-                        " resep_dokter.jml, resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
+                        " resep_dokter.jml, resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter, " +
+                        " COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, " +
+                        " COALESCE(pernah_diberikan.vvip, '') as jml_max "+
                         " from databarang inner join jenis inner join golongan_barang inner join kategori_barang "+
                         " inner join industrifarmasi inner join resep_dokter on databarang.kdjns=jenis.kdjns "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
                         " and resep_dokter.kode_brng=databarang.kode_brng "+
-                        " and databarang.kode_golongan=golongan_barang.kode and databarang.kode_kategori=kategori_barang.kode  "+
+                        " and databarang.kode_golongan=golongan_barang.kode and databarang.kode_kategori=kategori_barang.kode "+
+                        " LEFT JOIN ( "+
+                        " SELECT c.kode_brng, " +
+                        "	SUM(c.jml) as jml_terakhir, " +
+                        "	f.vvip " +
+                        " FROM detail_pemberian_obat c " +
+                        " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                        " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                        " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                        " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                        " WHERE e.no_rkm_medis =? " +
+                        " AND b.kd_pj = 'BPJ' " +
+                        " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                        " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                        " GROUP BY c.kode_brng " +
+                        ") pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng  "+
                         " where resep_dokter.no_resep=? and databarang.status='1' order by databarang.nama_brng");
                     try{
                         psobat.setDouble(1,kenaikan);
-                        psobat.setString(2,no_resep);
+                        psobat.setString(2, TNoRM.getText().trim());
+                        psobat.setString(3,no_resep);
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
                             int cek;
@@ -2906,6 +3115,24 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 ulang="Ulangi";
                             }else if(rsobat.getString("ulang").equals("false")){
                                 ulang="-";
+                            }
+                            String jmlMax         = rsobat.getString("jml_max");
+                            String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                            String hasilKurangText = ""; // default kosong
+                            if (jmlMax != null && !jmlMax.isEmpty() &&
+                                jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                                try {
+                                    int max  = Integer.parseInt(jmlMax);
+                                    int last = Integer.parseInt(jmlTerakhir);
+
+                                    if (last > 0) {
+                                        int hasil = max - last;
+                                        hasilKurangText = String.valueOf(hasil); // tetap String
+                                    }
+                                } catch (NumberFormatException e) {
+                                    hasilKurangText = ""; // jika format bukan angka, kosongkan
+                                }
                             }
                             
                             no_batchcari="";tgl_kadaluarsacari="";no_fakturcari="";h_belicari=0;hargacari=0;sisacari=0;
@@ -2942,14 +3169,14 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 tabModeobat.addRow(new Object[] {
                                    false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
-                                   rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                    h_belicari,rsobat.getString("kategori"),rsobat.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari,rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                 });   
                             }else{
                                 tabModeobat.addRow(new Object[] {
                                    false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
-                                   rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                    h_belicari,rsobat.getString("kategori"),rsobat.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari,rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                 });   
                             }                   
@@ -2969,18 +3196,54 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "select databarang.kode_brng, databarang.nama_brng,jenis.nama, "+
                         "databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
                         " databarang.letak_barang,industrifarmasi.nama_industri,databarang.h_beli,databarang."+hppfarmasi+" as dasar, "+
-                        " resep_dokter.jml, resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
+                        " resep_dokter.jml, resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter, " +
+                        " COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, " +
+                        " COALESCE(pernah_diberikan.vvip, '') as jml_max "+
                         " from databarang inner join jenis inner join golongan_barang inner join kategori_barang "+
                         " inner join industrifarmasi inner join resep_dokter on databarang.kdjns=jenis.kdjns "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
                         " and resep_dokter.kode_brng=databarang.kode_brng "+
-                        " and databarang.kode_golongan=golongan_barang.kode and databarang.kode_kategori=kategori_barang.kode  "+
+                        " and databarang.kode_golongan=golongan_barang.kode and databarang.kode_kategori=kategori_barang.kode "+
+                        " LEFT JOIN ( "+
+                        " SELECT c.kode_brng, " +
+                        "	SUM(c.jml) as jml_terakhir, " +
+                        "	f.vvip " +
+                        " FROM detail_pemberian_obat c " +
+                        " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                        " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                        " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                        " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                        " WHERE e.no_rkm_medis =? " +
+                        " AND b.kd_pj = 'BPJ' " +
+                        " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                        " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                        " GROUP BY c.kode_brng " +
+                        ") pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng  "+
                         " where resep_dokter.no_resep=? and databarang.status='1' order by databarang.nama_brng");
                     try{
                         psobat.setDouble(1,kenaikan);
-                        psobat.setString(2,no_resep);
+                        psobat.setString(2, TNoRM.getText().trim());
+                        psobat.setString(3,no_resep);
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
+                            String jmlMax         = rsobat.getString("jml_max");
+                            String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                            String hasilKurangText = ""; // default kosong
+                            if (jmlMax != null && !jmlMax.isEmpty() &&
+                                jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                                try {
+                                    int max  = Integer.parseInt(jmlMax);
+                                    int last = Integer.parseInt(jmlTerakhir);
+
+                                    if (last > 0) {
+                                        int hasil = max - last;
+                                        hasilKurangText = String.valueOf(hasil); // tetap String
+                                    }
+                                } catch (NumberFormatException e) {
+                                    hasilKurangText = ""; // jika format bukan angka, kosongkan
+                                }
+                            }
                             sisacari=0;
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
@@ -3005,13 +3268,13 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 JOptionPane.showMessageDialog(rootPane,"Maaf stok tidak mencukupi..!!");
                                 tabModeobat.addRow(new Object[] {false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("harga"),100),
-                                   rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                 });   
                             }else{
                                 tabModeobat.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("harga"),100),
-                                   rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                    rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                 });   
                             }          
@@ -3034,18 +3297,54 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "databarang.kode_sat,databarang.karyawan,databarang.ralan,"+
                         "databarang.beliluar,databarang.letak_barang,databarang.utama,"+
                         "industrifarmasi.nama_industri,databarang.h_beli,resep_dokter.jml, "+
-                        "resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
+                        "resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter, " +
+                        " COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, " +
+                        " COALESCE(pernah_diberikan.vvip, '') as jml_max "+
                         " from databarang inner join jenis inner join golongan_barang inner join kategori_barang "+
                         " inner join industrifarmasi inner join resep_dokter on databarang.kdjns=jenis.kdjns "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
                         " and resep_dokter.kode_brng=databarang.kode_brng  "+
-                        " and databarang.kode_golongan=golongan_barang.kode and databarang.kode_kategori=kategori_barang.kode  "+
+                        " and databarang.kode_golongan=golongan_barang.kode and databarang.kode_kategori=kategori_barang.kode "+
+                        " LEFT JOIN ( "+
+                        " SELECT c.kode_brng, " +
+                        "	SUM(c.jml) as jml_terakhir, " +
+                        "	f.vvip " +
+                        " FROM detail_pemberian_obat c " +
+                        " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                        " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                        " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                        " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                        " WHERE e.no_rkm_medis =? " +
+                        " AND b.kd_pj = 'BPJ' " +
+                        " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                        " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                        " GROUP BY c.kode_brng " +
+                        ") pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng  "+
                         " where resep_dokter.no_resep=? and databarang.status='1' order by databarang.nama_brng");
 
                     try{
-                        psobat.setString(1,no_resep);
+                        psobat.setString(1, TNoRM.getText().trim());
+                        psobat.setString(2,no_resep);
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
+                            String jmlMax         = rsobat.getString("jml_max");
+                            String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                            String hasilKurangText = ""; // default kosong
+                            if (jmlMax != null && !jmlMax.isEmpty() &&
+                                jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                                try {
+                                    int max  = Integer.parseInt(jmlMax);
+                                    int last = Integer.parseInt(jmlTerakhir);
+
+                                    if (last > 0) {
+                                        int hasil = max - last;
+                                        hasilKurangText = String.valueOf(hasil); // tetap String
+                                    }
+                                } catch (NumberFormatException e) {
+                                    hasilKurangText = ""; // jika format bukan angka, kosongkan
+                                }
+                            }
                             no_batchcari="";tgl_kadaluarsacari="";no_fakturcari="";h_belicari=0;hargacari=0;sisacari=0;
                             psbatch=koneksi.prepareStatement(
                                 "select data_batch.no_batch, data_batch.kode_brng, data_batch.tgl_beli, data_batch.tgl_kadaluarsa, data_batch.asal, data_batch.no_faktur, "+
@@ -3089,14 +3388,14 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 tabModeobat.addRow(new Object[] {
                                    false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
-                                   rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                    h_belicari,rsobat.getString("kategori"),rsobat.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari,rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                 });
                             }else{
                                 tabModeobat.addRow(new Object[] {
                                    false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                    rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(hargacari,100),
-                                   rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                   rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                    h_belicari,rsobat.getString("kategori"),rsobat.getString("golongan"),no_batchcari,no_fakturcari,tgl_kadaluarsacari,rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                 });
                             }       
@@ -3118,17 +3417,53 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                         "databarang.kode_sat,databarang.karyawan,databarang.ralan,"+
                         "databarang.beliluar,databarang.letak_barang,databarang.utama,"+
                         "industrifarmasi.nama_industri,databarang.h_beli,resep_dokter.jml,databarang."+hppfarmasi+" as dasar, "+
-                        "resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter "+
+                        "resep_dokter.aturan_pakai,kategori_barang.nama as kategori,golongan_barang.nama as golongan, if(resep_dokter.ulang='true','OBAT ITERASI ( 7/23 )','-') as stts, resep_dokter.ulang, resep_dokter.etter, " +
+                        " COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, " +
+                        " COALESCE(pernah_diberikan.vvip, '') as jml_max "+
                         " from databarang inner join jenis inner join golongan_barang inner join kategori_barang "+
                         " inner join industrifarmasi inner join resep_dokter on databarang.kdjns=jenis.kdjns "+
                         " and industrifarmasi.kode_industri=databarang.kode_industri "+
                         " and resep_dokter.kode_brng=databarang.kode_brng  "+
-                        " and databarang.kode_golongan=golongan_barang.kode and databarang.kode_kategori=kategori_barang.kode  "+
+                        " and databarang.kode_golongan=golongan_barang.kode and databarang.kode_kategori=kategori_barang.kode "+
+                        " LEFT JOIN ( "+
+                        " SELECT c.kode_brng, " +
+                        "	SUM(c.jml) as jml_terakhir, " +
+                        "	f.vvip " +
+                        " FROM detail_pemberian_obat c " +
+                        " INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                        " INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                        " INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                        " INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                        " WHERE e.no_rkm_medis =? " +
+                        " AND b.kd_pj = 'BPJ' " +
+                        " AND b.tgl_registrasi >= DATE_SUB(NOW(), INTERVAL 30 DAY) " +
+                        " AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05')) " +
+                        " GROUP BY c.kode_brng " +
+                        ") pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng  "+
                         " where resep_dokter.no_resep=? and databarang.status='1' order by databarang.nama_brng");
                     try{
-                        psobat.setString(1,no_resep);
+                        psobat.setString(1, TNoRM.getText().trim());
+                        psobat.setString(2,no_resep);
                         rsobat=psobat.executeQuery();
                         while(rsobat.next()){
+                            String jmlMax         = rsobat.getString("jml_max");
+                            String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                            String hasilKurangText = ""; // default kosong
+                            if (jmlMax != null && !jmlMax.isEmpty() &&
+                                jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                                try {
+                                    int max  = Integer.parseInt(jmlMax);
+                                    int last = Integer.parseInt(jmlTerakhir);
+
+                                    if (last > 0) {
+                                        int hasil = max - last;
+                                        hasilKurangText = String.valueOf(hasil); // tetap String
+                                    }
+                                } catch (NumberFormatException e) {
+                                    hasilKurangText = ""; // jika format bukan angka, kosongkan
+                                }
+                            }
                             sisacari=0;
                             psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
@@ -3154,25 +3489,25 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                                     tabModeobat.addRow(new Object[] {false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("karyawan"),100),
-                                       rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                       rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                        rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                     });
                                 }else if(Jeniskelas.getSelectedItem().equals("Rawat Jalan")){
                                     tabModeobat.addRow(new Object[] {false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("ralan"),100),
-                                       rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                       rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                        rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                     });
                                 }else if(Jeniskelas.getSelectedItem().equals("Beli Luar")){
                                     tabModeobat.addRow(new Object[] {false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("beliluar"),100),
-                                       rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                       rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                        rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                     });
                                 }else if(Jeniskelas.getSelectedItem().equals("Utama/BPJS")){
                                     tabModeobat.addRow(new Object[] {false,sisacari,rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("utama"),100),
-                                       rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                       rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                        rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                     });
                                 } 
@@ -3180,25 +3515,25 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                                 if(Jeniskelas.getSelectedItem().equals("Karyawan")){
                                     tabModeobat.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("karyawan"),100),
-                                       rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                       rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                        rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                     });
                                 }else if(Jeniskelas.getSelectedItem().equals("Rawat Jalan")){
                                     tabModeobat.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("ralan"),100),
-                                       rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                       rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                        rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                     });
                                 }else if(Jeniskelas.getSelectedItem().equals("Beli Luar")){
                                     tabModeobat.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("beliluar"),100),
-                                       rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                       rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                        rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                     });
                                 }else if(Jeniskelas.getSelectedItem().equals("Utama/BPJS")){
                                     tabModeobat.addRow(new Object[] {false,rsobat.getString("jml"),rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
                                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),Valid.roundUp(rsobat.getDouble("utama"),100),
-                                       rsobat.getString("nama"),0,0,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
+                                       rsobat.getString("nama"),rsobat.getString("jml_terakhir"),hasilKurangText,sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("nama_industri"),
                                        rsobat.getDouble("dasar"),rsobat.getString("kategori"),rsobat.getString("golongan"),"","","",rsobat.getString("ulang"),rsobat.getString("stts"),rsobat.getString("etter")
                                     });
                                 }  
@@ -3985,9 +4320,9 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         harga=null;
         harga=new double[z];
         eb=null;
-        eb=new double[z];
+        eb=new String[z];
         ts=null;
-        ts=new double[z];
+        ts=new String[z];
         stok=null;
         stok=new double[z];
         kodebarang=null;
@@ -4054,17 +4389,11 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                     jumlah[z]=Double.parseDouble(tbDetailObatRacikan.getValueAt(i,10).toString());
                 } catch (Exception e) {
                     jumlah[z]=0;
-                }                 
-                try {
-                    eb[z]=Double.parseDouble(tbDetailObatRacikan.getValueAt(i,11).toString());
-                } catch (Exception e) {
-                    eb[z]=0;
-                } 
-                try {
-                    ts[z]=Double.parseDouble(tbDetailObatRacikan.getValueAt(i,12).toString());
-                } catch (Exception e) {
-                    ts[z]=0;
-                }                                 
+                }  
+                
+                eb[z]=tbObat.getValueAt(i,11).toString();
+                ts[z]=tbObat.getValueAt(i,12).toString();
+                                              
                 industri[z]=tbDetailObatRacikan.getValueAt(i,13).toString();
                 kategori[z]=tbDetailObatRacikan.getValueAt(i,14).toString();
                 golongan[z]=tbDetailObatRacikan.getValueAt(i,15).toString();

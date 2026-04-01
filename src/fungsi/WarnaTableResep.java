@@ -34,10 +34,27 @@ public class WarnaTableResep extends DefaultTableCellRenderer {
             component.setForeground(new Color(50, 50, 50));
         }
         
-        if(table.getValueAt(row,12).toString().equals("Obat ini sudah diberikan dalam waktu kurang dari 1 bulan terakhir.")){
-            component.setBackground(new Color(255, 15, 15));
-            component.setForeground(new Color(255, 255, 255));
+        if (!table.getValueAt(row, 13).toString().trim().isEmpty() &&
+            !table.getValueAt(row, 14).toString().trim().isEmpty()) {
+            try {
+                double jml13 = Double.parseDouble(table.getValueAt(row, 13).toString());
+                double jml14 = Double.parseDouble(table.getValueAt(row, 14).toString());
+
+                double selisih = Math.abs(jml14 - jml13);
+                if (selisih <= 7) { 
+                    component.setBackground(new Color(255, 15, 15));
+                    component.setForeground(new Color(255, 255, 255));
+                }
+            } catch (NumberFormatException e) {
+            }
         }
+        
+        if (!table.getValueAt(row, 12).toString().trim().isEmpty() &&
+            !table.getValueAt(row, 13).toString().trim().isEmpty()) {
+            component.setBackground(new Color(255, 195, 15));
+            component.setForeground(new Color(220, 20, 60));
+        }
+
         if (isSelected){
             component.setBackground(new Color(245, 222, 179));
             component.setForeground(new Color(220, 20, 60));

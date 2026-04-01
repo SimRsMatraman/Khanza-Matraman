@@ -584,6 +584,8 @@ public class DlgBarang extends javax.swing.JDialog {
         apotekmin = new widget.TextBox();
         igdmax = new widget.TextBox();
         igdmin = new widget.TextBox();
+        label47 = new widget.Label();
+        MaxKronis = new widget.TextBox();
         ChkInput = new widget.CekBox();
 
         Popup.setName("Popup"); // NOI18N
@@ -1336,7 +1338,7 @@ public class DlgBarang extends javax.swing.JDialog {
         Kapasitas.setBounds(410, 132, 70, 23);
 
         DTPExpired.setForeground(new java.awt.Color(50, 70, 50));
-        DTPExpired.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-01-2025" }));
+        DTPExpired.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-01-2025" }));
         DTPExpired.setDisplayFormat("dd-MM-yyyy");
         DTPExpired.setName("DTPExpired"); // NOI18N
         DTPExpired.setOpaque(false);
@@ -1719,6 +1721,32 @@ public class DlgBarang extends javax.swing.JDialog {
         FormInput.add(igdmin);
         igdmin.setBounds(720, 120, 60, 23);
 
+        label47.setText("Max Obat Kronis / Bulan :");
+        label47.setName("label47"); // NOI18N
+        label47.setPreferredSize(new java.awt.Dimension(65, 23));
+        FormInput.add(label47);
+        label47.setBounds(500, 160, 140, 23);
+
+        MaxKronis.setName("MaxKronis"); // NOI18N
+        MaxKronis.setPreferredSize(new java.awt.Dimension(207, 23));
+        MaxKronis.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                MaxKronisMouseMoved(evt);
+            }
+        });
+        MaxKronis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                MaxKronisMouseExited(evt);
+            }
+        });
+        MaxKronis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                MaxKronisKeyPressed(evt);
+            }
+        });
+        FormInput.add(MaxKronis);
+        MaxKronis.setBounds(650, 160, 130, 23);
+
         PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -1840,8 +1868,6 @@ public class DlgBarang extends javax.swing.JDialog {
             Valid.textKosong(utama, "Harga Ranap Kelas Utama");
         } else if (kelasvip.getText().trim().equals("")) {
             Valid.textKosong(kelasvip, "Harga Ranap Kelas VIP");
-        } else if (kelasvvip.getText().trim().equals("")) {
-            Valid.textKosong(kelasvvip, "Harga Ranap Kelas VVIP");
         } else if (beliluar.getText().trim().equals("")) {
             Valid.textKosong(beliluar, "Harga Jika Beli dari Apotek Lain");
         } else if (jualbebas.getText().trim().equals("")) {
@@ -1868,6 +1894,8 @@ public class DlgBarang extends javax.swing.JDialog {
             Valid.textKosong(minobat, "Minimal Permintaan Obat");
         } else if (maxobat.getText().trim().equals("") || maxobat.getText().trim().equals("")) {
             Valid.textKosong(maxobat, "Maximal Permintaan Obat");
+        } else if (MaxKronis.getText().trim().equals("")) {
+            Valid.textKosong(MaxKronis, "Jumlah Max Obat Kronis");
         } else {
             if (ChkKadaluarsa.isSelected() == true) {
                 tanggal = Valid.SetTgl(DTPExpired.getSelectedItem()+"");
@@ -1879,7 +1907,7 @@ public class DlgBarang extends javax.swing.JDialog {
                     + "karyawan=?,expire=?,kode_industri=?,kode_kategori=?,kode_golongan=?,kode_satbesar=?,dasar=?,isi=?,minobat=?,maxobat=?", 28, new String[]{
                         Nm.getText(), Kd.getText(), Kapasitas.getText(), kdsat.getText(), Letak.getText(), dasar.getText(), dasar.getText(),
                         dasar.getText(), dasar.getText(), stok_minimal.getText(), kdjns.getText(),dasar.getText(), dasar.getText(), 
-                        dasar.getText(), dasar.getText(),dasar.getText(), dasar.getText(), dasar.getText(),tanggal,KdIF.getText(),
+                        dasar.getText(), MaxKronis.getText(),dasar.getText(), dasar.getText(), dasar.getText(),tanggal,KdIF.getText(),
                         kdkategori.getText(),kdgolongan.getText(),kdsatBesar.getText(),dasar.getText(),Isi.getText(),minobat.getText(),maxobat.getText(),
 //                        kdapotek.getText()+""+apotekmax.getText(),kdapotek.getText()+""+apotekmin.getText(),
 //                        kdigd.getText()+""+igdmax.getText(),kdigd.getText()+""+igdmin.getText(),
@@ -2053,8 +2081,6 @@ public class DlgBarang extends javax.swing.JDialog {
             Valid.textKosong(kelas3, "Harga Ranap Kelas 3");
         } else if (utama.getText().trim().equals("")) {
             Valid.textKosong(utama, "Harga Ranap Kelas Utama");
-        } else if (kelasvip.getText().trim().equals("")) {
-            Valid.textKosong(kelasvip, "Harga Ranap Kelas VIP");
         } else if (kelasvvip.getText().trim().equals("")) {
             Valid.textKosong(kelasvvip, "Harga Ranap Kelas VVIP");
         } else if (beliluar.getText().trim().equals("")) {
@@ -2083,6 +2109,8 @@ public class DlgBarang extends javax.swing.JDialog {
             Valid.textKosong(minobat, "Minimal Permintaan Obat");
         } else if (maxobat.getText().trim().equals("") || maxobat.getText().trim().equals("")) {
             Valid.textKosong(maxobat, "Maximal Permintaan Obat");
+        } else if (MaxKronis.getText().trim().equals("")) {
+            Valid.textKosong(MaxKronis, "Jumlah Max Obat Kronis");
         } else {
             if (ChkKadaluarsa.isSelected() == true) {
                 tanggal = Valid.SetTgl(DTPExpired.getSelectedItem() + "");
@@ -2091,7 +2119,7 @@ public class DlgBarang extends javax.swing.JDialog {
             }
             if(Sequel.menyimpantf("databarang", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "Kode Barang", 28, new String[]{
                     Kd.getText(), Nm.getText(), kdsatBesar.getText(), kdsat.getText(), Letak.getText(),dasar.getText(), dasar.getText(), dasar.getText(),
-                    dasar.getText(), dasar.getText(), dasar.getText(),dasar.getText(), dasar.getText(), dasar.getText(),dasar.getText(), 
+                    dasar.getText(), dasar.getText(), dasar.getText(),dasar.getText(), dasar.getText(), MaxKronis.getText(),dasar.getText(), 
                     dasar.getText(), dasar.getText(),stok_minimal.getText(), kdjns.getText(), Isi.getText(),Kapasitas.getText(), tanggal,"1",
                     KdIF.getText(),kdkategori.getText(),kdgolongan.getText(),minobat.getText(),maxobat.getText()
 //                    ,kdapotek.getText()+""+apotekmax.getText(),kdapotek.getText()+""+apotekmin.getText(),
@@ -2673,6 +2701,18 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         // TODO add your handling code here:
     }//GEN-LAST:event_igdmaxKeyPressed
 
+    private void MaxKronisMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaxKronisMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaxKronisMouseMoved
+
+    private void MaxKronisMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MaxKronisMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaxKronisMouseExited
+
+    private void MaxKronisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MaxKronisKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MaxKronisKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -2715,6 +2755,7 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.TextBox KdIF;
     private widget.Label LCount;
     private widget.TextBox Letak;
+    private widget.TextBox MaxKronis;
     private javax.swing.JMenuItem MnRestore;
     private widget.TextBox Nm;
     private widget.TextBox NmIF;
@@ -2775,6 +2816,7 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.Label label44;
     private widget.Label label45;
     private widget.Label label46;
+    private widget.Label label47;
     private widget.Label label9;
     private widget.TextBox maxobat;
     private widget.TextBox minobat;
@@ -3562,7 +3604,7 @@ private void KapasitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             kelas3.setText(Double.toString(Double.parseDouble(tbObat.getValueAt(row, 15).toString())));
             utama.setText(Double.toString(Double.parseDouble(tbObat.getValueAt(row, 16).toString())));
             kelasvip.setText(Double.toString(Double.parseDouble(tbObat.getValueAt(row, 17).toString())));
-            kelasvvip.setText(Double.toString(Double.parseDouble(tbObat.getValueAt(row, 18).toString())));
+            MaxKronis.setText(Double.toString(Double.parseDouble(tbObat.getValueAt(row, 18).toString())));
             beliluar.setText(Double.toString(Double.parseDouble(tbObat.getValueAt(row, 19).toString())));
             jualbebas.setText(Double.toString(Double.parseDouble(tbObat.getValueAt(row, 20).toString())));
             karyawan.setText(Double.toString(Double.parseDouble(tbObat.getValueAt(row, 21).toString())));

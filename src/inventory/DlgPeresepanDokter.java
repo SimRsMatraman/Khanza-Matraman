@@ -36,9 +36,13 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
 import widget.Button;
@@ -59,7 +63,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private boolean ubah=false,copy=false,sukses=true;
     private boolean[] pilih; 
     private double[] jumlah,harga,beli,stok,kapasitas,p1,p2;
-    private String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi,status_terakhir;
+    private String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi,status_terakhir,beri_terakhir,jml_max,sisa;
     public DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
     private WarnaTable2 warna=new WarnaTable2();
     private WarnaTable2 warna2=new WarnaTable2();
@@ -67,7 +71,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private DlgCariMetodeRacik metoderacik=new DlgCariMetodeRacik(null,false);
     public DlgCariDokter dokter=new DlgCariDokter(null,false);
     private String noracik="",aktifkanbatch="no",STOKKOSONGRESEP="no",qrystokkosong="",tampilkan_ppnobat_ralan="",status="",bangsal="",resep="",DEPOAKTIFOBAT="",
-            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no";
+            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no";  
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -78,7 +83,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         setSize(656,250);
         tabModeResep=new DefaultTableModel(null,new Object[]{
                 "Iter","Jumlah","Aturan Pakai","Kode Barang","Nama Barang","Satuan",
-                "Komposisi","Harga(Rp)","Jenis Obat","I.F.","H.Beli","Stok","Status"
+                "Komposisi","Harga(Rp)","Jenis Obat","I.F.","H.Beli","Stok","Status","Sudah Beri","Max/Bln","Sisa"
             }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -91,7 +96,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, 
                 java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
                 java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,java.lang.Double.class,
-                java.lang.Object.class
+                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
              };
              /*Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
@@ -101,28 +106,29 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 return types [columnIndex];
              }
         };
+        
         tbResep.setModel(tabModeResep);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbResep.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbResep.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (i = 0; i < 13; i++) {
+        for (i = 0; i < 16; i++) {
             TableColumn column = tbResep.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(40);
             }else if(i==1){
                 column.setPreferredWidth(50);
             }else if(i==2){
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(120);
             }else if(i==3){
                 column.setPreferredWidth(70);
             }else if(i==4){
                 column.setPreferredWidth(240);
             }else if(i==5){
-                column.setPreferredWidth(75);
+                column.setPreferredWidth(50);
             }else if(i==6){
                 column.setPreferredWidth(250);
             }else if(i==7){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(70);
             }else if(i==8){
                 column.setPreferredWidth(100);
             }else if(i==9){
@@ -133,8 +139,14 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             }else if(i==11){
                 column.setPreferredWidth(50);
             }else if(i==12){
-                column.setPreferredWidth(350);
-            }                 
+                column.setPreferredWidth(400);
+            }else if(i==13){
+                column.setPreferredWidth(80);
+            }else if(i==14){
+                column.setPreferredWidth(80);
+            }else if(i==15){
+                column.setPreferredWidth(50);
+            }               
         }
         warna.kolom=1;
         tbResep.setDefaultRenderer(Object.class,warna);
@@ -402,8 +414,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         } catch (Exception e) {
             RESEPRAJALKEPLAN="no";
         }
-    }    
-    
+    }  
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -420,6 +432,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         KdPj = new widget.TextBox();
         LPpn = new widget.Label();
         jLabel6 = new widget.Label();
+        TNoRM = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         panelisi3 = new widget.panelisi();
         label9 = new widget.Label();
@@ -436,7 +449,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         BtnKeluar = new widget.Button();
         FormInput = new widget.PanelBiasa();
         TNoRw = new widget.TextBox();
-        TNoRM = new widget.TextBox();
         TPasien = new widget.TextBox();
         KdDokter = new widget.TextBox();
         NmDokter = new widget.TextBox();
@@ -519,6 +531,13 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel6.setName("jLabel6"); // NOI18N
         jLabel6.setPreferredSize(new java.awt.Dimension(35, 23));
 
+        TNoRM.setName("TNoRM"); // NOI18N
+        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNoRMKeyPressed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -591,7 +610,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         label12.setPreferredSize(new java.awt.Dimension(50, 23));
         panelisi3.add(label12);
 
-        Jeniskelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rawat Jalan", "Beli Luar", "Karyawan", "Utama/BPJS", "Kelas 1", "Kelas 2", "Kelas 3", "VIP", "VVIP" }));
+        Jeniskelas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Rawat Jalan", "Beli Luar", "Karyawan", "Utama/BPJS", "Kelas 1", "Kelas 2", "Kelas 3", "VIP" }));
         Jeniskelas.setName("Jeniskelas"); // NOI18N
         Jeniskelas.setPreferredSize(new java.awt.Dimension(120, 23));
         Jeniskelas.addItemListener(new java.awt.event.ItemListener() {
@@ -701,15 +720,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         });
         FormInput.add(TNoRw);
         TNoRw.setBounds(75, 12, 120, 23);
-
-        TNoRM.setName("TNoRM"); // NOI18N
-        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoRMKeyPressed(evt);
-            }
-        });
-        FormInput.add(TNoRM);
-        TNoRM.setBounds(1350, 110, 140, 23);
 
         TPasien.setEditable(false);
         TPasien.setName("TPasien"); // NOI18N
@@ -1102,6 +1112,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         if(tbResep.getRowCount()!=0){
             try {
                 getCekStok();
+                getCekKronis();
                 getCekStatus();
             } catch (java.lang.NullPointerException e) {
             }
@@ -1124,6 +1135,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 }                
             }else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
                 getCekStok();
+                getCekKronis();
                 getCekStatus();
                 i=tbResep.getSelectedColumn();
                 if(i==2){
@@ -1136,6 +1148,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 getCekStok();
+                getCekKronis();
                 getCekStatus();
                 i=tbResep.getSelectedColumn();
                 if((i==2)||(i==3)||(i==11)){
@@ -1557,6 +1570,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private void tbResepPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbResepPropertyChange
         if(this.isVisible()==true){
             getCekStok();
+            getCekKronis();
             getCekStatus();
             hitungResep();
         }
@@ -1714,7 +1728,13 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         stok=null;
         stok=new double[z];            
         status_terakhir=null;
-        status_terakhir=new String[z];  
+        status_terakhir=new String[z];
+        beri_terakhir=null;
+        beri_terakhir=new String[z]; 
+        jml_max=null;
+        jml_max=new String[z]; 
+        sisa=null;
+        sisa=new String[z]; 
         z=0;        
         for(i=0;i<tbResep.getRowCount();i++){
             if(!tbResep.getValueAt(i,1).toString().equals("")){
@@ -1753,7 +1773,10 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     stok[z]=0;
                 }
                 
-                status_terakhir[z]=tbResep.getValueAt(i,12).toString(); 
+                status_terakhir[z]=tbResep.getValueAt(i,12).toString();
+                beri_terakhir[z]=tbResep.getValueAt(i,13).toString();
+                jml_max[z]=tbResep.getValueAt(i,14).toString();
+                sisa[z]=tbResep.getValueAt(i,15).toString();
                 z++;
             }
         }
@@ -1762,7 +1785,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         
         for(i=0;i<z;i++){
             tabModeResep.addRow(new Object[] {
-                pilih[i],jumlah[i],aturan[i],kodebarang[i],namabarang[i],kodesatuan[i],letakbarang[i],harga[i],namajenis[i],industri[i],beli[i],stok[i],status_terakhir[i]
+                pilih[i],jumlah[i],aturan[i],kodebarang[i],namabarang[i],kodesatuan[i],letakbarang[i],harga[i],namajenis[i],industri[i],beli[i],stok[i],status_terakhir[i],beri_terakhir[i],jml_max[i],sisa[i]
             });
         }
         
@@ -1779,16 +1802,26 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     "databarang.kode_sat, (databarang.h_beli+(databarang.h_beli*?)) as harga, " +
                     "databarang.letak_barang, industrifarmasi.nama_industri, databarang.h_beli, " +
                     "SUM(gudangbarang.stok) as stok, " +
-                    "CASE WHEN pernah_diberikan.kode_brng IS NOT NULL \n" +
-                    "AND databarang.kode_golongan IN ( 'G04', 'G05' ) THEN\n" +
-                    "'Obat kronis ini sudah diberikan dalam waktu kurang dari 1 bulan terakhir.' ELSE '' \n" +
-                    "END AS status_terakhir " +
-                    "FROM databarang INNER JOIN jenis ON databarang.kdjns = jenis.kdjns " +
+                    "COALESCE(pernah_diberikan.poli, '') as status, " +
+                    "COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, " +
+                    "COALESCE(pernah_diberikan.vvip, '') as jml_max " +
+                    "FROM databarang "+
+                    "INNER JOIN jenis ON databarang.kdjns = jenis.kdjns " +
                     "INNER JOIN industrifarmasi ON industrifarmasi.kode_industri = databarang.kode_industri " +
                     "INNER JOIN gudangbarang ON databarang.kode_brng = gudangbarang.kode_brng " +
-                    "LEFT JOIN (SELECT DISTINCT c.kode_brng FROM detail_pemberian_obat c " +
-                    "INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat WHERE b.no_rkm_medis=? " +
-                    "AND b.kd_pj='BPJ' AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND c.kode_brng IN ( SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ( 'G04', 'G05' )) " +
+                    "LEFT JOIN (SELECT c.kode_brng, SUM(c.jml) as jml_terakhir, GROUP_CONCAT( " +
+                    "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y')) " +
+                    " SEPARATOR ' , " +
+                    " ' " +
+                    ") as poli, " +
+                    "f.vvip "+
+                    "FROM detail_pemberian_obat c " +
+                    "INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                    "INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                    "INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                    "INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                    "WHERE b.no_rkm_medis=? " +
+                    "AND b.kd_pj='BPJ' AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND c.kode_brng IN ( SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ( 'G04', 'G05' )) GROUP BY c.kode_brng " +
                     ") AS pernah_diberikan " +
                     "ON pernah_diberikan.kode_brng = databarang.kode_brng " +
                     "WHERE databarang.status='1' " + qrystokkosong +
@@ -1797,7 +1830,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     " AND gudangbarang.kd_bangsal=? AND (databarang.kode_brng LIKE ? OR " +
                     "databarang.nama_brng LIKE ? OR jenis.nama LIKE ? OR databarang.letak_barang LIKE ?) " +
                     "GROUP BY databarang.kode_brng " +
-                    "ORDER BY CASE WHEN pernah_diberikan.kode_brng IS NOT NULL \n" +
+                    "ORDER BY CASE WHEN pernah_diberikan.kode_brng IS NOT NULL " +
                     "AND databarang.kode_golongan IN ( 'G04', 'G05' ) THEN 0 ELSE 1 END,databarang.nama_brng";
 
                 psresepasuransi = koneksi.prepareStatement(sql);
@@ -1812,40 +1845,84 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 rsobat = psresepasuransi.executeQuery();
                 int rowCount = 0;
                 while(rsobat.next()){
+                    String statusTerakhir = rsobat.getString("status");
+                    String jmlMax         = rsobat.getString("jml_max");
+                    String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                    String hasilKurangText = ""; // default kosong
+
+                    if (statusTerakhir != null && !statusTerakhir.trim().isEmpty()) {
+                        if (jmlMax != null && !jmlMax.isEmpty() &&
+                            jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                            try {
+                                int max  = Integer.parseInt(jmlMax);
+                                int last = Integer.parseInt(jmlTerakhir);
+
+                                if (last > 0) {
+                                    int hasil = max - last;
+                                    hasilKurangText = String.valueOf(hasil); // tetap String
+                                }
+                            } catch (NumberFormatException e) {
+                                hasilKurangText = ""; // jika format bukan angka, kosongkan
+                            }
+                        }
+                    }
+
                     tabModeResep.addRow(new Object[] {
-                        false,"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
-                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),
-                        Valid.roundUp(rsobat.getDouble("harga"),100),
-                        rsobat.getString("nama"),rsobat.getString("nama_industri"),
-                        rsobat.getDouble("h_beli"),rsobat.getDouble("stok"),
-                        rsobat.getString("status_terakhir")
+                        false,                                   
+                        "",                                       
+                        "",                                       
+                        rsobat.getString("kode_brng"),           
+                        rsobat.getString("nama_brng"),           
+                        rsobat.getString("kode_sat"),           
+                        rsobat.getString("letak_barang"),       
+                        Valid.roundUp(rsobat.getDouble("harga"),100), 
+                        rsobat.getString("nama"),                
+                        rsobat.getString("nama_industri"),      
+                        rsobat.getDouble("h_beli"),              
+                        rsobat.getDouble("stok"),                
+                        statusTerakhir,                       
+                        jmlTerakhir,              
+                        jmlMax,                         
+                        hasilKurangText                          
                     });
                 }
-
             } else {
                 // TANPA KENAIKAN - Jenis Kelas
                 String sql = "SELECT databarang.kode_brng, databarang.nama_brng, jenis.nama, " +
                     "databarang.kode_sat, databarang.letak_barang, databarang.karyawan, " +
                     "databarang.utama, databarang.ralan, databarang.beliluar, databarang.kelas1, " +
-                    "databarang.kelas2, databarang.kelas3, databarang.vip, databarang.vvip, " +
+                    "databarang.kelas2, databarang.kelas3, databarang.vip, " +
                     "industrifarmasi.nama_industri, databarang.h_beli, SUM(gudangbarang.stok) as stok, " +
-                    "CASE WHEN pernah_diberikan.kode_brng IS NOT NULL AND databarang.kode_golongan IN ( 'G04', 'G05' ) " +
-                    "THEN 'Obat ini sudah diberikan dalam waktu kurang dari 1 bulan terakhir.' ELSE '' END as status_terakhir " +
-                    "FROM databarang INNER JOIN jenis ON databarang.kdjns = jenis.kdjns " +
+                    "COALESCE(pernah_diberikan.poli, '') as status, " +
+                    "COALESCE(pernah_diberikan.jml_terakhir, '') as jml_terakhir, " +
+                    "COALESCE(pernah_diberikan.vvip, '') as jml_max " +
+                    "FROM databarang "+
+                    "INNER JOIN jenis ON databarang.kdjns = jenis.kdjns " +
                     "INNER JOIN industrifarmasi ON industrifarmasi.kode_industri = databarang.kode_industri " +
                     "INNER JOIN gudangbarang ON databarang.kode_brng = gudangbarang.kode_brng " +
-                    "LEFT JOIN (SELECT DISTINCT c.kode_brng FROM detail_pemberian_obat c " +
-                    "INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat WHERE b.no_rkm_medis=? " +
-                    "AND b.kd_pj='BPJ' AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) " +
-                    "AND c.kode_brng IN (SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ('G04','G05'))" +    
-                    ") AS pernah_diberikan ON pernah_diberikan.kode_brng = databarang.kode_brng " +
+                    "LEFT JOIN (SELECT c.kode_brng, SUM(c.jml) as jml_terakhir, GROUP_CONCAT( " +
+                    "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y')) " +
+                    " SEPARATOR ' , " +
+                    " ' " +
+                    ") as poli, " +
+                    "f.vvip "+
+                    "FROM detail_pemberian_obat c " +
+                    "INNER JOIN reg_periksa b ON b.no_rawat = c.no_rawat " +
+                    "INNER JOIN poliklinik d ON d.kd_poli = b.kd_poli " +
+                    "INNER JOIN pasien e ON b.no_rkm_medis = e.no_rkm_medis " +
+                    "INNER JOIN databarang f ON f.kode_brng = c.kode_brng " +
+                    "WHERE b.no_rkm_medis=? " +
+                    "AND b.kd_pj='BPJ' AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND c.kode_brng IN ( SELECT db.kode_brng FROM databarang db WHERE db.kode_golongan IN ( 'G04', 'G05' )) GROUP BY c.kode_brng " +
+                    ") AS pernah_diberikan " +
+                    "ON pernah_diberikan.kode_brng = databarang.kode_brng " +
                     "WHERE databarang.status='1' " + qrystokkosong +
                     (aktifkanbatch.equals("yes") ? " AND gudangbarang.no_batch<>'' AND gudangbarang.no_faktur<>''" : 
                      " AND gudangbarang.no_batch='' AND gudangbarang.no_faktur=''") +
                     " AND gudangbarang.kd_bangsal=? AND (databarang.kode_brng LIKE ? OR " +
                     "databarang.nama_brng LIKE ? OR jenis.nama LIKE ? OR databarang.letak_barang LIKE ?) " +
                     "GROUP BY databarang.kode_brng " +
-                    "ORDER BY CASE WHEN pernah_diberikan.kode_brng IS NOT NULL \n" +
+                    "ORDER BY CASE WHEN pernah_diberikan.kode_brng IS NOT NULL " +
                     "AND databarang.kode_golongan IN ( 'G04', 'G05' ) THEN 0 ELSE 1 END,databarang.nama_brng";
 
                 psresep = koneksi.prepareStatement(sql);
@@ -1872,16 +1949,48 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         case "Kelas 2": hargaKelas = rsobat.getDouble("kelas2"); break;
                         case "Kelas 3": hargaKelas = rsobat.getDouble("kelas3"); break;
                         case "VIP": hargaKelas = rsobat.getDouble("vip"); break;
-                        case "VVIP": hargaKelas = rsobat.getDouble("vvip"); break;
+                    }
+
+                    String statusTerakhir = rsobat.getString("status");
+                    String jmlMax         = rsobat.getString("jml_max");
+                    String jmlTerakhir    = rsobat.getString("jml_terakhir");
+
+                    String hasilKurangText = ""; // default kosong
+
+                    if (statusTerakhir != null && !statusTerakhir.trim().isEmpty()) {
+                        if (jmlMax != null && !jmlMax.isEmpty() &&
+                            jmlTerakhir != null && !jmlTerakhir.isEmpty()) {
+                            try {
+                                int max  = Integer.parseInt(jmlMax);
+                                int last = Integer.parseInt(jmlTerakhir);
+
+                                if (last > 0) {
+                                    int hasil = max - last;
+                                    hasilKurangText = String.valueOf(hasil); // tetap String
+                                }
+                            } catch (NumberFormatException e) {
+                                hasilKurangText = ""; // jika format bukan angka, kosongkan
+                            }
+                        }
                     }
 
                     tabModeResep.addRow(new Object[] {
-                        false,"","",rsobat.getString("kode_brng"),rsobat.getString("nama_brng"),
-                        rsobat.getString("kode_sat"),rsobat.getString("letak_barang"),
-                        Valid.roundUp(hargaKelas,100),
-                        rsobat.getString("nama"),rsobat.getString("nama_industri"),
-                        rsobat.getDouble("h_beli"),rsobat.getDouble("stok"),
-                        rsobat.getString("status_terakhir")
+                        false,                                   
+                        "",                                     
+                        "",                                    
+                        rsobat.getString("kode_brng"),         
+                        rsobat.getString("nama_brng"),         
+                        rsobat.getString("kode_sat"),         
+                        rsobat.getString("letak_barang"),    
+                        Valid.roundUp(hargaKelas,100),      
+                        rsobat.getString("nama"),            
+                        rsobat.getString("nama_industri"),  
+                        rsobat.getDouble("h_beli"),        
+                        rsobat.getDouble("stok"),             
+                        statusTerakhir,                        
+                        jmlTerakhir,
+                        jmlMax,
+                        hasilKurangText 
                     });
                 }
             }
@@ -3975,37 +4084,76 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }               
     }
     
-    private void getCekStatus() {
-        if(tbResep.getSelectedRow() != -1){
-            if(STOKKOSONGRESEP.equals("no")){
-                String statusRow12 = tbResep.getValueAt(tbResep.getSelectedRow(),12).toString().trim();
+    private void getCekKronis() {
+        if (tbResep.getSelectedRow() != -1) {
+            if (STOKKOSONGRESEP.equals("no")) {
+                // ambil nilai kolom 15 (status/jumlah kronis)
+                Object val15 = tbResep.getValueAt(tbResep.getSelectedRow(), 15);
+                String str15 = (val15 == null) ? "" : val15.toString().trim();
 
-                if(statusRow12.isEmpty() || isNumeric(statusRow12)){
-                    // Row 12 kosong/angka → AMAN, cek stok
-                } else {
-                    // Row 12 teks PRB → BLOCK EDIT
-//                    JOptionPane.showMessageDialog(rootPane,
-//                        "Maaf, obatnya belum bisa diberikan lagi karena pasien sudah mendapatkannya kurang dari 1 bulan yang lalu...!!");
-//                    tbResep.setValueAt(false, tbResep.getSelectedRow(), 0);
-//                    tbResep.setValueAt("", tbResep.getSelectedRow(), 1);
-//                    tbResep.changeSelection(tbResep.getSelectedRow(), 1, false, false);
-//                    return;
-                }
+                // hanya jalankan logika jika kolom 15 tidak kosong
+                if (!str15.isEmpty()) {
+                    try {
+                        double jml1 = Double.parseDouble(tbResep.getValueAt(tbResep.getSelectedRow(), 1).toString());
+                        double jml15 = Double.parseDouble(str15);
 
-                try {
-                    double jumlah = Double.parseDouble(tbResep.getValueAt(tbResep.getSelectedRow(),1).toString());
-                    double stok = Double.parseDouble(tbResep.getValueAt(tbResep.getSelectedRow(),11).toString());
+                        if (jml1 > 0) {
+                            if (jml1 > jml15) {
+                                Object max = tbResep.getValueAt(tbResep.getSelectedRow(), 15); // isi row 15
+                                Object jml = tbResep.getValueAt(tbResep.getSelectedRow(), 13); // isi row 13
+                                Object poli = tbResep.getValueAt(tbResep.getSelectedRow(), 12); // isi row 12
 
-                    if(jumlah > 0 && jumlah > stok){
-                        JOptionPane.showMessageDialog(rootPane, "Stok obat tidak mencukupi..!!");
+                                String maxStr  = (max  == null) ? "" : max.toString().trim();
+                                String jmlStr  = (jml  == null) ? "" : jml.toString().trim();
+                                String poliStr = (poli == null) ? "" : poli.toString().trim();
+
+                                String msg = "Maaf, obat tersebut hanya boleh diberikan maksimal " + maxStr +
+                                             " karena dalam 1 bulan terakhir sudah diberikan dengan jumlah " + jmlStr +
+                                             " di " + poliStr + "....!!!!!";
+
+                                JOptionPane.showMessageDialog(rootPane, msg);
+                                tbResep.setValueAt("", tbResep.getSelectedRow(), 1);
+                            }
+                        }
+                    } catch (NumberFormatException e) {
                         tbResep.setValueAt("", tbResep.getSelectedRow(), 1);
                     }
-                } catch (Exception e) {
-                    tbResep.setValueAt("", tbResep.getSelectedRow(), 1);
-                } 
-            }  
-        }               
+                }
+            }
+        }
     }
+ 
+    private void getCekStatus() {
+//    if(tbResep.getSelectedRow() != -1 && STOKKOSONGRESEP.equals("no")){
+//        int row = tbResep.getSelectedRow();
+//        String statusRow12 = tbResep.getValueAt(row,12).toString().trim();
+//        String jmlRow13 = tbResep.getValueAt(row,13).toString().trim();
+//
+//        // FULL BLOCK: Row13 = "30"
+//        if(!statusRow12.isEmpty() && jmlRow13.equals("30")){
+//            JOptionPane.showMessageDialog(rootPane,
+//                "Maaf, obatnya belum bisa diberikan lagi karena pasien sudah mendapatkannya kurang dari 1 bulan yang lalu...!!");
+//            bypassListener = true;
+//            tbResep.setValueAt(false, row, 0);
+//            tbResep.setValueAt("", row, 1);
+//            bypassListener = false;
+//            return;
+//        }
+//        
+//        // AUTO ISI LIMIT
+//        if(!statusRow12.isEmpty() && !jmlRow13.isEmpty() && !jmlRow13.equals("30")){
+//            double jmlSebelumnya = Double.parseDouble(jmlRow13);
+//            double sisaMax = 30.0 - jmlSebelumnya;
+//            JOptionPane.showMessageDialog(rootPane,
+//                "Obat hanya bisa di berikan dengan jumlah " + (int)sisaMax + 
+//                " karena 30 hari yang lalu pasien sudah mendapatkan " + jmlSebelumnya + "...!!");
+//            bypassListener = true;
+//            tbResep.setValueAt(true, row, 0);
+//            tbResep.setValueAt((int)sisaMax, row, 1);
+//            bypassListener = false;
+//        }
+//    }
+}
 
     private boolean isNumeric(String str) {
         if(str == null || str.trim().isEmpty()) return false;

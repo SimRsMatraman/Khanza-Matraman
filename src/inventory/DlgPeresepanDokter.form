@@ -92,6 +92,14 @@
         </Property>
       </Properties>
     </Component>
+    <Component class="widget.TextBox" name="TNoRM">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="TNoRM" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNoRMKeyPressed"/>
+      </Events>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -236,7 +244,7 @@
             <Component class="widget.ComboBox" name="Jeniskelas">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
+                  <StringArray count="8">
                     <StringItem index="0" value="Rawat Jalan"/>
                     <StringItem index="1" value="Beli Luar"/>
                     <StringItem index="2" value="Karyawan"/>
@@ -245,7 +253,6 @@
                     <StringItem index="5" value="Kelas 2"/>
                     <StringItem index="6" value="Kelas 3"/>
                     <StringItem index="7" value="VIP"/>
-                    <StringItem index="8" value="VVIP"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="Jeniskelas" noResource="true"/>
@@ -388,19 +395,6 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="75" y="12" width="120" height="23"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="widget.TextBox" name="TNoRM">
-              <Properties>
-                <Property name="name" type="java.lang.String" value="TNoRM" noResource="true"/>
-              </Properties>
-              <Events>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNoRMKeyPressed"/>
-              </Events>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="1350" y="110" width="140" height="23"/>
                 </Constraint>
               </Constraints>
             </Component>
