@@ -757,7 +757,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),6).toString(), 
                 tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),4).toString()+" "+
                 tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),5).toString(), 
-                kode_pj,status);
+                kode_pj,status, 
+                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),4).toString());
         resep.isCek();
         resep.tampilobat2(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
         resep.setVisible(true);
@@ -774,7 +775,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(3,5),
                 tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),2).toString().substring(6,8),
                 tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),7).toString(),
-                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),6).toString(),status);
+                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),6).toString(),status,
+                tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),4).toString());
         resep.isCek();
         resep.tampilobat(tbPemisahan.getValueAt(tbPemisahan.getSelectedRow(),0).toString());
         resep.setVisible(true);   
