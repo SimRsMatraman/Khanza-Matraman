@@ -973,7 +973,7 @@ System.out.println("Error Jakportal : "+e);
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-03-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-04-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -987,7 +987,7 @@ System.out.println("Error Jakportal : "+e);
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-03-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-04-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1345,16 +1345,18 @@ private void ceklisResep(){
 
     resepSelected = !resepSelected;
 
-    for(int i=0;i<tbKunjungan.getRowCount();i++){
+ for(int i=0;i<tbKunjungan.getRowCount();i++){
 
-        String resep = safeString(tbKunjungan.getValueAt(i,3));
-        String idPoli = safeString(tbKunjungan.getValueAt(i,10));
-        String idPoliEnd = safeString(tbKunjungan.getValueAt(i,11));
+    String resep = safeString(tbKunjungan.getValueAt(i,3));
+    String idPoli = safeString(tbKunjungan.getValueAt(i,10));
+    String idPoliEnd = safeString(tbKunjungan.getValueAt(i,11));
 
-        if(!resep.equals("") && !idPoli.equals("") && !idPoliEnd.equals("")){
-            tbKunjungan.setValueAt(resepSelected,i,0);
-        }
-    }
+    System.out.println("resep="+resep+" | poli="+idPoli+" | poliEnd="+idPoliEnd);
+
+if(resep != null && !resep.trim().isEmpty()){
+    tbKunjungan.setValueAt(resepSelected,i,0);
+}
+}
 }
     
 private void ceklisLab(){
@@ -1363,12 +1365,14 @@ private void ceklisLab(){
 
     for(int i=0;i<tbKunjungan.getRowCount();i++){
 
-        String lab = safeString(tbKunjungan.getValueAt(i,4));
-        String idPoli = safeString(tbKunjungan.getValueAt(i,10));
-        String idPoliEnd = safeString(tbKunjungan.getValueAt(i,11));
+        Object labObj = tbKunjungan.getValueAt(i,4);
 
-        if(!lab.equals("") && !idPoli.equals("") && !idPoliEnd.equals("")){
-            tbKunjungan.setValueAt(labSelected,i,0);
+        if(labObj != null){
+            String lab = labObj.toString().trim();
+
+            if(!lab.isEmpty()){
+                tbKunjungan.setValueAt(labSelected,i,0);
+            }
         }
     }
 }
@@ -1379,12 +1383,14 @@ private void ceklisRadiologi(){
 
     for(int i=0;i<tbKunjungan.getRowCount();i++){
 
-        String rad = safeString(tbKunjungan.getValueAt(i,5));
-        String idPoli = safeString(tbKunjungan.getValueAt(i,10));
-        String idPoliEnd = safeString(tbKunjungan.getValueAt(i,11));
+        Object radObj = tbKunjungan.getValueAt(i,5);
 
-        if(!rad.equals("") && !idPoli.equals("") && !idPoliEnd.equals("")){
-            tbKunjungan.setValueAt(radSelected,i,0);
+        if(radObj != null){
+            String rad = radObj.toString().trim();
+
+            if(!rad.isEmpty()){
+                tbKunjungan.setValueAt(radSelected,i,0);
+            }
         }
     }
 }
