@@ -23,7 +23,7 @@ public class WarnaTableResep extends DefaultTableCellRenderer {
         }else{
             component.setBackground(new Color(255,255,255));
             component.setForeground(new Color(50,50,50));
-        } 
+        }
         
         if (!isSelected) {
             if (column  == 1) {
@@ -59,6 +59,25 @@ public class WarnaTableResep extends DefaultTableCellRenderer {
             component.setBackground(new Color(245, 222, 179));
             component.setForeground(new Color(220, 20, 60));
         }
+        
+        if (column == 15) {
+            try {
+                    double jml13 = Double.parseDouble(table.getValueAt(row, 13).toString());
+                    double jml14 = Double.parseDouble(table.getValueAt(row, 14).toString());
+
+                    double selisih = Math.abs(jml14 - jml13);
+                    if (selisih <= 7) { 
+                        Object val15 = table.getValueAt(row, 15);
+                        String s15 = (val15 == null) ? "" : val15.toString().trim();
+                        if (!s15.isEmpty()) {
+                            setBackground(new Color(255, 15, 15));
+                            setForeground(new Color(50, 50, 50));
+                            return this;
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                }
+        } 
 
         return component;
     }
