@@ -67,7 +67,7 @@ public class DlgBarang extends javax.swing.JDialog {
         tabMode = new DefaultTableModel(null,new Object[]{
             "P", "Kode Barang", "Nama Barang", "Kd.Sat Besar", "Nm.Satuan Besar","Isi", "Kd.Sat Kecil", "Nm.Satuan Kecil",
             "Kps", "Kandungan","Hrg.Dasar(Rp)","Hrg.Beli(Rp)", "Ralan(Rp)", "Ranap K1(Rp)", "Ranap K2(Rp)", "Ranap K3(Rp)",
-            "Kelas Utama/BPJS(Rp)", "Ranap VIP(Rp)", "Ranap VVIP(Rp)", "Beli Luar(Rp)","Jual Bebas(Rp)", "Karyawan(Rp)", 
+            "Kelas Utama/BPJS(Rp)", "Ranap VIP(Rp)", "Jml Max Kronis", "Beli Luar(Rp)","Jual Bebas(Rp)", "Karyawan(Rp)", 
             "Stok Min", "Kode Jenis", "Nama Jenis","Kadaluwarsa","Kode I.F.","Industri Farmasi","Kode Kategori","Kategori",
             "Kode Golongan","Golongan","Min. Permintaan Obat","Max. Permintaan Obat"
         }) {
