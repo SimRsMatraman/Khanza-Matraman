@@ -7295,41 +7295,79 @@ public final class DlgReg extends javax.swing.JDialog {
 }//GEN-LAST:event_THbngnKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if(TNoReg.getText().trim().equals("")){
-            Valid.textKosong(TNoReg,"No.Regristrasi");
-        }else if(TNoRw.getText().trim().equals("")){
-            Valid.textKosong(TNoRw,"No.Rawat");
-        }else if(TDokter.getText().trim().equals("")){
-            Valid.textKosong(KdDokter,"dokter");
-        }else if(TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
-            Valid.textKosong(TNoRM,"pasien");
-        }else if(TPoli.getText().trim().equals("")){
-            Valid.textKosong(kdpoli,"poliklinik");
-        }else if(TBiaya.getText().trim().equals("")){
-            Valid.textKosong(TBiaya,"biaya regristrasi");
-        }else if(kdpnj.getText().trim().equals("")||nmpnj.getText().trim().equals("")){
-            Valid.textKosong(kdpnj,"Jenis Bayar");
-        }else if(Sequel.cariInteger("select count(pasien.no_rkm_medis) from pasien inner join reg_periksa inner join kamar_inap "+
-                 "on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                 "where kamar_inap.stts_pulang='-' and pasien.no_rkm_medis=?",TNoRM.getText())>0){
-            JOptionPane.showMessageDialog(null,"Pasien sedang dalam masa perawatan di kamar inap..!!");
-            TNoRM.requestFocus();
+if(TNoReg.getText().trim().equals("")){
+        Valid.textKosong(TNoReg,"No.Regristrasi");
+    }else if(TNoRw.getText().trim().equals("")){
+        Valid.textKosong(TNoRw,"No.Rawat");
+    }else if(TDokter.getText().trim().equals("")){
+        Valid.textKosong(KdDokter,"dokter");
+    }else if(TNoRM.getText().trim().equals("")||TPasien.getText().trim().equals("")){
+        Valid.textKosong(TNoRM,"pasien");
+    }else if(TPoli.getText().trim().equals("")){
+        Valid.textKosong(kdpoli,"poliklinik");
+    }else if(TBiaya.getText().trim().equals("")){
+        Valid.textKosong(TBiaya,"biaya regristrasi");
+    }else if(kdpnj.getText().trim().equals("")||nmpnj.getText().trim().equals("")){
+        Valid.textKosong(kdpnj,"Jenis Bayar");
+    }else if(Sequel.cariInteger("select count(pasien.no_rkm_medis) from pasien inner join reg_periksa inner join kamar_inap "+
+             "on reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.no_rawat=kamar_inap.no_rawat "+
+             "where kamar_inap.stts_pulang='-' and pasien.no_rkm_medis=?",TNoRM.getText())>0){
+        JOptionPane.showMessageDialog(null,"Pasien sedang dalam masa perawatan di kamar inap..!!");
+        TNoRM.requestFocus();
+    }else{
+
+        // 🔴 VALIDASI BPJ (DITARUH DI DALAM, BUKAN else if)
+        if(kdpnj.getText().equals("BPJ")){
+            
+            String tgl = Valid.SetTgl(DTPReg.getSelectedItem()+"");
+            String norm = TNoRM.getText();
+            String poliNow = kdpoli.getText();
+
+            boolean igdSekarang = poliNow.equals("IGDK") || poliNow.equals("U0001");
+
+            int pernahIGD = Sequel.cariInteger(
+                "select count(*) from reg_periksa where no_rkm_medis='"+norm+
+                "' and tgl_registrasi='"+tgl+
+                "' and kd_pj='BPJ' and (kd_poli='IGDK' or kd_poli='U0001')"
+            );
+
+            int pernahBPJ = Sequel.cariInteger(
+                "select count(*) from reg_periksa where no_rkm_medis='"+norm+
+                "' and tgl_registrasi='"+tgl+
+                "' and kd_pj='BPJ'"
+            );
+
+            // ❌ IGD ke IGD
+            if(igdSekarang && pernahIGD > 0){
+                JOptionPane.showMessageDialog(null,
+                    "Pasien BPJS sudah pernah ke IGD hari ini.\nTidak bisa daftar IGD lagi..!!");
+                TNoRM.requestFocus();
+                return;
+            }
+
+            // 🟡 Poli → IGD (boleh + notif)
+            if(igdSekarang && pernahBPJ > 0){
+                JOptionPane.showMessageDialog(null,
+                    "Pasien BPJS sudah terdaftar hari ini.\nMelanjutkan ke IGD..");
+            }
+        }
+
+        // 🔽 LANJUT PROSES NORMAL
+        if(akses.getkode().equals("Admin Utama")){
+            isRegistrasi();
         }else{
-            if(akses.getkode().equals("Admin Utama")){
-                isRegistrasi();
-            }else{
-                if(aktifjadwal.equals("aktif")){
-                    if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+KdDokter.getText()+"' and reg_periksa.tgl_registrasi='"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"' ")>=kuota){
-                        JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
-                        TCari.requestFocus();
-                    }else{
-                        isRegistrasi();
-                    }                    
+            if(aktifjadwal.equals("aktif")){
+                if(Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_dokter='"+KdDokter.getText()+"' and reg_periksa.tgl_registrasi='"+Valid.SetTgl(DTPReg.getSelectedItem()+"")+"' ")>=kuota){
+                    JOptionPane.showMessageDialog(null,"Eiiits, Kuota registrasi penuh..!!!");
+                    TCari.requestFocus();
                 }else{
                     isRegistrasi();
-                }  
-            }                          
-        }
+                }                    
+            }else{
+                isRegistrasi();
+            }  
+        }                          
+    }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed

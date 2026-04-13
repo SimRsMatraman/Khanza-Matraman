@@ -6331,19 +6331,51 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                             this.setCursor(Cursor.getDefaultCursor());
                         }
                     }
-                    if (tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 4).toString().equals("Belum Terbit")
-                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0015") //rad
-                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0016") //lab
-                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0046") //anestesi
-                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0039") //neonatus    
-                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0033") //tbro
-                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0041") //tbdots   
-                            //                            &&!tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString().equals("U0021") //fisio
-                            && !tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString().equals("U0035") //farmasi
-                            //                            &&!tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString().equals("U0045") //rehab
-                            ) {
-                        JOptionPane.showMessageDialog(null, "Pasien belum terbit SEP!");
-                    }
+String noRawat = tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 12).toString();
+String kdPoli = tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString();
+
+if (!kdPoli.equals("U0015")
+        && !kdPoli.equals("U0016")
+        && !kdPoli.equals("U0046")
+        && !kdPoli.equals("U0039")
+        && !kdPoli.equals("U0033")
+        && !kdPoli.equals("U0041")
+        && !kdPoli.equals("U0035")) {
+
+    String kd_pj = Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat=?", noRawat);
+
+boolean adaSEP = Sequel.cariInteger(
+    "select count(*) from bridging_sep where no_rawat=? and no_sep is not null and no_sep not in ('','-','0')",
+    noRawat
+) > 0;
+
+    int jmlKunjungan = Sequel.cariInteger(
+        "select count(*) from reg_periksa " +
+        "where no_rkm_medis = (select no_rkm_medis from reg_periksa where no_rawat=? limit 1) " +
+        "and tgl_registrasi = curdate()",
+        noRawat
+    );
+
+    String pesan = "";
+
+    // ✅ 1. KHUSUS BPJS
+    if ("BPJ".equals(kd_pj) && !adaSEP) {
+        pesan = "Pasien belum terbit SEP!";
+    }
+
+    // ✅ 2. SEMUA PASIEN (termasuk non BPJS)
+    if (jmlKunjungan > 1) {
+        if (!pesan.equals("")) {
+            pesan += "\n";
+        }
+        pesan += "Pasien sudah berkunjung lebih dari 1x hari ini (" + jmlKunjungan + "x)";
+    }
+
+    // ✅ tampilkan kalau ada isi
+    if (!pesan.equals("")) {
+        JOptionPane.showMessageDialog(null, pesan);
+    }
+}
                 } else {
                     if (tbKasirRalan.getSelectedRow() != -1) {
                         if (Sequel.cariRegistrasi(TNoRw.getText()) > 0) {

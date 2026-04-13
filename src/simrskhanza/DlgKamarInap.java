@@ -6558,31 +6558,32 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     }
                     norawat.requestFocus();
                 }
-            }else if(norawat.isEditable()==false){
-                String countEdukasi = Sequel.cariIsi("SELECT COUNT(*) FROM edukasi_pasien WHERE no_rawat=?", norawat.getText());
-
-                if(countEdukasi.equals("0")) {
-                    int choice = JOptionPane.showConfirmDialog(
-                        null, 
-                        "Belum isi edukasi pasien dan keluarga!\nApakah ingin mengisi sekarang?", 
-                        "Edukasi Diperlukan", 
-                        JOptionPane.YES_NO_OPTION
-                    );
-
-                    if(choice == JOptionPane.YES_OPTION) {
-                        RMDataEdukasi form=new RMDataEdukasi(null,false);
-                        form.isCek();
-                        form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                        form.setLocationRelativeTo(internalFrame1);
-                        form.setVisible(true);
-                        form.emptTeks();
-                        form.setNoRm(norawat.getText(), new Date());
-                        form.tampil();
-                        form.generateNoSuratRanap();
-                        this.setCursor(Cursor.getDefaultCursor());
-                    }
-                    return;
-                }
+            }
+            else if(norawat.isEditable()==false){
+//                String countEdukasi = Sequel.cariIsi("SELECT COUNT(*) FROM edukasi_pasien WHERE no_rawat=?", norawat.getText());
+//
+//                if(countEdukasi.equals("0")) {
+//                    int choice = JOptionPane.showConfirmDialog(
+//                        null, 
+//                        "Belum isi edukasi pasien dan keluarga!\nApakah ingin mengisi sekarang?", 
+//                        "Edukasi Diperlukan", 
+//                        JOptionPane.YES_NO_OPTION
+//                    );
+//
+//                    if(choice == JOptionPane.YES_OPTION) {
+//                        RMDataEdukasi form=new RMDataEdukasi(null,false);
+//                        form.isCek();
+//                        form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//                        form.setLocationRelativeTo(internalFrame1);
+//                        form.setVisible(true);
+//                        form.emptTeks();
+//                        form.setNoRm(norawat.getText(), new Date());
+//                        form.tampil();
+//                        form.generateNoSuratRanap();
+//                        this.setCursor(Cursor.getDefaultCursor());
+//                    }
+//                    return;
+//                }
 
                 // 🔥 GANTI MENGEDIT (bukan mengedittf)
                     Sequel.mengedit("edukasi_pasien","no_rawat='"+norawat.getText()+"'","status='1'");
