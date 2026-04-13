@@ -1810,7 +1810,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     "INNER JOIN industrifarmasi ON industrifarmasi.kode_industri = databarang.kode_industri " +
                     "INNER JOIN gudangbarang ON databarang.kode_brng = gudangbarang.kode_brng " +
                     "LEFT JOIN (SELECT c.kode_brng, SUM(c.jml) as jml_terakhir, GROUP_CONCAT( " +
-                    "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y')) " +
+                    "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y'), ' ( ', c.jml, ' ) ') " +
                     " SEPARATOR ' , " +
                     " ' " +
                     ") as poli, " +
@@ -1902,7 +1902,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     "INNER JOIN industrifarmasi ON industrifarmasi.kode_industri = databarang.kode_industri " +
                     "INNER JOIN gudangbarang ON databarang.kode_brng = gudangbarang.kode_brng " +
                     "LEFT JOIN (SELECT c.kode_brng, SUM(c.jml) as jml_terakhir, GROUP_CONCAT( " +
-                    "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y')) " +
+                    "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y'), ' ( ', c.jml, ' ) ') " +
                     " SEPARATOR ' , " +
                     " ' " +
                     ") as poli, " +
@@ -3220,7 +3220,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
                         "LEFT JOIN (SELECT c.kode_brng, SUM(c.jml) as jml_terakhir, GROUP_CONCAT( " +
-                        "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y')) " +
+                        "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y'), ' ( ', c.jml, ' ) ') " +
                         " SEPARATOR ' , " +
                         " ' " +
                         ") as poli, " +
@@ -3251,7 +3251,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
                         "LEFT JOIN (SELECT c.kode_brng, SUM(c.jml) as jml_terakhir, GROUP_CONCAT( " +
-                        "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y')) " +
+                        "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y'), ' ( ', c.jml, ' ) ') " +
                         " SEPARATOR ' , " +
                         " ' " +
                         ") as poli, " +
@@ -3357,7 +3357,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
                         "LEFT JOIN (SELECT c.kode_brng, SUM(c.jml) as jml_terakhir, GROUP_CONCAT( " +
-                        "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y')) " +
+                        "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y'), ' ( ', c.jml, ' ) ') " +
                         " SEPARATOR ' , " +
                         " ' " +
                         ") as poli, " +
@@ -3391,7 +3391,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                         " inner join gudangbarang on databarang.kode_brng=gudangbarang.kode_brng "+
                         " inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
                         "LEFT JOIN (SELECT c.kode_brng, SUM(c.jml) as jml_terakhir, GROUP_CONCAT( " +
-                        "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y')) " +
+                        "CONCAT(d.nm_poli, ' pada tanggal ', DATE_FORMAT(c.tgl_perawatan, '%d-%m-%Y'), ' ( ', c.jml, ' ) ') " +
                         " SEPARATOR ' , " +
                         " ' " +
                         ") as poli, " +
