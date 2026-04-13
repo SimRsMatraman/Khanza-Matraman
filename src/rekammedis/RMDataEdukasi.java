@@ -3247,7 +3247,7 @@ public void tampil() {
         
         if(akses.getjml2()>=1){
             KodeDokter.setEditable(false);
-            BtnDokter.setEnabled(false);
+            BtnDokter.setEnabled(true);
             KodeDokter.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter,KodeDokter.getText());
         }            
