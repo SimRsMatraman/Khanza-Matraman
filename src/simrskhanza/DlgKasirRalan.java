@@ -6331,51 +6331,52 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                             this.setCursor(Cursor.getDefaultCursor());
                         }
                     }
-String noRawat = tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 12).toString();
-String kdPoli = tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString();
+                    String noRawat = tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 12).toString();
+                    String kdPoli = tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString();
 
-if (!kdPoli.equals("U0015")
-        && !kdPoli.equals("U0016")
-        && !kdPoli.equals("U0046")
-        && !kdPoli.equals("U0039")
-        && !kdPoli.equals("U0033")
-        && !kdPoli.equals("U0041")
-        && !kdPoli.equals("U0035")) {
+                    if (!kdPoli.equals("U0015")
+                            && !kdPoli.equals("U0016")
+                            && !kdPoli.equals("U0046")
+                            && !kdPoli.equals("U0039")
+                            && !kdPoli.equals("U0033")
+                            && !kdPoli.equals("U0041")
+                            && !kdPoli.equals("U0035")) 
+                    {
 
-    String kd_pj = Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat=?", noRawat);
+                        String kd_pj = Sequel.cariIsi("select kd_pj from reg_periksa where no_rawat=?", noRawat);
 
-boolean adaSEP = Sequel.cariInteger(
-    "select count(*) from bridging_sep where no_rawat=? and no_sep is not null and no_sep not in ('','-','0')",
-    noRawat
-) > 0;
+                        boolean adaSEP = Sequel.cariInteger(
+                            "select count(*) from bridging_sep where no_rawat=? and no_sep is not null and no_sep not in ('','-','0')",
+                            noRawat
+                        ) > 0;
 
-    int jmlKunjungan = Sequel.cariInteger(
-        "select count(*) from reg_periksa " +
-        "where no_rkm_medis = (select no_rkm_medis from reg_periksa where no_rawat=? limit 1) " +
-        "and tgl_registrasi = curdate()",
-        noRawat
-    );
+                        int jmlKunjungan = Sequel.cariInteger(
+                            "select count(*) from reg_periksa " +
+                            "where no_rkm_medis = (select no_rkm_medis from reg_periksa where no_rawat=? limit 1) " +
+                            "and tgl_registrasi = curdate()",
+                            noRawat
+                        );
 
-    String pesan = "";
+                        String pesan = "";
 
-    // ✅ 1. KHUSUS BPJS
-    if ("BPJ".equals(kd_pj) && !adaSEP) {
-        pesan = "Pasien belum terbit SEP!";
-    }
+                        // ✅ 1. KHUSUS BPJS
+                        if ("BPJ".equals(kd_pj) && !adaSEP) {
+                            pesan = "Pasien belum terbit SEP!";
+                        }
 
-    // ✅ 2. SEMUA PASIEN (termasuk non BPJS)
-    if (jmlKunjungan > 1) {
-        if (!pesan.equals("")) {
-            pesan += "\n";
-        }
-        pesan += "Pasien sudah berkunjung lebih dari 1x hari ini (" + jmlKunjungan + "x)";
-    }
+                        // ✅ 2. SEMUA PASIEN (termasuk non BPJS)
+//                        if (jmlKunjungan > 1) {
+//                            if (!pesan.equals("")) {
+//                                pesan += "\n";
+//                            }
+//                            pesan += "Pasien sudah berkunjung lebih dari 1x hari ini (" + jmlKunjungan + "x)";
+//                        }
 
-    // ✅ tampilkan kalau ada isi
-    if (!pesan.equals("")) {
-        JOptionPane.showMessageDialog(null, pesan);
-    }
-}
+                        // ✅ tampilkan kalau ada isi
+                        if (!pesan.equals("")) {
+                            JOptionPane.showMessageDialog(null, pesan);
+                        }
+                    }
                 } else {
                     if (tbKasirRalan.getSelectedRow() != -1) {
                         if (Sequel.cariRegistrasi(TNoRw.getText()) > 0) {
