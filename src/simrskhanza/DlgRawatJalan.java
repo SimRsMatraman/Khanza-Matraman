@@ -80,7 +80,7 @@ import rekammedis.RMDataCatatanObservasiIGD;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
 import rekammedis.RMDataSkriningGiziLanjut;
-import rekammedis.RMEdukasiPasienKeluargaRawatJalan;
+import rekammedis.RMDataEdukasi;
 import rekammedis.RMHasilPemeriksaanUSG;
 import rekammedis.RMKonselingFarmasi;
 import rekammedis.RMMCU;
@@ -11344,7 +11344,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             TCari.requestFocus();
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMEdukasiPasienKeluargaRawatJalan form = new RMEdukasiPasienKeluargaRawatJalan(null, false);
+            RMDataEdukasi form = new RMDataEdukasi(null, false);
             form.isCek();
             form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
             form.setLocationRelativeTo(internalFrame1);
