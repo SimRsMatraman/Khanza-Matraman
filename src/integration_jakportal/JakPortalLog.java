@@ -112,6 +112,7 @@ public final class JakPortalLog extends javax.swing.JDialog {
 
 tabModeKunjungan = new DefaultTableModel(null, new Object[]{
     "P", "Date Time", "No Rawat", "No Resep", "No Lab", "No Radiologi",
+    "Status Journey",
     "Check In", "Check In End", "Nurse Station", "Nurse Station End",
     "Poliklinik", "Poliklinik End", "Check Out"
 }) {
@@ -122,6 +123,7 @@ tabModeKunjungan = new DefaultTableModel(null, new Object[]{
 
     Class[] types = new Class[]{
         Boolean.class, Object.class, Object.class, Object.class, Object.class, Object.class,
+        Object.class,
         Object.class, Object.class, Object.class, Object.class,
         Object.class, Object.class, Object.class
     };
@@ -132,42 +134,58 @@ tabModeKunjungan = new DefaultTableModel(null, new Object[]{
     }
 };
 
-        tbKunjungan.setModel(tabModeKunjungan);
+tbKunjungan.setModel(tabModeKunjungan);
 
-        tbKunjungan.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbKunjungan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (i = 0; i < 13; i++) {
+// ================== SET TAMPILAN ==================
+tbKunjungan.setPreferredScrollableViewportSize(new Dimension(500, 500));
+tbKunjungan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+// ================== SET LEBAR KOLOM ==================
+for (int i = 0; i < 14; i++) {
     TableColumn column = tbKunjungan.getColumnModel().getColumn(i);
+
     if (i == 0) {
-        column.setPreferredWidth(30);
+        column.setPreferredWidth(30); // checkbox
     } else if (i == 1) {
-        column.setPreferredWidth(120);
+        column.setPreferredWidth(130); // datetime
     } else if (i == 2) {
-        column.setPreferredWidth(120);
-    } else if (i == 3 || i == 4 || i == 5) { // resep, lab, rad
-        column.setPreferredWidth(140);
+        column.setPreferredWidth(130); // no rawat
+    } else if (i == 3 || i == 4 || i == 5) {
+        column.setPreferredWidth(150); // resep, lab, rad
+    } else if (i == 6) {
+        column.setPreferredWidth(180); // 🔥 status journey
     } else {
-        column.setPreferredWidth(220);
+        column.setPreferredWidth(200); // sisanya
     }
 }
-        tbKunjungan.setDefaultRenderer(Object.class, new WarnaTableJakPro());
+
+// ================== RENDERER WARNA ==================
+tbKunjungan.setDefaultRenderer(Object.class, new WarnaTableJakPro());
+
+// ================== SELECT ALL HEADER ==================
 tbKunjungan.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {
     public void mouseClicked(java.awt.event.MouseEvent evt) {
         int col = tbKunjungan.columnAtPoint(evt.getPoint());
 
-        if(col == 0){
-            boolean pilih = true;
+        if (col == 0) {
+            boolean semuaTerpilih = true;
 
-            for(int i=0;i<tbKunjungan.getRowCount();i++){
-                if(!(Boolean)tbKunjungan.getValueAt(i,0)){
-                    pilih = true;
+            for (int i = 0; i < tbKunjungan.getRowCount(); i++) {
+
+                Object val = tbKunjungan.getValueAt(i, 6);
+                String status = (val == null) ? "" : val.toString().trim();
+
+                if(status.equalsIgnoreCase("Batal")){
+                    continue;
+                }
+
+                if (!(Boolean) tbKunjungan.getValueAt(i, 0)) {
+                    semuaTerpilih = false;
                     break;
-                } else {
-                    pilih = false;
                 }
             }
 
-            pilihSemuaKunjungan(pilih);
+            pilihSemuaKunjungan(!semuaTerpilih);
         }
     }
 });
@@ -973,7 +991,7 @@ System.out.println("Error Jakportal : "+e);
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-04-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -987,7 +1005,7 @@ System.out.println("Error Jakportal : "+e);
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-04-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1001,7 +1019,7 @@ System.out.println("Error Jakportal : "+e);
 
         cmbStatusJakportal.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         cmbStatusJakportal.setForeground(new java.awt.Color(50, 50, 50));
-        cmbStatusJakportal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Belum Checkin", "Sudah Checkin", "Checkin Selesai", "Belum Nurse Station", "Sudah Nurse Station", "Nurse Station Selesai", "Belum Poliklinik", "Sudah Poliklinik", "Poliklinik Selesai", "Belum Checkout", "Sudah Checkout", "Belum Selesai" }));
+        cmbStatusJakportal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua", "Belum Checkin", "Checkin", "Checkin Selesai", "Nurse Station", "Nurse Station Selesai", "Poliklinik", "Poliklinik Selesai", "Check Out", "Batal" }));
         cmbStatusJakportal.setName("cmbStatusJakportal"); // NOI18N
         cmbStatusJakportal.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -1020,7 +1038,7 @@ System.out.println("Error Jakportal : "+e);
         jLabel11.setPreferredSize(new java.awt.Dimension(40, 23));
         panelGlass10.add(jLabel11);
 
-        cmbTask.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Check IN", "Nurse Station", "Poliklinik", "Resep Obat", "Laboratorium", "Radiologi", "Check Out", " " }));
+        cmbTask.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Check IN", "Nurse Station", "Poliklinik", "Resep Obat", "Laboratorium", "Radiologi", "Check Out", "Batal" }));
         cmbTask.setName("cmbTask"); // NOI18N
         cmbTask.setPreferredSize(new java.awt.Dimension(100, 20));
         cmbTask.addActionListener(new java.awt.event.ActionListener() {
@@ -1329,8 +1347,19 @@ System.out.println("Error Jakportal : "+e);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pilihSemuaKunjungan(boolean pilih){
-    for(int i=0;i<tbKunjungan.getRowCount();i++){
+private void pilihSemuaKunjungan(boolean pilih){
+    for(int i = 0; i < tbKunjungan.getRowCount(); i++){
+
+        Object val = tbKunjungan.getValueAt(i, 6);
+
+        String status = (val == null) ? "" : val.toString().trim();
+
+        // ❌ skip kalau batal
+        if(status.equalsIgnoreCase("Batal")){
+            tbKunjungan.setValueAt(false, i, 0); // pastikan tetap tidak dicentang
+            continue;
+        }
+
         tbKunjungan.setValueAt(pilih, i, 0);
     }
 }
@@ -2175,127 +2204,101 @@ public void tampil() {
     Valid.tabelKosong(tabModeKunjungan);
     try {
 
-String kondisiStatus="";
+        String statusDipilih = cmbStatusJakportal.getSelectedItem().toString();
 
-String status=cmbStatusJakportal.getSelectedItem().toString();
+        String filterStatus = "";
+        if (!statusDipilih.equals("Semua")) {
+            filterStatus = " HAVING status_journey = ? ";
+        }
 
-if(status.equals("Belum Checkin")){
-    kondisiStatus=" AND IFNULL(jp.id_checkin,'')='' ";
+        ps = koneksi.prepareStatement(
+            "SELECT rp.no_rawat, rp.tgl_registrasi, rp.jam_reg, " +
 
-}else if(status.equals("Sudah Checkin")){
-    kondisiStatus=" AND IFNULL(jp.id_checkin,'')<>'' ";
+            "jp.id_checkin, jp.id_checkin_end, jp.id_ns, jp.id_ns_end, " +
+            "jp.id_poli, jp.id_poli_end, jp.id_check_out, " +
 
-}else if(status.equals("Checkin Selesai")){
-    kondisiStatus=" AND IFNULL(jp.id_checkin_end,'')<>'' ";
+            // ================== STATUS ==================
+            "CASE " +
+            "WHEN LOWER(rp.stts)='batal' THEN 'Batal' " +
+            "WHEN jp.id_check_out IS NOT NULL AND jp.id_check_out<>'' THEN 'Check Out' " +
 
-}else if(status.equals("Belum Nurse Station")){
-    kondisiStatus=" AND IFNULL(jp.id_ns,'')='' ";
+            "WHEN jp.id_poli_end IS NOT NULL AND jp.id_poli_end<>'' THEN 'Poliklinik Selesai' " +
+            "WHEN jp.id_poli IS NOT NULL AND jp.id_poli<>'' THEN 'Poliklinik' " +
 
-}else if(status.equals("Sudah Nurse Station")){
-    kondisiStatus=" AND IFNULL(jp.id_ns,'')<>'' ";
+            "WHEN jp.id_ns_end IS NOT NULL AND jp.id_ns_end<>'' THEN 'Nurse Station Selesai' " +
+            "WHEN jp.id_ns IS NOT NULL AND jp.id_ns<>'' THEN 'Nurse Station' " +
 
-}else if(status.equals("Nurse Station Selesai")){
-    kondisiStatus=" AND IFNULL(jp.id_ns_end,'')<>'' ";
+            "WHEN jp.id_checkin_end IS NOT NULL AND jp.id_checkin_end<>'' THEN 'Checkin Selesai' " +
+            "WHEN jp.id_checkin IS NOT NULL AND jp.id_checkin<>'' THEN 'Checkin' " +
 
-}else if(status.equals("Belum Poliklinik")){
-    kondisiStatus=" AND IFNULL(jp.id_poli,'')='' ";
+            "ELSE 'Belum Checkin' END AS status_journey, " +
 
-}else if(status.equals("Sudah Poliklinik")){
-    kondisiStatus=" AND IFNULL(jp.id_poli,'')<>'' ";
+            "(SELECT GROUP_CONCAT(ro.no_resep SEPARATOR ', ') FROM resep_obat ro WHERE ro.no_rawat=rp.no_rawat) AS no_resep, " +
+            "(SELECT GROUP_CONCAT(pl.noorder SEPARATOR ', ') FROM permintaan_lab pl WHERE pl.no_rawat=rp.no_rawat) AS no_lab, " +
+            "(SELECT GROUP_CONCAT(pr.noorder SEPARATOR ', ') FROM permintaan_radiologi pr WHERE pr.no_rawat=rp.no_rawat) AS no_rad " +
 
-}else if(status.equals("Poliklinik Selesai")){
-    kondisiStatus=" AND IFNULL(jp.id_poli_end,'')<>'' ";
+            "FROM reg_periksa rp " +
+            "LEFT JOIN jakportal_patientjourney jp ON rp.no_rawat=jp.no_rawat " +
+            "INNER JOIN poliklinik p ON rp.kd_poli=p.kd_poli " +
+            "INNER JOIN maping_poli_bpjs mp ON mp.kd_poli_rs = rp.kd_poli " +
 
-}else if(status.equals("Belum Checkout")){
-    kondisiStatus=" AND IFNULL(jp.id_check_out,'')='' ";
+            "WHERE rp.tgl_registrasi BETWEEN ? AND ? " +
+            "AND p.status='1' " +
 
-}else if(status.equals("Sudah Checkout")){
-    kondisiStatus=" AND IFNULL(jp.id_check_out,'')<>'' ";
-    
-}else if(status.equals("Belum Selesai")){
-    kondisiStatus=" AND ( " +
-                  "IFNULL(jp.id_checkin,'')='' OR " +
-                  "IFNULL(jp.id_checkin_end,'')='' OR " +
-                  "IFNULL(jp.id_ns,'')='' OR " +
-                  "IFNULL(jp.id_ns_end,'')='' OR " +
-                  "IFNULL(jp.id_poli,'')='' OR " +
-                  "IFNULL(jp.id_poli_end,'')='' OR " +
-                  "IFNULL(jp.id_check_out,'')='' OR " +
+            filterStatus +
 
-                  "EXISTS (SELECT 1 FROM jakportal_patientjourney_laboratorium jl " +
-                  "WHERE jl.no_rawat=rp.no_rawat AND " +
-                  "(IFNULL(jl.id_permintaan,'')='' OR IFNULL(jl.id_sampel,'')='' OR IFNULL(jl.id_hasil,'')='')) OR " +
+            " ORDER BY rp.tgl_registrasi, rp.jam_reg"
+        );
 
-                  "EXISTS (SELECT 1 FROM jakportal_patientjourney_radiologi jr " +
-                  "WHERE jr.no_rawat=rp.no_rawat AND " +
-                  "(IFNULL(jr.id_permintaan,'')='' OR IFNULL(jr.id_sampel,'')='' OR IFNULL(jr.id_hasil,'')='')) OR " +
+        int paramIndex = 1;
 
-                  "EXISTS (SELECT 1 FROM jakportal_patientjourney_resep jre " +
-                  "WHERE jre.no_rawat=rp.no_rawat AND " +
-                  "(IFNULL(jre.id_permintaan,'')='' OR IFNULL(jre.id_validasi,'')='' OR IFNULL(jre.id_penyerahan,'')='')) " +
-                  ")";
-}
+        ps.setString(paramIndex++, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
+        ps.setString(paramIndex++, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
 
-ps = koneksi.prepareStatement(
-"SELECT rp.no_rawat, rp.tgl_registrasi, rp.jam_reg, " +
-"jp.id_checkin, jp.id_checkin_end, jp.id_ns, jp.id_ns_end, " +
-"jp.id_poli, jp.id_poli_end, jp.id_check_out, " +
+        if (!statusDipilih.equals("Semua")) {
+            ps.setString(paramIndex++, statusDipilih);
+        }
 
-"(SELECT GROUP_CONCAT(ro.no_resep SEPARATOR ', ') FROM resep_obat ro WHERE ro.no_rawat=rp.no_rawat) AS no_resep, " +
-"(SELECT GROUP_CONCAT(pl.noorder SEPARATOR ', ') FROM permintaan_lab pl WHERE pl.no_rawat=rp.no_rawat) AS no_lab, " +
-"(SELECT GROUP_CONCAT(pr.noorder SEPARATOR ', ') FROM permintaan_radiologi pr WHERE pr.no_rawat=rp.no_rawat) AS no_rad " +
-
-"FROM reg_periksa rp " +
-"LEFT JOIN jakportal_patientjourney jp ON rp.no_rawat=jp.no_rawat " +
-"INNER JOIN poliklinik p ON rp.kd_poli=p.kd_poli " +
-
-"WHERE rp.tgl_registrasi BETWEEN ? AND ? " +
-"AND p.status='1' " +
-"AND rp.kd_poli <> 'U0035' " +
-
-kondisiStatus +
-
-"AND ( " +
-"IFNULL(jp.id_checkin,'')='' OR " +
-"IFNULL(jp.id_checkin_end,'')='' OR " +
-"IFNULL(jp.id_ns,'')='' OR " +
-"IFNULL(jp.id_ns_end,'')='' OR " +
-"IFNULL(jp.id_poli,'')='' OR " +
-"IFNULL(jp.id_poli_end,'')='' OR " +
-"IFNULL(jp.id_check_out,'')='' " +
-
-"OR EXISTS (SELECT 1 FROM jakportal_patientjourney_laboratorium jl " +
-"WHERE jl.no_rawat=rp.no_rawat AND (IFNULL(jl.id_permintaan,'')='' OR IFNULL(jl.id_sampel,'')='' OR IFNULL(jl.id_hasil,'')='')) " +
-
-"OR EXISTS (SELECT 1 FROM jakportal_patientjourney_radiologi jr " +
-"WHERE jr.no_rawat=rp.no_rawat AND (IFNULL(jr.id_permintaan,'')='' OR IFNULL(jr.id_sampel,'')='' OR IFNULL(jr.id_hasil,'')='')) " +
-
-"OR EXISTS (SELECT 1 FROM jakportal_patientjourney_resep jre " +
-"WHERE jre.no_rawat=rp.no_rawat AND (IFNULL(jre.id_permintaan,'')='' OR IFNULL(jre.id_validasi,'')='' OR IFNULL(jre.id_penyerahan,'')='')) " +
-
-")"
-);
-
-        ps.setString(1, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
-        ps.setString(2, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
         rs = ps.executeQuery();
 
+        // ================== LOAD DATA ==================
         while (rs.next()) {
             tabModeKunjungan.addRow(new Object[]{
-    false,
-    rs.getString("tgl_registrasi") + " " + rs.getString("jam_reg"),
-    rs.getString("no_rawat"),
-    rs.getString("no_resep"),
-    rs.getString("no_lab"),
-    rs.getString("no_rad"),
-    rs.getString("id_checkin"),
-    rs.getString("id_checkin_end"),
-    rs.getString("id_ns"),
-    rs.getString("id_ns_end"),
-    rs.getString("id_poli"),
-    rs.getString("id_poli_end"),
-    rs.getString("id_check_out")
-});
+                false,
+                rs.getString("tgl_registrasi") + " " + rs.getString("jam_reg"),
+                rs.getString("no_rawat"),
+                rs.getString("no_resep"),
+                rs.getString("no_lab"),
+                rs.getString("no_rad"),
+                rs.getString("status_journey"),
+                rs.getString("id_checkin"),
+                rs.getString("id_checkin_end"),
+                rs.getString("id_ns"),
+                rs.getString("id_ns_end"),
+                rs.getString("id_poli"),
+                rs.getString("id_poli_end"),
+                rs.getString("id_check_out")
+            });
+        }
+
+        // ================== AUTO CHECKLIST ==================
+        if(!statusDipilih.equals("Semua")){
+            for(int i = 0; i < tbKunjungan.getRowCount(); i++){
+
+                String statusRow = tbKunjungan.getValueAt(i, 6).toString().trim();
+
+                // ❌ skip batal kalau bukan filter batal
+                if(!statusDipilih.equals("Batal") &&
+                   statusRow.equalsIgnoreCase("Batal")){
+                    tbKunjungan.setValueAt(false, i, 0);
+                    continue;
+                }
+
+                tbKunjungan.setValueAt(
+                    statusRow.equalsIgnoreCase(statusDipilih),
+                    i, 0
+                );
+            }
         }
 
     } catch (Exception e) {
@@ -2307,7 +2310,7 @@ kondisiStatus +
         } catch (Exception e) {}
     }
 
-    LCount.setText("" + tabModeKunjungan.getRowCount());
+    LCount.setText("Total: " + tabModeKunjungan.getRowCount());
 }
 
     public void tampilPenunjang() {

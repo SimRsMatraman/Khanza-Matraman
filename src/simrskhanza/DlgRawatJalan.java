@@ -2180,6 +2180,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAPS4 = new widget.Button();
         SKS = new widget.Button();
         SKJ = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif1 = new widget.Button();
         MIgd = new widget.PanelBiasa();
         BtnRiwayat1 = new widget.Button();
         BtnResepObat1 = new widget.Button();
@@ -2205,29 +2206,34 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnIC2 = new widget.Button();
         BtnEP13 = new widget.Button();
         BtnAPS2 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif2 = new widget.Button();
         MPd = new widget.PanelBiasa();
         BtnAwalMedisPenyakitDalam = new widget.Button();
         BtnAwalKeperawatan1 = new widget.Button();
         BtnIC3 = new widget.Button();
         BtnEP12 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif3 = new widget.Button();
         MSyaraf = new widget.PanelBiasa();
         BtnAwalKeperawatan5 = new widget.Button();
         BtnAwalMedis2 = new widget.Button();
         BtnAwalMedisNeurologi = new widget.Button();
         BtnIC4 = new widget.Button();
         BtnEP11 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif4 = new widget.Button();
         MObgyn = new widget.PanelBiasa();
         BtnAwalKeperawatanKandungan = new widget.Button();
         BtnAwalMedisKandungan = new widget.Button();
         BtnHasilPemeriksaanUSG = new widget.Button();
         BtnIC5 = new widget.Button();
         BtnEP10 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif5 = new widget.Button();
         MAnak = new widget.PanelBiasa();
         BtnAwalKeperawatanAnak = new widget.Button();
         BtnAwalMedisAnak = new widget.Button();
         BtnPenilaianLanjutanRisikoJatuhAnak = new widget.Button();
         BtnIC6 = new widget.Button();
         BtnEP9 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif6 = new widget.Button();
         MBedah = new widget.PanelBiasa();
         BtnAwalMedisBedah = new widget.Button();
         BtnAwalKeperawatan2 = new widget.Button();
@@ -2241,17 +2247,20 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnAwalKeperawatan3 = new widget.Button();
         BtnIC8 = new widget.Button();
         BtnEP7 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif8 = new widget.Button();
         MMata = new widget.PanelBiasa();
         BtnAwalMedisMata = new widget.Button();
         BtnAwalKeperawatan4 = new widget.Button();
         BtnIC9 = new widget.Button();
         BtnEP6 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif9 = new widget.Button();
         MGigi = new widget.PanelBiasa();
         BtnAwalMedis1 = new widget.Button();
         BtnAwalKeperawatanGigi = new widget.Button();
         BtnOdontogram = new widget.Button();
         BtnIC10 = new widget.Button();
         BtnEP5 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif10 = new widget.Button();
         MGizi = new widget.PanelBiasa();
         BtnAsuhanGizi = new widget.Button();
         BtnSkriningNutrisiLansia = new widget.Button();
@@ -2263,6 +2272,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnEP4 = new widget.Button();
         BtnAdimeGizi = new widget.Button();
         BtnMakanSehat = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif11 = new widget.Button();
         MFisio = new widget.PanelBiasa();
         BtnRiwayat2 = new widget.Button();
         BtnResepObat2 = new widget.Button();
@@ -2274,12 +2284,14 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnPermintaanKonsultasiMedik1 = new widget.Button();
         BtnIC12 = new widget.Button();
         BtnEP3 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif12 = new widget.Button();
         MGeriatri = new widget.PanelBiasa();
         BtnAwalKeperawatanGeriatri = new widget.Button();
         BtnAwalMedisGeriatri = new widget.Button();
         BtnPenilaianTambahanGeriatri = new widget.Button();
         BtnIC13 = new widget.Button();
         BtnEP2 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif13 = new widget.Button();
         MPsikiatri = new widget.PanelBiasa();
         BtnAwalKeperawatanPsikiatri = new widget.Button();
         BtnAwalMedisPsikiatri = new widget.Button();
@@ -2287,6 +2299,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnCatatan1 = new widget.Button();
         BtnIC14 = new widget.Button();
         BtnEP1 = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif14 = new widget.Button();
         Lainnya = new widget.PanelBiasa();
         BtnAwalMedisOrthopedi = new widget.Button();
         BtnPenilaianPasienTerminal = new widget.Button();
@@ -2318,6 +2331,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnIEMR = new widget.Button();
         BtnObatBhp = new widget.Button();
         BtnMedicalCheckUp = new widget.Button();
+        BtnPenandaLokasiOperasiAlternatif15 = new widget.Button();
 
         NoSEP.setHighlighter(null);
         NoSEP.setName("NoSEP"); // NOI18N
@@ -2421,7 +2435,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -2583,7 +2597,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2602,7 +2616,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3003,7 +3017,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass11.add(BtnTemplatePemeriksaanDrPr);
-        BtnTemplatePemeriksaanDrPr.setBounds(820, 40, 170, 22);
+        BtnTemplatePemeriksaanDrPr.setBounds(820, 40, 170, 32);
 
         internalFrame4.add(panelGlass11, java.awt.BorderLayout.PAGE_START);
 
@@ -4164,7 +4178,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         jSeparator1.setName("jSeparator1"); // NOI18N
         panelGlass16.add(jSeparator1);
-        jSeparator1.setBounds(0, 0, 0, 3);
+        jSeparator1.setBounds(0, 0, 0, 12);
 
         BtnRiwayatSoap1.setMnemonic('R');
         BtnRiwayatSoap1.setText("  Riwayat SOAP");
@@ -5106,7 +5120,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-02-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -5640,6 +5654,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         MRalan.add(SKJ);
 
+        BtnPenandaLokasiOperasiAlternatif1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif1.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif1.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif1.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif1.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif1.setName("BtnPenandaLokasiOperasiAlternatif1"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif1.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif1.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif1ActionPerformed(evt);
+            }
+        });
+        MRalan.add(BtnPenandaLokasiOperasiAlternatif1);
+
         jTabbedPane1.addTab("Rawat Jalan", MRalan);
 
         MIgd.setBackground(new java.awt.Color(255, 255, 255));
@@ -6055,6 +6086,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         MIgd.add(BtnAPS2);
 
+        BtnPenandaLokasiOperasiAlternatif2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif2.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif2.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif2.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif2.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif2.setName("BtnPenandaLokasiOperasiAlternatif2"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif2.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif2.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif2ActionPerformed(evt);
+            }
+        });
+        MIgd.add(BtnPenandaLokasiOperasiAlternatif2);
+
         jTabbedPane1.addTab("IGD", MIgd);
 
         MPd.setBackground(new java.awt.Color(255, 255, 255));
@@ -6129,6 +6177,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MPd.add(BtnEP12);
+
+        BtnPenandaLokasiOperasiAlternatif3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif3.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif3.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif3.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif3.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif3.setName("BtnPenandaLokasiOperasiAlternatif3"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif3.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif3.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif3ActionPerformed(evt);
+            }
+        });
+        MPd.add(BtnPenandaLokasiOperasiAlternatif3);
 
         jTabbedPane1.addTab("PD", MPd);
 
@@ -6222,6 +6287,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         MSyaraf.add(BtnEP11);
 
+        BtnPenandaLokasiOperasiAlternatif4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif4.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif4.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif4.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif4.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif4.setName("BtnPenandaLokasiOperasiAlternatif4"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif4.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif4.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif4ActionPerformed(evt);
+            }
+        });
+        MSyaraf.add(BtnPenandaLokasiOperasiAlternatif4);
+
         jTabbedPane1.addTab("Syaraf", MSyaraf);
 
         MObgyn.setBackground(new java.awt.Color(255, 255, 255));
@@ -6314,6 +6396,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         MObgyn.add(BtnEP10);
 
+        BtnPenandaLokasiOperasiAlternatif5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif5.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif5.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif5.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif5.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif5.setName("BtnPenandaLokasiOperasiAlternatif5"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif5.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif5.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif5ActionPerformed(evt);
+            }
+        });
+        MObgyn.add(BtnPenandaLokasiOperasiAlternatif5);
+
         jTabbedPane1.addTab("Obgyn", MObgyn);
 
         MAnak.setBackground(new java.awt.Color(255, 255, 255));
@@ -6405,6 +6504,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MAnak.add(BtnEP9);
+
+        BtnPenandaLokasiOperasiAlternatif6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif6.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif6.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif6.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif6.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif6.setName("BtnPenandaLokasiOperasiAlternatif6"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif6.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif6.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif6ActionPerformed(evt);
+            }
+        });
+        MAnak.add(BtnPenandaLokasiOperasiAlternatif6);
 
         jTabbedPane1.addTab("Anak", MAnak);
 
@@ -6607,6 +6723,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         MTht.add(BtnEP7);
 
+        BtnPenandaLokasiOperasiAlternatif8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif8.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif8.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif8.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif8.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif8.setName("BtnPenandaLokasiOperasiAlternatif8"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif8.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif8.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif8ActionPerformed(evt);
+            }
+        });
+        MTht.add(BtnPenandaLokasiOperasiAlternatif8);
+
         jTabbedPane1.addTab("THT", MTht);
 
         MMata.setBackground(new java.awt.Color(255, 255, 255));
@@ -6681,6 +6814,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MMata.add(BtnEP6);
+
+        BtnPenandaLokasiOperasiAlternatif9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif9.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif9.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif9.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif9.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif9.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif9.setName("BtnPenandaLokasiOperasiAlternatif9"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif9.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif9.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif9ActionPerformed(evt);
+            }
+        });
+        MMata.add(BtnPenandaLokasiOperasiAlternatif9);
 
         jTabbedPane1.addTab("Mata", MMata);
 
@@ -6778,6 +6928,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MGigi.add(BtnEP5);
+
+        BtnPenandaLokasiOperasiAlternatif10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif10.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif10.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif10.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif10.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif10.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif10.setName("BtnPenandaLokasiOperasiAlternatif10"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif10.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif10.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif10ActionPerformed(evt);
+            }
+        });
+        MGigi.add(BtnPenandaLokasiOperasiAlternatif10);
 
         jTabbedPane1.addTab("Gigi", MGigi);
 
@@ -6957,6 +7124,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         MGizi.add(BtnMakanSehat);
 
+        BtnPenandaLokasiOperasiAlternatif11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif11.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif11.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif11.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif11.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif11.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif11.setName("BtnPenandaLokasiOperasiAlternatif11"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif11.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif11.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif11ActionPerformed(evt);
+            }
+        });
+        MGizi.add(BtnPenandaLokasiOperasiAlternatif11);
+
         jTabbedPane1.addTab("Gizi", MGizi);
 
         MFisio.setBackground(new java.awt.Color(255, 255, 255));
@@ -7134,6 +7318,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         });
         MFisio.add(BtnEP3);
 
+        BtnPenandaLokasiOperasiAlternatif12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif12.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif12.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif12.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif12.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif12.setName("BtnPenandaLokasiOperasiAlternatif12"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif12.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif12.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif12ActionPerformed(evt);
+            }
+        });
+        MFisio.add(BtnPenandaLokasiOperasiAlternatif12);
+
         jTabbedPane1.addTab("Fisio", MFisio);
 
         MGeriatri.setBackground(new java.awt.Color(255, 255, 255));
@@ -7225,6 +7426,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MGeriatri.add(BtnEP2);
+
+        BtnPenandaLokasiOperasiAlternatif13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif13.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif13.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif13.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif13.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif13.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif13.setName("BtnPenandaLokasiOperasiAlternatif13"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif13.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif13.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif13ActionPerformed(evt);
+            }
+        });
+        MGeriatri.add(BtnPenandaLokasiOperasiAlternatif13);
 
         jTabbedPane1.addTab("Geriatri", MGeriatri);
 
@@ -7334,6 +7552,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         MPsikiatri.add(BtnEP1);
+
+        BtnPenandaLokasiOperasiAlternatif14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif14.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif14.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif14.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif14.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif14.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif14.setName("BtnPenandaLokasiOperasiAlternatif14"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif14.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif14.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif14ActionPerformed(evt);
+            }
+        });
+        MPsikiatri.add(BtnPenandaLokasiOperasiAlternatif14);
 
         jTabbedPane1.addTab("Psikiatri", MPsikiatri);
 
@@ -7851,6 +8086,23 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         Lainnya.add(BtnMedicalCheckUp);
+
+        BtnPenandaLokasiOperasiAlternatif15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif15.setText("Penanda Lokasi Operasi Alternatif");
+        BtnPenandaLokasiOperasiAlternatif15.setFocusPainted(false);
+        BtnPenandaLokasiOperasiAlternatif15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif15.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPenandaLokasiOperasiAlternatif15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPenandaLokasiOperasiAlternatif15.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPenandaLokasiOperasiAlternatif15.setName("BtnPenandaLokasiOperasiAlternatif15"); // NOI18N
+        BtnPenandaLokasiOperasiAlternatif15.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPenandaLokasiOperasiAlternatif15.setRoundRect(false);
+        BtnPenandaLokasiOperasiAlternatif15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPenandaLokasiOperasiAlternatif15ActionPerformed(evt);
+            }
+        });
+        Lainnya.add(BtnPenandaLokasiOperasiAlternatif15);
 
         jTabbedPane1.addTab("Lainnya", Lainnya);
 
@@ -13849,6 +14101,244 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnRiwayatSoap2ActionPerformed
 
+    private void BtnPenandaLokasiOperasiAlternatif1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif1ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif1ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif2ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif2ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif3ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif3ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif4ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif4ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif5ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif5ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif6ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif6ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif8ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif8ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif9ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif9ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif10ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif10ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif11ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif11ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif12ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif12ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif13ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif13ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif14ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif14ActionPerformed
+
+    private void BtnPenandaLokasiOperasiAlternatif15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenandaLokasiOperasiAlternatif15ActionPerformed
+                if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMarkingOperasiAlternatif form = new RMMarkingOperasiAlternatif(null, false);
+            form.isCek();
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(), DTPCari2.getDate());
+            form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif15ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -13980,6 +14470,20 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnPemantauanPEWSAnak;
     private widget.Button BtnPemantauanPEWSDewasa;
     private widget.Button BtnPenandaLokasiOperasiAlternatif;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif1;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif10;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif11;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif12;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif13;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif14;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif15;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif2;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif3;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif4;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif5;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif6;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif8;
+    private widget.Button BtnPenandaLokasiOperasiAlternatif9;
     private widget.Button BtnPenilaianKorbanKekerasan;
     private widget.Button BtnPenilaianLanjutanRisikoJatuhAnak;
     private widget.Button BtnPenilaianLanjutanRisikoJatuhDewasa;
