@@ -6350,12 +6350,17 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                             noRawat
                         ) > 0;
 
-                        int jmlKunjungan = Sequel.cariInteger(
-                            "select count(*) from reg_periksa " +
-                            "where no_rkm_medis = (select no_rkm_medis from reg_periksa where no_rawat=? limit 1) " +
-                            "and tgl_registrasi = curdate()",
-                            noRawat
-                        );
+                        String noRM = Sequel.cariIsi(
+    "select no_rkm_medis from reg_periksa where no_rawat=?", 
+    noRawat
+);
+
+int jmlKunjungan = Sequel.cariInteger(
+    "select count(*) from reg_periksa " +
+    "where no_rkm_medis = (select no_rkm_medis from reg_periksa where no_rawat=? limit 1) " +
+    "and tgl_registrasi = current_date()",
+    noRawat
+);
 
                         String pesan = "";
 
@@ -6365,12 +6370,12 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                         }
 
                         // ✅ 2. SEMUA PASIEN (termasuk non BPJS)
-//                        if (jmlKunjungan > 1) {
-//                            if (!pesan.equals("")) {
-//                                pesan += "\n";
-//                            }
-//                            pesan += "Pasien sudah berkunjung lebih dari 1x hari ini (" + jmlKunjungan + "x)";
-//                        }
+if (jmlKunjungan > 1) {
+    if (!pesan.equals("")) {
+        pesan += "\n";
+    }
+    pesan += "Pasien sudah berkunjung lebih dari 1x hari ini (" + jmlKunjungan + "x)";
+}
 
                         // ✅ tampilkan kalau ada isi
                         if (!pesan.equals("")) {
