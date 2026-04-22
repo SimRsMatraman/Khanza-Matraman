@@ -7247,7 +7247,7 @@ public final class BPJSCekNoRujukanRS extends javax.swing.JDialog {
                                         "\"jampraktek\": \""+jammulai.substring(0,5)+"-"+jamselesai.substring(0,5)+"\"," +
                                         "\"jeniskunjungan\": "+jeniskunjungan+"," +
                                         "\"nomorreferensi\": \""+NoRujukan.getText()+"\"," +
-                                        "\"nomorantrean\": \""+TNoReg.getText()+"\"," +
+                                        "\"nomorantrean\": \""+KdPoli.getText()+"-S"+TNoReg.getText()+"\"," +
                                         "\"angkaantrean\": "+Integer.parseInt(TNoReg.getText())+"," +
                                         "\"estimasidilayani\": "+parsedDate.getTime()+"," +
                                         "\"sisakuotajkn\": "+(kuota-Integer.parseInt(TNoReg.getText()))+"," +
@@ -7297,7 +7297,7 @@ public final class BPJSCekNoRujukanRS extends javax.swing.JDialog {
                                             "\"jampraktek\": \""+jammulai.substring(0,5)+"-"+jamselesai.substring(0,5)+"\"," +
                                             "\"jeniskunjungan\": "+jeniskunjungan+"," +
                                             "\"nomorreferensi\": \""+NoSKDP.getText()+"\"," +
-                                            "\"nomorantrean\": \""+TNoReg.getText()+"\"," +
+                                            "\"nomorantrean\": \""+KdPoli.getText()+"-S"+TNoReg.getText()+"\"," +
                                             "\"angkaantrean\": "+Integer.parseInt(TNoReg.getText())+"," +
                                             "\"estimasidilayani\": "+parsedDate.getTime()+"," +
                                             "\"sisakuotajkn\": "+(kuota-Integer.parseInt(TNoReg.getText()))+"," +
@@ -7313,7 +7313,7 @@ public final class BPJSCekNoRujukanRS extends javax.swing.JDialog {
                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                             nameNode = root.path("metadata");  
                             System.out.println("respon WS BPJS Kirim Pakai SKDP : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
-                            if(nameNode.path("code").asText().equals("201")){
+                            if(!nameNode.path("code").asText().equals("201")){
                                 statusantrean=false;
                             }
                         } catch (Exception e) {
@@ -7325,6 +7325,42 @@ public final class BPJSCekNoRujukanRS extends javax.swing.JDialog {
             } catch (Exception e) {
                 statusantrean=false;
                 System.out.println("Notif : "+e);
+            }
+            if(statusantrean && (respon.equals("200") || respon.equals("201"))){
+                String validasi = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .format(new Date(System.currentTimeMillis() + (2 * 60 * 1000)));
+
+                Sequel.menyimpantf2(
+                    "referensi_mobilejkn_bpjs",
+                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+                    "Antrean",
+                    23,
+                    new String[] {
+                        TNoRw.getText(),                         // nobooking
+                        TNoRw.getText(),                         // no_rawat
+                        TNoPeserta.getText(),                       // nomorkartu
+                        TKtp.getText(),                          // nik
+                        TTlp.getText(),                          // nohp
+                        KdPoli.getText(),                        // kodepoli
+                        statuspasien.replaceAll("Baru","1").replaceAll("Lama","0").replaceAll("-","0"), // pasienbaru
+                        TNo.getText(),                           // norm
+                        Valid.SetTgl(TanggalSEP.getSelectedItem()+""), // tanggalperiksa
+                        KdDPJP.getText(),                        // kodedokter
+                        jammulai.substring(0,5)+"-"+jamselesai.substring(0,5), // jampraktek
+                        jeniskunjungan,                          // jeniskunjungan
+                        (!NoRujukan.getText().equals("") ? NoRujukan.getText() : NoSKDP.getText()), // nomorreferensi
+                        KdPoli.getText()+"-S"+TNoReg.getText(),  // nomorantrean
+                        TNoReg.getText(),                        // angkaantrean
+                        String.valueOf(parsedDate.getTime()),    // estimasidilayani
+                        String.valueOf(kuota-Integer.parseInt(TNoReg.getText())), // sisakuotajkn
+                        String.valueOf(kuota),                   // kuotajkn
+                        String.valueOf(kuota-Integer.parseInt(TNoReg.getText())), // sisakuotanonjkn
+                        String.valueOf(kuota),                   // kuotanonjkn
+                        "Checkin",                               // status
+                        validasi,                                // validasi
+                        "Sudah"                                  // statuskirim
+                    }
+                );
             }
         }
         return statusantrean;

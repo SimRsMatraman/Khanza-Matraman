@@ -6634,7 +6634,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                         "\"jampraktek\": \""+jammulai.substring(0,5)+"-"+jamselesai.substring(0,5)+"\"," +
                                         "\"jeniskunjungan\": "+jeniskunjungan+"," +
                                         "\"nomorreferensi\": \""+NoRujukan.getText()+"\"," +
-                                        "\"nomorantrean\": \""+nomorreg+"\"," +
+                                        "\"nomorantrean\": \""+kodepolireg+"-S"+nomorreg+"\"," +
                                         "\"angkaantrean\": "+Integer.parseInt(nomorreg)+"," +
                                         "\"estimasidilayani\": "+parsedDate.getTime()+"," +
                                         "\"sisakuotajkn\": "+(kuota-Integer.parseInt(nomorreg))+"," +
@@ -6649,7 +6649,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                         System.out.println("URL : "+URL);
                         root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                         nameNode = root.path("metadata");  
-                        respon=nameNode.path("code").asText();
+                        respon=nameNode.path("code").asText();                        
                         System.out.println("respon WS BPJS Kirim Pakai NoRujukan : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
                     } catch (Exception e) {
                         statusantrean=false;
@@ -6684,7 +6684,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                                             "\"jampraktek\": \""+jammulai.substring(0,5)+"-"+jamselesai.substring(0,5)+"\"," +
                                             "\"jeniskunjungan\": "+jeniskunjungan+"," +
                                             "\"nomorreferensi\": \""+NoSKDP.getText()+"\"," +
-                                            "\"nomorantrean\": \""+nomorreg+"\"," +
+                                            "\"nomorantrean\": \""+kodepolireg+"-S"+nomorreg+"\"," +
                                             "\"angkaantrean\": "+Integer.parseInt(nomorreg)+"," +
                                             "\"estimasidilayani\": "+parsedDate.getTime()+"," +
                                             "\"sisakuotajkn\": "+(kuota-Integer.parseInt(nomorreg))+"," +
@@ -6700,7 +6700,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                             nameNode = root.path("metadata");  
                             System.out.println("respon WS BPJS Kirim Pakai SKDP : "+nameNode.path("code").asText()+" "+nameNode.path("message").asText()+"\n");
-                            if(nameNode.path("code").asText().equals("201")){
+                            if(!nameNode.path("code").asText().equals("201")){
                                 statusantrean=false;
                             }
                         } catch (Exception e) {
@@ -6713,6 +6713,42 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 statusantrean=false;
                 System.out.println("Notif : "+e);
             }
+            if(statusantrean && (respon.equals("200") || respon.equals("201"))){
+                String validasi = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .format(new Date(System.currentTimeMillis() + (2 * 60 * 1000)));
+
+                Sequel.menyimpantf2(
+                    "referensi_mobilejkn_bpjs",
+                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+                    "Antrean",
+                    23,
+                    new String[] {
+                        TNoRw.getText(),
+                        TNoRw.getText(),
+                        NoKartu.getText(),
+                        NIK.getText(),
+                        NoTelp.getText(),
+                        KdPoli.getText(),
+                        "0",
+                        TNoRM.getText(),
+                        Valid.SetTgl(TanggalSEP.getSelectedItem()+""),
+                        KdDPJP.getText(),
+                        jammulai.substring(0,5)+"-"+jamselesai.substring(0,5),
+                        jeniskunjungan,
+                        (!NoRujukan.getText().equals("") ? NoRujukan.getText() : NoSKDP.getText()),
+                        kodepolireg+"-S"+nomorreg,
+                        nomorreg,
+                        String.valueOf(parsedDate.getTime()),
+                        String.valueOf(kuota-Integer.parseInt(nomorreg)),
+                        String.valueOf(kuota),
+                        String.valueOf(kuota-Integer.parseInt(nomorreg)),
+                        String.valueOf(kuota),
+                        "Checkin",
+                        validasi,
+                        "Sudah"
+                    }
+                );
+            }    
         }
         return statusantrean;
     }
