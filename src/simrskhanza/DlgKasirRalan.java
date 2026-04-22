@@ -13554,6 +13554,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     }
 
     public void isCek() {
+        DTPCari1.setDate(new Date());
+        DTPCari2.setDate(new Date());
         MnPermintaanKonsultasiMedik.setEnabled(akses.getkonsultasi_medik());
 //        MnDataKonsultasiMedik.setEnabled(akses.getjawaban_konsultasi_medik());
         MnRawatJalan1.setEnabled(akses.gettindakan_ralan());
