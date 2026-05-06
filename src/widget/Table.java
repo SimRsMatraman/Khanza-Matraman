@@ -1,6 +1,7 @@
 package widget;
 
 import java.awt.Color;
+import java.sql.Date;
 import javax.swing.JTable;
 
 /**
@@ -30,5 +31,9 @@ public class Table extends JTable {
         getTableHeader().setBackground(new Color(255,250,250));
         getTableHeader().setBorder(javax.swing.BorderFactory.createLineBorder(new Color(255,250,250)));
         getTableHeader().setFont(new java.awt.Font("Tahoma", 0, 11));
+    }
+
+    public String getValueAt(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

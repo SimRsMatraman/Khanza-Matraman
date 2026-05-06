@@ -6,6 +6,7 @@
 package widget;
 
 import java.awt.Color;
+import java.sql.Date;
 import uz.ncipro.calendar.JDateTimePicker;
 
 /**
@@ -22,6 +23,18 @@ public final class Tanggal extends JDateTimePicker {
         setFont(new java.awt.Font("Tahoma", 0, 11));
         //setBorder(javax.swing.BorderFactory.createLineBorder(new Color(212,212,152)));
         setSize(WIDTH,23);
+    }
+
+    public void setValue(String _000000) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setText(String _000000) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void getTimestamp(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
