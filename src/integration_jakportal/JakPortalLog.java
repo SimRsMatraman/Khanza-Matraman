@@ -1550,19 +1550,46 @@ this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             // mapping kd_poli
             String kdPoliAsli = Sequel.cariIsi("select kd_poli from reg_periksa where no_rawat='" + noRawat + "'");
             java.util.Map<String, String> map = new java.util.HashMap<>();
-            map.put("IGDK", "IGD"); map.put("U0001", "IGD"); map.put("U0002", "GIG");
-            map.put("U0057", "GIG"); map.put("U0012", "GIZ"); map.put("U0036", "GIZ");
-            map.put("U0013", "PAR"); map.put("U0015", "168"); map.put("U0016", "187");
-            map.put("U0021", "FST"); map.put("U0024", "INT"); map.put("U0054", "INT");
-            map.put("U0055", "INT"); map.put("U0025", "ANA"); map.put("U0026", "SAR");
-            map.put("U0027", "OBG"); map.put("U0028", "MAT"); map.put("U0034", "BED");
-            map.put("U0040", "THT"); map.put("U0045", "IRM"); map.put("U0046", "ANT");
-            map.put("U0051", "006"); map.put("U0060", "JIW"); map.put("U0015", "RDL");
-            map.put("U0016", "LAB"); map.put("U0031", "MCU"); map.put("U0033", "TRO");
-            map.put("U0037", "TPT"); map.put("U0041", "TBS"); map.put("U0047", "UMM");
-            map.put("U0050", "HIV"); map.put("U0047", "UMM"); map.put("U0052", "VIN");
-            map.put("U0058", "MHJ"); map.put("U0059", "JIW"); map.put("U0052", "VIN");
-            map.put("U0061", "MCU");
+            map.put("U0024", "INT");
+            map.put("U0025", "ANA");
+            map.put("U0027", "OBG");
+            map.put("U0013", "PAR");
+            map.put("U0033", "PAR");
+            map.put("U0034", "PAR");
+            map.put("U0037", "PAR");
+            map.put("U0034", "BED");
+            map.put("U0026", "SAR");
+            map.put("U0057", "GIG");
+            map.put("U0002", "GIG");
+            map.put("U0040", "THT");
+            map.put("U0031", "MCU");
+            map.put("U0058", "MHJ");
+            map.put("U0045", "IRM");
+            map.put("U0047", "UMM");
+            map.put("U0028", "MAT");
+            map.put("U0050", "HIV");
+            map.put("U0046", "ANT");
+            map.put("U0021", "FST");
+            map.put("U0052", "VIN");
+            map.put("U0059", "JIW");
+            map.put("U0060", "JIW");
+            map.put("U0033", "OBG"); //poli neonatus di masukan ke obgyn di jakportalnya
+            map.put("U0012", "GIZ");
+            map.put("U0036", "GIZ");
+            
+//            map.put("IGDK", "IGD"); map.put("U0001", "IGD"); map.put("U0002", "GIG");
+//            map.put("U0057", "GIG"); map.put("U0012", "GIZ"); map.put("U0036", "GIZ");
+//            map.put("U0013", "PAR"); map.put("U0015", "168"); map.put("U0016", "187");
+//            map.put("U0021", "FST"); map.put("U0024", "INT"); map.put("U0054", "INT");
+//            map.put("U0055", "INT"); map.put("U0025", "ANA"); map.put("U0026", "SAR");
+//            map.put("U0027", "OBG"); map.put("U0028", "MAT"); map.put("U0034", "BED");
+//            map.put("U0040", "THT"); map.put("U0045", "IRM"); map.put("U0046", "ANT");
+//            map.put("U0051", "006"); map.put("U0060", "JIW"); map.put("U0015", "RDL");
+//            map.put("U0016", "LAB"); map.put("U0031", "MCU"); map.put("U0033", "TRO");
+//            map.put("U0037", "TPT"); map.put("U0041", "TBS"); map.put("U0047", "UMM");
+//            map.put("U0050", "HIV"); map.put("U0047", "UMM"); map.put("U0052", "VIN");
+//            map.put("U0058", "MHJ"); map.put("U0059", "JIW"); map.put("U0052", "VIN");
+//            map.put("U0061", "MCU");
 
             String kodePoli = map.getOrDefault(kdPoliAsli, kdPoliAsli);
 
@@ -2202,112 +2229,183 @@ String idPoli = Sequel.cariIsi("SELECT jp.id_poli FROM jakportal_patientjourney 
 //    }
 public void tampil() {
     Valid.tabelKosong(tabModeKunjungan);
+
     try {
 
         String statusDipilih = cmbStatusJakportal.getSelectedItem().toString();
 
         String filterStatus = "";
+
         if (!statusDipilih.equals("Semua")) {
+
             filterStatus = " HAVING status_journey = ? ";
+
         }
 
         ps = koneksi.prepareStatement(
+
             "SELECT rp.no_rawat, rp.tgl_registrasi, rp.jam_reg, " +
 
             "jp.id_checkin, jp.id_checkin_end, jp.id_ns, jp.id_ns_end, " +
+
             "jp.id_poli, jp.id_poli_end, jp.id_check_out, " +
 
             // ================== STATUS ==================
+
             "CASE " +
+
             "WHEN LOWER(rp.stts)='batal' THEN 'Batal' " +
+
             "WHEN jp.id_check_out IS NOT NULL AND jp.id_check_out<>'' THEN 'Check Out' " +
 
             "WHEN jp.id_poli_end IS NOT NULL AND jp.id_poli_end<>'' THEN 'Poliklinik Selesai' " +
+
             "WHEN jp.id_poli IS NOT NULL AND jp.id_poli<>'' THEN 'Poliklinik' " +
 
             "WHEN jp.id_ns_end IS NOT NULL AND jp.id_ns_end<>'' THEN 'Nurse Station Selesai' " +
+
             "WHEN jp.id_ns IS NOT NULL AND jp.id_ns<>'' THEN 'Nurse Station' " +
 
             "WHEN jp.id_checkin_end IS NOT NULL AND jp.id_checkin_end<>'' THEN 'Checkin Selesai' " +
+
             "WHEN jp.id_checkin IS NOT NULL AND jp.id_checkin<>'' THEN 'Checkin' " +
 
             "ELSE 'Belum Checkin' END AS status_journey, " +
 
             "(SELECT GROUP_CONCAT(ro.no_resep SEPARATOR ', ') FROM resep_obat ro WHERE ro.no_rawat=rp.no_rawat) AS no_resep, " +
+
             "(SELECT GROUP_CONCAT(pl.noorder SEPARATOR ', ') FROM permintaan_lab pl WHERE pl.no_rawat=rp.no_rawat) AS no_lab, " +
+
             "(SELECT GROUP_CONCAT(pr.noorder SEPARATOR ', ') FROM permintaan_radiologi pr WHERE pr.no_rawat=rp.no_rawat) AS no_rad " +
 
             "FROM reg_periksa rp " +
+
             "LEFT JOIN jakportal_patientjourney jp ON rp.no_rawat=jp.no_rawat " +
+
             "INNER JOIN poliklinik p ON rp.kd_poli=p.kd_poli " +
+
             "INNER JOIN maping_poli_bpjs mp ON mp.kd_poli_rs = rp.kd_poli " +
 
             "WHERE rp.tgl_registrasi BETWEEN ? AND ? " +
+
             "AND p.status='1' " +
+
+            // ================== FILTER POLI ==================
+
+            "AND rp.kd_poli IN ( " +
+
+            "'U0025','U0034','U0002','U0057','U0028','U0031','U0058','U0027'," +
+
+            "'U0041','U0013','U0024','U0050','U0026','U0040','U0033','U0047'," +
+
+            "'U0045','U0012','U0021','U0052','U0039','U0046','U0059','U0037' " +
+
+            ") " +
 
             filterStatus +
 
             " ORDER BY rp.tgl_registrasi, rp.jam_reg"
+
         );
 
         int paramIndex = 1;
 
         ps.setString(paramIndex++, Valid.SetTgl(DTPCari1.getSelectedItem() + ""));
+
         ps.setString(paramIndex++, Valid.SetTgl(DTPCari2.getSelectedItem() + ""));
 
         if (!statusDipilih.equals("Semua")) {
+
             ps.setString(paramIndex++, statusDipilih);
+
         }
 
         rs = ps.executeQuery();
 
         // ================== LOAD DATA ==================
+
         while (rs.next()) {
+
             tabModeKunjungan.addRow(new Object[]{
+
                 false,
+
                 rs.getString("tgl_registrasi") + " " + rs.getString("jam_reg"),
+
                 rs.getString("no_rawat"),
+
                 rs.getString("no_resep"),
+
                 rs.getString("no_lab"),
+
                 rs.getString("no_rad"),
+
                 rs.getString("status_journey"),
+
                 rs.getString("id_checkin"),
+
                 rs.getString("id_checkin_end"),
+
                 rs.getString("id_ns"),
+
                 rs.getString("id_ns_end"),
+
                 rs.getString("id_poli"),
+
                 rs.getString("id_poli_end"),
+
                 rs.getString("id_check_out")
+
             });
+
         }
 
         // ================== AUTO CHECKLIST ==================
-        if(!statusDipilih.equals("Semua")){
-            for(int i = 0; i < tbKunjungan.getRowCount(); i++){
+
+        if (!statusDipilih.equals("Semua")) {
+
+            for (int i = 0; i < tbKunjungan.getRowCount(); i++) {
 
                 String statusRow = tbKunjungan.getValueAt(i, 6).toString().trim();
 
-                // ❌ skip batal kalau bukan filter batal
-                if(!statusDipilih.equals("Batal") &&
-                   statusRow.equalsIgnoreCase("Batal")){
+                // skip batal kalau bukan filter batal
+
+                if (!statusDipilih.equals("Batal") &&
+
+                    statusRow.equalsIgnoreCase("Batal")) {
+
                     tbKunjungan.setValueAt(false, i, 0);
+
                     continue;
+
                 }
 
                 tbKunjungan.setValueAt(
+
                     statusRow.equalsIgnoreCase(statusDipilih),
+
                     i, 0
+
                 );
+
             }
+
         }
 
     } catch (Exception e) {
+
         System.out.println("Notifikasi tampil(): " + e);
+
     } finally {
+
         try {
+
             if (rs != null) rs.close();
+
             if (ps != null) ps.close();
+
         } catch (Exception e) {}
+
     }
 
     LCount.setText("Total: " + tabModeKunjungan.getRowCount());
