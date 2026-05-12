@@ -88,7 +88,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         
         tabMode=new DefaultTableModel(null,new Object[]{
             "Tgl.Rawat","Status","No.Rawat","No.RM","Nama Pasien","NIP","Nama Pemeriksa","Tanggal SOAP","Jam SOAP","S (SUBJECTIVE)","O (OBJECTIVE)",
-            "A (ASSESSMENT)","P (PLAN)"
+            "A (ASSESSMENT)","P (PLAN)","i (INTRUKSI)"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -98,7 +98,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 13; i++) {
+        for (i = 0; i < 14; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(65);
@@ -125,6 +125,8 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             }else if(i==11){
                 column.setPreferredWidth(250);
             }else if(i==12){
+                column.setPreferredWidth(170);
+            }else if(i==13){
                 column.setPreferredWidth(170);
             }
         }
@@ -245,6 +247,8 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         label16 = new widget.Label();
         label17 = new widget.Label();
         JamPemeriksaan = new widget.TextBox();
+        scrollPane5 = new widget.ScrollPane();
+        instruksi = new widget.TextArea();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -311,7 +315,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Validasi SOAP ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Validasi SOAP ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -424,7 +428,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -438,7 +442,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -753,6 +757,25 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         FormInput.add(JamPemeriksaan);
         JamPemeriksaan.setBounds(320, 100, 141, 23);
 
+        scrollPane5.setBorder(javax.swing.BorderFactory.createTitledBorder("I (INSTRUKSI)"));
+        scrollPane5.setName("scrollPane5"); // NOI18N
+
+        instruksi.setEditable(false);
+        instruksi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        instruksi.setColumns(20);
+        instruksi.setRows(5);
+        instruksi.setName("instruksi"); // NOI18N
+        instruksi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                instruksiKeyPressed(evt);
+            }
+        });
+        scrollPane5.setViewportView(instruksi);
+
+        FormInput.add(scrollPane5);
+        scrollPane5.setBounds(770, 130, 530, 170);
+        scrollPane5.getAccessibleContext().setAccessibleDescription("");
+
         scrollInput.setViewportView(FormInput);
 
         PanelInput.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -788,9 +811,11 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             Valid.textKosong(TKeluhan,"S (SUBJECTIVE");
         }else if(TPemeriksaan.getText().equals("")){
             Valid.textKosong(TPemeriksaan,"O (OBJECTIVE)");
+        }else if(TPemeriksaan.getText().equals("")){
+            Valid.textKosong(instruksi,"I (INSTRUKSI)");
         }else{
-            if(Sequel.menyimpantf("validasi_pemeriksaan_ranap","?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",12,new String[]{
-                    TNoRw.getText(),TanggalPemeriksaan.getText(),JamPemeriksaan.getText(),TKeluhan.getText(),TPemeriksaan.getText(),TPenilaian.getText(),TindakLanjut.getText(), 
+            if(Sequel.menyimpantf("validasi_pemeriksaan_ranap","?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",13,new String[]{
+                    TNoRw.getText(),TanggalPemeriksaan.getText(),JamPemeriksaan.getText(),TKeluhan.getText(),TPemeriksaan.getText(),TPenilaian.getText(),TindakLanjut.getText(),instruksi.getText(), 
                     KodeDokter1.getText(),KodeDokter.getText(),tanggalNow.format(new Date()),jamNow.format(new Date()),"Validasi",
                 })==true){
                     tampil();
@@ -1057,6 +1082,10 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_JamPemeriksaanKeyPressed
 
+    private void instruksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_instruksiKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_instruksiKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1104,6 +1133,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     private widget.TextArea TPenilaian;
     private widget.TextBox TanggalPemeriksaan;
     private widget.TextArea TindakLanjut;
+    private widget.TextArea instruksi;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel19;
     private widget.Label jLabel21;
@@ -1124,6 +1154,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane3;
     private widget.ScrollPane scrollPane4;
+    private widget.ScrollPane scrollPane5;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
@@ -1134,14 +1165,14 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.tgl_registrasi,reg_periksa.status_lanjut,pemeriksaan_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
                     "pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.keluhan, " +
-                    "pemeriksaan_ranap.pemeriksaan,pemeriksaan_ranap.penilaian,pemeriksaan_ranap.rtl,pemeriksaan_ranap.nik,pegawai.nama from pasien inner join reg_periksa inner join pemeriksaan_ranap "+
+                    "pemeriksaan_ranap.pemeriksaan,pemeriksaan_ranap.penilaian,pemeriksaan_ranap.instruksi,pemeriksaan_ranap.rtl,pemeriksaan_ranap.nik,pegawai.nama from pasien inner join reg_periksa inner join pemeriksaan_ranap "+
                     "on pemeriksaan_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on pemeriksaan_ranap.nik=pegawai.nik LEFT JOIN validasi_pemeriksaan_ranap ON validasi_pemeriksaan_ranap.no_rawat = pemeriksaan_ranap.no_rawat AND validasi_pemeriksaan_ranap.tgl_perawatan = pemeriksaan_ranap.tgl_perawatan AND validasi_pemeriksaan_ranap.jam_rawat = pemeriksaan_ranap.jam_rawat where "+
                     "pemeriksaan_ranap.no_rawat like ? and ISNULL(validasi_pemeriksaan_ranap.status_validasi) order by pemeriksaan_ranap.no_rawat desc");
             }else{
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.tgl_registrasi,reg_periksa.status_lanjut,pemeriksaan_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien, "+
                     "pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,pemeriksaan_ranap.keluhan, " +
-                    "pemeriksaan_ranap.pemeriksaan,pemeriksaan_ranap.penilaian,pemeriksaan_ranap.rtl,pemeriksaan_ranap.nik,pegawai.nama from pasien inner join reg_periksa inner join pemeriksaan_ranap "+
+                    "pemeriksaan_ranap.pemeriksaan,pemeriksaan_ranap.penilaian,pemeriksaan_ranap.instruksi,pemeriksaan_ranap.rtl,pemeriksaan_ranap.nik,pegawai.nama from pasien inner join reg_periksa inner join pemeriksaan_ranap "+
                     "on pemeriksaan_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join pegawai on pemeriksaan_ranap.nik=pegawai.nik LEFT JOIN validasi_pemeriksaan_ranap ON validasi_pemeriksaan_ranap.no_rawat = pemeriksaan_ranap.no_rawat AND validasi_pemeriksaan_ranap.tgl_perawatan = pemeriksaan_ranap.tgl_perawatan AND validasi_pemeriksaan_ranap.jam_rawat = pemeriksaan_ranap.jam_rawat where "+
                     "pemeriksaan_ranap.no_rawat like ? and ISNULL(validasi_pemeriksaan_ranap.status_validasi) order by pemeriksaan_ranap.no_rawat desc");
             }
@@ -1155,7 +1186,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
                 while(rs.next()){
                     tabMode.addRow(new String[]{
                         rs.getString("tgl_registrasi"),rs.getString("status_lanjut"),rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("nik"),rs.getString("nama"),
-                        rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),rs.getString("keluhan"),rs.getString("pemeriksaan"),rs.getString("penilaian"),rs.getString("rtl")
+                        rs.getString("tgl_perawatan"),rs.getString("jam_rawat"),rs.getString("keluhan"),rs.getString("pemeriksaan"),rs.getString("penilaian"),rs.getString("rtl"),rs.getString("instruksi")
                     });
                 }
             } catch (Exception e) {
@@ -1183,6 +1214,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
         TKeluhan.setText("");
         TPemeriksaan.setText("");
         TPenilaian.setText("");
+        instruksi.setText("");
         TindakLanjut.setText("");
         TNoRw.requestFocus();
         KodeDokter1.requestFocus();
@@ -1203,6 +1235,7 @@ public final class ValidasiSOAP extends javax.swing.JDialog {
             TPemeriksaan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());  
             TPenilaian.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
             TindakLanjut.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            instruksi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
         }
     }
 

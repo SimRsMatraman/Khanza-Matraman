@@ -6368,34 +6368,29 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                             noRawat
                         ) > 0;
 
-                        String noRM = Sequel.cariIsi(
-    "select no_rkm_medis from reg_periksa where no_rawat=?", 
-    noRawat
-);
-
-int jmlKunjungan = Sequel.cariInteger(
-    "select count(*) from reg_periksa " +
-    "where no_rkm_medis = (select no_rkm_medis from reg_periksa where no_rawat=? limit 1) " +
-    "and tgl_registrasi = current_date()",
-    noRawat
-);
+                        int jmlKunjunganBPJS = Sequel.cariInteger(
+                            "select count(*) from reg_periksa " +
+                            "where kd_pj='BPJ' " +
+                            "and no_rkm_medis = (select no_rkm_medis from reg_periksa where no_rawat=? limit 1) " +
+                            "and tgl_registrasi = current_date()",
+                            noRawat
+                        );
 
                         String pesan = "";
 
-                        // ✅ 1. KHUSUS BPJS
+                        //notif pasien bpjs ga ada SEP
                         if ("BPJ".equals(kd_pj) && !adaSEP) {
                             pesan = "Pasien belum terbit SEP!";
                         }
 
-                        // ✅ 2. SEMUA PASIEN (termasuk non BPJS)
-if (jmlKunjungan > 1) {
-    if (!pesan.equals("")) {
-        pesan += "\n";
-    }
-    pesan += "Pasien sudah berkunjung lebih dari 1x hari ini (" + jmlKunjungan + "x)";
-}
+                        //notif pasien bpjs yang jumlah kunjungan > 1
+                        if ("BPJ".equals(kd_pj) && jmlKunjunganBPJS > 1) {
+                            if (!pesan.equals("")) {
+                                pesan += "\n";
+                            }
+                            pesan += "Pasien sudah berkunjung lebih dari 1x hari ini (" + jmlKunjunganBPJS + "x)";
+                        }
 
-                        // ✅ tampilkan kalau ada isi
                         if (!pesan.equals("")) {
                             JOptionPane.showMessageDialog(null, pesan);
                         }
