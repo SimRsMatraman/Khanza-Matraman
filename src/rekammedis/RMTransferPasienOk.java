@@ -402,9 +402,9 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         panelGlass8 = new widget.panelisi();
         btnMenyerahkan = new widget.Button();
         btnMenerima = new widget.Button();
+        BtnEdit = new widget.Button();
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
-        BtnEdit = new widget.Button();
         BtnAll = new widget.Button();
         BtnKeluar = new widget.Button();
         TabRawat = new javax.swing.JTabbedPane();
@@ -770,6 +770,24 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         });
         panelGlass8.add(btnMenerima);
 
+        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
+        BtnEdit.setMnemonic('G');
+        BtnEdit.setText("Ganti");
+        BtnEdit.setToolTipText("Alt+G");
+        BtnEdit.setName("BtnEdit"); // NOI18N
+        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnEditKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnEdit);
+
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
         BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
@@ -805,24 +823,6 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         panelGlass8.add(BtnHapus);
-
-        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
-        BtnEdit.setText("Ganti");
-        BtnEdit.setToolTipText("Alt+G");
-        BtnEdit.setName("BtnEdit"); // NOI18N
-        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEditActionPerformed(evt);
-            }
-        });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnEditKeyPressed(evt);
-            }
-        });
-        panelGlass8.add(BtnEdit);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
         BtnAll.setMnemonic('M');
@@ -3397,11 +3397,12 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         if (akses.getkode().equals("Admin Utama")) {
             prosesSimpanBerdasarkanTab();
         } else {
-            if (akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenyerahkan.getText())) {
-                prosesSimpanBerdasarkanTab();
-            } else {
-                JOptionPane.showMessageDialog(null, "Harus salah satu petugas sesuai user login..!!");
-            }
+            prosesSimpanBerdasarkanTab();
+//            if (akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenyerahkan.getText())) {
+//                prosesSimpanBerdasarkanTab();
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Harus salah satu petugas sesuai user login..!!");
+//            }
         }
     }
 }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -3482,13 +3483,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else {
-                    if 
-                        (akses.getkode().equals(KdPetugasMenyerahkan1.getText()) || akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenerima1.getText())) 
-                    {
-                        ganti();
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Harus salah satu petugas sesuai user login..!!");
-                    }
+                    ganti();
+//                    if 
+//                        (akses.getkode().equals(KdPetugasMenyerahkan1.getText()) || akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenerima1.getText())) 
+//                    {
+//                        ganti();
+//                    }else{
+//                        JOptionPane.showMessageDialog(null,"Harus salah satu petugas sesuai user login..!!");
+//                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
@@ -4564,13 +4566,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             if (akses.getkode().equals("Admin Utama")) {
                 prosesSimpanBerdasarkanTab();
             } else {
-                if 
-                    (akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenyerahkan.getText())) 
-                {
                     prosesSimpanBerdasarkanTab();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Harus salah satu petugas sesuai user login..!!");
-                }
+//                if 
+//                    (akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenyerahkan.getText())) 
+//                {
+//                    prosesSimpanBerdasarkanTab();
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "Harus salah satu petugas sesuai user login..!!");
+//                }
             }
         }
 
@@ -4590,13 +4593,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
                 }else {
-                    if 
-                        (akses.getkode().equals(KdPetugasMenyerahkan1.getText()) || akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenerima1.getText())) 
-                    {
-                        ganti();
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Harus salah satu petugas sesuai user login..!!");
-                    }
+                    ganti();
+//                    if 
+//                        (akses.getkode().equals(KdPetugasMenyerahkan1.getText()) || akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenerima1.getText())) 
+//                    {
+//                        ganti();
+//                    }else{
+//                        JOptionPane.showMessageDialog(null,"Harus salah satu petugas sesuai user login..!!");
+//                    }
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
