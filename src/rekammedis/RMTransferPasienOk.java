@@ -3480,18 +3480,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             Valid.textKosong(DiagnosaPost,"Diagnosa Post Operasi");
         }else{
             if(tbObat.getSelectedRow()>-1){
-                if(akses.getkode().equals("Admin Utama")){
-                    ganti();
-                }else {
-                    ganti();
-//                    if 
-//                        (akses.getkode().equals(KdPetugasMenyerahkan1.getText()) || akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenerima1.getText())) 
-//                    {
-//                        ganti();
-//                    }else{
-//                        JOptionPane.showMessageDialog(null,"Harus salah satu petugas sesuai user login..!!");
-//                    }
-                }
+                ganti();
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
             }
@@ -4590,18 +4579,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             Valid.textKosong(DiagnosaPre,"Diagnosa Utama");
         }else{
             if(tbObat.getSelectedRow()>-1){
-                if(akses.getkode().equals("Admin Utama")){
-                    ganti();
-                }else {
-                    ganti();
-//                    if 
-//                        (akses.getkode().equals(KdPetugasMenyerahkan1.getText()) || akses.getkode().equals(KdPetugasMenerima.getText()) || akses.getkode().equals(KdPetugasMenerima1.getText())) 
-//                    {
-//                        ganti();
-//                    }else{
-//                        JOptionPane.showMessageDialog(null,"Harus salah satu petugas sesuai user login..!!");
-//                    }
-                }
+                ganti();
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
             }
@@ -5521,7 +5499,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
                 "usg_ginjal1=?,usg_haper1=?,usg_thorax1=?,usg_lainnya1=?,ctscan1=?,ct_kepala1=?,ct_abdomen1=?,ct_thorax1=?,mri1=?,mri_lainnya1=?," +
                 "obat=?,resep_post=?,Transfusi_masuk=?,terapi_sebelum_lainnya1=?,kesadaran1=?,observasi1=?,td1=?,nd1=?,sh1=?,luka_op=?," +
                 "pasang_alat=?,drainese=?,spoeling=?,alat_warna=?,iufd1=?,balon1=?,vol1=?,warna1=?,dc_lainnya1=?,alkes1=?," +
-                "nip_menyerahkan1=?,nip_menerima1=?,laporan_pa=?,sample_pa=?,laporan_anastesi=?,laporan_to=?,ttd_menyerahkan1=?,ttd_menerima1=?",130,new String[]{
+                "nip_menyerahkan1=?,nip_menerima1=?,laporan_pa=?,sample_pa=?,laporan_anastesi=?,laporan_to=?,ttd_menerima=?,ttd_menyerahkan1=?,ttd_menerima1=?",131,new String[]{
     
                 TNoRw.getText(),tglJam(TanggalMasuk.getDate()),tglJam(TanggalMasuk1.getDate()),KdRuang.getText(),Status.getText(),DiagnosaPre.getText(),DiagnosaPost.getText(),KdDokterOperator.getText(),KdDokterAnastesi.getText(),Rencana.getText(), 
                 IzinOp.isSelected() ? "true" : "false",Lab.isSelected() ? "true" : "false",Dpl.isSelected() ? "true" : "false",Gds.isSelected() ? "true" : "false",BtCt.isSelected() ? "true" : "false",Uc.isSelected() ? "true" : "false",SpgtSgot.isSelected() ? "true" : "false",LabLainnya.getText(),Rontgen.isSelected() ? "true" : "false",RontgenThorax.isSelected() ? "true" : "false"
@@ -5535,7 +5513,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
                 ,USGGinjal1.isSelected() ? "true" : "false",USGHepar1.isSelected() ? "true" : "false",USGThorax1.isSelected() ? "true" : "false",USGLainnya1.getText(),CTScan1.isSelected() ? "true" : "false",CTKepala1.isSelected() ? "true" : "false",CTAbdomen1.isSelected() ? "true" : "false",CTThorax1.isSelected() ? "true" : "false",MRI1.isSelected() ? "true" : "false",MRILainnya1.getText()
                 ,ObatObatan.getText(),ResepPostOp.getText(),TransfusiMasuk.getText(),TerapiSebelumLainnya1.getText(),Kesadaran1.isSelected() ? "true" : "false",Observasi1.isSelected() ? "true" : "false",TD1.getText(),Nd1.getText(),Sh1.getText(),LukaOP.getText()
                 ,PasangAlat.isSelected() ? "true" : "false",Drainase.getText(),Spoeling.getText(),AlatWarna.getText(),IUFD1.getText(),Balon1.getText(),Vol1.getText(),Warna1.getText(),DCLainnya1.getText(),Alkes1.getText()
-                ,KdPetugasMenyerahkan1.getText(),KdPetugasMenerima1.getText(),LapPA.isSelected() ? "true" : "false",SamplePA.isSelected() ? "true" : "false",LapAnastesi.isSelected() ? "true" : "false",LapTimeOut.isSelected() ? "true" : "false","/uploads/transferpasienok/"+KdPetugasMenyerahkan1.getText()+".png","/uploads/transferpasienok/"+KdPetugasMenerima1.getText()+".png"
+                ,KdPetugasMenyerahkan1.getText(),KdPetugasMenerima1.getText(),LapPA.isSelected() ? "true" : "false",SamplePA.isSelected() ? "true" : "false",LapAnastesi.isSelected() ? "true" : "false",LapTimeOut.isSelected() ? "true" : "false","/uploads/transferpasienok/"+KdPetugasMenerima.getText()+".png","/uploads/transferpasienok/"+KdPetugasMenyerahkan1.getText()+".png","/uploads/transferpasienok/"+KdPetugasMenerima1.getText()+".png"
                 ,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()
             })==true){
                 emptTeks();
