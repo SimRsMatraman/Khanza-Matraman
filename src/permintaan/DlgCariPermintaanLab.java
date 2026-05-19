@@ -583,7 +583,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(BtnSimpan4);
         BtnSimpan4.setBounds(390, 30, 100, 30);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2025 16:22:15" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2026 08:20:16" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -735,7 +735,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         TNoPermintaanPK.setBounds(240, 30, 130, 23);
 
         TanggalPulang1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2025" }));
+        TanggalPulang1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-03-2026" }));
         TanggalPulang1.setDisplayFormat("dd-MM-yyyy");
         TanggalPulang1.setName("TanggalPulang1"); // NOI18N
         TanggalPulang1.setOpaque(false);
@@ -2906,7 +2906,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 //                        koneksisysmex=koneksiDBSysmex.condb();
                         ps=koneksi.prepareStatement(
                             "select permintaan_lab.noorder,permintaan_lab.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,permintaan_lab.tgl_permintaan,pasien.tgl_lahir,"+
-                            "permintaan_lab.jam_permintaan,pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,"+
+                            "permintaan_lab.jam_permintaan,LEFT(alamat, 50) as alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,"+
                             "if(pasien.jk='L','1','2') as jk,permintaan_lab.dokter_perujuk,dokter.nm_dokter,reg_periksa.kd_poli,"+
                             "poliklinik.nm_poli,permintaan_lab.tambahan,permintaan_lab.diagnosa_klinis,penjab.png_jawab "+
                             "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
@@ -3015,7 +3015,7 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 //                        koneksisysmex=koneksiDBSysmex.condb();
                         ps=koneksi.prepareStatement(
                             "select permintaan_lab.noorder,permintaan_lab.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,permintaan_lab.tgl_permintaan,pasien.tgl_lahir,"+
-                            "permintaan_lab.jam_permintaan,pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,if(pasien.jk='L','1','2') as jk,"+
+                            "permintaan_lab.jam_permintaan,LEFT(alamat, 50) as alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,if(pasien.jk='L','1','2') as jk,"+
                             "permintaan_lab.dokter_perujuk,dokter.nm_dokter,IFNULL(kamar_inap.kd_kamar,'Ranap Gabung') as kd_kamar,IFNULL(bangsal.kd_bangsal,'-') as kd_bangsal,IFNULL(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis,penjab.png_jawab "+
                             "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                             "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
