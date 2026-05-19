@@ -3765,7 +3765,18 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 try {
                     getData();
-                    TabRawat.setSelectedIndex(1);
+                    // Ambil nip_penerima dari kolom 18 baris yang dipilih
+                    int row = tbObat.getSelectedRow();
+                    String nip_penerima = tbObat.getValueAt(row, 18).toString();
+
+                    // Cek apakah nip_penerima kosong
+                    if (nip_penerima == null || nip_penerima.trim().isEmpty()) {
+                        // nip_penerima kosong → buka tab 0
+                        TabRawat.setSelectedIndex(0);
+                    } else {
+                        // nip_penerima sudah terisi → buka tab 1
+                        TabRawat.setSelectedIndex(1);
+                    }
                 } catch (java.lang.NullPointerException e) {
                 }
             }
@@ -5523,7 +5534,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             })==true){
                 emptTeks();
                 tampil();
-                TabRawat.setSelectedIndex(1);
+                TabRawat.setSelectedIndex(0);
         }
     }
     
