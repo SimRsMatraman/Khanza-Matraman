@@ -398,6 +398,10 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         LoadHTML = new widget.editorpane();
         BtnPrint = new widget.Button();
         BtnSimpan = new widget.Button();
+        DiagnosaPost1 = new widget.TextBox();
+        KdDokterAnastesi1 = new widget.TextBox();
+        NmDokterAnastesi1 = new widget.TextBox();
+        BtnDokter5 = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         btnMenyerahkan = new widget.Button();
@@ -430,16 +434,10 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         NmRuang = new widget.TextBox();
         jLabel28 = new widget.Label();
         DiagnosaPre = new widget.TextBox();
-        jLabel96 = new widget.Label();
-        DiagnosaPost = new widget.TextBox();
         label44 = new widget.Label();
         KdDokterOperator = new widget.TextBox();
         NmDokterOperator = new widget.TextBox();
         BtnDokter2 = new widget.Button();
-        label58 = new widget.Label();
-        KdDokterAnastesi = new widget.TextBox();
-        NmDokterAnastesi = new widget.TextBox();
-        BtnDokter3 = new widget.Button();
         BtnRuang2 = new widget.Button();
         BtnRuang3 = new widget.Button();
         jSeparator3 = new javax.swing.JSeparator();
@@ -565,15 +563,11 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         jLabel24 = new widget.Label();
         DiagnosaPre1 = new widget.TextBox();
         jLabel95 = new widget.Label();
-        DiagnosaPost1 = new widget.TextBox();
         label33 = new widget.Label();
         KdDokterOperator1 = new widget.TextBox();
         NmDokterOperator1 = new widget.TextBox();
         BtnDokter4 = new widget.Button();
         label41 = new widget.Label();
-        KdDokterAnastesi1 = new widget.TextBox();
-        NmDokterAnastesi1 = new widget.TextBox();
-        BtnDokter5 = new widget.Button();
         label17 = new widget.Label();
         KdPetugasMenyerahkan1 = new widget.TextBox();
         NmPetugasMenyerahkan1 = new widget.TextBox();
@@ -662,6 +656,10 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         BtnRuang1 = new widget.Button();
         label66 = new widget.Label();
         Status1 = new widget.TextBox();
+        DiagnosaPost = new widget.TextBox();
+        KdDokterAnastesi = new widget.TextBox();
+        NmDokterAnastesi = new widget.TextBox();
+        BtnDokter3 = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -726,6 +724,38 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnSimpanKeyPressed(evt);
+            }
+        });
+
+        DiagnosaPost1.setHighlighter(null);
+        DiagnosaPost1.setName("DiagnosaPost1"); // NOI18N
+        DiagnosaPost1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DiagnosaPost1KeyPressed(evt);
+            }
+        });
+
+        KdDokterAnastesi1.setEditable(false);
+        KdDokterAnastesi1.setName("KdDokterAnastesi1"); // NOI18N
+        KdDokterAnastesi1.setPreferredSize(new java.awt.Dimension(80, 23));
+
+        NmDokterAnastesi1.setEditable(false);
+        NmDokterAnastesi1.setName("NmDokterAnastesi1"); // NOI18N
+        NmDokterAnastesi1.setPreferredSize(new java.awt.Dimension(207, 23));
+
+        BtnDokter5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnDokter5.setMnemonic('2');
+        BtnDokter5.setToolTipText("Alt+2");
+        BtnDokter5.setName("BtnDokter5"); // NOI18N
+        BtnDokter5.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnDokter5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDokter5ActionPerformed(evt);
+            }
+        });
+        BtnDokter5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnDokter5KeyPressed(evt);
             }
         });
 
@@ -941,7 +971,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         label13.setBounds(0, 40, 70, 23);
 
         TanggalMasuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026 11:25:45" }));
+        TanggalMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:23" }));
         TanggalMasuk.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalMasuk.setName("TanggalMasuk"); // NOI18N
         TanggalMasuk.setOpaque(false);
@@ -968,12 +998,12 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Rencana);
-        Rencana.setBounds(630, 140, 240, 23);
+        Rencana.setBounds(620, 120, 240, 23);
 
         jLabel25.setText("Rencana :");
         jLabel25.setName("jLabel25"); // NOI18N
         FormInput.add(jLabel25);
-        jLabel25.setBounds(550, 140, 70, 23);
+        jLabel25.setBounds(540, 120, 70, 23);
 
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel26.setText("Asal Ruang Rawat / Poliklinik");
@@ -1024,39 +1054,23 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         FormInput.add(DiagnosaPre);
         DiagnosaPre.setBounds(130, 80, 730, 23);
 
-        jLabel96.setText("Diagnosa Post OP :");
-        jLabel96.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jLabel96.setName("jLabel96"); // NOI18N
-        FormInput.add(jLabel96);
-        jLabel96.setBounds(20, 110, 100, 23);
-
-        DiagnosaPost.setHighlighter(null);
-        DiagnosaPost.setName("DiagnosaPost"); // NOI18N
-        DiagnosaPost.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DiagnosaPostKeyPressed(evt);
-            }
-        });
-        FormInput.add(DiagnosaPost);
-        DiagnosaPost.setBounds(130, 110, 730, 23);
-
         label44.setText("dr. Operator / Asisten :");
         label44.setName("label44"); // NOI18N
         label44.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label44);
-        label44.setBounds(30, 140, 130, 23);
+        label44.setBounds(20, 120, 130, 23);
 
         KdDokterOperator.setEditable(false);
         KdDokterOperator.setName("KdDokterOperator"); // NOI18N
         KdDokterOperator.setPreferredSize(new java.awt.Dimension(80, 23));
         FormInput.add(KdDokterOperator);
-        KdDokterOperator.setBounds(170, 140, 100, 23);
+        KdDokterOperator.setBounds(160, 120, 100, 23);
 
         NmDokterOperator.setEditable(false);
         NmDokterOperator.setName("NmDokterOperator"); // NOI18N
         NmDokterOperator.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput.add(NmDokterOperator);
-        NmDokterOperator.setBounds(270, 140, 240, 23);
+        NmDokterOperator.setBounds(260, 120, 240, 23);
 
         BtnDokter2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnDokter2.setMnemonic('2');
@@ -1074,43 +1088,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtnDokter2);
-        BtnDokter2.setBounds(510, 140, 28, 23);
-
-        label58.setText("dr. Anastesi / Penata :");
-        label58.setName("label58"); // NOI18N
-        label58.setPreferredSize(new java.awt.Dimension(70, 23));
-        FormInput.add(label58);
-        label58.setBounds(30, 170, 130, 23);
-
-        KdDokterAnastesi.setEditable(false);
-        KdDokterAnastesi.setName("KdDokterAnastesi"); // NOI18N
-        KdDokterAnastesi.setPreferredSize(new java.awt.Dimension(80, 23));
-        FormInput.add(KdDokterAnastesi);
-        KdDokterAnastesi.setBounds(170, 170, 100, 23);
-
-        NmDokterAnastesi.setEditable(false);
-        NmDokterAnastesi.setName("NmDokterAnastesi"); // NOI18N
-        NmDokterAnastesi.setPreferredSize(new java.awt.Dimension(207, 23));
-        FormInput.add(NmDokterAnastesi);
-        NmDokterAnastesi.setBounds(270, 170, 240, 23);
-
-        BtnDokter3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnDokter3.setMnemonic('2');
-        BtnDokter3.setToolTipText("Alt+2");
-        BtnDokter3.setName("BtnDokter3"); // NOI18N
-        BtnDokter3.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnDokter3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDokter3ActionPerformed(evt);
-            }
-        });
-        BtnDokter3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnDokter3KeyPressed(evt);
-            }
-        });
-        FormInput.add(BtnDokter3);
-        BtnDokter3.setBounds(510, 170, 28, 23);
+        BtnDokter2.setBounds(500, 120, 28, 23);
 
         BtnRuang2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnRuang2.setMnemonic('2');
@@ -1246,26 +1224,26 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         label23.setName("label23"); // NOI18N
         label23.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label23);
-        label23.setBounds(30, 210, 350, 30);
+        label23.setBounds(30, 160, 350, 30);
 
         label24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label24.setText("1. Status Pasien / Kelengkapan Pasien");
         label24.setName("label24"); // NOI18N
         label24.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label24);
-        label24.setBounds(40, 240, 330, 22);
+        label24.setBounds(40, 190, 330, 22);
 
         IzinOp.setText("Izin Operasi");
         IzinOp.setName("IzinOp"); // NOI18N
         FormInput.add(IzinOp);
-        IzinOp.setBounds(60, 260, 130, 22);
+        IzinOp.setBounds(60, 210, 130, 22);
 
         label25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label25.setText("Pemeriksaan Penunjang :");
         label25.setName("label25"); // NOI18N
         label25.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label25);
-        label25.setBounds(60, 280, 140, 22);
+        label25.setBounds(60, 230, 140, 22);
 
         Lab.setText("Laboratorium");
         Lab.setName("Lab"); // NOI18N
@@ -1275,7 +1253,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Lab);
-        Lab.setBounds(60, 300, 110, 22);
+        Lab.setBounds(60, 250, 110, 22);
 
         Dpl.setText("DPL");
         Dpl.setName("Dpl"); // NOI18N
@@ -1285,7 +1263,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Dpl);
-        Dpl.setBounds(170, 300, 50, 22);
+        Dpl.setBounds(170, 250, 50, 22);
 
         Gds.setText("GDS");
         Gds.setName("Gds"); // NOI18N
@@ -1295,7 +1273,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Gds);
-        Gds.setBounds(230, 300, 50, 22);
+        Gds.setBounds(230, 250, 50, 22);
 
         BtCt.setText("BT / CT");
         BtCt.setName("BtCt"); // NOI18N
@@ -1305,7 +1283,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(BtCt);
-        BtCt.setBounds(290, 300, 70, 22);
+        BtCt.setBounds(290, 250, 70, 22);
 
         Uc.setText("UC");
         Uc.setName("Uc"); // NOI18N
@@ -1315,7 +1293,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Uc);
-        Uc.setBounds(370, 300, 50, 22);
+        Uc.setBounds(370, 250, 50, 22);
 
         SpgtSgot.setText("SGPT/SGOT,   Lainnya :");
         SpgtSgot.setName("SpgtSgot"); // NOI18N
@@ -1325,7 +1303,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(SpgtSgot);
-        SpgtSgot.setBounds(60, 330, 180, 22);
+        SpgtSgot.setBounds(60, 280, 180, 22);
 
         LabLainnya.setHighlighter(null);
         LabLainnya.setName("LabLainnya"); // NOI18N
@@ -1335,7 +1313,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(LabLainnya);
-        LabLainnya.setBounds(240, 330, 170, 22);
+        LabLainnya.setBounds(240, 280, 170, 22);
 
         Rontgen.setText("Rontgen;");
         Rontgen.setName("Rontgen"); // NOI18N
@@ -1345,7 +1323,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Rontgen);
-        Rontgen.setBounds(60, 360, 80, 22);
+        Rontgen.setBounds(60, 310, 80, 22);
 
         RontgenThorax.setText("Thorax");
         RontgenThorax.setName("RontgenThorax"); // NOI18N
@@ -1355,7 +1333,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(RontgenThorax);
-        RontgenThorax.setBounds(140, 360, 70, 22);
+        RontgenThorax.setBounds(140, 310, 70, 22);
 
         RontgenKepala.setText("Kepala");
         RontgenKepala.setName("RontgenKepala"); // NOI18N
@@ -1365,7 +1343,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(RontgenKepala);
-        RontgenKepala.setBounds(210, 360, 70, 22);
+        RontgenKepala.setBounds(210, 310, 70, 22);
 
         RontgenIVP.setText("IVP");
         RontgenIVP.setName("RontgenIVP"); // NOI18N
@@ -1375,7 +1353,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(RontgenIVP);
-        RontgenIVP.setBounds(280, 360, 60, 22);
+        RontgenIVP.setBounds(280, 310, 60, 22);
 
         RontgenBNO.setText("BNO,  Lainnya :");
         RontgenBNO.setName("RontgenBNO"); // NOI18N
@@ -1385,7 +1363,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(RontgenBNO);
-        RontgenBNO.setBounds(60, 390, 110, 22);
+        RontgenBNO.setBounds(60, 340, 110, 22);
 
         BNOLainnya.setHighlighter(null);
         BNOLainnya.setName("BNOLainnya"); // NOI18N
@@ -1395,7 +1373,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(BNOLainnya);
-        BNOLainnya.setBounds(170, 390, 240, 22);
+        BNOLainnya.setBounds(170, 340, 240, 22);
 
         EKG.setText("EKG ;  Tanggal ");
         EKG.setName("EKG"); // NOI18N
@@ -1405,10 +1383,10 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(EKG);
-        EKG.setBounds(60, 420, 110, 22);
+        EKG.setBounds(60, 370, 110, 22);
 
         TanggalEKG.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalEKG.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026 11:25:45" }));
+        TanggalEKG.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:23" }));
         TanggalEKG.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalEKG.setName("TanggalEKG"); // NOI18N
         TanggalEKG.setOpaque(false);
@@ -1418,7 +1396,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(TanggalEKG);
-        TanggalEKG.setBounds(180, 420, 150, 22);
+        TanggalEKG.setBounds(180, 370, 150, 22);
 
         USG.setText("USG;");
         USG.setName("USG"); // NOI18N
@@ -1428,7 +1406,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(USG);
-        USG.setBounds(60, 450, 60, 22);
+        USG.setBounds(60, 400, 60, 22);
 
         USGAbdomen.setText("Abdomen");
         USGAbdomen.setName("USGAbdomen"); // NOI18N
@@ -1438,7 +1416,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(USGAbdomen);
-        USGAbdomen.setBounds(120, 450, 90, 22);
+        USGAbdomen.setBounds(120, 400, 90, 22);
 
         USGGinjal.setText("Ginjal");
         USGGinjal.setName("USGGinjal"); // NOI18N
@@ -1448,7 +1426,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(USGGinjal);
-        USGGinjal.setBounds(210, 450, 70, 22);
+        USGGinjal.setBounds(210, 400, 70, 22);
 
         USGHepar.setText("Hepar");
         USGHepar.setName("USGHepar"); // NOI18N
@@ -1458,7 +1436,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(USGHepar);
-        USGHepar.setBounds(280, 450, 70, 22);
+        USGHepar.setBounds(280, 400, 70, 22);
 
         USGThorax.setText("Thorax");
         USGThorax.setName("USGThorax"); // NOI18N
@@ -1468,14 +1446,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(USGThorax);
-        USGThorax.setBounds(350, 450, 70, 22);
+        USGThorax.setBounds(350, 400, 70, 22);
 
         label27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label27.setText("Lainnya :");
         label27.setName("label27"); // NOI18N
         label27.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label27);
-        label27.setBounds(60, 480, 60, 22);
+        label27.setBounds(60, 430, 60, 22);
 
         USGLainnya.setHighlighter(null);
         USGLainnya.setName("USGLainnya"); // NOI18N
@@ -1485,7 +1463,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(USGLainnya);
-        USGLainnya.setBounds(110, 480, 300, 22);
+        USGLainnya.setBounds(110, 430, 300, 22);
 
         CTScan.setText("CT Scan;");
         CTScan.setName("CTScan"); // NOI18N
@@ -1495,7 +1473,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CTScan);
-        CTScan.setBounds(60, 510, 80, 22);
+        CTScan.setBounds(60, 460, 80, 22);
 
         CTKepala.setText("Kepala");
         CTKepala.setName("CTKepala"); // NOI18N
@@ -1505,7 +1483,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CTKepala);
-        CTKepala.setBounds(140, 510, 70, 22);
+        CTKepala.setBounds(140, 460, 70, 22);
 
         CTAbdomen.setText("Abdomen");
         CTAbdomen.setName("CTAbdomen"); // NOI18N
@@ -1515,7 +1493,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CTAbdomen);
-        CTAbdomen.setBounds(210, 510, 90, 22);
+        CTAbdomen.setBounds(210, 460, 90, 22);
 
         CTThorax.setText("Thorax");
         CTThorax.setName("CTThorax"); // NOI18N
@@ -1525,7 +1503,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CTThorax);
-        CTThorax.setBounds(300, 510, 100, 22);
+        CTThorax.setBounds(300, 460, 100, 22);
 
         MRI.setText("MRI  ;");
         MRI.setName("MRI"); // NOI18N
@@ -1535,14 +1513,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(MRI);
-        MRI.setBounds(60, 530, 70, 22);
+        MRI.setBounds(60, 480, 70, 22);
 
         label28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label28.setText("Lainnya :");
         label28.setName("label28"); // NOI18N
         label28.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label28);
-        label28.setBounds(60, 550, 60, 22);
+        label28.setBounds(60, 500, 60, 22);
 
         MRILainnya.setHighlighter(null);
         MRILainnya.setName("MRILainnya"); // NOI18N
@@ -1552,14 +1530,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(MRILainnya);
-        MRILainnya.setBounds(120, 550, 290, 22);
+        MRILainnya.setBounds(120, 500, 290, 22);
 
         label29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label29.setText("2. Terapi Yang Diberikan Sebelum Operasi");
         label29.setName("label29"); // NOI18N
         label29.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label29);
-        label29.setBounds(40, 580, 280, 22);
+        label29.setBounds(40, 530, 280, 22);
 
         Antibiotik.setText("Antibiotok; ");
         Antibiotik.setName("Antibiotik"); // NOI18N
@@ -1569,7 +1547,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Antibiotik);
-        Antibiotik.setBounds(60, 610, 100, 22);
+        Antibiotik.setBounds(60, 560, 100, 22);
 
         AntibiotikLainnya.setHighlighter(null);
         AntibiotikLainnya.setName("AntibiotikLainnya"); // NOI18N
@@ -1579,10 +1557,10 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(AntibiotikLainnya);
-        AntibiotikLainnya.setBounds(160, 610, 150, 22);
+        AntibiotikLainnya.setBounds(160, 560, 150, 22);
 
         TanggalAntibiotik.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalAntibiotik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026 11:25:45" }));
+        TanggalAntibiotik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:23" }));
         TanggalAntibiotik.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalAntibiotik.setName("TanggalAntibiotik"); // NOI18N
         TanggalAntibiotik.setOpaque(false);
@@ -1597,7 +1575,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(TanggalAntibiotik);
-        TanggalAntibiotik.setBounds(320, 610, 110, 22);
+        TanggalAntibiotik.setBounds(320, 560, 110, 22);
 
         Transfusi.setText("Transfusi;");
         Transfusi.setName("Transfusi"); // NOI18N
@@ -1607,7 +1585,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Transfusi);
-        Transfusi.setBounds(60, 640, 100, 22);
+        Transfusi.setBounds(60, 590, 100, 22);
 
         TransfusiLainnya.setHighlighter(null);
         TransfusiLainnya.setName("TransfusiLainnya"); // NOI18N
@@ -1617,10 +1595,10 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(TransfusiLainnya);
-        TransfusiLainnya.setBounds(160, 640, 150, 22);
+        TransfusiLainnya.setBounds(160, 590, 150, 22);
 
         TanggalTransfusi.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalTransfusi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026 11:25:45" }));
+        TanggalTransfusi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:23" }));
         TanggalTransfusi.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalTransfusi.setName("TanggalTransfusi"); // NOI18N
         TanggalTransfusi.setOpaque(false);
@@ -1635,14 +1613,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(TanggalTransfusi);
-        TanggalTransfusi.setBounds(320, 640, 110, 22);
+        TanggalTransfusi.setBounds(320, 590, 110, 22);
 
         label30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label30.setText("Lainnya :");
         label30.setName("label30"); // NOI18N
         label30.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label30);
-        label30.setBounds(60, 670, 60, 22);
+        label30.setBounds(60, 620, 60, 22);
 
         TerapiSebelumLainnya.setHighlighter(null);
         TerapiSebelumLainnya.setName("TerapiSebelumLainnya"); // NOI18N
@@ -1652,19 +1630,19 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(TerapiSebelumLainnya);
-        TerapiSebelumLainnya.setBounds(110, 670, 300, 22);
+        TerapiSebelumLainnya.setBounds(110, 620, 300, 22);
 
         label26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label26.setText("3. Keadaan Umum Pasien");
         label26.setName("label26"); // NOI18N
         label26.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label26);
-        label26.setBounds(450, 240, 410, 22);
+        label26.setBounds(450, 190, 410, 22);
 
         Kesadaran.setText("Kesadaran");
         Kesadaran.setName("Kesadaran"); // NOI18N
         FormInput.add(Kesadaran);
-        Kesadaran.setBounds(470, 260, 110, 22);
+        Kesadaran.setBounds(470, 210, 110, 22);
 
         Observasi.setText("Observasi,");
         Observasi.setName("Observasi"); // NOI18N
@@ -1674,14 +1652,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Observasi);
-        Observasi.setBounds(470, 280, 90, 22);
+        Observasi.setBounds(470, 230, 90, 22);
 
         label31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label31.setText("TD :");
         label31.setName("label31"); // NOI18N
         label31.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label31);
-        label31.setBounds(570, 280, 30, 22);
+        label31.setBounds(570, 230, 30, 22);
 
         TD.setHighlighter(null);
         TD.setName("TD"); // NOI18N
@@ -1691,14 +1669,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(TD);
-        TD.setBounds(600, 280, 70, 22);
+        TD.setBounds(600, 230, 70, 22);
 
         label32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label32.setText("Nd :");
         label32.setName("label32"); // NOI18N
         label32.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label32);
-        label32.setBounds(680, 280, 30, 22);
+        label32.setBounds(680, 230, 30, 22);
 
         Nd.setHighlighter(null);
         Nd.setName("Nd"); // NOI18N
@@ -1708,7 +1686,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Nd);
-        Nd.setBounds(710, 280, 70, 22);
+        Nd.setBounds(710, 230, 70, 22);
 
         Sh.setHighlighter(null);
         Sh.setName("Sh"); // NOI18N
@@ -1718,7 +1696,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Sh);
-        Sh.setBounds(820, 280, 80, 22);
+        Sh.setBounds(820, 230, 80, 22);
 
         Puasa.setText("Puasa, Mulai jam :");
         Puasa.setName("Puasa"); // NOI18N
@@ -1728,7 +1706,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Puasa);
-        Puasa.setBounds(470, 310, 130, 22);
+        Puasa.setBounds(470, 260, 130, 22);
 
         CmbJamPuasa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         CmbJamPuasa.setName("CmbJamPuasa"); // NOI18N
@@ -1738,7 +1716,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbJamPuasa);
-        CmbJamPuasa.setBounds(600, 310, 62, 22);
+        CmbJamPuasa.setBounds(600, 260, 62, 22);
 
         CmbMenitPuasa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbMenitPuasa.setName("CmbMenitPuasa"); // NOI18N
@@ -1748,7 +1726,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbMenitPuasa);
-        CmbMenitPuasa.setBounds(670, 310, 62, 22);
+        CmbMenitPuasa.setBounds(670, 260, 62, 22);
 
         CmbDetikPuasa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbDetikPuasa.setName("CmbDetikPuasa"); // NOI18N
@@ -1758,7 +1736,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbDetikPuasa);
-        CmbDetikPuasa.setBounds(730, 310, 62, 22);
+        CmbDetikPuasa.setBounds(730, 260, 62, 22);
 
         ChkJlnPuasa.setBorder(null);
         ChkJlnPuasa.setSelected(true);
@@ -1772,7 +1750,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(ChkJlnPuasa);
-        ChkJlnPuasa.setBounds(800, 310, 23, 22);
+        ChkJlnPuasa.setBounds(800, 260, 23, 22);
 
         Klisma.setText("Klisma , Jam :");
         Klisma.setName("Klisma"); // NOI18N
@@ -1782,7 +1760,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Klisma);
-        Klisma.setBounds(470, 340, 120, 22);
+        Klisma.setBounds(470, 290, 120, 22);
 
         CmbJamKlisma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         CmbJamKlisma.setName("CmbJamKlisma"); // NOI18N
@@ -1792,7 +1770,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbJamKlisma);
-        CmbJamKlisma.setBounds(600, 340, 62, 22);
+        CmbJamKlisma.setBounds(600, 290, 62, 22);
 
         CmbMenitKlisma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbMenitKlisma.setName("CmbMenitKlisma"); // NOI18N
@@ -1802,7 +1780,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbMenitKlisma);
-        CmbMenitKlisma.setBounds(670, 340, 62, 22);
+        CmbMenitKlisma.setBounds(670, 290, 62, 22);
 
         CmbDetikKlisma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         CmbDetikKlisma.setName("CmbDetikKlisma"); // NOI18N
@@ -1812,7 +1790,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(CmbDetikKlisma);
-        CmbDetikKlisma.setBounds(730, 340, 62, 22);
+        CmbDetikKlisma.setBounds(730, 290, 62, 22);
 
         ChkJlnKlisma.setBorder(null);
         ChkJlnKlisma.setSelected(true);
@@ -1826,7 +1804,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(ChkJlnKlisma);
-        ChkJlnKlisma.setBounds(800, 340, 23, 22);
+        ChkJlnKlisma.setBounds(800, 290, 23, 22);
 
         Cukur.setText("Cukur daerah operasi");
         Cukur.setName("Cukur"); // NOI18N
@@ -1836,7 +1814,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Cukur);
-        Cukur.setBounds(470, 370, 150, 22);
+        Cukur.setBounds(470, 320, 150, 22);
 
         LukaSebelumOP.setText("Luka sebelum operasi :");
         LukaSebelumOP.setName("LukaSebelumOP"); // NOI18N
@@ -1846,7 +1824,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(LukaSebelumOP);
-        LukaSebelumOP.setBounds(470, 390, 170, 22);
+        LukaSebelumOP.setBounds(470, 340, 170, 22);
 
         LukaSebelumOPLainnya.setHighlighter(null);
         LukaSebelumOPLainnya.setName("LukaSebelumOPLainnya"); // NOI18N
@@ -1856,7 +1834,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(LukaSebelumOPLainnya);
-        LukaSebelumOPLainnya.setBounds(640, 390, 260, 22);
+        LukaSebelumOPLainnya.setBounds(640, 340, 260, 22);
 
         Mens.setText("Menstruasi terakhir :");
         Mens.setName("Mens"); // NOI18N
@@ -1866,10 +1844,10 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Mens);
-        Mens.setBounds(470, 420, 170, 22);
+        Mens.setBounds(470, 370, 170, 22);
 
         DTPMens.setForeground(new java.awt.Color(50, 70, 50));
-        DTPMens.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026" }));
+        DTPMens.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         DTPMens.setDisplayFormat("dd-MM-yyyy");
         DTPMens.setName("DTPMens"); // NOI18N
         DTPMens.setOpaque(false);
@@ -1879,14 +1857,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(DTPMens);
-        DTPMens.setBounds(640, 420, 120, 22);
+        DTPMens.setBounds(640, 370, 120, 22);
 
         label34.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label34.setText("IUFD:");
         label34.setName("label34"); // NOI18N
         label34.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label34);
-        label34.setBounds(470, 450, 40, 22);
+        label34.setBounds(470, 400, 40, 22);
 
         IUFD.setHighlighter(null);
         IUFD.setName("IUFD"); // NOI18N
@@ -1896,14 +1874,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(IUFD);
-        IUFD.setBounds(500, 450, 400, 22);
+        IUFD.setBounds(500, 400, 400, 22);
 
         label35.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label35.setText("DC, Balon :");
         label35.setName("label35"); // NOI18N
         label35.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label35);
-        label35.setBounds(470, 480, 60, 22);
+        label35.setBounds(470, 430, 60, 22);
 
         Balon.setHighlighter(null);
         Balon.setName("Balon"); // NOI18N
@@ -1913,14 +1891,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Balon);
-        Balon.setBounds(530, 480, 80, 22);
+        Balon.setBounds(530, 430, 80, 22);
 
         label36.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label36.setText("cc Vol :");
         label36.setName("label36"); // NOI18N
         label36.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label36);
-        label36.setBounds(620, 480, 40, 22);
+        label36.setBounds(620, 430, 40, 22);
 
         Vol.setHighlighter(null);
         Vol.setName("Vol"); // NOI18N
@@ -1930,14 +1908,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Vol);
-        Vol.setBounds(660, 480, 80, 22);
+        Vol.setBounds(660, 430, 80, 22);
 
         label37.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label37.setText("cc Warna :");
         label37.setName("label37"); // NOI18N
         label37.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label37);
-        label37.setBounds(750, 480, 60, 22);
+        label37.setBounds(750, 430, 60, 22);
 
         Warna.setHighlighter(null);
         Warna.setName("Warna"); // NOI18N
@@ -1947,14 +1925,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Warna);
-        Warna.setBounds(810, 480, 90, 22);
+        Warna.setBounds(810, 430, 90, 22);
 
         label38.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label38.setText("Lainnya :");
         label38.setName("label38"); // NOI18N
         label38.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label38);
-        label38.setBounds(470, 510, 50, 22);
+        label38.setBounds(470, 460, 50, 22);
 
         DCLainnya.setHighlighter(null);
         DCLainnya.setName("DCLainnya"); // NOI18N
@@ -1964,14 +1942,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(DCLainnya);
-        DCLainnya.setBounds(520, 510, 380, 22);
+        DCLainnya.setBounds(520, 460, 380, 22);
 
         label39.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label39.setText("4. Alhes Yang Diserahkan di Kamar Operasi");
         label39.setName("label39"); // NOI18N
         label39.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label39);
-        label39.setBounds(450, 550, 410, 22);
+        label39.setBounds(450, 500, 410, 22);
 
         Alkes.setHighlighter(null);
         Alkes.setName("Alkes"); // NOI18N
@@ -1981,14 +1959,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Alkes);
-        Alkes.setBounds(470, 570, 430, 22);
+        Alkes.setBounds(470, 520, 430, 22);
 
         label40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label40.setText("5. Kesiapan Pasien");
         label40.setName("label40"); // NOI18N
         label40.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label40);
-        label40.setBounds(450, 610, 410, 22);
+        label40.setBounds(450, 560, 410, 22);
 
         GantiBaju.setText("Ganti Baju Kamar Operasi");
         GantiBaju.setName("GantiBaju"); // NOI18N
@@ -1998,7 +1976,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(GantiBaju);
-        GantiBaju.setBounds(470, 630, 180, 22);
+        GantiBaju.setBounds(470, 580, 180, 22);
 
         GigiPalsu.setText("Gigi Palsu");
         GigiPalsu.setName("GigiPalsu"); // NOI18N
@@ -2008,7 +1986,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(GigiPalsu);
-        GigiPalsu.setBounds(660, 630, 90, 22);
+        GigiPalsu.setBounds(660, 580, 90, 22);
 
         BantuDengar.setText("Alat Bantu Dengar");
         BantuDengar.setName("BantuDengar"); // NOI18N
@@ -2018,7 +1996,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(BantuDengar);
-        BantuDengar.setBounds(470, 650, 180, 22);
+        BantuDengar.setBounds(470, 600, 180, 22);
 
         Perhiasan.setText("Perhiasan");
         Perhiasan.setName("Perhiasan"); // NOI18N
@@ -2028,7 +2006,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Perhiasan);
-        Perhiasan.setBounds(660, 650, 150, 22);
+        Perhiasan.setBounds(660, 600, 150, 22);
 
         Pengembalian.setText("Pengembalian ke Keluarga Dengan Tanda Terima");
         Pengembalian.setName("Pengembalian"); // NOI18N
@@ -2038,10 +2016,10 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(Pengembalian);
-        Pengembalian.setBounds(470, 670, 320, 22);
+        Pengembalian.setBounds(470, 620, 320, 22);
 
         DTPSerah.setForeground(new java.awt.Color(50, 70, 50));
-        DTPSerah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026" }));
+        DTPSerah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         DTPSerah.setDisplayFormat("dd-MM-yyyy");
         DTPSerah.setName("DTPSerah"); // NOI18N
         DTPSerah.setOpaque(false);
@@ -2051,14 +2029,14 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(DTPSerah);
-        DTPSerah.setBounds(160, 720, 90, 22);
+        DTPSerah.setBounds(160, 670, 90, 22);
 
         label67.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label67.setText("Sh :");
         label67.setName("label67"); // NOI18N
         label67.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput.add(label67);
-        label67.setBounds(790, 280, 30, 22);
+        label67.setBounds(790, 230, 30, 22);
 
         Status.setEditable(false);
         Status.setHighlighter(null);
@@ -2149,7 +2127,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         label12.setBounds(0, 40, 70, 23);
 
         TanggalMasuk1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalMasuk1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026 11:25:45" }));
+        TanggalMasuk1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:24" }));
         TanggalMasuk1.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalMasuk1.setName("TanggalMasuk1"); // NOI18N
         TanggalMasuk1.setOpaque(false);
@@ -2242,6 +2220,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         FormInput1.add(jLabel24);
         jLabel24.setBounds(20, 80, 100, 23);
 
+        DiagnosaPre1.setEditable(false);
         DiagnosaPre1.setHighlighter(null);
         DiagnosaPre1.setName("DiagnosaPre1"); // NOI18N
         DiagnosaPre1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2257,16 +2236,6 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         jLabel95.setName("jLabel95"); // NOI18N
         FormInput1.add(jLabel95);
         jLabel95.setBounds(20, 110, 100, 23);
-
-        DiagnosaPost1.setHighlighter(null);
-        DiagnosaPost1.setName("DiagnosaPost1"); // NOI18N
-        DiagnosaPost1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DiagnosaPost1KeyPressed(evt);
-            }
-        });
-        FormInput1.add(DiagnosaPost1);
-        DiagnosaPost1.setBounds(130, 110, 730, 23);
 
         label33.setText("dr. Operator / Asisten :");
         label33.setName("label33"); // NOI18N
@@ -2309,36 +2278,6 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         label41.setPreferredSize(new java.awt.Dimension(70, 23));
         FormInput1.add(label41);
         label41.setBounds(30, 170, 130, 23);
-
-        KdDokterAnastesi1.setEditable(false);
-        KdDokterAnastesi1.setName("KdDokterAnastesi1"); // NOI18N
-        KdDokterAnastesi1.setPreferredSize(new java.awt.Dimension(80, 23));
-        FormInput1.add(KdDokterAnastesi1);
-        KdDokterAnastesi1.setBounds(170, 170, 100, 23);
-
-        NmDokterAnastesi1.setEditable(false);
-        NmDokterAnastesi1.setName("NmDokterAnastesi1"); // NOI18N
-        NmDokterAnastesi1.setPreferredSize(new java.awt.Dimension(207, 23));
-        FormInput1.add(NmDokterAnastesi1);
-        NmDokterAnastesi1.setBounds(270, 170, 240, 23);
-
-        BtnDokter5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnDokter5.setMnemonic('2');
-        BtnDokter5.setToolTipText("Alt+2");
-        BtnDokter5.setName("BtnDokter5"); // NOI18N
-        BtnDokter5.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnDokter5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDokter5ActionPerformed(evt);
-            }
-        });
-        BtnDokter5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnDokter5KeyPressed(evt);
-            }
-        });
-        FormInput1.add(BtnDokter5);
-        BtnDokter5.setBounds(510, 170, 28, 23);
 
         label17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label17.setText("Petugas / Perawat :");
@@ -2599,7 +2538,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         EKG1.setBounds(60, 450, 110, 22);
 
         TanggalEKG1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalEKG1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026 11:25:45" }));
+        TanggalEKG1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:24" }));
         TanggalEKG1.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalEKG1.setName("TanggalEKG1"); // NOI18N
         TanggalEKG1.setOpaque(false);
@@ -3019,7 +2958,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         Alkes1.setBounds(470, 550, 430, 22);
 
         DTPSerah1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPSerah1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026" }));
+        DTPSerah1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         DTPSerah1.setDisplayFormat("dd-MM-yyyy");
         DTPSerah1.setName("DTPSerah1"); // NOI18N
         DTPSerah1.setOpaque(false);
@@ -3148,6 +3087,46 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         FormInput1.add(Status1);
         Status1.setBounds(780, 40, 80, 23);
 
+        DiagnosaPost.setHighlighter(null);
+        DiagnosaPost.setName("DiagnosaPost"); // NOI18N
+        DiagnosaPost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DiagnosaPostKeyPressed(evt);
+            }
+        });
+        FormInput1.add(DiagnosaPost);
+        DiagnosaPost.setBounds(130, 110, 730, 23);
+
+        KdDokterAnastesi.setEditable(false);
+        KdDokterAnastesi.setName("KdDokterAnastesi"); // NOI18N
+        KdDokterAnastesi.setPreferredSize(new java.awt.Dimension(80, 23));
+        FormInput1.add(KdDokterAnastesi);
+        KdDokterAnastesi.setBounds(170, 170, 100, 23);
+
+        NmDokterAnastesi.setEditable(false);
+        NmDokterAnastesi.setName("NmDokterAnastesi"); // NOI18N
+        NmDokterAnastesi.setPreferredSize(new java.awt.Dimension(207, 23));
+        FormInput1.add(NmDokterAnastesi);
+        NmDokterAnastesi.setBounds(270, 170, 240, 23);
+
+        BtnDokter3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnDokter3.setMnemonic('2');
+        BtnDokter3.setToolTipText("Alt+2");
+        BtnDokter3.setName("BtnDokter3"); // NOI18N
+        BtnDokter3.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnDokter3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDokter3ActionPerformed(evt);
+            }
+        });
+        BtnDokter3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnDokter3KeyPressed(evt);
+            }
+        });
+        FormInput1.add(BtnDokter3);
+        BtnDokter3.setBounds(510, 170, 28, 23);
+
         scrollInput1.setViewportView(FormInput1);
 
         internalFrame4.add(scrollInput1, java.awt.BorderLayout.CENTER);
@@ -3188,7 +3167,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -3202,7 +3181,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-05-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4831,7 +4810,6 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
     private widget.Label jLabel7;
     private widget.Label jLabel9;
     private widget.Label jLabel95;
-    private widget.Label jLabel96;
     private javax.swing.JSeparator jSeparator15;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -4884,7 +4862,6 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
     private widget.Label label55;
     private widget.Label label56;
     private widget.Label label57;
-    private widget.Label label58;
     private widget.Label label59;
     private widget.Label label60;
     private widget.Label label61;
