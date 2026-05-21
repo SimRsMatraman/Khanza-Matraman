@@ -43,7 +43,7 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
-    private String tgl,finger="",kodedokter="",namadokter="",norawat="",norm="",rad="";
+    private String tgl,finger="",kodedokter="",namadokter="",norawat="",norm="",rad="",hiv="",hbsag="";
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
@@ -1344,9 +1344,13 @@ public final class SuratKeteranganSehat extends javax.swing.JDialog {
                 norawat=TNoRw.getText();
                 norm=Sequel.cariIsi("select no_rkm_medis from reg_periksa where no_rawat=?",TNoRw.getText());
                 rad=Sequel.cariIsi("select hasil from hasil_radiologi where no_rawat=?",TNoRw.getText());
+                hiv=Sequel.cariIsi("select nilai from detail_periksa_lab WHERE id_template IN ('64','65','66','67','524','686','687','688','882','883','884','885','958','1030','1031','1032','1068','1069','1070') AND no_rawat=? limit 1",TNoRw.getText());
+                hbsag=Sequel.cariIsi("select nilai from detail_periksa_lab WHERE id_template IN ('63','147','202','517','518','519','684','821','881','1029','1067') AND no_rawat=?",TNoRw.getText());
                 param.put("norawat", TNoRw.getText());
                 param.put("norm", norm);
                 param.put("rad", rad);
+                param.put("hiv", hiv);
+                param.put("hbsag", hbsag);
                 param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+namadokter+"\nID "+(finger.equals("")?kodedokter:finger)+"\n"+Sequel.cariIsi("select DATE_FORMAT(reg_periksa.tgl_registrasi,'%d-%m-%Y') from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));  
                 Valid.MyReportqry("rptSuratKeteranganSehatKhusus.jasper","report","::[ Surat Keterangan Sehat ]::",
                               " select surat_keterangan_sehat.no_surat,DATE_FORMAT(surat_keterangan_sehat.tanggalsurat,'%d-%m-%Y')as tanggalsurat,surat_keterangan_sehat.berat,surat_keterangan_sehat.tinggi,surat_keterangan_sehat.BMI,surat_keterangan_sehat.tensi,surat_keterangan_sehat.suhu, "+
