@@ -462,6 +462,7 @@ public class DlgSirkulasiBarang7 extends javax.swing.JDialog {
         scrollPane1.setName("scrollPane1"); // NOI18N
         scrollPane1.setOpaque(true);
 
+        tbDokter.setAutoCreateRowSorter(true);
         tbDokter.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -846,7 +847,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     "from detail_pemberian_obat "+
                     "inner join databarang on databarang.kode_brng=detail_pemberian_obat.kode_brng "+
                     "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "+
-                    "where  detail_pemberian_obat.tgl_perawatan between ? and ? "+
+                    "inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
+                    "inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+        
+                    "where detail_pemberian_obat.tgl_perawatan between ? and ? and kategori_barang.kode not in ('-','K06') and golongan_barang.kode not in ('-','G01')"+
                     "group by detail_pemberian_obat.kode_brng");
             try {
                 ttltotaljual=0;ttltotalbeli=0;ttltotalpesan=0;
