@@ -14864,7 +14864,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "<tr>"+
                                                "<td width='49%' border='0'>h. Pembayaran</td>"+
                                                "<td width='1%' border='0'>:</td>"+
-                                               "<td width='50%' border='0'>"+rs.getString("png_jawab")+"</td>"+
+                                               "<td width='50%' border='0'>"+rs2.getString("png_jawab")+"</td>"+
                                           "</tr>"+
                                           "<tr>"+
                                                "<td width='49%' border='0'>i. Nilai-nilai Kepercayaan/Budaya Yang Perlu Diperhatikan</td>"+
@@ -15091,7 +15091,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                             "penilaian_awal_keperawatan_ranap_neonatus.nilai_nips1,penilaian_awal_keperawatan_ranap_neonatus.nips2,penilaian_awal_keperawatan_ranap_neonatus.nilai_nips2,penilaian_awal_keperawatan_ranap_neonatus.nips3,penilaian_awal_keperawatan_ranap_neonatus.nilai_nips3,penilaian_awal_keperawatan_ranap_neonatus.nips4,"+
                             "penilaian_awal_keperawatan_ranap_neonatus.nilai_nips4,penilaian_awal_keperawatan_ranap_neonatus.nips5,penilaian_awal_keperawatan_ranap_neonatus.nilai_nips5,penilaian_awal_keperawatan_ranap_neonatus.total_nips,penilaian_awal_keperawatan_ranap_neonatus.ket_nips,penilaian_awal_keperawatan_ranap_neonatus.skrining_gizi1,"+
                             "penilaian_awal_keperawatan_ranap_neonatus.nilai_gizi1,penilaian_awal_keperawatan_ranap_neonatus.skrining_gizi2,penilaian_awal_keperawatan_ranap_neonatus.nilai_gizi2,penilaian_awal_keperawatan_ranap_neonatus.skrining_gizi3,penilaian_awal_keperawatan_ranap_neonatus.nilai_gizi3,penilaian_awal_keperawatan_ranap_neonatus.nilai_total_gizi,"+
-                            "penilaian_awal_keperawatan_ranap_neonatus.skrining_gizi_diketahui_dietisen,penilaian_awal_keperawatan_ranap_neonatus.skrining_gizi_jam_diketahui_dietisen,penilaian_awal_keperawatan_ranap_neonatus.rencana,penilaian_awal_keperawatan_ranap_neonatus.nip1,penilaian_awal_keperawatan_ranap_neonatus.nip2,penilaian_awal_keperawatan_ranap_neonatus.kd_dokter,"+
+                            "penilaian_awal_keperawatan_ranap_neonatus.skrining_gizi_diagnosa_khusus,penilaian_awal_keperawatan_ranap_neonatus.skrining_gizi_ket_diagnosa_khusus,penilaian_awal_keperawatan_ranap_neonatus.skrining_gizi_diketahui_dietisen,penilaian_awal_keperawatan_ranap_neonatus.skrining_gizi_jam_diketahui_dietisen,penilaian_awal_keperawatan_ranap_neonatus.rencana,penilaian_awal_keperawatan_ranap_neonatus.nip1,penilaian_awal_keperawatan_ranap_neonatus.nip2,penilaian_awal_keperawatan_ranap_neonatus.kd_dokter,"+
                             "pasien.tgl_lahir,pasien.jk,pengkaji1.nama as pengkaji1,pengkaji2.nama as pengkaji2,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.agama,pasien.pekerjaan,pasien.pnd,penjab.png_jawab,bahasa_pasien.nama_bahasa "+
                             "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                             "inner join penilaian_awal_keperawatan_ranap_neonatus on reg_periksa.no_rawat=penilaian_awal_keperawatan_ranap_neonatus.no_rawat "+
@@ -15150,7 +15150,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='100%' colspan='2'>Riwayat Prenatal : "+
-                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'"+
+                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                          "<td border='0'>"+
                                                             "Diagnosa Ibu : G :"+rs2.getString("g")+"&nbsp;&nbsp;&nbsp;&nbsp;"+
@@ -15185,7 +15185,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='100%' colspan='2'>Riwayat Intranatal : "+
-                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'"+
+                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                          "<td border='0'>"+
                                                             "Diagnosa Ibu : G :"+rs2.getString("g1")+"&nbsp;&nbsp;&nbsp;&nbsp;"+
@@ -15197,7 +15197,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                                     "<tr>"+
                                                          "<td border='0'>"+
 //                                                            "Merokok : "+rs2.getString("riwayat_merokok")+(rs2.getString("riwayat_merokok_jumlah").equals("")?"":", "+rs2.getString("riwayat_merokok_jumlah")+" batang/hari")+"&nbsp;&nbsp;&nbsp;&nbsp;"+    
-                                                            "Tanggal Lahir :"+rs2.getString("tanggal")+"&nbsp;&nbsp;&nbsp;&nbsp;"+
+                                                            "Tanggal Lahir :"+rs2.getString("tanggal_lahir")+"&nbsp;&nbsp;&nbsp;&nbsp;"+
                                                             "Kondisi Saat Lahir :"+rs2.getString("kondisi")+"&nbsp;&nbsp;&nbsp;&nbsp;"+
                                                             "APGAR Score :"+rs2.getString("apgar")+
                                                         "</td>"+
@@ -15236,7 +15236,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='100%' colspan='2'>Faktor Resiko Infeksi : "+
-                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'"+
+                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                          "<td border='0'>"+
                                                             "Mayor :"+rs2.getString("mayor")+"&nbsp;&nbsp;&nbsp;&nbsp;"+
@@ -15248,7 +15248,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='100%' colspan='2'>Kebutuhan Biologis : "+
-                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'"+
+                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                          "<td border='0'>"+
                                                             "Nutrisi :"+rs2.getString("nutrisi")+(rs2.getString("ket_nutrisi").equals("")?"":", "+rs2.getString("ket_nutrisi")+"&nbsp;&nbsp;&nbsp;&nbsp;")+
@@ -15270,7 +15270,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+  
                                           "<tr>"+
                                               "<td width='100%' colspan='2'>Alergi/Reaksi(Pada Orang Tua) : "+
-                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'"+
+                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                          "<td border='0'>"+
                                                             "Alergi :"+rs2.getString("alergi")+
@@ -15299,7 +15299,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='100%' colspan='2'>Riwayat Penyakit Keluarga : "+
-                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'"+
+                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                          "<td border='0'>"+
                                                             "RPK :"+rs2.getString("rpk")+
@@ -15310,7 +15310,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='100%' colspan='2'>Riwayat Imunisasi : "+
-                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'"+
+                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                          "<td border='0'>"+
                                                             "Imunisasi :"+rs2.getString("imunisasi")+
@@ -15321,7 +15321,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='100%' colspan='2'>Kebiasaan Ibu : "+
-                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'"+
+                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                         "<td border='0'>"+
                                                             "Obat-obatan : "+rs2.getString("riwayat_obat")+(rs2.getString("ket_obat").equals("")?"":", "+rs2.getString("ket_obat")+"")+"&nbsp;&nbsp;&nbsp;&nbsp;"+
@@ -15533,7 +15533,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                                  "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                          "<td width='23%' border='0'>"+
-                                                            "Laki-laki : "+rs2.getString("pemeriksaan_reproduksi_laki")+(rs2.getString("pemeriksaan_reproduksi_laki_keterangan").equals("")?"":", "+rs2.getString("pemeriksaan_reproduksi_laki_keterangan"))+
+                                                            "Laki-laki : "+rs2.getString("pemeriksaan_reproduksi")+(rs2.getString("pemeriksaan_reproduksi_keterangan").equals("")?"":", "+rs2.getString("pemeriksaan_reproduksi_keterangan"))+
                                                          "</td>"+
                                                          "<td width='23%' border='0'>"+
                                                             "Perempuan : "+rs2.getString("pemeriksaan_reproduksi_perempuan")+(rs2.getString("pemeriksaan_reproduksi_perempuan_keterangan").equals("")?"":", "+rs2.getString("pemeriksaan_reproduksi_perempuan_keterangan"))+
@@ -15608,7 +15608,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "<tr>"+
                                                "<td width='49%' border='0'>h. Pembayaran</td>"+
                                                "<td width='1%' border='0'>:</td>"+
-                                               "<td width='50%' border='0'>"+rs.getString("png_jawab")+"</td>"+
+                                               "<td width='50%' border='0'>"+rs2.getString("png_jawab")+"</td>"+
                                           "</tr>"+
                                           "<tr>"+
                                                "<td width='49%' border='0'>i. Nilai-nilai Kepercayaan/Budaya Yang Perlu Diperhatikan</td>"+
@@ -15744,6 +15744,14 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "<tr>"+
                                               "<td valign='top' align='left' colspan='3'>Total Skor : </td>"+
                                               "<td valign='top' align='right' colspan='3'>"+rs2.getString("nilai_total_gizi")+"&nbsp;&nbsp;</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td valign='top' align='left' colspan='3'>Diagnosa Khusus : </td>"+
+                                              "<td valign='top' align='right' colspan='3'>"+rs2.getString("skrining_gizi_diagnosa_khusus")+"&nbsp;&nbsp;</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td valign='top' align='left' colspan='3'>Keterangan Diagnosa Khusus : </td>"+
+                                              "<td valign='top' align='right' colspan='3'>"+rs2.getString("skrining_gizi_ket_diagnosa_khusus")+"&nbsp;&nbsp;</td>"+
                                           "</tr>"+
                                           "<tr>"+
                                               "<td valign='top' align='left' colspan='5' border='0'>Sudah dibaca dan diketahui oleh Dietisen : "+rs2.getString("skrining_gizi_diketahui_dietisen")+(rs2.getString("skrining_gizi_jam_diketahui_dietisen").equals("")?"":", "+rs2.getString("skrining_gizi_jam_diketahui_dietisen"))+"</td>"+
@@ -20322,7 +20330,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='100%' colspan='2'>Kebiasaan : "+
-                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'"+
+                                                 "<table width='99%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                     "<tr>"+
                                                          "<td border='0'>"+
                                                             "Merokok : "+rs2.getString("riwayat_merokok")+(rs2.getString("riwayat_merokok_jumlah").equals("")?"":", "+rs2.getString("riwayat_merokok_jumlah")+" batang/hari")+"&nbsp;&nbsp;&nbsp;&nbsp;"+
@@ -20687,7 +20695,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "<tr>"+
                                                "<td width='49%' border='0'>h. Pembayaran</td>"+
                                                "<td width='1%' border='0'>:</td>"+
-                                               "<td width='50%' border='0'>"+rs.getString("png_jawab")+"</td>"+
+                                               "<td width='50%' border='0'>"+rs2.getString("png_jawab")+"</td>"+
                                           "</tr>"+
                                           "<tr>"+
                                                "<td width='49%' border='0'>i. Nilai-nilai Kepercayaan/Budaya Yang Perlu Diperhatikan</td>"+
