@@ -856,7 +856,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="16-04-2025 09:19:02"/>
+                        <StringItem index="0" value="12-06-2026 09:01:05"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -884,7 +884,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="16-04-2025 09:19:02"/>
+                        <StringItem index="0" value="12-06-2026 09:01:05"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -894,6 +894,22 @@
                       <Dimension value="[132, 23]"/>
                     </Property>
                   </Properties>
+                </Component>
+                <Component class="widget.ComboBox" name="cmbTipeResep">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="Semua"/>
+                        <StringItem index="1" value="Non Racik"/>
+                        <StringItem index="2" value="Racik"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="lightWeightPopupEnabled" type="boolean" value="false"/>
+                    <Property name="name" type="java.lang.String" value="cmbTipeResep" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cmbTipeResepKeyPressed"/>
+                  </Events>
                 </Component>
                 <Component class="widget.Label" name="jLabel6">
                   <Properties>
@@ -1115,7 +1131,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="16-04-2025"/>
+                        <StringItem index="0" value="12-06-2026"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
