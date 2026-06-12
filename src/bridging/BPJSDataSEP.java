@@ -14,7 +14,7 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.WarnaTable;
+import fungsi.WarnaTableSEP;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -243,7 +243,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 column.setPreferredWidth(170);
             }
         }
-        tbDataSEP.setDefaultRenderer(Object.class, new WarnaTable());
+        tbDataSEP.setDefaultRenderer(Object.class, new WarnaTableSEP());
         
         tabModeInternal=new DefaultTableModel(null,new Object[]{
                 "No.SEP","No.Rawat","No.RM","Nama Pasien","Tgl.SEP","Tgl.Rujukan","No.Rujukan","Kode PPK Rujukan","Nama PPK Rujukan","Kode PPK Pelayanan", 
@@ -376,7 +376,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                 column.setPreferredWidth(170);
             }
         }
-        tbDataSEPInternal.setDefaultRenderer(Object.class, new WarnaTable());
+        tbDataSEPInternal.setDefaultRenderer(Object.class, new WarnaTableSEP());
         
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCariInternal.setDocument(new batasInput((byte)100).getKata(TCariInternal));
