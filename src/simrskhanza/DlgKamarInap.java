@@ -151,6 +151,7 @@ import integration_orthanc.DicomViewerHybridSplitRad;
 import java.util.Calendar;
 import kepegawaian.DlgCariDokter;
 import rekammedis.RMDataCatatanKeseimbanganCairan;
+import rekammedis.RMDataTerapiCairan;
 import surat.SuratGCRanap;
 
 import rekammedis.RMDataEdukasi;
@@ -991,6 +992,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanCekGDS = new javax.swing.JMenuItem();
         MnMonitoringReaksiTranfusi = new javax.swing.JMenuItem();
         MnKeseimbanganCairan = new javax.swing.JMenuItem();
+        MnPemberianTerapiCairan = new javax.swing.JMenuItem();
         MnRMFarmasi = new javax.swing.JMenu();
         MnKonselingFarmasi = new javax.swing.JMenuItem();
         MnRekonsiliasiObat = new javax.swing.JMenuItem();
@@ -2441,6 +2443,22 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         });
         MnObservasi.add(MnKeseimbanganCairan);
+
+        MnPemberianTerapiCairan.setBackground(new java.awt.Color(255, 255, 254));
+        MnPemberianTerapiCairan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPemberianTerapiCairan.setForeground(new java.awt.Color(50, 50, 50));
+        MnPemberianTerapiCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPemberianTerapiCairan.setText("Catatan Keseimbangan Cairan");
+        MnPemberianTerapiCairan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPemberianTerapiCairan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPemberianTerapiCairan.setName("MnPemberianTerapiCairan"); // NOI18N
+        MnPemberianTerapiCairan.setPreferredSize(new java.awt.Dimension(240, 26));
+        MnPemberianTerapiCairan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPemberianTerapiCairanActionPerformed(evt);
+            }
+        });
+        MnObservasi.add(MnPemberianTerapiCairan);
 
         MnDataRM.add(MnObservasi);
 
@@ -14320,6 +14338,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                                 form.setLocationRelativeTo(internalFrame1);
                                 form.setVisible(true);
+                                form.emptTeks();
                                 if(R1.isSelected()==true){
                                     form.setNoRm(rs2.getString("no_rawat2"),new Date());
                                 }else if(R2.isSelected()==true){
@@ -14327,7 +14346,6 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 }else if(R3.isSelected()==true){
                                     form.setNoRm(rs2.getString("no_rawat2"),DTPCari4.getDate());
                                 }
-                                form.emptTeks();
                                 this.setCursor(Cursor.getDefaultCursor());
                             }else{
                                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
@@ -14353,6 +14371,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                     form.setLocationRelativeTo(internalFrame1);
                     form.setVisible(true);
+                    form.emptTeks();
                     if(R1.isSelected()==true){
                         form.setNoRm(norawat.getText(),new Date());
                     }else if(R2.isSelected()==true){
@@ -14360,7 +14379,6 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     }else if(R3.isSelected()==true){
                         form.setNoRm(norawat.getText(),DTPCari4.getDate());
                     }   
-                    form.emptTeks();
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }
@@ -16728,6 +16746,25 @@ if(tabMode.getRowCount()==0){
         }
     }//GEN-LAST:event_MnTransferOkActionPerformed
 
+    private void MnPemberianTerapiCairanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPemberianTerapiCairanActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else{
+            if(tbKamIn.getSelectedRow()>-1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMDataTerapiCairan form=new RMDataTerapiCairan(null,false);
+                form.isCek();
+                form.emptTeks();
+                form.setNoRm(norawat.getText(),DTPCari2.getDate());
+                form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnPemberianTerapiCairanActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -16867,6 +16904,7 @@ if(tabMode.getRowCount()==0){
     private javax.swing.JMenuItem MnOperasi;
     private javax.swing.JMenuItem MnPCare;
     private javax.swing.JMenuItem MnPemberianObat;
+    private javax.swing.JMenuItem MnPemberianTerapiCairan;
     private javax.swing.JMenuItem MnPengantarPulang;
     private javax.swing.JMenuItem MnPenggunaanKamar;
     private javax.swing.JMenu MnPenilaianAwal;
