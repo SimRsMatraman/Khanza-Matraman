@@ -327,6 +327,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
     private void initComponents() {
 
         LoadHTML = new widget.editorpane();
+        MenyetujuiPemindahan = new widget.ComboBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -341,7 +342,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         scrollInput = new widget.ScrollPane();
         FormInput = new widget.PanelBiasa();
         jSeparator14 = new javax.swing.JSeparator();
-        MenyetujuiPemindahan = new widget.ComboBox();
         jLabel57 = new widget.Label();
         TNoRw = new widget.TextBox();
         TPasien = new widget.TextBox();
@@ -381,7 +381,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         scrollPane4 = new widget.ScrollPane();
         PemeriksaanPenunjang = new widget.TextArea();
         jSeparator4 = new javax.swing.JSeparator();
-        jLabel34 = new widget.Label();
         IndikasiPindah = new widget.ComboBox();
         AsalRuang = new widget.TextBox();
         jLabel35 = new widget.Label();
@@ -468,6 +467,14 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
 
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
+
+        MenyetujuiPemindahan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Ya", "Tidak" }));
+        MenyetujuiPemindahan.setName("MenyetujuiPemindahan"); // NOI18N
+        MenyetujuiPemindahan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                MenyetujuiPemindahanKeyPressed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -640,16 +647,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jSeparator14);
         jSeparator14.setBounds(0, 861, 880, 0);
 
-        MenyetujuiPemindahan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
-        MenyetujuiPemindahan.setName("MenyetujuiPemindahan"); // NOI18N
-        MenyetujuiPemindahan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                MenyetujuiPemindahanKeyPressed(evt);
-            }
-        });
-        FormInput.add(MenyetujuiPemindahan);
-        MenyetujuiPemindahan.setBounds(775, 330, 80, 23);
-
         jLabel57.setText("Indikasi Pindah :");
         jLabel57.setName("jLabel57"); // NOI18N
         FormInput.add(jLabel57);
@@ -767,7 +764,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
             }
         });
         FormInput.add(KeteranganPeralatan);
-        KeteranganPeralatan.setBounds(288, 330, 160, 23);
+        KeteranganPeralatan.setBounds(288, 330, 340, 23);
 
         jLabel13.setText(":");
         jLabel13.setName("jLabel13"); // NOI18N
@@ -940,11 +937,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jSeparator4);
         jSeparator4.setBounds(0, 320, 880, 1);
 
-        jLabel34.setText("Pasien/Keluarga Mengetahui & Menyetujui Alasan Pemindahan :");
-        jLabel34.setName("jLabel34"); // NOI18N
-        FormInput.add(jLabel34);
-        jLabel34.setBounds(451, 330, 320, 23);
-
         IndikasiPindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kondisi Pasien Stabil", "Kondisi Pasien Tidak Ada Perubahan", "Kondisi Pasien Memburuk", "Fasilitas Kurang Memadai", "Fasilitas Butuh Lebih Baik", "Tenaga Membutuhkan Yang Lebih Ahli", "Tenaga Kurang", "Lain-lain" }));
         IndikasiPindah.setName("IndikasiPindah"); // NOI18N
         IndikasiPindah.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1000,12 +992,12 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
             }
         });
         FormInput.add(NamaMenyetujui);
-        NamaMenyetujui.setBounds(398, 360, 230, 23);
+        NamaMenyetujui.setBounds(398, 360, 450, 23);
 
         jLabel38.setText("Hubungan :");
         jLabel38.setName("jLabel38"); // NOI18N
         FormInput.add(jLabel38);
-        jLabel38.setBounds(621, 360, 80, 23);
+        jLabel38.setBounds(620, 330, 80, 23);
 
         HubunganMenyetujui.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kakak", "Adik", "Saudara", "Keluarga", "Kakek", "Nenek", "Orang Tua", "Suami", "Istri", "Penanggung Jawab", "Menantu", "Ipar", "Mertua", "-" }));
         HubunganMenyetujui.setName("HubunganMenyetujui"); // NOI18N
@@ -1015,7 +1007,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
             }
         });
         FormInput.add(HubunganMenyetujui);
-        HubunganMenyetujui.setBounds(705, 360, 150, 23);
+        HubunganMenyetujui.setBounds(700, 330, 150, 23);
 
         jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel39.setText("Bila Pemberi Persetujuan Adalah Keluarga/Penanggung Jawab Pasien, Nama");
@@ -2391,7 +2383,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
     private widget.Label jLabel31;
     private widget.Label jLabel32;
     private widget.Label jLabel33;
-    private widget.Label jLabel34;
     private widget.Label jLabel35;
     private widget.Label jLabel36;
     private widget.Label jLabel37;

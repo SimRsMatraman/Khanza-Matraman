@@ -10,6 +10,21 @@
         <Property name="name" type="java.lang.String" value="LoadHTML" noResource="true"/>
       </Properties>
     </Component>
+    <Component class="widget.ComboBox" name="MenyetujuiPemindahan">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="-"/>
+            <StringItem index="1" value="Ya"/>
+            <StringItem index="2" value="Tidak"/>
+          </StringArray>
+        </Property>
+        <Property name="name" type="java.lang.String" value="MenyetujuiPemindahan" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="MenyetujuiPemindahanKeyPressed"/>
+      </Events>
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
@@ -312,25 +327,6 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="widget.ComboBox" name="MenyetujuiPemindahan">
-                          <Properties>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="2">
-                                <StringItem index="0" value="Ya"/>
-                                <StringItem index="1" value="Tidak"/>
-                              </StringArray>
-                            </Property>
-                            <Property name="name" type="java.lang.String" value="MenyetujuiPemindahan" noResource="true"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="MenyetujuiPemindahanKeyPressed"/>
-                          </Events>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="775" y="330" width="80" height="23"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
                         <Component class="widget.Label" name="jLabel57">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Indikasi Pindah :"/>
@@ -572,7 +568,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="288" y="330" width="160" height="23"/>
+                              <AbsoluteConstraints x="288" y="330" width="340" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -943,17 +939,6 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="widget.Label" name="jLabel34">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Pasien/Keluarga Mengetahui &amp; Menyetujui Alasan Pemindahan :"/>
-                            <Property name="name" type="java.lang.String" value="jLabel34" noResource="true"/>
-                          </Properties>
-                          <Constraints>
-                            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="451" y="330" width="320" height="23"/>
-                            </Constraint>
-                          </Constraints>
-                        </Component>
                         <Component class="widget.ComboBox" name="IndikasiPindah">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -1064,7 +1049,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="398" y="360" width="230" height="23"/>
+                              <AbsoluteConstraints x="398" y="360" width="450" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1075,7 +1060,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="621" y="360" width="80" height="23"/>
+                              <AbsoluteConstraints x="620" y="330" width="80" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1106,7 +1091,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="705" y="360" width="150" height="23"/>
+                              <AbsoluteConstraints x="700" y="330" width="150" height="23"/>
                             </Constraint>
                           </Constraints>
                         </Component>
