@@ -2603,36 +2603,38 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
 
     private void isRawat() {
         try {
-            ps=koneksi.prepareStatement(
-                    "SELECT " +
-                    "    a.no_rkm_medis, " +
-                    "    b.nm_pasien, " +
-                    "    IF(b.jk='L','Laki-Laki','Perempuan') AS jk, " +
-                    "    b.tgl_lahir, " +
-                    "    a.tgl_registrasi, " +
-                    "    CASE " +
-                    "    WHEN d.no_rawat IS NOT NULL " +
-                    "        THEN CONCAT(DATE_FORMAT(d.tgl_masuk, '%d-%m-%Y'), ' ', DATE_FORMAT(d.jam_masuk, '%H:%i:%s')) " +
-                    "        ELSE CONCAT(DATE_FORMAT(a.tgl_registrasi, '%d-%m-%Y'), ' ', DATE_FORMAT(a.jam_reg, '%H:%i:%s')) " +
-                    "    END AS jam, " +
-                    "    COALESCE(d.kd_kamar, a.kd_poli) AS kode_ruangan, " +
-                    "    COALESCE(h.nm_bangsal, f.nm_poli) AS ruangan, " +
-                    "    COALESCE(e.keluhan, c.keluhan_utama) AS sekunder, " +
-                    "    COALESCE(e.pemeriksaan, c.rps) AS prosedur, " +
-                    "    COALESCE(e.rtl, c.tata) AS obat, "+
-                    "    COALESCE(e.tgl_perawatan, c.tanggal) AS tgl_rawat, " +
-                    "    CONCAT(COALESCE(j.kd_penyakit), ' - ', COALESCE(j.nm_penyakit)) AS penyakit " +
-                    "FROM reg_periksa a " +
-                    "INNER JOIN pasien b ON a.no_rkm_medis = b.no_rkm_medis " +
-                    "LEFT JOIN asesmen_medis_igd c ON a.no_rawat = c.no_rawat " +
-                    "LEFT JOIN kamar_inap d ON d.no_rawat = a.no_rawat " +
-                    "LEFT JOIN pemeriksaan_ranap e ON e.no_rawat = a.no_rawat " +
-                    "LEFT JOIN poliklinik f ON f.kd_poli=a.kd_poli " +
-                    "LEFT JOIN kamar g ON g.kd_kamar=d.kd_kamar " +
-                    "LEFT JOIN bangsal h ON h.kd_bangsal=g.kd_bangsal "+
-                    "LEFT JOIN diagnosa_pasien i ON i.no_rawat=a.no_rawat " +
-                    "LEFT JOIN penyakit j on j.kd_penyakit=i.kd_penyakit " +
-                    "WHERE a.no_rawat=? ORDER BY tgl_rawat DESC LIMIT 1");
+ps=koneksi.prepareStatement(
+    "SELECT " +
+    "a.no_rkm_medis, " +
+    "b.nm_pasien, " +
+    "IF(b.jk='L','Laki-Laki','Perempuan') AS jk, " +
+    "b.tgl_lahir, " +
+    "a.tgl_registrasi, " +
+    "CASE " +
+    "WHEN d.no_rawat IS NOT NULL THEN " +
+    "CONCAT(DATE_FORMAT(d.tgl_masuk,'%d-%m-%Y'),' ',DATE_FORMAT(d.jam_masuk,'%H:%i:%s')) " +
+    "ELSE " +
+    "CONCAT(DATE_FORMAT(a.tgl_registrasi,'%d-%m-%Y'),' ',DATE_FORMAT(a.jam_reg,'%H:%i:%s')) " +
+    "END AS jam, " +
+    "a.kd_poli AS kode_ruangan, " +
+    "f.nm_poli AS ruangan, " +
+    "COALESCE(e.keluhan,c.keluhan_utama) AS sekunder, " +
+    "COALESCE(e.pemeriksaan,c.rps) AS prosedur, " +
+    "COALESCE(e.rtl,c.tata) AS obat, " +
+    "COALESCE(e.tgl_perawatan,c.tanggal) AS tgl_rawat, " +
+    "CONCAT(IFNULL(j.kd_penyakit,''),' - ',IFNULL(j.nm_penyakit,'')) AS penyakit " +
+    "FROM reg_periksa a " +
+    "INNER JOIN pasien b ON a.no_rkm_medis=b.no_rkm_medis " +
+    "LEFT JOIN asesmen_medis_igd c ON a.no_rawat=c.no_rawat " +
+    "LEFT JOIN kamar_inap d ON d.no_rawat=a.no_rawat " +
+    "LEFT JOIN pemeriksaan_ranap e ON e.no_rawat=a.no_rawat " +
+    "LEFT JOIN poliklinik f ON f.kd_poli=a.kd_poli " +
+    "LEFT JOIN diagnosa_pasien i ON i.no_rawat=a.no_rawat " +
+    "LEFT JOIN penyakit j ON j.kd_penyakit=i.kd_penyakit " +
+    "WHERE a.no_rawat=? " +
+    "ORDER BY COALESCE(e.tgl_perawatan,c.tanggal) DESC " +
+    "LIMIT 1"
+);
             try {
                 ps.setString(1,TNoRw.getText());
                 rs=ps.executeQuery();
