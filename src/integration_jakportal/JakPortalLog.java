@@ -627,7 +627,7 @@ String idcheckin = Sequel.cariIsi("select id_checkin from jakportal_patientjourn
 // CHECKIN
 if(kosong(idcheckin)){
 
-CheckIn(noRawat,tglReg,jamReg,"","","","","","","","","08:00:00","12:00:00","P002");
+CheckIn(noRawat,tglReg,jamReg,"","","","","","","","","","08:00:00","12:00:00","P002");
 
 delay(300);
 
@@ -1546,6 +1546,7 @@ this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             String noHp = Sequel.cariIsi("select no_tlp from pasien where no_rkm_medis='" + noRkmMedis + "'");
             String jk = Sequel.cariIsi("select jk from pasien where no_rkm_medis='" + noRkmMedis + "'");
             String kodeDokter = Sequel.cariIsi("select kd_dokter from reg_periksa where no_rawat='" + noRawat + "'");
+            String tanggalLahir = Sequel.cariIsi("select tgl_lahir from pasien where no_rkm_medis='" + noRkmMedis + "'");
 
             // mapping kd_poli
             String kdPoliAsli = Sequel.cariIsi("select kd_poli from reg_periksa where no_rawat='" + noRawat + "'");
@@ -1634,7 +1635,23 @@ this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 else {kodeBiaya = "";}
 
                 if (idcheckin == null || idcheckin.equals("")) {
-                    CheckIn(noRawat, tglReg, jamReg, noRkmMedis, nik, namaPasien, noHp, jk, kodePoli, kodeDokter, namaDokter, jamMulai, jamSelesai, kodeBiaya);
+CheckIn(
+    noRawat,
+    tglReg,
+    jamReg,
+    noRkmMedis,
+    nik,
+    namaPasien,
+    tanggalLahir,
+    noHp,
+    jk,
+    kodePoli,
+    kodeDokter,
+    namaDokter,
+    jamMulai,
+    jamSelesai,
+    kodeBiaya
+);
                 } else {
                     String datetime = getSafeTime(noRawat, "id_checkin_datetime");
                     if (datetime == null) continue;
@@ -2737,45 +2754,138 @@ LCount.setText("" + tabModeRadiologi.getRowCount());
 //        LCount.setText("" + tabModeLog.getRowCount());
 //    }
 
-    private void CheckIn(String noRawatpasien, String tglReg, String jamReg, String noRkmMedis, String nik, String namaPasien, String noHp, String jk, String kodePoli, String kodeDokter, String namaDokter, String jamMulai, String jamSelesai, String kodeBiaya) {
-        try {
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("x-username", koneksiDB.JAKPORTALUSERNAME());
-            headers.add("x-token", api.Token());
-            requestJson = "{"
-                    + "\"kode\": \"" + koneksiDB.JAKPORTALUSERNAME() + "\","
-                    + "\"tanggal\": \"" + tglReg + "\","
-                    + "\"jam\": \"" + jamReg + "\","
-                    + "\"norm\": \"" + noRkmMedis + "\","
-                    + "\"nik\": \"" + nik + "\","
-                    + "\"namapasien\": \"" + namaPasien + "\","
-                    + "\"nohp\": \"" + noHp + "\","
-                    + "\"jk\": \"" + jk + "\","
-                    + "\"kodepoli\": \"" + kodePoli + "\","
-                    + "\"kodedokter\": \"" + kodeDokter + "\","
-                    + "\"namadokter\": \"" + namaDokter + "\","
-                    + "\"jammulai\": \"" + jamMulai + "\","
-                    + "\"jamselesai\": \"" + jamSelesai + "\","
-                    + "\"kodebiaya\": \"" + kodeBiaya + "\","
-                    + "\"noregistrasi\": \"" + noRawatpasien + "\""
-                    + "}";
-//            System.out.println("Notifikasi : " + requestJson);
-            requestEntity = new HttpEntity(requestJson, headers);
-            URL = koneksiDB.JAKPORTALURL();
-            root = mapper.readTree(api.getRest().exchange(URL + "/checkin", HttpMethod.POST, requestEntity, String.class).getBody());
-            response = root.path("response");
-            Sequel.menyimpantf2("jakportal_patientjourney", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "No.Rawat", 15,
-                    new String[]{noRawatpasien, response.path("idcheckin").asText(), tglReg + " " + jamReg, "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00"});
+//    private void CheckIn(String noRawatpasien, String tglReg, String jamReg, String noRkmMedis, String nik, String namaPasien, String noHp, String jk, String kodePoli, String kodeDokter, String namaDokter, String jamMulai, String jamSelesai, String kodeBiaya) {
+//        try {
+//            headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_JSON);
+//            headers.add("x-username", koneksiDB.JAKPORTALUSERNAME());
+//            headers.add("x-token", api.Token());
+//            requestJson = "{"
+//                    + "\"kode\": \"" + koneksiDB.JAKPORTALUSERNAME() + "\","
+//                    + "\"tanggal\": \"" + tglReg + "\","
+//                    + "\"jam\": \"" + jamReg + "\","
+//                    + "\"norm\": \"" + noRkmMedis + "\","
+//                    + "\"nik\": \"" + nik + "\","
+//                    + "\"namapasien\": \"" + namaPasien + "\","
+//                    + "\"nohp\": \"" + noHp + "\","
+//                    + "\"jk\": \"" + jk + "\","
+//                    + "\"kodepoli\": \"" + kodePoli + "\","
+//                    + "\"kodedokter\": \"" + kodeDokter + "\","
+//                    + "\"namadokter\": \"" + namaDokter + "\","
+//                    + "\"jammulai\": \"" + jamMulai + "\","
+//                    + "\"jamselesai\": \"" + jamSelesai + "\","
+//                    + "\"kodebiaya\": \"" + kodeBiaya + "\","
+//                    + "\"noregistrasi\": \"" + noRawatpasien + "\""
+//                    + "}";
+////            System.out.println("Notifikasi : " + requestJson);
+//            requestEntity = new HttpEntity(requestJson, headers);
+//            URL = koneksiDB.JAKPORTALURL();
+//            root = mapper.readTree(api.getRest().exchange(URL + "/checkin", HttpMethod.POST, requestEntity, String.class).getBody());
+//            response = root.path("response");
+//            Sequel.menyimpantf2("jakportal_patientjourney", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "No.Rawat", 15,
+//                    new String[]{noRawatpasien, response.path("idcheckin").asText(), tglReg + " " + jamReg, "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00", "", "0000-00-00 00:00:00"});
+//
+//        } catch (Exception ex) {
+//            System.out.println("Notifikasi : " + ex);
+//            if (ex.toString().contains("UnknownHostException")) {
+//                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
+//            }
+//        }
+//    }
 
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
+    private void CheckIn(
+        String noRawatpasien,
+        String tglReg,
+        String jamReg,
+        String noRkmMedis,
+        String nik,
+        String namaPasien,
+        String tanggalLahir,
+        String noHp,
+        String jk,
+        String kodePoli,
+        String kodeDokter,
+        String namaDokter,
+        String jamMulai,
+        String jamSelesai,
+        String kodeBiaya) {
+
+    try {
+        headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("x-username", koneksiDB.JAKPORTALUSERNAME());
+        headers.add("x-token", api.Token());
+
+        requestJson = "{"
+                + "\"kode\":\"" + koneksiDB.JAKPORTALUSERNAME() + "\","
+                + "\"tanggal\":\"" + tglReg + "\","
+                + "\"jam\":\"" + jamReg + "\","
+                + "\"norm\":\"" + noRkmMedis + "\","
+                + "\"nik\":\"" + nik + "\","
+                + "\"namapasien\":\"" + namaPasien + "\","
+                + "\"tanggallahir\":\"" + tanggalLahir + "\","
+                + "\"nohp\":\"" + noHp + "\","
+                + "\"jk\":\"" + jk + "\","
+                + "\"kodepoli\":\"" + kodePoli + "\","
+                + "\"kodedokter\":\"" + kodeDokter + "\","
+                + "\"namadokter\":\"" + namaDokter + "\","
+                + "\"jammulai\":\"" + jamMulai + "\","
+                + "\"jamselesai\":\"" + jamSelesai + "\","
+                + "\"kodebiaya\":\"" + kodeBiaya + "\","
+                + "\"noregistrasi\":\"" + noRawatpasien + "\""
+                + "}";
+
+        System.out.println("Request : " + requestJson);
+
+        requestEntity = new HttpEntity<>(requestJson, headers);
+
+        URL = koneksiDB.JAKPORTALURL();
+
+        root = mapper.readTree(
+                api.getRest().exchange(
+                        URL + "/checkin",
+                        HttpMethod.POST,
+                        requestEntity,
+                        String.class
+                ).getBody()
+        );
+
+        response = root.path("response");
+
+        Sequel.menyimpantf2(
+                "jakportal_patientjourney",
+                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+                "No.Rawat",
+                15,
+                new String[]{
+                    noRawatpasien,
+                    response.path("idcheckin").asText(),
+                    tglReg + " " + jamReg,
+                    "",
+                    "0000-00-00 00:00:00",
+                    "",
+                    "0000-00-00 00:00:00",
+                    "",
+                    "0000-00-00 00:00:00",
+                    "",
+                    "0000-00-00 00:00:00",
+                    "",
+                    "0000-00-00 00:00:00",
+                    "",
+                    "0000-00-00 00:00:00"
+                }
+        );
+
+    } catch (Exception ex) {
+        System.out.println("Notifikasi : " + ex);
+
+        if (ex.toString().contains("UnknownHostException")) {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Koneksi ke server JAKPORTAL terputus...!");
         }
     }
-
+}
+    
     private void CheckInEnd(String noRawatpasien, String idCheckin, String tglReg, String jamReg) {
         try {
             headers = new HttpHeaders();
