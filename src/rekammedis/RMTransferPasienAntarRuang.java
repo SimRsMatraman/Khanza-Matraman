@@ -1037,6 +1037,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         scrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane5.setName("scrollPane5"); // NOI18N
 
+        KeluhanUtamaSebelumTransfer.setEditable(false);
         KeluhanUtamaSebelumTransfer.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         KeluhanUtamaSebelumTransfer.setColumns(20);
         KeluhanUtamaSebelumTransfer.setRows(5);
@@ -1183,6 +1184,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel29);
         jLabel29.setBounds(283, 520, 30, 23);
 
+        TDSetelahTransfer.setEditable(false);
         TDSetelahTransfer.setFocusTraversalPolicyProvider(true);
         TDSetelahTransfer.setName("TDSetelahTransfer"); // NOI18N
         TDSetelahTransfer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1208,6 +1210,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         scrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane6.setName("scrollPane6"); // NOI18N
 
+        KeluhanUtamaSetelahTransfer.setEditable(false);
         KeluhanUtamaSetelahTransfer.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         KeluhanUtamaSetelahTransfer.setColumns(20);
         KeluhanUtamaSetelahTransfer.setRows(5);
@@ -1227,6 +1230,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel47);
         jLabel47.setBounds(46, 550, 90, 23);
 
+        NadiSetelahTransfer.setEditable(false);
         NadiSetelahTransfer.setFocusTraversalPolicyProvider(true);
         NadiSetelahTransfer.setName("NadiSetelahTransfer"); // NOI18N
         NadiSetelahTransfer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1248,6 +1252,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel49);
         jLabel49.setBounds(283, 550, 30, 23);
 
+        RRSetelahTransfer.setEditable(false);
         RRSetelahTransfer.setFocusTraversalPolicyProvider(true);
         RRSetelahTransfer.setName("RRSetelahTransfer"); // NOI18N
         RRSetelahTransfer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1269,6 +1274,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel51);
         jLabel51.setBounds(46, 580, 90, 23);
 
+        SuhuSetelahTransfer.setEditable(false);
         SuhuSetelahTransfer.setFocusTraversalPolicyProvider(true);
         SuhuSetelahTransfer.setName("SuhuSetelahTransfer"); // NOI18N
         SuhuSetelahTransfer.addKeyListener(new java.awt.event.KeyAdapter() {

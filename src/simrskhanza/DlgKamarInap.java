@@ -991,7 +991,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnCatatanKeperawatan = new javax.swing.JMenuItem();
         MnCatatanCekGDS = new javax.swing.JMenuItem();
         MnMonitoringReaksiTranfusi = new javax.swing.JMenuItem();
-        MnKeseimbanganCairan = new javax.swing.JMenuItem();
         MnPemberianTerapiCairan = new javax.swing.JMenuItem();
         MnRMFarmasi = new javax.swing.JMenu();
         MnKonselingFarmasi = new javax.swing.JMenuItem();
@@ -1254,6 +1253,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         tbListDicom = new widget.Table();
         jPopupMenuDicom = new javax.swing.JPopupMenu();
         MnViewDicom = new javax.swing.JMenuItem();
+        MnKeseimbanganCairan = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         PanelCariUtama = new javax.swing.JPanel();
         panelGlass10 = new widget.panelisi();
@@ -2427,22 +2427,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         });
         MnObservasi.add(MnMonitoringReaksiTranfusi);
-
-        MnKeseimbanganCairan.setBackground(new java.awt.Color(255, 255, 254));
-        MnKeseimbanganCairan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnKeseimbanganCairan.setForeground(new java.awt.Color(50, 50, 50));
-        MnKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnKeseimbanganCairan.setText("Catatan Keseimbangan Cairan");
-        MnKeseimbanganCairan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnKeseimbanganCairan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnKeseimbanganCairan.setName("MnKeseimbanganCairan"); // NOI18N
-        MnKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(240, 26));
-        MnKeseimbanganCairan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnKeseimbanganCairanActionPerformed(evt);
-            }
-        });
-        MnObservasi.add(MnKeseimbanganCairan);
 
         MnPemberianTerapiCairan.setBackground(new java.awt.Color(255, 255, 254));
         MnPemberianTerapiCairan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -5755,6 +5739,21 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         });
         jPopupMenuDicom.add(MnViewDicom);
+
+        MnKeseimbanganCairan.setBackground(new java.awt.Color(255, 255, 254));
+        MnKeseimbanganCairan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKeseimbanganCairan.setForeground(new java.awt.Color(50, 50, 50));
+        MnKeseimbanganCairan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKeseimbanganCairan.setText("Catatan Keseimbangan Cairan");
+        MnKeseimbanganCairan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnKeseimbanganCairan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnKeseimbanganCairan.setName("MnKeseimbanganCairan"); // NOI18N
+        MnKeseimbanganCairan.setPreferredSize(new java.awt.Dimension(240, 26));
+        MnKeseimbanganCairan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKeseimbanganCairanActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);

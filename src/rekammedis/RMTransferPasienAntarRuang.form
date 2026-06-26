@@ -1173,6 +1173,7 @@
                           <SubComponents>
                             <Component class="widget.TextArea" name="KeluhanUtamaSebelumTransfer">
                               <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                                     <EmptyBorder/>
@@ -1448,6 +1449,7 @@
                         </Component>
                         <Component class="widget.TextBox" name="TDSetelahTransfer">
                           <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="TDSetelahTransfer" noResource="true"/>
                           </Properties>
@@ -1503,6 +1505,7 @@
                           <SubComponents>
                             <Component class="widget.TextArea" name="KeluhanUtamaSetelahTransfer">
                               <Properties>
+                                <Property name="editable" type="boolean" value="false"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                                     <EmptyBorder/>
@@ -1531,6 +1534,7 @@
                         </Component>
                         <Component class="widget.TextBox" name="NadiSetelahTransfer">
                           <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="NadiSetelahTransfer" noResource="true"/>
                           </Properties>
@@ -1568,6 +1572,7 @@
                         </Component>
                         <Component class="widget.TextBox" name="RRSetelahTransfer">
                           <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="RRSetelahTransfer" noResource="true"/>
                           </Properties>
@@ -1605,6 +1610,7 @@
                         </Component>
                         <Component class="widget.TextBox" name="SuhuSetelahTransfer">
                           <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
                             <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="SuhuSetelahTransfer" noResource="true"/>
                           </Properties>
