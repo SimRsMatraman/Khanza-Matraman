@@ -849,7 +849,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "+
                     "inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode "+
                     "inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+        
-                    "where detail_pemberian_obat.tgl_perawatan between ? and ? and kategori_barang.kode not in ('-','K06') and golongan_barang.kode not in ('-','G01')"+
+                    "where detail_pemberian_obat.tgl_perawatan between ? and ? "+
+//                    "and kategori_barang.kode not in ('-','K06') and golongan_barang.kode not in ('-','G01')"+
                     "group by detail_pemberian_obat.kode_brng");
             try {
                 ttltotaljual=0;ttltotalbeli=0;ttltotalpesan=0;
