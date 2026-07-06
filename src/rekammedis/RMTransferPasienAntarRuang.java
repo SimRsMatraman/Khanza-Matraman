@@ -2622,21 +2622,50 @@ ps=koneksi.prepareStatement(
     "ELSE " +
     "CONCAT(DATE_FORMAT(a.tgl_registrasi,'%d-%m-%Y'),' ',DATE_FORMAT(a.jam_reg,'%H:%i:%s')) " +
     "END AS jam, " +
+
     "a.kd_poli AS kode_ruangan, " +
     "f.nm_poli AS ruangan, " +
+
+    "CASE " +
+    "WHEN d.kd_kamar IS NOT NULL THEN d.kd_kamar " +
+    "ELSE pr.kd_kamar " +
+    "END AS kdruang1, " +
+
+    "CASE " +
+    "WHEN d.kd_kamar IS NOT NULL THEN bg_ri.nm_bangsal " +
+    "ELSE bg_pr.nm_bangsal " +
+    "END AS ruang_selanjutnya, " +
+
     "COALESCE(e.keluhan,c.keluhan_utama) AS sekunder, " +
     "COALESCE(e.pemeriksaan,c.rps) AS prosedur, " +
     "COALESCE(e.rtl,c.tata) AS obat, " +
     "COALESCE(e.tgl_perawatan,c.tanggal) AS tgl_rawat, " +
     "CONCAT(IFNULL(j.kd_penyakit,''),' - ',IFNULL(j.nm_penyakit,'')) AS penyakit " +
+
     "FROM reg_periksa a " +
     "INNER JOIN pasien b ON a.no_rkm_medis=b.no_rkm_medis " +
+
     "LEFT JOIN asesmen_medis_igd c ON a.no_rawat=c.no_rawat " +
+
     "LEFT JOIN kamar_inap d ON d.no_rawat=a.no_rawat " +
+    "AND d.tgl_keluar='0000-00-00' " +
+    "AND d.jam_keluar='00:00:00' " +
+
     "LEFT JOIN pemeriksaan_ranap e ON e.no_rawat=a.no_rawat " +
+
     "LEFT JOIN poliklinik f ON f.kd_poli=a.kd_poli " +
+
+    "LEFT JOIN permintaan_ranap pr ON pr.no_rawat=a.no_rawat " +
+
+    "LEFT JOIN kamar km_pr ON km_pr.kd_kamar=pr.kd_kamar " +
+    "LEFT JOIN bangsal bg_pr ON bg_pr.kd_bangsal=km_pr.kd_bangsal " +
+
+    "LEFT JOIN kamar km_ri ON km_ri.kd_kamar=d.kd_kamar " +
+    "LEFT JOIN bangsal bg_ri ON bg_ri.kd_bangsal=km_ri.kd_bangsal " +
+
     "LEFT JOIN diagnosa_pasien i ON i.no_rawat=a.no_rawat " +
     "LEFT JOIN penyakit j ON j.kd_penyakit=i.kd_penyakit " +
+
     "WHERE a.no_rawat=? " +
     "ORDER BY COALESCE(e.tgl_perawatan,c.tanggal) DESC " +
     "LIMIT 1"
@@ -2653,6 +2682,8 @@ ps=koneksi.prepareStatement(
                     TanggalMasuk.setSelectedItem(rs.getString("jam"));
                     KdRuang.setText(rs.getString("kode_ruangan"));
                     AsalRuang.setText(rs.getString("ruangan"));
+                    KdRuang1.setText(rs.getString("kdruang1"));
+                    RuangSelanjutnya.setText(rs.getString("ruang_selanjutnya"));
                     DiagnosaUtama.setText(rs.getString("penyakit"));
                     DiagnosaSekunder.setText(rs.getString("sekunder"));
                     ProsedurDilakukan.setText(rs.getString("prosedur"));
