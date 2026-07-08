@@ -45,6 +45,7 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -152,6 +153,7 @@ import surat.SuratTidakHamil;
 import surat.SuratMCUPegawai;
 import surat.SuratMCUJiwa;
 import whatsapp.WhatsAppSendPOLI;
+import rekammedis.RMSkriningTB;
 
 /**
  *
@@ -681,6 +683,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPenilaianAwalKeperawatanKebidanan = new javax.swing.JMenuItem();
         MnPenilaianAwalKeperawatanBayiAnak = new javax.swing.JMenuItem();
         MnPenilaianAwalKeperawatanPsikiatri = new javax.swing.JMenuItem();
+        MnPenilaianAwalSkriningTB = new javax.swing.JMenuItem();
         MnRMMedisRawatJalan = new javax.swing.JMenu();
         MnPenilaianAwalMedisRalan = new javax.swing.JMenuItem();
         MnPenilaianAwalMedisRalanKebidanan = new javax.swing.JMenuItem();
@@ -1002,6 +1005,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPiutangObat = new javax.swing.JMenuItem();
         MnPenjualan = new javax.swing.JMenuItem();
         MnPeriksaMCUHAJI = new javax.swing.JMenuItem();
+        AD = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         jPanel2 = new javax.swing.JPanel();
         panelGlass6 = new widget.panelisi();
@@ -1249,6 +1253,22 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         });
         MnRMRawatJalan.add(MnPenilaianAwalKeperawatanPsikiatri);
+
+        MnPenilaianAwalSkriningTB.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianAwalSkriningTB.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPenilaianAwalSkriningTB.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianAwalSkriningTB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPenilaianAwalSkriningTB.setText("Skrining  TBC");
+        MnPenilaianAwalSkriningTB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianAwalSkriningTB.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianAwalSkriningTB.setName("MnPenilaianAwalSkriningTB"); // NOI18N
+        MnPenilaianAwalSkriningTB.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnPenilaianAwalSkriningTB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnPenilaianAwalSkriningTBActionPerformed(evt);
+            }
+        });
+        MnRMRawatJalan.add(MnPenilaianAwalSkriningTB);
 
         MnDataRM.add(MnRMRawatJalan);
 
@@ -5589,7 +5609,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         TglSakit1.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-04-2026" }));
+        TglSakit1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2026" }));
         TglSakit1.setDisplayFormat("dd-MM-yyyy");
         TglSakit1.setName("TglSakit1"); // NOI18N
         TglSakit1.setOpaque(false);
@@ -5636,7 +5656,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel32.setBounds(176, 10, 20, 23);
 
         TglSakit2.setForeground(new java.awt.Color(50, 70, 50));
-        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-04-2026" }));
+        TglSakit2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2026" }));
         TglSakit2.setDisplayFormat("dd-MM-yyyy");
         TglSakit2.setName("TglSakit2"); // NOI18N
         TglSakit2.setOpaque(false);
@@ -5788,6 +5808,16 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPeriksaMCUHAJI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnPeriksaMCUHAJIActionPerformed(evt);
+            }
+        });
+
+        AD.setEditable(false);
+        AD.setHighlighter(null);
+        AD.setName("AD"); // NOI18N
+        AD.setPreferredSize(new java.awt.Dimension(250, 23));
+        AD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ADActionPerformed(evt);
             }
         });
 
@@ -6004,7 +6034,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel15.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass8.add(jLabel15);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6022,7 +6052,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(23, 23));
         panelGlass8.add(jLabel17);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "22-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -12985,6 +13015,30 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }//GEN-LAST:event_MnTransferOkActionPerformed
 
+    private void MnPenilaianAwalSkriningTBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalSkriningTBActionPerformed
+        if (TPasienCari.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data registrasi pada table...!!!");
+            TCari.requestFocus();
+        } else {
+            if (tbKasirRalan.getSelectedRow() != -1) {
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningTB tb = new RMSkriningTB(null, false);
+                tb.isCek();
+                tb.emptTeks();
+                tb.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                tb.setLocationRelativeTo(internalFrame1);
+                tb.setNoRm(TNoRw.getText(), TNoRMCari.getText(), TPasienCari.getText(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 1).toString(), DTPCari1.getDate(), DTPCari2.getDate(), AD.getText());
+                tb.tampil();
+                tb.setVisible(true);
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }//GEN-LAST:event_MnPenilaianAwalSkriningTBActionPerformed
+
+    private void ADActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ADActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -13002,6 +13056,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.TextBox AD;
     private widget.Button BtnAll;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
@@ -13156,6 +13211,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem MnPenilaianAwalMedisRalanPenyakitDalam;
     private javax.swing.JMenuItem MnPenilaianAwalMedisRalanPsikiatri;
     private javax.swing.JMenuItem MnPenilaianAwalMedisRalanTHT;
+    private javax.swing.JMenuItem MnPenilaianAwalSkriningTB;
     private javax.swing.JMenuItem MnPenilaianFisioterapi;
     private javax.swing.JMenuItem MnPenilaianKorbanKekerasan;
     private javax.swing.JMenu MnPenilaianLain;
@@ -13578,6 +13634,43 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             TNoRMCari.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 2).toString());
             TPasienCari.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 3).toString());
             KdPoli.setText(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
+            
+            Integer umur = null;
+            String kategoriUmur = "tidak diketahui";
+
+            try {
+                pskasir = koneksi.prepareStatement(
+                        "SELECT umurdaftar FROM reg_periksa WHERE no_rkm_medis = ?"
+                );
+                pskasir.setString(1, TNoRMCari.getText());
+
+                rskasir = pskasir.executeQuery();
+                if (rskasir.next()) {
+                    int tmpUmur = rskasir.getInt("umurdaftar");
+                    if (!rskasir.wasNull()) {
+                        umur = tmpUmur;
+                        kategoriUmur = (umur < 17) ? "Anak" : "Dewasa";
+                    }
+                }
+
+                AD.setText(kategoriUmur);
+
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                try {
+                    if (rskasir != null) {
+                        rskasir.close();
+                    }
+                } catch (Exception e) {
+                }
+                try {
+                    if (pskasir != null) {
+                        pskasir.close();
+                    }
+                } catch (Exception e) {
+                }
+            }
         }
     }
 
