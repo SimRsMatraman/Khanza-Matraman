@@ -45,11 +45,13 @@ import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 import rekammedis.DlgMasterRencanaKeperawatan;
 import freehand.DlgMarkingImageAssMedisIGD;
+import inventory.DlgPeresepanDokter;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import laporan.DlgDiagnosaPenyakitSoap;
+import simrskhanza.DlgPRB;
 
 
 /**
@@ -69,7 +71,7 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
     private DlgDiagnosaPenyakitSoap penyakit=new DlgDiagnosaPenyakitSoap(null,false);
     private boolean[] pilih; 
     private String[] kode,masalah;
-    private String masalahkeperawatan="",urlImage; 
+    private String masalahkeperawatan="", namaPenyakit = "", Listpenyakit = "",urlImage; 
     private StringBuilder htmlContent;
     public DlgMasterRencanaKeperawatan masterr=new DlgMasterRencanaKeperawatan(null,false);
     private SimpleDateFormat tanggalNow = new SimpleDateFormat("yyyy-MM-dd");
@@ -578,6 +580,8 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
         BtnEdit1 = new widget.Button();
         PanelWall = new usu.widget.glass.PanelGlass();
         Asesmen = new widget.Button();
+        BtnInput3 = new widget.Button();
+        Refresh = new widget.Button();
         internalFrame3 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbObat = new widget.Table();
@@ -604,7 +608,7 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Asesmen Awal Medis IGD ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Asesmen Awal Medis IGD ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -1622,13 +1626,13 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
         scrollPane14.setViewportView(Edukasi);
 
         FormInput.add(scrollPane14);
-        scrollPane14.setBounds(440, 1720, 370, 143);
+        scrollPane14.setBounds(510, 1720, 370, 143);
 
         jLabel83.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel83.setText("Edukasi :");
         jLabel83.setName("jLabel83"); // NOI18N
         FormInput.add(jLabel83);
-        jLabel83.setBounds(440, 1700, 120, 23);
+        jLabel83.setBounds(510, 1700, 120, 23);
 
         BtnEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
         BtnEdit1.setMnemonic('G');
@@ -1671,6 +1675,32 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
         FormInput.add(Asesmen);
         Asesmen.setBounds(780, 1620, 40, 40);
 
+        BtnInput3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnInput3.setText("E-Resep");
+        BtnInput3.setToolTipText("");
+        BtnInput3.setName("BtnInput3"); // NOI18N
+        BtnInput3.setPreferredSize(new java.awt.Dimension(160, 30));
+        BtnInput3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnInput3ActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnInput3);
+        BtnInput3.setBounds(400, 1720, 90, 30);
+
+        Refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        Refresh.setMnemonic('2');
+        Refresh.setToolTipText("Refresh data diagnosa");
+        Refresh.setName("Refresh"); // NOI18N
+        Refresh.setPreferredSize(new java.awt.Dimension(28, 23));
+        Refresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshActionPerformed(evt);
+            }
+        });
+        FormInput.add(Refresh);
+        Refresh.setBounds(400, 1750, 40, 23);
+
         scrollInput.setViewportView(FormInput);
 
         internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -1712,7 +1742,7 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-09-2023" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1726,7 +1756,7 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-09-2023" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2697,6 +2727,104 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
         penyakit.setVisible(true);    // TODO add your handling code here:
     }//GEN-LAST:event_AsesmenActionPerformed
 
+    private void BtnInput3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInput3ActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
+                JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
+            }else {
+                DlgPeresepanDokter resep=new DlgPeresepanDokter(null,false);
+                resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+                resep.setLocationRelativeTo(internalFrame1);
+                resep.setNoRm(TNoRw.getText(),new Date(),KdPetugas.getText(),NmPetugas.getText(),"ralan");
+                resep.isCek();
+                resep.tampilobat();
+                resep.setVisible(true);
+
+                // 🔥 AUTO CEK & BUKA DlgPRB setelah Pemberian Obat
+                DlgPRB prb = new DlgPRB(null, false);
+                String noRM = TNoRM.getText();  // Atau ambil dari pasien
+                String catatanObat = Sequel.cariIsi(
+                    "SELECT CONCAT('Pasien ', e.png_jawab, ' dengan nama ', a.nm_pasien, ' telah mendapatkan obat PRB kurang dari 1 bulan yang lalu', '\\n\\n', " +
+                    "GROUP_CONCAT(CONCAT('pada tanggal ', DATE_FORMAT(b.tgl_registrasi,'%Y-%m-%d'), ' (', d.nama_brng, ' (', c.jml, ')') " +
+                    "ORDER BY b.tgl_registrasi DESC SEPARATOR '\\n')) " +
+                    "FROM pasien a INNER JOIN reg_periksa b ON b.no_rkm_medis = a.no_rkm_medis " +
+                    "INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat " +
+                    "INNER JOIN databarang d ON d.kode_brng = c.kode_brng " +
+                    "INNER JOIN penjab e ON e.kd_pj=b.kd_pj " +
+                    "WHERE a.no_rkm_medis = ? AND c.tgl_perawatan >= DATE_SUB(CURDATE(), INTERVAL 30 DAY ) AND b.kd_pj='BPJ' " +
+                    "AND d.kode_golongan IN ('G04', 'G05') GROUP BY a.no_rkm_medis, a.nm_pasien",
+                    noRM
+                );
+
+                if (!catatanObat.trim().isEmpty()) {
+                    prb.setNoRm(noRM);
+                    prb.setSize(720, 330);
+                    prb.setLocationRelativeTo(internalFrame1);
+                    prb.toFront();
+                    prb.setVisible(true);
+                }
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnInput3ActionPerformed
+
+    private void RefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshActionPerformed
+        Tata.setText("");
+        try {
+            ps = koneksi.prepareStatement(
+                    " select concat(databarang.nama_brng,' ',resep_dokter.jml,' ',kodesatuan.satuan,' ',resep_dokter.aturan_pakai) as obat FROM resep_dokter INNER JOIN resep_obat ON resep_dokter.no_resep = resep_obat.no_resep INNER JOIN databarang ON resep_dokter.kode_brng = databarang.kode_brng INNER JOIN kodesatuan ON databarang.kode_sat = kodesatuan.kode_sat where resep_obat.no_rawat='" + TNoRw.getText() + "'"
+            );
+            try {
+                rs = ps.executeQuery();
+                namaPenyakit = "";
+                while (rs.next()) {
+                    Listpenyakit = rs.getString("obat");
+                    namaPenyakit = namaPenyakit + "" + Listpenyakit + ",  " + "\n";
+                }
+                Tata.append(namaPenyakit.length() > 0 ? namaPenyakit.substring(0, namaPenyakit.length() - 1) : "");
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+
+        //Menapilkan Racikan Obat
+        try {
+            ps = koneksi.prepareStatement(
+                    " select concat(resep_dokter_racikan.nama_racik,' ',resep_dokter_racikan.jml_dr,' ',resep_dokter_racikan.aturan_pakai) as obat FROM resep_dokter_racikan INNER JOIN resep_obat ON resep_dokter_racikan.no_resep = resep_obat.no_resep where resep_obat.no_rawat='" + TNoRw.getText() + "'"
+            );
+            try {
+                rs = ps.executeQuery();
+                namaPenyakit = "";
+                while (rs.next()) {
+                    Listpenyakit = rs.getString("obat");
+                    namaPenyakit = namaPenyakit + "" + Listpenyakit + "," + "\n";
+                }
+                Tata.append(namaPenyakit.length() > 0 ? namaPenyakit.substring(0, namaPenyakit.length() - 1) : "");
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            } finally {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }//GEN-LAST:event_RefreshActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -2726,6 +2854,7 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
     private widget.Button BtnEdit;
     private widget.Button BtnEdit1;
     private widget.Button BtnHapus;
+    private widget.Button BtnInput3;
     private widget.Button BtnKeluar;
     private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
@@ -2764,6 +2893,7 @@ public final class AsesmenAwalMedisIGD extends javax.swing.JDialog {
     private widget.TextArea RPS;
     private widget.TextBox RR;
     private widget.TextArea Radiologi;
+    private widget.Button Refresh;
     private widget.TextBox SPO;
     private widget.ScrollPane Scroll;
     private widget.TextBox Suhu;

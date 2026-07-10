@@ -2067,6 +2067,29 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         copy=false;
     }
     
+    public void setNoRm(String norwt,Date tanggal,String KodeDokter,String NamaDokter,String status) {        
+        TNoRw.setText(norwt);
+        Sequel.cariIsi("select concat(pasien.no_rkm_medis,' ',pasien.nm_pasien,' (',pasien.umur,')') from reg_periksa inner join pasien "+
+                    " on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where no_rawat=? ",TPasien,TNoRw.getText());
+        if(status.equals("ralan")){
+            Sequel.cariIsi("SELECT pemeriksaan_ralan.rtl FROM reg_periksa INNER JOIN pemeriksaan_ralan on pemeriksaan_ralan.no_rawat=reg_periksa.no_rawat AND reg_periksa.kd_dokter=pemeriksaan_ralan.nik " +
+            "WHERE pemeriksaan_ralan.no_rawat=? GROUP BY pemeriksaan_ralan.no_rawat",TindakLanjut,TNoRw.getText());
+        }else{
+        Sequel.cariIsi("SELECT pemeriksaan_ranap.rtl FROM reg_periksa INNER JOIN pemeriksaan_ranap on pemeriksaan_ranap.no_rawat=reg_periksa.no_rawat AND reg_periksa.kd_dokter=pemeriksaan_ranap.nik " +
+            "WHERE pemeriksaan_ranap.no_rawat=? GROUP BY pemeriksaan_ranap.no_rawat",TindakLanjut,TNoRw.getText());
+        }
+        
+        DTPBeri.setDate(tanggal);
+        KdDokter.setText(KodeDokter);
+        NmDokter.setText(NamaDokter);
+        KdPj.setText(Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",norwt));
+        TCari.requestFocus();
+        this.status=status;
+        SetHarga();
+        ubah=false;
+        copy=false;
+    }
+    
     public void setNoRm(String norwt,String KodeDokter,String NamaDokter,String Pasien,String kodepj,String status,String rm) {        
         TNoRw.setText(norwt);
         TNoRM.setText(rm);
