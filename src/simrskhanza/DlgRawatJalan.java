@@ -2597,7 +2597,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-04-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2616,7 +2616,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-04-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -5120,7 +5120,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-03-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-04-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -13145,256 +13145,271 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_urutKunjKeyPressed
 
     private void BtnIC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC1ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC1ActionPerformed
 
     private void BtnIC2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC2ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC2ActionPerformed
 
     private void BtnIC3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC3ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC3ActionPerformed
 
     private void BtnIC4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC4ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC4ActionPerformed
 
     private void BtnIC5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC5ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan"); // ⬅️ kirim "ralan"
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC5ActionPerformed
 
     private void BtnIC6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC6ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC6ActionPerformed
 
     private void BtnIC7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC7ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC7ActionPerformed
 
     private void BtnIC8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC8ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC8ActionPerformed
 
     private void BtnIC9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC9ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC9ActionPerformed
 
     private void BtnIC10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC10ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC10ActionPerformed
 
     private void BtnIC11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC11ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC11ActionPerformed
 
     private void BtnIC12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC12ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC12ActionPerformed
 
     private void BtnIC13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC13ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC13ActionPerformed
 
     private void BtnIC14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIC14ActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnIC14ActionPerformed
 
     private void BtnICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnICActionPerformed
-        if (TNoRw.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
+        }else{ 
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            RMDataIC ic = new RMDataIC(null, false);
-            ic.isCek();
-            ic.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-            ic.setLocationRelativeTo(internalFrame1);
-            ic.setNoRm(TNoRw.getText(), DTPCari2.getDate(), "ralan");
-            ic.tampil();
-            ic.setVisible(true);
+            RMDataIC form=new RMDataIC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate(),"ralan"); // ⬅️ kirim "ranap"
+            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnICActionPerformed

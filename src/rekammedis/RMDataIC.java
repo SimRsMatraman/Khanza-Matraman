@@ -2751,11 +2751,11 @@ public final class RMDataIC extends javax.swing.JDialog {
         );
         if(akses.getjml2()>=1){
             KodeDokter1.setEditable(false);
-            BtnDokter1.setEnabled(false);
+//            BtnDokter1.setEnabled(false);
             KodeDokter1.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter1,KodeDokter1.getText());
             KodeDokter.setEditable(false);
-            BtnDokter.setEnabled(false);
+//            BtnDokter.setEnabled(false);
             KodeDokter.setText(akses.getkode());
             Sequel.cariIsi("select nama from pegawai where nik=?", NamaDokter,KodeDokter.getText());
 
