@@ -708,7 +708,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         jLabel11.setBounds(740, 10, 30, 23);
 
         TanggalMasuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-06-2026 10:18:17" }));
+        TanggalMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2026 08:47:27" }));
         TanggalMasuk.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalMasuk.setName("TanggalMasuk"); // NOI18N
         TanggalMasuk.setOpaque(false);
@@ -727,7 +727,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         label12.setBounds(201, 40, 55, 23);
 
         TanggalPindah.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalPindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-06-2026 10:18:17" }));
+        TanggalPindah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2026 08:47:27" }));
         TanggalPindah.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPindah.setName("TanggalPindah"); // NOI18N
         TanggalPindah.setOpaque(false);
@@ -1037,7 +1037,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         scrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane5.setName("scrollPane5"); // NOI18N
 
-        KeluhanUtamaSebelumTransfer.setEditable(false);
         KeluhanUtamaSebelumTransfer.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         KeluhanUtamaSebelumTransfer.setColumns(20);
         KeluhanUtamaSebelumTransfer.setRows(5);
@@ -1184,7 +1183,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel29);
         jLabel29.setBounds(283, 520, 30, 23);
 
-        TDSetelahTransfer.setEditable(false);
         TDSetelahTransfer.setFocusTraversalPolicyProvider(true);
         TDSetelahTransfer.setName("TDSetelahTransfer"); // NOI18N
         TDSetelahTransfer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1210,7 +1208,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         scrollPane6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         scrollPane6.setName("scrollPane6"); // NOI18N
 
-        KeluhanUtamaSetelahTransfer.setEditable(false);
         KeluhanUtamaSetelahTransfer.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         KeluhanUtamaSetelahTransfer.setColumns(20);
         KeluhanUtamaSetelahTransfer.setRows(5);
@@ -1230,7 +1227,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel47);
         jLabel47.setBounds(46, 550, 90, 23);
 
-        NadiSetelahTransfer.setEditable(false);
         NadiSetelahTransfer.setFocusTraversalPolicyProvider(true);
         NadiSetelahTransfer.setName("NadiSetelahTransfer"); // NOI18N
         NadiSetelahTransfer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1252,7 +1248,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel49);
         jLabel49.setBounds(283, 550, 30, 23);
 
-        RRSetelahTransfer.setEditable(false);
         RRSetelahTransfer.setFocusTraversalPolicyProvider(true);
         RRSetelahTransfer.setName("RRSetelahTransfer"); // NOI18N
         RRSetelahTransfer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1274,7 +1269,6 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         FormInput.add(jLabel51);
         jLabel51.setBounds(46, 580, 90, 23);
 
-        SuhuSetelahTransfer.setEditable(false);
         SuhuSetelahTransfer.setFocusTraversalPolicyProvider(true);
         SuhuSetelahTransfer.setName("SuhuSetelahTransfer"); // NOI18N
         SuhuSetelahTransfer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1475,7 +1469,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-06-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1489,7 +1483,7 @@ public final class RMTransferPasienAntarRuang extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-06-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
