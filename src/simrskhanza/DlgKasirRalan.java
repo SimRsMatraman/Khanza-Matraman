@@ -673,7 +673,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnRiwayat = new javax.swing.JMenu();
         ppRiwayat = new javax.swing.JMenuItem();
         ppRiwayatLabRad = new javax.swing.JMenuItem();
-        ppHasilLab = new javax.swing.JMenuItem();
+        ppHasilLaborat = new javax.swing.JMenuItem();
         ppHasilRad = new javax.swing.JMenuItem();
         DataPasien = new javax.swing.JMenuItem();
         MnDataRM = new javax.swing.JMenu();
@@ -1103,22 +1103,21 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         });
         MnRiwayat.add(ppRiwayatLabRad);
 
-        ppHasilLab.setBackground(new java.awt.Color(255, 255, 254));
-        ppHasilLab.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppHasilLab.setForeground(new java.awt.Color(50, 50, 50));
-        ppHasilLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppHasilLab.setActionCommand("Hasil Pemeriksaan Lab");
-        ppHasilLab.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppHasilLab.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppHasilLab.setLabel("Hasil Pemeriksaan Lab");
-        ppHasilLab.setName("ppHasilLab"); // NOI18N
-        ppHasilLab.setPreferredSize(new java.awt.Dimension(250, 26));
-        ppHasilLab.addActionListener(new java.awt.event.ActionListener() {
+        ppHasilLaborat.setBackground(new java.awt.Color(255, 255, 254));
+        ppHasilLaborat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppHasilLaborat.setForeground(new java.awt.Color(50, 50, 50));
+        ppHasilLaborat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppHasilLaborat.setText("Hasil Pemeriksaan Lab");
+        ppHasilLaborat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppHasilLaborat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppHasilLaborat.setName("ppHasilLaborat"); // NOI18N
+        ppHasilLaborat.setPreferredSize(new java.awt.Dimension(250, 26));
+        ppHasilLaborat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppHasilLabBtnPrintActionPerformed(evt);
+                ppHasilLaboratActionPerformed(evt);
             }
         });
-        MnRiwayat.add(ppHasilLab);
+        MnRiwayat.add(ppHasilLaborat);
 
         ppHasilRad.setBackground(new java.awt.Color(255, 255, 254));
         ppHasilRad.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -12376,27 +12375,6 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }//GEN-LAST:event_ppRiwayatBtnPrintActionPerformed
 
-    private void ppHasilLabBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHasilLabBtnPrintActionPerformed
-        if (tabModekasir.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Maaf, data registrasi sudah habis...!!!!");
-            TNoRw.requestFocus();
-        } else if (TPasienCari.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data pasien dengan menklik data pada table...!!!");
-            tbKasirRalan.requestFocus();
-        } else {
-            if (tbKasirRalan.getSelectedRow() != -1) {
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgCariPeriksaLab form = new DlgCariPeriksaLab(null, false);
-                form.isCek();
-                form.SetNoRw(TNoRw.getText());
-                form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
-                form.setLocationRelativeTo(internalFrame1);
-                form.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        }
-    }//GEN-LAST:event_ppHasilLabBtnPrintActionPerformed
-
     private void ppHasilRadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHasilRadActionPerformed
         if (tabModekasir.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data registrasi sudah habis...!!!!");
@@ -13039,6 +13017,69 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         // TODO add your handling code here:
     }//GEN-LAST:event_ADActionPerformed
 
+    private void ppHasilLaboratActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHasilLaboratActionPerformed
+        if (tabModekasir.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Maaf, data registrasi sudah habis...!!!!"
+            );
+            TNoRwCari.requestFocus();
+            return;
+        }
+
+        if (tbKasirRalan.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Maaf, silakan pilih terlebih dahulu data pasien pada tabel...!!!"
+            );
+            tbKasirRalan.requestFocus();
+            return;
+        }
+
+        String noRawat = TNoRwCari.getText() == null
+        ? ""
+        : TNoRwCari.getText().trim();
+
+        String noRM = TNoRMCari.getText() == null
+        ? ""
+        : TNoRMCari.getText().trim();
+
+        if (noRawat.isEmpty() || noRM.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Nomor rawat atau nomor rekam medis pasien tidak ditemukan.\n"
+                + "Hasil laboratorium tidak dapat ditampilkan."
+            );
+            tbKasirRalan.requestFocus();
+            return;
+        }
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            DlgCariPeriksaLab form =
+            new DlgCariPeriksaLab(null, false);
+
+            form.isCek();
+            form.SetTCari(noRawat, noRM);
+            form.setSize(
+                internalFrame1.getWidth(),
+                internalFrame1.getHeight()
+            );
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Gagal membuka hasil laboratorium:\n"
+                + e.getMessage()
+            );
+        } finally {
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_ppHasilLaboratActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -13419,7 +13460,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem ppCatatanPasien;
     private javax.swing.JMenuItem ppDataIndukKecelakaan;
     private javax.swing.JMenuItem ppDeteksiDIniCorona;
-    private javax.swing.JMenuItem ppHasilLab;
+    private javax.swing.JMenuItem ppHasilLaborat;
     private javax.swing.JMenuItem ppHasilRad;
     private javax.swing.JMenuItem ppIKP;
     private javax.swing.JMenuItem ppIKP1;

@@ -3861,11 +3861,52 @@ private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }
 
     public void SetNoRw(String norw) {
-//        NoRawat.setText(norw);
         nomr = Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='" + norw + "'");
-        TCari.setText(nomr);
-        tampil();
+        TCari.setText(nomr);        
         Sequel.cariIsi("SELECT DATE_SUB((SELECT tgl_registrasi FROM reg_periksa WHERE no_rawat='" + norw + "'), INTERVAL 7 DAY) AS tgl_registrasi", Tgl1);
+        tampil();
+    }
+    
+    private boolean modeCariPasien = false;
+    
+    public void SetTCari(String norw, String norm) {
+        String noRawat = norw == null ? "" : norw.trim();
+        String noRM = norm == null ? "" : norm.trim();
+
+        modeCariPasien = true;
+
+        if (noRawat.isEmpty() || noRM.isEmpty()) {
+            TCari.setText("");
+            Valid.tabelKosong(tabMode);
+
+            JOptionPane.showMessageDialog(
+                null,
+                "Nomor rawat atau nomor rekam medis tidak ditemukan.\n"
+                + "Pencarian hasil laboratorium dibatalkan."
+            );
+            return;
+        }
+
+        TCari.setText(noRM);
+
+        // Tgl1 = 7 hari sebelum tanggal registrasi
+        Sequel.cariIsi(
+            "select date_sub(tgl_registrasi,interval 7 day) "
+            + "from reg_periksa "
+            + "where no_rawat='" + noRawat + "'",
+            Tgl1
+        );
+
+        // Tgl2 = tanggal registrasi
+        Sequel.cariIsi(
+            "select tgl_registrasi "
+            + "from reg_periksa "
+            + "where no_rawat='" + noRawat + "'",
+            Tgl2
+        );
+
+        // Harus paling terakhir
+        tampil();
     }
 
     private void getData() {
