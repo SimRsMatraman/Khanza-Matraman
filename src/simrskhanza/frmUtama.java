@@ -18,7 +18,6 @@ import bridging.AkunRekeningBankPapua;
 import rekammedis.RMRiwayatPerawatan;
 import setting.DlgPenelusuranLogin;
 import inventory.DlgObatPenyakit;
-import inventory.DlgPemberianObatFDC;
 import setting.DlgRunTeks;
 import laporan.DlgSirkulasiBerkas;
 import permintaan.DlgCariPermintaanLab;
@@ -1012,15 +1011,12 @@ public class frmUtama extends javax.swing.JFrame {
     private final Connection koneksi=koneksiDB.condb();
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
-    private final DlgKasirRalan kasirralan=new DlgKasirRalan(this,false);
-//    private static DlgManagemenFileKlaim digitalklaim;
     private final DlgManagemenFileKlaim digitalklaim=new DlgManagemenFileKlaim(this,false);
     private final JakPortalLog integration_jakportal=new JakPortalLog(this,false);
     private final DlgReg reg=new DlgReg(this,false);
-//    private final DlgKamarInap kamarinap=new DlgKamarInap(this,false);
-//    private static DlgKasirRalan kasirralan;
-    private static DlgKamarInap kamarinap;
-//    private static DlgReg reg;
+    private final DlgKasirRalan kasirralan=new DlgKasirRalan(this,false);
+    private final DlgKamarInap kamarinap=new DlgKamarInap(this,false);
+    private final DlgIGD igd=new DlgIGD(this,false);
     private final INACBGHybrid inacbgklaim=new INACBGHybrid(this,false);
     private final INACBGCariCoderNIK cariNIK=new INACBGCariCoderNIK(this,false);
     private static frmUtama myInstance;
@@ -1035,15 +1031,12 @@ public class frmUtama extends javax.swing.JFrame {
     private int jmlmenu=0,grid=0,tinggi=0,i=0,menuawal=0;
     private String coder_nik="",pilihpage="",judulform="",tampilkantni=Sequel.cariIsi("select set_tni_polri.tampilkan_tni_polri from set_tni_polri"),
             AKTIFKANTRACKSQL=koneksiDB.AKTIFKANTRACKSQL();
-    private String loadReg="unload",loadKasirRalan="unload",loadKamarInap="unload";
     
     frmUtama() {
         super();
         initComponents();
         initKhanza();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/iconk.png")).getImage());
-        BackgroundWorker bc= new BackgroundWorker();
-        bc.execute();
         
         this.setExtendedState(MAXIMIZED_BOTH);
         //this.setSize(screen.width,screen.height);
@@ -1149,60 +1142,7 @@ public class frmUtama extends javax.swing.JFrame {
             myInstance = new frmUtama();
 
         return myInstance;
-    }
-    
-    private class BackgroundWorker extends SwingWorker<String, Integer>{
-        
-        @Override
-        protected String doInBackground() throws Exception { 
-                             try{
-                                 long startTime= System.currentTimeMillis(); 
-                                 loadClassReg();
-                                 long endTime=System.currentTimeMillis(); // mengambil waktu akhir eksekusi
-                                 long elapsedTime= endTime - startTime; // menghitung waktu eksekusi
-                                 System.out.println("Load Page Registration Success "+String.valueOf(elapsedTime)+" milidetik");
-                             }catch(Exception e){}
-                             try{
-                                 long startTime= System.currentTimeMillis(); 
-                                 loadClassKasirRalan();
-                                 long endTime=System.currentTimeMillis(); // mengambil waktu akhir eksekusi
-                                 long elapsedTime= endTime - startTime; // menghitung waktu eksekusi
-                                 System.out.println("Load Page Kasir Ralan Success "+String.valueOf(elapsedTime)+" milidetik");
-                             }catch(Exception e){}
-                             try{
-                                 long startTime= System.currentTimeMillis(); 
-                                 loadClassKamarInap();
-                                 long endTime=System.currentTimeMillis(); // mengambil waktu akhir eksekusi
-                                 long elapsedTime= endTime - startTime; // menghitung waktu eksekusi
-                                 System.out.println("Load Page Kamar Inap Success "+String.valueOf(elapsedTime)+" milidetik");
-                             }catch(Exception e){}
-                             
-                             
-            
-            return "finished";
-        }
-        @Override
-        protected void process(List<Integer> chunks) {
-//            this.loadReg="";
-//            progressBar.setValue(chunks.get(chunks.size()-1));
-        }
-    }
-    
-    public void loadClassKasirRalan(){
-//        kasirralan=new DlgKasirRalan(null,false);
-        this.loadKasirRalan="load";
-    }
-    
-    public void loadClassKamarInap(){
-        kamarinap=new DlgKamarInap(null,false);
-        this.loadKamarInap="load";
-    }
-    
-    public void loadClassReg(){
-//        reg=new DlgReg(null,false);
-        this.loadReg="load";
-    }
-     
+    }    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -7874,17 +7814,7 @@ public class frmUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnLoginActionPerformed
 
     private void BtnToolKamnapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolKamnapActionPerformed
-//        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-//        isTutup();
-//        DlgKamarInap ranap=new DlgKamarInap(this,false);
-//        ranap.emptTeks();
-//        ranap.isCek();
-//        ranap.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-//        ranap.setLocationRelativeTo(PanelUtama);
-//        ranap.setVisible(true);
-//        DlgHome.dispose();
-//        this.setCursor(Cursor.getDefaultCursor());
-        if(loadKamarInap=="load"){
+
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         kamarinap.isCek();      
@@ -7894,12 +7824,7 @@ public class frmUtama extends javax.swing.JFrame {
         kamarinap.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
-        }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-             JOptionPane.showMessageDialog(null,"Halaman sedang di siapkan, silahkan tunggu beberapa saat..!!");
-             isTutup();
-             this.setCursor(Cursor.getDefaultCursor());   
-        }
+
     }//GEN-LAST:event_BtnToolKamnapActionPerformed
 
 private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
@@ -7967,7 +7892,7 @@ private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_BtnMenuActionPerformed
 
 private void BtnToolKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolKasirActionPerformed
-        if(loadKasirRalan=="load"){
+
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         kasirralan.isCek();      
@@ -7977,16 +7902,11 @@ private void BtnToolKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         kasirralan.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
-        }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-             JOptionPane.showMessageDialog(null,"Halaman sedang di siapkan, silahkan tunggu beberapa saat..!!");
-             isTutup();
-             this.setCursor(Cursor.getDefaultCursor());   
-        }
+
 }//GEN-LAST:event_BtnToolKasirActionPerformed
 
 private void BtnToolRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolRegActionPerformed
-        if(loadReg=="load"){
+
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         reg.emptTeks();    
@@ -7995,12 +7915,7 @@ private void BtnToolRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         reg.setLocationRelativeTo(PanelUtama);
         reg.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());   
-        }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-             JOptionPane.showMessageDialog(null,"Halaman sedang di siapkan, silahkan tunggu beberapa saat..!!");
-            isTutup();
-             this.setCursor(Cursor.getDefaultCursor());   
-       }
+
 }//GEN-LAST:event_BtnToolRegActionPerformed
 
 
@@ -9371,7 +9286,16 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     }//GEN-LAST:event_btnPeriksaRadiologiActionPerformed
 
     private void btnToolIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToolIGDActionPerformed
-        btnIGDActionPerformed(evt);
+        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        isTutup();
+        igd.emptTeks();
+        igd.isCek();
+        igd.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        igd.setLocationRelativeTo(PanelUtama);
+        igd.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+      
     }//GEN-LAST:event_btnToolIGDActionPerformed
 
     private void btnTagihanRalanPerhariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTagihanRalanPerhariActionPerformed
@@ -9510,16 +9434,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     }//GEN-LAST:event_btnJMDetailDokterActionPerformed
 
     private void btnIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIGDActionPerformed
-        isTutup();
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgIGD igd=new DlgIGD(this,false);
-        igd.emptTeks();
-        igd.isCek();
-        igd.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-        igd.setLocationRelativeTo(PanelUtama);
-        igd.setVisible(true);
-        DlgHome.dispose();
-        this.setCursor(Cursor.getDefaultCursor());
+        
     }//GEN-LAST:event_btnIGDActionPerformed
 
     private void btnToolRadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToolRadActionPerformed
@@ -13819,26 +13734,17 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     }//GEN-LAST:event_btnResepObatFDCActionPerformed
 
     private void BtnDigitalKlaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDigitalKlaimActionPerformed
-        if(loadKasirRalan=="load"){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             isTutup();
-            //        digitalklaim.isCek();
-            //        digitalklaim.setCariKosong();
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             digitalklaim.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
             digitalklaim.setLocationRelativeTo(PanelUtama);
             digitalklaim.setVisible(true);
             DlgHome.dispose();
             this.setCursor(Cursor.getDefaultCursor());
-        }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            JOptionPane.showMessageDialog(null,"Halaman sedang di siapkan, silahkan tunggu beberapa saat..!!");
-            isTutup();
-            this.setCursor(Cursor.getDefaultCursor());
-        }
     }//GEN-LAST:event_BtnDigitalKlaimActionPerformed
 
     private void btnJakPoralLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJakPoralLogActionPerformed
-isTutup();
+        isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         JakPortalLog form=new JakPortalLog(this,false);

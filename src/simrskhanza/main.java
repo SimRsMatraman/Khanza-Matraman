@@ -1,162 +1,215 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simrskhanza;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.EventQueue;
+import java.util.concurrent.ExecutionException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
-import usu.widget.util.WidgetUtilities;
 
-/**
- *
- * @author admin
- */
 public class main extends javax.swing.JFrame {
- Timer timer;
- ActionListener action;
- int a = 0;
-    /**
-     * Creates new form main
-     */
+
+    private Timer progressTimer;
+
     public main() {
-     
-//        initComponents();
-//        setLocationRelativeTo(this);
-//        
-//         aksipo();
-//         timer = new Timer(100, action);
-//        timer.start();
         initComponents();
-        setLocationRelativeTo(this);
-        setIconImage(new ImageIcon(super.getClass().getResource("/picture/yaski24.png")).getImage());
-        BackgroundWorker bw =new BackgroundWorker();
-        bw.execute();
-        
+
+        setLocationRelativeTo(null);
+
+        setIconImage(
+            new ImageIcon(
+                getClass().getResource("/picture/yaski24.png")
+            ).getImage()
+        );
+
+        progressBar.setMinimum(0);
+        progressBar.setMaximum(100);
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+        progressBar.setString("Memulai aplikasi...");
+
+        mulaiLoading();
     }
-    
-    private class BackgroundWorker extends SwingWorker<String, Integer>{
-        @Override
-        protected String doInBackground() throws Exception {
-            frmUtama utama=new frmUtama();
-            while( a <100){
-                    try{
-                   Thread.sleep(20);
-                    publish(a);
-                   a+=6;
-                }catch(Exception e){}
+
+    private void mulaiLoading() {
+
+        /*
+         * Timer berjalan di EDT sehingga splash screen tetap bergerak
+         * selama frmUtama dibuat oleh SwingWorker.
+         *
+         * Angka 0-90 merupakan progress visual.
+         * Saat proses sebenarnya selesai, nilainya langsung menjadi 100.
+         */
+        progressTimer = new Timer(80, e -> {
+            int nilai = progressBar.getValue();
+
+            if (nilai < 90) {
+                int tambahan;
+
+                /*
+                 * Bergerak agak cepat pada awal,
+                 * lalu melambat menjelang selesai.
+                 */
+                if (nilai < 35) {
+                    tambahan = 2;
+                } else {
+                    tambahan = 1;
                 }
-                    utama.isWall();
+
+                nilai = Math.min(nilai + tambahan, 90);
+
+                progressBar.setValue(nilai);
+                progressBar.setString(
+                    "Memuat aplikasi... " + nilai + "%"
+                );
+            }
+        });
+
+        progressTimer.start();
+
+        new StartupWorker().execute();
+    }
+
+    private class StartupWorker
+            extends SwingWorker<frmUtama, Void> {
+
+        @Override
+        protected frmUtama doInBackground() throws Exception {
+
+            long mulai = System.currentTimeMillis();
+
+            /*
+             * Seluruh dialog penting yang merupakan field frmUtama
+             * tetap akan dibuat pada proses startup.
+             */
+            frmUtama utama = frmUtama.getInstance();
+
+            long selesai = System.currentTimeMillis();
+
+            System.out.println(
+                "Waktu loading frmUtama: "
+                + (selesai - mulai)
+                + " ms"
+            );
+
+            return utama;
+        }
+
+        @Override
+        protected void done() {
+            try {
+                frmUtama utama = get();
+
+                if (progressTimer != null) {
+                    progressTimer.stop();
+                }
+
+                progressBar.setValue(95);
+                progressBar.setString(
+                    "Menyiapkan tampilan utama..."
+                );
+
+                /*
+                 * Memaksa tulisan 95% tergambar sebelum isWall().
+                 */
+                progressBar.paintImmediately(
+                    0,
+                    0,
+                    progressBar.getWidth(),
+                    progressBar.getHeight()
+                );
+
+                /*
+                 * Method yang memodifikasi komponen Swing
+                 * dijalankan di done(), yaitu di EDT.
+                 */
+                utama.isWall();
+
+                progressBar.setValue(100);
+                progressBar.setString("Selesai");
+
+                progressBar.paintImmediately(
+                    0,
+                    0,
+                    progressBar.getWidth(),
+                    progressBar.getHeight()
+                );
+
+                /*
+                 * Beri waktu singkat agar angka 100% terlihat.
+                 */
+                Timer selesaiTimer = new Timer(150, e -> {
+                    ((Timer) e.getSource()).stop();
+
                     utama.setVisible(true);
                     dispose();
-            return "finished";
-        }
-        @Override
-        protected void process(List<Integer> chunks) {
-            progressBar.setValue(chunks.get(chunks.size()-1));
-        }
- }
-   
+                });
 
-    
-    
-//     public void aksipo(){
-//        action = new ActionListener() {
-//            
-//          
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//              
-//                progressBar.setValue(progressBar.getValue() + 2); //persen progress bar bertambah setiap 5 kali
-//                
-//                 frmUtama utama=frmUtama.getInstance();
-//                 progressBar.setStringPainted(true);
-//                if (progressBar.getPercentComplete() == 1.0) {
-//                    
-//                 timer.stop();
-//                  
-//             utama.isWall();
-//           //utama.setIconImage(new javax.swing.ImageIcon( getClass(). getResource("/picture/home.PNG")).getImage());
-//          utama.setVisible(true);
-//          dispose();
-//                 
-//                }
-//            }
-//            
-//        };
-//        
-//      
-//    }
- public void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+                selesaiTimer.setRepeats(false);
+                selesaiTimer.start();
+
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+
+                tampilkanErrorLoading(e);
+
+            } catch (ExecutionException e) {
+                tampilkanErrorLoading(e.getCause());
+            }
+        }
+    }
+
+    private void tampilkanErrorLoading(Throwable error) {
+        if (progressTimer != null) {
+            progressTimer.stop();
+        }
+
+        progressBar.setString("Gagal memuat aplikasi");
+
+        error.printStackTrace();
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Aplikasi gagal dimuat.\n"
+            + error.getMessage(),
+            "Kesalahan Startup",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    public static void main(String[] args) {
+
+        /*
+         * Set Nimbus sebelum membuat komponen Swing.
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (
+                javax.swing.UIManager.LookAndFeelInfo info :
+                javax.swing.UIManager
+                    .getInstalledLookAndFeels()
+            ) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    javax.swing.UIManager.setLookAndFeel(
+                        info.getClassName()
+                    );
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.out.println(
+                "Gagal menggunakan Nimbus: " + e
+            );
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                 frmUtama utama=frmUtama.getInstance();
-//                utama.isWall();
-//                utama.setVisible(true);
-//                
-//             
-//                
-//            }
-//        });
- new SwingWorker<Void, Integer>(){
-                @Override
-                public Void doInBackground(){
-                    frmUtama utama=frmUtama.getInstance();
-                    utama.isWall();
-                    utama.setVisible(true);
-                    dispose();
-                    return null;
-                }
-                @Override
-                public void done(){
-//                    utama.isWall();
-//                    utama.setVisible(true);
-//                    dispose();
-                }
-                @Override
-                protected void process(List<Integer> ints){
-                    progressBar.setValue(progressBar.getValue() + 3);
-                }
-
-
-            }.execute();
+        EventQueue.invokeLater(() -> {
+            main splash = new main();
+            splash.setVisible(true);
+        });
     }
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+
+    /*
+     * initComponents() dan variables declaration
+     * dari NetBeans tetap diletakkan di sini.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
