@@ -37,6 +37,21 @@ public class WarnaTableReg extends DefaultTableCellRenderer {
             component.setBackground(new Color(245, 222, 179));
             component.setForeground(new Color(220, 20, 60));
         }
+        
+        int modelRow = table.convertRowIndexToModel(row);
+
+        Object mismatchValue =
+                table.getModel().getValueAt(modelRow, 26);
+
+        boolean mismatchSEP =
+                Boolean.TRUE.equals(mismatchValue)
+                || "1".equals(String.valueOf(mismatchValue))
+                || "true".equalsIgnoreCase(String.valueOf(mismatchValue));
+        
+        if (mismatchSEP) {
+            component.setBackground(new Color(255, 204, 204));
+            component.setForeground(new Color(139, 0, 0));
+        }
 
         return component;
     }
