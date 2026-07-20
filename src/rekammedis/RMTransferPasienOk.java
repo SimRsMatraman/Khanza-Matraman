@@ -402,6 +402,8 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         KdDokterAnastesi1 = new widget.TextBox();
         NmDokterAnastesi1 = new widget.TextBox();
         BtnDokter5 = new widget.Button();
+        BtnMenerima = new widget.Button();
+        BtnMenerima1 = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         btnMenyerahkan = new widget.Button();
@@ -449,7 +451,6 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         label15 = new widget.Label();
         KdPetugasMenerima = new widget.TextBox();
         NmPetugasMenerima = new widget.TextBox();
-        BtnMenerima = new widget.Button();
         label16 = new widget.Label();
         label23 = new widget.Label();
         label24 = new widget.Label();
@@ -575,7 +576,6 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         label18 = new widget.Label();
         KdPetugasMenerima1 = new widget.TextBox();
         NmPetugasMenerima1 = new widget.TextBox();
-        BtnMenerima1 = new widget.Button();
         label19 = new widget.Label();
         label42 = new widget.Label();
         label43 = new widget.Label();
@@ -756,6 +756,38 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         BtnDokter5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 BtnDokter5KeyPressed(evt);
+            }
+        });
+
+        BtnMenerima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnMenerima.setMnemonic('2');
+        BtnMenerima.setToolTipText("Alt+2");
+        BtnMenerima.setName("BtnMenerima"); // NOI18N
+        BtnMenerima.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnMenerima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMenerimaActionPerformed(evt);
+            }
+        });
+        BtnMenerima.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnMenerimaKeyPressed(evt);
+            }
+        });
+
+        BtnMenerima1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnMenerima1.setMnemonic('2');
+        BtnMenerima1.setToolTipText("Alt+2");
+        BtnMenerima1.setName("BtnMenerima1"); // NOI18N
+        BtnMenerima1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnMenerima1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMenerima1ActionPerformed(evt);
+            }
+        });
+        BtnMenerima1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnMenerima1KeyPressed(evt);
             }
         });
 
@@ -971,7 +1003,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         label13.setBounds(0, 40, 70, 23);
 
         TanggalMasuk.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:23" }));
+        TanggalMasuk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026 11:23:48" }));
         TanggalMasuk.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalMasuk.setName("TanggalMasuk"); // NOI18N
         TanggalMasuk.setOpaque(false);
@@ -1195,24 +1227,6 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         FormInput.add(NmPetugasMenerima);
         NmPetugasMenerima.setBounds(660, 750, 180, 22);
 
-        BtnMenerima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnMenerima.setMnemonic('2');
-        BtnMenerima.setToolTipText("Alt+2");
-        BtnMenerima.setName("BtnMenerima"); // NOI18N
-        BtnMenerima.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnMenerima.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnMenerimaActionPerformed(evt);
-            }
-        });
-        BtnMenerima.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnMenerimaKeyPressed(evt);
-            }
-        });
-        FormInput.add(BtnMenerima);
-        BtnMenerima.setBounds(840, 750, 28, 22);
-
         label16.setText("Menyerahkan :");
         label16.setName("label16"); // NOI18N
         label16.setPreferredSize(new java.awt.Dimension(70, 23));
@@ -1386,7 +1400,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         EKG.setBounds(60, 370, 110, 22);
 
         TanggalEKG.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalEKG.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:23" }));
+        TanggalEKG.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026 11:23:48" }));
         TanggalEKG.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalEKG.setName("TanggalEKG"); // NOI18N
         TanggalEKG.setOpaque(false);
@@ -1560,7 +1574,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         AntibiotikLainnya.setBounds(160, 560, 150, 22);
 
         TanggalAntibiotik.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalAntibiotik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:23" }));
+        TanggalAntibiotik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026 11:23:48" }));
         TanggalAntibiotik.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalAntibiotik.setName("TanggalAntibiotik"); // NOI18N
         TanggalAntibiotik.setOpaque(false);
@@ -1598,7 +1612,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         TransfusiLainnya.setBounds(160, 590, 150, 22);
 
         TanggalTransfusi.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalTransfusi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:23" }));
+        TanggalTransfusi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026 11:23:48" }));
         TanggalTransfusi.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalTransfusi.setName("TanggalTransfusi"); // NOI18N
         TanggalTransfusi.setOpaque(false);
@@ -1847,7 +1861,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         Mens.setBounds(470, 370, 170, 22);
 
         DTPMens.setForeground(new java.awt.Color(50, 70, 50));
-        DTPMens.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
+        DTPMens.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026" }));
         DTPMens.setDisplayFormat("dd-MM-yyyy");
         DTPMens.setName("DTPMens"); // NOI18N
         DTPMens.setOpaque(false);
@@ -2019,7 +2033,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         Pengembalian.setBounds(470, 620, 320, 22);
 
         DTPSerah.setForeground(new java.awt.Color(50, 70, 50));
-        DTPSerah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
+        DTPSerah.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026" }));
         DTPSerah.setDisplayFormat("dd-MM-yyyy");
         DTPSerah.setName("DTPSerah"); // NOI18N
         DTPSerah.setOpaque(false);
@@ -2029,7 +2043,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             }
         });
         FormInput.add(DTPSerah);
-        DTPSerah.setBounds(160, 670, 90, 22);
+        DTPSerah.setBounds(150, 720, 90, 22);
 
         label67.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         label67.setText("Sh :");
@@ -2127,7 +2141,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         label12.setBounds(0, 40, 70, 23);
 
         TanggalMasuk1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalMasuk1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:24" }));
+        TanggalMasuk1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026 11:23:49" }));
         TanggalMasuk1.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalMasuk1.setName("TanggalMasuk1"); // NOI18N
         TanggalMasuk1.setOpaque(false);
@@ -2212,7 +2226,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         jSeparator8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
         jSeparator8.setName("jSeparator8"); // NOI18N
         FormInput1.add(jSeparator8);
-        jSeparator8.setBounds(10, 730, 880, 3);
+        jSeparator8.setBounds(10, 730, 880, 12);
 
         jLabel24.setText("Diagnosa Pre OP :");
         jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -2333,24 +2347,6 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         NmPetugasMenerima1.setPreferredSize(new java.awt.Dimension(207, 23));
         FormInput1.add(NmPetugasMenerima1);
         NmPetugasMenerima1.setBounds(660, 770, 180, 22);
-
-        BtnMenerima1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnMenerima1.setMnemonic('2');
-        BtnMenerima1.setToolTipText("Alt+2");
-        BtnMenerima1.setName("BtnMenerima1"); // NOI18N
-        BtnMenerima1.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnMenerima1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnMenerima1ActionPerformed(evt);
-            }
-        });
-        BtnMenerima1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnMenerima1KeyPressed(evt);
-            }
-        });
-        FormInput1.add(BtnMenerima1);
-        BtnMenerima1.setBounds(840, 770, 28, 22);
 
         label19.setText("Menyerahkan :");
         label19.setName("label19"); // NOI18N
@@ -2538,7 +2534,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         EKG1.setBounds(60, 450, 110, 22);
 
         TanggalEKG1.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalEKG1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026 09:04:24" }));
+        TanggalEKG1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026 11:23:49" }));
         TanggalEKG1.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalEKG1.setName("TanggalEKG1"); // NOI18N
         TanggalEKG1.setOpaque(false);
@@ -2958,7 +2954,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         Alkes1.setBounds(470, 550, 430, 22);
 
         DTPSerah1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPSerah1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
+        DTPSerah1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026" }));
         DTPSerah1.setDisplayFormat("dd-MM-yyyy");
         DTPSerah1.setName("DTPSerah1"); // NOI18N
         DTPSerah1.setOpaque(false);
@@ -3167,7 +3163,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -3181,7 +3177,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3399,6 +3395,19 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
     }
 }
     
+    private void prosesGantiBerdasarkanTab() {
+    switch (TabRawat.getSelectedIndex()) {
+        case 0:
+            ganti();
+            break;
+        case 1:
+            ganti1();
+            break;
+        default:
+            JOptionPane.showMessageDialog(null, "Tab tidak dikenali");
+    }
+}
+    
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
@@ -3455,13 +3464,11 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
             Valid.textKosong(BtnDokter2,"Dokter Operator");
         }else if(DiagnosaPre.getText().trim().equals("")){
             Valid.textKosong(DiagnosaPre,"Diagnosa Pre Operasi");
-        }else if(DiagnosaPost.getText().trim().equals("")){
-            Valid.textKosong(DiagnosaPost,"Diagnosa Post Operasi");
         }else{
-            if(tbObat.getSelectedRow()>-1){
-                ganti();
-            }else{
-                JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
+                        if (akses.getkode().equals("Admin Utama")) {
+                prosesGantiBerdasarkanTab();
+            } else {
+                    prosesGantiBerdasarkanTab();
             }
         }
 }//GEN-LAST:event_BtnEditActionPerformed
@@ -5475,34 +5482,78 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
     }
 
     private void ganti() {
-        if(Sequel.mengedittf("transfer_pasien_ok","no_rawat=? and tanggal_masuk=?","no_rawat=?,tanggal_masuk=?,tanggal_keluar=?,asal_ruang=?,stts=?,diagnosa_pre=?,diagnosa_post=?,kd_operator=?,kd_anastesi=?,rencana=?,\n" +
-                "izin_op=?,lab=?,dpl=?,gds=?,btct=?,uc=?,sgot=?,lab_lainnya=?,rontgen=?,rontgen_thorax=?," +
-                "rontgen_kepala=?,rontgen_ivp=?,rontgen_bno=?,bno_lainnya=?,ekg=?,tanggal_ekg=?,usg=?,usg_abdomen=?,usg_ginjal=?,usg_haper=?," +
-                "usg_thorax=?,usg_lainnya=?,ctscan=?,ct_kepala=?,ct_abdomen=?,ct_thorax=?,mri=?,mri_lainnya=?,antibiotik=?,antibiotik_lainnya=?," +
-                "tanggal_antibiotik=?,transfusi=?,transfusi_lainnya=?,tanggal_transfusi=?,terapi_sebelum_lainnya=?,kesadaran=?,observasi=?,td=?,nd=?,sh=?," +
-                "puasa=?,jam_puasa=?,klisma=?,jam_klisma=?,cukur=?,luka_sebelum_op=?,luka_sebelum_op_lainnya=?,mens=?,tanggal_mens=?,iufd=?," +
-                "dc_balon=?,dc_vol=?,dv_warna=?,dc_lainnya=?,alkes=?,ganti_baju=?,gigi_palsu=?,alat_bantu_dengar=?,perhiasan=?,pengembalian=?," +
-                "nip_menyerahkan=?,nip_menerima=?,laporan_op=?,lab1=?,dpl1=?,gds1=?,btct1=?,uc1=?,sgot1=?,lab_lainnya1=?," +
-                "rontgen1=?,rontgen_thorax1=?,rontgen_kepala1=?,rontgen_ivp1=?,rontgen_bno1=?,bno_lainnya1=?,ekg1=?,tanggal_ekg1=?,usg1=?,usg_abdomen1=?," +
-                "usg_ginjal1=?,usg_haper1=?,usg_thorax1=?,usg_lainnya1=?,ctscan1=?,ct_kepala1=?,ct_abdomen1=?,ct_thorax1=?,mri1=?,mri_lainnya1=?," +
-                "obat=?,resep_post=?,Transfusi_masuk=?,terapi_sebelum_lainnya1=?,kesadaran1=?,observasi1=?,td1=?,nd1=?,sh1=?,luka_op=?," +
-                "pasang_alat=?,drainese=?,spoeling=?,alat_warna=?,iufd1=?,balon1=?,vol1=?,warna1=?,dc_lainnya1=?,alkes1=?," +
-                "nip_menyerahkan1=?,nip_menerima1=?,laporan_pa=?,sample_pa=?,laporan_anastesi=?,laporan_to=?,ttd_menerima=?,ttd_menyerahkan1=?,ttd_menerima1=?",131,new String[]{
+        if(Sequel.mengedittf("transfer_pasien_ok","no_rawat=? and tanggal_masuk=?",
+        "no_rawat=?,tanggal_masuk=?,tanggal_keluar=?,asal_ruang=?,stts=?,diagnosa_pre=?,diagnosa_post=?,kd_operator=?,kd_anastesi=?,rencana=?," +
+        "izin_op=?,lab=?,dpl=?,gds=?,btct=?,uc=?,sgot=?,lab_lainnya=?,rontgen=?,rontgen_thorax=?," +
+        "rontgen_kepala=?,rontgen_ivp=?,rontgen_bno=?,bno_lainnya=?,ekg=?,tanggal_ekg=?,usg=?,usg_abdomen=?,usg_ginjal=?,usg_haper=?," +
+        "usg_thorax=?,usg_lainnya=?,ctscan=?,ct_kepala=?,ct_abdomen=?,ct_thorax=?,mri=?,mri_lainnya=?,antibiotik=?,antibiotik_lainnya=?," +
+        "tanggal_antibiotik=?,transfusi=?,transfusi_lainnya=?,tanggal_transfusi=?,terapi_sebelum_lainnya=?,kesadaran=?,observasi=?,td=?,nd=?,sh=?," +
+        "puasa=?,jam_puasa=?,klisma=?,jam_klisma=?,cukur=?,luka_sebelum_op=?,luka_sebelum_op_lainnya=?,mens=?,tanggal_mens=?,iufd=?," +
+        "dc_balon=?,dc_vol=?,dv_warna=?,dc_lainnya=?,alkes=?,ganti_baju=?,gigi_palsu=?,alat_bantu_dengar=?,perhiasan=?,pengembalian=?," +
+        "nip_menyerahkan=?,nip_menerima=?,laporan_op=?,lab1=?,dpl1=?,gds1=?,btct1=?,uc1=?,sgot1=?,lab_lainnya1=?," +
+        "rontgen1=?,rontgen_thorax1=?,rontgen_kepala1=?,rontgen_ivp1=?,rontgen_bno1=?,bno_lainnya1=?,ekg1=?,tanggal_ekg1=?,usg1=?,usg_abdomen1=?," +
+        "usg_ginjal1=?,usg_haper1=?,usg_thorax1=?,usg_lainnya1=?,ctscan1=?,ct_kepala1=?,ct_abdomen1=?,ct_thorax1=?,mri1=?,mri_lainnya1=?," +
+        "obat=?,resep_post=?,Transfusi_masuk=?,terapi_sebelum_lainnya1=?,kesadaran1=?,observasi1=?,td1=?,nd1=?,sh1=?,luka_op=?," +
+        "pasang_alat=?,drainese=?,spoeling=?,alat_warna=?,iufd1=?,balon1=?,vol1=?,warna1=?,dc_lainnya1=?,alkes1=?," +
+        "nip_menyerahkan1=?,nip_menerima1=?,laporan_pa=?,sample_pa=?,laporan_anastesi=?,laporan_to=?,ttd_menyerahkan=?",
+        129,new String[]{
     
-                TNoRw.getText(),tglJam(TanggalMasuk.getDate()),tglJam(TanggalMasuk1.getDate()),KdRuang.getText(),Status.getText(),DiagnosaPre.getText(),DiagnosaPost.getText(),KdDokterOperator.getText(),KdDokterAnastesi.getText(),Rencana.getText(), 
-                IzinOp.isSelected() ? "true" : "false",Lab.isSelected() ? "true" : "false",Dpl.isSelected() ? "true" : "false",Gds.isSelected() ? "true" : "false",BtCt.isSelected() ? "true" : "false",Uc.isSelected() ? "true" : "false",SpgtSgot.isSelected() ? "true" : "false",LabLainnya.getText(),Rontgen.isSelected() ? "true" : "false",RontgenThorax.isSelected() ? "true" : "false"
-                ,RontgenKepala.isSelected() ? "true" : "false",RontgenIVP.isSelected() ? "true" : "false",RontgenBNO.isSelected() ? "true" : "false",BNOLainnya.getText(),EKG.isSelected() ? "true" : "false",tglJam(TanggalEKG.getDate()),USG.isSelected() ? "true" : "false",USGAbdomen.isSelected() ? "true" : "false",USGGinjal.isSelected() ? "true" : "false",USGHepar.isSelected() ? "true" : "false"
-                ,USGThorax.isSelected() ? "true" : "false",USGLainnya.getText(),CTScan.isSelected() ? "true" : "false",CTKepala.isSelected() ? "true" : "false",CTAbdomen.isSelected() ? "true" : "false",CTThorax.isSelected() ? "true" : "false",MRI.isSelected() ? "true" : "false",MRILainnya.getText(),Antibiotik.isSelected() ? "true" : "false",AntibiotikLainnya.getText()
-                ,tglJam(TanggalAntibiotik.getDate()),Transfusi.isSelected() ? "true" : "false",TransfusiLainnya.getText(),tglJam(TanggalTransfusi.getDate()),TerapiSebelumLainnya.getText(),Kesadaran.isSelected() ? "true" : "false",Observasi.isSelected() ? "true" : "false",TD.getText(),Nd.getText(),Sh.getText()
-                ,Puasa.isSelected() ? "true" : "false",CmbJamPuasa.getSelectedItem()+":"+CmbMenitPuasa.getSelectedItem()+":"+CmbDetikPuasa.getSelectedItem(),Klisma.isSelected() ? "true" : "false",CmbJamKlisma.getSelectedItem()+":"+CmbMenitKlisma.getSelectedItem()+":"+CmbDetikKlisma.getSelectedItem(),Cukur.isSelected() ? "true" : "false",LukaSebelumOP.isSelected() ? "true" : "false",LukaSebelumOPLainnya.getText(),Mens.isSelected() ? "true" : "false",Valid.SetTgl(DTPMens.getSelectedItem()+""),IUFD.getText()
-                ,Balon.getText(),Vol.getText(),Warna.getText(),DCLainnya.getText(),Alkes.getText(),GantiBaju.isSelected() ? "true" : "false",GigiPalsu.isSelected() ? "true" : "false",BantuDengar.isSelected() ? "true" : "false",Perhiasan.isSelected() ? "true" : "false",Pengembalian.isSelected() ? "true" : "false"
-                ,KdPetugasMenyerahkan.getText(),KdPetugasMenerima.getText(),LapOp.isSelected() ? "true" : "false",Lab1.isSelected() ? "true" : "false",Dpl1.isSelected() ? "true" : "false",Gds1.isSelected() ? "true" : "false",BtCt1.isSelected() ? "true" : "false",Uc1.isSelected() ? "true" : "false",SpgtSgot1.isSelected() ? "true" : "false",LabLainnya1.getText()
-                ,Rontgen1.isSelected() ? "true" : "false",RontgenThorax1.isSelected() ? "true" : "false",RontgenKepala1.isSelected() ? "true" : "false",RontgenIVP1.isSelected() ? "true" : "false",RontgenBNO1.isSelected() ? "true" : "false",BNOLainnya1.getText(),EKG1.isSelected() ? "true" : "false",tglJam(TanggalEKG1.getDate()),USG1.isSelected() ? "true" : "false",USGAbdomen1.isSelected() ? "true" : "false"
-                ,USGGinjal1.isSelected() ? "true" : "false",USGHepar1.isSelected() ? "true" : "false",USGThorax1.isSelected() ? "true" : "false",USGLainnya1.getText(),CTScan1.isSelected() ? "true" : "false",CTKepala1.isSelected() ? "true" : "false",CTAbdomen1.isSelected() ? "true" : "false",CTThorax1.isSelected() ? "true" : "false",MRI1.isSelected() ? "true" : "false",MRILainnya1.getText()
-                ,ObatObatan.getText(),ResepPostOp.getText(),TransfusiMasuk.getText(),TerapiSebelumLainnya1.getText(),Kesadaran1.isSelected() ? "true" : "false",Observasi1.isSelected() ? "true" : "false",TD1.getText(),Nd1.getText(),Sh1.getText(),LukaOP.getText()
-                ,PasangAlat.isSelected() ? "true" : "false",Drainase.getText(),Spoeling.getText(),AlatWarna.getText(),IUFD1.getText(),Balon1.getText(),Vol1.getText(),Warna1.getText(),DCLainnya1.getText(),Alkes1.getText()
-                ,KdPetugasMenyerahkan1.getText(),KdPetugasMenerima1.getText(),LapPA.isSelected() ? "true" : "false",SamplePA.isSelected() ? "true" : "false",LapAnastesi.isSelected() ? "true" : "false",LapTimeOut.isSelected() ? "true" : "false","/uploads/transferpasienok/"+KdPetugasMenerima.getText()+".png","/uploads/transferpasienok/"+KdPetugasMenyerahkan1.getText()+".png","/uploads/transferpasienok/"+KdPetugasMenerima1.getText()+".png"
-                ,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()
+TNoRw.getText(),tglJam(TanggalMasuk.getDate()),tglJam(TanggalMasuk1.getDate()),KdRuang.getText(),Status.getText(),DiagnosaPre.getText(),DiagnosaPost.getText(),KdDokterOperator.getText(),KdDokterAnastesi.getText(),Rencana.getText(),
+IzinOp.isSelected() ? "true" : "false",Lab.isSelected() ? "true" : "false",Dpl.isSelected() ? "true" : "false",Gds.isSelected() ? "true" : "false",BtCt.isSelected() ? "true" : "false",Uc.isSelected() ? "true" : "false",SpgtSgot.isSelected() ? "true" : "false",LabLainnya.getText(),Rontgen.isSelected() ? "true" : "false",RontgenThorax.isSelected() ? "true" : "false",
+RontgenKepala.isSelected() ? "true" : "false",RontgenIVP.isSelected() ? "true" : "false",RontgenBNO.isSelected() ? "true" : "false",BNOLainnya.getText(),EKG.isSelected() ? "true" : "false",tglJam(TanggalEKG.getDate()),USG.isSelected() ? "true" : "false",USGAbdomen.isSelected() ? "true" : "false",USGGinjal.isSelected() ? "true" : "false",USGHepar.isSelected() ? "true" : "false",
+USGThorax.isSelected() ? "true" : "false",USGLainnya.getText(),CTScan.isSelected() ? "true" : "false",CTKepala.isSelected() ? "true" : "false",CTAbdomen.isSelected() ? "true" : "false",CTThorax.isSelected() ? "true" : "false",MRI.isSelected() ? "true" : "false",MRILainnya.getText(),Antibiotik.isSelected() ? "true" : "false",AntibiotikLainnya.getText(),
+tglJam(TanggalAntibiotik.getDate()),Transfusi.isSelected() ? "true" : "false",TransfusiLainnya.getText(),tglJam(TanggalTransfusi.getDate()),TerapiSebelumLainnya.getText(),Kesadaran.isSelected() ? "true" : "false",Observasi.isSelected() ? "true" : "false",TD.getText(),Nd.getText(),Sh.getText(),
+Puasa.isSelected() ? "true" : "false",CmbJamPuasa.getSelectedItem()+":"+CmbMenitPuasa.getSelectedItem()+":"+CmbDetikPuasa.getSelectedItem(),Klisma.isSelected() ? "true" : "false",CmbJamKlisma.getSelectedItem()+":"+CmbMenitKlisma.getSelectedItem()+":"+CmbDetikKlisma.getSelectedItem(),Cukur.isSelected() ? "true" : "false",LukaSebelumOP.isSelected() ? "true" : "false",LukaSebelumOPLainnya.getText(),Mens.isSelected() ? "true" : "false",Valid.SetTgl(DTPMens.getSelectedItem()+""),IUFD.getText(),
+Balon.getText(),Vol.getText(),Warna.getText(),DCLainnya.getText(),Alkes.getText(),GantiBaju.isSelected() ? "true" : "false",GigiPalsu.isSelected() ? "true" : "false",BantuDengar.isSelected() ? "true" : "false",Perhiasan.isSelected() ? "true" : "false",Pengembalian.isSelected() ? "true" : "false",
+KdPetugasMenyerahkan.getText(),KdPetugasMenerima.getText(),LapOp.isSelected() ? "true" : "false",Lab1.isSelected() ? "true" : "false",Dpl1.isSelected() ? "true" : "false",Gds1.isSelected() ? "true" : "false",BtCt1.isSelected() ? "true" : "false",Uc1.isSelected() ? "true" : "false",SpgtSgot1.isSelected() ? "true" : "false",LabLainnya1.getText(),
+Rontgen1.isSelected() ? "true" : "false",RontgenThorax1.isSelected() ? "true" : "false",RontgenKepala1.isSelected() ? "true" : "false",RontgenIVP1.isSelected() ? "true" : "false",RontgenBNO1.isSelected() ? "true" : "false",BNOLainnya1.getText(),EKG1.isSelected() ? "true" : "false",tglJam(TanggalEKG1.getDate()),USG1.isSelected() ? "true" : "false",USGAbdomen1.isSelected() ? "true" : "false",
+USGGinjal1.isSelected() ? "true" : "false",USGHepar1.isSelected() ? "true" : "false",USGThorax1.isSelected() ? "true" : "false",USGLainnya1.getText(),CTScan1.isSelected() ? "true" : "false",CTKepala1.isSelected() ? "true" : "false",CTAbdomen1.isSelected() ? "true" : "false",CTThorax1.isSelected() ? "true" : "false",MRI1.isSelected() ? "true" : "false",MRILainnya1.getText(),
+ObatObatan.getText(),ResepPostOp.getText(),TransfusiMasuk.getText(),TerapiSebelumLainnya1.getText(),Kesadaran1.isSelected() ? "true" : "false",Observasi1.isSelected() ? "true" : "false",TD1.getText(),Nd1.getText(),Sh1.getText(),LukaOP.getText(),
+PasangAlat.isSelected() ? "true" : "false",Drainase.getText(),Spoeling.getText(),AlatWarna.getText(),IUFD1.getText(),Balon1.getText(),Vol1.getText(),Warna1.getText(),DCLainnya1.getText(),Alkes1.getText(),
+KdPetugasMenyerahkan1.getText(),KdPetugasMenerima1.getText(),LapPA.isSelected() ? "true" : "false",SamplePA.isSelected() ? "true" : "false",LapAnastesi.isSelected() ? "true" : "false",LapTimeOut.isSelected() ? "true" : "false",
+"/uploads/transferpasienok/"+KdPetugasMenyerahkan.getText()+".png",
+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),
+tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()
+            })==true){
+                emptTeks();
+                tampil();
+                TabRawat.setSelectedIndex(2);
+        }
+    }
+    
+private void ganti1() {
+        if(Sequel.mengedittf("transfer_pasien_ok","no_rawat=? and tanggal_masuk=?",
+        "no_rawat=?,tanggal_masuk=?,tanggal_keluar=?,asal_ruang=?,stts=?,diagnosa_pre=?,diagnosa_post=?,kd_operator=?,kd_anastesi=?,rencana=?," +
+        "izin_op=?,lab=?,dpl=?,gds=?,btct=?,uc=?,sgot=?,lab_lainnya=?,rontgen=?,rontgen_thorax=?," +
+        "rontgen_kepala=?,rontgen_ivp=?,rontgen_bno=?,bno_lainnya=?,ekg=?,tanggal_ekg=?,usg=?,usg_abdomen=?,usg_ginjal=?,usg_haper=?," +
+        "usg_thorax=?,usg_lainnya=?,ctscan=?,ct_kepala=?,ct_abdomen=?,ct_thorax=?,mri=?,mri_lainnya=?,antibiotik=?,antibiotik_lainnya=?," +
+        "tanggal_antibiotik=?,transfusi=?,transfusi_lainnya=?,tanggal_transfusi=?,terapi_sebelum_lainnya=?,kesadaran=?,observasi=?,td=?,nd=?,sh=?," +
+        "puasa=?,jam_puasa=?,klisma=?,jam_klisma=?,cukur=?,luka_sebelum_op=?,luka_sebelum_op_lainnya=?,mens=?,tanggal_mens=?,iufd=?," +
+        "dc_balon=?,dc_vol=?,dv_warna=?,dc_lainnya=?,alkes=?,ganti_baju=?,gigi_palsu=?,alat_bantu_dengar=?,perhiasan=?,pengembalian=?," +
+        "nip_menyerahkan=?,nip_menerima=?,laporan_op=?,lab1=?,dpl1=?,gds1=?,btct1=?,uc1=?,sgot1=?,lab_lainnya1=?," +
+        "rontgen1=?,rontgen_thorax1=?,rontgen_kepala1=?,rontgen_ivp1=?,rontgen_bno1=?,bno_lainnya1=?,ekg1=?,tanggal_ekg1=?,usg1=?,usg_abdomen1=?," +
+        "usg_ginjal1=?,usg_haper1=?,usg_thorax1=?,usg_lainnya1=?,ctscan1=?,ct_kepala1=?,ct_abdomen1=?,ct_thorax1=?,mri1=?,mri_lainnya1=?," +
+        "obat=?,resep_post=?,Transfusi_masuk=?,terapi_sebelum_lainnya1=?,kesadaran1=?,observasi1=?,td1=?,nd1=?,sh1=?,luka_op=?," +
+        "pasang_alat=?,drainese=?,spoeling=?,alat_warna=?,iufd1=?,balon1=?,vol1=?,warna1=?,dc_lainnya1=?,alkes1=?," +
+        "nip_menyerahkan1=?,nip_menerima1=?,laporan_pa=?,sample_pa=?,laporan_anastesi=?,laporan_to=?,ttd_menyerahkan1=?",
+        129,new String[]{
+    
+TNoRw.getText(),tglJam(TanggalMasuk.getDate()),tglJam(TanggalMasuk1.getDate()),KdRuang.getText(),Status.getText(),DiagnosaPre.getText(),DiagnosaPost.getText(),KdDokterOperator.getText(),KdDokterAnastesi.getText(),Rencana.getText(),
+IzinOp.isSelected() ? "true" : "false",Lab.isSelected() ? "true" : "false",Dpl.isSelected() ? "true" : "false",Gds.isSelected() ? "true" : "false",BtCt.isSelected() ? "true" : "false",Uc.isSelected() ? "true" : "false",SpgtSgot.isSelected() ? "true" : "false",LabLainnya.getText(),Rontgen.isSelected() ? "true" : "false",RontgenThorax.isSelected() ? "true" : "false",
+RontgenKepala.isSelected() ? "true" : "false",RontgenIVP.isSelected() ? "true" : "false",RontgenBNO.isSelected() ? "true" : "false",BNOLainnya.getText(),EKG.isSelected() ? "true" : "false",tglJam(TanggalEKG.getDate()),USG.isSelected() ? "true" : "false",USGAbdomen.isSelected() ? "true" : "false",USGGinjal.isSelected() ? "true" : "false",USGHepar.isSelected() ? "true" : "false",
+USGThorax.isSelected() ? "true" : "false",USGLainnya.getText(),CTScan.isSelected() ? "true" : "false",CTKepala.isSelected() ? "true" : "false",CTAbdomen.isSelected() ? "true" : "false",CTThorax.isSelected() ? "true" : "false",MRI.isSelected() ? "true" : "false",MRILainnya.getText(),Antibiotik.isSelected() ? "true" : "false",AntibiotikLainnya.getText(),
+tglJam(TanggalAntibiotik.getDate()),Transfusi.isSelected() ? "true" : "false",TransfusiLainnya.getText(),tglJam(TanggalTransfusi.getDate()),TerapiSebelumLainnya.getText(),Kesadaran.isSelected() ? "true" : "false",Observasi.isSelected() ? "true" : "false",TD.getText(),Nd.getText(),Sh.getText(),
+Puasa.isSelected() ? "true" : "false",CmbJamPuasa.getSelectedItem()+":"+CmbMenitPuasa.getSelectedItem()+":"+CmbDetikPuasa.getSelectedItem(),Klisma.isSelected() ? "true" : "false",CmbJamKlisma.getSelectedItem()+":"+CmbMenitKlisma.getSelectedItem()+":"+CmbDetikKlisma.getSelectedItem(),Cukur.isSelected() ? "true" : "false",LukaSebelumOP.isSelected() ? "true" : "false",LukaSebelumOPLainnya.getText(),Mens.isSelected() ? "true" : "false",Valid.SetTgl(DTPMens.getSelectedItem()+""),IUFD.getText(),
+Balon.getText(),Vol.getText(),Warna.getText(),DCLainnya.getText(),Alkes.getText(),GantiBaju.isSelected() ? "true" : "false",GigiPalsu.isSelected() ? "true" : "false",BantuDengar.isSelected() ? "true" : "false",Perhiasan.isSelected() ? "true" : "false",Pengembalian.isSelected() ? "true" : "false",
+KdPetugasMenyerahkan.getText(),KdPetugasMenerima.getText(),LapOp.isSelected() ? "true" : "false",Lab1.isSelected() ? "true" : "false",Dpl1.isSelected() ? "true" : "false",Gds1.isSelected() ? "true" : "false",BtCt1.isSelected() ? "true" : "false",Uc1.isSelected() ? "true" : "false",SpgtSgot1.isSelected() ? "true" : "false",LabLainnya1.getText(),
+Rontgen1.isSelected() ? "true" : "false",RontgenThorax1.isSelected() ? "true" : "false",RontgenKepala1.isSelected() ? "true" : "false",RontgenIVP1.isSelected() ? "true" : "false",RontgenBNO1.isSelected() ? "true" : "false",BNOLainnya1.getText(),EKG1.isSelected() ? "true" : "false",tglJam(TanggalEKG1.getDate()),USG1.isSelected() ? "true" : "false",USGAbdomen1.isSelected() ? "true" : "false",
+USGGinjal1.isSelected() ? "true" : "false",USGHepar1.isSelected() ? "true" : "false",USGThorax1.isSelected() ? "true" : "false",USGLainnya1.getText(),CTScan1.isSelected() ? "true" : "false",CTKepala1.isSelected() ? "true" : "false",CTAbdomen1.isSelected() ? "true" : "false",CTThorax1.isSelected() ? "true" : "false",MRI1.isSelected() ? "true" : "false",MRILainnya1.getText(),
+ObatObatan.getText(),ResepPostOp.getText(),TransfusiMasuk.getText(),TerapiSebelumLainnya1.getText(),Kesadaran1.isSelected() ? "true" : "false",Observasi1.isSelected() ? "true" : "false",TD1.getText(),Nd1.getText(),Sh1.getText(),LukaOP.getText(),
+PasangAlat.isSelected() ? "true" : "false",Drainase.getText(),Spoeling.getText(),AlatWarna.getText(),IUFD1.getText(),Balon1.getText(),Vol1.getText(),Warna1.getText(),DCLainnya1.getText(),Alkes1.getText(),
+KdPetugasMenyerahkan1.getText(),KdPetugasMenerima1.getText(),LapPA.isSelected() ? "true" : "false",SamplePA.isSelected() ? "true" : "false",LapAnastesi.isSelected() ? "true" : "false",LapTimeOut.isSelected() ? "true" : "false",
+"/uploads/transferpasienok/"+KdPetugasMenyerahkan1.getText()+".png",
+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),
+tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()
             })==true){
                 emptTeks();
                 tampil();
@@ -5530,7 +5581,7 @@ public final class RMTransferPasienOk extends javax.swing.JDialog {
                 ,USGGinjal1.isSelected() ? "true" : "false",USGHepar1.isSelected() ? "true" : "false",USGThorax1.isSelected() ? "true" : "false",USGLainnya1.getText(),CTScan1.isSelected() ? "true" : "false",CTKepala1.isSelected() ? "true" : "false",CTAbdomen1.isSelected() ? "true" : "false",CTThorax1.isSelected() ? "true" : "false",MRI1.isSelected() ? "true" : "false",MRILainnya1.getText()
                 ,ObatObatan.getText(),ResepPostOp.getText(),TransfusiMasuk.getText(),TerapiSebelumLainnya1.getText(),Kesadaran1.isSelected() ? "true" : "false",Observasi1.isSelected() ? "true" : "false",TD1.getText(),Nd1.getText(),Sh1.getText(),LukaOP.getText()
                 ,PasangAlat.isSelected() ? "true" : "false",Drainase.getText(),Spoeling.getText(),AlatWarna.getText(),IUFD1.getText(),Balon1.getText(),Vol1.getText(),Warna1.getText(),DCLainnya1.getText(),Alkes1.getText()
-                ,KdPetugasMenyerahkan1.getText(),KdPetugasMenerima1.getText(),LapPA.isSelected() ? "true" : "false",SamplePA.isSelected() ? "true" : "false",LapAnastesi.isSelected() ? "true" : "false",LapTimeOut.isSelected() ? "true" : "false","/uploads/transferpasienok/"+KdPetugasMenyerahkan.getText()+".png","/uploads/transferpasienok/"+KdPetugasMenerima.getText()+".png","",""
+                ,KdPetugasMenyerahkan1.getText(),KdPetugasMenerima1.getText(),LapPA.isSelected() ? "true" : "false",SamplePA.isSelected() ? "true" : "false",LapAnastesi.isSelected() ? "true" : "false",LapTimeOut.isSelected() ? "true" : "false","/uploads/transferpasienok/"+KdPetugasMenyerahkan.getText()+".png","","",""
             })==true){
                 emptTeks();
                 tampil();
