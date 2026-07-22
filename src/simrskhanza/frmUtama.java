@@ -1000,6 +1000,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 //import integration_jakportal.JakPortalLog;
 
 
@@ -7688,6 +7690,7 @@ public class frmUtama extends javax.swing.JFrame {
 //                    MnPengajuanCutiPegawai.setEnabled(false);
 
                     DlgLogin.dispose();
+                    tampilDashboardLogin();
                     BtnLog.setText("Log Out");
                     MnLogin.setText("Log Out");
                     lblStts.setText("Admin : ");
@@ -7698,6 +7701,7 @@ public class frmUtama extends javax.swing.JFrame {
                 }else if(akses.getjml2()>=1){  
                     BtnMenu.setEnabled(true);
                     DlgLogin.dispose();
+                    tampilDashboardLogin();
                     BtnLog.setText("Log Out");
                     MnLogin.setText("Log Out");
                     lblStts.setText("Admin : ");
@@ -20646,6 +20650,189 @@ isTutup();
             System.out.println("Notifikasi : Silahkan Set Aplikasi "+e);
         }
     }
+
+private void tampilDashboardLogin() {
+String namaDokter = Sequel.cariIsi(
+
+    "SELECT nm_dokter FROM dokter WHERE kd_dokter=?",
+
+    akses.getkode()
+
+);
+
+if(namaDokter == null || namaDokter.trim().equals("")){
+
+    return; // Bukan dokter, dashboard tidak ditampilkan
+
+}
+    int jmlRalan = Sequel.cariInteger(
+    "SELECT COUNT(*) " +
+    "FROM reg_periksa " +
+    "WHERE tgl_registrasi=CURDATE() " +
+    "AND kd_dokter='" + akses.getkode() + "'"
+);
+
+    int jmlRanap = Sequel.cariInteger(
+    "SELECT COUNT(DISTINCT ki.no_rawat) " +
+    "FROM kamar_inap ki " +
+    "INNER JOIN dpjp_ranap dp ON dp.no_rawat=ki.no_rawat " +
+    "WHERE ki.tgl_masuk=CURDATE() " +
+    "AND dp.kd_dokter='" + akses.getkode() + "'"
+);
+
+    int jmlDirawat = Sequel.cariInteger(
+    "SELECT COUNT(DISTINCT ki.no_rawat) " +
+    "FROM kamar_inap ki " +
+    "INNER JOIN dpjp_ranap dp ON dp.no_rawat=ki.no_rawat " +
+    "WHERE ki.stts_pulang='-' " +
+    "AND dp.kd_dokter='" + akses.getkode() + "'"
+);
+
+    int jmlResume = Sequel.cariInteger(
+    "SELECT COUNT(DISTINCT ki.no_rawat) " +
+    "FROM kamar_inap ki " +
+    "INNER JOIN dpjp_ranap dp ON dp.no_rawat=ki.no_rawat " +
+    "LEFT JOIN resume_pasien_ranap rp ON rp.no_rawat=ki.no_rawat " +
+    "WHERE rp.no_rawat IS NULL " +
+    "AND ki.tgl_keluar<>'0000-00-00' " +
+    "AND ki.tgl_keluar>=DATE_SUB(CURDATE(),INTERVAL 30 DAY) " +
+    "AND dp.kd_dokter='" + akses.getkode() + "'"
+);
+
+    String pesan =
+      "══════════════════════════════════════\n"
+    + "         DASHBOARD DOKTER\n"
+    + "══════════════════════════════════════\n\n"
+    + "Selamat Datang,\n"
+    + namaDokter + "\n\n"
+
+    + "📋 RAWAT JALAN\n"
+    + "   Hari Ini       : " + jmlRalan + " Pasien\n\n"
+
+    + "🛏 RAWAT INAP\n"
+    + "   Masuk Hari Ini : " + jmlRanap + " Pasien\n"
+    + "   Masih Dirawat  : " + jmlDirawat + " Pasien\n\n"
+
+    + "📄 RESUME MEDIS\n"
+    + "   Belum Resume   : " + jmlResume + " Pasien\n\n"
+
+    + (jmlResume > 0
+        ? "Silakan lengkapi resume medis pasien yang telah selesai dirawat."
+        : "Seluruh resume medis pasien Anda telah lengkap.");
+
+    Object[] pilihan;
+
+if (jmlResume > 0) {
+    pilihan = new Object[]{
+        "Lihat Daftar Resume",
+        "Tutup"
+    };
+} else {
+    pilihan = new Object[]{
+        "OK"
+    };
+}
+
+    int jawab = JOptionPane.showOptionDialog(
+            this,
+            pesan,
+            "Dashboard SIMRS",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            pilihan,
+            pilihan[0]
+    );
+
+    if (jmlResume > 0 && jawab == 0) {
+    tampilDaftarResume();
+}
+}    
+ 
+private void tampilDaftarResume() {
+
+    StringBuilder daftar = new StringBuilder();
+
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
+    try {
+
+        ps = koneksi.prepareStatement(
+    "SELECT DISTINCT " +
+    "ki.no_rawat, " +
+    "p.no_rkm_medis, " +
+    "p.nm_pasien, " +
+    "b.nm_bangsal, " +
+    "ki.tgl_keluar, " +
+    "DATEDIFF(CURDATE(),ki.tgl_keluar) AS hari " +
+    "FROM kamar_inap ki " +
+
+    "INNER JOIN reg_periksa rp ON rp.no_rawat=ki.no_rawat " +
+    "INNER JOIN pasien p ON p.no_rkm_medis=rp.no_rkm_medis " +
+    "INNER JOIN kamar k ON k.kd_kamar=ki.kd_kamar " +
+    "INNER JOIN bangsal b ON b.kd_bangsal=k.kd_bangsal " +
+
+    "INNER JOIN dpjp_ranap dp ON dp.no_rawat=ki.no_rawat " +
+
+    "LEFT JOIN resume_pasien_ranap r ON r.no_rawat=ki.no_rawat " +
+
+    "WHERE r.no_rawat IS NULL " +
+    "AND ki.tgl_keluar<>'0000-00-00' " +
+    "AND ki.tgl_keluar>=DATE_SUB(CURDATE(),INTERVAL 30 DAY) " +
+    "AND dp.kd_dokter=? " +
+
+    "ORDER BY hari DESC"
+);
+
+ps.setString(1, akses.getkode());
+
+        rs = ps.executeQuery();
+
+        int no = 1;
+
+        while (rs.next()) {
+
+            daftar.append(no++)
+                  .append(". ")
+                  .append(rs.getString("nm_pasien"))
+                  .append("\n")
+                  .append("No Rawat : ").append(rs.getString("no_rawat")).append("\n")
+                  .append("No RM    : ").append(rs.getString("no_rkm_medis")).append("\n")
+                  .append("Bangsal  : ").append(rs.getString("nm_bangsal")).append("\n")
+                  .append("Tgl Keluar : ").append(rs.getString("tgl_keluar")).append("\n")
+                  .append("Terlambat : ").append(rs.getInt("hari")).append(" Hari")
+                  .append("\n\n");
+        }
+
+    } catch (Exception e) {
+        System.out.println(e);
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+        } catch (Exception e) {
+        }
+    }
+
+    if (daftar.length() == 0) {
+        daftar.append("Tidak ada pasien yang belum mengisi resume dalam 30 hari terakhir.");
+    }
+
+    JTextArea area = new JTextArea(daftar.toString());
+    area.setEditable(false);
+    area.setCaretPosition(0);
+
+    JScrollPane scroll = new JScrollPane(area);
+    scroll.setPreferredSize(new java.awt.Dimension(700, 450));
+
+    JOptionPane.showMessageDialog(
+            this,
+            scroll,
+            "Daftar Resume Pasien Belum Diisi",
+            JOptionPane.INFORMATION_MESSAGE
+    );
+}
 
     private void isTutup() {
         FlayMenu.setVisible(false);
