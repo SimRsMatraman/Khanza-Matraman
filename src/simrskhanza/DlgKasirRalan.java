@@ -7279,8 +7279,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     MnBillingActionPerformed(null);
                     //}                    
                 } else if (i == 3) {
-                    if (MnKamarInap.isEnabled() == true) {
-                        MnKamarInapActionPerformed(null);
+                    if (akses.gettindakan_ralan() == true) {
+                        MnDataRalanActionPerformed(null);
                     }
                 }
             }

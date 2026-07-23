@@ -574,6 +574,8 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
     
     public void onCari(){        
         TCari.requestFocus();
+        TCari.setText("");
+        tampil();
     }
     
     private void isPhoto(){
