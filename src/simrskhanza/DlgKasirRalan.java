@@ -6396,13 +6396,30 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                             "select count(*) from bridging_sep where no_rawat=? and no_sep is not null and no_sep not in ('','-','0')",
                             noRawat
                         ) > 0;
-
-                        int jmlKunjunganBPJS = Sequel.cariInteger(
-                            "select count(*) from reg_periksa " +
-                            "where kd_pj='BPJ' " +
-                            "and no_rkm_medis = (select no_rkm_medis from reg_periksa where no_rawat=? limit 1) " +
-                            "and tgl_registrasi = current_date()",
+                        
+                        String noRM = Sequel.cariIsi(
+                            "select no_rkm_medis from reg_periksa where no_rawat=?",
                             noRawat
+                        );
+
+                        int jmlIGD = Sequel.cariInteger(
+                            "select count(*) from reg_periksa " +
+                            "where no_rkm_medis=? " +
+                            "and kd_pj='BPJ' " +
+                            "and stts<>'Batal' " +
+                            "and tgl_registrasi=current_date() " +
+                            "and kd_poli in ('IGDK','U0001')",
+                            noRM
+                        );
+
+                        int jmlPoli = Sequel.cariInteger(
+                            "select count(*) from reg_periksa " +
+                            "where no_rkm_medis=? " +
+                            "and kd_pj='BPJ' " +
+                            "and stts<>'Batal' " +
+                            "and tgl_registrasi=current_date() " +
+                            "and kd_poli not in ('IGDK','U0001')",
+                            noRM
                         );
 
                         String pesan = "";
@@ -6412,12 +6429,15 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                             pesan = "Pasien belum terbit SEP!";
                         }
 
-                        //notif pasien bpjs yang jumlah kunjungan > 1
-                        if ("BPJ".equals(kd_pj) && jmlKunjunganBPJS > 1) {
-                            if (!pesan.equals("")) {
-                                pesan += "\n";
+                        //notif pasien bpjs yang jumlah kunjungan > 1 (1 poli 1 igd boleh)
+                        if ("BPJ".equals(kd_pj)) {
+                            if (jmlPoli > 1 || jmlIGD > 1) {
+                                if (!pesan.equals("")) {
+                                    pesan += "\n";
+                                }
+
+                                pesan += "Pasien memiliki kunjungan BPJS ganda pada kategori yang sama hari ini.";
                             }
-                            pesan += "Pasien sudah berkunjung lebih dari 1x hari ini (" + jmlKunjunganBPJS + "x)";
                         }
 
                         if (!pesan.equals("")) {
