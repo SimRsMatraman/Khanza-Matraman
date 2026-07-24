@@ -10026,7 +10026,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                               "<td valign='top' align='right' colspan='3'>"+rs2.getString("skrining_gizi_ket_diagnosa_khusus")+"&nbsp;&nbsp;</td>"+
                                           "</tr>"+
                                           "<tr>"+
-                                              "<td valign='top' align='left' colspan='5' border='0'>Sudah dibaca dan diketahui oleh Dietisen : "+rs2.getString("skrining_gizi_diketahui_dietisen")+(rs2.getString("skrining_gizi_jam_diketahui_dietisen").equals("")?"":", "+rs2.getString("skrining_gizi_jam_diketahui_dietisen"))+"</td>"+
+                                              "<td valign='top' align='left' colspan='5' border='0'>Sudah dibaca dan diketahui oleh Petugas Gizi : "+rs2.getString("skrining_gizi_diketahui_dietisen")+(rs2.getString("skrining_gizi_jam_diketahui_dietisen").equals("")?"":", "+rs2.getString("skrining_gizi_jam_diketahui_dietisen"))+"</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
@@ -15020,7 +15020,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                               "<td valign='top' align='left' colspan='4' border='0'>Pasien dengan diagnosis khusus : "+rs2.getString("skrining_gizi_diagnosa_khusus")+(rs2.getString("skrining_gizi_ket_diagnosa_khusus").equals("")?"":", "+rs2.getString("skrining_gizi_ket_diagnosa_khusus"))+"</td>"+
                                           "</tr>"+
                                           "<tr>"+
-                                              "<td valign='top' align='left' colspan='4' border='0'>Sudah dibaca dan diketahui oleh Dietisen : "+rs2.getString("skrining_gizi_diketahui_dietisen")+(rs2.getString("skrining_gizi_jam_diketahui_dietisen").equals("")?"":", "+rs2.getString("skrining_gizi_jam_diketahui_dietisen"))+"</td>"+
+                                              "<td valign='top' align='left' colspan='4' border='0'>Sudah dibaca dan diketahui oleh Petugas Gizi : "+rs2.getString("skrining_gizi_diketahui_dietisen")+(rs2.getString("skrining_gizi_jam_diketahui_dietisen").equals("")?"":", "+rs2.getString("skrining_gizi_jam_diketahui_dietisen"))+"</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
@@ -15765,7 +15765,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                               "<td valign='top' align='right' colspan='3'>"+rs2.getString("skrining_gizi_ket_diagnosa_khusus")+"&nbsp;&nbsp;</td>"+
                                           "</tr>"+
                                           "<tr>"+
-                                              "<td valign='top' align='left' colspan='5' border='0'>Sudah dibaca dan diketahui oleh Dietisen : "+rs2.getString("skrining_gizi_diketahui_dietisen")+(rs2.getString("skrining_gizi_jam_diketahui_dietisen").equals("")?"":", "+rs2.getString("skrining_gizi_jam_diketahui_dietisen"))+"</td>"+
+                                              "<td valign='top' align='left' colspan='5' border='0'>Sudah dibaca dan diketahui oleh Petugas Gizi : "+rs2.getString("skrining_gizi_diketahui_dietisen")+(rs2.getString("skrining_gizi_jam_diketahui_dietisen").equals("")?"":", "+rs2.getString("skrining_gizi_jam_diketahui_dietisen"))+"</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
@@ -20941,7 +20941,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                               "<td valign='top' align='left' colspan='4' border='0'>Pasien dengan diagnosis khusus : "+rs2.getString("skrining_gizi_diagnosa_khusus")+(rs2.getString("skrining_gizi_ket_diagnosa_khusus").equals("")?"":", "+rs2.getString("skrining_gizi_ket_diagnosa_khusus"))+"</td>"+
                                           "</tr>"+
                                           "<tr>"+
-                                              "<td valign='top' align='left' colspan='4' border='0'>Sudah dibaca dan diketahui oleh Dietisen : "+rs2.getString("skrining_gizi_diketahui_dietisen")+(rs2.getString("skrining_gizi_jam_diketahui_dietisen").equals("")?"":", "+rs2.getString("skrining_gizi_jam_diketahui_dietisen"))+"</td>"+
+                                              "<td valign='top' align='left' colspan='4' border='0'>Sudah dibaca dan diketahui oleh Petugas Gizi : "+rs2.getString("skrining_gizi_diketahui_dietisen")+(rs2.getString("skrining_gizi_jam_diketahui_dietisen").equals("")?"":", "+rs2.getString("skrining_gizi_jam_diketahui_dietisen"))+"</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+

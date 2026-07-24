@@ -3328,7 +3328,7 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
             }
         });
         FormInput.add(PemeriksaanGenitalia);
-        PemeriksaanGenitalia.setBounds(346, 1090, 80, 23);
+        PemeriksaanGenitalia.setBounds(346, 1090, 109, 23);
 
         jLabel141.setText("Genitalia :");
         jLabel141.setName("jLabel141"); // NOI18N
@@ -4339,10 +4339,10 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
         FormInput.add(NilaiGiziTotal);
         NilaiGiziTotal.setBounds(794, 1960, 60, 23);
 
-        jLabel207.setText("Sudah dibaca dan diketahui oleh Dietisen :");
+        jLabel207.setText("Sudah dibaca dan diketahui oleh Petugas Gizi :");
         jLabel207.setName("jLabel207"); // NOI18N
         FormInput.add(jLabel207);
-        jLabel207.setBounds(448, 1990, 220, 23);
+        jLabel207.setBounds(450, 1990, 230, 23);
 
         DiketahuiDietisen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
         DiketahuiDietisen.setName("DiketahuiDietisen"); // NOI18N
@@ -4352,7 +4352,7 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
             }
         });
         FormInput.add(DiketahuiDietisen);
-        DiketahuiDietisen.setBounds(672, 1990, 80, 23);
+        DiketahuiDietisen.setBounds(680, 1990, 80, 23);
 
         jLabel208.setText("Jam  :");
         jLabel208.setName("jLabel208"); // NOI18N
@@ -4382,17 +4382,22 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
             }
         });
         FormInput.add(DiagnosaKhususGizi);
-        DiagnosaKhususGizi.setBounds(214, 1990, 80, 23);
+        DiagnosaKhususGizi.setBounds(210, 1990, 80, 23);
 
         KeteranganDiagnosaKhususGizi.setFocusTraversalPolicyProvider(true);
         KeteranganDiagnosaKhususGizi.setName("KeteranganDiagnosaKhususGizi"); // NOI18N
+        KeteranganDiagnosaKhususGizi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KeteranganDiagnosaKhususGiziActionPerformed(evt);
+            }
+        });
         KeteranganDiagnosaKhususGizi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 KeteranganDiagnosaKhususGiziKeyPressed(evt);
             }
         });
         FormInput.add(KeteranganDiagnosaKhususGizi);
-        KeteranganDiagnosaKhususGizi.setBounds(297, 1990, 150, 23);
+        KeteranganDiagnosaKhususGizi.setBounds(290, 1990, 150, 23);
 
         jSeparator12.setBackground(new java.awt.Color(239, 244, 234));
         jSeparator12.setForeground(new java.awt.Color(239, 244, 234));
@@ -6744,6 +6749,10 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
             JOptionPane.showMessageDialog(null,"Hanya diperbolehkan menginputkan Angka ");
         }
     }//GEN-LAST:event_SpO2KeyTyped
+
+    private void KeteranganDiagnosaKhususGiziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KeteranganDiagnosaKhususGiziActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KeteranganDiagnosaKhususGiziActionPerformed
 
     /**
     * @param args the command line arguments
