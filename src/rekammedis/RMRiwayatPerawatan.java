@@ -2773,9 +2773,22 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         NmPasien.setText(nama);
         isPasien();
         listDokter();
-        listPoli();
+        listPoli();                
         BtnCari1ActionPerformed(null);
         Tgl1.setDate(cal.getTime());
+    }
+    
+    public void setNoRmLabRad(String norm,String nama) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -6);
+//        Date result = cal.getTime();
+        NoRM.setText(norm);
+        NmPasien.setText(nama);
+        isPasien();
+        listDokter();
+        listPoli();        
+        BtnCari1ActionPerformed(null);
+        Tgl1.setDate(cal.getTime());        
     }
     
     public void emptTeks(){
