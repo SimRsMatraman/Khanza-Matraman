@@ -175,6 +175,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        MnCetakSuratSKBN3Var = new javax.swing.JMenuItem();
         MnCetakSuratSKBN = new javax.swing.JMenuItem();
         MnCetakSuratSKBN5Var = new javax.swing.JMenuItem();
         MnCetakSuratSKBN6Var = new javax.swing.JMenuItem();
@@ -236,6 +237,20 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
         jPopupMenu1.setPreferredSize(new java.awt.Dimension(250, 86));
+
+        MnCetakSuratSKBN3Var.setBackground(new java.awt.Color(250, 250, 250));
+        MnCetakSuratSKBN3Var.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCetakSuratSKBN3Var.setForeground(new java.awt.Color(50, 50, 50));
+        MnCetakSuratSKBN3Var.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCetakSuratSKBN3Var.setText("Cetak SKBN (3)");
+        MnCetakSuratSKBN3Var.setName("MnCetakSuratSKBN3Var"); // NOI18N
+        MnCetakSuratSKBN3Var.setPreferredSize(new java.awt.Dimension(140, 26));
+        MnCetakSuratSKBN3Var.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCetakSuratSKBN3VarActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnCetakSuratSKBN3Var);
 
         MnCetakSuratSKBN.setBackground(new java.awt.Color(250, 250, 250));
         MnCetakSuratSKBN.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -486,7 +501,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-07-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -500,7 +515,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-07-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -620,7 +635,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         jLabel18.setBounds(511, 40, 100, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-07-2025" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-07-2025" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setName("TanggalSurat"); // NOI18N
         TanggalSurat.setOpaque(false);
@@ -1280,6 +1295,34 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
        }        // TODO add your handling code here:
     }//GEN-LAST:event_MnCetakSuratSKBN6VarActionPerformed
 
+    private void MnCetakSuratSKBN3VarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSKBN3VarActionPerformed
+        if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Map<String, Object> param = new HashMap<>();
+                param.put("keperluan",Keperluan.getText());
+                param.put("tanggalsurat",TanggalSurat.getSelectedItem().toString());
+                param.put("kategori",Kategori.getSelectedItem().toString());
+                param.put("nosurat",NoSurat.getText());
+                param.put("dokter",TDokter.getText());
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());  
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                Valid.MyReportqry("rptBebasNarkoba3.jasper","report","::[ Surat SKBN ]::",
+                              " select reg_periksa.no_rawat,dokter.nm_dokter,dokter.no_ijn_praktek,dokter.nip1,pasien.tgl_lahir,pasien.nm_pasien,pasien.pekerjaan,"+
+                              " pasien.alamat,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,concat(kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as nm_alamat,pasien.jk,reg_periksa.kd_dokter, surat_skbn.no_surat, surat_skbn.tanggalsurat,surat_skbn.keperluan,surat_skbn.opiat,surat_skbn.amphetamin,surat_skbn.benzodiazepin,surat_skbn.cocain,surat_skbn.ganja,surat_skbn.methamphetamin " +
+                              " from reg_periksa inner join surat_skbn inner join pasien inner join dokter inner join kelurahan inner join kecamatan inner join kabupaten " +
+                              " on reg_periksa.no_rawat=surat_skbn.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis and reg_periksa.kd_dokter=dokter.kd_dokter and pasien.kd_kel=kelurahan.kd_kel "+
+                              " and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",param);
+                this.setCursor(Cursor.getDefaultCursor());  // TODO add your handling code here:
+        }
+    }//GEN-LAST:event_MnCetakSuratSKBN3VarActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1315,6 +1358,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
     private widget.Label LCount;
     private javax.swing.JMenuItem MnCetakSuratSKBN;
     private javax.swing.JMenuItem MnCetakSuratSKBN2;
+    private javax.swing.JMenuItem MnCetakSuratSKBN3Var;
     private javax.swing.JMenuItem MnCetakSuratSKBN5Var;
     private javax.swing.JMenuItem MnCetakSuratSKBN6Var;
     private javax.swing.JMenuItem MnCetakSuratSKBNSign;
@@ -1524,7 +1568,7 @@ public final class SuratBebasNarkoba extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getsurat_bebas_narkoba());
         BtnEdit.setEnabled(akses.getsurat_bebas_narkoba());
         
-        if (akses.getkode().equals("122650") || akses.getkode().equals("Admin Utama") ) {
+        if (akses.getkode().equals("D0000030") || akses.getkode().equals("Admin Utama") ) {
             MnCetakSuratSKBNSign.setEnabled(true);
         } else {
             MnCetakSuratSKBNSign.setVisible(false);
