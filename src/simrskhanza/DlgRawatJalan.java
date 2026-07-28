@@ -199,8 +199,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     public RMCari5SOAPTerakhir soapterakhir = new RMCari5SOAPTerakhir(null, false);
     public RMCari5SOAPTerakhirRM soapterakhirRM = new RMCari5SOAPTerakhirRM(null, false);
     private DlgDiagnosaPenyakitSoap penyakit = new DlgDiagnosaPenyakitSoap(null, false);
-    private PreparedStatement ps, ps2, ps3, ps4, ps5, ps6, pstindakan, psset_tarif, psrekening;
-    private ResultSet rs, rstindakan, rsset_tarif, rsrekening;
+    private PreparedStatement ps, ps2, ps3, ps4, ps5, ps6, psrajal, pstindakan, psset_tarif, psrekening;
+    private ResultSet rs, rsrajal, rstindakan, rsset_tarif, rsrekening;
     private int i = 0, jmlparsial = 0, jml = 0, index = 0, tinggi = 0;
     private String aktifkanparsial = "no", kode_poli = "", kd_pj = "", poli_ralan = "No", cara_bayar_ralan = "No",
             Suspen_Piutang_Tindakan_Ralan = "", Tindakan_Ralan = "", Beban_Jasa_Medik_Dokter_Tindakan_Ralan = "", Utang_Jasa_Medik_Dokter_Tindakan_Ralan = "",
@@ -1989,6 +1989,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BMI = new widget.TextBox();
         jLabel54 = new widget.Label();
         jLabel58 = new widget.Label();
+        SuratKontrol = new widget.Button();
         internalFrame9 = new widget.InternalFrame();
         Scroll12 = new widget.ScrollPane();
         tbPemeriksaanRM = new widget.Table();
@@ -2435,7 +2436,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Perawatan/Tindakan Rawat Jalan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -2597,7 +2598,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2616,7 +2617,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -3017,7 +3018,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         });
         panelGlass11.add(BtnTemplatePemeriksaanDrPr);
-        BtnTemplatePemeriksaanDrPr.setBounds(820, 40, 170, 32);
+        BtnTemplatePemeriksaanDrPr.setBounds(820, 40, 170, 22);
 
         internalFrame4.add(panelGlass11, java.awt.BorderLayout.PAGE_START);
 
@@ -3776,6 +3777,21 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass12.add(jLabel58);
         jLabel58.setBounds(390, 110, 40, 23);
 
+        SuratKontrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/bpjs.png"))); // NOI18N
+        SuratKontrol.setMnemonic('2');
+        SuratKontrol.setText(" Input Surat Kontrol");
+        SuratKontrol.setToolTipText("Input surat kontrol");
+        SuratKontrol.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        SuratKontrol.setName("SuratKontrol"); // NOI18N
+        SuratKontrol.setPreferredSize(new java.awt.Dimension(28, 23));
+        SuratKontrol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SuratKontrolActionPerformed(evt);
+            }
+        });
+        panelGlass12.add(SuratKontrol);
+        SuratKontrol.setBounds(830, 370, 170, 30);
+
         PanelInput.add(panelGlass12, java.awt.BorderLayout.CENTER);
 
         internalFrame5.add(PanelInput, java.awt.BorderLayout.PAGE_START);
@@ -4178,7 +4194,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         jSeparator1.setName("jSeparator1"); // NOI18N
         panelGlass16.add(jSeparator1);
-        jSeparator1.setBounds(0, 0, 0, 12);
+        jSeparator1.setBounds(0, 0, 0, 3);
 
         BtnRiwayatSoap1.setMnemonic('R');
         BtnRiwayatSoap1.setText("  Riwayat SOAP");
@@ -5120,7 +5136,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-04-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -10293,19 +10309,17 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if (TNoRw.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
-        } else {
-            if (Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?", TNoRw.getText()) > 0) {
-                JOptionPane.showMessageDialog(null, "Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-            } else {
+        } else { 
                 try {
-                    ps = koneksi.prepareStatement("select no_sep,no_kartu,tanggal_lahir,jkel,nmdiagnosaawal from bridging_sep where no_rawat=?");
+                    psrajal = koneksi.prepareStatement("select no_sep,no_kartu,tanggal_lahir,jkel,nmdiagnosaawal,kdpolitujuan,nmpolitujuan,kddpjp,nmdpdjp from bridging_sep where no_rawat=?");
                     try {
-                        ps.setString(1, TNoRw.getText());
-                        rs = ps.executeQuery();
-                        if (rs.next()) {
+                        psrajal.setString(1, TNoRw.getText());
+                        rsrajal = psrajal.executeQuery();
+                        if (rsrajal.next()) {
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                             BPJSSuratKontrol form = new BPJSSuratKontrol(null, false);
-                            form.setNoRm(TNoRw.getText(), rs.getString("no_sep"), rs.getString("no_kartu"), TNoRM.getText(), TPasien.getText(), rs.getString("tanggal_lahir"), rs.getString("jkel"), rs.getString("nmdiagnosaawal"));
+                            form.setNoRm(TNoRw.getText(), rsrajal.getString("no_sep"), rsrajal.getString("no_kartu"), TNoRM.getText(), TPasien.getText(), rsrajal.getString("tanggal_lahir"), rsrajal.getString("jkel"), rsrajal.getString("nmdiagnosaawal"));
+                            form.setpolidokter(rsrajal.getString("kdpolitujuan"), rsrajal.getString("nmpolitujuan"), rsrajal.getString("kddpjp"), rsrajal.getString("nmdpdjp"));
                             form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
                             form.setLocationRelativeTo(internalFrame1);
                             form.setVisible(true);
@@ -10317,17 +10331,16 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     } finally {
-                        if (rs != null) {
-                            rs.close();
+                        if (rsrajal != null) {
+                            rsrajal.close();
                         }
-                        if (ps != null) {
-                            ps.close();
+                        if (psrajal != null) {
+                            psrajal.close();
                         }
                     }
                 } catch (Exception e) {
                     System.out.println("Notif : " + e);
-                }
-            }
+                }  
         }
     }//GEN-LAST:event_BtnSKDPActionPerformed
 
@@ -14354,6 +14367,45 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnPenandaLokasiOperasiAlternatif15ActionPerformed
 
+    private void SuratKontrolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuratKontrolActionPerformed
+        if (TNoRw.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        } else { 
+                try {
+                    psrajal = koneksi.prepareStatement("select no_sep,no_kartu,tanggal_lahir,jkel,nmdiagnosaawal,kdpolitujuan,nmpolitujuan,kddpjp,nmdpdjp from bridging_sep where no_rawat=?");
+                    try {
+                        psrajal.setString(1, TNoRw.getText());
+                        rsrajal = psrajal.executeQuery();
+                        if (rsrajal.next()) {
+                            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                            BPJSSuratKontrol form = new BPJSSuratKontrol(null, false);
+                            form.setNoRm(TNoRw.getText(), rsrajal.getString("no_sep"), rsrajal.getString("no_kartu"), TNoRM.getText(), TPasien.getText(), rsrajal.getString("tanggal_lahir"), rsrajal.getString("jkel"), rsrajal.getString("nmdiagnosaawal"));
+                            form.setpolidokter(rsrajal.getString("kdpolitujuan"), rsrajal.getString("nmpolitujuan"), rsrajal.getString("kddpjp"), rsrajal.getString("nmdpdjp"));
+                            form.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
+                            form.setLocationRelativeTo(internalFrame1);
+                            form.setVisible(true);
+                            this.setCursor(Cursor.getDefaultCursor());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Pasien tersebut belum terbit SEP, silahkan hubungi bagian terkait..!!");
+                            TCari.requestFocus();
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    } finally {
+                        if (rsrajal != null) {
+                            rsrajal.close();
+                        }
+                        if (psrajal != null) {
+                            psrajal.close();
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }  
+        }
+    }//GEN-LAST:event_SuratKontrolActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -14645,6 +14697,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.ScrollPane Scroll9;
     private widget.ScrollPane ScrollMenu;
     private widget.TextArea Subjek;
+    private widget.Button SuratKontrol;
     private widget.ComboBox Suspek;
     private widget.TextBox TAdnexaKanan;
     private widget.TextBox TAdnexaKiri;

@@ -7360,6 +7360,15 @@ public final class DlgReg extends javax.swing.JDialog {
             boolean igdSekarang =
                     poliNow.equals("IGDK") ||
                     poliNow.equals("U0001");
+            
+            boolean poliKecuali =
+                    poliNow.equals("U0015")
+                    || poliNow.equals("U0016")
+                    || poliNow.equals("U0046")
+                    || poliNow.equals("U0039")
+                    || poliNow.equals("U0033")
+                    || poliNow.equals("U0041")
+                    || poliNow.equals("U0035");
 
             int pernahIGD = Sequel.cariInteger(
                 "select count(*) from reg_periksa " +
@@ -7375,7 +7384,7 @@ public final class DlgReg extends javax.swing.JDialog {
                 "where no_rkm_medis='" + norm + "' " +
                 "and tgl_registrasi='" + tgl + "' " +
                 "and kd_pj='BPJ' " +
-                "and kd_poli not in ('IGDK','U0001') " +
+                "and kd_poli not in ('IGDK','U0001','U0015','U0016','U0046','U0039','U0033','U0041','U0035') " +
                 "and stts<>'Batal'"
             );
 
@@ -7410,7 +7419,7 @@ public final class DlgReg extends javax.swing.JDialog {
             } else {
 
                 // Poli → Poli: tidak boleh
-                if (pernahPoli > 0) {
+                if (!poliKecuali && pernahPoli > 0) {
                     JOptionPane.showMessageDialog(
                         null,
                         "Pasien BPJS sudah pernah terdaftar di poli hari ini.\n" +

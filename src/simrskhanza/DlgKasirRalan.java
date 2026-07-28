@@ -201,6 +201,9 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
     private boolean sukses = false;
     private Jurnal jur = new Jurnal();
     private double ttljmdokter = 0, ttljmperawat = 0, ttlkso = 0, ttljasasarana = 0, ttlbhp = 0, ttlmenejemen = 0, ttlpendapatan = 0;
+    private static final String POLI_KECUALI =
+        "'IGDK','U0001'," +
+        "'U0015','U0016','U0046','U0039','U0033','U0041','U0035'";
 
     /**
      * Creates new form DlgReg
@@ -6355,7 +6358,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             Valid.pindah(evt, TCari, BtnAll);
         }
 }//GEN-LAST:event_BtnCariKeyPressed
-
+    
     private void tbKasirRalanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKasirRalanMouseClicked
         if (tabModekasir.getRowCount() != 0) {
             try {
@@ -6380,7 +6383,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     }
                     String noRawat = tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 12).toString();
                     String kdPoli = tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString();
-
+                    
                     if (!kdPoli.equals("U0015")
                             && !kdPoli.equals("U0016")
                             && !kdPoli.equals("U0046")
@@ -6413,12 +6416,13 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                         );
 
                         int jmlPoli = Sequel.cariInteger(
-                            "select count(*) from reg_periksa " +
+                            "select count(*) " +
+                            "from reg_periksa " +
                             "where no_rkm_medis=? " +
                             "and kd_pj='BPJ' " +
                             "and stts<>'Batal' " +
                             "and tgl_registrasi=current_date() " +
-                            "and kd_poli not in ('IGDK','U0001')",
+                            "and kd_poli not in (" + POLI_KECUALI + ")",
                             noRM
                         );
 
