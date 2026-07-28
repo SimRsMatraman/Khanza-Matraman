@@ -2286,8 +2286,8 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 //                aplikasi.setNoRm(NoResep.getText(),TNoRw.getText(),DTPCari2.getDate());
                 aplikasi.setNoRm(NoResep.getText(),DTPCari2.getDate());
                 aplikasi.tampil();
-                aplikasi.setSize(750,750);
-//                aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+//                aplikasi.setSize(750,750);
+                aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 aplikasi.setLocationRelativeTo(internalFrame1);
                 aplikasi.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
