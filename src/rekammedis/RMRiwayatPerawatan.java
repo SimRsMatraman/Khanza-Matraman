@@ -18043,7 +18043,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                 try {
                     rs2=koneksi.prepareStatement(
                         "select rekonsiliasi_obat.no_rekonsiliasi,rekonsiliasi_obat.tanggal_wawancara,rekonsiliasi_obat.rekonsiliasi_obat_saat,"+
-                        "rekonsiliasi_obat.alergi_obat,rekonsiliasi_obat.manifestasi_alergi,rekonsiliasi_obat.dampak_alergi,rekonsiliasi_obat.nip,"+
+                        "rekonsiliasi_obat.alergi_obat,rekonsiliasi_obat.dampak_alergi,rekonsiliasi_obat.nip,"+
                         "petugas.nama from rekonsiliasi_obat inner join reg_periksa on reg_periksa.no_rawat=rekonsiliasi_obat.no_rawat "+
                         "inner join petugas on rekonsiliasi_obat.nip=petugas.nip where rekonsiliasi_obat.no_rawat='"+norawat+"' "+
                         "order by rekonsiliasi_obat.tanggal_wawancara").executeQuery();
@@ -18073,7 +18073,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='33%'>Alergi Obat : "+rs2.getString("alergi_obat")+"</td>"+
-                                              "<td width='33%'>Manifestasi Alergi : "+rs2.getString("manifestasi_alergi")+"</td>"+
+//                                              "<td width='33%'>Manifestasi Alergi : "+rs2.getString("manifestasi_alergi")+"</td>"+
                                               "<td width='33%'>Dampak Alergi : "+rs2.getString("dampak_alergi")+"</td>"+
                                           "</tr>"+
                                        "</table>"+
@@ -18129,23 +18129,25 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                             );
                             
                             try {
-                                rs3=koneksi.prepareStatement(
-                                        "select rekonsiliasi_obat_konfirmasi.diterima_farmasi,rekonsiliasi_obat_konfirmasi.dikonfirmasi_apoteker,rekonsiliasi_obat_konfirmasi.nip,petugas.nama,"+
-                                        "rekonsiliasi_obat_konfirmasi.diserahkan_pasien from rekonsiliasi_obat_konfirmasi inner join petugas on rekonsiliasi_obat_konfirmasi.nip=petugas.nip "+
-                                        "where rekonsiliasi_obat_konfirmasi.no_rekonsiliasi='"+rs2.getString("no_rekonsiliasi")+"'").executeQuery();
+                                rs3 = koneksi.prepareStatement(
+    "SELECT rok.dikonfirmasi_apoteker, rok.nip, p.nama " +
+    "FROM rekonsiliasi_obat_konfirmasi rok " +
+    "INNER JOIN petugas p ON rok.nip = p.nip " +
+    "WHERE rok.no_rekonsiliasi = '" + rs2.getString("no_rekonsiliasi") + "'"
+).executeQuery();
                                 if(rs3.next()){
                                     htmlContent.append(
                                          "<tr>"+
                                             "<td valign='top'>"+
-                                               "DIKONFIRMASI FARMASI/APOTEKER"+  
+                                               "DIKONFIRMASI PETUGAS"+  
                                                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                                   "<tr>"+
-                                                      "<td width='33%'>Diterima Farmasi : "+rs3.getString("diterima_farmasi")+"</td>"+
+//                                                      "<td width='33%'>Diterima Farmasi : "+rs3.getString("diterima_farmasi")+"</td>"+
                                                       "<td width='33%'>Dikonfirmasi Apoteker : "+rs3.getString("dikonfirmasi_apoteker")+"</td>"+
-                                                      "<td width='33%'>Diserahkan Pasien : "+rs3.getString("diserahkan_pasien")+"</td>"+
+//                                                      "<td width='33%'>Diserahkan Pasien : "+rs3.getString("diserahkan_pasien")+"</td>"+
                                                   "</tr>"+
                                                  "<tr>"+
-                                                      "<td width='100%' colspan='3'>Petugas Farmasi/Apoteker : "+rs3.getString("nip")+" "+rs3.getString("nama")+"</td>"+
+                                                      "<td width='100%' colspan='3'>Petugas Validasi : "+rs3.getString("nip")+" "+rs3.getString("nama")+"</td>"+
                                                   "</tr>"+
                                                "</table>"+
                                             "</td>"+

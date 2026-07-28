@@ -49,6 +49,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i,reply;
+    private RMCariJumlahObatDosis cariobatdosis=new RMCariJumlahObatDosis(null,false);
     
 
     /** Creates new form DlgPerawatan
@@ -58,7 +59,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        DlgTambahObatRekonsiliasi.setSize(650,163);
+        DlgTambahObatRekonsiliasi.setSize(700,163);
         
         tabMode=new DefaultTableModel(null,new Object[]{
             "Nama Obat","Dosis Obat","Frekuensi","Cara Pemberian/Aturan Pakai","Waktu Pemberian Terakhir","Tindak Lanjut","Perubahan Aturan Pakai"}){
@@ -99,7 +100,85 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         PerubahanAturanPakai.setDocument(new batasInput((int)150).getKata(PerubahanAturanPakai));
         TNoRekonsialiasi.setDocument(new batasInput((byte)20).getKata(TNoRekonsialiasi));
         AlergiObat.setDocument(new batasInput((int)70).getKata(AlergiObat));
-        ManifestasiAlergi.setDocument(new batasInput((int)70).getKata(ManifestasiAlergi));
+//        ManifestasiAlergi.setDocument(new batasInput((int)70).getKata(ManifestasiAlergi));
+        
+        cariobatdosis.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(cariobatdosis.getTable().getSelectedRow()!= -1){ 
+                    if(i==1){
+                        NamaObat.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+                        DosisObat.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }else if(i==2){
+//                        Obat2.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis2.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }else if(i==3){
+//                        Obat3.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis3.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==4){
+//                        Obat4.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis4.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==5){
+//                        Obat5.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis5.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==6){
+//                        Obat6.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis6.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==7){
+//                        Obat7.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis7.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==8){
+//                        Obat8.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis8.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==9){
+//                        Obat9.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis9.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==10){
+//                        Obat10.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis10.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==11){
+//                        Obat11.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis11.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==12){
+//                        Obat12.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis12.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==13){
+//                        Obat13.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis13.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==14){
+//                        Obat14.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis14.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+//                    }
+//                    else if(i==15){
+//                        Obat15.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),2).toString());
+//                        Dosis15.setText(cariobatdosis.getTable().getValueAt(cariobatdosis.getTable().getSelectedRow(),3).toString());  
+                    }
+                }              
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         
         
         petugas.addWindowListener(new WindowListener() {
@@ -156,6 +235,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         PemberianTerakhir = new widget.TextBox();
         jLabel113 = new widget.Label();
         PerubahanAturanPakai = new widget.TextBox();
+        BtnObat1 = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -191,9 +271,6 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         jLabel55 = new widget.Label();
         scrollPane2 = new widget.ScrollPane();
         AlergiObat = new widget.TextArea();
-        jLabel56 = new widget.Label();
-        scrollPane3 = new widget.ScrollPane();
-        ManifestasiAlergi = new widget.TextArea();
         jLabel6 = new widget.Label();
         DampakAlergi = new widget.ComboBox();
         jLabel8 = new widget.Label();
@@ -318,7 +395,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             }
         });
         panelBiasa2.add(AturanPakai);
-        AturanPakai.setBounds(89, 70, 260, 23);
+        AturanPakai.setBounds(89, 70, 290, 23);
 
         jLabel112.setText("Waktu Pemberian Terakhir :");
         jLabel112.setName("jLabel112"); // NOI18N
@@ -349,6 +426,24 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         });
         panelBiasa2.add(PerubahanAturanPakai);
         PerubahanAturanPakai.setBounds(144, 100, 260, 23);
+
+        BtnObat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnObat1.setMnemonic('2');
+        BtnObat1.setToolTipText("Alt+2");
+        BtnObat1.setName("BtnObat1"); // NOI18N
+        BtnObat1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnObat1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnObat1ActionPerformed(evt);
+            }
+        });
+        BtnObat1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnObat1KeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(BtnObat1);
+        BtnObat1.setBounds(630, 10, 28, 23);
 
         internalFrame4.add(panelBiasa2, java.awt.BorderLayout.CENTER);
 
@@ -550,7 +645,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         PanelInput.add(jLabel9);
         jLabel9.setBounds(197, 40, 69, 23);
 
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2023" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -642,9 +737,9 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         jLabel5.setText("Rekonsiliasi Saat :");
         jLabel5.setName("jLabel5"); // NOI18N
         PanelInput.add(jLabel5);
-        jLabel5.setBounds(346, 150, 120, 23);
+        jLabel5.setBounds(200, 150, 120, 23);
 
-        RekonsiliasiSaat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Admisi", "Transfer Antar Ruang", "Pindah Faskes Lain" }));
+        RekonsiliasiSaat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Admisi", "Transfer Antar Ruang", "Pasien Pulang", "Pindah Faskes Lain" }));
         RekonsiliasiSaat.setName("RekonsiliasiSaat"); // NOI18N
         RekonsiliasiSaat.setPreferredSize(new java.awt.Dimension(45, 23));
         RekonsiliasiSaat.addItemListener(new java.awt.event.ItemListener() {
@@ -658,7 +753,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             }
         });
         PanelInput.add(RekonsiliasiSaat);
-        RekonsiliasiSaat.setBounds(470, 150, 160, 23);
+        RekonsiliasiSaat.setBounds(320, 150, 160, 23);
 
         jLabel55.setText("Alergi Obat :");
         jLabel55.setName("jLabel55"); // NOI18N
@@ -681,28 +776,6 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
 
         PanelInput.add(scrollPane2);
         scrollPane2.setBounds(98, 100, 240, 43);
-
-        jLabel56.setText("Manifestasi Alergi :");
-        jLabel56.setName("jLabel56"); // NOI18N
-        PanelInput.add(jLabel56);
-        jLabel56.setBounds(346, 100, 120, 23);
-
-        scrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        scrollPane3.setName("scrollPane3"); // NOI18N
-
-        ManifestasiAlergi.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        ManifestasiAlergi.setColumns(20);
-        ManifestasiAlergi.setRows(5);
-        ManifestasiAlergi.setName("ManifestasiAlergi"); // NOI18N
-        ManifestasiAlergi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                ManifestasiAlergiKeyPressed(evt);
-            }
-        });
-        scrollPane3.setViewportView(ManifestasiAlergi);
-
-        PanelInput.add(scrollPane3);
-        scrollPane3.setBounds(470, 100, 240, 43);
 
         jLabel6.setText("Dampak Alergi :");
         jLabel6.setName("jLabel6"); // NOI18N
@@ -775,14 +848,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         
     }//GEN-LAST:event_tbPemeriksaanKeyPressed
 
-    private void BtnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPetugasActionPerformed
-        petugas.isCek();
-        petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        petugas.setLocationRelativeTo(internalFrame1);
-        petugas.setAlwaysOnTop(false);
-        petugas.setVisible(true);
-    }//GEN-LAST:event_BtnPetugasActionPerformed
-
     private void TNoRekonsialiasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRekonsialiasiKeyPressed
        
     }//GEN-LAST:event_TNoRekonsialiasiKeyPressed
@@ -809,10 +874,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private void AlergiObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlergiObatKeyPressed
         
     }//GEN-LAST:event_AlergiObatKeyPressed
-
-    private void ManifestasiAlergiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ManifestasiAlergiKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ManifestasiAlergiKeyPressed
 
     private void DampakAlergiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DampakAlergiItemStateChanged
         // TODO add your handling code here:
@@ -900,9 +961,9 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }else{
             reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-                if(Sequel.menyimpantf("rekonsiliasi_obat","?,?,?,?,?,?,?,?","No.Rawat",8,new String[]{
+                if(Sequel.menyimpantf("rekonsiliasi_obat","?,?,?,?,?,?,?","No.Rawat",7,new String[]{
                         TNoRekonsialiasi.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
-                        RekonsiliasiSaat.getSelectedItem().toString(),AlergiObat.getText(),ManifestasiAlergi.getText(),DampakAlergi.getSelectedItem().toString(),KodePetugas.getText(),
+                        RekonsiliasiSaat.getSelectedItem().toString(),AlergiObat.getText(),DampakAlergi.getSelectedItem().toString(),KodePetugas.getText(),
                     })==true){
                         for (i = 0; i < tbPemeriksaan.getRowCount(); i++) {
                            Sequel.menyimpan2("rekonsiliasi_obat_detail_obat","?,?,?,?,?,?,?,?",8,new String[]{
@@ -982,6 +1043,33 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
     }//GEN-LAST:event_BtnSimpanRekonKeyPressed
 
+    private void BtnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPetugasActionPerformed
+        petugas.isCek();
+        petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        petugas.setLocationRelativeTo(internalFrame1);
+        petugas.setAlwaysOnTop(false);
+        petugas.setVisible(true);
+    }//GEN-LAST:event_BtnPetugasActionPerformed
+
+    private void BtnObat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnObat1ActionPerformed
+        if(TNoRw.getText().equals("")&&TNoRM.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Pasien masih kosong...!!!");
+        }else{
+            i=1;
+            cariobatdosis.setNoRawat(TNoRw.getText());
+            cariobatdosis.tampil();
+            //        cariedukasidokter.isCek();
+            cariobatdosis.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            cariobatdosis.setLocationRelativeTo(internalFrame1);
+            cariobatdosis.setAlwaysOnTop(false);
+            cariobatdosis.setVisible(true);
+        }
+    }//GEN-LAST:event_BtnObat1ActionPerformed
+
+    private void BtnObat1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnObat1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnObat1KeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1006,6 +1094,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
     private widget.Button BtnKeluarRekon;
+    private widget.Button BtnObat1;
     private widget.Button BtnPetugas;
     private widget.Button BtnSimpan;
     private widget.Button BtnSimpanRekon;
@@ -1020,7 +1109,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.TextBox Frekuensi;
     private widget.TextBox Jk;
     private widget.TextBox KodePetugas;
-    private widget.TextArea ManifestasiAlergi;
     private widget.TextBox NamaObat;
     private widget.TextBox NamaPetugas;
     private widget.PanelBiasa PanelInput;
@@ -1049,7 +1137,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.Label jLabel4;
     private widget.Label jLabel5;
     private widget.Label jLabel55;
-    private widget.Label jLabel56;
     private widget.Label jLabel6;
     private widget.Label jLabel8;
     private widget.Label jLabel9;
@@ -1060,14 +1147,13 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.PanelBiasa panelBiasa2;
     private widget.panelisi panelGlass8;
     private widget.ScrollPane scrollPane2;
-    private widget.ScrollPane scrollPane3;
     private widget.Table tbPemeriksaan;
     // End of variables declaration//GEN-END:variables
 
     public void emptTeks() {
         Tanggal.setDate(new Date());
         AlergiObat.setText("");
-        ManifestasiAlergi.setText("");
+//        ManifestasiAlergi.setText("");
         autoNomor();
         TNoRekonsialiasi.requestFocus();
     }

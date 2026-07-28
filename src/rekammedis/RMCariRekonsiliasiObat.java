@@ -44,7 +44,7 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         
         DlgKonfirmasiObatRekonsiliasi.setSize(572,165);
 
-        Object[] row={"No.Rekonsiliasi","Pasien","Tanggal Wawancara","Rekonsiliasi Saat","Alergi Obat","Dampak Alergi","Manifestasi Alergi","Petugas Rekonsiliasi"};
+        Object[] row={"No.Rekonsiliasi","Pasien","Tanggal Wawancara","Rekonsiliasi Saat","Alergi Obat","Dampak Alergi","Petugas Rekonsiliasi"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -53,7 +53,7 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         tbDokter.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < 7; i++) {
             TableColumn column = tbDokter.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(100);
@@ -68,8 +68,6 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
             }else if(i==5){
                 column.setPreferredWidth(110);
             }else if(i==6){
-                column.setPreferredWidth(160);
-            }else if(i==7){
                 column.setPreferredWidth(160);
             }
         }
@@ -178,16 +176,12 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         DlgKonfirmasiObatRekonsiliasi = new javax.swing.JDialog();
         internalFrame4 = new widget.InternalFrame();
         panelBiasa2 = new widget.PanelBiasa();
-        jLabel99 = new widget.Label();
         BtnKeluarRekon = new widget.Button();
         BtnSimpanRekon = new widget.Button();
         NoRekonsiliasi = new widget.TextBox();
-        DiterimaFarmasi = new widget.Tanggal();
         jLabel100 = new widget.Label();
         jLabel101 = new widget.Label();
         DikonfirmasiApoteker = new widget.Tanggal();
-        jLabel102 = new widget.Label();
-        DiserahkanPasien = new widget.Tanggal();
         jLabel9 = new widget.Label();
         KodePetugas = new widget.TextBox();
         NamaPetugas = new widget.TextBox();
@@ -233,11 +227,6 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         panelBiasa2.setName("panelBiasa2"); // NOI18N
         panelBiasa2.setLayout(null);
 
-        jLabel99.setText("Diterima Farmasi :");
-        jLabel99.setName("jLabel99"); // NOI18N
-        panelBiasa2.add(jLabel99);
-        jLabel99.setBounds(296, 10, 120, 23);
-
         BtnKeluarRekon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
         BtnKeluarRekon.setMnemonic('U');
         BtnKeluarRekon.setText("Tutup");
@@ -280,19 +269,6 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         panelBiasa2.add(NoRekonsiliasi);
         NoRekonsiliasi.setBounds(134, 10, 140, 23);
 
-        DiterimaFarmasi.setForeground(new java.awt.Color(50, 70, 50));
-        DiterimaFarmasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2023 11:12:22" }));
-        DiterimaFarmasi.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
-        DiterimaFarmasi.setName("DiterimaFarmasi"); // NOI18N
-        DiterimaFarmasi.setOpaque(false);
-        DiterimaFarmasi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DiterimaFarmasiKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(DiterimaFarmasi);
-        DiterimaFarmasi.setBounds(420, 10, 130, 23);
-
         jLabel100.setText("Nomor Rekonsiliasi :");
         jLabel100.setName("jLabel100"); // NOI18N
         panelBiasa2.add(jLabel100);
@@ -304,7 +280,7 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         jLabel101.setBounds(0, 40, 130, 23);
 
         DikonfirmasiApoteker.setForeground(new java.awt.Color(50, 70, 50));
-        DikonfirmasiApoteker.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2023 11:13:31" }));
+        DikonfirmasiApoteker.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2026 09:11:55" }));
         DikonfirmasiApoteker.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DikonfirmasiApoteker.setName("DikonfirmasiApoteker"); // NOI18N
         DikonfirmasiApoteker.setOpaque(false);
@@ -315,24 +291,6 @@ public class RMCariRekonsiliasiObat extends javax.swing.JDialog {
         });
         panelBiasa2.add(DikonfirmasiApoteker);
         DikonfirmasiApoteker.setBounds(134, 40, 130, 23);
-
-        jLabel102.setText("Diserahkan Pasien :");
-        jLabel102.setName("jLabel102"); // NOI18N
-        panelBiasa2.add(jLabel102);
-        jLabel102.setBounds(296, 40, 120, 23);
-
-        DiserahkanPasien.setForeground(new java.awt.Color(50, 70, 50));
-        DiserahkanPasien.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-02-2023 11:14:53" }));
-        DiserahkanPasien.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
-        DiserahkanPasien.setName("DiserahkanPasien"); // NOI18N
-        DiserahkanPasien.setOpaque(false);
-        DiserahkanPasien.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DiserahkanPasienKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(DiserahkanPasien);
-        DiserahkanPasien.setBounds(420, 40, 130, 23);
 
         jLabel9.setText("Petugas Farmasi :");
         jLabel9.setName("jLabel9"); // NOI18N
@@ -868,7 +826,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }else {
             if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().equals("")){
                 NoRekonsiliasi.setText(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                DiterimaFarmasi.requestFocus();
+//                DiterimaFarmasi.requestFocus();
                 DlgKonfirmasiObatRekonsiliasi.setLocationRelativeTo(internalFrame1);
                 DlgKonfirmasiObatRekonsiliasi.setVisible(true);
             }else{
@@ -892,10 +850,25 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             Valid.textKosong(BtnPetugas,"Petugas");
         }else{
             Sequel.meghapus("rekonsiliasi_obat_konfirmasi","no_rekonsiliasi",NoRekonsiliasi.getText());
-            if(Sequel.menyimpantf("rekonsiliasi_obat_konfirmasi","?,?,?,?,?","Nomor Rekonsiliasi",5,new String[]{
-                NoRekonsiliasi.getText(),Valid.SetTgl(DiterimaFarmasi.getSelectedItem()+"")+" "+DiterimaFarmasi.getSelectedItem().toString().substring(11,19),
-                Valid.SetTgl(DikonfirmasiApoteker.getSelectedItem()+"")+" "+DikonfirmasiApoteker.getSelectedItem().toString().substring(11,19),
-                KodePetugas.getText(),Valid.SetTgl(DiserahkanPasien.getSelectedItem()+"")+" "+DiserahkanPasien.getSelectedItem().toString().substring(11,19)
+            if(Sequel.menyimpantf(
+
+    "rekonsiliasi_obat_konfirmasi",
+
+    "?,?,?",
+
+    "Nomor Rekonsiliasi",
+
+    3,
+
+    new String[]{
+
+        NoRekonsiliasi.getText(),
+
+        Valid.SetTgl(DikonfirmasiApoteker.getSelectedItem()+"") + " " +
+
+        DikonfirmasiApoteker.getSelectedItem().toString().substring(11,19),
+
+        KodePetugas.getText(),
             })==true){
                 tampil();
                 NoRekonsiliasi.setText("");
@@ -914,20 +887,12 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }//GEN-LAST:event_BtnSimpanRekonKeyPressed
 
     private void NoRekonsiliasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRekonsiliasiKeyPressed
-        Valid.pindah(evt,BtnKeluarRekon,DiterimaFarmasi);
+//        Valid.pindah(evt,BtnKeluarRekon,DiterimaFarmasi);
     }//GEN-LAST:event_NoRekonsiliasiKeyPressed
 
-    private void DiterimaFarmasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiterimaFarmasiKeyPressed
-        Valid.pindah2(evt,NoRekonsiliasi,DiterimaFarmasi);
-    }//GEN-LAST:event_DiterimaFarmasiKeyPressed
-
     private void DikonfirmasiApotekerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DikonfirmasiApotekerKeyPressed
-        Valid.pindah2(evt,DiterimaFarmasi,DiserahkanPasien);
+//        Valid.pindah2(evt,DiterimaFarmasi,DiserahkanPasien);
     }//GEN-LAST:event_DikonfirmasiApotekerKeyPressed
-
-    private void DiserahkanPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiserahkanPasienKeyPressed
-        Valid.pindah2(evt,DikonfirmasiApoteker,BtnPetugas);
-    }//GEN-LAST:event_DiserahkanPasienKeyPressed
 
     private void BtnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPetugasActionPerformed
         pilihan=2;
@@ -939,7 +904,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
-        Valid.pindah(evt,DiserahkanPasien,BtnSimpanRekon);
+//        Valid.pindah(evt,DiserahkanPasien,BtnSimpanRekon);
     }//GEN-LAST:event_BtnPetugasKeyPressed
 
     /**
@@ -969,8 +934,6 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.Button BtnPrint;
     private widget.Button BtnSimpanRekon;
     private widget.Tanggal DikonfirmasiApoteker;
-    private widget.Tanggal DiserahkanPasien;
-    private widget.Tanggal DiterimaFarmasi;
     private javax.swing.JDialog DlgKonfirmasiObatRekonsiliasi;
     private widget.TextBox KodePetugas;
     private widget.TextBox NamaPetugas;
@@ -985,9 +948,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
     private widget.InternalFrame internalFrame4;
     private widget.Label jLabel100;
     private widget.Label jLabel101;
-    private widget.Label jLabel102;
     private widget.Label jLabel9;
-    private widget.Label jLabel99;
     private widget.TextBox kdmem;
     private widget.TextBox kdptg;
     private widget.Label label10;
@@ -1012,7 +973,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             ps=koneksi.prepareStatement(
                 "select rekonsiliasi_obat.no_rekonsiliasi,rekonsiliasi_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,"+
                 "reg_periksa.umurdaftar,reg_periksa.sttsumur,rekonsiliasi_obat.tanggal_wawancara,rekonsiliasi_obat.rekonsiliasi_obat_saat,"+
-                "rekonsiliasi_obat.alergi_obat,rekonsiliasi_obat.manifestasi_alergi,rekonsiliasi_obat.dampak_alergi,rekonsiliasi_obat.nip,"+
+                "rekonsiliasi_obat.alergi_obat,rekonsiliasi_obat.dampak_alergi,rekonsiliasi_obat.nip,"+
                 "petugas.nama from rekonsiliasi_obat inner join reg_periksa on reg_periksa.no_rawat=rekonsiliasi_obat.no_rawat "+
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join petugas on rekonsiliasi_obat.nip=petugas.nip "+
                 "where rekonsiliasi_obat.tanggal_wawancara between ? and ? "+(TCari.getText().trim().equals("")?"":" and "+
@@ -1034,7 +995,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                 while(rs.next()){
                     tabMode.addRow(new String[]{
                         rs.getString("no_rekonsiliasi"),rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien")+" ("+rs.getString("jk")+") ("+rs.getString("umurdaftar")+rs.getString("sttsumur")+")",
-                        rs.getString("tanggal_wawancara"),rs.getString("rekonsiliasi_obat_saat"),rs.getString("alergi_obat"),rs.getString("dampak_alergi"),rs.getString("manifestasi_alergi"),rs.getString("nip")+" "+rs.getString("nama")
+                        rs.getString("tanggal_wawancara"),rs.getString("rekonsiliasi_obat_saat"),rs.getString("alergi_obat"),rs.getString("dampak_alergi"),rs.getString("nip")+" "+rs.getString("nama")
                     });
                     tabMode.addRow(new String[]{
                         "","Nama Obat","Dosis Obat","Frekuensi","Cara Pemberian","Pemberian Terakhir","Tindak Lanjut","Perubahan Aturan Pakai"
@@ -1058,26 +1019,30 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                             ps2.close();
                         }
                     }
-                    ps3=koneksi.prepareStatement(
-                            "select rekonsiliasi_obat_konfirmasi.diterima_farmasi,rekonsiliasi_obat_konfirmasi.dikonfirmasi_apoteker,rekonsiliasi_obat_konfirmasi.nip,petugas.nama,"+
-                            "rekonsiliasi_obat_konfirmasi.diserahkan_pasien from rekonsiliasi_obat_konfirmasi inner join petugas on rekonsiliasi_obat_konfirmasi.nip=petugas.nip "+
-                            "where rekonsiliasi_obat_konfirmasi.no_rekonsiliasi=?");
+                    ps3 = koneksi.prepareStatement(
+    "select rekonsiliasi_obat_konfirmasi.dikonfirmasi_apoteker, " +
+    "rekonsiliasi_obat_konfirmasi.nip, " +
+    "petugas.nama " +
+    "from rekonsiliasi_obat_konfirmasi " +
+    "inner join petugas on rekonsiliasi_obat_konfirmasi.nip=petugas.nip " +
+    "where rekonsiliasi_obat_konfirmasi.no_rekonsiliasi=?"
+);
                     try {
                         ps3.setString(1,rs.getString("no_rekonsiliasi"));
                         rs3=ps3.executeQuery();
                         if(rs3.next()){
-                            tabMode.addRow(new String[]{
-                                "","Diterima Farmasi : "+rs3.getString("diterima_farmasi"),"","","","","",""
-                            });
+//                            tabMode.addRow(new String[]{
+//                                "","Diterima Farmasi : "+rs3.getString("diterima_farmasi"),"","","","","",""
+//                            });
                             tabMode.addRow(new String[]{
                                 "","Dikonfirmasi Apoteker : "+rs3.getString("dikonfirmasi_apoteker"),"","","","","",""
                             });
                             tabMode.addRow(new String[]{
                                 "","Petugas Farmasi/Apoteker : "+rs3.getString("nip")+" "+rs3.getString("nama"),"","","","","",""
                             });
-                            tabMode.addRow(new String[]{
-                                "","Kembali Ke Pasien : "+rs3.getString("diserahkan_pasien"),"","","","","",""
-                            });
+//                            tabMode.addRow(new String[]{
+//                                "","Kembali Ke Pasien : "+rs3.getString("diserahkan_pasien"),"","","","","",""
+//                            });
                         }
                     } catch (Exception e) {
                         System.out.println("Notif 3 : "+e);
