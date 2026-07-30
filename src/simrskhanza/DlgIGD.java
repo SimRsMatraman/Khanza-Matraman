@@ -195,6 +195,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             status="Baru",alamatperujuk="-",umur="0",sttsumur="Th",IPPRINTERTRACER="",
             validasiregistrasi=Sequel.cariIsi("select set_validasi_registrasi.wajib_closing_kasir from set_validasi_registrasi"),
             validasicatatan=Sequel.cariIsi("select set_validasi_catatan.tampilkan_catatan from set_validasi_catatan"),variabel="",kamar,namakamar,datapasien="",finger="",norawat="",nomr="",nama="",telp="";
+    private javax.swing.Timer timerRefresh;
     private char ESC = 27;
     // ganti kertas
     private char[] FORM_FEED = {12};
@@ -251,7 +252,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         initIGD();
-
+        
         this.setLocation(8,1);
         setSize(885,674);
 
@@ -406,6 +407,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         
         ChkInput.setSelected(false);
         isForm(); 
+        initAutoRefresh();
         
 //        pasien.addWindowListener(new WindowListener() {
 //            @Override
@@ -950,6 +952,8 @@ public final class DlgIGD extends javax.swing.JDialog {
         DTPCari1 = new widget.Tanggal();
         jLabel17 = new widget.Label();
         DTPCari2 = new widget.Tanggal();
+        jLabel11 = new widget.Label();
+        ChkRefresh = new widget.CekBox();
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
@@ -4641,7 +4645,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         panelGlass7.add(jLabel15);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-07-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -4655,16 +4659,34 @@ public final class DlgIGD extends javax.swing.JDialog {
         panelGlass7.add(jLabel17);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-07-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
         DTPCari2.setPreferredSize(new java.awt.Dimension(133, 23));
         panelGlass7.add(DTPCari2);
 
+        jLabel11.setText("Auto-refresh :");
+        jLabel11.setName("jLabel11"); // NOI18N
+        jLabel11.setPreferredSize(new java.awt.Dimension(78, 23));
+        panelGlass7.add(jLabel11);
+
+        ChkRefresh.setBorder(null);
+        ChkRefresh.setSelected(true);
+        ChkRefresh.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        ChkRefresh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkRefresh.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkRefresh.setName("ChkRefresh"); // NOI18N
+        ChkRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkRefreshActionPerformed(evt);
+            }
+        });
+        panelGlass7.add(ChkRefresh);
+
         jLabel6.setText("Key Word :");
         jLabel6.setName("jLabel6"); // NOI18N
-        jLabel6.setPreferredSize(new java.awt.Dimension(158, 23));
+        jLabel6.setPreferredSize(new java.awt.Dimension(100, 23));
         panelGlass7.add(jLabel6);
 
         TCari.setName("TCari"); // NOI18N
@@ -4826,7 +4848,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         jLabel9.setBounds(165, 72, 36, 23);
 
         DTPReg.setForeground(new java.awt.Color(50, 70, 50));
-        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-07-2026" }));
+        DTPReg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-07-2026" }));
         DTPReg.setDisplayFormat("dd-MM-yyyy");
         DTPReg.setName("DTPReg"); // NOI18N
         DTPReg.setOpaque(false);
@@ -6241,6 +6263,23 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
+        /*
+        * Aktifkan kembali timer jam setelah dialog pernah ditutup.
+        */
+       if (timerJam == null) {
+           jam();
+       }
+
+       /*
+        * Aktifkan kembali auto-refresh.
+        */
+       if (ChkRefresh.isSelected()) {
+           if (timerRefresh == null) {
+               initAutoRefresh();
+           } else {
+               timerRefresh.restart();
+           }
+       }
     }//GEN-LAST:event_formWindowOpened
 
     private void MnPeriksaRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPeriksaRadiologiActionPerformed
@@ -10257,6 +10296,32 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }
     }//GEN-LAST:event_ppHasilLaboratActionPerformed
 
+    private void ChkRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkRefreshActionPerformed
+        if (ChkRefresh.isSelected()) {
+            /*
+             * Refresh langsung ketika dicentang.
+             */
+            tampil();
+
+            /*
+             * Jika dialog pernah di-dispose, timer sudah null.
+             * Buat kembali timer tersebut.
+             */
+            if (timerRefresh == null) {
+                initAutoRefresh();
+            } else {
+                timerRefresh.restart();
+            }
+        } else {
+            /*
+             * Saat checkbox tidak dipilih, hentikan timer.
+             */
+            if (timerRefresh != null) {
+                timerRefresh.stop();
+            }
+        }  // TODO add your handling code here:
+    }//GEN-LAST:event_ChkRefreshActionPerformed
+
     /**
     * @data args the command line arguments
     */
@@ -10299,6 +10364,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.Button BtnTriase;
     private widget.CekBox ChkInput;
     private widget.CekBox ChkJln;
+    private widget.CekBox ChkRefresh;
     private widget.CekBox ChkTracker;
     private widget.ComboBox CmbDetik;
     private widget.ComboBox CmbJam;
@@ -10507,6 +10573,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
     private widget.InternalFrame internalFrame5;
     private widget.InternalFrame internalFrame6;
     private widget.Label jLabel10;
+    private widget.Label jLabel11;
     private widget.Label jLabel13;
     private widget.Label jLabel15;
     private widget.Label jLabel17;
@@ -10600,99 +10667,134 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
         StringBuilder sql = new StringBuilder();
 
         sql.append(
-            "SELECT " +
-            "    rp.no_reg, " +
-            "    rp.no_rawat, " +
-            "    rp.tgl_registrasi, " +
-            "    rp.jam_reg, " +
-            "    rp.kd_dokter, " +
-            "    d.nm_dokter, " +
-            "    rp.no_rkm_medis, " +
-            "    p.nm_pasien, " +
-            "    p.jk, " +
-            "    CONCAT(rp.umurdaftar,' ',rp.sttsumur) AS umur, " +
-            "    pol.nm_poli, " +
-            "    rp.p_jawab, " +
-            "    rp.almt_pj, " +
-            "    rp.hubunganpj, " +
-            "    rp.biaya_reg, " +
-            "    rp.stts_daftar, " +
-            "    pj.png_jawab, " +
-            "    rp.stts, " +
-            "    rp.kd_pj, " +
-            "    rp.status_bayar, " +
+            "SELECT "
+            + "rp.no_reg, "
+            + "rp.no_rawat, "
+            + "rp.tgl_registrasi, "
+            + "rp.jam_reg, "
+            + "rp.kd_dokter, "
+            + "d.nm_dokter, "
+            + "rp.no_rkm_medis, "
+            + "p.nm_pasien, "
+            + "p.jk, "
+            + "CONCAT(rp.umurdaftar,' ',rp.sttsumur) AS umur, "
+            + "pol.nm_poli, "
+            + "rp.p_jawab, "
+            + "rp.almt_pj, "
+            + "rp.hubunganpj, "
+            + "rp.biaya_reg, "
+            + "rp.stts_daftar, "
+            + "pj.png_jawab, "
 
-            "    IFNULL(bs.klsrawat, '-') AS klsrawat, " +
+            /*
+             * Apabila no_rawat ditemukan di kamar_inap,
+             * status ditampilkan sebagai Dirawat.
+             */
+            + "CASE "
+            + "    WHEN EXISTS ("
+            + "        SELECT 1 "
+            + "        FROM kamar_inap ki "
+            + "        WHERE ki.no_rawat = rp.no_rawat"
+            + "    ) THEN 'Dirawat' "
+            + "    ELSE rp.stts "
+            + "END AS stts, "
 
-            "    IF(" +
-            "        bs.no_sep IS NOT NULL " +
-            "        AND bs.no_sep <> '', " +
-            "        1, 0" +
-            "    ) AS ada_sep, " +
+            + "rp.kd_pj, "
+            + "rp.status_bayar, "
 
-            "    IF(rsm.no_rawat IS NOT NULL, 1, 0) AS resume, " +
-            "    IF(tri.no_rawat IS NOT NULL, 1, 0) AS triase, " +
-            "    IF(ami.no_rawat IS NOT NULL, 1, 0) AS medis, " +
-            "    IF(pak.no_rawat IS NOT NULL, 1, 0) AS perawat " +
+            /*
+             * bridging_sep sudah dikelompokkan per no_rawat.
+             */
+            + "IFNULL(bs.klsrawat, '-') AS klsrawat, "
 
-            "FROM reg_periksa rp " +
+            + "CASE "
+            + "    WHEN bs.no_sep IS NOT NULL "
+            + "         AND bs.no_sep <> '' "
+            + "    THEN 1 "
+            + "    ELSE 0 "
+            + "END AS ada_sep, "
 
-            "INNER JOIN dokter d " +
-            "    ON d.kd_dokter = rp.kd_dokter " +
+            /*
+             * Menggunakan EXISTS agar tabel pemeriksaan yang mempunyai
+             * beberapa record tidak menggandakan reg_periksa.
+             */
+            + "CASE WHEN EXISTS ("
+            + "    SELECT 1 FROM resume_pasien rsm "
+            + "    WHERE rsm.no_rawat = rp.no_rawat"
+            + ") THEN 1 ELSE 0 END AS resume, "
 
-            "INNER JOIN pasien p " +
-            "    ON p.no_rkm_medis = rp.no_rkm_medis " +
+            + "CASE WHEN EXISTS ("
+            + "    SELECT 1 FROM data_triase_igd tri "
+            + "    WHERE tri.no_rawat = rp.no_rawat"
+            + ") THEN 1 ELSE 0 END AS triase, "
 
-            "INNER JOIN poliklinik pol " +
-            "    ON pol.kd_poli = rp.kd_poli " +
+            + "CASE WHEN EXISTS ("
+            + "    SELECT 1 FROM asesmen_medis_igd ami "
+            + "    WHERE ami.no_rawat = rp.no_rawat"
+            + ") THEN 1 ELSE 0 END AS medis, "
 
-            "INNER JOIN penjab pj " +
-            "    ON pj.kd_pj = rp.kd_pj " +
+            + "CASE WHEN EXISTS ("
+            + "    SELECT 1 FROM penilaian_awal_keperawatan_igd pak "
+            + "    WHERE pak.no_rawat = rp.no_rawat"
+            + ") THEN 1 ELSE 0 END AS perawat "
 
-            "LEFT JOIN bridging_sep bs " +
-            "    ON bs.no_rawat = rp.no_rawat " +
+            + "FROM reg_periksa rp "
 
-            "LEFT JOIN resume_pasien rsm " +
-            "    ON rsm.no_rawat = rp.no_rawat " +
+            + "INNER JOIN dokter d "
+            + "    ON d.kd_dokter = rp.kd_dokter "
 
-            "LEFT JOIN data_triase_igd tri " +
-            "    ON tri.no_rawat = rp.no_rawat " +
+            + "INNER JOIN pasien p "
+            + "    ON p.no_rkm_medis = rp.no_rkm_medis "
 
-            "LEFT JOIN asesmen_medis_igd ami " +
-            "    ON ami.no_rawat = rp.no_rawat " +
+            + "INNER JOIN poliklinik pol "
+            + "    ON pol.kd_poli = rp.kd_poli "
 
-            "LEFT JOIN penilaian_awal_keperawatan_igd pak " +
-            "    ON pak.no_rawat = rp.no_rawat " +
+            + "INNER JOIN penjab pj "
+            + "    ON pj.kd_pj = rp.kd_pj "
 
-            "WHERE rp.kd_poli = 'IGDK' " +
-            "  AND rp.tgl_registrasi BETWEEN ? AND ? "
+            /*
+             * Satu baris bridging_sep untuk setiap no_rawat.
+             * Walaupun terdapat SEP IGD dan SEP rawat inap,
+             * hasil reg_periksa tetap satu baris.
+             */
+            + "LEFT JOIN ("
+            + "    SELECT "
+            + "        no_rawat, "
+            + "        MAX(NULLIF(no_sep, '')) AS no_sep, "
+            + "        MAX(NULLIF(klsrawat, '')) AS klsrawat "
+            + "    FROM bridging_sep "
+            + "    GROUP BY no_rawat"
+            + ") bs ON bs.no_rawat = rp.no_rawat "
+
+            + "WHERE rp.kd_poli = 'IGDK' "
+            + "AND rp.tgl_registrasi BETWEEN ? AND ? "
         );
 
         if (!keyword.isEmpty()) {
             sql.append(
-                "AND (" +
-                "       rp.no_reg LIKE ? " +
-                "    OR rp.no_rawat LIKE ? " +
-                "    OR rp.tgl_registrasi LIKE ? " +
-                "    OR rp.kd_dokter LIKE ? " +
-                "    OR d.nm_dokter LIKE ? " +
-                "    OR rp.no_rkm_medis LIKE ? " +
-                "    OR rp.stts_daftar LIKE ? " +
-                "    OR p.nm_pasien LIKE ? " +
-                "    OR pol.nm_poli LIKE ? " +
-                "    OR rp.p_jawab LIKE ? " +
-                "    OR rp.almt_pj LIKE ? " +
-                "    OR rp.hubunganpj LIKE ? " +
-                "    OR pj.png_jawab LIKE ? " +
-                ") "
+                "AND ("
+                + "       rp.no_reg LIKE ? "
+                + "    OR rp.no_rawat LIKE ? "
+                + "    OR rp.tgl_registrasi LIKE ? "
+                + "    OR rp.kd_dokter LIKE ? "
+                + "    OR d.nm_dokter LIKE ? "
+                + "    OR rp.no_rkm_medis LIKE ? "
+                + "    OR rp.stts_daftar LIKE ? "
+                + "    OR p.nm_pasien LIKE ? "
+                + "    OR pol.nm_poli LIKE ? "
+                + "    OR rp.p_jawab LIKE ? "
+                + "    OR rp.almt_pj LIKE ? "
+                + "    OR rp.hubunganpj LIKE ? "
+                + "    OR pj.png_jawab LIKE ? "
+                + ") "
             );
         }
 
         sql.append(
-            "ORDER BY " +
-            "    rp.tgl_registrasi, " +
-            "    rp.jam_reg, " +
-            "    rp.no_rawat"
+            "ORDER BY "
+            + "rp.tgl_registrasi, "
+            + "rp.jam_reg, "
+            + "rp.no_rawat"
         );
 
         try {
@@ -10714,18 +10816,37 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                boolean adaSep = rs.getBoolean("ada_sep");
-                boolean isResume = rs.getBoolean("resume");
-                boolean isTriase = rs.getBoolean("triase");
-                boolean isMedis = rs.getBoolean("medis");
-                boolean isPerawat = rs.getBoolean("perawat");
+                boolean adaSep =
+                        rs.getBoolean("ada_sep");
+
+                boolean isResume =
+                        rs.getBoolean("resume");
+
+                boolean isTriase =
+                        rs.getBoolean("triase");
+
+                boolean isMedis =
+                        rs.getBoolean("medis");
+
+                boolean isPerawat =
+                        rs.getBoolean("perawat");
 
                 String statusSep;
 
                 if ("BPJ".equals(rs.getString("kd_pj"))) {
                     if (adaSep) {
-                        statusSep =
-                            "Kelas " + rs.getString("klsrawat");
+                        String kelasRawat =
+                                rs.getString("klsrawat");
+
+                        if (
+                            kelasRawat == null
+                            || kelasRawat.trim().equals("")
+                            || kelasRawat.equals("-")
+                        ) {
+                            statusSep = "Sudah Terbit";
+                        } else {
+                            statusSep = "Kelas " + kelasRawat;
+                        }
                     } else {
                         statusSep = "Belum Terbit";
                     }
@@ -10764,17 +10885,16 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
                     isPerawat
                 });
             }
-
         } catch (Exception e) {
             System.out.println(
                 "Notifikasi tampil RegIGD: " + e
             );
             e.printStackTrace();
-
         } finally {
             try {
                 if (rs != null) {
                     rs.close();
+                    rs = null;
                 }
             } catch (Exception e) {
                 System.out.println(
@@ -10785,6 +10905,7 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
             try {
                 if (ps != null) {
                     ps.close();
+                    ps = null;
                 }
             } catch (Exception e) {
                 System.out.println(
@@ -10841,7 +10962,42 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
             Sequel.cariIsi("select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat=?", nosep,tbPetugas.getValueAt(tbPetugas.getSelectedRow(),2).toString());
         }
     }
+    
+    private void initAutoRefresh() {
+        /*
+         * Jangan membuat timer kedua jika timer lama masih tersedia.
+         */
+        if (timerRefresh != null) {
+            timerRefresh.stop();
+        }
 
+        timerRefresh = new javax.swing.Timer(
+            60000,
+            new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(
+                        java.awt.event.ActionEvent evt
+                ) {
+                    if (ChkRefresh.isSelected()) {
+                        System.out.println(
+                            "Auto refresh IGD: "
+                            + new java.util.Date()
+                        );
+
+                        tampil();
+                    }
+                }
+            }
+        );
+
+        timerRefresh.setCoalesce(true);
+        timerRefresh.setRepeats(true);
+        timerRefresh.setInitialDelay(60000);
+
+        if (ChkRefresh.isSelected()) {
+            timerRefresh.start();
+        }
+    }
 
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
@@ -10909,6 +11065,11 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
             if (timerJam != null) {
                 timerJam.stop();
                 timerJam = null;
+            }
+            
+            if (timerRefresh != null) {
+                timerRefresh.stop();
+                timerRefresh = null;
             }
 
             super.dispose();

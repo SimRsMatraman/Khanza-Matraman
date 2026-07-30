@@ -3138,6 +3138,19 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                             rs2.close();
                         }
                     }   
+                    
+                    if (urut > 1) {
+                        htmlContent.append(
+                            "<tr>"
+                            + "<td colspan='4' "
+                            + "style='height:12px; "
+                            + "border-top:3px solid #555555; "
+                            + "background-color:#F2F2F2;'>"
+                            + "&nbsp;"
+                            + "</td>"
+                            + "</tr>"
+                        );
+                    }
 
                     htmlContent.append(
                       "<tr class='isi'>"+ 
@@ -20222,9 +20235,17 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
     }
 
     private void menampilkanAsuhanKeperawatanRawatInap(String norawat) {
-        try {
-            if(chkAsuhanKeperawatanRanap.isSelected()==true){
-                try {
+                if (!chkAsuhanKeperawatanRanap.isSelected()) {
+                    return;
+                }
+        
+                /*
+                * Menyimpan posisi HTML sebelum blok penilaian dibuat.
+                * Bila terjadi error, HTML dikembalikan ke posisi ini.
+                */
+               int posisiAwalHtml = htmlContent.length();
+
+               try {
                     rs2=koneksi.prepareStatement(
                             "select penilaian_awal_keperawatan_ranap.tanggal,penilaian_awal_keperawatan_ranap.informasi,penilaian_awal_keperawatan_ranap.ket_informasi,penilaian_awal_keperawatan_ranap.tiba_diruang_rawat,"+
                             "penilaian_awal_keperawatan_ranap.kasus_trauma,penilaian_awal_keperawatan_ranap.cara_masuk,penilaian_awal_keperawatan_ranap.rps,penilaian_awal_keperawatan_ranap.rpd,penilaian_awal_keperawatan_ranap.rpk,penilaian_awal_keperawatan_ranap.rpo,"+
@@ -20281,20 +20302,44 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                             "penilaian_awal_keperawatan_ranap.penilaian_jatuhsydney_skala9,penilaian_awal_keperawatan_ranap.penilaian_jatuhsydney_nilai9,penilaian_awal_keperawatan_ranap.penilaian_jatuhsydney_skala10,"+
                             "penilaian_awal_keperawatan_ranap.penilaian_jatuhsydney_nilai10,penilaian_awal_keperawatan_ranap.penilaian_jatuhsydney_skala11,penilaian_awal_keperawatan_ranap.penilaian_jatuhsydney_nilai11,"+
                             "penilaian_awal_keperawatan_ranap.penilaian_jatuhsydney_totalnilai,penilaian_awal_keperawatan_ranap.skrining_gizi1,penilaian_awal_keperawatan_ranap.nilai_gizi1,penilaian_awal_keperawatan_ranap.skrining_gizi2,"+
-                            "penilaian_awal_keperawatan_ranap.nilai_gizi2,penilaian_awal_keperawatan_ranap.nilai_total_gizi,penilaian_awal_keperawatan_ranap.skrining_gizi_diagnosa_khusus,penilaian_awal_keperawatan_ranap.skrining_gizi_ket_diagnosa_khusus,"+
-                            "penilaian_awal_keperawatan_ranap.skrining_gizi_diketahui_dietisen,penilaian_awal_keperawatan_ranap.skrining_gizi_jam_diketahui_dietisen,penilaian_awal_keperawatan_ranap.rencana,"+
-                            "penilaian_awal_keperawatan_ranap.nip1,penilaian_awal_keperawatan_ranap.nip2,penilaian_awal_keperawatan_ranap.kd_dokter,pengkaji1.nama as pengkaji1,pengkaji2.nama as pengkaji2,dokter.nm_dokter,penilaian_awal_keperawatan_ranap.masalah_lainnya "+
-                            "from penilaian_awal_keperawatan_ranap inner join petugas as pengkaji1 on penilaian_awal_keperawatan_ranap.nip1=pengkaji1.nip "+
-                            "inner join petugas as pengkaji2 on penilaian_awal_keperawatan_ranap.nip2=pengkaji2.nip "+
-                            "inner join dokter on penilaian_awal_keperawatan_ranap.kd_dokter=dokter.kd_dokter where penilaian_awal_keperawatan_ranap.no_rawat='"+norawat+"'").executeQuery();
-                    if(rs2.next()){
+                            "penilaian_awal_keperawatan_ranap.nilai_gizi2,"
+                            + "penilaian_awal_keperawatan_ranap.nilai_total_gizi,"
+                            + "penilaian_awal_keperawatan_ranap.skrining_gizi_diagnosa_khusus,"
+                            + "penilaian_awal_keperawatan_ranap.skrining_gizi_ket_diagnosa_khusus,"
+                            + "penilaian_awal_keperawatan_ranap.skrining_gizi_diketahui_dietisen,"
+                            + "penilaian_awal_keperawatan_ranap.skrining_gizi_jam_diketahui_dietisen,"
+                            + "penilaian_awal_keperawatan_ranap.rencana,"
+                            + "penilaian_awal_keperawatan_ranap.nip1,"
+                            + "penilaian_awal_keperawatan_ranap.nip2,"
+                            + "penilaian_awal_keperawatan_ranap.kd_dokter,"
+                            + "pengkaji1.nama as pengkaji1,"
+                            + "pengkaji2.nama as pengkaji2,dokter.nm_dokter,"
+                            + "penilaian_awal_keperawatan_ranap.masalah_lainnya,penjab.png_jawab "
+                            + "from penilaian_awal_keperawatan_ranap "
+                            + "inner join reg_periksa on "
+                            + "penilaian_awal_keperawatan_ranap.no_rawat=reg_periksa.no_rawat "
+                            + "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "
+                            + "inner join petugas as pengkaji1 on "
+                            + "penilaian_awal_keperawatan_ranap.nip1=pengkaji1.nip "
+                            + "inner join petugas as pengkaji2 on "
+                            + "penilaian_awal_keperawatan_ranap.nip2=pengkaji2.nip "
+                            + "inner join dokter on "
+                            + "penilaian_awal_keperawatan_ranap.kd_dokter=dokter.kd_dokter "
+                            + "where penilaian_awal_keperawatan_ranap.no_rawat='"
+                            + norawat
+                            + "'").executeQuery();
+                    if (rs2.next()) {
                         htmlContent.append(
-                          "<tr class='isi'>"+ 
-                            "<td valign='top' width='2%'></td>"+        
-                            "<td valign='top' width='18%'>Penilaian Awal Keperawatan Rawat Inap Dewasa</td>"+
-                            "<td valign='top' width='1%' align='center'>:</td>"+
-                            "<td valign='top' width='79%'>"+
-                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                            "<tr class='isi'>"
+                            + "<td valign='top' width='2%'></td>"
+                            + "<td valign='top' width='18%'>"
+                            + "Penilaian Awal Keperawatan Rawat Inap Dewasa"
+                            + "</td>"
+                            + "<td valign='top' width='1%' align='center'>:</td>"
+                            + "<td valign='top' width='79%'>"
+                            + "<table width='100%' border='0' "
+                            + "align='center' cellpadding='3px' cellspacing='0' "
+                            + "class='tbl_form'>"
                         );
                         rs2.beforeFirst();
                         while(rs2.next()){
@@ -20991,23 +21036,6 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                             htmlContent.append(rs2.getString("masalah_lainnya"));
                             htmlContent.append("</td>"+
                                                "<td valign='top'>");
-//                            try {
-//                                rs3=koneksi.prepareStatement(
-//                                    "select master_rencana_keperawatan.rencana_keperawatan from master_rencana_keperawatan "+
-//                                    "inner join penilaian_awal_keperawatan_ranap_rencana on penilaian_awal_keperawatan_ranap_rencana.kode_rencana=master_rencana_keperawatan.kode_rencana "+
-//                                    "where penilaian_awal_keperawatan_ranap_rencana.no_rawat='"+norawat+"' order by penilaian_awal_keperawatan_ranap_rencana.kode_rencana").executeQuery();
-//                                while(rs3.next()){
-//                                    htmlContent.append(rs3.getString("rencana_keperawatan")+"<br>");
-//                                }
-//                            } catch (Exception e) {
-//                                System.out.println("Notif : "+e);
-//                            } 
-//                            finally{
-//                                if(rs3!=null){
-//                                    rs3.close();
-//                                }
-//                            }
-                            
                             htmlContent.append(rs2.getString("rencana")+
                                             "</td>"+
                                           "</tr>"+
@@ -21017,20 +21045,33 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                             );   
                         }
                         htmlContent.append(
-                              "</table>"+
-                            "</td>"+
-                          "</tr>");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                } finally{
-                    if(rs2!=null){
-                        rs2.close();
-                    }
-                }
-            }
+                                "</table>"
+                              + "</td>"
+                              + "</tr>"
+                          );
+                        }
         } catch (Exception e) {
-            System.out.println("Notif Asuhan Keperawatan Rawat Inap: "+e);
+            /*
+             * Buang seluruh HTML penilaian yang tidak selesai.
+             * Dengan demikian EWS tidak masuk ke tabel yang rusak.
+             */
+            htmlContent.setLength(posisiAwalHtml);
+
+            System.out.println(
+                "Notif Asuhan Keperawatan Rawat Inap "
+                + "[No.Rawat: " + norawat + "] : " + e
+            );
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs2 != null) {
+                    rs2.close();
+                }
+            } catch (Exception e) {
+                System.out.println(
+                    "Notif tutup Penilaian Awal Keperawatan Ranap: " + e
+                );
+            }
         }
     }
 
@@ -23219,102 +23260,580 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
         }
     }
     
-    private void menampilkanPenilaianPasienTerminal(String norawat) {
-        try{
-            if(chkPenilaianPasienTerminal.isSelected()==true){
-                try {
-                    rs2=koneksi.prepareStatement(
-                        "select penilaian_pasien_terminal.tanggal,penilaian_pasien_terminal.diagnosa,penilaian_pasien_terminal.rps,penilaian_pasien_terminal.rpd,penilaian_pasien_terminal.keadaan_umum,"+
-                        "penilaian_pasien_terminal.kesadaran,penilaian_pasien_terminal.td,penilaian_pasien_terminal.nadi,penilaian_pasien_terminal.suhu,"+
-                        "penilaian_pasien_terminal.rr,penilaian_pasien_terminal.spo2,penilaian_pasien_terminal.skala_nyeri,penilaian_pasien_terminal.tahap_pasien_menjelang_ajal,"+
-                        "penilaian_pasien_terminal.tanda_klinis_menjelang_kematian,penilaian_pasien_terminal.kebutuhan_spiritual_pasien,penilaian_pasien_terminal.nip,petugas.nama "+
-                        "from penilaian_pasien_terminal inner join petugas on penilaian_pasien_terminal.nip=petugas.nip where penilaian_pasien_terminal.no_rawat='"+norawat+"'").executeQuery();
-                    if(rs2.next()){
-                        htmlContent.append(
-                          "<tr class='isi'>"+ 
-                            "<td valign='top' width='2%'></td>"+        
-                            "<td valign='top' width='18%'>Penilaian Pasien Terminal</td>"+
-                            "<td valign='top' width='1%' align='center'>:</td>"+
-                            "<td valign='top' width='79%'>"+
-                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
-                        );
-                        rs2.beforeFirst();
-                        while(rs2.next()){
-                            htmlContent.append(
-                                 "<tr>"+
-                                    "<td valign='top'>"+
-                                       "YANG MELAKUKAN PENGKAJIAN"+  
-                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
-                                          "<tr>"+
-                                              "<td width='50%' border='0'>Tanggal : "+rs2.getString("tanggal")+"</td>"+
-                                              "<td width='50%' border='0'>Petugas : "+rs2.getString("nip")+" "+rs2.getString("nama")+"</td>"+
-                                          "</tr>"+
-                                       "</table>"+
-                                    "</td>"+
-                                 "</tr>"+
-                                 "<tr>"+
-                                    "<td valign='top'>"+
-                                       "RIWAYAT PENGKAJIAN"+  
-                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>1.</td><td border='0' width='96%'>Diagnosa : "+rs2.getString("diagnosa").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>2.</td><td border='0' width='96%'>Uraian Penyakit/Kondisi Pasien Saat Ini : "+rs2.getString("rps").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>3.</td><td border='0' width='96%'>Riwayat Penyakit/Kondisi Sebelumnya : "+rs2.getString("rpd").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>4.</td><td border='0' width='96%'>Keadaa Umum : "+rs2.getString("keadaan_umum")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>5.</td><td border='0' width='96%'>Kesadaran : "+rs2.getString("kesadaran")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>6.</td><td border='0' width='96%'>Tanda-tanda Vital : </td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'></td><td border='0' width='96%' style='margin-left: 10px'>"+
-                                                   "TD : "+rs2.getString("td")+" mmHg&nbsp;&nbsp;&nbsp;&nbsp;"+
-                                                   "Nadi : "+rs2.getString("nadi")+" x/menit&nbsp;&nbsp;&nbsp;&nbsp;"+
-                                                   "Suhu : "+rs2.getString("suhu")+" °C&nbsp;&nbsp;&nbsp;&nbsp;"+
-                                                   "SpO2 : "+rs2.getString("spo2")+" %mmHg&nbsp;&nbsp;&nbsp;&nbsp;"+
-                                                   "RR : "+rs2.getString("rr")+" x/menit"+
-                                              "</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>7.</td><td border='0' border='0' width='96%'>Skala Nyeri : "+rs2.getString("skala_nyeri")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>8.</td><td border='0' width='96%'>Tahap Pasien Menjelang Ajal : "+rs2.getString("tahap_pasien_menjelang_ajal")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>9.</td><td border='0' width='96%'>Tanda-tanda Klinis Menjelang Kematian : "+rs2.getString("tanda_klinis_menjelang_kematian")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' border='0'>10.</td><td border='0' width='96%'>Kebutuhan Spiritual Pasien/Keluarga : "+rs2.getString("kebutuhan_spiritual_pasien").replaceAll("(\r\n|\r|\n|\n\r)","<br>")+"</td>"+
-                                          "</tr>"+
-                                       "</table>"+
-                                    "</td>"+
-                                 "</tr>"
-                            );  
-                        }
-                        htmlContent.append(
-                              "</table>"+
-                            "</td>"+
-                          "</tr>");
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                } finally{
-                    if(rs2!=null){
-                        rs2.close();
-                    }
-                }
+    private String htmlTerminal(String nilai) {
+        if (nilai == null || nilai.trim().equals("")) {
+            return "-";
+        }
+
+        return nilai
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;")
+                .replaceAll("(\\r\\n|\\r|\\n)", "<br>");
+    }
+
+    private void tambahPilihanTerminal(
+            StringBuilder hasil,
+            ResultSet hasilQuery,
+            int index,
+            String keterangan
+    ) throws SQLException {
+        if ("true".equalsIgnoreCase(hasilQuery.getString(index))) {
+            if (hasil.length() > 0) {
+                hasil.append(", ");
             }
-        }catch (Exception e) {
-            System.out.println("Notif Penilaian Pasien Terminal : "+e);
+
+            hasil.append(keterangan);
+        }
+    }
+
+    private String hasilPilihanTerminal(StringBuilder hasil) {
+        return hasil.length() == 0 ? "Tidak ada" : hasil.toString();
+    }
+    
+    private String barisTerminal(String judul, String nilai) {
+        return "<tr>"
+                + "<td valign='top' width='30%'>"
+                + htmlTerminal(judul)
+                + "</td>"
+                + "<td valign='top' width='1%' align='center'>:</td>"
+                + "<td valign='top' width='69%'>"
+                + htmlTerminal(nilai)
+                + "</td>"
+                + "</tr>";
+    }
+
+    private String yaTidakTerminal(String nilai) {
+        return "true".equalsIgnoreCase(nilai) ? "Ya" : "Tidak";
+    }
+    
+    private void menampilkanPenilaianPasienTerminal(String norawat) {
+        if (!chkPenilaianPasienTerminal.isSelected()) {
+            return;
+        }
+
+        PreparedStatement psTerminal = null;
+        ResultSet rsTerminal = null;
+
+        try {
+            /*
+             * Urutan kolom penilaian_pasien_terminal harus sama dengan
+             * urutan 93 nilai pada BtnSimpanActionPerformed:
+             *
+             * 1  = no_rawat
+             * 2  = tanggal
+             * 3  = kd_ruangan
+             * 4-92 = hasil pengkajian
+             * 93 = nip
+             * 94 = nama petugas dari JOIN
+             */
+            psTerminal = koneksi.prepareStatement(
+                    "SELECT p.*, pt.nama AS nama_petugas "
+                    + "FROM penilaian_pasien_terminal p "
+                    + "LEFT JOIN petugas pt ON p.nip = pt.nip "
+                    + "WHERE p.no_rawat = ? "
+                    + "ORDER BY p.tanggal"
+            );
+
+            psTerminal.setString(1, norawat);
+            rsTerminal = psTerminal.executeQuery();
+
+            if (rsTerminal.next()) {
+                htmlContent.append(
+                        "<tr class='isi'>"
+                        + "<td valign='top' width='2%'></td>"
+                        + "<td valign='top' width='18%'>"
+                        + "Penilaian Pasien Terminal"
+                        + "</td>"
+                        + "<td valign='top' width='1%' align='center'>:</td>"
+                        + "<td valign='top' width='79%'>"
+                        + "<table width='100%' border='0' "
+                        + "align='center' cellpadding='3px' cellspacing='0' "
+                        + "class='tbl_form'>"
+                );
+
+                rsTerminal.beforeFirst();
+
+                while (rsTerminal.next()) {
+                    StringBuilder pernapasan = new StringBuilder();
+                    tambahPilihanTerminal(
+                            pernapasan, rsTerminal, 4, "Dyspneu"
+                    );
+                    tambahPilihanTerminal(
+                            pernapasan, rsTerminal, 5, "Pernapasan tidak teratur"
+                    );
+                    tambahPilihanTerminal(
+                            pernapasan, rsTerminal, 6, "Ada sekret"
+                    );
+                    tambahPilihanTerminal(
+                            pernapasan, rsTerminal, 7, "Napas cepat"
+                    );
+                    tambahPilihanTerminal(
+                            pernapasan, rsTerminal, 8, "Bernapas melalui mulut"
+                    );
+                    tambahPilihanTerminal(
+                            pernapasan, rsTerminal, 9, "Saturasi menurun"
+                    );
+                    tambahPilihanTerminal(
+                            pernapasan, rsTerminal, 10, "Napas lambat"
+                    );
+                    tambahPilihanTerminal(
+                            pernapasan, rsTerminal, 11, "Mukosa kebiruan"
+                    );
+                    tambahPilihanTerminal(
+                            pernapasan, rsTerminal, 12, "Tidak ada kelainan"
+                    );
+
+                    StringBuilder gastrointestinal = new StringBuilder();
+                    tambahPilihanTerminal(
+                            gastrointestinal, rsTerminal, 13, "Mual"
+                    );
+                    tambahPilihanTerminal(
+                            gastrointestinal, rsTerminal, 14, "Sulit menelan"
+                    );
+                    tambahPilihanTerminal(
+                            gastrointestinal, rsTerminal, 15, "Inkontinensia"
+                    );
+                    tambahPilihanTerminal(
+                            gastrointestinal, rsTerminal, 16,
+                            "Penurunan pergerakan"
+                    );
+                    tambahPilihanTerminal(
+                            gastrointestinal, rsTerminal, 17,
+                            "Distensi abdomen"
+                    );
+                    tambahPilihanTerminal(
+                            gastrointestinal, rsTerminal, 18,
+                            "Tidak ada kelainan"
+                    );
+                    tambahPilihanTerminal(
+                            gastrointestinal, rsTerminal, 19,
+                            "Sulit berbicara"
+                    );
+                    tambahPilihanTerminal(
+                            gastrointestinal, rsTerminal, 20,
+                            "Inkontinensia urine"
+                    );
+
+                    StringBuilder kondisiFisik = new StringBuilder();
+                    tambahPilihanTerminal(
+                            kondisiFisik, rsTerminal, 23, "Bercak pada kulit"
+                    );
+                    tambahPilihanTerminal(
+                            kondisiFisik, rsTerminal, 24, "Gelisah"
+                    );
+                    tambahPilihanTerminal(
+                            kondisiFisik, rsTerminal, 25, "Lemas"
+                    );
+                    tambahPilihanTerminal(
+                            kondisiFisik, rsTerminal, 26, "Tidak ada kelainan"
+                    );
+                    tambahPilihanTerminal(
+                            kondisiFisik, rsTerminal, 27, "Kulit dingin"
+                    );
+
+                    StringBuilder sirkulasi = new StringBuilder();
+                    tambahPilihanTerminal(
+                            sirkulasi, rsTerminal, 28,
+                            "Perubahan tekanan darah"
+                    );
+                    tambahPilihanTerminal(
+                            sirkulasi, rsTerminal, 29, "Nadi lambat"
+                    );
+                    tambahPilihanTerminal(
+                            sirkulasi, rsTerminal, 30,
+                            "Penurunan aktivitas fisik"
+                    );
+
+                    StringBuilder masalahKeperawatan = new StringBuilder();
+                    tambahPilihanTerminal(
+                            masalahKeperawatan, rsTerminal, 32,
+                            "Memerlukan perubahan posisi"
+                    );
+                    tambahPilihanTerminal(
+                            masalahKeperawatan, rsTerminal, 33, "Mual"
+                    );
+                    tambahPilihanTerminal(
+                            masalahKeperawatan, rsTerminal, 34, "Konstipasi"
+                    );
+                    tambahPilihanTerminal(
+                            masalahKeperawatan, rsTerminal, 35, "Nyeri akut"
+                    );
+                    tambahPilihanTerminal(
+                            masalahKeperawatan, rsTerminal, 36,
+                            "Gangguan pola napas"
+                    );
+                    tambahPilihanTerminal(
+                            masalahKeperawatan, rsTerminal, 37,
+                            "Perubahan persepsi sensori"
+                    );
+                    tambahPilihanTerminal(
+                            masalahKeperawatan, rsTerminal, 38, "Nyeri kronis"
+                    );
+                    tambahPilihanTerminal(
+                            masalahKeperawatan, rsTerminal, 39,
+                            "Bersihan jalan napas"
+                    );
+                    tambahPilihanTerminal(
+                            masalahKeperawatan, rsTerminal, 40,
+                            "Defisit perawatan diri"
+                    );
+
+                    StringBuilder psikososial = new StringBuilder();
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 56, "Menyangkal"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 57, "Rasa bersalah"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 58, "Ansietas"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 59, "Sedih/menangis"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 60, "Takut"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 61, "Distres spiritual"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 62, "Marah"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 63,
+                            "Ketidakberdayaan"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 64, "Marah"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 65, "Letih"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 66, "Merasa bersalah"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 67,
+                            "Penurunan konsentrasi"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 68, "Gangguan tidur"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 69,
+                            "Perubahan kebiasaan"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 70,
+                            "Keluarga kurang mendukung"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 71,
+                            "Ketidakmampuan memenuhi kebutuhan"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 72,
+                            "Kesulitan mengambil keputusan perawatan"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 73,
+                            "Koping individu tidak efektif"
+                    );
+                    tambahPilihanTerminal(
+                            psikososial, rsTerminal, 74, "Distres"
+                    );
+
+                    StringBuilder pendampingan = new StringBuilder();
+                    tambahPilihanTerminal(
+                            pendampingan, rsTerminal, 75,
+                            "Perlu didampingi"
+                    );
+                    tambahPilihanTerminal(
+                            pendampingan, rsTerminal, 76,
+                            "Keluarga dapat mendampingi"
+                    );
+                    tambahPilihanTerminal(
+                            pendampingan, rsTerminal, 77,
+                            "Sahabat dapat mendampingi"
+                    );
+
+                    StringBuilder kebutuhanSetelahMeninggal =
+                            new StringBuilder();
+                    tambahPilihanTerminal(
+                            kebutuhanSetelahMeninggal, rsTerminal, 79,
+                            "Tidak ada kebutuhan khusus"
+                    );
+                    tambahPilihanTerminal(
+                            kebutuhanSetelahMeninggal, rsTerminal, 80,
+                            "Autopsi"
+                    );
+                    tambahPilihanTerminal(
+                            kebutuhanSetelahMeninggal, rsTerminal, 81,
+                            "Donasi organ"
+                    );
+
+                    StringBuilder responsKeluarga = new StringBuilder();
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 82, "Marah"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 83, "Letih"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 84,
+                            "Merasa bersalah"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 85,
+                            "Penurunan konsentrasi"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 86,
+                            "Ketidakmampuan memenuhi kebutuhan"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 87,
+                            "Koping individu tidak efektif"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 88, "Distres"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 89,
+                            "Perubahan kebiasaan"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 90, "Sedih"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 91, "Depresi"
+                    );
+                    tambahPilihanTerminal(
+                            responsKeluarga, rsTerminal, 92,
+                            "Gangguan tidur"
+                    );
+
+                    htmlContent.append(
+                            "<tr>"
+                            + "<td valign='top'>"
+
+                            // Informasi pengkajian
+                            + "<b>YANG MELAKUKAN PENGKAJIAN</b>"
+                            + "<table width='100%' border='0' "
+                            + "cellpadding='3px' cellspacing='0' "
+                            + "class='tbl_form'>"
+                            + "<tr>"
+                            + "<td width='50%'>Tanggal: "
+                            + htmlTerminal(rsTerminal.getString(2))
+                            + "</td>"
+                            + "<td width='50%'>Petugas: "
+                            + htmlTerminal(rsTerminal.getString(93))
+                            + " "
+                            + htmlTerminal(rsTerminal.getString(94))
+                            + "</td>"
+                            + "</tr>"
+                            + "<tr>"
+                            + "<td colspan='2'>Ruangan/Poliklinik: "
+                            + htmlTerminal(rsTerminal.getString(3))
+                            + "</td>"
+                            + "</tr>"
+                            + "</table><br>"
+
+                            // Kondisi fisik
+                            + "<b>A. KONDISI FISIK PASIEN</b>"
+                            + "<table width='100%' border='0' "
+                            + "cellpadding='3px' cellspacing='0' "
+                            + "class='tbl_form'>"
+                            + barisTerminal(
+                                    "1. Pernapasan",
+                                    hasilPilihanTerminal(pernapasan)
+                            )
+                            + barisTerminal(
+                                    "2. Gastrointestinal/Eliminasi",
+                                    hasilPilihanTerminal(gastrointestinal)
+                            )
+                            + barisTerminal(
+                                    "3. Nyeri",
+                                    rsTerminal.getString(21)
+                            )
+                            + barisTerminal(
+                                    "Keterangan nyeri",
+                                    rsTerminal.getString(22)
+                            )
+                            + barisTerminal(
+                                    "4. Kondisi fisik lainnya",
+                                    hasilPilihanTerminal(kondisiFisik)
+                            )
+                            + barisTerminal(
+                                    "5. Sirkulasi/Aktivitas",
+                                    hasilPilihanTerminal(sirkulasi)
+                            )
+                            + barisTerminal(
+                                    "6. Faktor lainnya",
+                                    rsTerminal.getString(31)
+                            )
+                            + barisTerminal(
+                                    "7. Masalah keperawatan",
+                                    hasilPilihanTerminal(masalahKeperawatan)
+                            )
+                            + "</table><br>"
+
+                            // Spiritual
+                            + "<b>B. KEBUTUHAN SPIRITUAL</b>"
+                            + "<table width='100%' border='0' "
+                            + "cellpadding='3px' cellspacing='0' "
+                            + "class='tbl_form'>"
+                            + barisTerminal(
+                                    "Kebutuhan spiritual",
+                                    rsTerminal.getString(41)
+                            )
+                            + barisTerminal(
+                                    "Keterangan spiritual",
+                                    rsTerminal.getString(42)
+                            )
+                            + barisTerminal(
+                                    "Perlu bimbingan rohani",
+                                    rsTerminal.getString(43)
+                            )
+                            + barisTerminal(
+                                    "Perlu pendampingan",
+                                    rsTerminal.getString(44)
+                            )
+                            + barisTerminal(
+                                    "Ingin menghubungi seseorang",
+                                    rsTerminal.getString(45)
+                            )
+                            + barisTerminal(
+                                    "Perlu didoakan",
+                                    rsTerminal.getString(46)
+                            )
+                            + "</table><br>"
+
+                            // Orang yang dapat dihubungi
+                            + "<b>C. ORANG YANG DAPAT DIHUBUNGI</b>"
+                            + "<table width='100%' border='0' "
+                            + "cellpadding='3px' cellspacing='0' "
+                            + "class='tbl_form'>"
+                            + barisTerminal(
+                                    "Nama",
+                                    rsTerminal.getString(47)
+                            )
+                            + barisTerminal(
+                                    "Hubungan",
+                                    rsTerminal.getString(48)
+                            )
+                            + barisTerminal(
+                                    "Alamat",
+                                    rsTerminal.getString(49)
+                            )
+                            + barisTerminal(
+                                    "Nomor HP",
+                                    rsTerminal.getString(50)
+                            )
+                            + "</table><br>"
+
+                            // Rencana perawatan
+                            + "<b>D. RENCANA PERAWATAN</b>"
+                            + "<table width='100%' border='0' "
+                            + "cellpadding='3px' cellspacing='0' "
+                            + "class='tbl_form'>"
+                            + barisTerminal(
+                                    "Tetap dirawat",
+                                    yaTidakTerminal(rsTerminal.getString(51))
+                            )
+                            + barisTerminal(
+                                    "Rumah siap menerima pasien",
+                                    rsTerminal.getString(52)
+                            )
+                            + barisTerminal(
+                                    "Dirawat di rumah",
+                                    yaTidakTerminal(rsTerminal.getString(53))
+                            )
+                            + barisTerminal(
+                                    "Ada yang merawat di rumah",
+                                    rsTerminal.getString(54)
+                            )
+                            + barisTerminal(
+                                    "Memerlukan home care",
+                                    rsTerminal.getString(55)
+                            )
+                            + "</table><br>"
+
+                            // Psikososial
+                            + "<b>E. KONDISI PSIKOSOSIAL</b>"
+                            + "<table width='100%' border='0' "
+                            + "cellpadding='3px' cellspacing='0' "
+                            + "class='tbl_form'>"
+                            + barisTerminal(
+                                    "Respons pasien/keluarga",
+                                    hasilPilihanTerminal(psikososial)
+                            )
+                            + barisTerminal(
+                                    "Pendampingan",
+                                    hasilPilihanTerminal(pendampingan)
+                            )
+                            + barisTerminal(
+                                    "Kebutuhan lainnya",
+                                    rsTerminal.getString(78)
+                            )
+                            + "</table><br>"
+
+                            // Setelah meninggal
+                            + "<b>F. KEBUTUHAN SETELAH MENINGGAL</b>"
+                            + "<table width='100%' border='0' "
+                            + "cellpadding='3px' cellspacing='0' "
+                            + "class='tbl_form'>"
+                            + barisTerminal(
+                                    "Kebutuhan pasien/keluarga",
+                                    hasilPilihanTerminal(
+                                            kebutuhanSetelahMeninggal
+                                    )
+                            )
+                            + barisTerminal(
+                                    "Respons kehilangan/berduka",
+                                    hasilPilihanTerminal(responsKeluarga)
+                            )
+                            + "</table>"
+
+                            + "</td>"
+                            + "</tr>"
+                    );
+                }
+
+                htmlContent.append(
+                        "</table>"
+                        + "</td>"
+                        + "</tr>"
+                );
+            }
+        } catch (Exception e) {
+            System.out.println(
+                    "Notif Penilaian Pasien Terminal : " + e
+            );
+        } finally {
+            try {
+                if (rsTerminal != null) {
+                    rsTerminal.close();
+                }
+            } catch (Exception e) {
+                System.out.println(
+                        "Notif Close ResultSet Terminal : " + e
+                );
+            }
+
+            try {
+                if (psTerminal != null) {
+                    psTerminal.close();
+                }
+            } catch (Exception e) {
+                System.out.println(
+                        "Notif Close PreparedStatement Terminal : " + e
+                );
+            }
         }
     }
     
