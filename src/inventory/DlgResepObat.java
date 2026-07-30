@@ -2021,20 +2021,254 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             try {
                 i=0;
                 ps=koneksi.prepareStatement(
-                    "select detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.jam,databarang.kode_sat, "+
-                    "detail_pemberian_obat.kode_brng,detail_pemberian_obat.jml,detail_pemberian_obat.total,"+
-                    "databarang.nama_brng,detail_pemberian_obat.no_rawat from detail_pemberian_obat inner join databarang "+
-                    "on detail_pemberian_obat.kode_brng=databarang.kode_brng inner join resep_obat on resep_obat.no_rawat=detail_pemberian_obat.no_rawat "+
-                    "and detail_pemberian_obat.tgl_perawatan=resep_obat.tgl_perawatan and detail_pemberian_obat.jam=resep_obat.jam "+
-                    "where resep_obat.no_resep=?");
+                    "SELECT " +
+                    "    ro.no_resep, " +
+                    "    'Non-Racik' AS kategori, " +
+                    "    dpo.no_rawat, " +
+                    "    dpo.tgl_perawatan, " +
+                    "    dpo.jam, " +
+                    "    ro.kd_dokter, " +
+                    "    db.nama_brng, " +
+                    "    COALESCE(ap.aturan, '') AS aturan_pakai, " +
+                    "    CAST(COALESCE(dpo.jml, 0) AS CHAR) AS jumlah_obat, " +
+                    "    '' AS detail_jml, " +
+                    "    '' AS nama_racik, " +
+                    "    '' AS metode_racik " +
+                    "FROM detail_pemberian_obat AS dpo " +
+                    "INNER JOIN resep_obat AS ro " +
+                    "    ON ro.tgl_perawatan = dpo.tgl_perawatan " +
+                    "   AND ro.jam            = dpo.jam " +
+                    "   AND ro.no_rawat       = dpo.no_rawat " +
+                    "LEFT JOIN databarang AS db " +
+                    "    ON db.kode_brng = dpo.kode_brng " +
+                    "LEFT JOIN aturan_pakai AS ap " +
+                    "    ON ap.tgl_perawatan = dpo.tgl_perawatan " +
+                    "   AND ap.jam            = dpo.jam " +
+                    "   AND ap.no_rawat       = dpo.no_rawat " +
+                    "   AND ap.kode_brng      = dpo.kode_brng " +
+                    "WHERE ro.no_resep = ? " +
+                    "AND NOT EXISTS " +
+                    "( " +
+                    "    SELECT 1 " +
+                    "    FROM detail_obat_racikan AS cek " +
+                    "    WHERE cek.tgl_perawatan = dpo.tgl_perawatan " +
+                    "      AND cek.jam            = dpo.jam " +
+                    "      AND cek.no_rawat       = dpo.no_rawat " +
+                    "      AND cek.kode_brng      = dpo.kode_brng " +
+                    ") " +
+                    "UNION ALL " +
+                    "SELECT " +
+                    "    ro.no_resep, " +
+                    "    'Racikan' AS kategori, " +
+                    "    obr.no_rawat, " +
+                    "    obr.tgl_perawatan, " +
+                    "    obr.jam, " +
+                    "    ro.kd_dokter, " +
+                    "    db.nama_brng, " +
+                    "    CASE " +
+                    "        WHEN dor.kode_brng = pertama.kode_brng_pertama " +
+                    "        THEN COALESCE(obr.aturan_pakai, '') " +
+                    "        ELSE '' " +
+                    "    END AS aturan_pakai, " +
+                    "    COALESCE(CAST(rdrd.jml AS CHAR), '') AS jumlah_obat, " +
+                    "    CASE " +
+                    "        WHEN dor.kode_brng = pertama.kode_brng_pertama " +
+                    "        THEN CAST(COALESCE(obr.jml_dr, 0) AS CHAR) " +
+                    "        ELSE '' " +
+                    "    END AS detail_jml, " +
+                    "    CASE " +
+                    "        WHEN dor.kode_brng = pertama.kode_brng_pertama " +
+                    "        THEN COALESCE(rdr.nama_racik, '') " +
+                    "        ELSE '' " +
+                    "    END AS nama_racik, " +
+                    "    CASE " +
+                    "        WHEN dor.kode_brng = pertama.kode_brng_pertama " +
+                    "        THEN COALESCE(mr.nm_racik, '') " +
+                    "        ELSE '' " +
+                    "    END AS metode_racik " +
+                    "FROM obat_racikan AS obr " +
+                    "INNER JOIN detail_obat_racikan AS dor " +
+                    "    ON dor.tgl_perawatan = obr.tgl_perawatan " +
+                    "   AND dor.jam            = obr.jam " +
+                    "   AND dor.no_rawat       = obr.no_rawat " +
+                    "   AND dor.no_racik       = obr.no_racik " +
+                    "INNER JOIN " +
+                    "( " +
+                    "    SELECT " +
+                    "        tgl_perawatan, " +
+                    "        jam, " +
+                    "        no_rawat, " +
+                    "        no_racik, " +
+                    "        MIN(kode_brng) AS kode_brng_pertama " +
+                    "    FROM detail_obat_racikan " +
+                    "    GROUP BY " +
+                    "        tgl_perawatan, " +
+                    "        jam, " +
+                    "        no_rawat, " +
+                    "        no_racik " +
+                    ") AS pertama " +
+                    "    ON pertama.tgl_perawatan = dor.tgl_perawatan " +
+                    "   AND pertama.jam            = dor.jam " +
+                    "   AND pertama.no_rawat       = dor.no_rawat " +
+                    "   AND pertama.no_racik       = dor.no_racik " +
+                    "LEFT JOIN databarang AS db " +
+                    "    ON db.kode_brng = dor.kode_brng " +
+                    "INNER JOIN resep_obat AS ro " +
+                    "    ON ro.tgl_perawatan = obr.tgl_perawatan " +
+                    "   AND ro.jam            = obr.jam " +
+                    "   AND ro.no_rawat       = obr.no_rawat " +
+                    "LEFT JOIN resep_dokter_racikan_detail AS rdrd " +
+                    "    ON rdrd.no_resep  = ro.no_resep " +
+                    "   AND rdrd.no_racik  = obr.no_racik " +
+                    "   AND rdrd.kode_brng = dor.kode_brng " +
+                    "LEFT JOIN resep_dokter_racikan AS rdr " +
+                    "    ON rdr.no_resep = ro.no_resep " +
+                    "   AND rdr.no_racik = obr.no_racik " +
+                    "LEFT JOIN metode_racik AS mr " +
+                    "    ON mr.kd_racik = obr.kd_racik " +
+                    "WHERE ro.no_resep = ? " +
+                    "ORDER BY " +
+                    "    CASE " +
+                    "        WHEN kategori = 'Non-Racik' THEN 1 " +
+                    "        WHEN kategori = 'Racikan' THEN 2 " +
+                    "        ELSE 3 " +
+                    "    END, " +
+                    "    CASE " +
+                    "        WHEN kategori = 'Racikan' " +
+                    "             AND aturan_pakai <> '' " +
+                    "        THEN 0 " +
+                    "        ELSE 1 " +
+                    "    END, " +
+                    "    nama_brng");
                 try {
                     ps.setString(1,NoResep.getText());
+                    ps.setString(2,NoResep.getText());
                     rs=ps.executeQuery();
-                    while(rs.next()){
-                        Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                            ""+i,rs.getString("nama_brng"),Sequel.cariIsi("select aturan from aturan_pakai where tgl_perawatan='"+rs.getString("tgl_perawatan")+"' and jam='"+rs.getString("jam")+"' and no_rawat='"+rs.getString("no_rawat")+"' and kode_brng='"+rs.getString("kode_brng")+"'"),rs.getString("jml"),Valid.SetAngka(rs.getDouble("total")),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
-                        });
-                        i++;
+                    String kategoriSebelumnya = "";
+                    int i = 1;
+
+                    while (rs.next()) {
+                        String kategori = rs.getString("kategori");
+                        String aturanPakai = rs.getString("aturan_pakai");
+                        String jumlahObat = rs.getString("jumlah_obat");
+                        String jumlahRacik = rs.getString("detail_jml");
+                        String namaRacik = rs.getString("nama_racik");
+                        String metodeRacik = rs.getString("metode_racik");
+
+                        namaRacik = namaRacik == null ? "" : namaRacik.trim();
+                        metodeRacik = metodeRacik == null ? "" : metodeRacik.trim();
+
+                        String judulRacikan = "RACIKAN";
+
+                        if (!namaRacik.isEmpty() && !metodeRacik.isEmpty()) {
+                            judulRacikan += " (" + namaRacik + " - " + metodeRacik + ")";
+                        } else if (!namaRacik.isEmpty()) {
+                            judulRacikan += " (" + namaRacik + ")";
+                        } else if (!metodeRacik.isEmpty()) {
+                            judulRacikan += " (" + metodeRacik + ")";
+                        }
+
+                        if (aturanPakai == null) {
+                            aturanPakai = "";
+                        }
+
+                        if (jumlahObat == null) {
+                            jumlahObat = "";
+                        }
+
+                        if (!kategori.equals(kategoriSebelumnya)) {
+
+                            if (!kategoriSebelumnya.isEmpty()) {
+                                // Baris kosong antar kategori
+                                Sequel.menyimpan(
+                                    "temporary_resep",
+                                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+                                    38,
+                                    new String[]{
+                                        String.valueOf(i++),
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "","","","","","","","","","","","","","","",
+                                        "","","","","","","","","","","","","","","","","",
+                                        akses.getalamatip()
+                                    }
+                                );
+                            }
+
+                            if ("Non-Racik".equals(kategori)) {
+                                // Header Non Racikan saja
+                                Sequel.menyimpan(
+                                    "temporary_resep",
+                                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+                                    38,
+                                    new String[]{
+                                        String.valueOf(i++),
+                                        "NON RACIKAN",
+                                        "",
+                                        "",
+                                        "","","","","","","","","","","","","","","","",
+                                        "","","","","","","","","","","","","","","","","",
+                                        akses.getalamatip()
+                                    }
+                                );
+
+                            } else if ("Racikan".equals(kategori)) {
+                                // Header Racikan + aturan pakai + jumlah
+                                Sequel.menyimpan(
+                                    "temporary_resep",
+                                    "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+                                    38,
+                                    new String[]{
+                                        String.valueOf(i++),
+                                        judulRacikan,
+                                        aturanPakai,
+                                        jumlahRacik,
+                                        "","","","","","","","","","","","","","","","",
+                                        "","","","","","","","","","","","","","","","","",
+                                        akses.getalamatip()
+                                    }
+                                );
+                            }
+
+                            kategoriSebelumnya = kategori;
+                        }
+
+                        if ("Non-Racik".equals(kategori)) {
+                            // Non-racik: aturan dan jumlah tetap di baris obat
+                            Sequel.menyimpan(
+                                "temporary_resep",
+                                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+                                38,
+                                new String[]{
+                                    String.valueOf(i++),
+                                    rs.getString("nama_brng"),
+                                    aturanPakai,
+                                    jumlahObat,
+                                    "","","","","","","","","","","","","","","","",
+                                    "","","","","","","","","","","","","","","","","",
+                                    akses.getalamatip()
+                                }
+                            );
+
+                        } else {
+                            // Racikan: hanya nama bahan, aturan dan jumlah dikosongkan
+                            Sequel.menyimpan(
+                                "temporary_resep",
+                                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",
+                                38,
+                                new String[]{
+                                    String.valueOf(i++),
+                                    rs.getString("nama_brng"),
+                                    "",
+                                    jumlahObat,
+                                    "","","","","","","","","","","","","","","","",
+                                    "","","","","","","","","","","","","","","","","",
+                                    akses.getalamatip()
+                                }
+                            );
+                        }
                     }
                 } catch (Exception e) {
                     System.out.println("Notif 2 : "+e);

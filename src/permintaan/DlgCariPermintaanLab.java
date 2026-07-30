@@ -6784,12 +6784,14 @@ private void tbLabRalanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             if (formalarm.contains("ranap")) {
 
                 tampil3();
+                
+                permintaanbaru = 0;
 
-                permintaanbaru += hitungPermintaan(
-                        tbLabRanap,
-                        5,      // kolom Sample
-                        false   // semua permintaan
-                );
+//                permintaanbaru += hitungPermintaan(
+//                        tbLabRanap,
+//                        5,      // kolom Sample
+//                        false   // semua permintaan
+//                );
             }
 
             // ================= ALARM =================
