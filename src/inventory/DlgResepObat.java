@@ -2842,7 +2842,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         "telaah_resep_obat.identitas,telaah_resep_obat.obat,telaah_resep_obat.campuran,telaah_resep_obat.jumlah,"+
                         "telaah_resep_obat.dosis,telaah_resep_obat.rute,telaah_resep_obat.tidak1,telaah_resep_obat.tidak2,telaah_resep_obat.tidak3,"+
                         "telaah_resep_obat.benar1,telaah_resep_obat.benar2,telaah_resep_obat.benar3,telaah_resep_obat.benar4,telaah_resep_obat.benar5,"+
-                        "telaah_resep_obat.tgl,telaah_resep_obat.jam_telaah,dokter.nm_dokter,petugas.nama "+
+                        "telaah_resep_obat.tgl,telaah_resep_obat.konfirmasi,telaah_resep_obat.jam_telaah,dokter.nm_dokter,petugas.nama "+
                         "from resep_obat inner join telaah_resep_obat on resep_obat.no_resep=telaah_resep_obat.no_resep "+
                         "inner join dokter on telaah_resep_obat.kd_dokter=dokter.kd_dokter "+
                         "inner join petugas on telaah_resep_obat.nip=petugas.nip "+
@@ -2968,6 +2968,9 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                                     "</tr>"+
                                     "<tr class='isi'>"+
                                         "<td valign='middle' align='center' colspan='3'><br>Nomor Telfon Penerima Obat :"+rs.getString("TLP")+"</td>"+
+                                    "</tr>"+
+                                   "<tr class='isi'>"+
+                                        "<td valign='middle' align='center' colspan='3'><br>Hasil Konfirmasi Farmasi ke Dokter :"+rs.getString("konfirmasi")+"</td>"+
                                     "</tr>"+
                                     "<tr class='isi'>"+
                                         "<td valign='middle' align='center' colspan='3'><br>Petugas Farmasi : "+rs.getString("nip")+" "+rs.getString("nama")+"</td>"+

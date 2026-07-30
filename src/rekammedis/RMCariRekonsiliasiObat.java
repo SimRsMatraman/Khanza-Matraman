@@ -998,7 +998,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         rs.getString("tanggal_wawancara"),rs.getString("rekonsiliasi_obat_saat"),rs.getString("alergi_obat"),rs.getString("dampak_alergi"),rs.getString("nip")+" "+rs.getString("nama")
                     });
                     tabMode.addRow(new String[]{
-                        "","Nama Obat","Dosis Obat","Frekuensi","Cara Pemberian","Pemberian Terakhir","Tindak Lanjut","Perubahan Aturan Pakai"
+                        "","Nama Obat","Dosis Obat","Cara Pemberian","Pemberian Terakhir","Tindak Lanjut","Perubahan Aturan Pakai"
                     });
                     ps2=koneksi.prepareStatement("select * from rekonsiliasi_obat_detail_obat where rekonsiliasi_obat_detail_obat.no_rekonsiliasi=?");
                     try {
@@ -1006,7 +1006,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             tabMode.addRow(new String[]{
-                                "",rs2.getString("nama_obat"),rs2.getString("dosis_obat"),rs2.getString("frekuensi"),rs2.getString("cara_pemberian"),rs2.getString("waktu_pemberian_terakhir"),rs2.getString("tindak_lanjut"),rs2.getString("perubahan_aturan_pakai")
+                                "",rs2.getString("nama_obat"),rs2.getString("dosis_obat"),rs2.getString("cara_pemberian"),rs2.getString("waktu_pemberian_terakhir"),rs2.getString("tindak_lanjut"),rs2.getString("perubahan_aturan_pakai")
                             });
                         }
                     } catch (Exception e) {

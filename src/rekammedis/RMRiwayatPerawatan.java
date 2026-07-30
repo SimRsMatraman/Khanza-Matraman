@@ -18087,7 +18087,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                             "<td valign='top' width='4%' bgcolor='#FFFAF8' align='center'>No.</td>"+
                                             "<td valign='top' width='22%' bgcolor='#FFFAF8' align='center'>Nama Obat</td>"+
                                             "<td valign='top' width='9%' bgcolor='#FFFAF8' align='center'>Dosis Obat</td>"+
-                                            "<td valign='top' width='9%' bgcolor='#FFFAF8' align='center'>Frekuensi</td>"+
+//                                            "<td valign='top' width='9%' bgcolor='#FFFAF8' align='center'>Frekuensi</td>"+
                                             "<td valign='top' width='19%' bgcolor='#FFFAF8' align='center'>Cara Pemberian/Aturan Pakai</td>"+
                                             "<td valign='top' width='10%' bgcolor='#FFFAF8' align='center'>Pemberian Terakhir</td>"+
                                             "<td valign='top' width='8%' bgcolor='#FFFAF8' align='center'>Tindak Lanjut</td>"+
@@ -18105,7 +18105,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                             "<td valign='top' align='center'>"+w+"</td>"+
                                             "<td valign='top'>"+rs3.getString("nama_obat")+"</td>"+
                                             "<td valign='top'>"+rs3.getString("dosis_obat")+"</td>"+
-                                            "<td valign='top' align='center'>"+rs3.getString("frekuensi")+"</td>"+
+//                                            "<td valign='top' align='center'>"+rs3.getString("frekuensi")+"</td>"+
                                             "<td valign='top'>"+rs3.getString("cara_pemberian")+"</td>"+
                                             "<td valign='top'>"+rs3.getString("waktu_pemberian_terakhir")+"</td>"+
                                             "<td valign='top' align='center'>"+rs3.getString("tindak_lanjut")+"</td>"+
