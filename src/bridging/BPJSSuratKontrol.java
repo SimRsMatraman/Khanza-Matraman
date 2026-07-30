@@ -936,11 +936,11 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                         })==true){
                         emptTeks();
                         tampil();
-                        if(JADIKANBOOKINGSURATKONTROLAPIBPJS.equals("yes")){
-                            if(isBooking()==false){
-                                JOptionPane.showMessageDialog(null,"Gagal menyimpan booking, silahkan hubungi administrator...!!!!");
-                            }
-                        }
+//                        if(JADIKANBOOKINGSURATKONTROLAPIBPJS.equals("yes")){
+//                            if(isBooking()==false){
+//                                JOptionPane.showMessageDialog(null,"Gagal menyimpan booking, silahkan hubungi administrator...!!!!");
+//                            }
+//                        }
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());

@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Properties;
 import javax.swing.event.DocumentEvent;
 import keuangan.Jurnal;
+import rekammedis.RMRiwayatPerawatan;
 import simrskhanza.DlgCariBangsal;
 import simrskhanza.DlgCariObatPenyakit;
 import simrskhanza.DlgCariPasien;
@@ -81,12 +82,12 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
         initComponents();
 
         tabModePO=new DefaultTableModel(null,new Object[]{
-                "No.Rawat","No.Rekam Medis"," Nama Pasien","No.Telp","Tgl.Resep Terakhir","Nama Obat"
+                "No.Rawat","No.Rekam Medis"," Nama Pasien","NIK","No.Telp","Tgl.Resep Terakhir","Nama Obat"
             }){
             @Override 
             public boolean isCellEditable(int rowIndex, int colIndex){return false;}
             Class[] types = new Class[]{
-                java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             @Override
             public Class getColumnClass(int columnIndex) {
@@ -99,12 +100,12 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
         tbPemberianObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbPemberianObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 7; i++) {
             TableColumn column = tbPemberianObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
             }else if(i==1){
-                column.setPreferredWidth(105);
+                column.setPreferredWidth(70);
             }else if(i==2){
                 column.setPreferredWidth(200);
             }else if(i==3){
@@ -112,6 +113,8 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
             }else if(i==4){
                 column.setPreferredWidth(90);
             }else if(i==5){
+                column.setPreferredWidth(90);
+            }else if(i==6){
                 column.setPreferredWidth(300);
             }
         }
@@ -345,7 +348,7 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
     private void initComponents() {
 
         Popup2 = new javax.swing.JPopupMenu();
-        ppNoRawat = new javax.swing.JMenuItem();
+        ppRiwayat = new javax.swing.JMenuItem();
         ppResepObat = new javax.swing.JMenuItem();
         THBeli = new widget.TextBox();
         Tanggal = new widget.Tanggal();
@@ -377,6 +380,10 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
         PanelInput = new javax.swing.JPanel();
         ChkInput = new widget.CekBox();
         ppLokasi = new javax.swing.JMenuItem();
+        BtnSeek4 = new widget.Button();
+        TCariPasien = new widget.TextBox();
+        jLabel16 = new widget.Label();
+        ppNoRawat = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbPemberianObat = new widget.Table();
@@ -391,31 +398,30 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
         DTPCari1 = new widget.Tanggal();
         jLabel19 = new widget.Label();
         DTPCari2 = new widget.Tanggal();
-        jLabel16 = new widget.Label();
-        TCariPasien = new widget.TextBox();
-        BtnSeek4 = new widget.Button();
         jSeparator5 = new javax.swing.JSeparator();
+        jLabel18 = new widget.Label();
+        TKTP = new widget.TextBox();
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
 
         Popup2.setName("Popup2"); // NOI18N
 
-        ppNoRawat.setBackground(new java.awt.Color(255, 255, 254));
-        ppNoRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppNoRawat.setForeground(new java.awt.Color(50, 50, 50));
-        ppNoRawat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppNoRawat.setText("Rekap Per No.Rawat");
-        ppNoRawat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppNoRawat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppNoRawat.setName("ppNoRawat"); // NOI18N
-        ppNoRawat.setPreferredSize(new java.awt.Dimension(200, 25));
-        ppNoRawat.addActionListener(new java.awt.event.ActionListener() {
+        ppRiwayat.setBackground(new java.awt.Color(255, 255, 254));
+        ppRiwayat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppRiwayat.setForeground(new java.awt.Color(50, 50, 50));
+        ppRiwayat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppRiwayat.setText("Lihat Riwayat Pasien");
+        ppRiwayat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppRiwayat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppRiwayat.setName("ppRiwayat"); // NOI18N
+        ppRiwayat.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppNoRawatActionPerformed(evt);
+                ppRiwayatActionPerformed(evt);
             }
         });
-        Popup2.add(ppNoRawat);
+        Popup2.add(ppRiwayat);
 
         ppResepObat.setBackground(new java.awt.Color(255, 255, 254));
         ppResepObat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -439,7 +445,7 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
 
         Tanggal.setEditable(false);
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-08-2025" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -531,7 +537,7 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
         jLabel7.setBounds(-2, 42, 80, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-08-2025" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2026" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -700,6 +706,49 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
             }
         });
 
+        BtnSeek4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSeek4.setMnemonic('5');
+        BtnSeek4.setToolTipText("Alt+5");
+        BtnSeek4.setName("BtnSeek4"); // NOI18N
+        BtnSeek4.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnSeek4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSeek4ActionPerformed(evt);
+            }
+        });
+        BtnSeek4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnSeek4KeyPressed(evt);
+            }
+        });
+
+        TCariPasien.setName("TCariPasien"); // NOI18N
+        TCariPasien.setPreferredSize(new java.awt.Dimension(130, 23));
+        TCariPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCariPasienKeyPressed(evt);
+            }
+        });
+
+        jLabel16.setText("No.RM :");
+        jLabel16.setName("jLabel16"); // NOI18N
+        jLabel16.setPreferredSize(new java.awt.Dimension(50, 23));
+
+        ppNoRawat.setBackground(new java.awt.Color(255, 255, 254));
+        ppNoRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppNoRawat.setForeground(new java.awt.Color(50, 50, 50));
+        ppNoRawat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppNoRawat.setText("Rekap Per No.Rawat");
+        ppNoRawat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppNoRawat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppNoRawat.setName("ppNoRawat"); // NOI18N
+        ppNoRawat.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppNoRawat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppNoRawatActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -802,7 +851,7 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
         panelGlass9.add(jLabel14);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-08-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -815,43 +864,12 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-08-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
         DTPCari2.setPreferredSize(new java.awt.Dimension(100, 23));
         panelGlass9.add(DTPCari2);
-
-        jLabel16.setText("No.RM :");
-        jLabel16.setName("jLabel16"); // NOI18N
-        jLabel16.setPreferredSize(new java.awt.Dimension(50, 23));
-        panelGlass9.add(jLabel16);
-
-        TCariPasien.setName("TCariPasien"); // NOI18N
-        TCariPasien.setPreferredSize(new java.awt.Dimension(130, 23));
-        TCariPasien.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TCariPasienKeyPressed(evt);
-            }
-        });
-        panelGlass9.add(TCariPasien);
-
-        BtnSeek4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnSeek4.setMnemonic('5');
-        BtnSeek4.setToolTipText("Alt+5");
-        BtnSeek4.setName("BtnSeek4"); // NOI18N
-        BtnSeek4.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSeek4ActionPerformed(evt);
-            }
-        });
-        BtnSeek4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeek4KeyPressed(evt);
-            }
-        });
-        panelGlass9.add(BtnSeek4);
 
         jSeparator5.setBackground(new java.awt.Color(220, 225, 215));
         jSeparator5.setForeground(new java.awt.Color(220, 225, 215));
@@ -860,6 +878,21 @@ public class DlgPemberianObatFDC extends javax.swing.JDialog {
         jSeparator5.setOpaque(true);
         jSeparator5.setPreferredSize(new java.awt.Dimension(1, 23));
         panelGlass9.add(jSeparator5);
+
+        jLabel18.setText("KTP :");
+        jLabel18.setName("jLabel18"); // NOI18N
+        jLabel18.setPreferredSize(new java.awt.Dimension(50, 23));
+        panelGlass9.add(jLabel18);
+
+        TKTP.setMinimumSize(new java.awt.Dimension(80, 24));
+        TKTP.setName("TKTP"); // NOI18N
+        TKTP.setPreferredSize(new java.awt.Dimension(130, 23));
+        TKTP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TKTPKeyPressed(evt);
+            }
+        });
+        panelGlass9.add(TKTP);
 
         jLabel6.setText("Key Word :");
         jLabel6.setName("jLabel6"); // NOI18N
@@ -1261,6 +1294,25 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         // TODO add your handling code here:
     }//GEN-LAST:event_TanggalKeyPressed
 
+    private void ppRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatActionPerformed
+        if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMRiwayatPerawatan resume=new RMRiwayatPerawatan(null,true);
+            resume.setNoRm(TNoRM.getText(),TPasien.getText());
+            resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+            resume.setLocationRelativeTo(internalFrame1);
+            resume.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_ppRiwayatActionPerformed
+
+    private void TKTPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKTPKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TKTPKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -1301,6 +1353,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.TextBox TCari;
     private widget.TextBox TCariPasien;
     private widget.TextBox THBeli;
+    private widget.TextBox TKTP;
     private widget.TextBox TKdOb;
     private widget.TextBox TNmOb;
     private widget.TextBox TNoRM;
@@ -1320,6 +1373,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Label jLabel14;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
+    private widget.Label jLabel18;
     private widget.Label jLabel19;
     private widget.Label jLabel3;
     private widget.Label jLabel6;
@@ -1331,86 +1385,174 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JMenuItem ppLokasi;
     private javax.swing.JMenuItem ppNoRawat;
     private javax.swing.JMenuItem ppResepObat;
+    private javax.swing.JMenuItem ppRiwayat;
     private widget.Table tbPemberianObat;
     // End of variables declaration//GEN-END:variables
 
     public void tampilPO() {
-        pas="";
-        if(!TCariPasien.getText().equals("")){
-           pas=" and b.no_rkm_medis='"+TCariPasien.getText()+"' "; 
+        String tanggalAwal = Valid.SetTgl(DTPCari1.getSelectedItem() + "");
+        String tanggalAkhir = Valid.SetTgl(DTPCari2.getSelectedItem() + "");
+
+        /*
+         * Jika Valid.forSQL() tidak tersedia di project Anda,
+         * gunakan:
+         *
+         * String kataCari = TCari.getText().trim().replace("'", "''");
+         */
+        String kataCari = TCari.getText().trim().replace("'", "''");
+        String nomorRM = "";
+
+        String filterPasien = "";
+        if (!nomorRM.equals("")) {
+            filterPasien =
+                " AND b.no_rkm_medis = '" + nomorRM + "' ";
         }
-        tgl=" c.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;        
-        sql="SELECT\n" +
-            "    b.no_rawat,\n" +
-            "    a.no_rkm_medis,\n" +
-            "    a.nm_pasien,\n" +
-            "    a.no_tlp,\n" +
-            "    c.tgl_perawatan,d.nama_brng\n" +
-            "FROM\n" +
-            "    pasien a\n" +
-            "    INNER JOIN reg_periksa b ON b.no_rkm_medis = a.no_rkm_medis\n" +
-            "    INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat INNER JOIN databarang d on d.kode_brng=c.kode_brng\n" +
-            "    INNER JOIN (\n" +
-            "        SELECT\n" +
-            "            b.no_rkm_medis,\n" +
-            "            MAX(c.tgl_perawatan) AS latest_treatment\n" +
-            "        FROM\n" +
-            "            reg_periksa b\n" +
-            "            INNER JOIN detail_pemberian_obat c ON c.no_rawat = b.no_rawat\n" +
-            "        WHERE\n" +
-            "            c.kode_brng IN ('B000000842', 'B000000843', 'B000000844', 'B000000845')\n" +
-            "            AND "+tgl+(TCari.getText().trim().equals("")?"":"\n") +
-            "        GROUP BY\n" +
-            "            b.no_rkm_medis\n" +
-            "    ) latest ON latest.no_rkm_medis = b.no_rkm_medis AND latest.latest_treatment = c.tgl_perawatan\n" +
-            "WHERE\n" +
-            "    c.kode_brng IN ('B000000842', 'B000000843', 'B000000844', 'B000000845')\n" +
-            "    AND "+tgl+(TCari.getText().trim().equals("")?"":"\n") +
-            "ORDER BY\n" +
-            "    c.tgl_perawatan DESC";
-                
-//           "detail_pemberian_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-//           "detail_pemberian_obat.kode_brng,databarang.nama_brng,detail_pemberian_obat.embalase,detail_pemberian_obat.tuslah,"+
-//           "detail_pemberian_obat.jml,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.total,detail_pemberian_obat.h_beli,"+
-//           "detail_pemberian_obat.kd_bangsal,detail_pemberian_obat.no_batch,detail_pemberian_obat.no_faktur "+
-//           "from detail_pemberian_obat inner join reg_periksa on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat "+
-//           "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-//           "inner join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng "+
-//           "where "+tgl+(TCari.getText().trim().equals("")?"":" and (tgl_perawatan like ? or "+
-//           "detail_pemberian_obat.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
-//           "pasien.nm_pasien like ? or detail_pemberian_obat.kode_brng like ? or databarang.nama_brng like ? or "+
-//           "detail_pemberian_obat.no_faktur like ? or detail_pemberian_obat.no_batch like ?) ")+
-//           "order by detail_pemberian_obat.tgl_perawatan";
-        
+
+        String filterCari = "";
+        if (!kataCari.equals("")) {
+            filterCari =
+                " AND (" +
+                "       a.nm_pasien LIKE '%" + kataCari + "%' " +
+                "    OR a.no_rkm_medis LIKE '%" + kataCari + "%' " +
+                "    OR a.no_ktp LIKE '%" + kataCari + "%' " +
+                "    OR d.nama_brng LIKE '%" + kataCari + "%' " +
+                " ) ";
+        }
+
+        String obatTbUtama =
+            "(" +
+            "   c.kode_brng IN (" +
+            "       'B000000842'," +
+            "       'B000000843'," +
+            "       'B000000844'," +
+            "       'B000000845'," +
+            "       'B000000846'" +
+            "   ) " +
+            "   OR UPPER(d.nama_brng) LIKE '%FDC%' " +
+            ")";
+
+        String obatTbSubquery =
+            "(" +
+            "   c2.kode_brng IN (" +
+            "       'B000000842'," +
+            "       'B000000843'," +
+            "       'B000000844'," +
+            "       'B000000845'," +
+            "       'B000000846'" +
+            "   ) " +
+            "   OR UPPER(d2.nama_brng) LIKE '%FDC%' " +
+            ")";
+
+        sql =
+            "SELECT " +
+            "    b.no_rawat, " +
+            "    a.no_rkm_medis, " +
+            "    a.nm_pasien, " +
+            "    a.no_ktp, " +
+            "    a.no_tlp, " +
+            "    c.tgl_perawatan, " +
+            "    d.nama_brng " +
+
+            "FROM pasien a " +
+
+            "INNER JOIN reg_periksa b " +
+            "    ON b.no_rkm_medis = a.no_rkm_medis " +
+
+            "INNER JOIN detail_pemberian_obat c " +
+            "    ON c.no_rawat = b.no_rawat " +
+
+            "INNER JOIN databarang d " +
+            "    ON d.kode_brng = c.kode_brng " +
+
+            /*
+             * Mengambil tanggal pemberian obat TB terakhir
+             * dalam periode yang dipilih untuk setiap pasien.
+             */
+            "INNER JOIN ( " +
+            "    SELECT " +
+            "        b2.no_rkm_medis, " +
+            "        MAX(c2.tgl_perawatan) AS latest_treatment " +
+
+            "    FROM reg_periksa b2 " +
+
+            "    INNER JOIN detail_pemberian_obat c2 " +
+            "        ON c2.no_rawat = b2.no_rawat " +
+
+            "    INNER JOIN databarang d2 " +
+            "        ON d2.kode_brng = c2.kode_brng " +
+
+            "    WHERE " + obatTbSubquery + " " +
+
+            "      AND c2.tgl_perawatan BETWEEN " +
+            "          '" + tanggalAwal + "' " +
+            "          AND '" + tanggalAkhir + "' " +
+
+            "    GROUP BY b2.no_rkm_medis " +
+            ") latest " +
+            "    ON latest.no_rkm_medis = b.no_rkm_medis " +
+            "   AND latest.latest_treatment = c.tgl_perawatan " +
+
+            "WHERE " + obatTbUtama + " " +
+
+            "  AND c.tgl_perawatan BETWEEN " +
+            "      '" + tanggalAwal + "' " +
+            "      AND '" + tanggalAkhir + "' " +
+
+            "  AND NOT EXISTS ( " +
+            "      SELECT 1 " +
+            "      FROM pemeriksaan_ralan pr " +
+            "      INNER JOIN reg_periksa rp " +
+            "          ON rp.no_rawat = pr.no_rawat " +
+            "      WHERE rp.no_rkm_medis = a.no_rkm_medis " +
+            "        AND pr.tgl_perawatan >= c.tgl_perawatan " +
+            "        AND LOWER(COALESCE(pr.rtl, '')) REGEXP " +
+            "            'stop[[:space:]]+(oat|pengobatan)" +
+            "|selesai[[:space:]]+(oat|pengobatan)" +
+            "|pengobatan[[:space:]]+tb[[:space:]]+(telah[[:space:]]+)?selesai' " +
+            "  ) " +
+
+            filterPasien +
+            filterCari +
+
+            "ORDER BY c.tgl_perawatan DESC";
+
         Valid.tabelKosong(tabModePO);
-        try{
-            ps=koneksi.prepareStatement(sql);
+
+        try {
+            ps = koneksi.prepareStatement(sql);
+
             try {
-                    
-                rs=ps.executeQuery();
-//                jumlahtotal=0;
-                while(rs.next()){
-//                    jumlahtotal=jumlahtotal+rs.getDouble("total");
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
                     tabModePO.addRow(new Object[]{
-                        rs.getString(1),rs.getString(2),rs.getString(3),
-                        rs.getString(4),rs.getString(5),rs.getString(6)
+                        rs.getString("no_rawat"),
+                        rs.getString("no_rkm_medis"),
+                        rs.getString("nm_pasien"),
+                        rs.getString("no_ktp"),
+                        rs.getString("no_tlp"),
+                        rs.getString("tgl_perawatan"),
+                        rs.getString("nama_brng")
                     });
                 }
             } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(rs!=null){
+                System.out.println("Notif tampil PO: " + e);
+                System.out.println("SQL: " + sql);
+            } finally {
+                if (rs != null) {
                     rs.close();
                 }
-                if(ps!=null){
+
+                if (ps != null) {
                     ps.close();
                 }
             }
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notifikasi tampil PO: " + e);
+            System.out.println("SQL: " + sql);
         }
-        LCount.setText(""+tabModePO.getRowCount());
-//        LCount1.setText(""+Valid.SetAngka(jumlahtotal));
+
+        LCount.setText("" + tabModePO.getRowCount());
     }
     
     public void tampilPO2() {
@@ -1492,6 +1634,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             TNoRw.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString());
             TPasien.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString());
+            TKTP.setText(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),3).toString());
         }
     }
     
