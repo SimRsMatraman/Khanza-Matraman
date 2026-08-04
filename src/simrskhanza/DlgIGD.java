@@ -5568,7 +5568,30 @@ public final class DlgIGD extends javax.swing.JDialog {
 }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil();
+        if (timerRefresh != null) {
+        timerRefresh.stop();
+        }
+
+        try {
+            setCursor(
+                Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)
+            );
+
+            tampil();
+        } finally {
+            setCursor(Cursor.getDefaultCursor());
+
+            if (
+                ChkRefresh.isSelected()
+                && timerRefresh != null
+            ) {
+                /*
+                 * Auto-refresh berikutnya dihitung 60 detik
+                 * setelah pencarian manual selesai.
+                 */
+                timerRefresh.restart();
+            }
+        }
 }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -10654,6 +10677,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
 
     private void tampil() {
+        long mulaiTampil = System.currentTimeMillis();
+        
         Valid.tabelKosong(tabMode);
 
         String tanggalAwal =
@@ -10757,14 +10782,13 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
              * Walaupun terdapat SEP IGD dan SEP rawat inap,
              * hasil reg_periksa tetap satu baris.
              */
-            + "LEFT JOIN ("
-            + "    SELECT "
-            + "        no_rawat, "
-            + "        MAX(NULLIF(no_sep, '')) AS no_sep, "
-            + "        MAX(NULLIF(klsrawat, '')) AS klsrawat "
-            + "    FROM bridging_sep "
-            + "    GROUP BY no_rawat"
-            + ") bs ON bs.no_rawat = rp.no_rawat "
+            + "LEFT JOIN bridging_sep bs "
+            + "    ON bs.no_rawat = rp.no_rawat "
+            + "   AND bs.no_sep = ("
+            + "       SELECT MAX(NULLIF(bs2.no_sep, '')) "
+            + "       FROM bridging_sep bs2 "
+            + "       WHERE bs2.no_rawat = rp.no_rawat"
+            + "   ) "
 
             + "WHERE rp.kd_poli = 'IGDK' "
             + "AND rp.tgl_registrasi BETWEEN ? AND ? "
@@ -10796,6 +10820,8 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
             + "rp.jam_reg, "
             + "rp.no_rawat"
         );
+        
+        long mulaiQuery = System.currentTimeMillis();
 
         try {
             ps = koneksi.prepareStatement(sql.toString());
@@ -10814,6 +10840,8 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
             }
 
             rs = ps.executeQuery();
+            
+            long selesaiQuery = System.currentTimeMillis();
 
             while (rs.next()) {
                 boolean adaSep =
@@ -10885,6 +10913,18 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
                     isPerawat
                 });
             }
+            long selesaiRender = System.currentTimeMillis();
+            
+            System.out.println(
+                "Tampil IGD | Query: "
+                + (selesaiQuery - mulaiQuery)
+                + " ms | Isi tabel: "
+                + (selesaiRender - selesaiQuery)
+                + " ms | Total: "
+                + (selesaiRender - mulaiTampil)
+                + " ms"
+            );
+
         } catch (Exception e) {
             System.out.println(
                 "Notifikasi tampil RegIGD: " + e
@@ -10964,9 +11004,6 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
     }
     
     private void initAutoRefresh() {
-        /*
-         * Jangan membuat timer kedua jika timer lama masih tersedia.
-         */
         if (timerRefresh != null) {
             timerRefresh.stop();
         }
@@ -10978,20 +11015,24 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
                 public void actionPerformed(
                         java.awt.event.ActionEvent evt
                 ) {
-                    if (ChkRefresh.isSelected()) {
-                        System.out.println(
-                            "Auto refresh IGD: "
-                            + new java.util.Date()
-                        );
+                    if (!ChkRefresh.isSelected()) {
+                        return;
+                    }
 
+                    timerRefresh.stop();
+
+                    try {
                         tampil();
+                    } finally {
+                        if (ChkRefresh.isSelected()) {
+                            timerRefresh.restart();
+                        }
                     }
                 }
             }
         );
 
-        timerRefresh.setCoalesce(true);
-        timerRefresh.setRepeats(true);
+        timerRefresh.setRepeats(false);
         timerRefresh.setInitialDelay(60000);
 
         if (ChkRefresh.isSelected()) {
