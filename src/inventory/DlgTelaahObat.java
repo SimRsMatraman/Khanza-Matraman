@@ -874,7 +874,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         FormInput.add(label29);
         label29.setBounds(17, 390, 170, 23);
 
-        label30.setText("Bukti Konfirmasi Farmasi ke Dokter :");
+        label30.setText("Hasil Konfirmasi Farmasi ke Dokter :");
         label30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         label30.setName("label30"); // NOI18N
         label30.setPreferredSize(new java.awt.Dimension(70, 23));
@@ -1176,7 +1176,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
         jLabel15.setText("Hubungan Dgn pasien :");
         jLabel15.setName("jLabel15"); // NOI18N
         FormInput.add(jLabel15);
-        jLabel15.setBounds(320, 270, 130, 23);
+        jLabel15.setBounds(330, 270, 120, 23);
 
         Hubungan.setEditable(false);
         Hubungan.setHighlighter(null);
@@ -1198,7 +1198,7 @@ public final class DlgTelaahObat extends javax.swing.JDialog {
             }
         });
         FormInput.add(accic);
-        accic.setBounds(460, 320, 190, 24);
+        accic.setBounds(460, 330, 190, 24);
 
         FormPhoto.setBackground(new java.awt.Color(255, 255, 255));
         FormPhoto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1), "TTE Pasien : ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N

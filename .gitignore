@@ -27,3 +27,4 @@ src/.DS_Store
 setting/database.xml
 report/rptPeriksaLabPermintaan.pdf
 dist/SimRSUDMATRAMAN.jar
+dist/lib/AbsoluteLayout.jar

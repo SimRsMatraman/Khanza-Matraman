@@ -902,7 +902,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
             Valid.textKosong(NoRawat,"pasien");
         }else if(NmDokter.getText().trim().equals("")||KdDokter.getText().trim().equals("")){
             Valid.textKosong(KdDokter,"Dokter");
-        }else if(NmPoli.getText().trim().equals("")||NmPoli.getText().trim().equals("")){
+        }else if(KdPoli.getText().trim().equals("")||NmPoli.getText().trim().equals("")){
             Valid.textKosong(KdPoli,"Poli");
         }else{
             try {
@@ -929,22 +929,66 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                 nameNode = root.path("metaData");
                 System.out.println("code : "+nameNode.path("code").asText());
                 System.out.println("message : "+nameNode.path("message").asText());
-                if(nameNode.path("code").asText().equals("200")){
-                    response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc)).path("noSuratKontrol");
-                    if(Sequel.menyimpantf("bridging_surat_kontrol_bpjs","?,?,?,?,?,?,?,?","No.Surat",8,new String[]{
-                            NoSEP.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),response.asText(),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText()
-                        })==true){
-                        emptTeks();
-                        tampil();
-//                        if(JADIKANBOOKINGSURATKONTROLAPIBPJS.equals("yes")){
-//                            if(isBooking()==false){
-//                                JOptionPane.showMessageDialog(null,"Gagal menyimpan booking, silahkan hubungi administrator...!!!!");
-//                            }
-//                        }
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
-                }   
+                
+                String kodeResponse = nameNode.path("code").asText();
+                String pesanResponse = nameNode.path("message").asText();
+
+                if ("200".equals(kodeResponse)) {
+                JsonNode hasilDecrypt = mapper.readTree(
+                        api.Decrypt(root.path("response").asText(), utc)
+                );
+
+                String noSuratKontrol =
+                        hasilDecrypt.path("noSuratKontrol").asText();
+
+                if (noSuratKontrol.trim().equals("")) {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Nomor surat kontrol dari VClaim kosong."
+                    );
+                    return;
+                }
+
+                if (Sequel.menyimpantf(
+                        "bridging_surat_kontrol_bpjs",
+                        "?,?,?,?,?,?,?,?",
+                        "No.Surat",
+                        8,
+                        new String[]{
+                            NoSEP.getText().trim(),
+                            Valid.SetTgl(TanggalSurat.getSelectedItem() + ""),
+                            noSuratKontrol,
+                            Valid.SetTgl(TanggalKontrol.getSelectedItem() + ""),
+                            KdDokter.getText().trim(),
+                            NmDokter.getText().trim(),
+                            KdPoli.getText().trim(),
+                            NmPoli.getText().trim()
+                        }
+                )) {
+                    emptTeks();
+                    tampil();
+                }
+            } else if (
+                    "201".equals(kodeResponse)
+                    && pesanResponse.toLowerCase().contains("dokter tidak ditemukan")
+            ) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Jadwal dokter tidak ditemukan pada tanggal kontrol yang dipilih.\n"
+                        + "Silakan pilih tanggal kontrol lain atau periksa jadwal dokter.",
+                        "Jadwal Dokter Tidak Ditemukan",
+                        JOptionPane.WARNING_MESSAGE
+                );
+            } else if (
+                    "203".equals(kodeResponse)
+                    && pesanResponse.toLowerCase().contains(
+                            "sudah diterbitkan rencana kunjungan kontrol"
+                    )
+            ) {
+                tarikSuratKontrolDariVClaim();
+            } else {
+                JOptionPane.showMessageDialog(null, pesanResponse);
+            }
             }catch (Exception ex) {
                 System.out.println("Notifikasi Bridging : "+ex);
                 if(ex.toString().contains("UnknownHostException")){
@@ -954,6 +998,194 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         }
 }//GEN-LAST:event_BtnSimpanActionPerformed
 
+    private boolean tarikSuratKontrolDariVClaim() {
+        try {
+            String noKartu = NoKartu.getText().trim();
+            String tanggalKontrol =
+                    Valid.SetTgl(TanggalKontrol.getSelectedItem() + "");
+
+            if (noKartu.equals("")) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Nomor kartu BPJS pasien belum tersedia."
+                );
+                return false;
+            }
+
+            // tglRencanaKontrol formatnya yyyy-MM-dd
+            String[] bagianTanggal = tanggalKontrol.split("-");
+            String tahun = bagianTanggal[0];
+            String bulan = bagianTanggal[1];
+
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+
+            utc = String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("X-Timestamp", utc);
+            headers.add("X-Signature", api.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+
+            // Filter 2 = berdasarkan tanggal rencana kontrol
+            URL = link
+                    + "/RencanaKontrol/ListRencanaKontrol/Bulan/"
+                    + bulan
+                    + "/Tahun/"
+                    + tahun
+                    + "/Nokartu/"
+                    + noKartu
+                    + "/filter/2";
+
+            requestEntity = new HttpEntity(headers);
+
+            root = mapper.readTree(
+                    api.getRest().exchange(
+                            URL,
+                            HttpMethod.GET,
+                            requestEntity,
+                            String.class
+                    ).getBody()
+            );
+
+            nameNode = root.path("metaData");
+
+            System.out.println("URL tarik surat kontrol : " + URL);
+            System.out.println("code : " + nameNode.path("code").asText());
+            System.out.println("message : " + nameNode.path("message").asText());
+
+            if (!nameNode.path("code").asText().equals("200")) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        nameNode.path("message").asText()
+                );
+                return false;
+            }
+
+            JsonNode responseNode = mapper.readTree(
+                    api.Decrypt(root.path("response").asText(), utc)
+            );
+
+            JsonNode daftarSurat = responseNode.path("list");
+
+            if (!daftarSurat.isArray() || daftarSurat.size() == 0) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Rencana kontrol tidak ditemukan di VClaim."
+                );
+                return false;
+            }
+
+            int jumlahTersimpan = 0;
+
+            for (JsonNode surat : daftarSurat) {
+                String terbitSEP =
+                        surat.path("terbitSEP").asText();
+                String noSuratKontrol =
+                        surat.path("noSuratKontrol").asText();
+                String noSepAsal =
+                        surat.path("noSepAsalKontrol").asText();
+                String tglRencana =
+                        surat.path("tglRencanaKontrol").asText();
+
+                /*
+                 * Syarat:
+                 * 1. SEP belum diterbitkan.
+                 * 2. SEP asal sama dengan SEP pada form.
+                 * 3. Tanggal kontrol sama dengan tanggal yang dipilih.
+                 */
+                if (!terbitSEP.equalsIgnoreCase("Belum")) {
+                    continue;
+                }
+
+                if (!noSepAsal.equalsIgnoreCase(NoSEP.getText().trim())) {
+                    continue;
+                }
+
+                if (!tglRencana.equals(tanggalKontrol)) {
+                    continue;
+                }
+
+                if (noSuratKontrol.equals("")) {
+                    continue;
+                }
+
+                int sudahAda = Sequel.cariInteger(
+                        "select count(*) from bridging_surat_kontrol_bpjs "
+                        + "where no_surat=?",
+                        noSuratKontrol
+                );
+
+                if (sudahAda > 0) {
+                    System.out.println(
+                            "Surat kontrol sudah ada di database: "
+                            + noSuratKontrol
+                    );
+                    continue;
+                }
+
+                boolean berhasil = Sequel.menyimpantf(
+                        "bridging_surat_kontrol_bpjs",
+                        "?,?,?,?,?,?,?,?",
+                        "No.Surat",
+                        8,
+                        new String[]{
+                            noSepAsal,
+                            surat.path("tglTerbitKontrol").asText(),
+                            noSuratKontrol,
+                            tglRencana,
+                            surat.path("kodeDokter").asText(),
+                            surat.path("namaDokter").asText(),
+                            surat.path("poliTujuan").asText(),
+                            surat.path("namaPoliTujuan").asText()
+                        }
+                );
+
+                if (berhasil) {
+                    jumlahTersimpan++;
+                }
+            }
+
+            if (jumlahTersimpan > 0) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        jumlahTersimpan
+                        + " surat kontrol berhasil ditarik dari VClaim."
+                );
+
+                emptTeks();
+                tampil();
+                return true;
+            }
+
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Surat kontrol ditemukan, tetapi sudah ada di database "
+                    + "atau tidak sesuai dengan SEP dan tanggal kontrol."
+            );
+
+            return false;
+        } catch (Exception ex) {
+            System.out.println(
+                    "Notifikasi tarik surat kontrol VClaim: " + ex
+            );
+
+            if (ex.toString().contains("UnknownHostException")) {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Koneksi ke server BPJS terputus."
+                );
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Gagal menarik surat kontrol dari VClaim: "
+                        + ex.getMessage()
+                );
+            }
+
+            return false;
+        }
+    }
+    
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);

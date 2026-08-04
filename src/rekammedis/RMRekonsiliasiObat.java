@@ -62,7 +62,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         DlgTambahObatRekonsiliasi.setSize(700,163);
         
         tabMode=new DefaultTableModel(null,new Object[]{
-            "Nama Obat","Dosis Obat","Frekuensi","Cara Pemberian/Aturan Pakai","Waktu Pemberian Terakhir","Tindak Lanjut","Perubahan Aturan Pakai"}){
+            "Nama Obat","Dosis Obat","Cara Pemberian/Aturan Pakai","Waktu Pemberian Terakhir","Tindak Lanjut","Perubahan Aturan Pakai"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbPemeriksaan.setModel(tabMode);        
@@ -71,7 +71,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         tbPemeriksaan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbPemeriksaan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for(i = 0; i < 7; i++) {
+        for(i = 0; i < 6; i++) {
             TableColumn column = tbPemeriksaan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(150);
@@ -85,8 +85,6 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
                 column.setPreferredWidth(140);
             }else if(i==5){
                 column.setPreferredWidth(90);
-            }else if(i==6){
-                column.setPreferredWidth(200);
             }
         }
         tbPemeriksaan.setDefaultRenderer(Object.class, new WarnaTable());
@@ -94,7 +92,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         NamaObat.setDocument(new batasInput((int)100).getKata(NamaObat));
         DosisObat.setDocument(new batasInput((byte)20).getKata(DosisObat));
-        Frekuensi.setDocument(new batasInput((byte)10).getKata(Frekuensi));
+//        Frekuensi.setDocument(new batasInput((byte)10).getKata(Frekuensi));
         AturanPakai.setDocument(new batasInput((int)150).getKata(AturanPakai));
         PemberianTerakhir.setDocument(new batasInput((byte)20).getKata(PemberianTerakhir));
         PerubahanAturanPakai.setDocument(new batasInput((int)150).getKata(PerubahanAturanPakai));
@@ -227,8 +225,6 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         DosisObat = new widget.TextBox();
         jLabel108 = new widget.Label();
         TindakLanjut = new widget.ComboBox();
-        jLabel109 = new widget.Label();
-        Frekuensi = new widget.TextBox();
         jLabel111 = new widget.Label();
         AturanPakai = new widget.TextBox();
         jLabel112 = new widget.Label();
@@ -355,7 +351,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         jLabel108.setText("Tindak Lanjut :");
         jLabel108.setName("jLabel108"); // NOI18N
         panelBiasa2.add(jLabel108);
-        jLabel108.setBounds(367, 70, 150, 23);
+        jLabel108.setBounds(437, 70, 80, 23);
 
         TindakLanjut.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Stop", "Lanjut" }));
         TindakLanjut.setName("TindakLanjut"); // NOI18N
@@ -366,21 +362,6 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         });
         panelBiasa2.add(TindakLanjut);
         TindakLanjut.setBounds(521, 70, 100, 23);
-
-        jLabel109.setText("Frekuensi :");
-        jLabel109.setName("jLabel109"); // NOI18N
-        panelBiasa2.add(jLabel109);
-        jLabel109.setBounds(190, 40, 70, 23);
-
-        Frekuensi.setHighlighter(null);
-        Frekuensi.setName("Frekuensi"); // NOI18N
-        Frekuensi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                FrekuensiKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(Frekuensi);
-        Frekuensi.setBounds(264, 40, 90, 23);
 
         jLabel111.setText("Aturan Pakai :");
         jLabel111.setName("jLabel111"); // NOI18N
@@ -395,7 +376,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             }
         });
         panelBiasa2.add(AturanPakai);
-        AturanPakai.setBounds(89, 70, 290, 23);
+        AturanPakai.setBounds(89, 70, 310, 23);
 
         jLabel112.setText("Waktu Pemberian Terakhir :");
         jLabel112.setName("jLabel112"); // NOI18N
@@ -966,9 +947,9 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                         RekonsiliasiSaat.getSelectedItem().toString(),AlergiObat.getText(),DampakAlergi.getSelectedItem().toString(),KodePetugas.getText(),
                     })==true){
                         for (i = 0; i < tbPemeriksaan.getRowCount(); i++) {
-                           Sequel.menyimpan2("rekonsiliasi_obat_detail_obat","?,?,?,?,?,?,?,?",8,new String[]{
+                           Sequel.menyimpan2("rekonsiliasi_obat_detail_obat","?,?,?,?,?,?,?",7,new String[]{
                                TNoRekonsialiasi.getText(),tbPemeriksaan.getValueAt(i,0).toString(),tbPemeriksaan.getValueAt(i,1).toString(),tbPemeriksaan.getValueAt(i,2).toString(),
-                               tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString(),tbPemeriksaan.getValueAt(i,6).toString()
+                               tbPemeriksaan.getValueAt(i,3).toString(),tbPemeriksaan.getValueAt(i,4).toString(),tbPemeriksaan.getValueAt(i,5).toString()
                            });
                         }
                         Valid.tabelKosong(tabMode);
@@ -993,15 +974,15 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             Valid.textKosong(NamaObat,"Nama Obat");
         }else if(DosisObat.getText().trim().equals("")){
             Valid.textKosong(DosisObat,"Dosis Obat");
-        }else if(Frekuensi.getText().trim().equals("")){
-            Valid.textKosong(Frekuensi,"Frekuensi");
+//        }else if(Frekuensi.getText().trim().equals("")){
+//            Valid.textKosong(Frekuensi,"Frekuensi");
         }else if(AturanPakai.getText().trim().equals("")){
             Valid.textKosong(AturanPakai,"Aturan Pakai");
         }else if(PemberianTerakhir.getText().trim().equals("")){
             Valid.textKosong(PemberianTerakhir,"Waktu Pemberian Terakhir");
         }else{
             tabMode.addRow(new String[]{
-                NamaObat.getText(),DosisObat.getText(),Frekuensi.getText(),AturanPakai.getText(),PemberianTerakhir.getText(),TindakLanjut.getSelectedItem().toString(),PerubahanAturanPakai.getText()
+                NamaObat.getText(),DosisObat.getText(),AturanPakai.getText(),PemberianTerakhir.getText(),TindakLanjut.getSelectedItem().toString(),PerubahanAturanPakai.getText()
             });
             emptTeksTambahRekon();
         }
@@ -1012,23 +993,19 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     }//GEN-LAST:event_NamaObatKeyPressed
 
     private void DosisObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DosisObatKeyPressed
-        Valid.pindah(evt,NamaObat,Frekuensi);
+        Valid.pindah(evt,NamaObat,DosisObat);
     }//GEN-LAST:event_DosisObatKeyPressed
 
     private void TindakLanjutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TindakLanjutKeyPressed
         Valid.pindah(evt,AturanPakai,PerubahanAturanPakai);
     }//GEN-LAST:event_TindakLanjutKeyPressed
 
-    private void FrekuensiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FrekuensiKeyPressed
-        Valid.pindah(evt,DosisObat,PemberianTerakhir);
-    }//GEN-LAST:event_FrekuensiKeyPressed
-
     private void AturanPakaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AturanPakaiKeyPressed
         Valid.pindah(evt,PemberianTerakhir,TindakLanjut);
     }//GEN-LAST:event_AturanPakaiKeyPressed
 
     private void PemberianTerakhirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PemberianTerakhirKeyPressed
-        Valid.pindah(evt,Frekuensi,AturanPakai);
+        Valid.pindah(evt,DosisObat,AturanPakai);
     }//GEN-LAST:event_PemberianTerakhirKeyPressed
 
     private void PerubahanAturanPakaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PerubahanAturanPakaiKeyPressed
@@ -1106,7 +1083,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.ComboBox DampakAlergi;
     private javax.swing.JDialog DlgTambahObatRekonsiliasi;
     private widget.TextBox DosisObat;
-    private widget.TextBox Frekuensi;
     private widget.TextBox Jk;
     private widget.TextBox KodePetugas;
     private widget.TextBox NamaObat;
@@ -1127,7 +1103,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.InternalFrame internalFrame4;
     private widget.Label jLabel105;
     private widget.Label jLabel108;
-    private widget.Label jLabel109;
     private widget.Label jLabel11;
     private widget.Label jLabel111;
     private widget.Label jLabel112;
@@ -1264,7 +1239,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private void emptTeksTambahRekon() {
         NamaObat.setText("");
         DosisObat.setText("");
-        Frekuensi.setText("");
+//        Frekuensi.setText("");
         PemberianTerakhir.setText("");
         AturanPakai.setText("");
         PerubahanAturanPakai.setText("");
