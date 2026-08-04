@@ -617,7 +617,7 @@ public final class RMDataTerapiCairan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-07-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -631,7 +631,7 @@ public final class RMDataTerapiCairan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-07-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -727,7 +727,7 @@ public final class RMDataTerapiCairan extends javax.swing.JDialog {
         TPasien.setBounds(326, 10, 295, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2026" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-07-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1465,7 +1465,7 @@ public final class RMDataTerapiCairan extends javax.swing.JDialog {
         BtnBatal1.setBounds(100, 420, 100, 30);
 
         Tanggal1.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-06-2026" }));
+        Tanggal1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-07-2026" }));
         Tanggal1.setDisplayFormat("dd-MM-yyyy");
         Tanggal1.setName("Tanggal1"); // NOI18N
         Tanggal1.setOpaque(false);
@@ -2368,7 +2368,7 @@ public final class RMDataTerapiCairan extends javax.swing.JDialog {
                     "inner join petugas d on a.nip=d.nip " +
                     "inner join petugas e on a.nip1=e.nip " +
                     "where "+
-                    "a.tgl_pera0watan between ? and ? order by a.tgl_perawatan,a.jam_rawat");
+                    "a.tgl_perawatan between ? and ? order by a.tgl_perawatan,a.jam_rawat");
             }else{
                 ps=koneksi.prepareStatement(
                     "select a.*,b.no_rawat,c.no_rkm_medis,c.nm_pasien,b.umurdaftar,b.sttsumur,c.jk,c.tgl_lahir,d.nama as petugas,e.nama as verifikator " +
