@@ -51,6 +51,10 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import simrskhanza.DlgCariPasien;
@@ -83,11 +87,26 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private final javax.swing.JTextField txtCariMenu=new javax.swing.JTextField();
     private final javax.swing.JTextField txtCariLab=new javax.swing.JTextField();
     private final javax.swing.JTextField txtCariRad=new javax.swing.JTextField();
+    private final widget.Button btnSemuaLab=new widget.Button();
+    private final widget.Button btnSemuaRad=new widget.Button();
+    private final widget.Button btnMuatUlangDicom=new widget.Button();
     private final Map<String,widget.CekBox> daftarKunjunganLab=new LinkedHashMap<>();
     private final Map<String,widget.CekBox> daftarKunjunganRad=new LinkedHashMap<>();
-    private final Map<String,List<String>> cacheInstanceDicom=new java.util.concurrent.ConcurrentHashMap<>();
-    private javax.swing.SwingWorker<Map<String,String>,Void> pekerjaDicom;
+    private final Map<String,CacheDicom> cacheInstanceDicom=new java.util.concurrent.ConcurrentHashMap<>();
+    private final Map<String,CacheHybrid> cacheGambarHybrid=new java.util.concurrent.ConcurrentHashMap<>();
+    private final Map<widget.editorpane,HalamanAsync> halamanAsync=new java.util.IdentityHashMap<>();
+    private javax.swing.SwingWorker<Void,HasilDicom> pekerjaDicom;
+    private javax.swing.SwingWorker<Void,HasilHybrid> pekerjaHybrid;
+    private javax.swing.SwingWorker<Void,Void> pekerjaDataRadLab;
+    private volatile PreparedStatement queryAktifRadLab;
+    private java.nio.file.Path folderCacheHybrid;
+    private static final long TTL_DICOM_DITEMUKAN=120000L;
+    private static final long TTL_DICOM_KOSONG=15000L;
+    private static final long TTL_HYBRID_DITEMUKAN=300000L;
+    private static final long TTL_HYBRID_KOSONG=15000L;
+    private static final int BATAS_GAMBAR_HYBRID=25*1024*1024;
     private int versiMuatDicom=0;
+    private int versiMuatDataRadLab=0;
     private HttpClient http = new HttpClient();
     private GetMethod get;
     private DlgCariPasien pasien=new DlgCariPasien(null,true);
@@ -102,6 +121,73 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             this.penanda=penanda;
             this.norm=norm;
             this.tanggal=tanggal;
+        }
+    }
+
+    private static final class FilterRadLab {
+        private final int mode;
+        private final String noRm,tanggalAwal,tanggalAkhir,noRawat;
+
+        private FilterRadLab(int mode,String noRm,String tanggalAwal,String tanggalAkhir,String noRawat){
+            this.mode=mode;
+            this.noRm=noRm;
+            this.tanggalAwal=tanggalAwal;
+            this.tanggalAkhir=tanggalAkhir;
+            this.noRawat=noRawat;
+        }
+    }
+
+    private static final class PermintaanHybrid {
+        private final String penanda;
+        private final String url;
+        private final String htmlBerhasil;
+
+        private PermintaanHybrid(String penanda,String url,String htmlBerhasil){
+            this.penanda=penanda;
+            this.url=url;
+            this.htmlBerhasil=htmlBerhasil;
+        }
+    }
+
+    private static final class PersiapanHybrid {
+        private final String html;
+        private final List<PermintaanHybrid> permintaan;
+
+        private PersiapanHybrid(String html,List<PermintaanHybrid> permintaan){
+            this.html=html;
+            this.permintaan=permintaan;
+        }
+    }
+
+    private static final class HasilHybrid {
+        private final String penanda;
+        private final String pengganti;
+
+        private HasilHybrid(String penanda,String pengganti){
+            this.penanda=penanda;
+            this.pengganti=pengganti;
+        }
+    }
+
+    private static final class CacheHybrid {
+        private final String fileUrl;
+        private final java.nio.file.Path file;
+        private final long kedaluwarsa;
+
+        private CacheHybrid(String fileUrl,java.nio.file.Path file,long kedaluwarsa){
+            this.fileUrl=fileUrl;
+            this.file=file;
+            this.kedaluwarsa=kedaluwarsa;
+        }
+    }
+
+    private static final class HalamanAsync {
+        private final int versi;
+        private String html;
+
+        private HalamanAsync(int versi,String html){
+            this.versi=versi;
+            this.html=html;
         }
     }
 
@@ -248,7 +334,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
               }
             }
         });
-        LoadHTMLScan.setDocument(doc);
+        LoadHTMLScan.setDocument(kit.createDefaultDocument());
         LoadHTMLScan.setEditable(false);
         LoadHTMLScan.addHyperlinkListener(e -> {
             if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
@@ -260,7 +346,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
               }
             }
         });
-        LoadHTMLSOAPI.setDocument(doc);
+        LoadHTMLSOAPI.setDocument(kit.createDefaultDocument());
         LoadHTMLSOAPI.setEditable(false);
         LoadHTMLSOAPI.addHyperlinkListener(e -> {
             if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
@@ -272,7 +358,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 }
             }
         });
-        LoadHTMLPembelian.setDocument(doc);
+        LoadHTMLPembelian.setDocument(kit.createDefaultDocument());
         LoadHTMLPembelian.setEditable(false);
         LoadHTMLPembelian.addHyperlinkListener(e -> {
             if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
@@ -284,7 +370,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 }
             }
         });
-        LoadHTMLPiutang.setDocument(doc);
+        LoadHTMLPiutang.setDocument(kit.createDefaultDocument());
         LoadHTMLPiutang.setEditable(false);
         LoadHTMLPiutang.addHyperlinkListener(e -> {
             if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
@@ -296,7 +382,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 }
             }
         });
-        LoadHTMLRetensi.setDocument(doc);
+        LoadHTMLRetensi.setDocument(kit.createDefaultDocument());
         LoadHTMLRetensi.setEditable(false);
         LoadHTMLRetensi.addHyperlinkListener(e -> {
             if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
@@ -316,6 +402,34 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         isMenu1();
         isMenu2();
     }    
+
+    @Override
+    public void dispose(){
+        versiMuatDataRadLab++;
+        versiMuatDicom++;
+        PreparedStatement queryAktif=queryAktifRadLab;
+        if(queryAktif!=null){
+            try{
+                queryAktif.cancel();
+            }catch(Exception e){
+                System.out.println("Gagal membatalkan query Lab/Radiologi : "+e.getMessage());
+            }
+        }
+        if((pekerjaDataRadLab!=null)&&!pekerjaDataRadLab.isDone()){
+            pekerjaDataRadLab.cancel(true);
+        }
+        if((pekerjaDicom!=null)&&!pekerjaDicom.isDone()){
+            pekerjaDicom.cancel(true);
+        }
+        if((pekerjaHybrid!=null)&&!pekerjaHybrid.isDone()){
+            pekerjaHybrid.cancel(true);
+        }
+        cacheInstanceDicom.clear();
+        qrTteCache.clear();
+        bersihkanCacheHybrid();
+        halamanAsync.clear();
+        super.dispose();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2245,6 +2359,19 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 }//GEN-LAST:event_BtnPasienKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if((TabRawat.getSelectedIndex()==0)&&!NoRM.getText().trim().equals("")&&!NmPasien.getText().equals("")){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try{
+                if(tabModeRegistrasi.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+                }else{
+                    cetakRiwayatRegistrasi();
+                }
+            }finally{
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+            return;
+        }
         if(NoRM.getText().trim().equals("")||NmPasien.getText().equals("")){
             JOptionPane.showMessageDialog(null,"Pasien masih kosong...!!!");
         }else{
@@ -2917,9 +3044,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         NmPasien.setText(nama);
         isPasien();
         listDokter();
-        listPoli();                
-        BtnCari1ActionPerformed(null);
+        listPoli();
         Tgl1.setDate(cal.getTime());
+        BtnCari1ActionPerformed(null);
     }
     
     public void setNoRmLabRad(String norm,String nama) {
@@ -2930,9 +3057,9 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         NmPasien.setText(nama);
         isPasien();
         listDokter();
-        listPoli();        
+        listPoli();
+        Tgl1.setDate(cal.getTime());
         BtnCari1ActionPerformed(null);
-        Tgl1.setDate(cal.getTime());        
     }
     
     public void emptTeks(){
@@ -2940,7 +3067,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }
     
     public void BerkasDigital(){
-        TabRawat.setSelectedIndex(5);
+        TabRawat.setSelectedIndex(6);
     }
     
     public void bukaRiwayat(){
@@ -3216,8 +3343,45 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         FormMenu2.removeAll();
         siapkanPencarianKunjungan(txtCariLab,FormMenu1,false);
         siapkanPencarianKunjungan(txtCariRad,FormMenu2,true);
-        FormMenu1.setPreferredSize(new Dimension(255,50));
-        FormMenu2.setPreferredSize(new Dimension(255,50));
+        siapkanTombolSemua(btnSemuaLab,FormMenu1,false);
+        siapkanTombolSemua(btnSemuaRad,FormMenu2,true);
+        btnMuatUlangDicom.setText("Muat Ulang Foto DICOM");
+        btnMuatUlangDicom.setToolTipText("Kosongkan cache lalu cari ulang foto DICOM");
+        btnMuatUlangDicom.setPreferredSize(new Dimension(245,28));
+        btnMuatUlangDicom.addActionListener(e -> {
+            cacheInstanceDicom.clear();
+            tampilRadiologi();
+        });
+        FormMenu2.add(btnMuatUlangDicom);
+        FormMenu1.setPreferredSize(new Dimension(255,80));
+        FormMenu2.setPreferredSize(new Dimension(255,110));
+    }
+
+    private void siapkanTombolSemua(widget.Button tombol,widget.PanelBiasa panel,boolean radiologi){
+        tombol.setText("Semua");
+        tombol.setToolTipText("Centang semua atau lepas semua kunjungan, termasuk yang sedang tersaring");
+        tombol.setPreferredSize(new Dimension(245,28));
+        tombol.addActionListener(e -> pilihAtauLepasSemuaKunjungan(radiologi));
+        panel.add(tombol);
+    }
+
+    private void pilihAtauLepasSemuaKunjungan(boolean radiologi){
+        Map<String,widget.CekBox> daftar=radiologi ? daftarKunjunganRad : daftarKunjunganLab;
+        if(daftar.isEmpty()){
+            return;
+        }
+        boolean semuaTerpilih=true;
+        for(widget.CekBox pilihan:daftar.values()){
+            if(!pilihan.isSelected()){
+                semuaTerpilih=false;
+                break;
+            }
+        }
+        boolean pilihSemua=!semuaTerpilih;
+        for(widget.CekBox pilihan:daftar.values()){
+            pilihan.setSelected(pilihSemua);
+        }
+        muatUlangRiwayatRadLab(radiologi);
     }
 
     private void siapkanPencarianKunjungan(javax.swing.JTextField pencarian,widget.PanelBiasa panel,boolean radiologi){
@@ -3253,6 +3417,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             pilihan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
             pilihan.setOpaque(false);
             pilihan.setPreferredSize(new Dimension(245,22));
+            pilihan.setEnabled((pekerjaDataRadLab==null)||pekerjaDataRadLab.isDone());
             final boolean daftarRadiologi=radiologi;
             pilihan.addActionListener(e -> muatUlangRiwayatRadLab(daftarRadiologi));
             daftar.put(noRawat,pilihan);
@@ -3264,15 +3429,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }
 
     private void muatUlangRiwayatRadLab(boolean radiologi){
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        try{
-            if(radiologi){
-                tampilRadiologi();
-            }else{
-                tampilLaborat();
-            }
-        }finally{
-            setCursor(Cursor.getDefaultCursor());
+        if(radiologi){
+            tampilRadiologi();
+        }else{
+            tampilLaborat();
         }
     }
 
@@ -3291,7 +3451,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 jumlahTerlihat++;
             }
         }
-        panel.setPreferredSize(new Dimension(255,50+(jumlahTerlihat*24)));
+        panel.setPreferredSize(new Dimension(255,(radiologi ? 110 : 80)+(jumlahTerlihat*24)));
         panel.revalidate();
         panel.repaint();
         javax.swing.SwingUtilities.invokeLater(() -> scroll.getVerticalScrollBar().setValue(0));
@@ -3343,33 +3503,261 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }
 
+    private ResultSet jalankanQueryRadLab(List<PreparedStatement> daftar,String sql,Object... parameter) throws SQLException{
+        PreparedStatement statement=koneksi.prepareStatement(sql);
+        try{
+            for(int nomor=0;nomor<parameter.length;nomor++){
+                statement.setObject(nomor+1,parameter[nomor]);
+            }
+            ResultSet hasil=statement.executeQuery();
+            daftar.add(statement);
+            return hasil;
+        }catch(SQLException e){
+            statement.close();
+            throw e;
+        }
+    }
+
+    private void tutupQueryRadLab(List<PreparedStatement> daftar){
+        for(PreparedStatement statement:daftar){
+            try{
+                statement.close();
+            }catch(Exception e){
+                System.out.println("Gagal menutup query Lab/Radiologi : "+e.getMessage());
+            }
+        }
+    }
+
+    private boolean pilihanKunjunganAman(boolean radiologi,String noRawat,String label){
+        if(javax.swing.SwingUtilities.isEventDispatchThread()){
+            return pilihanKunjungan(radiologi,noRawat,label).isSelected();
+        }
+        java.util.concurrent.atomic.AtomicReference<Boolean> hasil=
+            new java.util.concurrent.atomic.AtomicReference<>();
+        try{
+            javax.swing.SwingUtilities.invokeAndWait(() -> {
+                widget.CekBox pilihan=pilihanKunjungan(radiologi,noRawat,label);
+                hasil.set(pilihan.isSelected());
+            });
+        }catch(Exception e){
+            throw new IllegalStateException("Gagal memperbarui daftar kunjungan",e);
+        }
+        return Boolean.TRUE.equals(hasil.get());
+    }
+
+    private PersiapanHybrid siapkanGambarHybrid(String halaman,int versi){
+        List<PermintaanHybrid> permintaan=new ArrayList<>();
+        String pola="(<a href='([^']+)'><img alt='[^']*' src=')"+
+            java.util.regex.Pattern.quote(placeholderFoto)+
+            "(' width='[^']+' height='[^']+'/></a>)";
+        java.util.regex.Matcher pencocok=java.util.regex.Pattern.compile(pola).matcher(halaman);
+        StringBuffer hasil=new StringBuffer();
+        String dasarHybrid="http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/";
+        int nomor=0;
+        while(pencocok.find()){
+            String url=pencocok.group(2);
+            if(!url.startsWith(dasarHybrid)){
+                pencocok.appendReplacement(hasil,java.util.regex.Matcher.quoteReplacement(pencocok.group(0)));
+                continue;
+            }
+            String gambarPlaceholder=pencocok.group(0);
+            String penanda=gambarPlaceholder+"<!--HYBRID-"+versi+"-"+nomor+"-->";
+            pencocok.appendReplacement(hasil,java.util.regex.Matcher.quoteReplacement(penanda));
+            permintaan.add(new PermintaanHybrid(penanda,url,gambarPlaceholder));
+            nomor++;
+        }
+        pencocok.appendTail(hasil);
+        return new PersiapanHybrid(hasil.toString(),permintaan);
+    }
+
+    private void daftarkanHalamanAsync(widget.editorpane targetHTML,String halaman,int versi){
+        halamanAsync.put(targetHTML,new HalamanAsync(versi,halaman));
+    }
+
+    private void perbaruiHalamanAsync(widget.editorpane targetHTML,int versi,String penanda,String pengganti){
+        HalamanAsync halaman=halamanAsync.get(targetHTML);
+        if((halaman==null)||(halaman.versi!=versi)||(versi!=versiMuatDicom)){
+            return;
+        }
+        halaman.html=halaman.html.replace(penanda,pengganti);
+        tampilkanHalamanDicom(targetHTML,halaman.html);
+    }
+
+    private String ambilGambarHybrid(String alamat) throws Exception{
+        long sekarang=System.currentTimeMillis();
+        CacheHybrid tersimpan=cacheGambarHybrid.get(alamat);
+        if((tersimpan!=null)&&(sekarang<tersimpan.kedaluwarsa)){
+            if(tersimpan.fileUrl.isEmpty()||((tersimpan.file!=null)&&java.nio.file.Files.exists(tersimpan.file))){
+                return tersimpan.fileUrl;
+            }
+        }
+        if(tersimpan!=null){
+            cacheGambarHybrid.remove(alamat,tersimpan);
+            if(tersimpan.file!=null){
+                java.nio.file.Files.deleteIfExists(tersimpan.file);
+            }
+        }
+
+        java.net.HttpURLConnection koneksiHybrid=null;
+        try{
+            koneksiHybrid=(java.net.HttpURLConnection)new java.net.URL(alamat.replace(" ","%20")).openConnection();
+            koneksiHybrid.setConnectTimeout(4000);
+            koneksiHybrid.setReadTimeout(12000);
+            koneksiHybrid.setUseCaches(false);
+            koneksiHybrid.setRequestProperty("Accept","image/*");
+            int status=koneksiHybrid.getResponseCode();
+            int ukuran=koneksiHybrid.getContentLength();
+            if((status<200)||(status>=300)||(ukuran>BATAS_GAMBAR_HYBRID)){
+                cacheGambarHybrid.put(alamat,new CacheHybrid("",null,System.currentTimeMillis()+TTL_HYBRID_KOSONG));
+                return "";
+            }
+            BufferedImage gambar;
+            try(java.io.InputStream input=new java.io.BufferedInputStream(koneksiHybrid.getInputStream())){
+                gambar=ImageIO.read(input);
+            }
+            if(Thread.currentThread().isInterrupted()||(gambar==null)){
+                cacheGambarHybrid.put(alamat,new CacheHybrid("",null,System.currentTimeMillis()+TTL_HYBRID_KOSONG));
+                return "";
+            }
+            if(folderCacheHybrid==null){
+                folderCacheHybrid=java.nio.file.Files.createTempDirectory("khanza-hybrid-");
+            }
+            java.nio.file.Path fileCache=java.nio.file.Files.createTempFile(folderCacheHybrid,"gambar-",".png");
+            if(!ImageIO.write(gambar,"png",fileCache.toFile())){
+                java.nio.file.Files.deleteIfExists(fileCache);
+                return "";
+            }
+            String fileUrl=fileCache.toUri().toURL().toExternalForm();
+            cacheGambarHybrid.put(alamat,new CacheHybrid(
+                fileUrl,fileCache,System.currentTimeMillis()+TTL_HYBRID_DITEMUKAN
+            ));
+            return fileUrl;
+        }catch(Exception e){
+            cacheGambarHybrid.put(alamat,new CacheHybrid("",null,System.currentTimeMillis()+TTL_HYBRID_KOSONG));
+            throw e;
+        }finally{
+            if(koneksiHybrid!=null){
+                koneksiHybrid.disconnect();
+            }
+        }
+    }
+
+    private void bersihkanCacheHybrid(){
+        for(CacheHybrid cache:cacheGambarHybrid.values()){
+            if(cache.file!=null){
+                try{
+                    java.nio.file.Files.deleteIfExists(cache.file);
+                }catch(Exception e){
+                    System.out.println("Gagal membersihkan cache gambar Hybrid Web : "+e.getMessage());
+                }
+            }
+        }
+        cacheGambarHybrid.clear();
+        if(folderCacheHybrid!=null){
+            try{
+                java.nio.file.Files.deleteIfExists(folderCacheHybrid);
+            }catch(Exception e){
+                System.out.println("Folder cache gambar Hybrid Web masih digunakan.");
+            }
+            folderCacheHybrid=null;
+        }
+    }
+
+    private void muatGambarHybridAsync(widget.editorpane targetHTML,List<PermintaanHybrid> daftar,int versi){
+        if(daftar.isEmpty()){
+            return;
+        }
+        if((pekerjaHybrid!=null)&&!pekerjaHybrid.isDone()){
+            pekerjaHybrid.cancel(true);
+        }
+        pekerjaHybrid=new javax.swing.SwingWorker<Void,HasilHybrid>() {
+            @Override
+            protected Void doInBackground(){
+                for(PermintaanHybrid permintaan:daftar){
+                    if(isCancelled()){
+                        break;
+                    }
+                    try{
+                        String fileUrl=ambilGambarHybrid(permintaan.url);
+                        if(!fileUrl.isEmpty()&&!isCancelled()){
+                            String pengganti=permintaan.htmlBerhasil.replace(
+                                "src='"+placeholderFoto+"'","src='"+fileUrl+"'"
+                            );
+                            publish(new HasilHybrid(permintaan.penanda,pengganti));
+                        }
+                    }catch(Exception e){
+                        if(!isCancelled()){
+                            System.out.println("Gambar Hybrid Web belum dapat dimuat : "+e.getMessage());
+                        }
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void process(List<HasilHybrid> hasilSelesai){
+                if(isCancelled()||(versi!=versiMuatDicom)){
+                    return;
+                }
+                for(HasilHybrid hasil:hasilSelesai){
+                    perbaruiHalamanAsync(targetHTML,versi,hasil.penanda,hasil.pengganti);
+                }
+            }
+
+            @Override
+            protected void done(){
+                if(pekerjaHybrid==this){
+                    pekerjaHybrid=null;
+                }
+            }
+        };
+        pekerjaHybrid.execute();
+    }
+
     private List<String> ambilInstanceDicom(ApiOrthanc orthanc,String norm,String tanggal) throws Exception{
         String kunci=norm+"|"+tanggal;
-        List<String> tersimpan=cacheInstanceDicom.get(kunci);
+        long sekarang=System.currentTimeMillis();
+        CacheDicom tersimpan=cacheInstanceDicom.get(kunci);
+        if((tersimpan!=null)&&(sekarang<tersimpan.kedaluwarsa)){
+            return tersimpan.instance;
+        }
         if(tersimpan!=null){
-            return tersimpan;
+            cacheInstanceDicom.remove(kunci,tersimpan);
         }
 
         List<String> instance=new ArrayList<>();
         String tanggalCari=tanggal.replaceAll("-","");
         JsonNode daftarStudy=orthanc.AmbilSeries(norm,tanggalCari,tanggalCari);
+        if(!orthanc.getLastError().isEmpty()){
+            throw new Exception("Permintaan study Orthanc gagal");
+        }
         for(JsonNode study:daftarStudy){
+            String patientId=study.path("PatientMainDicomTags").path("PatientID").asText();
+            if(!patientId.isEmpty()&&!patientId.endsWith(norm)){
+                continue;
+            }
             for(JsonNode seri:study.path("Series")){
                 JsonNode dataSeri=orthanc.AmbilInstances(seri.asText());
-                for(JsonNode item:dataSeri.path("Instances")){
-                    instance.add(item.asText());
+                if(!orthanc.getLastError().isEmpty()){
+                    throw new Exception("Permintaan series Orthanc gagal");
+                }
+                JsonNode daftarInstance=dataSeri.path("Instances");
+                if(daftarInstance.isArray()&&(daftarInstance.size()>0)){
+                    // Cukup satu preview sebagai thumbnail untuk setiap series.
+                    instance.add(daftarInstance.get(0).asText());
                 }
             }
         }
-        if(!instance.isEmpty()){
-            cacheInstanceDicom.put(kunci,instance);
-        }
-        return instance;
+        long ttl=instance.isEmpty() ? TTL_DICOM_KOSONG : TTL_DICOM_DITEMUKAN;
+        List<String> hasil=java.util.Collections.unmodifiableList(new ArrayList<>(instance));
+        cacheInstanceDicom.put(kunci,new CacheDicom(hasil,System.currentTimeMillis()+ttl));
+        return hasil;
     }
 
     private String hasilFotoDicom(ApiOrthanc orthanc,PermintaanDicom permintaan){
         StringBuilder hasil=new StringBuilder();
         int nomor=1;
+        boolean gagal=false;
         for(String tanggal:permintaan.tanggal){
             if(Thread.currentThread().isInterrupted()){
                 break;
@@ -3386,11 +3774,16 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     nomor++;
                 }
             }catch(Exception e){
+                gagal=true;
                 System.out.println("Gagal memuat DICOM tanggal "+tanggal+" : "+e);
             }
         }
         if(hasil.length()==0){
-            hasil.append("<tr><td valign='top' colspan='3' align='center'>Foto DICOM tidak ditemukan.</td></tr>");
+            if(gagal){
+                hasil.append("<tr><td valign='top' colspan='3' align='center'>Foto DICOM gagal dimuat. Silakan coba muat ulang.</td></tr>");
+            }else{
+                hasil.append("<tr><td valign='top' colspan='3' align='center'>Foto DICOM tidak ditemukan.</td></tr>");
+            }
         }
         return hasil.toString();
     }
@@ -3399,18 +3792,33 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         if(daftar.isEmpty()){
             return;
         }
-        pekerjaDicom=new javax.swing.SwingWorker<Map<String,String>,Void>() {
+        HalamanAsync halamanTerdaftar=halamanAsync.get(targetHTML);
+        if((halamanTerdaftar==null)||(halamanTerdaftar.versi!=versi)){
+            daftarkanHalamanAsync(targetHTML,halamanAwal,versi);
+        }
+        pekerjaDicom=new javax.swing.SwingWorker<Void,HasilDicom>() {
             @Override
-            protected Map<String,String> doInBackground(){
-                Map<String,String> hasil=new LinkedHashMap<>();
+            protected Void doInBackground(){
                 ApiOrthanc orthanc=new ApiOrthanc();
                 for(PermintaanDicom permintaan:daftar){
                     if(isCancelled()){
                         break;
                     }
-                    hasil.put(permintaan.penanda,hasilFotoDicom(orthanc,permintaan));
+                    publish(new HasilDicom(
+                        permintaan.penanda,hasilFotoDicom(orthanc,permintaan)
+                    ));
                 }
-                return hasil;
+                return null;
+            }
+
+            @Override
+            protected void process(List<HasilDicom> hasilSelesai){
+                if(isCancelled()||(versi!=versiMuatDicom)){
+                    return;
+                }
+                for(HasilDicom hasil:hasilSelesai){
+                    perbaruiHalamanAsync(targetHTML,versi,hasil.penanda,hasil.html);
+                }
             }
 
             @Override
@@ -3419,17 +3827,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     if(isCancelled()||(versi!=versiMuatDicom)){
                         return;
                     }
-                    String halamanLengkap=halamanAwal;
-                    for(Map.Entry<String,String> item:get().entrySet()){
-                        halamanLengkap=halamanLengkap.replace(item.getKey(),item.getValue());
-                    }
-                    javax.swing.JViewport viewport=(targetHTML.getParent() instanceof javax.swing.JViewport) ?
-                        (javax.swing.JViewport)targetHTML.getParent() : null;
-                    java.awt.Point posisiTampilan=(viewport==null) ? null : viewport.getViewPosition();
-                    targetHTML.setText(halamanLengkap);
-                    if((viewport!=null)&&(posisiTampilan!=null)){
-                        javax.swing.SwingUtilities.invokeLater(() -> viewport.setViewPosition(posisiTampilan));
-                    }
+                    get();
                 }catch(Exception e){
                     if(!isCancelled()){
                         System.out.println("Gagal menampilkan foto DICOM : "+e);
@@ -3442,6 +3840,16 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
         };
         pekerjaDicom.execute();
+    }
+
+    private void tampilkanHalamanDicom(widget.editorpane targetHTML,String halaman){
+        javax.swing.JViewport viewport=(targetHTML.getParent() instanceof javax.swing.JViewport) ?
+            (javax.swing.JViewport)targetHTML.getParent() : null;
+        java.awt.Point posisiTampilan=(viewport==null) ? null : viewport.getViewPosition();
+        targetHTML.setText(halaman);
+        if((viewport!=null)&&(posisiTampilan!=null)){
+            javax.swing.SwingUtilities.invokeLater(() -> viewport.setViewPosition(posisiTampilan));
+        }
     }
 
     private void isMenu(){
@@ -3487,6 +3895,14 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }
 
     private void tampilPerawatan() {
+        if((pekerjaDicom!=null)&&!pekerjaDicom.isDone()){
+            pekerjaDicom.cancel(true);
+        }
+        if((pekerjaHybrid!=null)&&!pekerjaHybrid.isDone()){
+            pekerjaHybrid.cancel(true);
+        }
+        final int versiDicomPerawatan=++versiMuatDicom;
+        List<PermintaanDicom> permintaanDicomPerawatan=new ArrayList<>();
         try{   
             htmlContent = new StringBuilder();
             if(R1.isSelected()==true){
@@ -4598,39 +5014,27 @@ menampilkanEdukasiPasienTerintegrasi(rs.getString("no_rawat"));
                                 rs3=koneksi.prepareStatement(
                                 "select distinct tgl_periksa from periksa_radiologi where no_rawat='"+rs.getString("no_rawat")+"' order by tgl_periksa").executeQuery();
                                 if(rs3.next()){
-                                htmlContent.append(  
-                                  "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                    "<tr><td valign='top' colspan='3'>Gambar Radiologi</td></tr>"+  
-                                    "<tr align='center'>"+
-                                      "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>"+
-                                      "<td valign='top' width='15%' bgcolor='#FFFAF8'>Tanggal</td>"+
-                                      "<td valign='top' width='81%' bgcolor='#FFFAF8'>Gambar Radiologi</td>"+
-                                    "</tr>");
-                                    w=1;
-                                    ApiOrthanc orthanc=new ApiOrthanc();
-                                    norm=Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",rs.getString("no_rawat"));
+                                    List<String> tanggalDicom=new ArrayList<>();
                                     do{
-                                        String tanggalDicom=rs3.getString("tgl_periksa");
-                                        String tanggalCari=tanggalDicom.replaceAll("-","");
-                                        root=orthanc.AmbilSeries(norm,tanggalCari,tanggalCari);
-                                        for(JsonNode list:root){
-                                            StudyInstanceUID = list.path("MainDicomTags").path("StudyInstanceUID").asText();
-                                            for(JsonNode sublist:list.path("Series")){
-                                                Series=sublist.asText();
-                                                rootx=orthanc.AmbilInstances(Series);
-                                                for(JsonNode liste:rootx.path("Instances")){
-                                                    htmlContent.append(
-                                                        "<tr>"+
-                                                            "<td valign='top' align='center'>"+w+"</td>"+
-                                                            "<td valign='top'>"+tanggalDicom+"</td>"+
-                                                            "<td valign='top' align='center'><a href='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/stone-webviewer/index.html?patient="+"*"+norm+"'> <img src='"+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+liste.asText()+"/preview' width='450' height='450'/></a></td>"+
-                                                        "</tr>");
-                                                    w++;
-                                                }
-                                            }
-                                        }
+                                        tanggalDicom.add(rs3.getString("tgl_periksa"));
                                     }while(rs3.next());
-                                    htmlContent.append("</table>");
+                                    norm=Sequel.cariIsi("select RIGHT(reg_periksa.no_rkm_medis,6) from reg_periksa where reg_periksa.no_rawat=?",rs.getString("no_rawat"));
+                                    String penandaDicom=
+                                        "<tr><td valign='top' colspan='3' align='center'>Sedang memuat foto DICOM...</td></tr>"+
+                                        "<!--DICOM-PERAWATAN-"+versiDicomPerawatan+"-"+permintaanDicomPerawatan.size()+"-->";
+                                    htmlContent.append(
+                                      "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                        "<tr><td valign='top' colspan='3'>Gambar Radiologi</td></tr>"+
+                                        "<tr align='center'>"+
+                                          "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>"+
+                                          "<td valign='top' width='15%' bgcolor='#FFFAF8'>Tanggal</td>"+
+                                          "<td valign='top' width='81%' bgcolor='#FFFAF8'>Gambar Radiologi</td>"+
+                                        "</tr>"+
+                                        penandaDicom+
+                                      "</table>");
+                                    permintaanDicomPerawatan.add(
+                                        new PermintaanDicom(penandaDicom,norm,tanggalDicom)
+                                    );
                                 }
                             }
                         } catch (Exception e) {
@@ -5848,12 +6252,29 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                     
                 }
                 
-                LoadHTMLRiwayatPerawatan.setText(
+                String halamanPerawatan=
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                        htmlContent.toString()+
                       "</table>"+
-                    "</html>");
+                    "</html>";
+                PersiapanHybrid persiapanHybrid=siapkanGambarHybrid(
+                    halamanPerawatan,versiDicomPerawatan
+                );
+                halamanPerawatan=persiapanHybrid.html;
+                LoadHTMLRiwayatPerawatan.setText(halamanPerawatan);
+                daftarkanHalamanAsync(
+                    LoadHTMLRiwayatPerawatan,halamanPerawatan,versiDicomPerawatan
+                );
+                muatGambarHybridAsync(
+                    LoadHTMLRiwayatPerawatan,persiapanHybrid.permintaan,versiDicomPerawatan
+                );
+                if(!permintaanDicomPerawatan.isEmpty()){
+                    muatFotoDicomAsync(
+                        LoadHTMLRiwayatPerawatan,halamanPerawatan,
+                        permintaanDicomPerawatan,versiDicomPerawatan
+                    );
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             } finally{
@@ -6117,121 +6538,157 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
     }
     
     private void tampilLaborat() {
-        tampilRadLab(false,true,LoadHTMLRiwayatRadLab);
+        mulaiMuatRadLab(false,true,LoadHTMLRiwayatRadLab);
     }
 
     private void tampilRadiologi() {
+        mulaiMuatRadLab(true,false,LoadHTMLRiwayatRadLab1);
+    }
+
+    private void mulaiMuatRadLab(boolean tampilRadiologi,boolean tampilLaborat,widget.editorpane targetHTML){
+        if((pekerjaDataRadLab!=null)&&!pekerjaDataRadLab.isDone()){
+            PreparedStatement queryAktif=queryAktifRadLab;
+            if(queryAktif!=null){
+                try{
+                    queryAktif.cancel();
+                }catch(Exception e){
+                    System.out.println("Gagal membatalkan query Lab/Radiologi sebelumnya : "+e.getMessage());
+                }
+            }
+            pekerjaDataRadLab.cancel(true);
+        }
         if((pekerjaDicom!=null)&&!pekerjaDicom.isDone()){
             pekerjaDicom.cancel(true);
         }
+        if((pekerjaHybrid!=null)&&!pekerjaHybrid.isDone()){
+            pekerjaHybrid.cancel(true);
+        }
         versiMuatDicom++;
-        tampilRadLab(true,false,LoadHTMLRiwayatRadLab1);
+        final int versiData=++versiMuatDataRadLab;
+        final FilterRadLab filter=new FilterRadLab(
+            R1.isSelected() ? 1 : R2.isSelected() ? 2 : R3.isSelected() ? 3 : 4,
+            NoRM.getText().trim(),Valid.SetTgl(Tgl1.getSelectedItem()+""),
+            Valid.SetTgl(Tgl2.getSelectedItem()+""),NoRawat.getText().trim()
+        );
+        targetHTML.setText("<html><body><br><center>Memuat data SIMRS...</center></body></html>");
+        setKontrolRadLabAktif(false);
+        javax.swing.SwingUtilities.invokeLater(() ->
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR))
+        );
+
+        pekerjaDataRadLab=new javax.swing.SwingWorker<Void,Void>() {
+            @Override
+            protected Void doInBackground(){
+                tampilRadLab(tampilRadiologi,tampilLaborat,targetHTML,versiData,filter);
+                return null;
+            }
+
+            @Override
+            protected void done(){
+                try{
+                    get();
+                }catch(java.util.concurrent.CancellationException e){
+                    // Permintaan lama sengaja dihentikan ketika pengguna memuat ulang/menutup form.
+                }catch(Exception e){
+                    System.out.println("Gagal memuat riwayat Lab/Radiologi : "+e);
+                }finally{
+                    if(pekerjaDataRadLab==this){
+                        pekerjaDataRadLab=null;
+                        setKontrolRadLabAktif(true);
+                        setCursor(Cursor.getDefaultCursor());
+                    }
+                }
+            }
+        };
+        pekerjaDataRadLab.execute();
     }
 
-    private void tampilRadLab(boolean tampilRadiologi,boolean tampilLaborat,widget.editorpane targetHTML) {
+    private void setKontrolRadLabAktif(boolean aktif){
+        BtnCari1.setEnabled(aktif);
+        BtnPrint.setEnabled(aktif);
+        TabRawat.setEnabled(aktif);
+        btnSemuaLab.setEnabled(aktif);
+        btnSemuaRad.setEnabled(aktif);
+        btnMuatUlangDicom.setEnabled(aktif);
+        txtCariLab.setEnabled(aktif);
+        txtCariRad.setEnabled(aktif);
+        for(widget.CekBox pilihan:daftarKunjunganLab.values()){
+            pilihan.setEnabled(aktif);
+        }
+        for(widget.CekBox pilihan:daftarKunjunganRad.values()){
+            pilihan.setEnabled(aktif);
+        }
+    }
+
+    private void tampilRadLab(boolean tampilRadiologi,boolean tampilLaborat,widget.editorpane targetHTML,int versiData,FilterRadLab filter) {
         try{   
-            htmlContent = new StringBuilder();
+            StringBuilder htmlContent = new StringBuilder();
+            PreparedStatement ps=null;
+            ResultSet rs=null,rs2=null,rs3=null,rs4=null;
+            List<PreparedStatement> queryRadLab=new ArrayList<>();
             List<PermintaanDicom> permintaanDicom=new ArrayList<>();
             int versiDicom=versiMuatDicom;
             String tabelPemeriksaan=tampilRadiologi ? "periksa_radiologi" : "periksa_lab";
-            if(R1.isSelected()==true){
-                ps=koneksi.prepareStatement(
-                    "(select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
-                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
-                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_lab) order by tgl_registrasi desc limit 5)"+
-                    "union "+ 
-                    "(select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
-                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
-                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_radiologi) order by tgl_registrasi desc limit 5) order by tgl_registrasi desc");
-            }else if(R2.isSelected()==true){
-                ps=koneksi.prepareStatement(
-                    "(select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
-                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
-                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_lab))"+
-                    "union "+ 
-                    "(select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
-                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
-                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_radiologi)) order by tgl_registrasi asc");
-            }else if(R3.isSelected()==true){
-                ps=koneksi.prepareStatement(
-                    "(select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
-                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
-                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_lab)) "+
-                    "union "+ 
-                    "(select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
-                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
-                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+ 
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat in (select no_rawat from periksa_radiologi)) order by tgl_registrasi asc");
-            }else if(R4.isSelected()==true){
-                ps=koneksi.prepareStatement(
-                    "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                    "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
-                    "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
-                    "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
-                    "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
-                    "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                    "where reg_periksa.stts<>'Batal' and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat=?");
+            String queryKunjungan=
+                "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
+                "reg_periksa.kd_dokter,dokter.nm_dokter,poliklinik.nm_poli,reg_periksa.p_jawab,reg_periksa.almt_pj,"+
+                "reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_lanjut,penjab.png_jawab "+
+                "from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
+                "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
+                "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
+                "where reg_periksa.stts<>'Batal' and exists (select 1 from "+tabelPemeriksaan+" pemeriksaan "+
+                "where pemeriksaan.no_rawat=reg_periksa.no_rawat) ";
+            if(filter.mode==1){
+                ps=koneksi.prepareStatement(queryKunjungan+
+                    "and reg_periksa.no_rkm_medis=? order by reg_periksa.tgl_registrasi desc limit 5");
+            }else if(filter.mode==2){
+                ps=koneksi.prepareStatement(queryKunjungan+
+                    "and reg_periksa.no_rkm_medis=? order by reg_periksa.tgl_registrasi asc");
+            }else if(filter.mode==3){
+                ps=koneksi.prepareStatement(queryKunjungan+
+                    "and reg_periksa.tgl_registrasi between ? and ? and reg_periksa.no_rkm_medis=? "+
+                    "order by reg_periksa.tgl_registrasi asc");
+            }else{
+                ps=koneksi.prepareStatement(queryKunjungan+
+                    "and reg_periksa.no_rkm_medis=? and reg_periksa.no_rawat=?");
             }
             
             try {
                 i=0;
-                if(R1.isSelected()==true){
-                    ps.setString(1,NoRM.getText().trim());
-                    ps.setString(2,NoRM.getText().trim());
-                }else if(R2.isSelected()==true){
-                    ps.setString(1,NoRM.getText().trim());
-                    ps.setString(2,NoRM.getText().trim());
-                }else if(R3.isSelected()==true){                    
-                    ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                    ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                    ps.setString(3,NoRM.getText().trim());
-                    ps.setString(4,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                    ps.setString(5,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                    ps.setString(6,NoRM.getText().trim());
-                }else if(R4.isSelected()==true){
-                    ps.setString(1,NoRM.getText().trim());
-                    ps.setString(2,NoRawat.getText().trim());
+                if((filter.mode==1)||(filter.mode==2)){
+                    ps.setString(1,filter.noRm);
+                }else if(filter.mode==3){                    
+                    ps.setString(1,filter.tanggalAwal);
+                    ps.setString(2,filter.tanggalAkhir);
+                    ps.setString(3,filter.noRm);
+                }else{
+                    ps.setString(1,filter.noRm);
+                    ps.setString(2,filter.noRawat);
                 }
                 urut=1;
                 java.util.Set<String> kunjunganTersedia=new java.util.LinkedHashSet<>();
+                queryAktifRadLab=ps;
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    if(Sequel.cariInteger("select count(*) from "+tabelPemeriksaan+" where no_rawat=?",rs.getString("no_rawat"))==0){
-                        continue;
+                    if(Thread.currentThread().isInterrupted()||(versiData!=versiMuatDataRadLab)){
+                        break;
                     }
                     String noRawatKunjungan=rs.getString("no_rawat");
                     kunjunganTersedia.add(noRawatKunjungan);
-                    widget.CekBox pilihan=pilihanKunjungan(
+                    boolean pilihanDipilih=pilihanKunjunganAman(
                         tampilRadiologi,noRawatKunjungan,labelKunjunganRadLab(rs)
                     );
-                    if(!pilihan.isSelected()){
+                    if(!pilihanDipilih){
                         continue;
                     }
                     try {
                         dokterrujukan="";
                         polirujukan="";
-                        rs2=koneksi.prepareStatement(
+                        rs2=jalankanQueryRadLab(queryRadLab,
                             "select poliklinik.nm_poli,dokter.nm_dokter from rujukan_internal_poli "+
                             "inner join poliklinik on rujukan_internal_poli.kd_poli=poliklinik.kd_poli "+
                             "inner join dokter on rujukan_internal_poli.kd_dokter=dokter.kd_dokter "+
-                            "where no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
+                            "where no_rawat=?",rs.getString("no_rawat"));
                         while(rs2.next()){
                             polirujukan=polirujukan+", "+rs2.getString("nm_poli");
                             dokterrujukan=dokterrujukan+", "+rs2.getString("nm_dokter");
@@ -6855,25 +7312,62 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                     );
                     
                 }
-                hapusPilihanKunjunganLama(tampilRadiologi,kunjunganTersedia);
+                String isiRadLab=htmlContent.length()==0 ?
+                    "<tr class='isi'><td align='center'>Data pemeriksaan tidak ditemukan.</td></tr>" :
+                    htmlContent.toString();
                 String halamanRadLab=
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                       htmlContent.toString()+
+                       isiRadLab+
                       "</table>"+
                     "</html>";
-                targetHTML.setText(halamanRadLab);
-                if(tampilRadiologi){
-                    muatFotoDicomAsync(targetHTML,halamanRadLab,permintaanDicom,versiDicom);
+                if(!Thread.currentThread().isInterrupted()&&(versiData==versiMuatDataRadLab)){
+                    Runnable terapkanHasil=() -> {
+                        if(versiData!=versiMuatDataRadLab){
+                            return;
+                        }
+                        hapusPilihanKunjunganLama(tampilRadiologi,kunjunganTersedia);
+                        PersiapanHybrid persiapanHybrid=siapkanGambarHybrid(
+                            halamanRadLab,versiDicom
+                        );
+                        targetHTML.setText(persiapanHybrid.html);
+                        daftarkanHalamanAsync(targetHTML,persiapanHybrid.html,versiDicom);
+                        muatGambarHybridAsync(
+                            targetHTML,persiapanHybrid.permintaan,versiDicom
+                        );
+                        if(tampilRadiologi){
+                            muatFotoDicomAsync(
+                                targetHTML,persiapanHybrid.html,permintaanDicom,versiDicom
+                            );
+                        }
+                    };
+                    if(javax.swing.SwingUtilities.isEventDispatchThread()){
+                        terapkanHasil.run();
+                    }else{
+                        javax.swing.SwingUtilities.invokeAndWait(terapkanHasil);
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
+                if(!Thread.currentThread().isInterrupted()&&(versiData==versiMuatDataRadLab)){
+                    javax.swing.SwingUtilities.invokeLater(() -> {
+                        if(versiData==versiMuatDataRadLab){
+                            targetHTML.setText(
+                                "<html><body><br><center>Data Lab/Radiologi gagal dimuat. Silakan coba lagi.</center></body></html>"
+                            );
+                        }
+                    });
+                }
             } finally{
                 if(rs!=null){
                     rs.close();
                 }
                 if(ps!=null){
                     ps.close();
+                }
+                tutupQueryRadLab(queryRadLab);
+                if(queryAktifRadLab==ps){
+                    queryAktifRadLab=null;
                 }
             }                
         }catch(Exception e){
@@ -7449,6 +7943,66 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
             }                
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }
+    }
+
+    private void cetakRiwayatRegistrasi(){
+        try{
+            List<Map<String,?>> data=new ArrayList<>();
+            for(int baris=0;baris<tabModeRegistrasi.getRowCount();baris++){
+                Map<String,Object> item=new HashMap<>();
+                item.put("no",baris+1);
+                for(int kolom=0;kolom<9;kolom++){
+                    Object nilai=tabModeRegistrasi.getValueAt(baris,kolom);
+                    item.put("temp"+(kolom+1),nilai==null ? "" : nilai.toString());
+                }
+                for(int kolom=10;kolom<=14;kolom++){
+                    item.put("temp"+kolom,"");
+                }
+                data.add(item);
+            }
+
+            Map<String,Object> param=new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+
+            JasperPrint cetakan=JasperFillManager.fillReport(
+                "./report/rptRiwayatRegistrasi.jasper",param,new JRMapCollectionDataSource(data)
+            );
+            JasperViewer viewer=new JasperViewer(cetakan,false);
+            viewer.setTitle("::[ Riwayat Registrasi ]::");
+            Dimension layar=java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            viewer.setSize(layar.width-50,layar.height-50);
+            viewer.setLocationRelativeTo(null);
+            viewer.setVisible(true);
+        }catch(Exception e){
+            System.out.println("Gagal mencetak riwayat registrasi : "+e);
+            JOptionPane.showMessageDialog(null,"Gagal mencetak riwayat registrasi : "+e.getMessage());
+        }
+    }
+
+    private static final class CacheDicom {
+        private final List<String> instance;
+        private final long kedaluwarsa;
+
+        private CacheDicom(List<String> instance,long kedaluwarsa){
+            this.instance=instance;
+            this.kedaluwarsa=kedaluwarsa;
+        }
+    }
+
+    private static final class HasilDicom {
+        private final String penanda;
+        private final String html;
+
+        private HasilDicom(String penanda,String html){
+            this.penanda=penanda;
+            this.html=html;
         }
     }
 

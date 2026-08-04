@@ -1938,7 +1938,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             }
 
             if (sukses && otorisasiPPRAValid) {
-                simpanLogOtorisasiPPRA();
+                sukses = simpanLogOtorisasiPPRA();
             }
 
             if (sukses) {
@@ -2872,24 +2872,56 @@ private void JeniskelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }
     }//GEN-LAST:event_BtnLoginActionPerformed
 
-    private void simpanLogOtorisasiPPRA() {
+    private boolean simpanLogOtorisasiPPRA() {
+        String nomorResep = NoResep.getText().trim();
+        if (nomorResep.isEmpty()) {
+            nomorResep = noresep == null ? "" : noresep.trim();
+        }
+        String nomorRawat = TNoRw.getText().trim();
+        String nipOtorisasi = nipOtorisasiPPRA == null ? "" : nipOtorisasiPPRA.trim();
+
+        if (nomorResep.isEmpty() || nomorRawat.isEmpty() || nipOtorisasi.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Log otorisasi PPRA tidak dapat disimpan. Nomor resep, nomor rawat, atau NIP otorisasi masih kosong."
+            );
+            return false;
+        }
+
+        PreparedStatement psOtorisasi = null;
         try {
             String tglOtorisasi = Valid.SetTgl(DTPTgl.getSelectedItem() + "") + " " +
                                   cmbJam.getSelectedItem() + ":" +
                                   cmbMnt.getSelectedItem() + ":" +
                                   cmbDtk.getSelectedItem();
 
-//            Sequel.menyimpan(
-//                "ppra_otorisasi_resep",
-//                "'" + NoResep.getText() + "','" +
-//                      TNoRw.getText() + "','" +
-//                      nipOtorisasiPPRA + "','" +
-//                      tglOtorisasi + "','" +
-//                      "VALIDASI_ANTIBIOTIK','Otorisasi obat watch/reserve'",
-//                "Otorisasi PPRA"
-//            );
+            psOtorisasi = koneksi.prepareStatement(
+                "insert into ppra_otorisasi_resep " +
+                "(no_resep,no_rawat,nip_otorisasi,tgl_otorisasi,jenis_otorisasi,keterangan) " +
+                "values (?,?,?,?,?,?)"
+            );
+            psOtorisasi.setString(1, nomorResep);
+            psOtorisasi.setString(2, nomorRawat);
+            psOtorisasi.setString(3, nipOtorisasi);
+            psOtorisasi.setString(4, tglOtorisasi);
+            psOtorisasi.setString(5, "VALIDASI_ANTIBIOTIK");
+            psOtorisasi.setString(6, "Otorisasi obat watch/reserve");
+            return psOtorisasi.executeUpdate() > 0;
         } catch (Exception e) {
             System.out.println("Notifikasi simpan otorisasi PPRA : " + e);
+            JOptionPane.showMessageDialog(
+                null,
+                "Gagal menyimpan log otorisasi PPRA. Transaksi dibatalkan.\n" + e.getMessage()
+            );
+            return false;
+        } finally {
+            if (psOtorisasi != null) {
+                try {
+                    psOtorisasi.close();
+                } catch (Exception e) {
+                    System.out.println("Notifikasi tutup query otorisasi PPRA : " + e);
+                }
+            }
         }
     }
     

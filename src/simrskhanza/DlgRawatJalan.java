@@ -2598,7 +2598,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -2617,7 +2617,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2793,6 +2793,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         tbTindakan.setAutoCreateRowSorter(true);
         tbTindakan.setToolTipText("");
         tbTindakan.setName("tbTindakan"); // NOI18N
+        tbTindakan.getTableHeader().setReorderingAllowed(false);
         tbTindakan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbTindakanKeyPressed(evt);
@@ -2808,6 +2809,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         tbRawatDr.setAutoCreateRowSorter(true);
         tbRawatDr.setName("tbRawatDr"); // NOI18N
+        tbRawatDr.getTableHeader().setReorderingAllowed(false);
         tbRawatDr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbRawatDrMouseClicked(evt);
@@ -2897,6 +2899,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         tbTindakan2.setAutoCreateRowSorter(true);
         tbTindakan2.setToolTipText("");
         tbTindakan2.setName("tbTindakan2"); // NOI18N
+        tbTindakan2.getTableHeader().setReorderingAllowed(false);
         tbTindakan2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbTindakan2KeyPressed(evt);
@@ -2912,6 +2915,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         tbRawatPr.setAutoCreateRowSorter(true);
         tbRawatPr.setName("tbRawatPr"); // NOI18N
+        tbRawatPr.getTableHeader().setReorderingAllowed(false);
         tbRawatPr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbRawatPrMouseClicked(evt);
@@ -3038,6 +3042,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         tbTindakan3.setAutoCreateRowSorter(true);
         tbTindakan3.setToolTipText("");
         tbTindakan3.setName("tbTindakan3"); // NOI18N
+        tbTindakan3.getTableHeader().setReorderingAllowed(false);
         tbTindakan3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbTindakan3KeyPressed(evt);
@@ -3053,6 +3058,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         tbRawatDrPr.setAutoCreateRowSorter(true);
         tbRawatDrPr.setName("tbRawatDrPr"); // NOI18N
+        tbRawatDrPr.getTableHeader().setReorderingAllowed(false);
         tbRawatDrPr.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbRawatDrPrMouseClicked(evt);
@@ -3083,6 +3089,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         tbPemeriksaan.setAutoCreateRowSorter(true);
         tbPemeriksaan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPemeriksaan.setName("tbPemeriksaan"); // NOI18N
+        tbPemeriksaan.getTableHeader().setReorderingAllowed(false);
         tbPemeriksaan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbPemeriksaanMouseClicked(evt);
@@ -3810,6 +3817,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         tbPemeriksaanRM.setAutoCreateRowSorter(true);
         tbPemeriksaanRM.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbPemeriksaanRM.setName("tbPemeriksaanRM"); // NOI18N
+        tbPemeriksaanRM.getTableHeader().setReorderingAllowed(false);
         tbPemeriksaanRM.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbPemeriksaanRMMouseClicked(evt);
@@ -5136,7 +5144,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         jLabel23.setBounds(554, 10, 60, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);

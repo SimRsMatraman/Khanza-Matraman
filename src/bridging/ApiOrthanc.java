@@ -5,19 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.Collections;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,11 +26,10 @@ public class ApiOrthanc {
     private JsonNode root,rootx;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
-    private SSLContext sslContext;
-    private SSLSocketFactory sslFactory;
-    private Scheme scheme;
     private HttpComponentsClientHttpRequestFactory factory;
+    private RestTemplate restTemplate;
     private String auth,authEncrypt,requestJson,requestJson1;
+    private volatile String lastError="";
     private byte[] encodedBytes;
     private int i=1;
     
@@ -56,12 +46,24 @@ public class ApiOrthanc {
     public String Auth(){
         return authEncrypt;
     }
+
+    public String getLastError(){
+        return lastError;
+    }
+
+    private void tampilkanPesan(String pesan){
+        if(SwingUtilities.isEventDispatchThread()){
+            JOptionPane.showMessageDialog(null,pesan);
+        }else{
+            SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null,pesan));
+        }
+    }
     
     public JsonNode AmbilSeries(String Norm,String Tanggal1,String Tanggal2){
-        System.out.println("Percobaan Mengambil Series Pasien : "+Norm);
+        lastError="";
+        root=mapper.createArrayNode();
         try{
             headers = new HttpHeaders();
-            System.out.println("Auth : "+authEncrypt);
             headers.add("Authorization", "Basic "+authEncrypt);
             requestJson = "{"+
                               "\"Level\": \"Study\","+
@@ -71,24 +73,22 @@ public class ApiOrthanc {
                                    "\"PatientID\": \"*"+Norm+"\""+
                               "}"+
                           "}";
-            System.out.println("Request JSON : "+requestJson);
             requestEntity = new HttpEntity(requestJson,headers);
-            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/tools/find");
             requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/tools/find", HttpMethod.POST, requestEntity, String.class).getBody();            
-            System.out.println("Result JSON : "+requestJson);
             root = mapper.readTree(requestJson);
         }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-            JOptionPane.showMessageDialog(null,"Gagal mengambil data dari Orthanc, silahkan hubungi administrator ..!!");
+            lastError=e.getMessage()==null ? e.getClass().getSimpleName() : e.getMessage();
+            root=mapper.createArrayNode();
+            System.out.println("Orthanc AmbilSeries gagal : "+e.getClass().getSimpleName());
         }
         return root;
     }
     
     public JsonNode AmbilPhoto(String Norm,String Tanggal1,String Tanggal2){
-        System.out.println("Percobaan Mengambil Photo Pasien : "+Norm);
+        lastError="";
+        root=mapper.createArrayNode();
         try{
             headers = new HttpHeaders();
-            System.out.println("Auth : "+authEncrypt);
             headers.add("Authorization", "Basic "+authEncrypt);
             requestJson = "{"+
                               "\"Level\": \"Study\","+
@@ -98,63 +98,54 @@ public class ApiOrthanc {
                                    "\"PatientID\": \"*"+Norm+"\""+
                               "}"+
                           "}";
-            System.out.println("Request JSON : "+requestJson);
             requestEntity = new HttpEntity(requestJson,headers);
-            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/tools/find");
             requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/tools/find", HttpMethod.POST, requestEntity, String.class).getBody();            
-            System.out.println("Result JSON : "+requestJson);
             root = mapper.readTree(requestJson);
             for(JsonNode list:root){
                 for(JsonNode sublist:list.path("Series")){
             headers = new HttpHeaders();
-            System.out.println("Auth : "+authEncrypt);
             headers.add("Authorization", "Basic "+authEncrypt);
             requestEntity = new HttpEntity(headers);
-            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+sublist.asText());
             requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+sublist.asText(), HttpMethod.GET, requestEntity, String.class).getBody();
-            System.out.println("Result JSON : "+requestJson);
             root = mapper.readTree(requestJson);
                 }
             }
         }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-            JOptionPane.showMessageDialog(null,"Gagal mengambil data dari Orthanc, silahkan hubungi administrator ..!!");
+            lastError=e.getMessage()==null ? e.getClass().getSimpleName() : e.getMessage();
+            root=mapper.createArrayNode();
+            System.out.println("Orthanc AmbilPhoto gagal : "+e.getClass().getSimpleName());
         }
         return root;
     }
     
     public JsonNode AmbilInstances(String seri){
-        System.out.println("Percobaan Mengambil Gambar Series : "+seri);
+        lastError="";
+        root=mapper.createObjectNode();
         try{
             headers = new HttpHeaders();
-            System.out.println("Auth : "+authEncrypt);
             headers.add("Authorization", "Basic "+authEncrypt);
             requestEntity = new HttpEntity(headers);
-            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+seri);
             requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+seri, HttpMethod.GET, requestEntity, String.class).getBody();
-            System.out.println("Result JSON : "+requestJson);
             root = mapper.readTree(requestJson);
         }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-            JOptionPane.showMessageDialog(null,"Gagal mengambil data dari Orthanc, silahkan hubungi administrator ..!!");
+            lastError=e.getMessage()==null ? e.getClass().getSimpleName() : e.getMessage();
+            root=mapper.createObjectNode();
+            System.out.println("Orthanc AmbilInstances gagal : "+e.getClass().getSimpleName());
         }
         return root;
     }
     
     public JsonNode AmbilPng(String NoRawat,String Series){
-        System.out.println("Percobaan Mengambil Gambar PNG : "+NoRawat+", Series : "+Series);
+        lastError="";
+        root=mapper.createObjectNode();
         try{
             headers = new HttpHeaders();
-            System.out.println("Auth : "+authEncrypt);
             headers.add("Authorization", "Basic "+authEncrypt);
             requestEntity = new HttpEntity(headers);
-            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+Series);
             requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+Series, HttpMethod.GET, requestEntity, String.class).getBody();
-            System.out.println("Result JSON : "+requestJson);
             root = mapper.readTree(requestJson);
             i=1;
             for(JsonNode list:root.path("Instances")){
-                 System.out.println("Mengambil Gambar PNG "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview");
                  headers = new HttpHeaders();
                  headers.add("Authorization", "Basic "+authEncrypt);
                  headers.add("Accept","image/png");
@@ -165,28 +156,27 @@ public class ApiOrthanc {
                  Files.write(Paths.get("./gambarradiologi/"+NoRawat+i+".png"),response.getBody());
                  i++;
             }
-            JOptionPane.showMessageDialog(null,"Pengambilan Gambar PNG dari Orthanc berhasil, silahkan lihat di dalam folder Aplikasi..!!");
+            tampilkanPesan("Pengambilan Gambar PNG dari Orthanc berhasil, silahkan lihat di dalam folder Aplikasi..!!");
         }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-            JOptionPane.showMessageDialog(null,"Gagal mengambil Gambar PNG dari Orthanc, silahkan hubungi administrator ..!!");
+            lastError=e.getMessage()==null ? e.getClass().getSimpleName() : e.getMessage();
+            root=mapper.createObjectNode();
+            System.out.println("Orthanc AmbilPng gagal : "+e.getClass().getSimpleName());
+            tampilkanPesan("Gagal mengambil Gambar PNG dari Orthanc, silahkan hubungi administrator ..!!");
         }
         return root;
     }
     
     public JsonNode AmbilJpg(String NoRawat,String Series){
-        System.out.println("Percobaan Mengambil Gambar JPG : "+NoRawat+", Series : "+Series);
+        lastError="";
+        root=mapper.createObjectNode();
         try{
             headers = new HttpHeaders();
-            System.out.println("Auth : "+authEncrypt);
             headers.add("Authorization", "Basic "+authEncrypt);
             requestEntity = new HttpEntity(headers);
-            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+Series);
             requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+Series, HttpMethod.GET, requestEntity, String.class).getBody();
-            System.out.println("Result JSON : "+requestJson);
             root = mapper.readTree(requestJson);
             i=1;
             for(JsonNode list:root.path("Instances")){
-                 System.out.println("Mengambil Gambar JPG "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview");
                  headers = new HttpHeaders();
                  headers.add("Authorization", "Basic "+authEncrypt);
                  headers.add("Accept","image/jpeg");
@@ -197,28 +187,27 @@ public class ApiOrthanc {
                  Files.write(Paths.get("./gambarradiologi/"+NoRawat+i+".jpg"),response.getBody());
                  i++;
             }
-            JOptionPane.showMessageDialog(null,"Pengambilan Gambar JPG dari Orthanc berhasil, silahkan lihat di dalam folder Aplikasi..!!");
+            tampilkanPesan("Pengambilan Gambar JPG dari Orthanc berhasil, silahkan lihat di dalam folder Aplikasi..!!");
         }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-            JOptionPane.showMessageDialog(null,"Gagal mengambil Gambar JPG dari Orthanc, silahkan hubungi administrator ..!!");
+            lastError=e.getMessage()==null ? e.getClass().getSimpleName() : e.getMessage();
+            root=mapper.createObjectNode();
+            System.out.println("Orthanc AmbilJpg gagal : "+e.getClass().getSimpleName());
+            tampilkanPesan("Gagal mengambil Gambar JPG dari Orthanc, silahkan hubungi administrator ..!!");
         }
         return root;
     }
     
     public JsonNode AmbilBmp(String NoRawat,String Series){
-        System.out.println("Percobaan Mengambil Gambar BMP : "+NoRawat+", Series : "+Series);
+        lastError="";
+        root=mapper.createObjectNode();
         try{
             headers = new HttpHeaders();
-            System.out.println("Auth : "+authEncrypt);
             headers.add("Authorization", "Basic "+authEncrypt);
             requestEntity = new HttpEntity(headers);
-            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+Series);
             requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+Series, HttpMethod.GET, requestEntity, String.class).getBody();
-            System.out.println("Result JSON : "+requestJson);
             root = mapper.readTree(requestJson);
             i=1;
             for(JsonNode list:root.path("Instances")){
-                 System.out.println("Mengambil Gambar BMP "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/preview");
                  headers = new HttpHeaders();
                  headers.add("Authorization", "Basic "+authEncrypt);
                  headers.add("Accept","image/bmp");
@@ -229,28 +218,27 @@ public class ApiOrthanc {
                  Files.write(Paths.get("./gambarradiologi/"+NoRawat+i+".bmp"),response.getBody());
                  i++;
             }
-            JOptionPane.showMessageDialog(null,"Pengambilan Gambar BMP dari Orthanc berhasil, silahkan lihat di dalam folder Aplikasi..!!");
+            tampilkanPesan("Pengambilan Gambar BMP dari Orthanc berhasil, silahkan lihat di dalam folder Aplikasi..!!");
         }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-            JOptionPane.showMessageDialog(null,"Gagal mengambil Gambar BMP dari Orthanc, silahkan hubungi administrator ..!!");
+            lastError=e.getMessage()==null ? e.getClass().getSimpleName() : e.getMessage();
+            root=mapper.createObjectNode();
+            System.out.println("Orthanc AmbilBmp gagal : "+e.getClass().getSimpleName());
+            tampilkanPesan("Gagal mengambil Gambar BMP dari Orthanc, silahkan hubungi administrator ..!!");
         }
         return root;
     }
     
     public JsonNode AmbilDcm(String NoRawat,String Series){
-        System.out.println("Percobaan Mengambil Gambar DCM : "+NoRawat+", Series : "+Series);
+        lastError="";
+        root=mapper.createObjectNode();
         try{
             headers = new HttpHeaders();
-            System.out.println("Auth : "+authEncrypt);
             headers.add("Authorization", "Basic "+authEncrypt);
             requestEntity = new HttpEntity(headers);
-            System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+Series);
             requestJson=getRest().exchange(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/series/"+Series, HttpMethod.GET, requestEntity, String.class).getBody();
-            System.out.println("Result JSON : "+requestJson);
             root = mapper.readTree(requestJson);
             i=1;
             for(JsonNode list:root.path("Instances")){
-                 System.out.println("Mengambil Gambar DCM "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/instances/"+list.asText()+"/file");
                  headers = new HttpHeaders();
                  headers.add("Authorization", "Basic "+authEncrypt);
                  headers.setAccept(Collections.singletonList(MediaType.APPLICATION_OCTET_STREAM));
@@ -260,28 +248,25 @@ public class ApiOrthanc {
                  Files.write(Paths.get("./gambarradiologi/"+NoRawat+i+".dcm"),response.getBody());
                  i++;
             }
-            JOptionPane.showMessageDialog(null,"Pengambilan Gambar DCM dari Orthanc berhasil, silahkan lihat di dalam folder Aplikasi..!!");
+            tampilkanPesan("Pengambilan Gambar DCM dari Orthanc berhasil, silahkan lihat di dalam folder Aplikasi..!!");
         }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-            JOptionPane.showMessageDialog(null,"Gagal mengambil Gambar DCM dari Orthanc, silahkan hubungi administrator ..!!");
+            lastError=e.getMessage()==null ? e.getClass().getSimpleName() : e.getMessage();
+            root=mapper.createObjectNode();
+            System.out.println("Orthanc AmbilDcm gagal : "+e.getClass().getSimpleName());
+            tampilkanPesan("Gagal mengambil Gambar DCM dari Orthanc, silahkan hubungi administrator ..!!");
         }
         return root;
     }
     
-    public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
-        sslContext = SSLContext.getInstance("SSL");
-        TrustManager[] trustManagers= {
-            new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {return null;}
-                public void checkServerTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
-                public void checkClientTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
-            }
-        };
-        sslContext.init(null,trustManagers , new SecureRandom());
-        sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-        scheme=new Scheme("https",443,sslFactory);
-        factory=new HttpComponentsClientHttpRequestFactory();
-        factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
-        return new RestTemplate(factory);
+    public synchronized RestTemplate getRest(){
+        if(restTemplate==null){
+            factory=new HttpComponentsClientHttpRequestFactory();
+            org.apache.http.params.HttpConnectionParams.setConnectionTimeout(
+                factory.getHttpClient().getParams(),5000
+            );
+            factory.setReadTimeout(20000);
+            restTemplate=new RestTemplate(factory);
+        }
+        return restTemplate;
     }
 }
