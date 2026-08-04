@@ -341,16 +341,24 @@ public final class RMCariDiagnosa1 extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                    "select diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit,diagnosa_pasien.status "+
-                    "from diagnosa_pasien inner join penyakit "+
-                    "on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit where "+
-                    "diagnosa_pasien.no_rawat=? and diagnosa_pasien.kd_penyakit like ? or "+
-                    "diagnosa_pasien.no_rawat=? and penyakit.nm_penyakit like ? order by diagnosa_pasien.no_rawat ");
+//                    "select diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit,diagnosa_pasien.status "+
+//                    "from diagnosa_pasien inner join penyakit "+
+//                    "on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit where "+
+//                    "diagnosa_pasien.no_rawat=? and diagnosa_pasien.kd_penyakit like ? or "+
+//                    "diagnosa_pasien.no_rawat=? and penyakit.nm_penyakit like ? order by diagnosa_pasien.no_rawat ");
+                    "select "+
+                    "diagnosa_pasien.kd_penyakit,"+
+                    "penyakit.nm_penyakit,"+
+                    "diagnosa_pasien.status "+
+                    "from diagnosa_pasien "+
+                    "inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit "+
+                    "where "+
+                    "diagnosa_pasien.no_rawat=? ");
             try{
                 ps.setString(1,norawat);
-                ps.setString(2,"%"+TCari.getText().trim()+"%");
-                ps.setString(3,norawat);
-                ps.setString(4,"%"+TCari.getText().trim()+"%");
+//                ps.setString(2,"%"+TCari.getText().trim()+"%");
+//                ps.setString(3,norawat);
+//                ps.setString(4,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new String[] {
@@ -379,6 +387,7 @@ public final class RMCariDiagnosa1 extends javax.swing.JDialog {
     
     public void setNoRawat(String norawat){
         this.norawat=norawat;
+        TCari.setText(norawat);
     }
 
     public JTable getTable(){
