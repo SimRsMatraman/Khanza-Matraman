@@ -338,7 +338,7 @@
 					<font fontName="Tahoma" size="5" isBold="true" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Jenis & Nama Obat]]></text>
+				<text><![CDATA[Nama Obat]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="99" y="51" width="76" height="7" uuid="d55b112b-51d0-46c1-b5b8-5adde5665e40"/>
@@ -354,7 +354,7 @@
 					<font fontName="Tahoma" size="5" isBold="true" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Jml]]></text>
+				<text><![CDATA[Qty]]></text>
 			</staticText>
 			<line>
 				<reportElement x="13" y="58" width="175" height="1" uuid="b53a6116-ba7b-47e5-96e1-cb686042a91f">
@@ -432,7 +432,7 @@
 	<detail>
 		<band height="11" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement mode="Transparent" x="13" y="1" width="81" height="8" uuid="b94f7c44-3742-48d8-b751-bf008502fe96">
+				<reportElement mode="Transparent" x="13" y="1" width="85" height="8" uuid="b94f7c44-3742-48d8-b751-bf008502fe96">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
