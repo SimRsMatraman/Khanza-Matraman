@@ -407,7 +407,6 @@ public final class DlgIGD extends javax.swing.JDialog {
         
         ChkInput.setSelected(false);
         isForm(); 
-        initAutoRefresh();
         
 //        pasien.addWindowListener(new WindowListener() {
 //            @Override
@@ -6299,9 +6298,8 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
        if (ChkRefresh.isSelected()) {
            if (timerRefresh == null) {
                initAutoRefresh();
-           } else {
-               timerRefresh.restart();
            }
+           timerRefresh.restart();
        }
     }//GEN-LAST:event_formWindowOpened
 
@@ -10321,24 +10319,15 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 
     private void ChkRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkRefreshActionPerformed
         if (ChkRefresh.isSelected()) {
-            /*
-             * Refresh langsung ketika dicentang.
-             */
-            tampil();
+            if (isShowing()) {
+                tampil();
 
-            /*
-             * Jika dialog pernah di-dispose, timer sudah null.
-             * Buat kembali timer tersebut.
-             */
-            if (timerRefresh == null) {
-                initAutoRefresh();
-            } else {
+                if (timerRefresh == null) {
+                    initAutoRefresh();
+                }
                 timerRefresh.restart();
             }
         } else {
-            /*
-             * Saat checkbox tidak dipilih, hentikan timer.
-             */
             if (timerRefresh != null) {
                 timerRefresh.stop();
             }
@@ -11015,7 +11004,7 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
                 public void actionPerformed(
                         java.awt.event.ActionEvent evt
                 ) {
-                    if (!ChkRefresh.isSelected()) {
+                    if (!ChkRefresh.isSelected() || !isShowing()) {
                         return;
                     }
 
@@ -11024,7 +11013,7 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
                     try {
                         tampil();
                     } finally {
-                        if (ChkRefresh.isSelected()) {
+                        if (ChkRefresh.isSelected() && isShowing()) {
                             timerRefresh.restart();
                         }
                     }
@@ -11033,11 +11022,8 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
         );
 
         timerRefresh.setRepeats(false);
+        timerRefresh.setCoalesce(true);
         timerRefresh.setInitialDelay(60000);
-
-        if (ChkRefresh.isSelected()) {
-            timerRefresh.start();
-        }
     }
 
     private void jam(){

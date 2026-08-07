@@ -45,6 +45,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariDokter;
+import rekammedis.DlgInputTemplateRacikan;
+import rekammedis.MasterCariTemplateResep;
 import widget.Button;
 
 /**
@@ -167,11 +169,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 "Aturan Pakai","Keterangan"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = true;
-                if ((colIndex==0)||(colIndex==2)||(colIndex==3)) {
-                    a=false;
-                }
-                return a;
+                return false;
              }
              Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
@@ -209,6 +207,15 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
         warna2.kolom=4;
         tbObatResepRacikan.setDefaultRenderer(Object.class,warna2);
+        tbObatResepRacikan.getTableHeader().setReorderingAllowed(false);
+        tbObatResepRacikan.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if(evt.getClickCount()==2&&tbObatResepRacikan.getSelectedRow()>=0){
+                    bukaDialogResepRacikan(true);
+                }
+            }
+        });
         
         tabModeDetailResepRacikan=new DefaultTableModel(null,new Object[]{
                 "No","Kode Barang","Nama Barang","Satuan","Harga(Rp)","H.Beli",
@@ -216,11 +223,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 "Komposisi"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if ((colIndex==9)||(colIndex==11)||(colIndex==12)||(colIndex==13)) {
-                    a=true;
-                }
-                return a;
+                return false;
              }             
              Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
@@ -435,6 +438,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         LPpn = new widget.Label();
         jLabel6 = new widget.Label();
         TNoRM = new widget.TextBox();
+        BtnTambah = new widget.Button();
+        BtnSeek5 = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         panelisi3 = new widget.panelisi();
         label9 = new widget.Label();
@@ -443,8 +448,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         BtnAll = new widget.Button();
         label12 = new widget.Label();
         Jeniskelas = new widget.ComboBox();
-        BtnTambah = new widget.Button();
-        BtnSeek5 = new widget.Button();
+        BtnTemplateResep = new widget.Button();
         BtnTambah1 = new widget.Button();
         BtnHapus = new widget.Button();
         BtnSimpan = new widget.Button();
@@ -542,6 +546,33 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             }
         });
 
+        BtnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
+        BtnTambah.setMnemonic('3');
+        BtnTambah.setToolTipText("Alt+3");
+        BtnTambah.setName("BtnTambah"); // NOI18N
+        BtnTambah.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTambahActionPerformed(evt);
+            }
+        });
+
+        BtnSeek5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/011.png"))); // NOI18N
+        BtnSeek5.setMnemonic('4');
+        BtnSeek5.setToolTipText("Alt+4");
+        BtnSeek5.setName("BtnSeek5"); // NOI18N
+        BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnSeek5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSeek5ActionPerformed(evt);
+            }
+        });
+        BtnSeek5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnSeek5KeyPressed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -629,34 +660,18 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         });
         panelisi3.add(Jeniskelas);
 
-        BtnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
-        BtnTambah.setMnemonic('3');
-        BtnTambah.setToolTipText("Alt+3");
-        BtnTambah.setName("BtnTambah"); // NOI18N
-        BtnTambah.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnTambah.addActionListener(new java.awt.event.ActionListener() {
+        BtnTemplateResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
+        BtnTemplateResep.setMnemonic('3');
+        BtnTemplateResep.setText("Template Resep");
+        BtnTemplateResep.setToolTipText("Alt+3");
+        BtnTemplateResep.setName("BtnTemplateResep"); // NOI18N
+        BtnTemplateResep.setPreferredSize(new java.awt.Dimension(168, 23));
+        BtnTemplateResep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnTambahActionPerformed(evt);
+                BtnTemplateResepActionPerformed(evt);
             }
         });
-        panelisi3.add(BtnTambah);
-
-        BtnSeek5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/011.png"))); // NOI18N
-        BtnSeek5.setMnemonic('4');
-        BtnSeek5.setToolTipText("Alt+4");
-        BtnSeek5.setName("BtnSeek5"); // NOI18N
-        BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
-        BtnSeek5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnSeek5ActionPerformed(evt);
-            }
-        });
-        BtnSeek5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnSeek5KeyPressed(evt);
-            }
-        });
-        panelisi3.add(BtnSeek5);
+        panelisi3.add(BtnTemplateResep);
 
         BtnTambah1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
         BtnTambah1.setMnemonic('3');
@@ -791,7 +806,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "13-04-2026" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-08-2026" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -998,6 +1013,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
         tbResep.setComponentPopupMenu(Popup);
         tbResep.setName("tbResep"); // NOI18N
+        tbResep.getTableHeader().setReorderingAllowed(false);
         tbResep.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbResepMouseClicked(evt);
@@ -1028,6 +1044,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Scroll1.setPreferredSize(new java.awt.Dimension(454, 90));
 
         tbObatResepRacikan.setName("tbObatResepRacikan"); // NOI18N
+        tbObatResepRacikan.getTableHeader().setReorderingAllowed(false);
         tbObatResepRacikan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbObatResepRacikanKeyPressed(evt);
@@ -1045,6 +1062,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         tbDetailResepObatRacikan.setAutoCreateRowSorter(true);
         tbDetailResepObatRacikan.setComponentPopupMenu(Popup);
         tbDetailResepObatRacikan.setName("tbDetailResepObatRacikan"); // NOI18N
+        tbDetailResepObatRacikan.getTableHeader().setReorderingAllowed(false);
         tbDetailResepObatRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 tbDetailResepObatRacikanPropertyChange(evt);
@@ -1202,11 +1220,8 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             Valid.textKosong(KdDokter,"Dokter");
         }else if(NoResep.getText().trim().equals("")){
             Valid.textKosong(NoResep,"No.Resep");
-//        }else if(ttl<=0){
-//            JOptionPane.showMessageDialog(null,"Maaf, silahkan masukkan terlebih dahulu obat yang mau diberikan...!!!");
-//            TCari.requestFocus();
         }else{
-            int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+            int reply = JOptionPane.showConfirmDialog(rootPane,"Pastikan semua data sudah benar sebelum disimpan.","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {                 
                 ChkJln.setSelected(false);    
                 Sequel.AutoComitFalse();
@@ -1489,53 +1504,20 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void tbObatResepRacikanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatResepRacikanKeyPressed
-        if(tbObatResepRacikan.getRowCount()!=0){
-            i=tbObatResepRacikan.getSelectedColumn();
-            if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
-                if(i==5){
-                    akses.setform("DlgCariObat");
-                    aturanpakai.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-                    aturanpakai.setLocationRelativeTo(internalFrame1);
-                    aturanpakai.setVisible(true);
-                }else if(i==3){
-                    if(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),1).equals("")){
-                        JOptionPane.showMessageDialog(null,"Silahkan masukkan nama racikan..!!");
-                        tbObatResepRacikan.requestFocus();
-                    }else{
-                        metoderacik.isCek();
-                        metoderacik.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-                        metoderacik.setLocationRelativeTo(internalFrame1);
-                        metoderacik.setVisible(true);
-                    }
-                }
-            }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
-                if(i==6){
-                    TCari.requestFocus();
-                }
-            }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                if(i==6){
-                    tampildetailracikanresep();
-                }
-            }
+        if(tbObatResepRacikan.getSelectedRow()>=0&&
+                (evt.getKeyCode()==KeyEvent.VK_ENTER||evt.getKeyCode()==KeyEvent.VK_SPACE)){
+            bukaDialogResepRacikan(true);
+            evt.consume();
         }
     }//GEN-LAST:event_tbObatResepRacikanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),1).equals("")&&tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),4).equals("")&&tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),5).equals("")&&tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),6).equals("")){
-            tabModeResepRacikan.removeRow(tbObatResepRacikan.getSelectedRow());
-        }else{
-            JOptionPane.showMessageDialog(null,"Maaf sudah terisi, gak boleh dihapus..!!");
-        }
+        hapusRacikanResepTerpilih();
 
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnTambah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambah1ActionPerformed
-        i=tabModeResepRacikan.getRowCount()+1;
-        if(i==99){
-            JOptionPane.showMessageDialog(null,"Maksimal 98 Racikan..!!");
-        }else{
-            tabModeResepRacikan.addRow(new Object[]{""+i,"","","","","",""});
-        }
+        bukaDialogResepRacikan(false);
     }//GEN-LAST:event_BtnTambah1ActionPerformed
 
     private void tbDetailResepObatRacikanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDetailResepObatRacikanKeyPressed
@@ -1642,6 +1624,22 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         // TODO add your handling code here:
     }//GEN-LAST:event_SttsObatKeyPressed
 
+    private void BtnTemplateResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTemplateResepActionPerformed
+        if(KdDokter.getText().trim().equals("")){
+            Valid.textKosong(KdDokter,"Dokter");
+            return;
+        }
+        MasterCariTemplateResep template=new MasterCariTemplateResep(null,true);
+        template.setTemplateResepListener((String noTemplate) -> {
+            pakaiTemplateResep(noTemplate);
+        });
+        template.setDokter(KdDokter.getText());
+        template.isCek();
+        template.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+        template.setLocationRelativeTo(internalFrame1);
+        template.setVisible(true);
+    }//GEN-LAST:event_BtnTemplateResepActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1667,6 +1665,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private widget.Button BtnSimpan;
     private widget.Button BtnTambah;
     private widget.Button BtnTambah1;
+    private widget.Button BtnTemplateResep;
     private widget.CekBox ChkJln;
     private widget.CekBox ChkRM;
     private widget.Tanggal DTPBeri;
@@ -4070,6 +4069,365 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
     }
     
+    private void bukaDialogResepRacikan(boolean edit){
+        int barisEdit=edit?tbObatResepRacikan.getSelectedRow():-1;
+        boolean tambahLagi;
+        do{
+            int nomor=barisEdit>=0?
+                    (int)angkaTemplate(tabModeResepRacikan.getValueAt(barisEdit,0)):
+                    nomorRacikTemplateBerikut();
+            if(nomor>98){
+                JOptionPane.showMessageDialog(null,"Maksimal 98 racikan.");
+                return;
+            }
+
+            String cariSebelumnya=TCari.getText();
+            TCari.setText("");
+            tampilobat();
+            java.util.List<DlgInputTemplateRacikan.Detail> katalog=buatKatalogObatRacikan();
+            TCari.setText(cariSebelumnya);
+            if(katalog.isEmpty()){
+                JOptionPane.showMessageDialog(null,"Daftar obat pada depo aktif masih kosong.");
+                return;
+            }
+
+            String noRacik=String.valueOf(nomor);
+            DlgInputTemplateRacikan dialog=new DlgInputTemplateRacikan(null,true);
+            dialog.setJudulDialog(barisEdit>=0?"Edit Racikan Resep Dokter":"Tambah Racikan Resep Dokter");
+            dialog.setKatalogObat(katalog);
+            if(barisEdit>=0){
+                dialog.setData(
+                        noRacik,
+                        nilaiTemplate(tabModeResepRacikan,barisEdit,1),
+                        nilaiTemplate(tabModeResepRacikan,barisEdit,2),
+                        angkaTemplate(tabModeResepRacikan.getValueAt(barisEdit,4)),
+                        nilaiTemplate(tabModeResepRacikan,barisEdit,5),
+                        nilaiTemplate(tabModeResepRacikan,barisEdit,6),
+                        ambilDetailRacikanResep(noRacik));
+            }else{
+                dialog.setData(noRacik,"","",0,"","",new java.util.ArrayList<>());
+            }
+            dialog.setLocationRelativeTo(internalFrame1);
+            dialog.setVisible(true);
+            if(!dialog.isDisimpan()){
+                return;
+            }
+            simpanCacheRacikanResep(dialog,barisEdit);
+            tambahLagi=dialog.isTambahLagi();
+            barisEdit=-1;
+        }while(tambahLagi);
+        hitungResep();
+    }
+
+    private java.util.List<DlgInputTemplateRacikan.Detail> buatKatalogObatRacikan(){
+        java.util.Map<String,Double> kapasitasObat=new java.util.HashMap<>();
+        try(PreparedStatement pst=koneksi.prepareStatement(
+                "select kode_brng,kapasitas from databarang where status='1'");
+            ResultSet rst=pst.executeQuery()){
+            while(rst.next()){
+                kapasitasObat.put(rst.getString(1),rst.getDouble(2));
+            }
+        }catch(Exception e){
+            System.out.println("Notif Kapasitas Katalog Racikan : "+e);
+        }
+
+        java.util.List<DlgInputTemplateRacikan.Detail> katalog=new java.util.ArrayList<>();
+        for(int baris=0;baris<tabModeResep.getRowCount();baris++){
+            String kode=nilaiTemplate(tabModeResep,baris,3);
+            if(kode.isEmpty()){
+                continue;
+            }
+            DlgInputTemplateRacikan.Detail d=new DlgInputTemplateRacikan.Detail();
+            d.kodeBarang=kode;
+            d.namaBarang=nilaiTemplate(tabModeResep,baris,4);
+            d.satuan=nilaiTemplate(tabModeResep,baris,5);
+            d.komposisi=nilaiTemplate(tabModeResep,baris,6);
+            d.harga=angkaTemplate(tabModeResep.getValueAt(baris,7));
+            d.jenis=nilaiTemplate(tabModeResep,baris,8);
+            d.industri=nilaiTemplate(tabModeResep,baris,9);
+            d.hargaBeli=angkaTemplate(tabModeResep.getValueAt(baris,10));
+            d.stok=angkaTemplate(tabModeResep.getValueAt(baris,11));
+            d.kapasitas=kapasitasObat.containsKey(kode)?kapasitasObat.get(kode):0;
+            katalog.add(d);
+        }
+        return katalog;
+    }
+
+    private java.util.List<DlgInputTemplateRacikan.Detail> ambilDetailRacikanResep(String noRacik){
+        java.util.List<DlgInputTemplateRacikan.Detail> detail=new java.util.ArrayList<>();
+        for(int baris=0;baris<tabModeDetailResepRacikan.getRowCount();baris++){
+            if(noRacik.equals(nilaiTemplate(tabModeDetailResepRacikan,baris,0))){
+                DlgInputTemplateRacikan.Detail d=new DlgInputTemplateRacikan.Detail();
+                d.kodeBarang=nilaiTemplate(tabModeDetailResepRacikan,baris,1);
+                d.namaBarang=nilaiTemplate(tabModeDetailResepRacikan,baris,2);
+                d.satuan=nilaiTemplate(tabModeDetailResepRacikan,baris,3);
+                d.harga=angkaTemplate(tabModeDetailResepRacikan.getValueAt(baris,4));
+                d.hargaBeli=angkaTemplate(tabModeDetailResepRacikan.getValueAt(baris,5));
+                d.jenis=nilaiTemplate(tabModeDetailResepRacikan,baris,6);
+                d.stok=angkaTemplate(tabModeDetailResepRacikan.getValueAt(baris,7));
+                d.kapasitas=angkaTemplate(tabModeDetailResepRacikan.getValueAt(baris,8));
+                d.p1=angkaTemplate(tabModeDetailResepRacikan.getValueAt(baris,9));
+                d.p2=angkaTemplate(tabModeDetailResepRacikan.getValueAt(baris,11));
+                d.kandungan=angkaTemplate(tabModeDetailResepRacikan.getValueAt(baris,12));
+                d.jumlah=angkaTemplate(tabModeDetailResepRacikan.getValueAt(baris,13));
+                d.industri=nilaiTemplate(tabModeDetailResepRacikan,baris,14);
+                d.komposisi=nilaiTemplate(tabModeDetailResepRacikan,baris,15);
+                detail.add(d);
+            }
+        }
+        return detail;
+    }
+
+    private void simpanCacheRacikanResep(DlgInputTemplateRacikan dialog,int barisEdit){
+        String noRacik=dialog.getNoRacik();
+        Object[] header=new Object[]{
+            noRacik,dialog.getNamaRacik(),dialog.getKodeMetode(),dialog.getNamaMetode(),
+            dialog.getJumlahRacik(),dialog.getAturanPakai(),dialog.getKeterangan()
+        };
+        if(barisEdit>=0){
+            for(int kolom=0;kolom<header.length;kolom++){
+                tabModeResepRacikan.setValueAt(header[kolom],barisEdit,kolom);
+            }
+        }else{
+            tabModeResepRacikan.addRow(header);
+            barisEdit=tabModeResepRacikan.getRowCount()-1;
+        }
+        for(int baris=tabModeDetailResepRacikan.getRowCount()-1;baris>=0;baris--){
+            if(noRacik.equals(nilaiTemplate(tabModeDetailResepRacikan,baris,0))){
+                tabModeDetailResepRacikan.removeRow(baris);
+            }
+        }
+        for(DlgInputTemplateRacikan.Detail d:dialog.getDetail()){
+            tabModeDetailResepRacikan.addRow(new Object[]{
+                noRacik,d.kodeBarang,d.namaBarang,d.satuan,d.harga,d.hargaBeli,d.jenis,d.stok,
+                d.kapasitas,d.p1,"/",d.p2,d.kandungan,d.jumlah,d.industri,d.komposisi
+            });
+        }
+        tbObatResepRacikan.setRowSelectionInterval(barisEdit,barisEdit);
+    }
+
+    private void hapusRacikanResepTerpilih(){
+        int baris=tbObatResepRacikan.getSelectedRow();
+        if(baris<0){
+            JOptionPane.showMessageDialog(null,"Pilih racikan yang akan dihapus.");
+            return;
+        }
+        String noRacik=nilaiTemplate(tabModeResepRacikan,baris,0);
+        if(JOptionPane.showConfirmDialog(null,"Hapus racikan "+nilaiTemplate(tabModeResepRacikan,baris,1)+"?",
+                "Konfirmasi",JOptionPane.YES_NO_OPTION)!=JOptionPane.YES_OPTION){
+            return;
+        }
+        tabModeResepRacikan.removeRow(baris);
+        for(int i=tabModeDetailResepRacikan.getRowCount()-1;i>=0;i--){
+            if(noRacik.equals(nilaiTemplate(tabModeDetailResepRacikan,i,0))){
+                tabModeDetailResepRacikan.removeRow(i);
+            }
+        }
+        hitungResep();
+    }
+
+    private void pakaiTemplateResep(String noTemplate) {
+        boolean adaDraft=adaDraftResep();
+        boolean tambah=false;
+        if(adaDraft){
+            Object[] pilihan={"Ganti Resep","Tambahkan","Batal"};
+            int jawab=JOptionPane.showOptionDialog(
+                null,
+                "Form resep sudah berisi obat. Bagaimana template akan digunakan?",
+                "Gunakan Template Resep",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                pilihan,
+                pilihan[0]
+            );
+            if(jawab==2||jawab==JOptionPane.CLOSED_OPTION){
+                return;
+            }
+            tambah=jawab==1;
+        }
+
+        if(!tambah){
+            bersihkanDraftTemplate();
+        }
+
+        int nonRacikMasuk=0;
+        int racikMasuk=0;
+        int obatDilewati=0;
+        PreparedStatement pst=null;
+        ResultSet rst=null;
+        try{
+            pst=koneksi.prepareStatement(
+                "select kode_brng,jml,aturan_pakai from template_resep_dokter_detail "+
+                "where no_template=? order by kode_brng"
+            );
+            pst.setString(1,noTemplate);
+            rst=pst.executeQuery();
+            while(rst.next()){
+                int baris=cariBarangTemplate(rst.getString("kode_brng"));
+                if(baris>=0){
+                    double jumlahTemplate=rst.getDouble("jml");
+                    if(tambah){
+                        jumlahTemplate+=angkaTemplate(tabModeResep.getValueAt(baris,1));
+                    }
+                    tabModeResep.setValueAt(jumlahTemplate,baris,1);
+                    tabModeResep.setValueAt(rst.getString("aturan_pakai"),baris,2);
+                    nonRacikMasuk++;
+                }else{
+                    obatDilewati++;
+                }
+            }
+            rst.close();
+            pst.close();
+            rst=null;
+            pst=null;
+
+            java.util.Map<String,String> nomorRacik=new java.util.LinkedHashMap<>();
+            pst=koneksi.prepareStatement(
+                "select r.no_racik,r.nama_racik,r.kd_racik,m.nm_racik,r.jml_dr,"+
+                "r.aturan_pakai,r.keterangan "+
+                "from template_resep_dokter_racikan r "+
+                "left join metode_racik m on m.kd_racik=r.kd_racik "+
+                "where r.no_template=? order by cast(r.no_racik as unsigned)"
+            );
+            pst.setString(1,noTemplate);
+            rst=pst.executeQuery();
+            int nomorBerikut=nomorRacikTemplateBerikut();
+            while(rst.next()){
+                String nomorBaru=String.valueOf(nomorBerikut++);
+                nomorRacik.put(rst.getString("no_racik"),nomorBaru);
+                tabModeResepRacikan.addRow(new Object[]{
+                    nomorBaru,
+                    rst.getString("nama_racik"),
+                    rst.getString("kd_racik"),
+                    rst.getString("nm_racik"),
+                    rst.getDouble("jml_dr"),
+                    rst.getString("aturan_pakai"),
+                    rst.getString("keterangan")
+                });
+                racikMasuk++;
+            }
+            rst.close();
+            pst.close();
+            rst=null;
+            pst=null;
+
+            pst=koneksi.prepareStatement(
+                "select x.no_racik,x.kode_brng,x.p1,x.p2,x.kandungan,x.jml,b.kapasitas "+
+                "from template_resep_dokter_racikan_detail x "+
+                "inner join databarang b on b.kode_brng=x.kode_brng "+
+                "where x.no_template=? order by cast(x.no_racik as unsigned),x.kode_brng"
+            );
+            pst.setString(1,noTemplate);
+            rst=pst.executeQuery();
+            while(rst.next()){
+                String nomorBaru=nomorRacik.get(rst.getString("no_racik"));
+                int baris=cariBarangTemplate(rst.getString("kode_brng"));
+                if(nomorBaru!=null&&baris>=0){
+                    tabModeDetailResepRacikan.addRow(new Object[]{
+                        nomorBaru,
+                        nilaiTemplate(tabModeResep,baris,3),
+                        nilaiTemplate(tabModeResep,baris,4),
+                        nilaiTemplate(tabModeResep,baris,5),
+                        angkaTemplate(tabModeResep.getValueAt(baris,7)),
+                        angkaTemplate(tabModeResep.getValueAt(baris,10)),
+                        nilaiTemplate(tabModeResep,baris,8),
+                        angkaTemplate(tabModeResep.getValueAt(baris,11)),
+                        rst.getDouble("kapasitas"),
+                        rst.getDouble("p1"),
+                        "/",
+                        rst.getDouble("p2"),
+                        rst.getDouble("kandungan"),
+                        rst.getDouble("jml"),
+                        nilaiTemplate(tabModeResep,baris,9),
+                        nilaiTemplate(tabModeResep,baris,6)
+                    });
+                }else{
+                    obatDilewati++;
+                }
+            }
+
+            TabRawat.setSelectedIndex(0);
+            BtnCariActionPerformed(null);
+            hitungResep();
+            String pesan="Template berhasil dimasukkan: "+nonRacikMasuk+
+                    " obat nonracik dan "+racikMasuk+" racikan.";
+            if(obatDilewati>0){
+                pesan+="\n"+obatDilewati+
+                        " obat dilewati karena tidak tersedia pada depo/daftar obat saat ini.";
+            }
+            JOptionPane.showMessageDialog(null,pesan);
+        }catch(Exception e){
+            System.out.println("Notif Pakai Template Resep : "+e);
+            JOptionPane.showMessageDialog(null,"Gagal menggunakan template resep: "+e.getMessage());
+        }finally{
+            try{
+                if(rst!=null){
+                    rst.close();
+                }
+            }catch(Exception e){}
+            try{
+                if(pst!=null){
+                    pst.close();
+                }
+            }catch(Exception e){}
+        }
+    }
+
+    private boolean adaDraftResep(){
+        for(int baris=0;baris<tabModeResep.getRowCount();baris++){
+            if(angkaTemplate(tabModeResep.getValueAt(baris,1))>0){
+                return true;
+            }
+        }
+        return tabModeResepRacikan.getRowCount()>0;
+    }
+
+    private void bersihkanDraftTemplate(){
+        for(int baris=0;baris<tabModeResep.getRowCount();baris++){
+            tabModeResep.setValueAt(false,baris,0);
+            tabModeResep.setValueAt("",baris,1);
+            tabModeResep.setValueAt("",baris,2);
+        }
+        Valid.tabelKosong(tabModeResepRacikan);
+        Valid.tabelKosong(tabModeDetailResepRacikan);
+    }
+
+    private int cariBarangTemplate(String kodeBarang){
+        for(int baris=0;baris<tabModeResep.getRowCount();baris++){
+            if(kodeBarang.equals(nilaiTemplate(tabModeResep,baris,3))){
+                return baris;
+            }
+        }
+        return -1;
+    }
+
+    private int nomorRacikTemplateBerikut(){
+        int terbesar=0;
+        for(int baris=0;baris<tabModeResepRacikan.getRowCount();baris++){
+            try{
+                terbesar=Math.max(
+                    terbesar,
+                    Integer.parseInt(nilaiTemplate(tabModeResepRacikan,baris,0))
+                );
+            }catch(Exception e){}
+        }
+        return terbesar+1;
+    }
+
+    private String nilaiTemplate(DefaultTableModel model,int baris,int kolom){
+        Object nilai=model.getValueAt(baris,kolom);
+        return nilai==null?"":nilai.toString();
+    }
+
+    private double angkaTemplate(Object nilai){
+        try{
+            return Double.parseDouble(nilai==null?"0":nilai.toString());
+        }catch(Exception e){
+            return 0;
+        }
+    }
+
     private void hitungResep() {
         ttl=0;
         y=0;
