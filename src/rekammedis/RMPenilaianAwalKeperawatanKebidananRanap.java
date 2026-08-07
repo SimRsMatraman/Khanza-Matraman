@@ -4697,6 +4697,10 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
             Valid.textKosong(Masalah,"Masalah Kebidanan");
         }else if(Tindakan.getText().trim().equals("")){
             Valid.textKosong(Tindakan,"Tindakan");
+        }else if(KeteranganDiagnosaKhususGizi.getText().trim().equals("")){
+            Valid.textKosong(KeteranganDiagnosaKhususGizi,"skrining_gizi_ket_diagnosa_khusus");
+        }else if(KeteranganDiketahuiDietisen.getText().trim().equals("")){
+            Valid.textKosong(KeteranganDiketahuiDietisen,"skrining_gizi_jam_diketahui_dietisen");
         }else{
             if(Sequel.menyimpantf("penilaian_awal_keperawatan_kebidanan_ranap","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",162,new String[]{
                     TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),Anamnesis.getSelectedItem().toString(),TibadiRuang.getSelectedItem().toString(),CaraMasuk.getSelectedItem().toString(),KeluhanUtama.getText(),RPK.getText(),PSK.getText(),RBedah.getText(),Alergi.getText(),KomplikasiKehamilan.getSelectedItem().toString(),KeteranganKomplikasiKehamilan.getText(),
@@ -7375,7 +7379,7 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
         RPK.setText("");
         PSK.setText("");
         RBedah.setText("");
-        Alergi.setText("");
+        Alergi.setText("-");
         KomplikasiKehamilan.setSelectedIndex(0);
         KeteranganKomplikasiKehamilan.setText("");
         UmurMinarche.setText("");
