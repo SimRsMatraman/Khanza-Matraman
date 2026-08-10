@@ -569,6 +569,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkKonselingFarmasi = new widget.CekBox();
         chkPelayananInformasiObat = new widget.CekBox();
         chkTransferAntarRuang = new widget.CekBox();
+        chkTransferPasienKamarOperasi = new widget.CekBox();
         chkAsuhanTambahanGeriatri = new widget.CekBox();
         chkAsuhanTambahanBunuhDiri = new widget.CekBox();
         chkAsuhanTambahanPerilakuKekerasan = new widget.CekBox();
@@ -593,6 +594,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkOperasiAlternatif = new widget.CekBox();
         chkDataIC = new widget.CekBox();
         chkJadwalPemberianObatRanap = new widget.CekBox();
+        chkDaftarPemberianTerapiCairan = new widget.CekBox();
         RiwayatLab = new widget.InternalFrame();
         Scroll6 = new widget.ScrollPane();
         LoadHTMLRiwayatRadLab = new widget.editorpane();
@@ -1695,6 +1697,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkTransferAntarRuang.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkTransferAntarRuang);
 
+        chkTransferPasienKamarOperasi.setSelected(true);
+        chkTransferPasienKamarOperasi.setText("Transfer Pasien Kamar Operasi");
+        chkTransferPasienKamarOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkTransferPasienKamarOperasi.setName("chkTransferPasienKamarOperasi"); // NOI18N
+        chkTransferPasienKamarOperasi.setOpaque(false);
+        chkTransferPasienKamarOperasi.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkTransferPasienKamarOperasi);
+
         chkAsuhanTambahanGeriatri.setSelected(true);
         chkAsuhanTambahanGeriatri.setText("Tambahan Pasien Geriatri");
         chkAsuhanTambahanGeriatri.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1922,6 +1932,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
         });
         FormMenu.add(chkJadwalPemberianObatRanap);
+
+        chkDaftarPemberianTerapiCairan.setSelected(true);
+        chkDaftarPemberianTerapiCairan.setText("Daftar Pemberian Terapi Cairan / Infus");
+        chkDaftarPemberianTerapiCairan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkDaftarPemberianTerapiCairan.setName("chkDaftarPemberianTerapiCairan"); // NOI18N
+        chkDaftarPemberianTerapiCairan.setOpaque(false);
+        chkDaftarPemberianTerapiCairan.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkDaftarPemberianTerapiCairan);
 
         ScrollMenu.setViewportView(FormMenu);
 
@@ -2570,6 +2588,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkKonselingFarmasi.setSelected(true);
             chkPelayananInformasiObat.setSelected(true);
             chkTransferAntarRuang.setSelected(true);
+            chkTransferPasienKamarOperasi.setSelected(true);
             chkCatatanCekGDS.setSelected(true);
             chkChecklistPreOperasi.setSelected(true);
             chkSignInSebelumAnestesi.setSelected(true);
@@ -2602,6 +2621,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkAsuhanKepOK.setSelected(true);
             chkDataIC.setSelected(true);
             chkJadwalPemberianObatRanap.setSelected(true);
+            chkDaftarPemberianTerapiCairan.setSelected(true);
         }else{
             chkTriase.setSelected(false);
             chkSkriningIGD.setSelected(false);
@@ -2688,6 +2708,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkKonselingFarmasi.setSelected(false);
             chkPelayananInformasiObat.setSelected(false);
             chkTransferAntarRuang.setSelected(false);
+            chkTransferPasienKamarOperasi.setSelected(false);
             chkCatatanCekGDS.setSelected(false);
             chkChecklistPreOperasi.setSelected(false);
             chkSignInSebelumAnestesi.setSelected(false);
@@ -2720,6 +2741,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkAsuhanKepOK.setSelected(false);
             chkDataIC.setSelected(false);
             chkJadwalPemberianObatRanap.setSelected(false);
+            chkDaftarPemberianTerapiCairan.setSelected(false);
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 
@@ -2954,6 +2976,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkHemodialisa;
     private widget.CekBox chkImplementasiKepRanap;
     private widget.CekBox chkJadwalPemberianObatRanap;
+    private widget.CekBox chkDaftarPemberianTerapiCairan;
     private widget.CekBox chkKonselingFarmasi;
     private widget.CekBox chkKonsultasiMedik;
     private widget.CekBox chkMonitoringGizi;
@@ -3013,6 +3036,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkTindakanRanapDokterParamedis;
     private widget.CekBox chkTindakanRanapParamedis;
     private widget.CekBox chkTransferAntarRuang;
+    private widget.CekBox chkTransferPasienKamarOperasi;
     private widget.CekBox chkTriase;
     private widget.CekBox chkUjiFungsiKFR;
     private widget.InternalFrame internalFrame1;
@@ -4239,6 +4263,8 @@ menampilkanEdukasiPasienTerintegrasi(rs.getString("no_rawat"));
                     menampilkanPelayananInformasiObat(rs.getString("no_rawat"));
                     //menampilkan konseling farmasi
                     menampilkanTransferAntarRuang(rs.getString("no_rawat"));
+                    //menampilkan transfer pasien kamar operasi
+                    menampilkanTransferPasienKamarOperasi(rs.getString("no_rawat"));
                     //menampilkan diagnosa penyakit
                     menampilkanDiagnosa(rs.getString("no_rawat"));
                     //menampilkan berkas digital
@@ -5503,6 +5529,9 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
         }
     }
 }
+
+                    //menampilkan daftar pemberian terapi cairan / infus
+                    menampilkanDaftarPemberianTerapiCairan(rs.getString("no_rawat"));
                     
                     //menampilkan penggunaan obat operasi
                     if(chkPenggunaanObatOperasi.isSelected()==true){
@@ -19375,6 +19404,150 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
         }
     }
     
+    private String fieldTransferOK(ResultSet data,String daftarField) throws SQLException {
+        StringBuilder hasil=new StringBuilder();
+        for(String field:daftarField.split(",")){
+            String namaField=field.trim();
+            String nilai=data.getString(namaField);
+            hasil.append("<span style='display:inline-block;margin:2px 14px 2px 0'><b>")
+                 .append(namaField.replace('_',' ')).append(":</b> ")
+                 .append(nilai==null?"":nilai).append("</span>");
+        }
+        return hasil.toString();
+    }
+
+    private String cekTransferOK(ResultSet data,String field,String label) throws SQLException {
+        String nilai=data.getString(field);
+        boolean dipilih=nilai!=null&&!nilai.trim().equals("")&&!nilai.equals("0")&&!nilai.equalsIgnoreCase("tidak")&&!nilai.equalsIgnoreCase("false")&&!nilai.equals("-");
+        return (dipilih?"&#9745; ":"&#9744; ")+label;
+    }
+
+    private String nilaiTransferOK(ResultSet data,String field) throws SQLException {
+        String nilai=data.getString(field);
+        return nilai==null?"":nilai;
+    }
+
+    private void menampilkanTransferPasienKamarOperasi(String norawat) {
+        if(!chkTransferPasienKamarOperasi.isSelected()){
+            return;
+        }
+        PreparedStatement psTransferOK=null;
+        try {
+            psTransferOK=koneksi.prepareStatement(
+                "select a.*,coalesce(po.nm_dokter,'') as nama_operator,coalesce(pa.nm_dokter,'') as nama_anastesi,"+
+                "coalesce(pm.nama,'') as nama_menyerahkan,coalesce(pr.nama,'') as nama_menerima,"+
+                "coalesce(pm1.nama,'') as nama_menyerahkan1,coalesce(pr1.nama,'') as nama_menerima1,"+
+                "coalesce(pl.nm_poli,b.nm_bangsal,a.asal_ruang) as nama_asal_ruang "+
+                "from transfer_pasien_ok a left join dokter po on po.kd_dokter=a.kd_operator "+
+                "left join dokter pa on pa.kd_dokter=a.kd_anastesi left join petugas pm on pm.nip=a.nip_menyerahkan "+
+                "left join petugas pr on pr.nip=a.nip_menerima left join petugas pm1 on pm1.nip=a.nip_menyerahkan1 "+
+                "left join petugas pr1 on pr1.nip=a.nip_menerima1 left join poliklinik pl on pl.kd_poli=a.asal_ruang "+
+                "left join kamar k on k.kd_kamar=a.asal_ruang left join bangsal b on b.kd_bangsal=k.kd_bangsal "+
+                "where a.no_rawat=? order by a.tanggal_masuk,a.tanggal_keluar");
+            psTransferOK.setString(1,norawat);
+            rs2=psTransferOK.executeQuery();
+            if(rs2.next()){
+                htmlContent.append(
+                    "<tr class='isi'><td valign='top' width='2%'></td><td valign='top' width='18%'>Transfer Pasien Kamar Operasi</td>"+
+                    "<td valign='top' width='1%' align='center'>:</td><td valign='top' width='79%'>"+
+                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                );
+                rs2.beforeFirst();
+                int nomor=1;
+                while(rs2.next()){
+                    htmlContent.append(
+                        "<tr><td bgcolor='#FFFAF8'><b>Transfer "+(nomor++)+"</b> &nbsp; <b>Masuk:</b> "+rs2.getString("tanggal_masuk")+
+                        " &nbsp; <b>Keluar:</b> "+rs2.getString("tanggal_keluar")+" &nbsp; <b>Asal Ruang:</b> "+rs2.getString("asal_ruang")+
+                        " "+rs2.getString("nama_asal_ruang")+" &nbsp; <b>Status:</b> "+rs2.getString("stts")+"</td></tr>"+
+                        "<tr><td><b>Identitas Operasi</b><br>"+
+                        fieldTransferOK(rs2,"diagnosa_pre,diagnosa_post,rencana")+
+                        "<br><b>Operator:</b> "+rs2.getString("kd_operator")+" "+rs2.getString("nama_operator")+
+                        " &nbsp; <b>Anastesi:</b> "+rs2.getString("kd_anastesi")+" "+rs2.getString("nama_anastesi")+"</td></tr>"+
+                        "<tr><td><b>SERAH TERIMA DARI RUANGAN KE KAMAR OPERASI</b>"+
+                        "<table width='100%' border='0' cellpadding='4px' cellspacing='0' class='tbl_form'><tr>"+
+                        "<td width='50%' valign='top'><b>1. Status Pasien / Kelengkapan Pasien</b><br>"+
+                        cekTransferOK(rs2,"izin_op","Izin Operasi")+"<br><br><b>Pemeriksaan Penunjang:</b><br>"+
+                        cekTransferOK(rs2,"lab","Laboratorium")+" &nbsp; "+cekTransferOK(rs2,"dpl","DPL")+" &nbsp; "+cekTransferOK(rs2,"gds","GDS")+" &nbsp; "+cekTransferOK(rs2,"btct","BT / CT")+" &nbsp; "+cekTransferOK(rs2,"uc","UC")+"<br>"+
+                        cekTransferOK(rs2,"sgot","SGPT/SGOT")+" &nbsp; <b>Lainnya:</b> "+nilaiTransferOK(rs2,"lab_lainnya")+"<br>"+
+                        cekTransferOK(rs2,"rontgen","Rontgen")+"; &nbsp; "+cekTransferOK(rs2,"rontgen_thorax","Thorax")+" &nbsp; "+cekTransferOK(rs2,"rontgen_kepala","Kepala")+" &nbsp; "+cekTransferOK(rs2,"rontgen_ivp","IVP")+"<br>"+
+                        cekTransferOK(rs2,"rontgen_bno","BNO")+" &nbsp; <b>Lainnya:</b> "+nilaiTransferOK(rs2,"bno_lainnya")+"<br>"+
+                        cekTransferOK(rs2,"ekg","EKG")+"; &nbsp; <b>Tanggal:</b> "+nilaiTransferOK(rs2,"tanggal_ekg")+"<br>"+
+                        cekTransferOK(rs2,"usg","USG")+"; &nbsp; "+cekTransferOK(rs2,"usg_abdomen","Abdomen")+" &nbsp; "+cekTransferOK(rs2,"usg_ginjal","Ginjal")+" &nbsp; "+cekTransferOK(rs2,"usg_haper","Hepar")+" &nbsp; "+cekTransferOK(rs2,"usg_thorax","Thorax")+"<br>"+
+                        "<b>Lainnya:</b> "+nilaiTransferOK(rs2,"usg_lainnya")+"<br>"+
+                        cekTransferOK(rs2,"ctscan","CT Scan")+"; &nbsp; "+cekTransferOK(rs2,"ct_kepala","Kepala")+" &nbsp; "+cekTransferOK(rs2,"ct_abdomen","Abdomen")+" &nbsp; "+cekTransferOK(rs2,"ct_thorax","Thorax")+"<br>"+
+                        cekTransferOK(rs2,"mri","MRI")+" &nbsp; <b>Lainnya:</b> "+nilaiTransferOK(rs2,"mri_lainnya")+"<br><br>"+
+                        "<b>2. Terapi yang Diberikan Sebelum Operasi</b><br>"+
+                        cekTransferOK(rs2,"antibiotik","Antibiotik")+": "+nilaiTransferOK(rs2,"antibiotik_lainnya")+" &nbsp; "+nilaiTransferOK(rs2,"tanggal_antibiotik")+"<br>"+
+                        cekTransferOK(rs2,"transfusi","Transfusi")+": "+nilaiTransferOK(rs2,"transfusi_lainnya")+" &nbsp; "+nilaiTransferOK(rs2,"tanggal_transfusi")+"<br>"+
+                        "<b>Lainnya:</b> "+nilaiTransferOK(rs2,"terapi_sebelum_lainnya")+"</td>"+
+                        "<td width='50%' valign='top'><b>3. Keadaan Umum Pasien</b><br>"+
+                        cekTransferOK(rs2,"kesadaran","Kesadaran")+"<br>"+cekTransferOK(rs2,"observasi","Observasi")+" &nbsp; TD: "+nilaiTransferOK(rs2,"td")+" &nbsp; Nd: "+nilaiTransferOK(rs2,"nd")+" &nbsp; Sh: "+nilaiTransferOK(rs2,"sh")+"<br>"+
+                        cekTransferOK(rs2,"puasa","Puasa, Mulai jam")+": "+nilaiTransferOK(rs2,"jam_puasa")+"<br>"+
+                        cekTransferOK(rs2,"klisma","Klisma, Jam")+": "+nilaiTransferOK(rs2,"jam_klisma")+"<br>"+
+                        cekTransferOK(rs2,"cukur","Cukur daerah operasi")+"<br>"+
+                        cekTransferOK(rs2,"luka_sebelum_op","Luka sebelum operasi")+": "+nilaiTransferOK(rs2,"luka_sebelum_op_lainnya")+"<br>"+
+                        cekTransferOK(rs2,"mens","Menstruasi terakhir")+": "+nilaiTransferOK(rs2,"tanggal_mens")+"<br>"+
+                        "IUFD: "+nilaiTransferOK(rs2,"iufd")+"<br>DC, Balon: "+nilaiTransferOK(rs2,"dc_balon")+" &nbsp; cc Vol: "+nilaiTransferOK(rs2,"dc_vol")+" &nbsp; cc Warna: "+nilaiTransferOK(rs2,"dv_warna")+"<br>"+
+                        "Lainnya: "+nilaiTransferOK(rs2,"dc_lainnya")+"<br><br>"+
+                        "<b>4. Alkes yang Diserahkan di Kamar Operasi</b><br>"+nilaiTransferOK(rs2,"alkes")+"<br><br>"+
+                        "<b>5. Kesiapan Pasien</b><br>"+
+                        cekTransferOK(rs2,"ganti_baju","Ganti Baju Kamar Operasi")+" &nbsp; "+cekTransferOK(rs2,"gigi_palsu","Gigi Palsu")+"<br>"+
+                        cekTransferOK(rs2,"alat_bantu_dengar","Alat Bantu Dengar")+" &nbsp; "+cekTransferOK(rs2,"perhiasan","Perhiasan")+"<br>"+
+                        cekTransferOK(rs2,"pengembalian","Pengembalian ke Keluarga dengan Tanda Terima")+"</td>"+
+                        "</tr></table></td></tr>"+
+                        "<tr><td><b>Serah Terima ke Kamar Operasi</b><br><b>Menyerahkan:</b> "+rs2.getString("nip_menyerahkan")+" "+rs2.getString("nama_menyerahkan")+
+                        " &nbsp; <b>Menerima:</b> "+rs2.getString("nip_menerima")+" "+rs2.getString("nama_menerima")+
+                        "<br><b>TTD Menyerahkan:</b> "+nilaiTransferOK(rs2,"ttd_menyerahkan")+" &nbsp; <b>TTD Menerima:</b> "+nilaiTransferOK(rs2,"ttd_menerima")+"</td></tr>"+
+                        "<tr><td><b>SERAH TERIMA DARI KAMAR OPERASI KE RUANGAN</b>"+
+                        "<table width='100%' border='0' cellpadding='4px' cellspacing='0' class='tbl_form'><tr>"+
+                        "<td width='50%' valign='top'><b>1. Status Pasien / Kelengkapan Pasien</b><br>"+
+                        cekTransferOK(rs2,"laporan_op","Laporan Operasi")+" &nbsp; "+cekTransferOK(rs2,"laporan_anastesi","Laporan Anastesi")+"<br>"+
+                        cekTransferOK(rs2,"laporan_pa","Laporan PA")+" &nbsp; "+cekTransferOK(rs2,"laporan_to","Laporan Time Out")+"<br>"+
+                        cekTransferOK(rs2,"sample_pa","Sample PA")+"<br><br>"+
+                        cekTransferOK(rs2,"lab1","Laboratorium")+" &nbsp; "+cekTransferOK(rs2,"dpl1","DPL")+" &nbsp; "+cekTransferOK(rs2,"gds1","GDS")+" &nbsp; "+cekTransferOK(rs2,"btct1","BT / CT")+" &nbsp; "+cekTransferOK(rs2,"uc1","UC")+"<br>"+
+                        cekTransferOK(rs2,"sgot1","SGPT/SGOT")+" &nbsp; <b>Lainnya:</b> "+nilaiTransferOK(rs2,"lab_lainnya1")+"<br>"+
+                        cekTransferOK(rs2,"rontgen1","Rontgen")+"; &nbsp; "+cekTransferOK(rs2,"rontgen_thorax1","Thorax")+" &nbsp; "+cekTransferOK(rs2,"rontgen_kepala1","Kepala")+" &nbsp; "+cekTransferOK(rs2,"rontgen_ivp1","IVP")+"<br>"+
+                        cekTransferOK(rs2,"rontgen_bno1","BNO")+" &nbsp; <b>Lainnya:</b> "+nilaiTransferOK(rs2,"bno_lainnya1")+"<br>"+
+                        cekTransferOK(rs2,"ekg1","EKG")+"; &nbsp; <b>Tanggal:</b> "+nilaiTransferOK(rs2,"tanggal_ekg1")+"<br>"+
+                        cekTransferOK(rs2,"usg1","USG")+"; &nbsp; "+cekTransferOK(rs2,"usg_abdomen1","Abdomen")+" &nbsp; "+cekTransferOK(rs2,"usg_ginjal1","Ginjal")+" &nbsp; "+cekTransferOK(rs2,"usg_haper1","Hepar")+" &nbsp; "+cekTransferOK(rs2,"usg_thorax1","Thorax")+"<br>"+
+                        "<b>Lainnya:</b> "+nilaiTransferOK(rs2,"usg_lainnya1")+"<br>"+
+                        cekTransferOK(rs2,"ctscan1","CT Scan")+"; &nbsp; "+cekTransferOK(rs2,"ct_kepala1","Kepala")+" &nbsp; "+cekTransferOK(rs2,"ct_abdomen1","Abdomen")+" &nbsp; "+cekTransferOK(rs2,"ct_thorax1","Thorax")+"<br>"+
+                        cekTransferOK(rs2,"mri1","MRI")+" &nbsp; <b>Lainnya:</b> "+nilaiTransferOK(rs2,"mri_lainnya1")+"<br><br>"+
+                        "<b>2. Terapi yang Diberikan Setelah Operasi</b><br>"+
+                        "Obat-obatan: "+nilaiTransferOK(rs2,"obat")+"<br>Resep Post Operasi: "+nilaiTransferOK(rs2,"resep_post")+"<br>"+
+                        "Transfusi Masuk: "+nilaiTransferOK(rs2,"Transfusi_masuk")+"<br>Lainnya: "+nilaiTransferOK(rs2,"terapi_sebelum_lainnya1")+"</td>"+
+                        "<td width='50%' valign='top'><b>3. Keadaan Umum Pasien</b><br>"+
+                        cekTransferOK(rs2,"kesadaran1","Kesadaran")+"<br>"+cekTransferOK(rs2,"observasi1","Observasi")+" &nbsp; TD: "+nilaiTransferOK(rs2,"td1")+" &nbsp; Nd: "+nilaiTransferOK(rs2,"nd1")+" &nbsp; Sh: "+nilaiTransferOK(rs2,"sh1")+"<br>"+
+                        "Luka Operasi: "+nilaiTransferOK(rs2,"luka_op")+"<br>"+
+                        cekTransferOK(rs2,"pasang_alat","Pemasangan Alat")+"<br>Drainase: "+nilaiTransferOK(rs2,"drainese")+"<br>"+
+                        "Spoeling: "+nilaiTransferOK(rs2,"spoeling")+" &nbsp; Warna: "+nilaiTransferOK(rs2,"alat_warna")+"<br>"+
+                        "IUFD: "+nilaiTransferOK(rs2,"iufd1")+"<br>DC, Balon: "+nilaiTransferOK(rs2,"balon1")+" &nbsp; cc Vol: "+nilaiTransferOK(rs2,"vol1")+" &nbsp; cc Warna: "+nilaiTransferOK(rs2,"warna1")+"<br>"+
+                        "Lainnya: "+nilaiTransferOK(rs2,"dc_lainnya1")+"<br><br>"+
+                        "<b>4. Alkes yang Diserahkan di Kamar Operasi</b><br>"+nilaiTransferOK(rs2,"alkes1")+"</td>"+
+                        "</tr></table></td></tr>"+
+                        "<tr><td><b>Petugas / Perawat Serah Terima Pascaoperasi</b><br><b>Menyerahkan:</b> "+rs2.getString("nip_menyerahkan1")+" "+rs2.getString("nama_menyerahkan1")+
+                        " &nbsp; <b>Menerima:</b> "+rs2.getString("nip_menerima1")+" "+rs2.getString("nama_menerima1")+"<br>"+
+                        "<b>TTD Menyerahkan:</b> "+nilaiTransferOK(rs2,"ttd_menyerahkan1")+" &nbsp; <b>TTD Menerima:</b> "+nilaiTransferOK(rs2,"ttd_menerima1")+"</td></tr>"
+                    );
+                }
+                htmlContent.append("</table></td></tr>");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Transfer Pasien Kamar Operasi : "+e);
+        } finally {
+            try {
+                if(rs2!=null){
+                    rs2.close();
+                }
+                if(psTransferOK!=null){
+                    psTransferOK.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Notif Tutup Transfer Pasien Kamar Operasi : "+e);
+            }
+        }
+    }
+
     private void menampilkanTransferAntarRuang(String norawat) {
         try {
             if(chkTransferAntarRuang.isSelected()==true){
@@ -20214,10 +20387,10 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
             if(chkCatatanObservasiRanap.isSelected()==true){
                 try {
                     rs2=koneksi.prepareStatement(
-                            "select catatan_observasi_ranap.tgl_perawatan,catatan_observasi_ranap.jam_rawat,catatan_observasi_ranap.gcs,"+
-                            "catatan_observasi_ranap.td,catatan_observasi_ranap.hr,catatan_observasi_ranap.rr,catatan_observasi_ranap.suhu,catatan_observasi_ranap.spo2,"+
-                            "catatan_observasi_ranap.nip,petugas.nama from catatan_observasi_ranap inner join petugas on catatan_observasi_ranap.nip=petugas.nip "+
-                            "where catatan_observasi_ranap.no_rawat='"+norawat+"'").executeQuery();
+                            "select c.tgl_perawatan,c.jam_rawat,c.gcs,c.td,c.hr,c.rr,c.suhu,c.spo2,c.nadi,c.hari_ke,c.penyakit,"+
+                            "c.hb,c.ht,c.trombosit,c.leukosit,c.lainnya,c.cairan,c.terapi,c.pagi,c.siang,c.malam,c.bb,c.tb,"+
+                            "c.nip,ifnull(p.nama,'') as nama from catatan_observasi c left join petugas p on c.nip=p.nip "+
+                            "where c.no_rawat='"+norawat+"' order by c.tgl_perawatan,c.jam_rawat").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
                           "<tr class='isi'>"+ 
@@ -20225,37 +20398,32 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                             "<td valign='top' width='18%'>Catatan Observasi Rawat Inap</td>"+
                             "<td valign='top' width='1%' align='center'>:</td>"+
                             "<td valign='top' width='79%'>"+
-                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                 "<tr align='center'>"+
-                                    "<td valign='middle' width='4%' bgcolor='#FFFAF8' rowspan='2'>No.</td>"+
-                                    "<td valign='middle' width='15%' bgcolor='#FFFAF8' rowspan='2'>Tanggal</td>"+
-                                    "<td valign='top' width='58%' bgcolor='#FFFAF8' colspan='7'>Monitoring</td>"+
-                                    "<td valign='middle' width='23%' bgcolor='#FFFAF8' rowspan='2'>Perawat/Paramedis</td>"+
-                                 "</tr>"+
-                                 "<tr align='center'>"+
-                                    "<td valign='top' width='11%' bgcolor='#FFFAF8'>GCS(E,V,M)</td>"+
-                                    "<td valign='top' width='10%' bgcolor='#FFFAF8'>TD</td>"+
-                                    "<td valign='top' width='9%' bgcolor='#FFFAF8'>HR (/menit)</td>"+
-                                    "<td valign='top' width='9%' bgcolor='#FFFAF8'>RR (/menit)</td>"+
-                                    "<td valign='top' width='9%' bgcolor='#FFFAF8'>Suhu(C)</td>"+
-                                    "<td valign='top' width='9%' bgcolor='#FFFAF8'>SpO2(%)</td>"+
-                                 "</tr>"
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
                         );
                         rs2.beforeFirst();
                         w=1;
                         while(rs2.next()){
                             htmlContent.append(
-                                 "<tr>"+
-                                    "<td valign='top' align='center'>"+w+"</td>"+
-                                    "<td valign='top'>"+rs2.getString("tgl_perawatan")+" "+rs2.getString("jam_rawat")+"</td>"+
-                                    "<td valign='top' align='center'>"+rs2.getString("gcs")+"</td>"+
-                                    "<td valign='top' align='center'>"+rs2.getString("td")+"</td>"+
-                                    "<td valign='top' align='center'>"+rs2.getString("hr")+"</td>"+
-                                    "<td valign='top' align='center'>"+rs2.getString("rr")+"</td>"+
-                                    "<td valign='top' align='center'>"+rs2.getString("suhu")+"</td>"+
-                                    "<td valign='top' align='center'>"+rs2.getString("spo2")+"</td>"+     
-                                    "<td valign='top'>"+rs2.getString("nip")+" "+rs2.getString("nama")+"</td>"+
-                                 "</tr>");                                        
+                                 "<tr><td valign='top' width='4%' align='center' bgcolor='#FFFAF8'><b>"+w+"</b></td>"+
+                                    "<td valign='top' bgcolor='#FFFAF8'><b>Tanggal/Jam:</b> "+rs2.getString("tgl_perawatan")+" "+rs2.getString("jam_rawat")+
+                                    " &nbsp; <b>Hari Ke:</b> "+rs2.getString("hari_ke")+" &nbsp; <b>Perawat/Paramedis:</b> "+rs2.getString("nip")+" "+rs2.getString("nama")+"</td></tr>"+
+                                 "<tr><td></td><td valign='top'>"+
+                                    "<table width='100%' border='0' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                      "<tr align='center'><td colspan='9' bgcolor='#FFFAF8'><b>Monitoring dan Antropometri</b></td></tr>"+
+                                      "<tr align='center'><td>GCS</td><td>TD</td><td>HR</td><td>RR</td><td>Suhu</td><td>SpO2</td><td>Nadi</td><td>BB</td><td>TB</td></tr>"+
+                                      "<tr align='center'><td>"+rs2.getString("gcs")+"</td><td>"+rs2.getString("td")+"</td><td>"+rs2.getString("hr")+"</td>"+
+                                      "<td>"+rs2.getString("rr")+"</td><td>"+rs2.getString("suhu")+"</td><td>"+rs2.getString("spo2")+"</td>"+
+                                      "<td>"+rs2.getString("nadi")+"</td><td>"+rs2.getString("bb")+"</td><td>"+rs2.getString("tb")+"</td></tr>"+
+                                      "<tr align='center'><td colspan='9' bgcolor='#FFFAF8'><b>Penyakit dan Pemeriksaan Laboratorium</b></td></tr>"+
+                                      "<tr align='center'><td colspan='3'>Penyakit</td><td>Hb</td><td>Ht</td><td>Trombosit</td><td>Leukosit</td><td colspan='2'>Lainnya</td></tr>"+
+                                      "<tr align='center'><td colspan='3'>"+rs2.getString("penyakit")+"</td><td>"+rs2.getString("hb")+"</td><td>"+rs2.getString("ht")+"</td>"+
+                                      "<td>"+rs2.getString("trombosit")+"</td><td>"+rs2.getString("leukosit")+"</td><td colspan='2'>"+rs2.getString("lainnya")+"</td></tr>"+
+                                      "<tr align='center'><td colspan='9' bgcolor='#FFFAF8'><b>Cairan, Terapi, dan Jadwal</b></td></tr>"+
+                                      "<tr align='center'><td colspan='3'>Cairan</td><td colspan='3'>Terapi</td><td>Pagi</td><td>Siang</td><td>Malam</td></tr>"+
+                                      "<tr><td colspan='3'>"+rs2.getString("cairan")+"</td><td colspan='3'>"+rs2.getString("terapi")+"</td>"+
+                                      "<td align='center'>"+rs2.getString("pagi")+"</td><td align='center'>"+rs2.getString("siang")+"</td><td align='center'>"+rs2.getString("malam")+"</td></tr>"+
+                                    "</table>"+
+                                 "</td></tr>");
                             w++;
                         }
                         htmlContent.append(
@@ -26014,7 +26182,175 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
         }
     }
     
+    private void menampilkanDaftarPemberianTerapiCairan(String norawat) {
+        if(!chkDaftarPemberianTerapiCairan.isSelected()){
+            return;
+        }
+        java.sql.PreparedStatement psCairan=null;
+        try {
+            psCairan=koneksi.prepareStatement(
+                "select a.tgl_perawatan,a.jam_rawat,a.jenis,a.volume,a.tetesan,a.jam_mulai,a.jam_selesai,a.lama,a.obat,a.keterangan,"+
+                "a.nip,ifnull(p.nama,'') as petugas,a.nip1,ifnull(v.nama,'') as verifikator,a.urut "+
+                "from terapi_cairan a left join petugas p on p.nip=a.nip left join petugas v on v.nip=a.nip1 "+
+                "where a.no_rawat=? order by a.tgl_perawatan,a.jam_rawat,a.urut");
+            psCairan.setString(1,norawat);
+            rs2=psCairan.executeQuery();
+            if(rs2.next()){
+                htmlContent.append(
+                    "<tr class='isi'><td valign='top' width='2%'></td>"+
+                    "<td valign='top' width='18%'>Daftar Pemberian Terapi Cairan / Infus</td>"+
+                    "<td valign='top' width='1%' align='center'>:</td><td valign='top' width='79%'>"+
+                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                    "<tr align='center'>"+
+                    "<td bgcolor='#FFFAF8'>No.</td><td bgcolor='#FFFAF8'>Tgl dan Jam</td><td bgcolor='#FFFAF8'>Jenis Cairan / Jalur</td>"+
+                    "<td bgcolor='#FFFAF8'>Obat yang Ditambahkan</td><td bgcolor='#FFFAF8'>Volume (ml)</td><td bgcolor='#FFFAF8'>Tetesan (menit/jam)</td>"+
+                    "<td bgcolor='#FFFAF8'>Lama Terapi</td><td bgcolor='#FFFAF8'>Mulai</td><td bgcolor='#FFFAF8'>Selesai</td>"+
+                    "<td bgcolor='#FFFAF8'>Yang Pasang</td><td bgcolor='#FFFAF8'>Verifikator</td><td bgcolor='#FFFAF8'>Keterangan</td></tr>"
+                );
+                int urutan=1;
+                rs2.beforeFirst();
+                while(rs2.next()){
+                    htmlContent.append(
+                        "<tr><td valign='top' align='center'>"+(urutan++)+"</td>"+
+                        "<td valign='top'>"+rs2.getString("tgl_perawatan")+" "+rs2.getString("jam_rawat")+"</td>"+
+                        "<td valign='top'>"+rs2.getString("jenis")+"</td><td valign='top'>"+rs2.getString("obat")+"</td>"+
+                        "<td valign='top' align='center'>"+rs2.getString("volume")+"</td><td valign='top' align='center'>"+rs2.getString("tetesan")+"</td>"+
+                        "<td valign='top' align='center'>"+rs2.getString("lama")+"</td><td valign='top' align='center'>"+rs2.getString("jam_mulai")+"</td>"+
+                        "<td valign='top' align='center'>"+rs2.getString("jam_selesai")+"</td><td valign='top'>"+rs2.getString("nip")+" "+rs2.getString("petugas")+"</td>"+
+                        "<td valign='top'>"+rs2.getString("nip1")+" "+rs2.getString("verifikator")+"</td><td valign='top'>"+rs2.getString("keterangan")+"</td></tr>"
+                    );
+                }
+                htmlContent.append("</table></td></tr>");
+            }
+            rs2.close();
+            psCairan.close();
+
+            String tabelPemberian="pemberiann_cairan";
+            java.sql.ResultSet daftarTabel=koneksi.getMetaData().getTables(null,null,tabelPemberian,null);
+            if(!daftarTabel.next()){
+                tabelPemberian="pemberian_cairan";
+            }
+            daftarTabel.close();
+            psCairan=koneksi.prepareStatement(
+                "select tanggal,jam,kesadaran,infus,oral,bab,bak,muntah,drain,perdrh,ngt,iwl,cairan_masuk,cairan_keluar,balance,deurisis,urut "+
+                "from "+tabelPemberian+" where no_rawat=? order by tanggal,jam,urut");
+            psCairan.setString(1,norawat);
+            rs2=psCairan.executeQuery();
+            if(rs2.next()){
+                htmlContent.append(
+                    "<tr class='isi'><td valign='top' width='2%'></td><td valign='top' width='18%'>Pemantauan Balance Cairan</td>"+
+                    "<td valign='top' width='1%' align='center'>:</td><td valign='top' width='79%'>"+
+                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                    "<tr align='center'><td bgcolor='#FFFAF8'>Tgl/Jam</td><td bgcolor='#FFFAF8'>Kesadaran</td><td bgcolor='#FFFAF8'>Infus</td>"+
+                    "<td bgcolor='#FFFAF8'>Oral</td><td bgcolor='#FFFAF8'>BAB</td><td bgcolor='#FFFAF8'>BAK</td><td bgcolor='#FFFAF8'>Muntah</td>"+
+                    "<td bgcolor='#FFFAF8'>Drain</td><td bgcolor='#FFFAF8'>Perdarahan</td><td bgcolor='#FFFAF8'>NGT</td><td bgcolor='#FFFAF8'>IWL</td>"+
+                    "<td bgcolor='#FFFAF8'>Cairan Masuk</td><td bgcolor='#FFFAF8'>Cairan Keluar</td><td bgcolor='#FFFAF8'>Balance</td><td bgcolor='#FFFAF8'>Diuresis</td></tr>"
+                );
+                rs2.beforeFirst();
+                while(rs2.next()){
+                    htmlContent.append(
+                        "<tr><td valign='top'>"+rs2.getString("tanggal")+" "+rs2.getString("jam")+"</td><td valign='top'>"+rs2.getString("kesadaran")+"</td>"+
+                        "<td valign='top'>"+rs2.getString("infus")+"</td><td valign='top'>"+rs2.getString("oral")+"</td><td valign='top'>"+rs2.getString("bab")+"</td>"+
+                        "<td valign='top'>"+rs2.getString("bak")+"</td><td valign='top'>"+rs2.getString("muntah")+"</td><td valign='top'>"+rs2.getString("drain")+"</td>"+
+                        "<td valign='top'>"+rs2.getString("perdrh")+"</td><td valign='top'>"+rs2.getString("ngt")+"</td><td valign='top'>"+rs2.getString("iwl")+"</td>"+
+                        "<td valign='top'>"+rs2.getString("cairan_masuk")+"</td><td valign='top'>"+rs2.getString("cairan_keluar")+"</td>"+
+                        "<td valign='top'>"+rs2.getString("balance")+"</td><td valign='top'>"+rs2.getString("deurisis")+"</td></tr>"
+                    );
+                }
+                htmlContent.append("</table></td></tr>");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Daftar Pemberian Terapi Cairan / Infus : "+e);
+        } finally {
+            try {
+                if(rs2!=null){
+                    rs2.close();
+                }
+                if(psCairan!=null){
+                    psCairan.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Notif Tutup Terapi Cairan : "+e);
+            }
+        }
+    }
+
     private void menampilkanChecklistKriteriaMasukICU(String norawat) {
+        try {
+            if(chkChecklistKriteriaMasukICU.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                        "select c.tanggal,c.diagnosa,c.prioritas_1,c.tensi,c.nadi,c.rr,c.gcs,c.prioritas_1_2,c.nrm,c.rm,c.ventilator,"+
+                        "c.prioritas_1_3,c.dopamin,c.dobutamin,c.adrenaline,c.prioritas_2,c.pj_kd_penyakit,ifnull(pj.nm_penyakit,'') as penyakit_jantung,"+
+                        "c.pp_kd_penyakit,ifnull(pp.nm_penyakit,'') as penyakit_paru,c.pn_kd_penyakit,ifnull(pn.nm_penyakit,'') as penyakit_neurologi,"+
+                        "c.diagnosa_lainnya,c.kd_pj,dpjp.nama as nama_dpjp,c.kd_dokter_icu,ifnull(dricu.nm_dokter,'') as nama_dokter_icu "+
+                        "from checklist_kriteria_masuk_icu c inner join pegawai dpjp on dpjp.nik=c.kd_pj "+
+                        "left join dokter dricu on dricu.kd_dokter=c.kd_dokter_icu left join penyakit pj on pj.kd_penyakit=c.pj_kd_penyakit "+
+                        "left join penyakit pp on pp.kd_penyakit=c.pp_kd_penyakit left join penyakit pn on pn.kd_penyakit=c.pn_kd_penyakit "+
+                        "where c.no_rawat='"+norawat+"'").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>"+
+                            "<td valign='top' width='2%'></td>"+
+                            "<td valign='top' width='18%'>Check List Kriteria Masuk ICU</td>"+
+                            "<td valign='top' width='1%' align='center'>:</td>"+
+                            "<td valign='top' width='79%'>"+
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        rs2.beforeFirst();
+                        while(rs2.next()){
+                            boolean prioritas3=!("".equals(rs2.getString("pj_kd_penyakit"))&&"".equals(rs2.getString("pp_kd_penyakit"))&&
+                                    "".equals(rs2.getString("pn_kd_penyakit"))&&"".equals(rs2.getString("diagnosa_lainnya")));
+                            htmlContent.append(
+                                 "<tr><td valign='top'><b>KRITERIA PASIEN MASUK ICU</b>"+
+                                   "<table width='100%' border='0' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                     "<tr><td width='33%' border='0'>Tanggal : "+rs2.getString("tanggal")+"</td>"+
+                                         "<td width='67%' border='0'>Dokter yang merawat : "+rs2.getString("kd_pj")+" "+rs2.getString("nama_dpjp")+"</td></tr>"+
+                                     "<tr><td border='0'>Diagnosa : "+rs2.getString("diagnosa")+"</td>"+
+                                         "<td border='0'>Dokter Konsultan ICU : "+rs2.getString("kd_dokter_icu")+" "+rs2.getString("nama_dokter_icu")+"</td></tr>"+
+                                   "</table>"+
+                                 "</td></tr>"+
+                                 "<tr><td valign='top'>"+
+                                   "<table width='100%' border='0' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
+                                     "<tr><td width='4%' align='center' bgcolor='#FFFAF8'>NO</td><td width='76%' align='center' bgcolor='#FFFAF8'>KRITERIA MASUK ICU</td><td width='20%' align='center' bgcolor='#FFFAF8'>YA/TIDAK</td></tr>"+
+                                     "<tr><td valign='top' align='center'>I</td><td valign='top'><b>PRIORITAS 1</b><br>1. Pasien kritis tidak stabil<br>"+
+                                         "Tensi: <b>"+rs2.getString("tensi")+"</b> &nbsp; Nadi: <b>"+rs2.getString("nadi")+" x/menit</b> &nbsp; RR: <b>"+rs2.getString("rr")+" x/menit</b> &nbsp; GCS: <b>"+rs2.getString("gcs")+"</b></td>"+
+                                         "<td valign='top' align='center'>"+rs2.getString("prioritas_1")+"</td></tr>"+
+                                     "<tr><td></td><td valign='top'>2. Pasien memerlukan bantuan ventilasi<br>"+
+                                         ("1".equals(rs2.getString("nrm"))?"&#9745;":"&#9744;")+" Masker NRM &nbsp; "+("1".equals(rs2.getString("rm"))?"&#9745;":"&#9744;")+" Masker RM &nbsp; "+("1".equals(rs2.getString("ventilator"))?"&#9745;":"&#9744;")+" Ventilator</td>"+
+                                         "<td valign='top' align='center'>"+rs2.getString("prioritas_1_2")+"</td></tr>"+
+                                     "<tr><td></td><td valign='top'>3. Pasien memerlukan obat-obat vasoaktif<br>"+
+                                         ("1".equals(rs2.getString("dopamin"))?"&#9745;":"&#9744;")+" Dopamin &nbsp; "+("1".equals(rs2.getString("dobutamin"))?"&#9745;":"&#9744;")+" Dobutamin &nbsp; "+("1".equals(rs2.getString("adrenaline"))?"&#9745;":"&#9744;")+" Adrenalin</td>"+
+                                         "<td valign='top' align='center'>"+rs2.getString("prioritas_1_3")+"</td></tr>"+
+                                     "<tr><td valign='top' align='center'>II</td><td valign='top'><b>PRIORITAS 2</b><br>Pasien yang memerlukan observasi ketat dan kondisinya sewaktu-waktu dapat berubah.</td>"+
+                                         "<td valign='top' align='center'>"+rs2.getString("prioritas_2")+"</td></tr>"+
+                                     "<tr><td valign='top' align='center'>III</td><td valign='top'><b>PRIORITAS 3</b><br>Pasien dengan penyakit primer berat atau terminal dengan komplikasi penyakit akut, kritis yang memerlukan pertolongan untuk penyakit kritisnya tetapi tidak sampai intubasi dan RJP.</td>"+
+                                         "<td valign='top' align='center'>"+(prioritas3?"Ya":"Tidak")+"</td></tr>"+
+                                     "<tr><td></td><td colspan='2'><b>SESUAI DIAGNOSIS PENYAKIT</b><br>"+
+                                         "A. Pasien Jantung: "+rs2.getString("pj_kd_penyakit")+" "+rs2.getString("penyakit_jantung")+"<br>"+
+                                         "B. Pasien Paru: "+rs2.getString("pp_kd_penyakit")+" "+rs2.getString("penyakit_paru")+"<br>"+
+                                         "C. Pasien Neurologi: "+rs2.getString("pn_kd_penyakit")+" "+rs2.getString("penyakit_neurologi")+"<br>"+
+                                         "D. Penyakit Lainnya: "+rs2.getString("diagnosa_lainnya")+"</td></tr>"+
+                                   "</table>"+
+                                 "</td></tr>"
+                            );
+                        }
+                        htmlContent.append("</table></td></tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Checklist Masuk ICU : "+e);
+        }
+    }
+
+    private void menampilkanChecklistKriteriaMasukICULama(String norawat) {
         try {
             if(chkChecklistKriteriaMasukICU.isSelected()==true){
                 try {
@@ -26327,12 +26663,11 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
             if(chkChecklistKriteriaKeluarICU.isSelected()==true){
                 try {
                     rs2=koneksi.prepareStatement(
-                        "select checklist_kriteria_keluar_icu.tanggal,checklist_kriteria_keluar_icu.kriteria1,checklist_kriteria_keluar_icu.kriteria2,checklist_kriteria_keluar_icu.kriteria3,"+
-                        "checklist_kriteria_keluar_icu.kriteria4,checklist_kriteria_keluar_icu.kriteria5,checklist_kriteria_keluar_icu.kriteria6,"+
-                        "checklist_kriteria_keluar_icu.kriteria7,checklist_kriteria_keluar_icu.kriteria8,checklist_kriteria_keluar_icu.kriteria9,"+
-                        "checklist_kriteria_keluar_icu.kriteria10,checklist_kriteria_keluar_icu.kriteria11,checklist_kriteria_keluar_icu.nik,pegawai.nama "+
-                        "from checklist_kriteria_keluar_icu inner join pegawai on pegawai.nik=checklist_kriteria_keluar_icu.nik "+
-                        "where checklist_kriteria_keluar_icu.no_rawat='"+norawat+"'").executeQuery();
+                        "select c.tanggal,c.diagnosa,c.poin_1,c.nrm,c.jacson_res,c.rm,c.ventilator,c.dopamin,c.dobutamin,c.non_adrenaline,c.adrenaline,"+
+                        "c.poin_2,c.nadi,c.td,c.diuresis,c.`map`,c.rr,c.spo2,c.poin_3,c.lainnya,c.ranap,c.rujuk,c.aps,"+
+                        "c.kd_pj,dpjp.nama as nama_dpjp,c.kd_dokter_icu,ifnull(dricu.nm_dokter,'') as nama_dokter_icu "+
+                        "from checklist_kriteria_keluar_icu c inner join pegawai dpjp on dpjp.nik=c.kd_pj "+
+                        "left join dokter dricu on dricu.kd_dokter=c.kd_dokter_icu where c.no_rawat='"+norawat+"'").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
                           "<tr class='isi'>"+ 
@@ -26347,11 +26682,15 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                             htmlContent.append(
                                  "<tr>"+
                                     "<td valign='top'>"+
-                                       "YANG MELAKUKAN PENGKAJIAN"+  
+                                       "KRITERIA PASIEN KELUAR ICU"+
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
                                               "<td width='33%' border='0'>Tanggal : "+rs2.getString("tanggal")+"</td>"+
-                                              "<td width='66%' border='0'>DPJP/Dokter Jaga/ICU : "+rs2.getString("nik")+" "+rs2.getString("nama")+"</td>"+
+                                              "<td width='67%' border='0'>Dokter yang merawat : "+rs2.getString("kd_pj")+" "+rs2.getString("nama_dpjp")+"</td>"+
+                                          "</tr>"+
+                                          "<tr>"+
+                                              "<td border='0'>Diagnosa : "+rs2.getString("diagnosa")+"</td>"+
+                                              "<td border='0'>Dokter Konsultan ICU : "+rs2.getString("kd_dokter_icu")+" "+rs2.getString("nama_dokter_icu")+"</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
@@ -26361,68 +26700,30 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"+
                                           "<tr>"+
                                               "<td width='4%' valign='top' align='center' bgcolor='#FFFAF8'></td>"+
-                                              "<td width='76%' valign='top' align='center' bgcolor='#FFFAF8'>KRITERIA KELUAR HCU</td>"+
+                                              "<td width='76%' valign='top' align='center' bgcolor='#FFFAF8'>KRITERIA KELUAR ICU</td>"+
                                               "<td width='20%' valign='top' align='center' bgcolor='#FFFAF8'>YA/TIDAK</td>"+
                                           "</tr>"+
                                           "<tr>"+
                                               "<td width='4%' valign='top' align='center'>1</td>"+
-                                              "<td width='76%' valign='top'>Pasien Tidak Lagi Memerlukan Perawatan ICU</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria1")+"</td>"+
+                                              "<td width='76%' valign='top'>Pasien tidak lagi memerlukan alat atau obat untuk <i>life support</i><br>"+
+                                              ("1".equals(rs2.getString("nrm"))?"&#9745;":"&#9744;")+" Masker NRM &nbsp; "+("1".equals(rs2.getString("jacson_res"))?"&#9745;":"&#9744;")+" Jackson Rees &nbsp; "+("1".equals(rs2.getString("rm"))?"&#9745;":"&#9744;")+" Masker RM &nbsp; "+("1".equals(rs2.getString("ventilator"))?"&#9745;":"&#9744;")+" Ventilator<br>"+
+                                              ("1".equals(rs2.getString("dopamin"))?"&#9745;":"&#9744;")+" Dopamin &nbsp; "+("1".equals(rs2.getString("dobutamin"))?"&#9745;":"&#9744;")+" Dobutamin &nbsp; "+("1".equals(rs2.getString("non_adrenaline"))?"&#9745;":"&#9744;")+" Nor-Adrenalin &nbsp; "+("1".equals(rs2.getString("adrenaline"))?"&#9745;":"&#9744;")+" Adrenalin</td>"+
+                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("poin_1")+"</td>"+
                                           "</tr>"+
                                           "<tr>"+
-                                              "<td width='4%' valign='top' align='center'>2</td>"+
-                                              "<td width='76%' valign='top'>Kondisi Pasien Yang Menyebabkan Pasien Dirawat Di ICU Telah Teratasi</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria2")+"</td>"+
+                                              "<td valign='top' align='center'>2</td>"+
+                                              "<td valign='top'>Pasien dalam kondisi stabil normal (sesuai parameter <i>baseline</i>) dan kemungkinan kebutuhan terapi intensif secara mendadak kecil/kurang.<br>"+
+                                              ("1".equals(rs2.getString("nadi"))?"&#9745;":"&#9744;")+" Nadi &gt;60/&lt;100 x/menit &nbsp; "+("1".equals(rs2.getString("td"))?"&#9745;":"&#9744;")+" TD Diastolik &lt;110 mmHg &nbsp; "+("1".equals(rs2.getString("diuresis"))?"&#9745;":"&#9744;")+" Diuresis &gt;0,5 cc/kgBB/jam<br>"+
+                                              ("1".equals(rs2.getString("map"))?"&#9745;":"&#9744;")+" MAP &gt;65 mmHg &nbsp; "+("1".equals(rs2.getString("rr"))?"&#9745;":"&#9744;")+" RR &lt;30 x/menit &nbsp; "+("1".equals(rs2.getString("spo2"))?"&#9745;":"&#9744;")+" SpO2 &gt;93% dengan nasal kanul</td>"+
+                                              "<td valign='top' align='center'>"+rs2.getString("poin_2")+"</td>"+
                                           "</tr>"+
                                           "<tr>"+
-                                              "<td width='4%' valign='top' align='center'>3</td>"+
-                                              "<td width='76%' valign='top'>Pasien Dalam Keadaan Terminal Yang Dengan Terapi Tidak Memberikan Hasil Yang Bermakna</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria3")+"</td>"+
+                                              "<td valign='top' align='center'>3</td>"+
+                                              "<td valign='top'>Manfaat terapi intensif kecil karena penyakit primernya sudah terminal, tidak berespons terhadap terapi ICU untuk penyakit akutnya, prognosis jangka pendek kecil dan tidak ada terapi potensial untuk memperbaiki prognosisnya.<br><b>Lain-lain:</b> "+rs2.getString("lainnya")+"</td>"+
+                                              "<td valign='top' align='center'>"+rs2.getString("poin_3")+"</td>"+
                                           "</tr>"+
                                           "<tr>"+
-                                              "<td width='4%' valign='top' align='center'>4</td>"+
-                                              "<td width='76%' valign='top'>Pasien Meninggal</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria4")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' valign='top' align='center'>5</td>"+
-                                              "<td width='76%' valign='top'>Pasien Membutuhkan Alat / Prosedur Yang Tidak Tersedia</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria5")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' valign='top' align='center'>6</td>"+
-                                              "<td width='76%' valign='top'>Keluarga Menghendaki Pasien Dipindahkan</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria6")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' valign='top' align='center'>7</td>"+
-                                              "<td width='76%' valign='top'>KRITERIA FISIOLOGIS TANDA-TANDA VITAL</td>"+
-                                              "<td width='20%' valign='top' align='center'></td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' valign='top' align='center'></td>"+
-                                              "<td width='76%' valign='top'>Nadi > 60 Atau < 100 x/menit</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria7")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' valign='top' align='center'></td>"+
-                                              "<td width='76%' valign='top'>SBP > 08 mmHg Atau 20 mmHg Di Atas SBP Pasien</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria8")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' valign='top' align='center'></td>"+
-                                              "<td width='76%' valign='top'>MAP > 60 mmHg</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria9")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' valign='top' align='center'></td>"+
-                                              "<td width='76%' valign='top'>DBP < 120 mmHg</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria10")+"</td>"+
-                                          "</tr>"+
-                                          "<tr>"+
-                                              "<td width='4%' valign='top' align='center'></td>"+
-                                              "<td width='76%' valign='top'>RR > 12 Sampai < 25 x/menit</td>"+
-                                              "<td width='20%' valign='top' align='center'>"+rs2.getString("kriteria11")+"</td>"+
+                                              "<td colspan='3'><b>Tujuan Keluar ICU:</b> "+("1".equals(rs2.getString("ranap"))?"&#9745;":"&#9744;")+" Ruang Rawat Inap &nbsp; "+("1".equals(rs2.getString("rujuk"))?"&#9745;":"&#9744;")+" Rumah Sakit Rujukan &nbsp; "+("1".equals(rs2.getString("aps"))?"&#9745;":"&#9744;")+" Atas Permintaan Sendiri</td>"+
                                           "</tr>"+
                                        "</table>"+
                                     "</td>"+
@@ -26443,7 +26744,7 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Checklist Keluar HCU : "+e);
+            System.out.println("Notif Checklist Keluar ICU : "+e);
         }
     }
     
