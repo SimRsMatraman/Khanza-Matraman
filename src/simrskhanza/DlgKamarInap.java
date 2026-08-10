@@ -16446,14 +16446,19 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
         }else{
             if(tbKamIn.getSelectedRow()>-1){
                 if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                    if(tbKamIn.getSelectedRow()==0){
+                        JOptionPane.showMessageDialog(null,"Data induk pasien rawat gabung tidak ditemukan...!!!");
+                        return;
+                    }
                     try {
+                        String noRawatIbu=tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString();
                         psanak=koneksi.prepareStatement(
                             "select pasien.no_rkm_medis,pasien.nm_pasien,ranap_gabung.no_rawat2,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,pasien.no_peserta, "+
                             "concat(pasien.alamatpj,', ',pasien.kelurahanpj,', ',pasien.kecamatanpj,', ',pasien.kabupatenpj) as alamat "+
                             "from reg_periksa inner join pasien inner join ranap_gabung on "+
                             "pasien.no_rkm_medis=reg_periksa.no_rkm_medis and ranap_gabung.no_rawat2=reg_periksa.no_rawat where ranap_gabung.no_rawat=?");            
                         try {
-                            psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                            psanak.setString(1,noRawatIbu);
                             rs2=psanak.executeQuery();
                             if(rs2.next()){
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -16462,11 +16467,11 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                                 resume.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                                 resume.setLocationRelativeTo(internalFrame1);
                                 if(R1.isSelected()==true){
-                                    resume.setNoRm(rs2.getString("no_rawat2"),new Date());
+                                    resume.setNoRmGabung(rs2.getString("no_rawat2"),noRawatIbu,new Date());
                                 }else if(R2.isSelected()==true){
-                                    resume.setNoRm(rs2.getString("no_rawat2"),DTPCari2.getDate());
+                                    resume.setNoRmGabung(rs2.getString("no_rawat2"),noRawatIbu,DTPCari2.getDate());
                                 }else if(R3.isSelected()==true){
-                                    resume.setNoRm(rs2.getString("no_rawat2"),DTPCari4.getDate());
+                                    resume.setNoRmGabung(rs2.getString("no_rawat2"),noRawatIbu,DTPCari4.getDate());
                                 }
                                 resume.tampil();
                                 resume.setVisible(true);
@@ -16506,7 +16511,7 @@ private void MnRujukMasukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }
-        }
+        } 
     }//GEN-LAST:event_BtnResumeActionPerformed
 
     private void MnPermintaanAmbulanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPermintaanAmbulanceActionPerformed
