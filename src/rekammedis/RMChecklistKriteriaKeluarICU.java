@@ -2223,63 +2223,99 @@ public final class RMChecklistKriteriaKeluarICU extends javax.swing.JDialog {
     
     private void isRawat() {
         try {
-            ps=koneksi.prepareStatement(
-                    "SELECT "+
-                    "    rp.no_rkm_medis, "+
-                    "    p.nm_pasien, "+
-                    "    p.jk, "+
-                    "    p.tmp_lahir, "+
-                    "    p.tgl_lahir, "+
-                    "    p.umur, "+
-                    "    rp.tgl_registrasi, "+
-                    "    IFNULL(d.diagnosa, '') AS semua_diagnosa "+
-                    "FROM reg_periksa AS rp "+
-                    "INNER JOIN pasien AS p "+
-                    "    ON rp.no_rkm_medis = p.no_rkm_medis "+
-                    "LEFT JOIN ( "+
-                    "    SELECT "+
-                    "        dp.no_rawat, "+
-                    "        GROUP_CONCAT( "+
-                    "            CONCAT( "+
-                    "                dp.kd_penyakit, "+
-                    "                ' - ', "+
-                    "                py.nm_penyakit "+
-                    "            ) "+
-                    "            ORDER BY dp.prioritas "+
-                    "            SEPARATOR ', ' "+
-                    "        ) AS diagnosa "+
-                    "    FROM diagnosa_pasien AS dp "+
-                    "    INNER JOIN penyakit AS py "+
-                    "        ON dp.kd_penyakit = py.kd_penyakit "+
-                    "    GROUP BY dp.no_rawat "+
-                    ") AS d "+
-                    "    ON rp.no_rawat = d.no_rawat "+
-                    "WHERE rp.no_rawat =?");
+            ps = koneksi.prepareStatement(
+                    "SELECT "
+                    + "rp.no_rkm_medis, "
+                    + "p.nm_pasien, "
+                    + "p.jk, "
+                    + "p.tmp_lahir, "
+                    + "p.tgl_lahir, "
+                    + "p.umur, "
+                    + "rp.tgl_registrasi, "
+                    + "IFNULL(dg.diagnosa, '') AS semua_diagnosa, "
+                    + "IFNULL(dpjp.kd_dokter, '') AS kd_dpjp_ranap, "
+                    + "IFNULL(dk.nm_dokter, '') AS nm_dpjp_ranap "
+                    + "FROM reg_periksa AS rp "
+                    + "INNER JOIN pasien AS p "
+                    + "ON rp.no_rkm_medis=p.no_rkm_medis "
+                    + "LEFT JOIN ("
+                        + "SELECT "
+                        + "dp.no_rawat, "
+                        + "GROUP_CONCAT("
+                            + "CONCAT("
+                                + "dp.kd_penyakit, ' - ', py.nm_penyakit"
+                            + ") "
+                            + "ORDER BY dp.prioritas "
+                            + "SEPARATOR ', '"
+                        + ") AS diagnosa "
+                        + "FROM diagnosa_pasien AS dp "
+                        + "INNER JOIN penyakit AS py "
+                        + "ON dp.kd_penyakit=py.kd_penyakit "
+                        + "GROUP BY dp.no_rawat"
+                    + ") AS dg "
+                    + "ON rp.no_rawat=dg.no_rawat "
+
+                    + "LEFT JOIN dpjp_ranap AS dpjp "
+                    + "ON dpjp.no_rawat=rp.no_rawat "
+                    + "AND dpjp.kd_dokter=("
+                        + "SELECT dr2.kd_dokter "
+                        + "FROM dpjp_ranap AS dr2 "
+                        + "WHERE dr2.no_rawat=rp.no_rawat "
+                        + "ORDER BY dr2.kd_dokter DESC "
+                        + "LIMIT 1"
+                    + ") "
+                    + "LEFT JOIN dokter AS dk "
+                    + "ON dpjp.kd_dokter=dk.kd_dokter "
+
+                    + "WHERE rp.no_rawat=?"
+            );
             try {
-                ps.setString(1,TNoRw.getText());
-                rs=ps.executeQuery();
-                if(rs.next()){
-                    TNoRM.setText(rs.getString("no_rkm_medis"));
-                    DTPCari1.setDate(rs.getDate("tgl_registrasi"));
-                    TPasien.setText(rs.getString("nm_pasien"));
-                    JK.setText(rs.getString("jk"));
-                    TglLahir.setText(rs.getString("tgl_lahir"));
-                    TempatLahir.setText(rs.getString("tmp_lahir"));
-                    Umur.setText(rs.getString("umur"));
-                    Diagnosa.setText(rs.getString("semua_diagnosa"));
+                ps.setString(1, TNoRw.getText().trim());
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    TNoRM.setText(
+                            rs.getString("no_rkm_medis")
+                    );
+                    TPasien.setText(
+                            rs.getString("nm_pasien")
+                    );
+                    JK.setText(
+                            rs.getString("jk")
+                    );
+                    TempatLahir.setText(
+                            rs.getString("tmp_lahir")
+                    );
+                    TglLahir.setText(
+                            rs.getString("tgl_lahir")
+                    );
+                    Umur.setText(
+                            rs.getString("umur")
+                    );
+                    DTPCari1.setDate(
+                            rs.getDate("tgl_registrasi")
+                    );
+                    Diagnosa.setText(
+                            rs.getString("semua_diagnosa")
+                    );
+                    KodeDPJP.setText(
+                            rs.getString("kd_dpjp_ranap")
+                    );
+                    NamaDPJP.setText(
+                            rs.getString("nm_dpjp_ranap")
+                    );
                 }
             } catch (Exception e) {
-                System.out.println("Notif : "+e);
-            } finally{
-                if(rs!=null){
+                System.out.println("Notif isRawat : " + e);
+            } finally {
+                if (rs != null) {
                     rs.close();
                 }
-                if(ps!=null){
+                if (ps != null) {
                     ps.close();
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif : "+e);
+            System.out.println("Notif isRawat : " + e);
         }
     }
     
