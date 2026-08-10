@@ -975,9 +975,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnChecklistPostOperasi = new javax.swing.JMenuItem();
         MnPenilaianPreOp = new javax.swing.JMenuItem();
         MnPenilaianPreAnestesi = new javax.swing.JMenuItem();
-        MnRMHCU = new javax.swing.JMenu();
-        MnCheckListKriteriaMasukHCU = new javax.swing.JMenuItem();
-        MnCheckListKriteriaKeluarHCU = new javax.swing.JMenuItem();
+        MnRMICU = new javax.swing.JMenu();
         MnCheckListKriteriaMasukICU = new javax.swing.JMenuItem();
         MnCheckListKriteriaKeluarICU = new javax.swing.JMenuItem();
         MnRMRisikoJatuh = new javax.swing.JMenu();
@@ -1254,6 +1252,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnKeseimbanganCairan = new javax.swing.JMenuItem();
         MnCatatanObservasiRanapPostPartum = new javax.swing.JMenuItem();
         MnCatatanObservasiRanapKebidanan = new javax.swing.JMenuItem();
+        MnCheckListKriteriaKeluarHCU = new javax.swing.JMenuItem();
+        MnCheckListKriteriaMasukHCU = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         PanelCariUtama = new javax.swing.JPanel();
         panelGlass10 = new widget.panelisi();
@@ -2185,47 +2185,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         MnDataRM.add(MnRMOperasi);
 
-        MnRMHCU.setBackground(new java.awt.Color(255, 255, 254));
-        MnRMHCU.setForeground(new java.awt.Color(50, 50, 50));
-        MnRMHCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnRMHCU.setText("RM HCU & ICU");
-        MnRMHCU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnRMHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnRMHCU.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnRMHCU.setName("MnRMHCU"); // NOI18N
-        MnRMHCU.setPreferredSize(new java.awt.Dimension(220, 26));
-
-        MnCheckListKriteriaMasukHCU.setBackground(new java.awt.Color(255, 255, 254));
-        MnCheckListKriteriaMasukHCU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnCheckListKriteriaMasukHCU.setForeground(new java.awt.Color(50, 50, 50));
-        MnCheckListKriteriaMasukHCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCheckListKriteriaMasukHCU.setText("Check List Kriteria Masuk HCU");
-        MnCheckListKriteriaMasukHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnCheckListKriteriaMasukHCU.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnCheckListKriteriaMasukHCU.setName("MnCheckListKriteriaMasukHCU"); // NOI18N
-        MnCheckListKriteriaMasukHCU.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnCheckListKriteriaMasukHCU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCheckListKriteriaMasukHCUActionPerformed(evt);
-            }
-        });
-        MnRMHCU.add(MnCheckListKriteriaMasukHCU);
-
-        MnCheckListKriteriaKeluarHCU.setBackground(new java.awt.Color(255, 255, 254));
-        MnCheckListKriteriaKeluarHCU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        MnCheckListKriteriaKeluarHCU.setForeground(new java.awt.Color(50, 50, 50));
-        MnCheckListKriteriaKeluarHCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        MnCheckListKriteriaKeluarHCU.setText("Check List Kriteria Keluar HCU");
-        MnCheckListKriteriaKeluarHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        MnCheckListKriteriaKeluarHCU.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        MnCheckListKriteriaKeluarHCU.setName("MnCheckListKriteriaKeluarHCU"); // NOI18N
-        MnCheckListKriteriaKeluarHCU.setPreferredSize(new java.awt.Dimension(200, 26));
-        MnCheckListKriteriaKeluarHCU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnCheckListKriteriaKeluarHCUActionPerformed(evt);
-            }
-        });
-        MnRMHCU.add(MnCheckListKriteriaKeluarHCU);
+        MnRMICU.setBackground(new java.awt.Color(255, 255, 254));
+        MnRMICU.setForeground(new java.awt.Color(50, 50, 50));
+        MnRMICU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnRMICU.setText("RM Checklist ICU");
+        MnRMICU.setActionCommand("RM Checklist ICU");
+        MnRMICU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnRMICU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnRMICU.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnRMICU.setName("MnRMICU"); // NOI18N
+        MnRMICU.setPreferredSize(new java.awt.Dimension(220, 26));
 
         MnCheckListKriteriaMasukICU.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaMasukICU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2241,7 +2210,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 MnCheckListKriteriaMasukICUActionPerformed(evt);
             }
         });
-        MnRMHCU.add(MnCheckListKriteriaMasukICU);
+        MnRMICU.add(MnCheckListKriteriaMasukICU);
 
         MnCheckListKriteriaKeluarICU.setBackground(new java.awt.Color(255, 255, 254));
         MnCheckListKriteriaKeluarICU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -2257,9 +2226,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 MnCheckListKriteriaKeluarICUActionPerformed(evt);
             }
         });
-        MnRMHCU.add(MnCheckListKriteriaKeluarICU);
+        MnRMICU.add(MnCheckListKriteriaKeluarICU);
 
-        MnDataRM.add(MnRMHCU);
+        MnDataRM.add(MnRMICU);
 
         MnRMRisikoJatuh.setBackground(new java.awt.Color(255, 255, 254));
         MnRMRisikoJatuh.setForeground(new java.awt.Color(50, 50, 50));
@@ -5753,6 +5722,36 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         });
 
+        MnCheckListKriteriaKeluarHCU.setBackground(new java.awt.Color(255, 255, 254));
+        MnCheckListKriteriaKeluarHCU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCheckListKriteriaKeluarHCU.setForeground(new java.awt.Color(50, 50, 50));
+        MnCheckListKriteriaKeluarHCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCheckListKriteriaKeluarHCU.setText("Check List Kriteria Keluar HCU");
+        MnCheckListKriteriaKeluarHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCheckListKriteriaKeluarHCU.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCheckListKriteriaKeluarHCU.setName("MnCheckListKriteriaKeluarHCU"); // NOI18N
+        MnCheckListKriteriaKeluarHCU.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnCheckListKriteriaKeluarHCU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCheckListKriteriaKeluarHCUActionPerformed(evt);
+            }
+        });
+
+        MnCheckListKriteriaMasukHCU.setBackground(new java.awt.Color(255, 255, 254));
+        MnCheckListKriteriaMasukHCU.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCheckListKriteriaMasukHCU.setForeground(new java.awt.Color(50, 50, 50));
+        MnCheckListKriteriaMasukHCU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCheckListKriteriaMasukHCU.setText("Check List Kriteria Masuk HCU");
+        MnCheckListKriteriaMasukHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCheckListKriteriaMasukHCU.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCheckListKriteriaMasukHCU.setName("MnCheckListKriteriaMasukHCU"); // NOI18N
+        MnCheckListKriteriaMasukHCU.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnCheckListKriteriaMasukHCU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCheckListKriteriaMasukHCUActionPerformed(evt);
+            }
+        });
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -5989,7 +5988,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(90, 23));
         panelCari.add(R2);
 
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -6012,7 +6011,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
 
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -6038,7 +6037,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         R3.setPreferredSize(new java.awt.Dimension(75, 23));
         panelCari.add(R3);
 
-        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
+        DTPCari3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2026" }));
         DTPCari3.setDisplayFormat("dd-MM-yyyy");
         DTPCari3.setName("DTPCari3"); // NOI18N
         DTPCari3.setOpaque(false);
@@ -6061,7 +6060,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27-07-2026" }));
+        DTPCari4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-08-2026" }));
         DTPCari4.setDisplayFormat("dd-MM-yyyy");
         DTPCari4.setName("DTPCari4"); // NOI18N
         DTPCari4.setOpaque(false);
@@ -17157,7 +17156,7 @@ if(tabMode.getRowCount()==0){
     private javax.swing.JMenuItem MnPulangAtasPermintaanSendiri;
     private javax.swing.JMenuItem MnRM2D;
     private javax.swing.JMenu MnRMFarmasi;
-    private javax.swing.JMenu MnRMHCU;
+    private javax.swing.JMenu MnRMICU;
     private javax.swing.JMenu MnRMOperasi;
     private javax.swing.JMenu MnRMRisikoJatuh;
     private javax.swing.JMenuItem MnRanapGabung;
