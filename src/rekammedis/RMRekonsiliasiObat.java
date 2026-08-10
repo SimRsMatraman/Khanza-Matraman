@@ -27,6 +27,8 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -94,7 +96,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         DosisObat.setDocument(new batasInput((byte)20).getKata(DosisObat));
 //        Frekuensi.setDocument(new batasInput((byte)10).getKata(Frekuensi));
         AturanPakai.setDocument(new batasInput((int)150).getKata(AturanPakai));
-        PemberianTerakhir.setDocument(new batasInput((byte)20).getKata(PemberianTerakhir));
+//        PemberianTerakhir.setDocument(new batasInput((byte)20).getKata(PemberianTerakhir));
         PerubahanAturanPakai.setDocument(new batasInput((int)150).getKata(PerubahanAturanPakai));
         TNoRekonsialiasi.setDocument(new batasInput((byte)20).getKata(TNoRekonsialiasi));
         AlergiObat.setDocument(new batasInput((int)70).getKata(AlergiObat));
@@ -228,10 +230,10 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         jLabel111 = new widget.Label();
         AturanPakai = new widget.TextBox();
         jLabel112 = new widget.Label();
-        PemberianTerakhir = new widget.TextBox();
         jLabel113 = new widget.Label();
         PerubahanAturanPakai = new widget.TextBox();
         BtnObat1 = new widget.Button();
+        TanggalPengkajian = new widget.Tanggal();
         internalFrame1 = new widget.InternalFrame();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -383,16 +385,6 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         panelBiasa2.add(jLabel112);
         jLabel112.setBounds(367, 40, 150, 23);
 
-        PemberianTerakhir.setHighlighter(null);
-        PemberianTerakhir.setName("PemberianTerakhir"); // NOI18N
-        PemberianTerakhir.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                PemberianTerakhirKeyPressed(evt);
-            }
-        });
-        panelBiasa2.add(PemberianTerakhir);
-        PemberianTerakhir.setBounds(521, 40, 100, 23);
-
         jLabel113.setText("Perubahan Aturan Pakai :");
         jLabel113.setName("jLabel113"); // NOI18N
         panelBiasa2.add(jLabel113);
@@ -406,7 +398,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
             }
         });
         panelBiasa2.add(PerubahanAturanPakai);
-        PerubahanAturanPakai.setBounds(144, 100, 260, 23);
+        PerubahanAturanPakai.setBounds(150, 120, 260, 23);
 
         BtnObat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         BtnObat1.setMnemonic('2');
@@ -425,6 +417,19 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         });
         panelBiasa2.add(BtnObat1);
         BtnObat1.setBounds(630, 10, 28, 23);
+
+        TanggalPengkajian.setForeground(new java.awt.Color(50, 70, 50));
+        TanggalPengkajian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-08-2026 11:12:47" }));
+        TanggalPengkajian.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+        TanggalPengkajian.setName("TanggalPengkajian"); // NOI18N
+        TanggalPengkajian.setOpaque(false);
+        TanggalPengkajian.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TanggalPengkajianKeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(TanggalPengkajian);
+        TanggalPengkajian.setBounds(530, 40, 130, 20);
 
         internalFrame4.add(panelBiasa2, java.awt.BorderLayout.CENTER);
 
@@ -626,7 +631,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         PanelInput.add(jLabel9);
         jLabel9.setBounds(197, 40, 69, 23);
 
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-07-2026" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-08-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -869,9 +874,9 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             JOptionPane.showMessageDialog(null,"Pilih terlebih dahulu pasien yang mau dimasukkan data kelarihannya...");
             BtnTambah.requestFocus();
         }else{
+            emptTeksTambahRekon();
             DlgTambahObatRekonsiliasi.setLocationRelativeTo(internalFrame1);
             DlgTambahObatRekonsiliasi.setVisible(true);
-            emptTeksTambahRekon();
         }
     }//GEN-LAST:event_BtnTambahActionPerformed
 
@@ -978,11 +983,16 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 //            Valid.textKosong(Frekuensi,"Frekuensi");
         }else if(AturanPakai.getText().trim().equals("")){
             Valid.textKosong(AturanPakai,"Aturan Pakai");
-        }else if(PemberianTerakhir.getText().trim().equals("")){
-            Valid.textKosong(PemberianTerakhir,"Waktu Pemberian Terakhir");
+//        }else if(PemberianTerakhir.getSelectedItem().trim().equals("")){
+//            Valid.getSelectedItem(PemberianTerakhir,"Waktu Pemberian Terakhir");
         }else{
             tabMode.addRow(new String[]{
-                NamaObat.getText(),DosisObat.getText(),AturanPakai.getText(),PemberianTerakhir.getText(),TindakLanjut.getSelectedItem().toString(),PerubahanAturanPakai.getText()
+                NamaObat.getText(),
+                DosisObat.getText(),
+                AturanPakai.getText(),
+                getWaktuPemberianTerakhir(),
+                TindakLanjut.getSelectedItem().toString(),
+                PerubahanAturanPakai.getText()
             });
             emptTeksTambahRekon();
         }
@@ -1001,12 +1011,8 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     }//GEN-LAST:event_TindakLanjutKeyPressed
 
     private void AturanPakaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AturanPakaiKeyPressed
-        Valid.pindah(evt,PemberianTerakhir,TindakLanjut);
+        Valid.pindah(evt,TanggalPengkajian,TindakLanjut);
     }//GEN-LAST:event_AturanPakaiKeyPressed
-
-    private void PemberianTerakhirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PemberianTerakhirKeyPressed
-        Valid.pindah(evt,DosisObat,AturanPakai);
-    }//GEN-LAST:event_PemberianTerakhirKeyPressed
 
     private void PerubahanAturanPakaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PerubahanAturanPakaiKeyPressed
         Valid.pindah(evt,TindakLanjut,BtnSimpanRekon);
@@ -1046,6 +1052,10 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private void BtnObat1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnObat1KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnObat1KeyPressed
+
+    private void TanggalPengkajianKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalPengkajianKeyPressed
+//        Valid.pindah2(evt,TanggalPengkajian,MembukaMata);
+    }//GEN-LAST:event_TanggalPengkajianKeyPressed
 
     /**
     * @param args the command line arguments
@@ -1088,7 +1098,6 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.TextBox NamaObat;
     private widget.TextBox NamaPetugas;
     private widget.PanelBiasa PanelInput;
-    private widget.TextBox PemberianTerakhir;
     private widget.TextBox PerubahanAturanPakai;
     private widget.ComboBox RekonsiliasiSaat;
     private widget.ScrollPane Scroll2;
@@ -1097,6 +1106,7 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private widget.TextBox TNoRw;
     private widget.TextBox TPasien;
     private widget.Tanggal Tanggal;
+    private widget.Tanggal TanggalPengkajian;
     private widget.TextBox TglLahir;
     private widget.ComboBox TindakLanjut;
     private widget.InternalFrame internalFrame1;
@@ -1239,12 +1249,43 @@ private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private void emptTeksTambahRekon() {
         NamaObat.setText("");
         DosisObat.setText("");
-//        Frekuensi.setText("");
-        PemberianTerakhir.setText("");
         AturanPakai.setText("");
         PerubahanAturanPakai.setText("");
         TindakLanjut.setSelectedIndex(0);
+
+        // widget.Tanggal tidak mendukung setText().
+        // Isi ulang model dengan tanggal dan jam saat ini.
+        TanggalPengkajian.setModel(new javax.swing.DefaultComboBoxModel(
+            new String[]{new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date())}
+        ));
+        TanggalPengkajian.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+
         NamaObat.requestFocus();
+    }
+
+    /**
+     * Mengubah nilai widget.Tanggal dari format tampilan dd-MM-yyyy HH:mm:ss
+     * menjadi format MySQL DATETIME yyyy-MM-dd HH:mm:ss.
+     */
+    private String getWaktuPemberianTerakhir() {
+        Object selected = TanggalPengkajian.getSelectedItem();
+        if (selected == null || selected.toString().trim().equals("")) {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+
+        String nilai = selected.toString().trim();
+        SimpleDateFormat input = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat output = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        input.setLenient(false);
+
+        try {
+            return output.format(input.parse(nilai));
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(rootPane,
+                "Format Waktu Pemberian Terakhir tidak valid: " + nilai +
+                "\nFormat yang benar: dd-MM-yyyy HH:mm:ss");
+            return output.format(new Date());
+        }
     }
 
 }
