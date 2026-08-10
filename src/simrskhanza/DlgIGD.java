@@ -10666,7 +10666,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
 private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
 
     private void tampil() {
-        long mulaiTampil = System.currentTimeMillis();
+//        long mulaiTampil = System.currentTimeMillis();
         
         Valid.tabelKosong(tabMode);
 
@@ -10810,7 +10810,7 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
             + "rp.no_rawat"
         );
         
-        long mulaiQuery = System.currentTimeMillis();
+//        long mulaiQuery = System.currentTimeMillis();
 
         try {
             ps = koneksi.prepareStatement(sql.toString());
@@ -10830,7 +10830,7 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
 
             rs = ps.executeQuery();
             
-            long selesaiQuery = System.currentTimeMillis();
+//            long selesaiQuery = System.currentTimeMillis();
 
             while (rs.next()) {
                 boolean adaSep =
@@ -10902,17 +10902,17 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
                     isPerawat
                 });
             }
-            long selesaiRender = System.currentTimeMillis();
+//            long selesaiRender = System.currentTimeMillis();
             
-            System.out.println(
-                "Tampil IGD | Query: "
-                + (selesaiQuery - mulaiQuery)
-                + " ms | Isi tabel: "
-                + (selesaiRender - selesaiQuery)
-                + " ms | Total: "
-                + (selesaiRender - mulaiTampil)
-                + " ms"
-            );
+//            System.out.println(
+//                "Tampil IGD | Query: "
+//                + (selesaiQuery - mulaiQuery)
+//                + " ms | Isi tabel: "
+//                + (selesaiRender - selesaiQuery)
+//                + " ms | Total: "
+//                + (selesaiRender - mulaiTampil)
+//                + " ms"
+//            );
 
         } catch (Exception e) {
             System.out.println(

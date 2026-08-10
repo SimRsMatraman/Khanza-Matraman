@@ -58,6 +58,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private int i=0;    
     private String namaPenyakit="",namaPenyakitt="",Listpenyakit="",Listpenyakitt="",NamaObat="",NamaObatt=""
             ,ListObat="",ListObatt="",NamaObattt="",NamaObatttt="",ListObattt="",ListObatttt=""; 
+    private String noRawatSumberRanap="";
     private String FileName;
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
     private RMCariRPSAssMedisRanap carirps=new RMCariRPSAssMedisRanap(null,false);
@@ -5060,7 +5061,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                     "inner join dokter b on b.kd_dokter=a.kd_dokter "+
                     "where a.no_rawat=?");
             try {
-                ps.setString(1,TNoRw.getText());
+                ps.setString(1,noRawatSumberRanap.isEmpty()?TNoRw.getText():noRawatSumberRanap);
                 rs=ps.executeQuery();
                 if(rs.next()){
                     KodeDokter.setText(rs.getString("kd_dokter"));
@@ -5142,11 +5143,16 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     private void isPsien() {
         Alergi.setText("-");
         Sequel.cariIsi("select nm_pasien from pasien where no_rkm_medis='"+TNoRM.getText()+"' ",TPasien);
-        Sequel.cariIsi("select kd_kamar from kamar_inap where no_rawat='"+TNoRw.getText()+"' order by tgl_masuk desc limit 1",Ruang);
-        Sequel.cariIsi("select concat(bangsal.nm_bangsal) as kd_kamar,kamar.kd_bangsal,kamar_inap.kd_kamar from kamar_inap INNER JOIN kamar ON kamar_inap.kd_kamar = kamar.kd_kamar INNER JOIN bangsal ON kamar.kd_bangsal = bangsal.kd_bangsal where no_rawat='"+TNoRw.getText()+"' order by tgl_masuk desc limit 1",Ruang1);
-        Sequel.cariIsi("select diagnosa_awal from kamar_inap where no_rawat='"+TNoRw.getText()+"' ",DiagnosaAwal);
-        Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat='"+TNoRw.getText()+"' order by tgl_masuk asc limit 1",Masuk);
-        Sequel.cariIsi("select jam_masuk from kamar_inap where no_rawat='"+TNoRw.getText()+"' order by jam_masuk asc limit 1",JamMasuk);
+        String sumberRanap=noRawatSumberRanap.isEmpty()?TNoRw.getText():noRawatSumberRanap;
+        Sequel.cariIsi("select kd_kamar from kamar_inap where no_rawat='"+sumberRanap+"' order by tgl_masuk desc limit 1",Ruang);
+        Sequel.cariIsi("select concat(bangsal.nm_bangsal) as kd_kamar,kamar.kd_bangsal,kamar_inap.kd_kamar from kamar_inap INNER JOIN kamar ON kamar_inap.kd_kamar = kamar.kd_kamar INNER JOIN bangsal ON kamar.kd_bangsal = bangsal.kd_bangsal where no_rawat='"+sumberRanap+"' order by tgl_masuk desc limit 1",Ruang1);
+        if(sumberRanap.equals(TNoRw.getText())){
+            Sequel.cariIsi("select diagnosa_awal from kamar_inap where no_rawat='"+sumberRanap+"' ",DiagnosaAwal);
+        }else{
+            DiagnosaAwal.setText("");
+        }
+        Sequel.cariIsi("select tgl_masuk from kamar_inap where no_rawat='"+sumberRanap+"' order by tgl_masuk asc limit 1",Masuk);
+        Sequel.cariIsi("select jam_masuk from kamar_inap where no_rawat='"+sumberRanap+"' order by tgl_masuk asc,jam_masuk asc limit 1",JamMasuk);
 //        Sequel.cariIsi("select tgl_keluar from kamar_inap where no_rawat='"+TNoRw.getText()+"' order by tgl_keluar desc limit 1",Keluar);
 //        Sequel.cariIsi("select jam_keluar from kamar_inap where no_rawat='"+TNoRw.getText()+"' order by jam_keluar desc limit 1",JamKeluar);
 //        Sequel.cariIsi("select reg_periksa.kd_dokter, dokter.nm_dokter from reg_periksa INNER JOIN dokter ON reg_periksa.kd_dokter = dokter.kd_dokter where no_rawat='"+TNoRw.getText()+"' ",KodeDokter1,NamaDokter1);
@@ -5159,6 +5165,15 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
     }
     
     public void setNoRm(String norwt, Date tgl2) {
+        setNoRmDenganSumberRanap(norwt,norwt,tgl2);
+    }
+
+    public void setNoRmGabung(String norwt,String noRawatIbu,Date tgl2) {
+        setNoRmDenganSumberRanap(norwt,noRawatIbu,tgl2);
+    }
+
+    private void setNoRmDenganSumberRanap(String norwt,String sumberRanap,Date tgl2) {
+        noRawatSumberRanap=sumberRanap==null||sumberRanap.trim().isEmpty()?norwt:sumberRanap.trim();
         TNoRw.setText(norwt);
         TCari.setText(norwt);
         Sequel.cariIsi("select tgl_registrasi from reg_periksa where no_rawat='"+norwt+"'", DTPCari1);
@@ -5176,7 +5191,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                     "SELECT IF(DATE_FORMAT(kamar_inap.tgl_keluar, \"%d-%m-%Y\")='00-00-0000',DATE_FORMAT(CURRENT_DATE,\"%d-%m-%Y\"),DATE_FORMAT(kamar_inap.tgl_keluar, \"%d-%m-%Y\")) as tgl_keluar,IF(kamar_inap.jam_keluar='00:00:00',CURRENT_TIME,kamar_inap.jam_keluar) as jam_keluar FROM kamar_inap "
                             + "WHERE kamar_inap.no_rawat=?");
             try {
-                ps.setString(1,norwt);
+                ps.setString(1,noRawatSumberRanap);
                 rs=ps.executeQuery();
                 while(rs.next()){
 //                    if(Keluar.getSelectedItem()){

@@ -26,6 +26,9 @@ public final class MasterCariTemplateResep extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private String kodedokter = "";
+    private String kodedokterFilter = "";
+    private boolean memuatPilihanDokter = false;
+    private final java.util.Map<String, String> kodePilihanDokter = new java.util.LinkedHashMap<>();
     private TemplateResepListener listener;
     private final MasterTemplateResep masterTemplate = new MasterTemplateResep(null, true);
 
@@ -64,6 +67,14 @@ public final class MasterCariTemplateResep extends javax.swing.JDialog {
                 tampil();
             }
         });
+        PilihDokter.addActionListener(e -> {
+            if (memuatPilihanDokter)
+                return;
+            Object pilihan = PilihDokter.getSelectedItem();
+            kodedokterFilter = pilihan == null ? kodedokter
+                    : kodePilihanDokter.getOrDefault(pilihan.toString(), kodedokter);
+            tampil();
+        });
     }
 
     private DefaultTableModel model(Object[] k) {
@@ -97,6 +108,8 @@ public final class MasterCariTemplateResep extends javax.swing.JDialog {
         Scroll = new widget.ScrollPane();
         tbDokter = new widget.Table();
         panelisi3 = new widget.panelisi();
+        label11 = new widget.Label();
+        PilihDokter = new javax.swing.JComboBox<>();
         label9 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
@@ -149,13 +162,23 @@ public final class MasterCariTemplateResep extends javax.swing.JDialog {
         panelisi3.setPreferredSize(new java.awt.Dimension(100, 43));
         panelisi3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 4, 9));
 
+        label11.setText("Dokter :");
+        label11.setName("label11"); // NOI18N
+        label11.setPreferredSize(new java.awt.Dimension(68, 23));
+        panelisi3.add(label11);
+
+        PilihDokter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua" }));
+        PilihDokter.setName("PilihDokter"); // NOI18N
+        PilihDokter.setPreferredSize(new java.awt.Dimension(272, 22));
+        panelisi3.add(PilihDokter);
+
         label9.setText("Key Word :");
         label9.setName("label9"); // NOI18N
         label9.setPreferredSize(new java.awt.Dimension(68, 23));
         panelisi3.add(label9);
 
         TCari.setName("TCari"); // NOI18N
-        TCari.setPreferredSize(new java.awt.Dimension(312, 23));
+        TCari.setPreferredSize(new java.awt.Dimension(150, 23));
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
@@ -230,6 +253,7 @@ public final class MasterCariTemplateResep extends javax.swing.JDialog {
         BtnTambah.setMnemonic('3');
         BtnTambah.setText("Buat Template");
         BtnTambah.setToolTipText("Alt+3");
+        BtnTambah.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnTambah.setName("BtnTambah"); // NOI18N
         BtnTambah.setPreferredSize(new java.awt.Dimension(158, 23));
         BtnTambah.addActionListener(new java.awt.event.ActionListener() {
@@ -243,6 +267,7 @@ public final class MasterCariTemplateResep extends javax.swing.JDialog {
         BtnKeluar.setMnemonic('4');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+4");
+        BtnKeluar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(155, 23));
         BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
@@ -389,12 +414,14 @@ public final class MasterCariTemplateResep extends javax.swing.JDialog {
     private widget.Label LCount;
     private widget.ScrollPane ObatNonRacik;
     private widget.ScrollPane ObatRacik;
+    private javax.swing.JComboBox<String> PilihDokter;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel19;
     private widget.Label jLabel20;
     private widget.Label label10;
+    private widget.Label label11;
     private widget.Label label9;
     private widget.panelisi panelisi3;
     private widget.ScrollPane scrollPane2;
@@ -410,6 +437,8 @@ public final class MasterCariTemplateResep extends javax.swing.JDialog {
 
     public void setDokter(String kode) {
         kodedokter = kode == null ? "" : kode.trim();
+        kodedokterFilter = kodedokter;
+        muatPilihanDokter();
         tampil();
     }
 
@@ -417,23 +446,81 @@ public final class MasterCariTemplateResep extends javax.swing.JDialog {
         setDokter(kode);
     }
 
+    private void muatPilihanDokter() {
+        memuatPilihanDokter = true;
+        kodePilihanDokter.clear();
+        PilihDokter.removeAllItems();
+        String pilihanDokterSaatIni = "";
+        try {
+            if (!kodedokter.isEmpty()) {
+                String namaDokter = "";
+                try (PreparedStatement pst = koneksi.prepareStatement(
+                        "select nm_dokter from dokter where kd_dokter=?");) {
+                    pst.setString(1, kodedokter);
+                    try (ResultSet rst = pst.executeQuery()) {
+                        if (rst.next())
+                            namaDokter = rst.getString(1);
+                    }
+                }
+                pilihanDokterSaatIni = kodedokter + " - " +
+                        (namaDokter.isEmpty() ? "Dokter Saat Ini" : namaDokter) + " (Saat Ini)";
+                kodePilihanDokter.put(pilihanDokterSaatIni, kodedokter);
+                PilihDokter.addItem(pilihanDokterSaatIni);
+            }
+
+            String semuaDokter = "Semua Dokter";
+            kodePilihanDokter.put(semuaDokter, "");
+            PilihDokter.addItem(semuaDokter);
+
+            try (PreparedStatement pst = koneksi.prepareStatement(
+                    "select distinct d.kd_dokter,d.nm_dokter from template_resep_dokter t " +
+                    "inner join dokter d on d.kd_dokter=t.kd_dokter where t.aktif='Ya' " +
+                    "order by d.nm_dokter,d.kd_dokter");
+                 ResultSet rst = pst.executeQuery()) {
+                while (rst.next()) {
+                    String kode = rst.getString("kd_dokter");
+                    if (kode.equals(kodedokter))
+                        continue;
+                    String label = kode + " - " + rst.getString("nm_dokter");
+                    kodePilihanDokter.put(label, kode);
+                    PilihDokter.addItem(label);
+                }
+            }
+            if (!pilihanDokterSaatIni.isEmpty())
+                PilihDokter.setSelectedItem(pilihanDokterSaatIni);
+            else
+                PilihDokter.setSelectedItem(semuaDokter);
+        } catch (Exception e) {
+            System.out.println("Notif Pilihan Dokter Template Resep : " + e);
+        } finally {
+            memuatPilihanDokter = false;
+        }
+    }
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         Valid.tabelKosong(tabModeObatUmum);
         Valid.tabelKosong(tabModeObatRacikan);
         Valid.tabelKosong(tabModeDetailObatRacikan);
-        if (kodedokter.isEmpty()) {
+        if (kodedokter.isEmpty() && kodedokterFilter.isEmpty()) {
             LCount.setText("0");
             return;
         }
         String cari = "%" + TCari.getText().trim() + "%";
         try {
             ps = koneksi.prepareStatement(
-                    "select t.no_template,t.nama_template,t.keterangan,t.kd_dokter,d.nm_dokter from template_resep_dokter t inner join dokter d on d.kd_dokter=t.kd_dokter where t.kd_dokter=? and t.aktif='Ya' and (t.no_template like ? or t.nama_template like ? or t.keterangan like ?) order by t.nama_template,t.no_template");
-            ps.setString(1, kodedokter);
-            ps.setString(2, cari);
-            ps.setString(3, cari);
-            ps.setString(4, cari);
+                    "select t.no_template,t.nama_template,t.keterangan,t.kd_dokter,d.nm_dokter " +
+                    "from template_resep_dokter t inner join dokter d on d.kd_dokter=t.kd_dokter " +
+                    "where t.aktif='Ya' " + (kodedokterFilter.isEmpty() ? "" : "and t.kd_dokter=? ") +
+                    "and (t.no_template like ? or t.nama_template like ? or t.keterangan like ? or d.nm_dokter like ?) " +
+                    "order by d.nm_dokter,t.nama_template,t.no_template");
+            int parameter = 1;
+            if (!kodedokterFilter.isEmpty())
+                ps.setString(parameter++, kodedokterFilter);
+            ps.setString(parameter++, cari);
+            ps.setString(parameter++, cari);
+            ps.setString(parameter++, cari);
+            ps.setString(parameter, cari);
             rs = ps.executeQuery();
             while (rs.next())
                 tabMode.addRow(new Object[] { rs.getString("no_template"), rs.getString("nama_template"),
