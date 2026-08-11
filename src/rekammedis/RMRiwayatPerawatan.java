@@ -82,6 +82,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private double biayaperawatan=0;
     private String kddpjp="",dpjp="",dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="",kosong="",Series="",StudyInstanceUID="",norm="";
     private StringBuilder htmlContent;
+    private String modeRiwayatAktif="Ringkas";
     private final String placeholderFoto=getClass().getResource("/picture/klik_melihat_foto.png").toExternalForm();
     private final Map<String,String> qrTteCache=new HashMap<>();
     private final javax.swing.JTextField txtCariMenu=new javax.swing.JTextField();
@@ -90,6 +91,13 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private final widget.Button btnSemuaLab=new widget.Button();
     private final widget.Button btnSemuaRad=new widget.Button();
     private final widget.Button btnMuatUlangDicom=new widget.Button();
+    private final javax.swing.JButton btnModeRingkas=new javax.swing.JButton();
+    private final javax.swing.JButton btnModeKlinis=new javax.swing.JButton();
+    private final javax.swing.JButton btnModeLengkap=new javax.swing.JButton();
+    private final javax.swing.JPanel panelModeRiwayat=new javax.swing.JPanel();
+    private final javax.swing.JLabel lblModeRiwayat=new javax.swing.JLabel();
+    private final javax.swing.JLabel lblKeteranganMode=new javax.swing.JLabel();
+    private final javax.swing.JLabel lblJumlahPilihan=new javax.swing.JLabel();
     private final Map<String,widget.CekBox> daftarKunjunganLab=new LinkedHashMap<>();
     private final Map<String,widget.CekBox> daftarKunjunganRad=new LinkedHashMap<>();
     private final Map<String,CacheDicom> cacheInstanceDicom=new java.util.concurrent.ConcurrentHashMap<>();
@@ -198,6 +206,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         super(parent, false); // Selalu nonmodal agar FrmUtama tetap dapat diakses.
         initComponents();
         inisialisasiPencarianMenu();
+        inisialisasiPresetRiwayat();
         inisialisasiDaftarKunjunganRadLab();
         this.setLocation(8,1);
         setSize(885,674);
@@ -484,6 +493,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkResume = new widget.CekBox();
         chkResumeRalan = new widget.CekBox();
         chkResumeRanap = new widget.CekBox();
+        chkRingkasanMasukKeluar = new widget.CekBox();
         chkPemeriksaanRalan = new widget.CekBox();
         chkPemeriksaanRanap = new widget.CekBox();
         chkPemeriksaanRalan1 = new widget.CekBox();
@@ -863,7 +873,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
 
         PanelAccor.setBackground(new java.awt.Color(255, 255, 255));
         PanelAccor.setName("PanelAccor"); // NOI18N
-        PanelAccor.setPreferredSize(new java.awt.Dimension(275, 43));
+        PanelAccor.setPreferredSize(new java.awt.Dimension(330, 43));
         PanelAccor.setLayout(new java.awt.BorderLayout());
 
         ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
@@ -887,12 +897,12 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         ScrollMenu.setBorder(null);
         ScrollMenu.setName("ScrollMenu"); // NOI18N
         ScrollMenu.setOpaque(true);
-        ScrollMenu.setPreferredSize(new java.awt.Dimension(255, 1197));
+        ScrollMenu.setPreferredSize(new java.awt.Dimension(310, 1197));
 
         FormMenu.setBackground(new java.awt.Color(255, 255, 255));
         FormMenu.setBorder(null);
         FormMenu.setName("FormMenu"); // NOI18N
-        FormMenu.setPreferredSize(new java.awt.Dimension(255, 3000));
+        FormMenu.setPreferredSize(new java.awt.Dimension(310, 3000));
         FormMenu.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 1, 1));
 
         chkSemua.setSelected(true);
@@ -976,6 +986,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkResumeRanap.setOpaque(false);
         chkResumeRanap.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkResumeRanap);
+
+        chkRingkasanMasukKeluar.setSelected(true);
+        chkRingkasanMasukKeluar.setText("Ringkasan Masuk Keluar");
+        chkRingkasanMasukKeluar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkRingkasanMasukKeluar.setName("chkRingkasanMasukKeluar"); // NOI18N
+        chkRingkasanMasukKeluar.setOpaque(false);
+        chkRingkasanMasukKeluar.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkRingkasanMasukKeluar);
 
         chkPemeriksaanRalan.setSelected(true);
         chkPemeriksaanRalan.setText("Pemeriksaan Ralan");
@@ -2561,6 +2579,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkResume.setSelected(true);
             chkResumeRalan.setSelected(true);
             chkResumeRanap.setSelected(true);
+            chkRingkasanMasukKeluar.setSelected(true);
             chkBerkasDigital.setSelected(true);
             chkUjiFungsiKFR.setSelected(true);
             chkAsuhanKeperawatanIGD.setSelected(true);
@@ -2681,6 +2700,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkResume.setSelected(false);
             chkResumeRalan.setSelected(false);
             chkResumeRanap.setSelected(false);
+            chkRingkasanMasukKeluar.setSelected(false);
             chkBerkasDigital.setSelected(false);
             chkUjiFungsiKFR.setSelected(false);
             chkAsuhanKeperawatanIGD.setSelected(false);
@@ -3015,6 +3035,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkResume;
     private widget.CekBox chkResumeRalan;
     private widget.CekBox chkResumeRanap;
+    private widget.CekBox chkRingkasanMasukKeluar;
     private widget.CekBox chkSemua;
     private widget.CekBox chkSemua1;
     private widget.CekBox chkSemua2;
@@ -3323,9 +3344,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     
     private void inisialisasiPencarianMenu(){
         txtCariMenu.setName("txtCariMenu");
-        txtCariMenu.setToolTipText("Ketik nama menu yang ingin dicari");
-        txtCariMenu.setPreferredSize(new Dimension(245,42));
-        txtCariMenu.setBorder(javax.swing.BorderFactory.createTitledBorder("Cari menu"));
+        txtCariMenu.setToolTipText("Cari jenis data, misalnya: laboratorium, obat, operasi, atau resume");
+        txtCariMenu.setPreferredSize(new Dimension(295,46));
+        txtCariMenu.setFont(new java.awt.Font("Tahoma",java.awt.Font.PLAIN,11));
+        txtCariMenu.setBorder(javax.swing.BorderFactory.createTitledBorder("Cari jenis data"));
         FormMenu.add(txtCariMenu,0);
 
         txtCariMenu.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
@@ -3354,12 +3376,307 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 javax.swing.AbstractButton menu=(javax.swing.AbstractButton)komponen;
                 String namaMenu=menu.getText();
                 menu.setVisible(kata.isEmpty()||((namaMenu!=null)&&namaMenu.toLowerCase(java.util.Locale.ROOT).contains(kata)));
+            }else if(komponen instanceof javax.swing.JLabel && "sectionRiwayat".equals(komponen.getName())){
+                komponen.setVisible(kata.isEmpty());
             }
         }
 
+        // Kontrol utama selalu terlihat saat pencarian.
+        panelModeRiwayat.setVisible(true);
+        txtCariMenu.setVisible(true);
+        lblJumlahPilihan.setVisible(true);
+        sesuaikanTinggiMenuRiwayat();
         FormMenu.revalidate();
         FormMenu.repaint();
         javax.swing.SwingUtilities.invokeLater(() -> ScrollMenu.getVerticalScrollBar().setValue(0));
+    }
+
+    private void sesuaikanTinggiMenuRiwayat(){
+        int tinggi=12;
+        for(java.awt.Component komponen:FormMenu.getComponents()){
+            if(komponen.isVisible()){
+                int h=komponen.getPreferredSize()!=null ? komponen.getPreferredSize().height : 24;
+                tinggi+=Math.max(24,h)+2;
+            }
+        }
+        FormMenu.setPreferredSize(new Dimension(310,Math.max(220,tinggi)));
+    }
+
+    /**
+     * Panel preset dibuat sebagai kontrol utama RiwayatAll. Deskripsi sengaja
+     * terlihat langsung agar petugas tidak perlu memahami arti preset dari tooltip.
+     */
+    private void inisialisasiPresetRiwayat(){
+        panelModeRiwayat.setName("panelModeRiwayat");
+        panelModeRiwayat.setOpaque(true);
+        panelModeRiwayat.setBackground(new java.awt.Color(248,250,252));
+        panelModeRiwayat.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(214,221,230)),
+                javax.swing.BorderFactory.createEmptyBorder(10,10,10,10)));
+        panelModeRiwayat.setPreferredSize(new Dimension(295,224));
+        panelModeRiwayat.setLayout(new javax.swing.BoxLayout(panelModeRiwayat,javax.swing.BoxLayout.Y_AXIS));
+
+        javax.swing.JLabel judul=new javax.swing.JLabel("TAMPILAN RIWAYAT");
+        judul.setFont(new java.awt.Font("Tahoma",java.awt.Font.BOLD,12));
+        judul.setForeground(new java.awt.Color(45,55,72));
+        judul.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+        panelModeRiwayat.add(judul);
+
+        javax.swing.JLabel petunjuk=new javax.swing.JLabel("<html><span style='color:#667085'>Pilih sesuai kebutuhan agar data lebih cepat ditampilkan.</span></html>");
+        petunjuk.setFont(new java.awt.Font("Tahoma",java.awt.Font.PLAIN,10));
+        petunjuk.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+        petunjuk.setPreferredSize(new Dimension(270,34));
+        petunjuk.setMaximumSize(new Dimension(270,36));
+        panelModeRiwayat.add(petunjuk);
+        panelModeRiwayat.add(javax.swing.Box.createVerticalStrut(5));
+
+        siapkanTombolMode(btnModeRingkas,"CEPAT","Data inti untuk pelayanan sehari-hari");
+        siapkanTombolMode(btnModeKlinis,"KLINIS","Data inti + asesmen/catatan klinis");
+        siapkanTombolMode(btnModeLengkap,"SEMUA DATA","Seluruh riwayat untuk audit/telaah lengkap");
+
+        btnModeRingkas.addActionListener(e -> aturPresetRiwayat("RINGKAS"));
+        btnModeKlinis.addActionListener(e -> aturPresetRiwayat("KLINIS"));
+        btnModeLengkap.addActionListener(e -> aturPresetRiwayat("LENGKAP"));
+
+        panelModeRiwayat.add(btnModeRingkas);
+        panelModeRiwayat.add(javax.swing.Box.createVerticalStrut(4));
+        panelModeRiwayat.add(btnModeKlinis);
+        panelModeRiwayat.add(javax.swing.Box.createVerticalStrut(4));
+        panelModeRiwayat.add(btnModeLengkap);
+        panelModeRiwayat.add(javax.swing.Box.createVerticalStrut(7));
+
+        lblModeRiwayat.setFont(new java.awt.Font("Tahoma",java.awt.Font.BOLD,10));
+        lblModeRiwayat.setForeground(new java.awt.Color(36,86,150));
+        lblModeRiwayat.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+        panelModeRiwayat.add(lblModeRiwayat);
+
+        lblKeteranganMode.setFont(new java.awt.Font("Tahoma",java.awt.Font.PLAIN,9));
+        lblKeteranganMode.setForeground(new java.awt.Color(95,105,120));
+        lblKeteranganMode.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+        lblKeteranganMode.setPreferredSize(new Dimension(270,28));
+        lblKeteranganMode.setMaximumSize(new Dimension(270,30));
+        panelModeRiwayat.add(lblKeteranganMode);
+
+        FormMenu.add(panelModeRiwayat,0);
+        aturPresetRiwayat("RINGKAS");
+        rapikanMenuRiwayatProfesional();
+    }
+
+    private void siapkanTombolMode(javax.swing.JButton tombol,String judul,String keterangan){
+        tombol.setText("<html><b>"+judul+"</b><br><span style='font-size:9px'>"+keterangan+"</span></html>");
+        tombol.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tombol.setFocusPainted(false);
+        tombol.setOpaque(true);
+        tombol.setContentAreaFilled(true);
+        tombol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tombol.setFont(new java.awt.Font("Tahoma",java.awt.Font.PLAIN,10));
+        tombol.setPreferredSize(new Dimension(270,46));
+        tombol.setMinimumSize(new Dimension(270,46));
+        tombol.setMaximumSize(new Dimension(270,46));
+        tombol.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+        tombol.setToolTipText(keterangan);
+    }
+
+    private void tampilkanModeAktif(String mode){
+        java.awt.Color aktif=new java.awt.Color(45,108,168);
+        java.awt.Color nonAktif=new java.awt.Color(255,255,255);
+        java.awt.Color teksAktif=java.awt.Color.WHITE;
+        java.awt.Color teksNormal=new java.awt.Color(55,65,81);
+        java.awt.Color garis=new java.awt.Color(205,214,224);
+
+        javax.swing.JButton[] tombol={btnModeRingkas,btnModeKlinis,btnModeLengkap};
+        for(javax.swing.JButton b:tombol){
+            b.setBackground(nonAktif);
+            b.setForeground(teksNormal);
+            b.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                    javax.swing.BorderFactory.createLineBorder(garis),
+                    javax.swing.BorderFactory.createEmptyBorder(4,8,4,8)));
+        }
+
+        javax.swing.JButton dipilih=btnModeRingkas;
+        String status="AKTIF: CEPAT";
+        String ket="Rekomendasi harian • paling cepat dan ringan.";
+        if("KLINIS".equals(mode)){
+            dipilih=btnModeKlinis;
+            status="AKTIF: KLINIS";
+            ket="Untuk telaah pelayanan klinis yang lebih lengkap.";
+        }else if("LENGKAP".equals(mode)){
+            dipilih=btnModeLengkap;
+            status="AKTIF: SEMUA DATA";
+            ket="Untuk audit/telaah lengkap • proses dapat lebih lama.";
+        }
+        dipilih.setBackground(aktif);
+        dipilih.setForeground(teksAktif);
+        dipilih.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(32,82,130),2),
+                javax.swing.BorderFactory.createEmptyBorder(3,7,3,7)));
+        lblModeRiwayat.setText(status);
+        lblKeteranganMode.setText("<html>"+ket+"</html>");
+    }
+
+    private void aturPresetRiwayat(String mode){
+        // Memanfaatkan event chkSemua agar seluruh pilihan direset secara konsisten.
+        if(chkSemua.isSelected()){
+            chkSemua.setSelected(false);
+        }else{
+            setSemuaPilihanRiwayat(false);
+        }
+
+        if("LENGKAP".equals(mode)){
+            chkSemua.setSelected(true);
+            modeRiwayatAktif="Lengkap";
+            txtCariMenu.setBorder(javax.swing.BorderFactory.createTitledBorder("Cari jenis data"));
+            tampilkanModeAktif("LENGKAP");
+            perbaruiJumlahPilihanRiwayat();
+            sesuaikanTinggiMenuRiwayat();
+            return;
+        }
+
+        // Informasi inti yang paling sering dibutuhkan dan relatif ringan.
+        chkRingkasanMasukKeluar.setSelected(true);
+        chkResume.setSelected(true);
+        chkResumeRalan.setSelected(true);
+        chkResumeRanap.setSelected(true);
+        chkDiagnosaPenyakit.setSelected(true);
+        chkProsedurTindakan.setSelected(true);
+        chkPemeriksaanRalan.setSelected(true);
+        chkPemeriksaanRanap.setSelected(true);
+        chkPemeriksaanLaborat.setSelected(true);
+        chkPemeriksaanRadiologi.setSelected(true);
+        chkPemberianObat.setSelected(true);
+        chkResepPulang.setSelected(true);
+        chkPenggunaanKamar.setSelected(true);
+
+        if("KLINIS".equals(mode)){
+            chkTriase.setSelected(true);
+            chkSkriningIGD.setSelected(true);
+            chkAsuhanKeperawatanIGD.setSelected(true);
+            chkAsuhanMedisIGD.setSelected(true);
+            chkAsuhanKeperawatanRalan.setSelected(true);
+            chkAsuhanMedisRalan.setSelected(true);
+            chkAsuhanKeperawatanRanap.setSelected(true);
+            chkAsuhanMedisRanap.setSelected(true);
+            chkCatatanDokter.setSelected(true);
+            chkCatatanObservasiIGD.setSelected(true);
+            chkCatatanObservasiRanap.setSelected(true);
+            chkRekonsiliasiObat.setSelected(true);
+            chkDaftarPemberianTerapiCairan.setSelected(true);
+            chkKonsultasiMedik.setSelected(true);
+            modeRiwayatAktif="Klinis";
+            tampilkanModeAktif("KLINIS");
+        }else{
+            modeRiwayatAktif="Ringkas";
+            tampilkanModeAktif("RINGKAS");
+        }
+        txtCariMenu.setBorder(javax.swing.BorderFactory.createTitledBorder("Cari jenis data"));
+        perbaruiJumlahPilihanRiwayat();
+        sesuaikanTinggiMenuRiwayat();
+        FormMenu.revalidate();
+        FormMenu.repaint();
+    }
+
+    /**
+     * Menata ulang sidebar RiwayatAll tanpa mengubah fungsi checkbox existing.
+     * Tujuan: navigasi lebih mudah, target klik lebih besar, dan kategori data jelas.
+     */
+    private void rapikanMenuRiwayatProfesional(){
+        java.util.List<java.awt.Component> pilihan=new java.util.ArrayList<>();
+        for(java.awt.Component c:FormMenu.getComponents()){
+            if(c!=panelModeRiwayat && c!=txtCariMenu){
+                pilihan.add(c);
+            }
+        }
+
+        FormMenu.removeAll();
+        FormMenu.setBackground(new java.awt.Color(246,248,251));
+        FormMenu.add(panelModeRiwayat);
+        FormMenu.add(txtCariMenu);
+
+        lblJumlahPilihan.setName("lblJumlahPilihan");
+        lblJumlahPilihan.setOpaque(true);
+        lblJumlahPilihan.setBackground(new java.awt.Color(235,244,252));
+        lblJumlahPilihan.setForeground(new java.awt.Color(31,78,121));
+        lblJumlahPilihan.setFont(new java.awt.Font("Tahoma",java.awt.Font.BOLD,10));
+        lblJumlahPilihan.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(200,220,238)),
+                javax.swing.BorderFactory.createEmptyBorder(6,9,6,9)));
+        lblJumlahPilihan.setPreferredSize(new Dimension(295,32));
+        FormMenu.add(lblJumlahPilihan);
+
+        java.util.Map<java.awt.Component,String> pembuka=new java.util.IdentityHashMap<>();
+        pembuka.put(chkSemua,"PILIHAN DATA");
+        pembuka.put(chkResume,"RINGKASAN & RESUME");
+        pembuka.put(chkPemeriksaanRalan,"PEMERIKSAAN UTAMA");
+        pembuka.put(chkTriase,"ASESMEN & CATATAN KLINIS");
+        pembuka.put(chkChecklistPreOperasi,"OPERASI, ANESTESI & HCU/ICU");
+        pembuka.put(chkAsuhanGizi,"GIZI, FARMASI & TERAPI");
+        pembuka.put(chkTransferAntarRuang,"TRANSFER & PENILAIAN KHUSUS");
+        pembuka.put(chkTindakanRalanDokter,"TINDAKAN & ADMINISTRASI PERAWATAN");
+
+        for(java.awt.Component c:pilihan){
+            String judul=pembuka.get(c);
+            if(judul!=null){
+                FormMenu.add(buatJudulKelompok(judul));
+            }
+            if(c instanceof widget.CekBox){
+                widget.CekBox cb=(widget.CekBox)c;
+                gayaCheckboxRiwayat(cb);
+                cb.addItemListener(e -> perbaruiJumlahPilihanRiwayat());
+            }
+            FormMenu.add(c);
+        }
+        perbaruiJumlahPilihanRiwayat();
+        sesuaikanTinggiMenuRiwayat();
+        FormMenu.revalidate();
+        FormMenu.repaint();
+    }
+
+    private javax.swing.JLabel buatJudulKelompok(String teks){
+        javax.swing.JLabel label=new javax.swing.JLabel(teks);
+        label.setName("sectionRiwayat");
+        label.setOpaque(false);
+        label.setForeground(new java.awt.Color(83,96,112));
+        label.setFont(new java.awt.Font("Tahoma",java.awt.Font.BOLD,10));
+        label.setBorder(javax.swing.BorderFactory.createEmptyBorder(9,5,3,5));
+        label.setPreferredSize(new Dimension(295,27));
+        return label;
+    }
+
+    private void gayaCheckboxRiwayat(widget.CekBox cb){
+        cb.setPreferredSize(new Dimension(295,28));
+        cb.setFont(new java.awt.Font("Tahoma",java.awt.Font.PLAIN,11));
+        cb.setForeground(new java.awt.Color(48,57,68));
+        cb.setOpaque(true);
+        cb.setBackground(java.awt.Color.WHITE);
+        cb.setBorder(javax.swing.BorderFactory.createEmptyBorder(2,8,2,5));
+        cb.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        if(cb==chkSemua){
+            cb.setText("Pilih semua jenis data");
+            cb.setFont(new java.awt.Font("Tahoma",java.awt.Font.BOLD,11));
+            cb.setBackground(new java.awt.Color(249,250,252));
+        }
+    }
+
+    private void perbaruiJumlahPilihanRiwayat(){
+        int aktif=0,total=0;
+        for(java.awt.Component c:FormMenu.getComponents()){
+            if(c instanceof widget.CekBox && c!=chkSemua){
+                total++;
+                if(((widget.CekBox)c).isSelected()) aktif++;
+            }
+        }
+        lblJumlahPilihan.setText("  "+aktif+" dari "+total+" jenis data dipilih");
+    }
+
+    private void setSemuaPilihanRiwayat(boolean dipilih){
+        for(java.awt.Component komponen:FormMenu.getComponents()){
+            if(komponen instanceof widget.CekBox){
+                widget.CekBox pilihan=(widget.CekBox)komponen;
+                if(pilihan!=chkSemua){
+                    pilihan.setSelected(dipilih);
+                }
+            }
+        }
     }
 
     private void inisialisasiDaftarKunjunganRadLab(){
@@ -3918,6 +4235,132 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }
 
+    private String amanHtml(String nilai){
+        if(nilai==null){
+            return "";
+        }
+        return nilai.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
+    }
+
+    private String nilaiRiwayat(String nilai){
+        if(nilai==null || nilai.trim().equals("") || nilai.equalsIgnoreCase("null")){
+            return "-";
+        }
+        return amanHtml(nilai.trim());
+    }
+
+    private void tampilRingkasanMasukKeluar(String noRawat) {
+        PreparedStatement psRingkasan=null, psDiagnosa=null, psProsedur=null;
+        ResultSet rsRingkasan=null, rsDiagnosa=null, rsProsedur=null;
+        try {
+            psRingkasan=koneksi.prepareStatement(
+                "select rp.no_rawat,rp.no_rkm_medis,p.nm_pasien,p.jk,p.tgl_lahir,p.umur,p.alamat,p.no_tlp,"+
+                "p.agama,p.gol_darah,p.stts_nikah,p.pnd,p.pekerjaan,p.nm_ibu,rp.tgl_registrasi,rp.jam_reg,"+
+                "rp.p_jawab,rp.almt_pj,rp.hubunganpj,d.nm_dokter,pj.png_jawab,pol.nm_poli,"+
+                "ki.tgl_masuk,ki.jam_masuk,ki.tgl_keluar,ki.jam_keluar,ki.lama,ki.stts_pulang,"+
+                "ki.diagnosa_awal,ki.diagnosa_akhir,k.kd_kamar,b.nm_bangsal "+
+                "from reg_periksa rp inner join pasien p on p.no_rkm_medis=rp.no_rkm_medis "+
+                "left join dokter d on d.kd_dokter=rp.kd_dokter left join penjab pj on pj.kd_pj=rp.kd_pj "+
+                "left join poliklinik pol on pol.kd_poli=rp.kd_poli left join kamar_inap ki on ki.no_rawat=rp.no_rawat "+
+                "left join kamar k on k.kd_kamar=ki.kd_kamar left join bangsal b on b.kd_bangsal=k.kd_bangsal "+
+                "where rp.no_rawat=? order by ki.tgl_masuk asc,ki.jam_masuk asc limit 1");
+            psRingkasan.setString(1,noRawat);
+            rsRingkasan=psRingkasan.executeQuery();
+            if(rsRingkasan.next()){
+                String ruangRawat=nilaiRiwayat(rsRingkasan.getString("nm_bangsal"));
+                String kodeKamar=nilaiRiwayat(rsRingkasan.getString("kd_kamar"));
+                if(!kodeKamar.equals("-")){
+                    ruangRawat=ruangRawat+" / "+kodeKamar;
+                }
+
+                String penanggungJawab=nilaiRiwayat(rsRingkasan.getString("p_jawab"));
+                String hubungan=nilaiRiwayat(rsRingkasan.getString("hubunganpj"));
+                if(!hubungan.equals("-")){
+                    penanggungJawab=penanggungJawab+" ("+hubungan+")";
+                }
+
+                htmlContent.append(
+                    "<tr class='isi'><td valign='top' width='2%'></td><td valign='top' colspan='3'>"+
+                    "<table width='100%' border='0' cellpadding='3' cellspacing='0' class='isi'>"+
+                    "<tr><td colspan='4' bgcolor='#FFFAF8'><b>RINGKASAN MASUK KELUAR (RM 16.19)</b></td></tr>"+
+                    "<tr><td colspan='4' bgcolor='#FBFBFB'><b>Informasi Rawat Inap</b></td></tr>"+
+                    "<tr><td valign='top' width='18%'>Tanggal Masuk</td><td valign='top' width='32%'>"+nilaiRiwayat(rsRingkasan.getString("tgl_masuk"))+" "+nilaiRiwayat(rsRingkasan.getString("jam_masuk"))+"</td>"+
+                    "<td valign='top' width='18%'>Tanggal Keluar</td><td valign='top' width='32%'>"+nilaiRiwayat(rsRingkasan.getString("tgl_keluar"))+" "+nilaiRiwayat(rsRingkasan.getString("jam_keluar"))+"</td></tr>"+
+                    "<tr><td valign='top'>Ruang Rawat</td><td valign='top'>"+ruangRawat+"</td>"+
+                    "<td valign='top'>Lama Rawat</td><td valign='top'>"+nilaiRiwayat(rsRingkasan.getString("lama"))+" hari</td></tr>"+
+                    "<tr><td valign='top'>Cara Penerimaan</td><td valign='top'>"+nilaiRiwayat(rsRingkasan.getString("nm_poli"))+"</td>"+
+                    "<td valign='top'>Cara Bayar</td><td valign='top'>"+nilaiRiwayat(rsRingkasan.getString("png_jawab"))+"</td></tr>"+
+                    "<tr><td valign='top'>Dokter Merawat</td><td valign='top' colspan='3'>"+nilaiRiwayat(rsRingkasan.getString("nm_dokter"))+"</td></tr>"+
+
+                    "<tr><td colspan='4' bgcolor='#FBFBFB'><b>Identitas & Penanggung Jawab</b></td></tr>"+
+                    "<tr><td valign='top'>Umur / Jenis Kelamin</td><td valign='top'>"+nilaiRiwayat(rsRingkasan.getString("umur"))+" / "+nilaiRiwayat(rsRingkasan.getString("jk"))+"</td>"+
+                    "<td valign='top'>Status / Agama / Gol. Darah</td><td valign='top'>"+nilaiRiwayat(rsRingkasan.getString("stts_nikah"))+" / "+nilaiRiwayat(rsRingkasan.getString("agama"))+" / "+nilaiRiwayat(rsRingkasan.getString("gol_darah"))+"</td></tr>"+
+                    "<tr><td valign='top'>Pendidikan</td><td valign='top'>"+nilaiRiwayat(rsRingkasan.getString("pnd"))+"</td>"+
+                    "<td valign='top'>Pekerjaan</td><td valign='top'>"+nilaiRiwayat(rsRingkasan.getString("pekerjaan"))+"</td></tr>"+
+                    "<tr><td valign='top'>Alamat</td><td valign='top' colspan='3'>"+nilaiRiwayat(rsRingkasan.getString("alamat"))+" &nbsp; | &nbsp; Telp: "+nilaiRiwayat(rsRingkasan.getString("no_tlp"))+"</td></tr>"+
+                    "<tr><td valign='top'>Orang Tua/Suami/Istri</td><td valign='top'>"+nilaiRiwayat(rsRingkasan.getString("nm_ibu"))+"</td>"+
+                    "<td valign='top'>Penanggung Jawab</td><td valign='top'>"+penanggungJawab+"</td></tr>"+
+                    "<tr><td valign='top'>Alamat Penanggung Jawab</td><td valign='top' colspan='3'>"+nilaiRiwayat(rsRingkasan.getString("almt_pj"))+"</td></tr>"+
+
+                    "<tr><td colspan='4' bgcolor='#FBFBFB'><b>Ringkasan Klinis</b></td></tr>"+
+                    "<tr><td valign='top'>Diagnosa Masuk</td><td valign='top' colspan='3'>"+nilaiRiwayat(rsRingkasan.getString("diagnosa_awal"))+"</td></tr>"+
+                    "<tr><td valign='top'>Diagnosa Akhir</td><td valign='top' colspan='3'>"+nilaiRiwayat(rsRingkasan.getString("diagnosa_akhir"))+"</td></tr>"+
+                    "<tr><td valign='top'>Keadaan / Cara Keluar</td><td valign='top' colspan='3'>"+nilaiRiwayat(rsRingkasan.getString("stts_pulang"))+"</td></tr>"
+                );
+
+                psDiagnosa=koneksi.prepareStatement(
+                    "select dp.kd_penyakit,py.nm_penyakit,dp.prioritas,dp.status_penyakit from diagnosa_pasien dp "+
+                    "inner join penyakit py on py.kd_penyakit=dp.kd_penyakit where dp.no_rawat=? and dp.status='Ranap' order by dp.prioritas asc");
+                psDiagnosa.setString(1,noRawat);
+                rsDiagnosa=psDiagnosa.executeQuery();
+                StringBuilder diagnosa=new StringBuilder();
+                int nomorDiagnosa=1;
+                while(rsDiagnosa.next()){
+                    if(diagnosa.length()>0) diagnosa.append("<br>");
+                    diagnosa.append(nomorDiagnosa++).append(". <b>")
+                            .append(nilaiRiwayat(rsDiagnosa.getString("kd_penyakit"))).append("</b> - ")
+                            .append(nilaiRiwayat(rsDiagnosa.getString("nm_penyakit")));
+                    String statusPenyakit=rsDiagnosa.getString("status_penyakit");
+                    if(statusPenyakit!=null && !statusPenyakit.trim().equals("")){
+                        diagnosa.append(" &nbsp; [").append(amanHtml(statusPenyakit)).append("]");
+                    }
+                }
+                htmlContent.append(
+                    "<tr><td valign='top'>Diagnosa ICD-10</td><td valign='top' colspan='3'>"+
+                    (diagnosa.length()>0?diagnosa.toString():"-")+"</td></tr>"
+                );
+
+                psProsedur=koneksi.prepareStatement(
+                    "select pp.kode,i.deskripsi_panjang from prosedur_pasien pp inner join icd9 i on i.kode=pp.kode "+
+                    "where pp.no_rawat=? and pp.status='Ranap'");
+                psProsedur.setString(1,noRawat);
+                rsProsedur=psProsedur.executeQuery();
+                StringBuilder prosedur=new StringBuilder();
+                int nomorProsedur=1;
+                while(rsProsedur.next()){
+                    if(prosedur.length()>0) prosedur.append("<br>");
+                    prosedur.append(nomorProsedur++).append(". <b>")
+                            .append(nilaiRiwayat(rsProsedur.getString("kode"))).append("</b> - ")
+                            .append(nilaiRiwayat(rsProsedur.getString("deskripsi_panjang")));
+                }
+                htmlContent.append(
+                    "<tr><td valign='top'>Tindakan ICD-9 CM</td><td valign='top' colspan='3'>"+
+                    (prosedur.length()>0?prosedur.toString():"-")+"</td></tr>"+
+                    "</table></td></tr>"
+                );
+            }
+        } catch(Exception e){
+            System.out.println("Notif Ringkasan Masuk Keluar : "+e);
+        } finally {
+            try{ if(rsProsedur!=null) rsProsedur.close(); }catch(Exception e){}
+            try{ if(psProsedur!=null) psProsedur.close(); }catch(Exception e){}
+            try{ if(rsDiagnosa!=null) rsDiagnosa.close(); }catch(Exception e){}
+            try{ if(psDiagnosa!=null) psDiagnosa.close(); }catch(Exception e){}
+            try{ if(rsRingkasan!=null) rsRingkasan.close(); }catch(Exception e){}
+            try{ if(psRingkasan!=null) psRingkasan.close(); }catch(Exception e){}
+        }
+    }
+
     private void tampilPerawatan() {
         if((pekerjaDicom!=null)&&!pekerjaDicom.isDone()){
             pekerjaDicom.cancel(true);
@@ -3991,45 +4434,41 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 urut=1;
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    try {
-                        dokterrujukan="";
-                        polirujukan="";
-                        rs2=koneksi.prepareStatement(
+                    dokterrujukan="";
+                    polirujukan="";
+                    try (PreparedStatement psRujukan=koneksi.prepareStatement(
                             "select poliklinik.nm_poli,dokter.nm_dokter from rujukan_internal_poli "+
                             "inner join poliklinik on rujukan_internal_poli.kd_poli=poliklinik.kd_poli "+
                             "inner join dokter on rujukan_internal_poli.kd_dokter=dokter.kd_dokter "+
-                            "where no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
-                        while(rs2.next()){
-                            polirujukan=polirujukan+", "+rs2.getString("nm_poli");
-                            dokterrujukan=dokterrujukan+", "+rs2.getString("nm_dokter");
+                            "where no_rawat=?")) {
+                        psRujukan.setString(1,rs.getString("no_rawat"));
+                        try(ResultSet rsRujukan=psRujukan.executeQuery()){
+                            while(rsRujukan.next()){
+                                polirujukan=polirujukan+", "+rsRujukan.getString("nm_poli");
+                                dokterrujukan=dokterrujukan+", "+rsRujukan.getString("nm_dokter");
+                            }
                         }
                     } catch (Exception e) {
-                        System.out.println("Notif : "+e);
-                    } finally{
-                        if(rs2!=null){
-                            rs2.close();
-                        }
-                    }   
+                        System.out.println("Notif Rujukan Internal : "+e);
+                    }
                     
                     if (urut > 1) {
                         htmlContent.append(
-                            "<tr>"
-                            + "<td colspan='4' "
-                            + "style='height:12px; "
-                            + "border-top:3px solid #555555; "
-                            + "background-color:#F2F2F2;'>"
-                            + "&nbsp;"
-                            + "</td>"
-                            + "</tr>"
+                            "<tr><td colspan='4' style='height:14px;border-top:1px solid #D5DBDB;background:#FFFFFF'>&nbsp;</td></tr>"
                         );
                     }
 
+                    String warnaStatus="Ranap".equals(rs.getString("status_lanjut")) ? "#E8F3FF" : "#EDF7ED";
                     htmlContent.append(
+                      "<tr><td colspan='4' style='padding:7px 9px;background:"+warnaStatus+";border:1px solid #D5DBDB'>"+
+                        "<b>"+urut+". "+amanHtml(rs.getString("tgl_registrasi"))+" "+amanHtml(rs.getString("jam_reg"))+" &nbsp; • &nbsp; "+amanHtml(rs.getString("status_lanjut"))+"</b>"+
+                        " &nbsp; | &nbsp; "+amanHtml(rs.getString("nm_poli"))+" &nbsp; | &nbsp; "+amanHtml(rs.getString("nm_dokter"))+""+
+                      "</td></tr>"+
                       "<tr class='isi'>"+ 
-                        "<td valign='top' width='2%'>"+urut+"</td>"+
+                        "<td valign='top' width='2%'></td>"+
                         "<td valign='top' width='18%'>No.Rawat</td>"+
                         "<td valign='top' width='1%' align='center'>:</td>"+
-                        "<td valign='top' width='79%'>"+rs.getString("no_rawat")+"</td>"+
+                        "<td valign='top' width='79%'><b>"+amanHtml(rs.getString("no_rawat"))+"</b></td>"+
                       "</tr>"+
                       "<tr class='isi'>"+ 
                         "<td valign='top' width='2%'></td>"+
@@ -4056,34 +4495,34 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                         "<td valign='top' width='79%'>"+rs.getString("nm_dokter")+dokterrujukan+"</td>"+
                       "</tr>"
                     );
-                    if(rs.getString("status_lanjut").equals("Ranap")){
-                        try{
-                            rs3=koneksi.prepareStatement(
-                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
-                            if(rs3.next()){
-                                htmlContent.append(
-                                  "<tr class='isi'>"+ 
-                                    "<td valign='top' width='2%'></td>"+        
-                                    "<td valign='top' width='18%'>DPJP Ranap</td>"+
-                                    "<td valign='top' width='1%' align='center'>:</td>"+
-                                    "<td valign='top' width='79%'>"
-                                );
-                                rs3.beforeFirst();
-                                urutdpjp=1;
-                                while(rs3.next()){
-                                    htmlContent.append(urutdpjp+". "+rs3.getString("nm_dokter")+"&nbsp;&nbsp;");
-                                    urutdpjp++;
+                    if(rs.getString("status_lanjut").equals("Ranap") && chkRingkasanMasukKeluar.isSelected()){
+                        tampilRingkasanMasukKeluar(rs.getString("no_rawat"));
+                    }
+
+                    if(rs.getString("status_lanjut").equals("Ranap") && !chkRingkasanMasukKeluar.isSelected()){
+                        try(PreparedStatement psDpjp=koneksi.prepareStatement(
+                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=?")){
+                            psDpjp.setString(1,rs.getString("no_rawat"));
+                            try(ResultSet rsDpjp=psDpjp.executeQuery()){
+                                StringBuilder daftarDpjp=new StringBuilder();
+                                int nomorDpjp=1;
+                                while(rsDpjp.next()){
+                                    if(daftarDpjp.length()>0){
+                                        daftarDpjp.append(" &nbsp;&nbsp; ");
+                                    }
+                                    daftarDpjp.append(nomorDpjp++).append(". ").append(amanHtml(rsDpjp.getString("nm_dokter")));
                                 }
-                                htmlContent.append("</td>"+
-                                  "</tr>"
-                                );    
+                                if(daftarDpjp.length()>0){
+                                    htmlContent.append(
+                                      "<tr class='isi'><td valign='top' width='2%'></td>"+
+                                      "<td valign='top' width='18%'>DPJP Ranap</td>"+
+                                      "<td valign='top' width='1%' align='center'>:</td>"+
+                                      "<td valign='top' width='79%'>"+daftarDpjp.toString()+"</td></tr>"
+                                    );
+                                }
                             }
                         } catch (Exception e) {
                             System.out.println("Status Lanjut : "+e);
-                        } finally{
-                            if(rs3!=null){
-                                rs3.close();
-                            }
                         }
                     }
                     htmlContent.append( 
@@ -6281,9 +6720,22 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
                     
                 }
                 
+                if(urut==1 && htmlContent.length()==0){
+                    htmlContent.append(
+                        "<tr><td colspan='4' align='center' style='padding:32px;color:#666666'>"+
+                        "<b>Tidak ada riwayat yang ditemukan.</b><br>Periksa pasien, rentang tanggal, dokter/poliklinik, atau pilihan menu di panel kiri."+
+                        "</td></tr>"
+                    );
+                }
                 String halamanPerawatan=
                     "<html>"+
-                      "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                      "<table width='100%' border='0' align='center' cellpadding='4px' cellspacing='0' class='tbl_form'>"+
+                        "<tr><td colspan='4' style='padding:10px;background:#F7F9F9;border-bottom:2px solid #D5DBDB'>"+
+                          "<b style='font-size:13px'>RIWAYAT PERAWATAN</b><br>"+
+                          "<span>Pasien: <b>"+amanHtml(NmPasien.getText())+"</b> &nbsp; | &nbsp; No. RM: <b>"+amanHtml(NoRM.getText())+"</b>"+
+                          " &nbsp; | &nbsp; Tampilan: <b>"+amanHtml(modeRiwayatAktif)+"</b></span>"+
+                        "</td></tr>"+
+                        "<tr><td colspan='4' style='height:8px'></td></tr>"+
                        htmlContent.toString()+
                       "</table>"+
                     "</html>";
