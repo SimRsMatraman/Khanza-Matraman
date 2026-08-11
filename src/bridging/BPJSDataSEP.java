@@ -6287,13 +6287,26 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
             requestEntity = new HttpEntity(requestJson,headers);
             root = mapper.readTree(restTemplate.exchange(URL, HttpMethod.DELETE,requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
-            System.out.println("code : "+nameNode.path("code").asText());
-            System.out.println("message : "+nameNode.path("message").asText());
-            JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
-            if(nameNode.path("code").asText().equals("200")){
-                Sequel.meghapus("bridging_sep","no_sep",tbDataSEP.getValueAt(tbDataSEP.getSelectedRow(),0).toString());
-                tabMode.removeRow(tbDataSEP.getSelectedRow());
+            String kodeResponse=nameNode.path("code").asText();
+            String pesanResponse=nameNode.path("message").asText();
+            String pesanResponseKecil=pesanResponse.toLowerCase();
+            boolean sepTidakDitemukan=pesanResponseKecil.contains("sep") &&
+                    (pesanResponseKecil.contains("tidak ditemukan") || pesanResponseKecil.contains("tidak ada"));
+            System.out.println("code : "+kodeResponse);
+            System.out.println("message : "+pesanResponse);
+            if(kodeResponse.equals("200") || sepTidakDitemukan){
+                int barisTerpilih=tbDataSEP.getSelectedRow();
+                String noSep=tbDataSEP.getValueAt(barisTerpilih,0).toString();
+                Sequel.meghapus("bridging_sep","no_sep",noSep);
+                tabMode.removeRow(barisTerpilih);
                 emptTeks();
+                if(sepTidakDitemukan){
+                    JOptionPane.showMessageDialog(null,"SEP "+noSep+" sudah tidak ditemukan di VClaim. Data SEP lokal berhasil dihapus.");
+                }else{
+                    JOptionPane.showMessageDialog(null,pesanResponse);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,pesanResponse);
             }
         } catch (Exception e) {   
             System.out.println("Notif : "+e);
