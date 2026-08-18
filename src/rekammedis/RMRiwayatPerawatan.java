@@ -86,6 +86,9 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private final String placeholderFoto=getClass().getResource("/picture/klik_melihat_foto.png").toExternalForm();
     private final Map<String,String> qrTteCache=new HashMap<>();
     private final javax.swing.JTextField txtCariMenu=new javax.swing.JTextField();
+    private final widget.CekBox chkTransferPasienKamarOperasi=new widget.CekBox();
+    private final widget.CekBox chkPemantauanTraumaKulitNeonatus=new widget.CekBox();
+    private final widget.CekBox chkDaftarPemberianTerapiCairan=new widget.CekBox();
     private final javax.swing.JTextField txtCariLab=new javax.swing.JTextField();
     private final javax.swing.JTextField txtCariRad=new javax.swing.JTextField();
     private final widget.Button btnSemuaLab=new widget.Button();
@@ -458,6 +461,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         R3 = new widget.RadioButton();
         R4 = new widget.RadioButton();
         NoRawat = new widget.TextBox();
+        chkChecklistKriteriaMasukHCU = new widget.CekBox();
+        chkChecklistKriteriaKeluarHCU = new widget.CekBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass5 = new widget.panelisi();
         BtnPrint = new widget.Button();
@@ -557,8 +562,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkChecklistPostOperasi = new widget.CekBox();
         chkAsuhanPreOperasi = new widget.CekBox();
         chkAsuhanPreAnestesi = new widget.CekBox();
-        chkChecklistKriteriaMasukHCU = new widget.CekBox();
-        chkChecklistKriteriaKeluarHCU = new widget.CekBox();
         chkChecklistKriteriaMasukICU = new widget.CekBox();
         chkChecklistKriteriaKeluarICU = new widget.CekBox();
         chkAsuhanLanjutanRisikoJatuhDewasa = new widget.CekBox();
@@ -579,7 +582,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkKonselingFarmasi = new widget.CekBox();
         chkPelayananInformasiObat = new widget.CekBox();
         chkTransferAntarRuang = new widget.CekBox();
-        chkTransferPasienKamarOperasi = new widget.CekBox();
         chkAsuhanTambahanGeriatri = new widget.CekBox();
         chkAsuhanTambahanBunuhDiri = new widget.CekBox();
         chkAsuhanTambahanPerilakuKekerasan = new widget.CekBox();
@@ -604,7 +606,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkOperasiAlternatif = new widget.CekBox();
         chkDataIC = new widget.CekBox();
         chkJadwalPemberianObatRanap = new widget.CekBox();
-        chkDaftarPemberianTerapiCairan = new widget.CekBox();
         RiwayatLab = new widget.InternalFrame();
         Scroll6 = new widget.ScrollPane();
         LoadHTMLRiwayatRadLab = new widget.editorpane();
@@ -700,6 +701,20 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                 NoRawatKeyPressed(evt);
             }
         });
+
+        chkChecklistKriteriaMasukHCU.setSelected(true);
+        chkChecklistKriteriaMasukHCU.setText("Check List Kriteria Masuk HCU");
+        chkChecklistKriteriaMasukHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkChecklistKriteriaMasukHCU.setName("chkChecklistKriteriaMasukHCU"); // NOI18N
+        chkChecklistKriteriaMasukHCU.setOpaque(false);
+        chkChecklistKriteriaMasukHCU.setPreferredSize(new java.awt.Dimension(245, 22));
+
+        chkChecklistKriteriaKeluarHCU.setSelected(true);
+        chkChecklistKriteriaKeluarHCU.setText("Check List Kriteria Keluar HCU");
+        chkChecklistKriteriaKeluarHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkChecklistKriteriaKeluarHCU.setName("chkChecklistKriteriaKeluarHCU"); // NOI18N
+        chkChecklistKriteriaKeluarHCU.setOpaque(false);
+        chkChecklistKriteriaKeluarHCU.setPreferredSize(new java.awt.Dimension(245, 22));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -1539,22 +1554,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkAsuhanPreAnestesi.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkAsuhanPreAnestesi);
 
-        chkChecklistKriteriaMasukHCU.setSelected(true);
-        chkChecklistKriteriaMasukHCU.setText("Check List Kriteria Masuk HCU");
-        chkChecklistKriteriaMasukHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        chkChecklistKriteriaMasukHCU.setName("chkChecklistKriteriaMasukHCU"); // NOI18N
-        chkChecklistKriteriaMasukHCU.setOpaque(false);
-        chkChecklistKriteriaMasukHCU.setPreferredSize(new java.awt.Dimension(245, 22));
-        FormMenu.add(chkChecklistKriteriaMasukHCU);
-
-        chkChecklistKriteriaKeluarHCU.setSelected(true);
-        chkChecklistKriteriaKeluarHCU.setText("Check List Kriteria Keluar HCU");
-        chkChecklistKriteriaKeluarHCU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        chkChecklistKriteriaKeluarHCU.setName("chkChecklistKriteriaKeluarHCU"); // NOI18N
-        chkChecklistKriteriaKeluarHCU.setOpaque(false);
-        chkChecklistKriteriaKeluarHCU.setPreferredSize(new java.awt.Dimension(245, 22));
-        FormMenu.add(chkChecklistKriteriaKeluarHCU);
-
         chkChecklistKriteriaMasukICU.setSelected(true);
         chkChecklistKriteriaMasukICU.setText("Check List Kriteria Masuk ICU");
         chkChecklistKriteriaMasukICU.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1714,14 +1713,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkTransferAntarRuang.setOpaque(false);
         chkTransferAntarRuang.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkTransferAntarRuang);
-
-        chkTransferPasienKamarOperasi.setSelected(true);
-        chkTransferPasienKamarOperasi.setText("Transfer Pasien Kamar Operasi");
-        chkTransferPasienKamarOperasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        chkTransferPasienKamarOperasi.setName("chkTransferPasienKamarOperasi"); // NOI18N
-        chkTransferPasienKamarOperasi.setOpaque(false);
-        chkTransferPasienKamarOperasi.setPreferredSize(new java.awt.Dimension(245, 22));
-        FormMenu.add(chkTransferPasienKamarOperasi);
 
         chkAsuhanTambahanGeriatri.setSelected(true);
         chkAsuhanTambahanGeriatri.setText("Tambahan Pasien Geriatri");
@@ -1950,14 +1941,6 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
         });
         FormMenu.add(chkJadwalPemberianObatRanap);
-
-        chkDaftarPemberianTerapiCairan.setSelected(true);
-        chkDaftarPemberianTerapiCairan.setText("Daftar Pemberian Terapi Cairan / Infus");
-        chkDaftarPemberianTerapiCairan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        chkDaftarPemberianTerapiCairan.setName("chkDaftarPemberianTerapiCairan"); // NOI18N
-        chkDaftarPemberianTerapiCairan.setOpaque(false);
-        chkDaftarPemberianTerapiCairan.setPreferredSize(new java.awt.Dimension(245, 22));
-        FormMenu.add(chkDaftarPemberianTerapiCairan);
 
         ScrollMenu.setViewportView(FormMenu);
 
@@ -2619,6 +2602,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkMonitoringReaksiTranfusi.setSelected(true);
             chkPenilaianKorbanKekerasan.setSelected(true);
             chkAsuhanLanjutanRisikoJatuhLansia.setSelected(true);
+            chkPemantauanTraumaKulitNeonatus.setSelected(true);
             chkPenilaianPasienPenyakitMenular.setSelected(true);
             chkEdukasiPasienTerintegrasiRawatJalan.setSelected(true);
             chkPemantauanPEWSDewasa.setSelected(true);
@@ -2740,6 +2724,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             chkMonitoringReaksiTranfusi.setSelected(false);
             chkPenilaianKorbanKekerasan.setSelected(false);
             chkAsuhanLanjutanRisikoJatuhLansia.setSelected(false);
+            chkPemantauanTraumaKulitNeonatus.setSelected(false);
             chkPenilaianPasienPenyakitMenular.setSelected(false);
             chkEdukasiPasienTerintegrasiRawatJalan.setSelected(false);
             chkPemantauanPEWSDewasa.setSelected(false);
@@ -2996,7 +2981,6 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkHemodialisa;
     private widget.CekBox chkImplementasiKepRanap;
     private widget.CekBox chkJadwalPemberianObatRanap;
-    private widget.CekBox chkDaftarPemberianTerapiCairan;
     private widget.CekBox chkKonselingFarmasi;
     private widget.CekBox chkKonsultasiMedik;
     private widget.CekBox chkMonitoringGizi;
@@ -3057,7 +3041,6 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkTindakanRanapDokterParamedis;
     private widget.CekBox chkTindakanRanapParamedis;
     private widget.CekBox chkTransferAntarRuang;
-    private widget.CekBox chkTransferPasienKamarOperasi;
     private widget.CekBox chkTriase;
     private widget.CekBox chkUjiFungsiKFR;
     private widget.InternalFrame internalFrame1;
@@ -3343,6 +3326,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }
     
     private void inisialisasiPencarianMenu(){
+        siapkanPilihanRiwayatKustom(chkTransferPasienKamarOperasi,"Transfer Pasien Kamar Operasi");
+        siapkanPilihanRiwayatKustom(chkPemantauanTraumaKulitNeonatus,"Pemantauan Risiko Trauma Kulit Neonatus");
+        siapkanPilihanRiwayatKustom(chkDaftarPemberianTerapiCairan,"Daftar Pemberian Terapi Cairan / Infus");
+
         txtCariMenu.setName("txtCariMenu");
         txtCariMenu.setToolTipText("Cari jenis data, misalnya: laboratorium, obat, operasi, atau resume");
         txtCariMenu.setPreferredSize(new Dimension(295,46));
@@ -3366,6 +3353,16 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 menyaringMenu();
             }
         });
+    }
+
+    private void siapkanPilihanRiwayatKustom(widget.CekBox pilihan,String judul){
+        pilihan.setSelected(true);
+        pilihan.setText(judul);
+        pilihan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pilihan.setName(judul.replace(" ",""));
+        pilihan.setOpaque(false);
+        pilihan.setPreferredSize(new Dimension(295,28));
+        FormMenu.add(pilihan);
     }
 
     private void menyaringMenu(){
@@ -4652,6 +4649,8 @@ menampilkanEdukasiPasienTerintegrasi(rs.getString("no_rawat"));
                     menampilkanLanjutanResikoJatuhAnak(rs.getString("no_rawat"));
                     //menampilkan penilaian lanjutan risiko jatuh lansia
                     menampilkanLanjutanResikoJatuhLansia(rs.getString("no_rawat"));
+                    //menampilkan pemantauan risiko trauma kulit pada pasien neonatus
+                    menampilkanPemantauanTraumaKulitNeonatus(rs.getString("no_rawat"));
                     //menampilkan penilaian tambahan geriatri
                     menampilkanTambahanGeriatri(rs.getString("no_rawat"));
                     //menampilkan penilaian tambahan bunuh diri
@@ -24718,6 +24717,85 @@ if(chkJadwalPemberianObatRanap.isSelected()==true){
         }
     }
     
+    private void menampilkanPemantauanTraumaKulitNeonatus(String norawat) {
+        if(!chkPemantauanTraumaKulitNeonatus.isSelected()){
+            return;
+        }
+        PreparedStatement psTraumaKulit=null;
+        try {
+            psTraumaKulit=koneksi.prepareStatement(
+                "select a.tanggal,a.kd_kamar,ifnull(b.nm_bangsal,'') as nama_kamar,a.skoring,a.tanggal_skoring,"+
+                "a.usia_gestasi,a.skor_usia_gestasi,a.status_mental,a.skor_status_mental,a.mobilisasi,a.skor_mobilisasi,"+
+                "a.aktivitas,a.skor_aktivitas,a.nutrisi,a.skor_nutrisi,a.kelembaban,a.skor_kelembaban,a.total_skor,"+
+                "a.nip,ifnull(p.nama,'') as nama_petugas,a.paraf from pemantauan_risiko_trauma_kulit_neonatus a "+
+                "left join petugas p on p.nip=a.nip left join kamar k on k.kd_kamar=a.kd_kamar "+
+                "left join bangsal b on b.kd_bangsal=k.kd_bangsal where a.no_rawat=? order by a.tanggal,a.skoring");
+            psTraumaKulit.setString(1,norawat);
+            rs2=psTraumaKulit.executeQuery();
+            if(rs2.next()){
+                htmlContent.append(
+                    "<tr class='isi'><td valign='top' width='2%'></td>"+
+                    "<td valign='top' width='18%'>Pemantauan Risiko Trauma Kulit Neonatus</td>"+
+                    "<td valign='top' width='1%' align='center'>:</td><td valign='top' width='79%'>"+
+                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                );
+                rs2.beforeFirst();
+                while(rs2.next()){
+                    int totalSkor=0;
+                    String lokasiParaf=rs2.getString("paraf");
+                    String gambarParaf="-";
+                    if(lokasiParaf!=null&&!lokasiParaf.trim().equals("")&&!lokasiParaf.equals("-")){
+                        String urlParaf=lokasiParaf.startsWith("http://")||lokasiParaf.startsWith("https://")
+                                ? lokasiParaf
+                                : "http://100.10.1.4:80"+(lokasiParaf.startsWith("/")?"":"/")+lokasiParaf;
+                        gambarParaf="<img src='"+urlParaf+"' width='120' height='70' alt='Paraf Petugas'>";
+                    }
+                    try {
+                        totalSkor=Integer.parseInt(rs2.getString("total_skor"));
+                    } catch (Exception e) {
+                        totalSkor=0;
+                    }
+                    htmlContent.append(
+                        "<tr><td colspan='3' align='center' bgcolor='#FFFAF8'><b>PEMANTAUAN RISIKO TRAUMA KULIT<br>PADA PASIEN NEONATUS</b></td></tr>"+
+                        "<tr><td colspan='3'><b>Tanggal:</b> "+rs2.getString("tanggal")+
+                        " &nbsp; <b>Kamar:</b> "+rs2.getString("kd_kamar")+" "+rs2.getString("nama_kamar")+
+                        " &nbsp; <b>Skoring Ke:</b> "+rs2.getString("skoring")+
+                        " &nbsp; <b>Tanggal Skoring:</b> "+rs2.getString("tanggal_skoring")+"</td></tr>"+
+                        "<tr align='center'><td width='8%' bgcolor='#FFFAF8'><b>No.</b></td>"+
+                        "<td width='72%' bgcolor='#FFFAF8'><b>Parameter / Kriteria</b></td>"+
+                        "<td width='20%' bgcolor='#FFFAF8'><b>Skor</b></td></tr>"+
+                        "<tr><td align='center'>1</td><td><b>Usia Gestasi</b><br>"+rs2.getString("usia_gestasi")+"</td><td align='center'>"+rs2.getString("skor_usia_gestasi")+"</td></tr>"+
+                        "<tr><td align='center'>2</td><td><b>Status Mental</b><br>"+rs2.getString("status_mental")+"</td><td align='center'>"+rs2.getString("skor_status_mental")+"</td></tr>"+
+                        "<tr><td align='center'>3</td><td><b>Mobilisasi</b><br>"+rs2.getString("mobilisasi")+"</td><td align='center'>"+rs2.getString("skor_mobilisasi")+"</td></tr>"+
+                        "<tr><td align='center'>4</td><td><b>Aktivitas</b><br>"+rs2.getString("aktivitas")+"</td><td align='center'>"+rs2.getString("skor_aktivitas")+"</td></tr>"+
+                        "<tr><td align='center'>5</td><td><b>Nutrisi</b><br>"+rs2.getString("nutrisi")+"</td><td align='center'>"+rs2.getString("skor_nutrisi")+"</td></tr>"+
+                        "<tr><td align='center'>6</td><td><b>Kelembaban</b><br>"+rs2.getString("kelembaban")+"</td><td align='center'>"+rs2.getString("skor_kelembaban")+"</td></tr>"+
+                        "<tr><td colspan='2' align='right' bgcolor='#FFFAF8'><b>TOTAL SKOR</b></td>"+
+                        "<td align='center' bgcolor='#FFFAF8'><b>"+rs2.getString("total_skor")+"</b></td></tr>"+
+                        "<tr><td colspan='3'><b>Kesimpulan:</b> "+
+                        (totalSkor>13?"Lakukan protokol penatalaksanaan risiko trauma kulit pada neonatus.":"Belum memenuhi kriteria protokol penatalaksanaan risiko trauma kulit pada neonatus.")+
+                        "<br><b>Petugas:</b> "+rs2.getString("nip")+" "+rs2.getString("nama_petugas")+
+                        "<br><b>Paraf:</b><br>"+gambarParaf+"</td></tr>"
+                    );
+                }
+                htmlContent.append("</table></td></tr>");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Pemantauan Risiko Trauma Kulit Neonatus : "+e);
+        } finally {
+            try {
+                if(rs2!=null){
+                    rs2.close();
+                }
+                if(psTraumaKulit!=null){
+                    psTraumaKulit.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Notif Tutup Pemantauan Risiko Trauma Kulit Neonatus : "+e);
+            }
+        }
+    }
+
     private void menampilkanTambahanGeriatri(String norawat) {
         try {
             if(chkAsuhanTambahanGeriatri.isSelected()==true){
