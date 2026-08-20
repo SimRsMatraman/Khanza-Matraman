@@ -258,7 +258,7 @@ public final class DlgIGD extends javax.swing.JDialog {
 
         Object[] row={"P","Reg","No.Rawat","Tanggal","Jam","Kd.Dokter","Dokter Dituju","Nomer RM",
             "Pasien","J.K.","Umur","Poliklinik","Penanggung Jawab","Alamat PJ","Hubungan PJ",
-            "Biaya Regristrasi","Stts Daftar","Jns Bayar","Status","Kd PJ","Stts Bayar","SEP BPJS","Resume","Triase","Medis","Keperawatan"};
+            "Biaya Regristrasi","Stts Daftar","Jns Bayar","Status","Kd PJ","Stts Bayar","SEP BPJS","Resep","Triase","Medis","Keperawatan"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -10733,9 +10733,9 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
              * beberapa record tidak menggandakan reg_periksa.
              */
             + "CASE WHEN EXISTS ("
-            + "    SELECT 1 FROM resume_pasien rsm "
-            + "    WHERE rsm.no_rawat = rp.no_rawat"
-            + ") THEN 1 ELSE 0 END AS resume, "
+            + "    SELECT 1 FROM resep_obat rso "
+            + "    WHERE rso.no_rawat = rp.no_rawat"
+            + ") THEN 1 ELSE 0 END AS resep, "
 
             + "CASE WHEN EXISTS ("
             + "    SELECT 1 FROM data_triase_igd tri "
@@ -10836,8 +10836,8 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
                 boolean adaSep =
                         rs.getBoolean("ada_sep");
 
-                boolean isResume =
-                        rs.getBoolean("resume");
+                boolean isResep =
+                        rs.getBoolean("resep");
 
                 boolean isTriase =
                         rs.getBoolean("triase");
@@ -10896,7 +10896,7 @@ private javax.swing.JMenuItem MnCatatanKeseimbanganCairan;
                     rs.getString("kd_pj"),
                     rs.getString("status_bayar"),
                     statusSep,
-                    isResume,
+                    isResep,
                     isTriase,
                     isMedis,
                     isPerawat
