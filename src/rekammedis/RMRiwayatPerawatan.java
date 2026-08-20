@@ -1938,8 +1938,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         FormMenu.add(chkDataIC);
 
         chkJadwalPemberianObatRanap.setSelected(true);
-        chkJadwalPemberianObatRanap.setText("Jadwal Pemberian Obat Ranap");
-        chkJadwalPemberianObatRanap.setToolTipText("");
+        chkJadwalPemberianObatRanap.setText("Pemberian Obat Rawat Inap");
+        chkJadwalPemberianObatRanap.setToolTipText("Tampilkan jadwal, realisasi, petugas, validasi klinis dan TTE pasien per pemberian");
         chkJadwalPemberianObatRanap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         chkJadwalPemberianObatRanap.setName("chkJadwalPemberianObatRanap"); // NOI18N
         chkJadwalPemberianObatRanap.setOpaque(false);
@@ -2844,7 +2844,13 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }//GEN-LAST:event_chkDataICActionPerformed
 
     private void chkJadwalPemberianObatRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkJadwalPemberianObatRanapActionPerformed
-        // TODO add your handling code here:
+        // Riwayat akan mengikuti pilihan saat tombol Cari/refresh riwayat dijalankan.
+        // Tidak menjalankan query langsung di EDT agar tetap ringan.
+        chkJadwalPemberianObatRanap.setToolTipText(
+            chkJadwalPemberianObatRanap.isSelected()
+            ? "Pemberian Obat Rawat Inap akan ditampilkan pada Riwayat Perawatan"
+            : "Pemberian Obat Rawat Inap disembunyikan dari Riwayat Perawatan"
+        );
     }//GEN-LAST:event_chkJadwalPemberianObatRanapActionPerformed
 
     private void ChkAccor2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccor2ActionPerformed
@@ -5896,78 +5902,207 @@ menampilkanEdukasiPasienTerintegrasi(rs.getString("no_rawat"));
                         }
                     }
                     
-                    //menampilkan jadwal pemberian obat ranap
-if(chkJadwalPemberianObatRanap.isSelected()==true){
-    try{
-        rs2=koneksi.prepareStatement(
-            "SELECT " +
-            "p.*, " +
-            "pegawai.nama AS nama_pengkaji " +
-            "FROM pemberian_obat_ranap p " +
-            "INNER JOIN pegawai ON pegawai.nik=p.nik " +
-            "WHERE p.no_rawat='"+rs.getString("no_rawat")+"' " +  // Fixed: pakai rs.getString bukan hardcode
-            "ORDER BY p.tanggal,p.jam").executeQuery();
-        
-        while(rs2.next()){
-            // Mulai card baru untuk setiap record
-            htmlContent.append(
-                "<div class='card mb-3'>"+
-                  "<div class='card-header'>"+
-                    "<b>No.Surat:</b> "+rs2.getString("no_surat")+
-                    "&nbsp;|&nbsp;"+
-                    "<b>Waktu:</b> "+rs2.getString("jam")+
-                    "&nbsp;|&nbsp;"+
-                    "<b>Tgl:</b> "+rs2.getString("tgl_perawatan")+
-                    "&nbsp;|&nbsp;"+
-                    "<b>Pengkaji:</b> "+rs2.getString("nama_pengkaji")+
-                  "</div>"+
-                  "<div class='card-body'>"+
-                    "<div class='row'>"
-            );
-            
-            // Loop obat 1-15
-            for(int i=1; i<=15; i++){
-                String obat = rs2.getString("obat"+i);
-                String dosis = rs2.getString("dosis"+i);
-                String rute = rs2.getString("rute"+i);
-                
-                if(obat != null && !obat.trim().equals("")){
-                    // Ambil aturan pakai jika ada
-                    String aturan = Sequel.cariIsi("select aturan from aturan_pakai where "+
-                        "tgl_perawatan='"+rs2.getString("tgl_perawatan")+"' and "+
-                        "jam='"+rs2.getString("jam")+"' and "+
-                        "no_rawat='"+rs.getString("no_rawat")+"' and "+
-                        "kode_brng='"+rs2.getString("kode_brng")+"'");
-                    
-                    htmlContent.append(
-                        "<div class='col-md-4 mb-2'>"+
-                          "<small class='text-muted'>Obat "+i+":</small><br>"+
-                          "<b>"+obat+"</b><br>"+
-                          "<small>"+dosis+" | "+rute+" | "+(aturan.isEmpty() ? "" : aturan)+"</small>"+
-                        "</div>"
-                    );
-                }
-            }
-            
-            htmlContent.append(
-                    "</div>"+
-                    "<div class='card-footer bg-light text-right'>"+
-                      "<small>Total: Rp "+Valid.SetAngka(rs2.getDouble("total"))+"</small>"+
-                    "</div>"+
-                  "</div>"+
-                "</div>"
-            );
-            
-            biayaperawatan += rs2.getDouble("total");
-        }
-    } catch (Exception e) {
-        System.out.println("Notifikasi : "+e);
-    } finally{
-        if(rs2!=null){
-            rs2.close();
-        }
-    }
-}
+                    // ================================================================
+                    // RIWAYAT PEMBERIAN OBAT RAWAT INAP - POR TERBARU + TTE PASIEN
+                    // Satu baris = satu id_jadwal / satu kejadian pemberian.
+                    // ================================================================
+                    if(chkJadwalPemberianObatRanap.isSelected()==true){
+                        PreparedStatement psPor=null;
+                        ResultSet rsPor=null;
+                        try{
+                            String sqlPor=
+                                "SELECT "+
+                                "h.no_surat,d.id_detail,d.urut,d.kategori,d.nama_obat,d.dosis_sediaan,"+
+                                "IFNULL(d.aturan_pakai,'') aturan_pakai,IFNULL(d.rute,'') rute,"+
+                                "j.id_jadwal,j.tanggal_pemberian,j.jam_rencana,j.jam_realisasi,"+
+                                "IFNULL(j.dosis_pemberian,'') dosis_pemberian,j.status_pemberian,"+
+                                "IFNULL(j.nama_petugas,'') nama_petugas,IFNULL(j.keterangan,'') keterangan,"+
+                                "EXISTS(SELECT 1 FROM pemberian_obat_ranap_validasi v "+
+                                "       WHERE v.id_jadwal=j.id_jadwal AND v.jenis_validasi='DPJP' "+
+                                "         AND v.status_validasi='Valid') valid_dpjp,"+
+                                "EXISTS(SELECT 1 FROM pemberian_obat_ranap_validasi v "+
+                                "       WHERE v.id_jadwal=j.id_jadwal AND v.jenis_validasi='Farmasi' "+
+                                "         AND v.status_validasi='Valid') valid_farmasi,"+
+                                "vv.kode_verifikasi,vv.nama_penandatangan,vv.hubungan,vv.waktu_verifikasi,"+
+                                "vv.nama_pendamping,vv.signature_path "+
+                                "FROM pemberian_obat_ranap h "+
+                                "INNER JOIN pemberian_obat_ranap_detail d ON d.no_surat=h.no_surat "+
+                                "INNER JOIN pemberian_obat_ranap_jadwal j ON j.id_detail=d.id_detail "+
+                                "LEFT JOIN pemberian_obat_ranap_verifikasi_item vi ON vi.id_jadwal=j.id_jadwal "+
+                                "LEFT JOIN pemberian_obat_ranap_verifikasi vv "+
+                                "       ON vv.kode_verifikasi=vi.kode_verifikasi AND vv.status_verifikasi='Aktif' "+
+                                "WHERE h.no_rawat=? AND h.status_dokumen<>'Batal' "+
+                                "ORDER BY j.tanggal_pemberian,COALESCE(j.jam_realisasi,j.jam_rencana),d.urut,j.id_jadwal";
+
+                            psPor=koneksi.prepareStatement(sqlPor);
+                            psPor.setString(1,rs.getString("no_rawat"));
+                            rsPor=psPor.executeQuery();
+
+                            StringBuilder porRows=new StringBuilder();
+                            int noPor=0;
+                            while(rsPor.next()){
+                                noPor++;
+
+                                String dosisAktual=rsPor.getString("dosis_pemberian");
+                                if(dosisAktual==null || dosisAktual.trim().equals("")){
+                                    dosisAktual=rsPor.getString("dosis_sediaan");
+                                }
+                                if(dosisAktual==null || dosisAktual.trim().equals("")){
+                                    dosisAktual="-";
+                                }
+
+                                String jamRencana=rsPor.getString("jam_rencana");
+                                String jamRealisasi=rsPor.getString("jam_realisasi");
+                                if(jamRencana==null || jamRencana.trim().equals("")) jamRencana="-";
+                                if(jamRealisasi==null || jamRealisasi.trim().equals("")) jamRealisasi="-";
+                                if(jamRencana.length()>=5) jamRencana=jamRencana.substring(0,5);
+                                if(jamRealisasi.length()>=5) jamRealisasi=jamRealisasi.substring(0,5);
+
+                                String status=rsPor.getString("status_pemberian");
+                                String statusColor="#7F8C8D";
+                                String statusBg="#F4F6F7";
+                                if("Diberikan".equalsIgnoreCase(status)){
+                                    statusColor="#1E8449";
+                                    statusBg="#EAFAF1";
+                                }else if("Terjadwal".equalsIgnoreCase(status)){
+                                    statusColor="#B9770E";
+                                    statusBg="#FEF9E7";
+                                }else if("MMO".equalsIgnoreCase(status)){
+                                    statusColor="#AF601A";
+                                    statusBg="#FDF2E9";
+                                }else if("STOP".equalsIgnoreCase(status) || "Tidak Diberikan".equalsIgnoreCase(status)){
+                                    statusColor="#B03A2E";
+                                    statusBg="#FDEDEC";
+                                }else if("Ditunda".equalsIgnoreCase(status)){
+                                    statusColor="#7D6608";
+                                    statusBg="#FCF3CF";
+                                }
+
+                                String dpjp=rsPor.getBoolean("valid_dpjp")
+                                    ? "<span style='color:#1E8449'><b>&#10003; DPJP</b></span>"
+                                    : "<span style='color:#7F8C8D'>DPJP belum</span>";
+                                String farmasi=rsPor.getBoolean("valid_farmasi")
+                                    ? "<span style='color:#1E8449'><b>&#10003; Farmasi</b></span>"
+                                    : "<span style='color:#7F8C8D'>Farmasi belum</span>";
+
+                                String tteHtml;
+                                String kodeVerifikasi=rsPor.getString("kode_verifikasi");
+                                if(kodeVerifikasi!=null && !kodeVerifikasi.trim().equals("")){
+                                    String namaTte=rsPor.getString("nama_penandatangan");
+                                    String hubunganTte=rsPor.getString("hubungan");
+                                    String pendampingTte=rsPor.getString("nama_pendamping");
+                                    String waktuTte=rsPor.getString("waktu_verifikasi");
+                                    String pathTte=rsPor.getString("signature_path");
+
+                                    if(namaTte==null || namaTte.trim().equals("")) namaTte="-";
+                                    if(hubunganTte==null || hubunganTte.trim().equals("")) hubunganTte="-";
+                                    if(pendampingTte==null || pendampingTte.trim().equals("")) pendampingTte="-";
+                                    if(waktuTte==null || waktuTte.trim().equals("")) waktuTte="-";
+
+                                    String imgTte="";
+                                    if(pathTte!=null && !pathTte.trim().equals("")){
+                                        String urlTte=pathTte.trim();
+                                        if(!urlTte.toLowerCase().startsWith("http://") &&
+                                           !urlTte.toLowerCase().startsWith("https://")){
+                                            if(!urlTte.startsWith("/")) urlTte="/"+urlTte;
+                                            urlTte="http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+urlTte;
+                                        }
+                                        imgTte=
+                                            "<br><img src='"+amanHtml(urlTte)+"' width='120' height='52' "+
+                                            "style='border:1px solid #D5DBDB;background:#FFFFFF;margin-top:4px'/>";
+                                    }
+
+                                    tteHtml=
+                                        "<div style='padding:4px;background:#EAFAF1;border:1px solid #D5F5E3'>"+
+                                          "<span style='color:#1E8449'><b>&#10003; TTE PASIEN</b></span><br>"+
+                                          "<b>"+amanHtml(namaTte)+"</b> ("+amanHtml(hubunganTte)+")<br>"+
+                                          "<span style='color:#5D6D7E'>"+amanHtml(waktuTte)+"</span>"+
+                                          imgTte+
+                                          "<br><span style='color:#7B7D7D'>Pendamping: "+amanHtml(pendampingTte)+"</span>"+
+                                        "</div>";
+                                }else{
+                                    tteHtml=
+                                        "<div style='padding:4px;background:#F8F9F9;border:1px solid #E5E7E9;color:#7F8C8D'>"+
+                                          "Belum TTE pasien"+
+                                        "</div>";
+                                }
+
+                                String ket=rsPor.getString("keterangan");
+                                if(ket==null || ket.trim().equals("")) ket="-";
+
+                                porRows.append(
+                                    "<tr>"+
+                                      "<td valign='top' align='center' style='padding:6px;border-bottom:1px solid #EAECEE'>"+
+                                        noPor+
+                                      "</td>"+
+                                      "<td valign='top' style='padding:6px;border-bottom:1px solid #EAECEE'>"+
+                                        "<b>"+amanHtml(rsPor.getString("tanggal_pemberian"))+"</b><br>"+
+                                        "<span style='color:#5D6D7E'>Rencana "+amanHtml(jamRencana)+"</span><br>"+
+                                        "<b style='color:#2E86C1'>Realisasi "+amanHtml(jamRealisasi)+"</b><br>"+
+                                        "<span style='color:#A6ACAF'>ID "+rsPor.getLong("id_jadwal")+"</span>"+
+                                      "</td>"+
+                                      "<td valign='top' style='padding:6px;border-bottom:1px solid #EAECEE'>"+
+                                        "<b style='font-size:11px'>"+amanHtml(rsPor.getString("nama_obat"))+"</b><br>"+
+                                        "<span style='color:#5D6D7E'>"+amanHtml(rsPor.getString("kategori"))+
+                                        " &nbsp; | &nbsp; "+amanHtml(rsPor.getString("rute"))+"</span><br>"+
+                                        "<b>Dosis diberikan: "+amanHtml(dosisAktual)+"</b><br>"+
+                                        "<span>Aturan: "+amanHtml(rsPor.getString("aturan_pakai"))+"</span>"+
+                                      "</td>"+
+                                      "<td valign='top' style='padding:6px;border-bottom:1px solid #EAECEE'>"+
+                                        "<div style='padding:4px;background:"+statusBg+";color:"+statusColor+"'><b>"+
+                                          amanHtml(status)+
+                                        "</b></div>"+
+                                        "<br><b>"+amanHtml(rsPor.getString("nama_petugas").trim().equals("")?"-":rsPor.getString("nama_petugas"))+"</b><br>"+
+                                        "<span style='color:#7F8C8D'>"+amanHtml(ket)+"</span>"+
+                                      "</td>"+
+                                      "<td valign='top' style='padding:6px;border-bottom:1px solid #EAECEE'>"+
+                                        dpjp+"<br>"+farmasi+
+                                      "</td>"+
+                                      "<td valign='top' style='padding:6px;border-bottom:1px solid #EAECEE'>"+
+                                        tteHtml+
+                                      "</td>"+
+                                    "</tr>"
+                                );
+                            }
+
+                            if(noPor>0){
+                                htmlContent.append(
+                                    "<tr class='isi'>"+
+                                      "<td valign='top' width='2%'></td>"+
+                                      "<td valign='top' colspan='3' style='padding-top:8px'>"+
+                                        "<table width='100%' border='0' cellpadding='0' cellspacing='0' style='border:1px solid #D5DBDB'>"+
+                                          "<tr>"+
+                                            "<td colspan='6' style='padding:8px;background:#EBF5FB;border-bottom:2px solid #AED6F1'>"+
+                                              "<b style='color:#1B4F72;font-size:12px'>PEMBERIAN OBAT RAWAT INAP</b><br>"+
+                                              "<span style='color:#5D6D7E'>Riwayat jadwal, realisasi, validasi klinis dan TTE pasien per kejadian pemberian.</span>"+
+                                            "</td>"+
+                                          "</tr>"+
+                                          "<tr align='center'>"+
+                                            "<td width='4%' style='padding:5px;background:#F4F6F7'><b>No</b></td>"+
+                                            "<td width='15%' style='padding:5px;background:#F4F6F7'><b>Tanggal / Jam</b></td>"+
+                                            "<td width='30%' style='padding:5px;background:#F4F6F7'><b>Obat / Dosis / Rute</b></td>"+
+                                            "<td width='18%' style='padding:5px;background:#F4F6F7'><b>Realisasi / Petugas</b></td>"+
+                                            "<td width='13%' style='padding:5px;background:#F4F6F7'><b>Validasi</b></td>"+
+                                            "<td width='20%' style='padding:5px;background:#F4F6F7'><b>TTE Pasien</b></td>"+
+                                          "</tr>"+
+                                          porRows.toString()+
+                                        "</table>"+
+                                      "</td>"+
+                                    "</tr>"+
+                                    "<tr class='isi'><td></td><td colspan='3' style='height:8px'></td></tr>"
+                                );
+                            }
+                        }catch(Exception e){
+                            System.out.println("Riwayat Pemberian Obat Rawat Inap : "+e);
+                        }finally{
+                            try{
+                                if(rsPor!=null) rsPor.close();
+                            }catch(Exception e){}
+                            try{
+                                if(psPor!=null) psPor.close();
+                            }catch(Exception e){}
+                        }
+                    }
 
                     //menampilkan daftar pemberian terapi cairan / infus
                     menampilkanDaftarPemberianTerapiCairan(rs.getString("no_rawat"));

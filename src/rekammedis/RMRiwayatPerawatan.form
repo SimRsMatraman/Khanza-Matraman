@@ -2054,8 +2054,8 @@
                             <Component class="widget.CekBox" name="chkJadwalPemberianObatRanap">
                               <Properties>
                                 <Property name="selected" type="boolean" value="true"/>
-                                <Property name="text" type="java.lang.String" value="Jadwal Pemberian Obat Ranap"/>
-                                <Property name="toolTipText" type="java.lang.String" value=""/>
+                                <Property name="text" type="java.lang.String" value="Pemberian Obat Rawat Inap"/>
+                                <Property name="toolTipText" type="java.lang.String" value="Tampilkan jadwal, realisasi, petugas, validasi klinis dan TTE pasien per pemberian"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="name" type="java.lang.String" value="chkJadwalPemberianObatRanap" noResource="true"/>
                                 <Property name="opaque" type="boolean" value="false"/>
