@@ -309,7 +309,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="Semua"/>
+                    <StringItem index="0" value="Tampilkan Semua"/>
                   </StringArray>
                 </Property>
                 <Property name="name" type="java.lang.String" value="listDok" noResource="true"/>
@@ -726,7 +726,7 @@
                             <Component class="widget.CekBox" name="chkRingkasanMasukKeluar">
                               <Properties>
                                 <Property name="selected" type="boolean" value="true"/>
-                                <Property name="text" type="java.lang.String" value="Ringkasan Masuk Keluar"/>
+                                <Property name="text" type="java.lang.String" value="Ringkasan Masuk / Keluar"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="name" type="java.lang.String" value="chkRingkasanMasukKeluar" noResource="true"/>
                                 <Property name="opaque" type="boolean" value="false"/>
@@ -2054,7 +2054,7 @@
                             <Component class="widget.CekBox" name="chkJadwalPemberianObatRanap">
                               <Properties>
                                 <Property name="selected" type="boolean" value="true"/>
-                                <Property name="text" type="java.lang.String" value="Pemberian Obat Rawat Inap"/>
+                                <Property name="text" type="java.lang.String" value="Pantauan Pemberian Obat"/>
                                 <Property name="toolTipText" type="java.lang.String" value="Tampilkan jadwal, realisasi, petugas, validasi klinis dan TTE pasien per pemberian"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="name" type="java.lang.String" value="chkJadwalPemberianObatRanap" noResource="true"/>

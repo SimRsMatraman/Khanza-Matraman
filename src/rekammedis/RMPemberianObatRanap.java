@@ -3929,7 +3929,7 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
         try{
             internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(
                 javax.swing.BorderFactory.createLineBorder(new java.awt.Color(52,120,190)),
-                "::[ PEMBERIAN OBAT RAWAT INAP - MODE KOTAK v39 - TTE PER PEMBERIAN"));
+                "::[ PEMBERIAN OBAT RAWAT INAP - MODE KOTAK v39.1 - FIX GAMBAR TTE"));
 
             // V26: lepaskan seluruh UI legacy dari internalFrame1.
             // Ini menghilangkan Tgl.Rawat, Keyword, Petugas, Baru, Cetak lama,
@@ -4267,7 +4267,7 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
             btnManual.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){tambahObatManualKotak();}});
             btnTambahJadwal.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){buatJadwalCepatKotak();}});
         }catch(Exception ex){
-            javax.swing.JOptionPane.showMessageDialog(this,"Gagal memasang UI Kotak v39: "+ex.getMessage());
+            javax.swing.JOptionPane.showMessageDialog(this,"Gagal memasang UI Kotak v39.1: "+ex.getMessage());
         }
     }
 
@@ -5915,29 +5915,119 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
 
     private java.awt.image.BufferedImage bacaGambarTteV37(String signaturePath){
         if(signaturePath==null || signaturePath.trim().equals("")) return null;
+
         String p=signaturePath.trim();
+
+        // 1. Bila database sudah menyimpan URL penuh, gunakan langsung.
         try{
-            if(p.startsWith("http://") || p.startsWith("https://"))
-                return javax.imageio.ImageIO.read(new java.net.URL(p));
+            if(p.toLowerCase().startsWith("http://") || p.toLowerCase().startsWith("https://")){
+                java.net.URLConnection c=new java.net.URL(p).openConnection();
+                c.setConnectTimeout(4000);
+                c.setReadTimeout(6000);
+                try(java.io.InputStream in=c.getInputStream()){
+                    java.awt.image.BufferedImage im=javax.imageio.ImageIO.read(in);
+                    if(im!=null) return im;
+                }
+            }
         }catch(Exception ignored){}
 
-        java.util.List<java.io.File> files=new java.util.ArrayList<java.io.File>();
-        files.add(new java.io.File(p));
-        if(p.startsWith("/")){
-            files.add(new java.io.File("/Applications/XAMPP/xamppfiles/htdocs"+p));
-            files.add(new java.io.File("/Applications/XAMPP/xamppfiles/htdocs/verified-2"+p));
-        }
-        for(java.io.File f:files){
-            try{if(f.exists() && f.isFile()) return javax.imageio.ImageIO.read(f);}catch(Exception ignored){}
-        }
+        // 2. Normalisasi path dari Verified.
+        String webPath=p.replace("\\","/");
+        if(!webPath.startsWith("/")) webPath="/"+webPath;
 
-        String webPath=p.startsWith("/")?p:"/"+p;
-        for(String base:new String[]{"http://127.0.0.1","http://localhost"}){
+        /*
+         * V39.1:
+         * Verified menyimpan signature_path seperti:
+         * /verified-2/uploads/farmasirisignature/por_xxx.png
+         *
+         * Java SIMRS tidak selalu berjalan pada mesin XAMPP yang sama.
+         * Karena itu prioritas berikutnya adalah server web dari setting SIMRS.
+         */
+        java.util.List<String> urls=new java.util.ArrayList<String>();
+        try{
+            String host=koneksiDB.HOSTHYBRIDWEB();
+            String port=koneksiDB.PORTWEB();
+
+            if(host!=null && !host.trim().equals("")){
+                host=host.trim();
+
+                if(host.toLowerCase().startsWith("http://") || host.toLowerCase().startsWith("https://")){
+                    String base=host;
+                    if(base.endsWith("/")) base=base.substring(0,base.length()-1);
+
+                    // PORTWEB hanya ditambah bila URL host belum memiliki port eksplisit.
+                    try{
+                        java.net.URL hu=new java.net.URL(base);
+                        if(hu.getPort()==-1 && port!=null && !port.trim().equals("") &&
+                           !port.trim().equals("80") && !port.trim().equals("443")){
+                            base=hu.getProtocol()+"://"+hu.getHost()+":"+port.trim();
+                        }
+                    }catch(Exception ignored){}
+
+                    urls.add(base+webPath);
+                }else{
+                    String hp=host;
+                    if(port!=null && !port.trim().equals("") && !port.trim().equals("80")){
+                        hp=hp+":"+port.trim();
+                    }
+                    urls.add("http://"+hp+webPath);
+
+                    // HTTPS sebagai fallback bila server menggunakan SSL.
+                    String hpHttps=host;
+                    if(port!=null && !port.trim().equals("") &&
+                       !port.trim().equals("443") && !port.trim().equals("80")){
+                        hpHttps=hpHttps+":"+port.trim();
+                    }
+                    urls.add("https://"+hpHttps+webPath);
+                }
+            }
+        }catch(Exception ignored){}
+
+        // 3. Fallback localhost bila Java dan XAMPP berada di mesin yang sama.
+        urls.add("http://127.0.0.1"+webPath);
+        urls.add("http://localhost"+webPath);
+
+        // Baca via HTTP/HTTPS.
+        for(String url:urls){
             try{
-                java.awt.image.BufferedImage im=javax.imageio.ImageIO.read(new java.net.URL(base+webPath));
-                if(im!=null)return im;
+                java.net.URLConnection c=new java.net.URL(url).openConnection();
+                c.setConnectTimeout(4000);
+                c.setReadTimeout(6000);
+                c.setUseCaches(false);
+
+                try(java.io.InputStream in=c.getInputStream()){
+                    java.awt.image.BufferedImage im=javax.imageio.ImageIO.read(in);
+                    if(im!=null) return im;
+                }
             }catch(Exception ignored){}
         }
+
+        // 4. Fallback file lokal XAMPP macOS.
+        java.util.List<java.io.File> files=new java.util.ArrayList<java.io.File>();
+        files.add(new java.io.File(p));
+
+        if(webPath.startsWith("/")){
+            // Contoh:
+            // /verified-2/uploads/... -> /Applications/XAMPP/xamppfiles/htdocs/verified-2/uploads/...
+            files.add(new java.io.File("/Applications/XAMPP/xamppfiles/htdocs"+webPath));
+
+            // Jika database hanya menyimpan /uploads/...
+            if(webPath.startsWith("/uploads/")){
+                files.add(new java.io.File(
+                    "/Applications/XAMPP/xamppfiles/htdocs/verified-2"+webPath
+                ));
+            }
+        }
+
+        for(java.io.File file:files){
+            try{
+                if(file.exists() && file.isFile() && file.canRead()){
+                    java.awt.image.BufferedImage im=javax.imageio.ImageIO.read(file);
+                    if(im!=null) return im;
+                }
+            }catch(Exception ignored){}
+        }
+
         return null;
     }
 
@@ -6101,7 +6191,9 @@ public final class RMPemberianObatRanap extends javax.swing.JDialog {
                     }else{
                         javax.swing.JLabel noImg=new javax.swing.JLabel(
                             "<html><center><b>TTE tersimpan tetapi gambar belum dapat dibaca.</b><br>"+
-                            "Path: "+(r.getString("tte_path")==null?"-":r.getString("tte_path"))+"</center></html>",
+                            "Path: "+(r.getString("tte_path")==null?"-":r.getString("tte_path"))+"<br>"+
+                            "<font color='#6B7C8A'>Server web: "+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"</font>"+
+                            "</center></html>",
                             javax.swing.SwingConstants.CENTER);
                         noImg.setPreferredSize(new java.awt.Dimension(610,100));
                         tte.add(noImg,java.awt.BorderLayout.CENTER);
